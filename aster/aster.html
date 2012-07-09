@@ -1,0 +1,94 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+	<script src="Geometry.js"></script>
+	<script src="MovingObject.js" ></script>
+	<script src="RenderablePolygon.js" ></script>
+	<script src="GameObjects.js" ></script>
+	<script src="GameEngine.js" ></script>
+    <script>
+      var GE; //Game engine Global variable
+      
+      
+      
+      /*
+       Makes an asteroid polygon, in the format of an array of [x, y] coordinates.
+       
+       n is how many 'sides' the base polygon will have (must be at least 3),
+       r is the max radius from the center of the asteroid.
+      */
+      function makeAsteroidPolygon(n, r){
+        n = Math.max(3, n); //At least 3.
+        var arr = [];
+        var angleDiff = 2 * Math.PI / n;
+        
+        var angle = 0;
+        
+        /*
+         Go through adding points of polygon.
+        */
+        arr.push([r * Math.cos(angle), r * -Math.sin(angle)]);
+        for(var i = 1; i < n; i++){
+          angle += angleDiff;
+          
+          arr.push([r * Math.cos(angle), r * -Math.sin(angle)]);
+          
+          // Maybe add an indented point along the polygon.
+          if(Math.random() < 0.35){
+            var a = angle + angleDiff / 2;
+            var tmpR = r / 2 + Math.random() * r / 2; // between half and 1 of maxRadius
+            
+            arr.push([tmpR * Math.cos(a), tmpR * -Math.sin(a)]);
+          }
+        }
+        
+        return arr;
+      }
+      
+      window.onload = function() {
+        canvas = document.getElementById("gameCanvas");
+        context = canvas.getContext("2d");
+        
+        GE = new GameEngine(canvas);
+        GE.init();
+        GE.newGame();
+        GE.start();
+      };
+    </script>
+  </head>
+  
+  <body>
+    <table width="100%">
+      <tr>
+        <td colspan="2" align="center"><h3>HTML5 Canvas Interactive-Animation Demo</h3></td>
+      </tr>
+      <tr>
+        <td width="650">
+          <!-- Game canvas -->
+          <canvas id="gameCanvas" width="600" height="480"></canvas>
+        </td>
+        
+        <td valign="top">
+          <!-- Description -->
+          <b>Controls</b><br/>
+          <table cellpadding="3">
+            <tr><td><b>Key</b></td><td><b>Action</b></td></tr>
+            <tr><td>Up Arrow</td><td>Accelerate</td></tr>
+            <tr><td>Down Arrow</td><td>Decelerate</td></tr>
+            <tr><td>Left Arrow</td><td>Rotate Left</td></tr>
+            <tr><td>Right Arrow</td><td>Rotate Right</td></tr>
+            <tr><td>Ctrl</td><td>Shoot</td></tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <!-- Control buttons -->
+          <input type="button" value="New Game" onclick="GE.newGame();GE.start()" />
+          <input type="button" value="Pause Game" onclick="GE.pause()" />
+          <input type="button" value="Resume Game" onclick="GE.start()" />
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>
