@@ -7,3 +7,15 @@
   pagesUrl: aster/aster.html
   github: https://github.com/rgoulter/js-canvas-demo-asteroids
   description: A small project for playing around with HTML5's Canvas, with JavaScript for technical aspects of a game.
+
+- name: Email Receipt Scraper
+  github: https://github.com/rgoulter/EmailReceiptScraper
+  description: Wrote this script to check through the receipt emails in my inbox.
+
+- name: JIM! (CS2103 project)
+  github: https://github.com/rgoulter/cs2103aug2013-w13-1j
+  description: The task-organiser Journal IMproved! (JIM!) we wrote for CS2103. Quite cool. I wrote the input parser, and the Input Suggestion / AutoComplete stuff.
+
+- name: CS5237 Voronoi Art
+  github: https://github.com/rgoulter/cs5237-VoronoiArt
+  description: A wee Voronoi Art program, built using C++, Qt 5, OpenCV.
