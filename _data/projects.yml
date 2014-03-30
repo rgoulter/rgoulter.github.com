@@ -1,0 +1,9 @@
+- name: Nonogram
+  pagesUrl: /cs1010r/np/nonogram_ui.html
+  github: https://github.com/rgoulter/Nonogram-Propagation-JS
+  description: This was a small project for CS1010R. My work on the project was the visual/UI representation of the Nonogram game.
+
+- name: HTML5 Canvas/JavaScript Demo (Asteroids)
+  pagesUrl: aster/aster.html
+  github: https://github.com/rgoulter/js-canvas-demo-asteroids
+  description: A small project for playing around with HTML5's Canvas, with JavaScript for technical aspects of a game.

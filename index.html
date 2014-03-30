@@ -10,13 +10,12 @@ National University of Singapore,
 as a Young Leader of the <a href="http://www.asianz.org.nz/">Asia:New Zealand Foundation</a>. 
 
 <p><b>Projects I've Got Hosted on GitHub:</b>
+
 <ul>
-    <li><a href="/cs1010r/np/nonogram_ui.html">Nonogram</a>
-    (<a href="https://github.com/rgoulter/Nonogram-Propagation-JS">Repo</a>)<br/>
-    This was a small project for CS1010R. My work on the project was the visual/UI representation of the Nonogram game.
+{% for project in site.data.projects %}
+    <li><a href="{{ project.siteUrl }}">{{ project.name }}</a>
+    (<a href="{{ project.github }}">Repo</a>)<br/>
+    {{ project.description }}
     </li>
-    <li><a href="aster/aster.html">HTML5 Canvas/JavaScript Demo (Asteroids)</a>
-    (<a href="https://github.com/rgoulter/js-canvas-demo-asteroids">Repo</a>)<br/>
-    A small project for playing around with HTML5's Canvas, with JavaScript for technical aspects of a game.
-    </li>
+{% endfor %}
 </ul>
