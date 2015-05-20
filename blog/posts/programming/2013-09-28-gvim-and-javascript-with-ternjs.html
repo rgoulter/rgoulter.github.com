@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>Richard Goulter's Blog - GVim and JavaScript with TernJS</title>
+        <link rel="stylesheet" type="text/css" href="../../css/default.css" />
+        <link rel="stylesheet" type="text/css" href="../../css/syntax.css" />
+    </head>
+    <body>
+        <div id="page">
+            <div id="header">
+                <div id="logo">
+                    <a href="../../">Richard Goulter's Blog</a>
+                </div>
+                <div id="navigation">
+                    <a href="../../">Home</a>
+                    <a href="../../yi.html">Yi</a>
+                    <a href="../../archive.html">Archive</a>
+                </div>
+            <div>
+                <img src="../../images/blog-banner.png" />
+            </div>
+            </div>
+
+
+            <div id="content">
+                <h1>GVim and JavaScript with TernJS</h1>
+
+                <div class="info">
+    Posted on September 28, 2013
+    
+        by richardgoulter
+    
+</div>
+<div class="info">
+    
+    Tags: <a href="../../tags/javascript.html">javascript</a>, <a href="../../tags/linux.html">linux</a>, <a href="../../tags/programming.html">programming</a>, <a href="../../tags/vim.html">vim</a>
+    
+</div>
+
+<p>Ok. So after cross-posting the GVim and Java from my NUS blog..</p>
+<p><a href="https://github.com/Valloric/YouCompleteMe">YouCompleteMe</a> not only provides awesome functionality with EClim or Jedi (for Java / Python respectively). Since it can get along with (as I understand things) Vim’s OmniComplete, then YCM works with other intelligent completion things like TernJS.</p>
+<p><a href="http://ternjs.net/">TernJS</a>, made by the same guy who did CodeMirror, does some pretty fancy JavaScript jazz, so <a href="https://github.com/marijnh/tern_for_vim">your text editor</a> can (try to) infer a variables type, .. and can provide intelligent autocomplete suggestions.</p>
+<p>Married with YCM, the intelligence and fuzzy-completion makes for what must surely be the most powerful JavaScript editing today.<br />(Well, I dunno what the emacs or Sublime kiddies are up to; they might be pretty close too).</p>
+<p>But. This was one time where being a total noob left things easier for Windows than for Linux.<br />See, oddly enough, I managed to get this working on Windows while it was still blowing up at me on Linux.<br />(Since I don’t want to battle my OS, I go with Linux Mint 15. I’m pretty sure Linux Mint is what comes up if you Google-search “easiest Linux to use”).</p>
+<p>Turns out I had two problems:<br />First was that “node” didn’t actually run NodeJS, since this was changed due to name conflicts. A quick symlink solves this issue..<br />Second was that, since I was too lazy to build NodeJS from source, the version in I was running from the package-repository was ancient. Ancient.</p>
+<p>I’ve not tried to build much from source on Windows.<br />By a poor selective case, I understand that <a href="https://bitbucket.org/Haroogan/vim-for-windows/src">trying to build Vim on Windows is a total pain</a> in the arse. <a href="https://github.com/Valloric/YouCompleteMe/wiki/Building-Vim-from-source">Building it on Linux is really really easy</a>, though.</p>
+<p>But I was lazy. Turns out that <a href="https://github.com/joyent/node">to build NodeJS from source</a>, after <a href="http://nodejs.org/">downloading the code</a>, was the stock-and-standard:</p>
+<pre><code>$ ./configure  
+$ make  
+$ sudo checkinstall</code></pre>
+<p>Well.<br />I used “checkinstall” rather than “make install”,<br />but that’s all there was to it, anyway.</p>
+<p>And with ‘node’ being called as expected, with an actual up-to-date version of Node, TernJS worked like it should! Fantastic.</p>
+
+
+<hr />
+
+<div>
+    
+    <a href="../../posts/programming/2013-09-28-gvim-eclipse-and-java.html" style="float:left;">Newer post</a>
+    
+    
+    <a href="../../posts/programming/2013-09-28-a-quick-flirtation-with-haskell.html" style="float:right; text-align: right;">Older post</a>
+    
+</div>
+<br style="clear: both;" />
+
+<hr />
+
+<div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'richardgoultersblog'; // required: replace example with your forum shortname
+        var disqus_identifier = '/posts/programming/2013-09-28-gvim-and-javascript-with-ternjs.html';
+        var disqus_url = 'http://www.rgoulter.com/blog' + '/posts/programming/2013-09-28-gvim-and-javascript-with-ternjs.html';
+        var disqus_title = 'GVim and JavaScript with TernJS - September 28, 2013';
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+<!-- Load highlight.js for Syntax Highlighting. -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/solarized_light.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+            </div>
+            <div id="footer">
+                Site proudly generated by
+                <a href="http://jaspervdj.be/hakyll">Hakyll</a>
+            </div>
+        </div>
+    </body>
+</html>

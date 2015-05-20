@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>Richard Goulter's Blog - Tmux + Vim + Fish</title>
+        <link rel="stylesheet" type="text/css" href="../../css/default.css" />
+        <link rel="stylesheet" type="text/css" href="../../css/syntax.css" />
+    </head>
+    <body>
+        <div id="page">
+            <div id="header">
+                <div id="logo">
+                    <a href="../../">Richard Goulter's Blog</a>
+                </div>
+                <div id="navigation">
+                    <a href="../../">Home</a>
+                    <a href="../../yi.html">Yi</a>
+                    <a href="../../archive.html">Archive</a>
+                </div>
+            <div>
+                <img src="../../images/blog-banner.png" />
+            </div>
+            </div>
+
+
+            <div id="content">
+                <h1>Tmux + Vim + Fish</h1>
+
+                <div class="info">
+    Posted on June 29, 2014
+    
+        by Richard Goulter
+    
+</div>
+<div class="info">
+    
+    Tags: <a href="../../tags/vim.html">vim</a>
+    
+</div>
+
+<p>My use of vim until recently has more/less been in GVim or MacVim. That’s not necessarily a bad thing, but I hadn’t bothered much with terminal vim. Getting the colours to look not-awful was a difficult task.</p>
+<p>The difficulty, my current understanding is, is that on the terminal only 256 colours can be shown. (Many colour schemes use colours other than just these 256). The console also has 16 ANSI colour escape codes. Terminal emulator applications can configure what these 16 colour values actually are.</p>
+<p><a href="http://ethanschoonover.com/solarized/vim-colors-solarized">The Solarized page</a> notes that for Terminal Vim users, there are two options: one option is to have the terminal emulator be Solarized-themed, and the vim solarized layout can use the 16 ANSI colors in coordination with this theme to match a true Solarized vim theme; the other option is to have Solarized use the terminal’s 256 colors, and give the closest approximation to a Solarized vim theme.</p>
+<p>So following that help, vim can exist in the terminal without looking awful.</p>
+<p>On OSX, I ran into an obscure error when starting a homebrew install of Vim on the terminal, which was resolved by putting an alias in my .bash_profile.</p>
+<p>Anyway, on its own, there’s little advantage to using Vim in the terminal by itself like that. I’d heard that with Tmux, and a Vim plugin like Slimux (<a href="http://esa-matti.suuronen.org/blog/2012/04/19/slimux-tmux-plugin-for-vim/">see this intro</a>), you can do fun things with a REPL. (Write text in Vim, then send it to the REPL.. so you get to keep the text you write, but don’t have to write it twice to see if it works).</p>
+<div class="figure">
+<img src="../../images/tmux-vim-slimux.png" />
+
+</div>
+<p>Anyway. A search for “tmux vim zsh” yields <a href="http://www.drbunsen.org/the-text-triumvirate/">‘The Text Triumvirate’</a>; that is, word-on-the-street about these things is probably worth something.</p>
+<p>Tmux the popular successor to GNU screen; to my understanding, the cool things these do are: i) multiple terminal ‘windows’ within one terminal (thus Terminal MUltipleXing), and ii) attach/detach “sessions”, which can continue running even if you log out from a terminal.</p>
+<p>The biggest issue with Tmux was getting it to have the TERM environment variable to be “screen-256color”. And the learning curve for figuring out how to do stuff. I wonder how much I’m missing out on, but I got help from <a href="http://blog.hawkhost.com/2010/06/28/tmux-the-terminal-multiplexer/">that Hawkhost post</a> (note that the text can’t be copy-pasted here because it’s fancytext or something). The <a href="https://wiki.archlinux.org/index.php/Tmux">ArchLinux wiki</a> had some good advice, too.</p>
+<p>The default terminal shell is Bash. Zsh and Fish are two more modern shells. A lot of people seem to be using Zsh, but I hear to get it to be a good shell it requires a lot of configuration (which is where things like oh-my-zsh come into it). Fish, “friendly interactive shell” is more about being easy to use from the get-go. (Perhaps, then, Fish is like the Sublime Text of shells?).</p>
+<p>I chose Fish shell because it wasn’t Zsh. But still, Fish is a fantastic shell compared to Bash. (For example, it’s colourful, and has a cool predictive/auto-completion thing going on).</p>
+<p>There were some difficulties in changing my shell to Fish. Biggest issue was Vim wanted a Bourne-compatible shell for the system shell, which Fish wasn’t, so Vim had to be told to use Bash.</p>
+<p>And with the issue of ‘making it look cool’, one option is to “Powerline everything”. For Vim, I’d used vim-airline (a lightweight alternative to Powerline). Powerline can also be added to Tmux, which I’d recomment. Powerline can be added to your shell, too, which is slightly over-the-top. YMMV. But still, it’s possible.</p>
+
+
+<hr />
+
+<div>
+    
+    <a href="../../posts/programming/2014-06-30-additions-to-hakyll.html" style="float:left;">Newer post</a>
+    
+    
+    <a href="../../posts/programming/2014-06-29-migrating-to-hakyll.html" style="float:right; text-align: right;">Older post</a>
+    
+</div>
+<br style="clear: both;" />
+
+<hr />
+
+<div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'richardgoultersblog'; // required: replace example with your forum shortname
+        var disqus_identifier = '/posts/programming/2014-06-29-tmux--vim--fish.html';
+        var disqus_url = 'http://www.rgoulter.com/blog' + '/posts/programming/2014-06-29-tmux--vim--fish.html';
+        var disqus_title = 'Tmux + Vim + Fish - June 29, 2014';
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+<!-- Load highlight.js for Syntax Highlighting. -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/solarized_light.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+            </div>
+            <div id="footer">
+                Site proudly generated by
+                <a href="http://jaspervdj.be/hakyll">Hakyll</a>
+            </div>
+        </div>
+    </body>
+</html>

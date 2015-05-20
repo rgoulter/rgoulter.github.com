@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>Richard Goulter's Blog - Brief Look at Haskell Editing Tools</title>
+        <link rel="stylesheet" type="text/css" href="../../css/default.css" />
+        <link rel="stylesheet" type="text/css" href="../../css/syntax.css" />
+    </head>
+    <body>
+        <div id="page">
+            <div id="header">
+                <div id="logo">
+                    <a href="../../">Richard Goulter's Blog</a>
+                </div>
+                <div id="navigation">
+                    <a href="../../">Home</a>
+                    <a href="../../yi.html">Yi</a>
+                    <a href="../../archive.html">Archive</a>
+                </div>
+            <div>
+                <img src="../../images/blog-banner.png" />
+            </div>
+            </div>
+
+
+            <div id="content">
+                <h1>Brief Look at Haskell Editing Tools</h1>
+
+                <div class="info">
+    Posted on September 27, 2014
+    
+        by Richard Goulter
+    
+</div>
+<div class="info">
+    
+    Tags: <a href="../../tags/haskell.html">haskell</a>, <a href="../../tags/editors.html">editors</a>
+    
+</div>
+
+<p>Recently I used Haskell in a school project. It was unclear to me whether there’s a “killer” Haskell editor. (e.g. Leksah looks damn cool, but also looks quite old now). <a href="http://www.haskell.org/haskellwiki/IDEs">The Haskell Wiki</a> does list a bunch, and some time I’d like to go through and do a better examination of these. My current understanding is as follows:</p>
+<h3 id="eclipsefp">EclipseFP</h3>
+<p>The excellent Haskell editing plugin for Eclipse. I used this quite well with Eclipse Kepler some time ago when I was playing around with Haskell; though, I think I ran into some issues when I was trying this with Eclipse Luna.</p>
+<p>The easiest way to get this plugin is from a standard Eclipse installation, and using the update-site to download the plugin. Now that Cabal supports cabal sandboxes, EclipseFP is able to download its dependencies without messing up your cabal setup.</p>
+<p>For some reason I didn’t opt for EclipseFP, but wanted to try out Haskell support for various editors.</p>
+<h3 id="atom-ide-haskell">Atom + IDE-Haskell</h3>
+<p>Atom (or, the free equivalent to Sublime Text) + <a href="https://atom.io/packages/ide-haskell">IDE-Haskell</a> is reasonably easy to install; though there are some dependencies which IDE-Haskell requires. I liked this setup quite a lot, although I never bothered to customise or adjust Atom very much. (By default, it gave me an awful variable-width font, so that had to change).</p>
+<p>I think this is what I would recommend in general; it’s inferior to EclipseFP in that the latter has a nice interface for editing Cabal project files, but it’s nice for by-default having a UI which emphasised text editing. (On the downside to Atom, though, is sometimes I encountered the Chrome dev-tools bar, which completely threw-off the look &amp; feel of Atom).<br />- Maybe it’s possible to customise Eclipse to be nice to use like this (beyond just double-clicking on the edit window), but Eclipse is a beast.</p>
+<h3 id="vim">Vim + …?</h3>
+<p>I’m a big Vim fan. Certainly the text motions, as well as a bunch of plugins (like fuzzy-finding autocompletion in YCM) are features I really want in a text editor. (If your editor has things like that, great!).</p>
+<p>But previously I wasn’t able to get Vim + Haskell working well together. It’s not due to a lack of support, but rather, a fragmentation in what support there is, and so it’s unclear what option to go with.</p>
+<p>I was fortunate to stumble upon the StackOverflow question <a href="http://stackoverflow.com/questions/20622390/is-haskellmode-vim-dead">Is haskellmode-vim dead?</a>, where the author adds:</p>
+<blockquote>
+<p>Just in case someone stumbles over this question in the future. My current (haskell specific) vim configuration contains these plugins: ghcmod-vim (type exploring), neco-ghc (auto completion), syntactic <em>[sic]</em> (error highlighting), vim2hs (misc utils)</p>
+</blockquote>
+<p>Thank you, Florian. :-) Indeed, this setup is fantastic. Slightly difficult to install if you’re using Vundle to manage plugin dependencies (I’ve heard NeoBundle takes care of these things), since ghcmod-vim requires vimproc, which needs to be natively-compiled.</p>
+<p>The one downside to this setup is that the “checking” done by syntastic(?) (and/or ghcmod-vim?) would be slow whenever I saved the file. My understanding is this is due to Vim’s single-threaded, synchronous nature of dealing with computations. One hopes that NeoVim, in addition to being well tested, will come with a community to make use of its nifty new features.</p>
+<h3 id="summary">Summary</h3>
+<p>Off the top of my head (and from what I used), I can’t recall all the features each of these had. That’s why it would be nice to have a round-up and summary/analysis of the current state of Haskell editing tools.</p>
+<p>I know the Vim one had both TagBar support (at least with lushtags, maybe?), and some level of auto-completion; errors from :GhcModCheck were linked with quickfix, and :GhcModType was able to give me the type of the current item. (Things which would be nicer with proper key bindings).</p>
+
+
+<hr />
+
+<div>
+    
+    <a href="../../posts/romance/2014-09-27-seducing-mr-knightly.html" style="float:left;">Newer post</a>
+    
+    
+    <a href="../../posts/programming/2014-08-21-beginning-arch-linux.html" style="float:right; text-align: right;">Older post</a>
+    
+</div>
+<br style="clear: both;" />
+
+<hr />
+
+<div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'richardgoultersblog'; // required: replace example with your forum shortname
+        var disqus_identifier = '/posts/programming/2014-09-27-brief-look-at-haskell-editing-tools.html';
+        var disqus_url = 'http://www.rgoulter.com/blog' + '/posts/programming/2014-09-27-brief-look-at-haskell-editing-tools.html';
+        var disqus_title = 'Brief Look at Haskell Editing Tools - September 27, 2014';
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+<!-- Load highlight.js for Syntax Highlighting. -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/solarized_light.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+            </div>
+            <div id="footer">
+                Site proudly generated by
+                <a href="http://jaspervdj.be/hakyll">Hakyll</a>
+            </div>
+        </div>
+    </body>
+</html>

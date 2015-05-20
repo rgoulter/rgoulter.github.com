@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>Richard Goulter's Blog - NeoVim</title>
+        <link rel="stylesheet" type="text/css" href="../../css/default.css" />
+        <link rel="stylesheet" type="text/css" href="../../css/syntax.css" />
+    </head>
+    <body>
+        <div id="page">
+            <div id="header">
+                <div id="logo">
+                    <a href="../../">Richard Goulter's Blog</a>
+                </div>
+                <div id="navigation">
+                    <a href="../../">Home</a>
+                    <a href="../../yi.html">Yi</a>
+                    <a href="../../archive.html">Archive</a>
+                </div>
+            <div>
+                <img src="../../images/blog-banner.png" />
+            </div>
+            </div>
+
+
+            <div id="content">
+                <h1>NeoVim</h1>
+
+                <div class="info">
+    Posted on April 29, 2014
+    
+        by richardgoulter
+    
+</div>
+<div class="info">
+    
+    Tags: <a href="../../tags/editors.html">editors</a>, <a href="../../tags/vim.html">vim</a>, <a href="../../tags/neovim.html">neovim</a>, <a href="../../tags/linkdump.html">linkdump</a>
+    
+</div>
+
+<p>So. I just found out about NeoVim (sometimes abbreviated nvim) today. Which could be called “slow”, seeing as their Bountysource fundraiser ended a month ago.</p>
+<p>There was a <a href="https://groups.google.com/forum/m/#!topic/vim_dev/x0BF9Y0Uby8">post to the Vim Developer Google group mailing list</a>, which saw a reply from Bram Moolenar and got some fairly heated discussion. <a href="http://www.reddit.com/r/linux/comments/1yrln5/bram_molenaar_responds_to_neovim/">A corresponding reddit thread</a> has some <a href="http://www.reddit.com/r/linux/comments/1yrln5/bram_molenaar_responds_to_neovim/cfnex9w">fairly understandable cynicism</a> of this idea:</p>
+<blockquote>
+<p><em>“I agree with Bram here. For outsiders, it’s so easy to say that a code base is too ugly, or too complex, but once you learn a particular code base, things like this usually do not matter that much.”</em></p>
+</blockquote>
+<p>The amusing thing is, though, this cynicism doesn’t seem in line with what contributors have experienced. Some <a href="https://news.ycombinator.com/item?id=7279358">anecdotal evidence from HN</a>:</p>
+<blockquote>
+<p>“I’ve contributed to a lot of open source projects, and the Vim community has been the most difficult to work with. I’ve been writing C for almost two decades, and the Vim codebase is the <em>worst</em> C I’ve ever seen”</p>
+</blockquote>
+<p>What I recall reading is that part of the motivation for Thiago de Arruda to start this fork is that the patches he wrote for Vim were rejected from the codebase because of uncertainty as to whether the changes would break anything.</p>
+<p>(The HN thread also features, I suppose naturally, links to <a href="https://github.com/chrizel/Yzis">previous</a> <a href="http://www.freehackers.org/VimIntegration">attempts</a> to fork Vim, as well as folk linking to <a href="https://github.com/limetext/lime">other</a> <a href="https://github.com/yi-editor/yi">projects</a> which relate to text editing for some reason).</p>
+<p>There is, of course, a Google Group / <a href="https://groups.google.com/forum/#!forum/neovim">mailing list for NeoVim</a>. It’s here where <a href="https://groups.google.com/forum/#!topic/neovim/ts_0qylNNVg">the author posts something</a> which has me really excited for the project; not the third-party integration or flashy features or anything, but the emphasis on testing:</p>
+<blockquote>
+<p>“<em>This may not be so obvious, but vim’s biggest problem has nothing to do with the lack of the above features. It’s something much more basic: poor testing infrastructure.</em></p>
+<p><em>While vim has some automated tests(about 200 counting with the ~100 tests embedded in test 49) those only catch the ‘biggest’ bugs, with many small ones being introduced by patches and only detected at a later time. It’s a true maintenance hell and here’s a post on reddit that illustrates the problem (even though the author himself disagrees with neovim): <a href="http://www.reddit.com/r/programming/comments/1yjzez/neovim_a_project_to_refactor_and_modernize_the/cfla7j5" class="uri">http://www.reddit.com/r/programming/comments/1yjzez/neovim_a_project_to_refactor_and_modernize_the/cfla7j5</a></em></p>
+<p><em>The problem is that in it’s current state, vim cannot grow because there’s no easy way to write automated tests for it. The current test suite is very hard to understand and those that submit patches probably won’t write tests because it’s too complicated. But patches need to be tested, especially bug fixes which must acompany a regression to ensure they won’t be reintroduced. So it’s easy to see why Bram is skeptical about merging patches, especially new features: He has no way of knowing if those patches will break existing code. In the example given by the reddit comment, Bram ‘solved’ the problem by simply picking the lesser of two evils.</em></p>
+<p><em>This is one of the firsts issues neovim aims to fix</em>&quot;</p>
+</blockquote>
+<p>And it seems that NeoVim indeed <a href="http://www.reddit.com/r/vim/comments/22kemc/cool_progress_on_neovim/cgo1998">aims to be contributor friendly</a>. While I don’t know what qualifies as “a good number” of contributors on a project at this kindof stage, <a href="https://github.com/neovim/neovim/graphs/contributors">the graphs on GitHub</a> seem to show that it’s got more traction than just one guy lugging at it.</p>
+
+
+<hr />
+
+<div>
+    
+    <a href="../../posts/meta/2014-06-01-interlude-2.html" style="float:left;">Newer post</a>
+    
+    
+    <a href="../../posts/programming/2014-04-26-vim-and-ios-programming.html" style="float:right; text-align: right;">Older post</a>
+    
+</div>
+<br style="clear: both;" />
+
+<hr />
+
+<div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'richardgoultersblog'; // required: replace example with your forum shortname
+        var disqus_identifier = '/posts/programming/2014-04-29-neovim.html';
+        var disqus_url = 'http://www.rgoulter.com/blog' + '/posts/programming/2014-04-29-neovim.html';
+        var disqus_title = 'NeoVim - April 29, 2014';
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+<!-- Load highlight.js for Syntax Highlighting. -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/solarized_light.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+            </div>
+            <div id="footer">
+                Site proudly generated by
+                <a href="http://jaspervdj.be/hakyll">Hakyll</a>
+            </div>
+        </div>
+    </body>
+</html>

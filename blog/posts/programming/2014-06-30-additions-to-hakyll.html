@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>Richard Goulter's Blog - Additions to Hakyll</title>
+        <link rel="stylesheet" type="text/css" href="../../css/default.css" />
+        <link rel="stylesheet" type="text/css" href="../../css/syntax.css" />
+    </head>
+    <body>
+        <div id="page">
+            <div id="header">
+                <div id="logo">
+                    <a href="../../">Richard Goulter's Blog</a>
+                </div>
+                <div id="navigation">
+                    <a href="../../">Home</a>
+                    <a href="../../yi.html">Yi</a>
+                    <a href="../../archive.html">Archive</a>
+                </div>
+            <div>
+                <img src="../../images/blog-banner.png" />
+            </div>
+            </div>
+
+
+            <div id="content">
+                <h1>Additions to Hakyll</h1>
+
+                <div class="info">
+    Posted on June 30, 2014
+    
+        by Richard Goulter
+    
+</div>
+<div class="info">
+    
+    Tags: <a href="../../tags/hakyll.html">hakyll</a>, <a href="../../tags/haskell.html">haskell</a>
+    
+</div>
+
+<p>The basic Hakyll site is (thankfully) not too glamorous. Some features I wanted to keep from WordPress include the tags, categories, pagination of posts, and ‘teaser’ text for each post.</p>
+<p>The repository for this site is at <a href="https://github.com/rgoulter/my-hakyll-blog">rgoulter/my-hakyll-blog</a> if you want to see the actual commits.</p>
+<h3 id="tags">Tags</h3>
+<p>Doing a Google search for “hakyll tags” probably will lead you to the same tutorial I found. But you found yourself here, so I’ll point out I used <a href="http://javran.github.io/posts/2014-03-01-add-tags-to-your-hakyll-blog.html">this tutorial</a></p>
+<h3 id="categories">Categories</h3>
+<p>The haddock documention for <a href="http://jaspervdj.be/hakyll/reference/Hakyll-Web-Tags.html">Hakyll.Web.Tags</a> describes that i. “Categories” are a special kind of “tag”; the only difference being a post can only belong to one category, but can have any number of tags. ii. Hakyll determines a category for a post (by default) using the directory structure. e.g.: <code>posts/&lt;category&gt;/1970-01-01-a-post.markdown</code> has the category <code>&lt;category&gt;</code>.</p>
+<p>If you’ve a reasonable idea of how you get from the tags, to the context, to the produced HTML, then it should be fairly clear how to add categories.<br /><a href="https://github.com/rgoulter/my-hakyll-blog/commit/336e3aee488fee2bb9f63eee34c848e9e8f1ad41">Here’s the commit where I make the changes</a>. The trickiest part was that the <a href="http://jaspervdj.be/hakyll/reference/Hakyll-Core-Identifier-Pattern.html">Glob</a> needed to be “posts/**.markdown” to match posts.</p>
+<h3 id="pagination-and-teasers">Pagination and Teasers</h3>
+<p>These come hand in hand if you “adapt” from the same sites I did.<br />The literate-haskell of <a href="http://www.eanalytica.com/site/">EAnalytica’s site</a> has pretty candid comments discussing the Haskell it uses. In turn, EAnalytica also borrows from <a href="https://github.com/dannysu/hakyll-blog">Danny Su’s site</a>, which is also useful for this.<br />The easiest way to ‘adapt’ from these was to look first at EAnalytica’s, then at Danny Su’s. (The limitation of Danny Su’s site is the site’s pagination is only 2 posts per page, and the rule for pagination relies on that, unfortunately). The more tedious part (unless you’ve got good control over your Haskell editor) is getting the imports for the necessary utility functions.</p>
+<p>One thing which tripped me up was that the code from these sites has magic strings for the Posts pattern, and for the pagination URL. (<a href="https://github.com/rgoulter/my-hakyll-blog/commit/968b1c0f4e7c586532865ae99b02e08e63c8dc47">c.f.</a>).</p>
+<p>For a more direct indication of the code to incorporate, <a href="https://github.com/rgoulter/my-hakyll-blog/commit/990fe87776c5926321d723f938364719036943c5">this is the commit</a> where my blog adds pagination and teasers.</p>
+
+
+<hr />
+
+<div>
+    
+    <a href="../../posts/programming/2014-07-01-yi-in-a-cabal-sandbox-on-osx.html" style="float:left;">Newer post</a>
+    
+    
+    <a href="../../posts/programming/2014-06-29-tmux--vim--fish.html" style="float:right; text-align: right;">Older post</a>
+    
+</div>
+<br style="clear: both;" />
+
+<hr />
+
+<div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'richardgoultersblog'; // required: replace example with your forum shortname
+        var disqus_identifier = '/posts/programming/2014-06-30-additions-to-hakyll.html';
+        var disqus_url = 'http://www.rgoulter.com/blog' + '/posts/programming/2014-06-30-additions-to-hakyll.html';
+        var disqus_title = 'Additions to Hakyll - June 30, 2014';
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+<!-- Load highlight.js for Syntax Highlighting. -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/solarized_light.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+            </div>
+            <div id="footer">
+                Site proudly generated by
+                <a href="http://jaspervdj.be/hakyll">Hakyll</a>
+            </div>
+        </div>
+    </body>
+</html>

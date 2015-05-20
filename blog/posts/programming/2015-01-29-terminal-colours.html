@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>Richard Goulter's Blog - Terminal Colours</title>
+        <link rel="stylesheet" type="text/css" href="../../css/default.css" />
+        <link rel="stylesheet" type="text/css" href="../../css/syntax.css" />
+    </head>
+    <body>
+        <div id="page">
+            <div id="header">
+                <div id="logo">
+                    <a href="../../">Richard Goulter's Blog</a>
+                </div>
+                <div id="navigation">
+                    <a href="../../">Home</a>
+                    <a href="../../yi.html">Yi</a>
+                    <a href="../../archive.html">Archive</a>
+                </div>
+            <div>
+                <img src="../../images/blog-banner.png" />
+            </div>
+            </div>
+
+
+            <div id="content">
+                <h1>Terminal Colours</h1>
+
+                <div class="info">
+    Posted on January 29, 2015
+    
+        by Richard Goulter
+    
+</div>
+<div class="info">
+    
+    Tags: <a href="../../tags/terminal.html">terminal</a>
+    
+</div>
+
+<p>Using a terminal which is all black-and-white is boring.<br />It’s also pretty hard to read. – One advantage to having a colourful shell prompt (I use Powerline; overkill, but certainly colourful) is it’s easier to see the delimitations of program output and shell commands. <em>Much</em> easier.</p>
+<p>Besides being easier to use, it’s also prettier. It’s quite nice to see <code>ls</code> command have different colours for folders/etc..<br />Indeed, to the extent that when I found out the old Solaris <code>ls</code> which my NUS Sunfire account was using didn’t have colour, I decided to replace it with the GNU coreutils version instead.<br /><a href="http://i.imgur.com/1pv2D58.png">Colour!</a><br />I was dismayed to see my new-and-improved terminal emulator, with a Solarized colour-theme <a href="http://i.imgur.com/HosbXlT.png">wasn’t showing the colours</a>. Or, rather, it was, but “light blue” and “light grey” were awfully similar.<br />– Btw, icymi, the <code>$LS_COLORS</code> environment variable can be used to colour all sorts of things, e.g. files with certain extensions, or to distinguish symlinks and such. I don’t know all the details here.</p>
+<p>Damn.<br />Because having the Solarized colour theme for the terminal emulator meant I could use the vim/solarized plugin so-that it’d make use of the ANSI 16-colours, which the terminal emulator mapped to the “true” Solarized colours. … Clear as mud, right?<br />Yes, it’s more of a pain than using GVim. But with GVim, it’s not particularly easy to use Slimux, I’d think. At best, the terminal would be on the adjacent workspace. (“Why don’t you use Sublime?”. i) No, fuck you. ii) I think you mean Atom. “Why don’t you use Atom?”.).</p>
+<p>“Why do terminals use archaic 256-colour?”, is the next thing to wonder.<br />Which somehow I’ve not wondered before.<br /><a href="http://stackoverflow.com/questions/16710105/why-do-we-have-max-256-colors-in-terminal-emulators">I wasn’t the first</a>. And that result from Google <a href="http://stackoverflow.com/questions/6403744/are-there-terminals-that-support-true-color">wasn’t the first, either</a>.<br />Which leads to <a href="https://gist.github.com/XVilka/8346728">this fantastic gist</a> from XVilka, who has apparently taken a comprehensive interest in the subject.<br />I was interested to note, among other things, that ZyX_l has a branch of Vim with truecolour support.</p>
+<p>I’d love to quote from the Gist, but it’s full of goodness, or at least things to start investigating.</p>
+
+
+<hr />
+
+<div>
+    
+    <a href="../../posts/programming/2015-02-18-eclipse-woes-import-plugin.html" style="float:left;">Newer post</a>
+    
+    
+    <a href="../../posts/programming/2015-01-20-analysis-of-swkpdotfiles-repo.html" style="float:right; text-align: right;">Older post</a>
+    
+</div>
+<br style="clear: both;" />
+
+<hr />
+
+<div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'richardgoultersblog'; // required: replace example with your forum shortname
+        var disqus_identifier = '/posts/programming/2015-01-29-terminal-colours.html';
+        var disqus_url = 'http://www.rgoulter.com/blog' + '/posts/programming/2015-01-29-terminal-colours.html';
+        var disqus_title = 'Terminal Colours - January 29, 2015';
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+<!-- Load highlight.js for Syntax Highlighting. -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/solarized_light.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+            </div>
+            <div id="footer">
+                Site proudly generated by
+                <a href="http://jaspervdj.be/hakyll">Hakyll</a>
+            </div>
+        </div>
+    </body>
+</html>

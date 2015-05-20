@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>Richard Goulter's Blog - You Know You Should Be Using VCS For That</title>
+        <link rel="stylesheet" type="text/css" href="../../css/default.css" />
+        <link rel="stylesheet" type="text/css" href="../../css/syntax.css" />
+    </head>
+    <body>
+        <div id="page">
+            <div id="header">
+                <div id="logo">
+                    <a href="../../">Richard Goulter's Blog</a>
+                </div>
+                <div id="navigation">
+                    <a href="../../">Home</a>
+                    <a href="../../yi.html">Yi</a>
+                    <a href="../../archive.html">Archive</a>
+                </div>
+            <div>
+                <img src="../../images/blog-banner.png" />
+            </div>
+            </div>
+
+
+            <div id="content">
+                <h1>You Know You Should Be Using VCS For That</h1>
+
+                <div class="info">
+    Posted on March 29, 2015
+    
+        by Richard Goulter
+    
+</div>
+<div class="info">
+    
+    Tags: <a href="../../tags/git.html">git</a>, <a href="../../tags/vim.html">vim</a>, <a href="../../tags/fugitive.html">fugitive</a>
+    
+</div>
+
+<p>It’s kindof cute that all programmers, if they’ve worked on any project for a long enough time before learning about VCS, surely all take the same approach to novice “version control”. e.g. Keeping folders/copies as snapshots of how the code looked at that time. – We weren’t all born knowing how to use VCS. (Though, maybe those who didn’t bother to play around with programming a lot outside of class never faced this).</p>
+<p>I’d be astounded if anyone with even only a basic grasp of VCS kept to doing things this way. VCS is obviously that much better at keeping versions.</p>
+<p>But, uh. One thing which is still not uncommon to see is, as an answer to the anxiety of “not sure if <em>this function</em> is something I’m going to need later (even though I don’t need it now). I’d better just comment it out.”.<br />It’s really quick and easy to use a decent text editor to comment/uncomment out a chunk of code. (Even the kids who don’t learn vim/emacs can do this in the text editors of IDEs).<br />This strikes me as a ‘dirty’ solution; it sounds like you’d want some <em>version</em> of the function handy. – And surely with VCS available, there shouldn’t be any doubt as to being able to get a copy of this function back if you delete it.</p>
+<p>I’m not sure I’ve met anyone who can do this well. I don’t think that’s necessarily a reflection on skill in VCS (it’s not as if anyone <strong>really</strong> needs to do somersaults in VCS all the time. … It’s probably not very good if you do have to), but perhaps this is a “common enough” thing which VCS doesn’t make accessible?<br />Rephrasing so as to be more precise/specific: if there’s some hunk of text (e.g. a function which we’d otherwise comment out) is removed in a commit, which isn’t necessarily the only modification in a commit, how to ‘recover’ this hunk of text into the current working copy of the file? (Bonus points if the function we want to recover isn’t the only modified hunk in the commit).</p>
+<p>Common enough answer of ‘how to do this’ is to look at the commit, copy-paste the hunk, and maybe remove the +‘s/-’s (the first column of the modified lines in the commit difference).<br />This also feels ’dirty’, and a bit wasteful. Especially if there’re many lines in the hunk. (Vim’s visual mode would mitigate this, sortof, but still).</p>
+<p>Checking out a commit/file, and copying the function directly, also feels … tedious.<br />I was surprised to learn Vim/Fugitive makes this not insanely brutal to pull off, though: the command <code>Glog</code> on a file in VCS will put the history of the file in a location list, so the different versions of a file can be easily traversed.<br />Though, again, it may be tedious to find which function you want to copy. (In principle, anyway, if not in practice!).</p>
+<p>I <em>think</em> what I’m after is closer to the following:<br /><code>git diff R R^ &gt; foo.diff</code> outputs a (“reverse”) of the commit. You can then either edit this <code>foo.diff</code> file, deleting the hunks you don’t want (tedious!, except for the pertinent hunk), which we can then <code>git apply foo.diff</code>. (Assuming the hunk is still relevant!).<br />Alternatively, just applying the diff (without editing it), one could then <code>git checkout --patch -- .</code> (assuming the repo was otherwise in a clean state before applying the diff..).<br />This is tedious, still, but it’s plausible that a script could perform this (“recover some hunk(s) from a commit [which removed them]”), with that assumption that a hunk could be applied to the working copy. (As far as I understand, if a file has changed so much that Git/VCS can’t figure out how to apply the diff, then this can’t work either).</p>
+<p>None of this seems a “great” solution to the problem, though.</p>
+
+
+<hr />
+
+<div>
+    
+    <a href="../../posts/narrative/2015-04-28-i-could-solve-this-in-five-minutes.html" style="float:left;">Newer post</a>
+    
+    
+    <a href="../../posts/narrative/2015-03-28-case-study-of-conflict-in-narrative.html" style="float:right; text-align: right;">Older post</a>
+    
+</div>
+<br style="clear: both;" />
+
+<hr />
+
+<div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'richardgoultersblog'; // required: replace example with your forum shortname
+        var disqus_identifier = '/posts/programming/2015-03-29-you-know-you-should-be-using-vcs-for-that.html';
+        var disqus_url = 'http://www.rgoulter.com/blog' + '/posts/programming/2015-03-29-you-know-you-should-be-using-vcs-for-that.html';
+        var disqus_title = 'You Know You Should Be Using VCS For That - March 29, 2015';
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+<!-- Load highlight.js for Syntax Highlighting. -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/solarized_light.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+            </div>
+            <div id="footer">
+                Site proudly generated by
+                <a href="http://jaspervdj.be/hakyll">Hakyll</a>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>Richard Goulter's Blog - Adding Next/Previous Post to Hakyll</title>
+        <link rel="stylesheet" type="text/css" href="../../css/default.css" />
+        <link rel="stylesheet" type="text/css" href="../../css/syntax.css" />
+    </head>
+    <body>
+        <div id="page">
+            <div id="header">
+                <div id="logo">
+                    <a href="../../">Richard Goulter's Blog</a>
+                </div>
+                <div id="navigation">
+                    <a href="../../">Home</a>
+                    <a href="../../yi.html">Yi</a>
+                    <a href="../../archive.html">Archive</a>
+                </div>
+            <div>
+                <img src="../../images/blog-banner.png" />
+            </div>
+            </div>
+
+
+            <div id="content">
+                <h1>Adding Next/Previous Post to Hakyll</h1>
+
+                <div class="info">
+    Posted on July  6, 2014
+    
+        by Richard Goulter
+    
+</div>
+<div class="info">
+    
+    Tags: <a href="../../tags/hakyll.html">hakyll</a>, <a href="../../tags/haskell.html">haskell</a>
+    
+</div>
+
+<p>So. The problem I was trying to solve in my last post was how to add next/prev links to a blogpost.<br />I’ve since figured out how to do that. <a href="https://github.com/rgoulter/my-hakyll-blog/commit/a4dd0513553a77f3b819a392078e59f461d884f9">See the commit</a>.</p>
+<p>My problem was, I had an <code>Item String</code>, and wanted to give a <code>Compiler String</code> corresponding to the next (or previous.. let’s ignore that for generality) post’s url.<br />I ran into difficulty by taking a list of <code>Identifier</code>s, and getting a list of <code>Compiler String</code>s. That is, I loaded all the posts, and mapped them to their urls. (At which point I was stuck with <code>[Compiler String]</code>).<br />What I figured out to do was instead take the list of <code>Identifier</code>s, take the <code>Identifier</code> of the <em>next</em> post, and map that <code>Identifier</code> to a url. (Which is of type <code>Compiler String</code>).</p>
+<p>If it’s unclear to you, then what I mean is that the problem I was struggling with was quite simple when done the wrong way.</p>
+<p>When I struggled, I was wanting to get a <code>Compiler [String]</code> because I figured I would be able to look up the url after some url. I thought there would be some way to treat <code>Compiler [String]</code> more like <code>[String]</code>.<br />Wrong idea, anyway.</p>
+<p>Once you can go from <code>Item a</code> to <code>Compiler String</code>, then it’s quite easy to give this to a post.<br />For those who hadn’t tinkered around enough with Hakyll for this to be so obvious, you give the <code>Item a -&gt; Compiler String</code> function to <code>field &quot;nextUrl&quot;</code>, and adding this to the <code>Context a</code> given to the post.</p>
+
+
+<hr />
+
+<div>
+    
+    <a href="../../posts/programming/2014-07-07-notes-from-some-examination-of-some-yi-configs.html" style="float:left;">Newer post</a>
+    
+    
+    <a href="../../posts/programming/2014-07-03-novice-struggles-with-haskell-syntax.html" style="float:right; text-align: right;">Older post</a>
+    
+</div>
+<br style="clear: both;" />
+
+<hr />
+
+<div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'richardgoultersblog'; // required: replace example with your forum shortname
+        var disqus_identifier = '/posts/programming/2014-07-06-adding-nextprevious-post-to-hakyll.html';
+        var disqus_url = 'http://www.rgoulter.com/blog' + '/posts/programming/2014-07-06-adding-nextprevious-post-to-hakyll.html';
+        var disqus_title = 'Adding Next/Previous Post to Hakyll - July  6, 2014';
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+<!-- Load highlight.js for Syntax Highlighting. -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/solarized_light.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+            </div>
+            <div id="footer">
+                Site proudly generated by
+                <a href="http://jaspervdj.be/hakyll">Hakyll</a>
+            </div>
+        </div>
+    </body>
+</html>

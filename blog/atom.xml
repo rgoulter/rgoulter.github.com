@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <title>Richard Goulter's Blog</title>
+    <link href="http://www.rgoulter.com/blog//atom.xml" rel="self" />
+    <link href="http://www.rgoulter.com/blog/" />
+    <id>http://www.rgoulter.com/blog//atom.xml</id>
+    <author>
+        <name>Richard Goulter</name>
+        <email>richard.goulter+blog@gmail.com</email>
+    </author>
+    <updated>2015-04-28T00:00:00Z</updated>
+    <entry>
+    <title>I Could Solve This in Five Minutes</title>
+    <link href="http://www.rgoulter.com/blog//posts/narrative/2015-04-28-i-could-solve-this-in-five-minutes.html" />
+    <id>http://www.rgoulter.com/blog//posts/narrative/2015-04-28-i-could-solve-this-in-five-minutes.html</id>
+    <published>2015-04-28T00:00:00Z</published>
+    <updated>2015-04-28T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<div class="info">
+    Posted on April 28, 2015
+    
+        by Richard Goulter
+    
+</div>
+<div class="info">
+    
+    Tags: <a href="/tags/romance.html">romance</a>, <a href="/tags/books.html">books</a>
+    
+</div>
+
+<p>So, at the moment I’m sludging through Sherry Thomas’ latest, &amp; first Contemporary, “The One in my Heart”.<br />There’s lots to not-enjoy about it. (Like the character lamenting the lack of timeless marriage, at the same time as looking at her phone during lunch with her partner). Whatever. The bigger issue for the Romance Novel here is that there’s zero (internal) conflict between the characters: the hero is utterly perfect, and utterly in love with the heroine; has been for ages. And the heroine is utterly perfect, and utterly in love with the hero; has been for ages. <strong>Sighhhhh.</strong></p>
+<p>So. Romance Novel, but main characters aren’t great. Gotcha.<br />There has to be at least <strong>some</strong> conflict*, though: the hero wants to reconcile with his parents (minus having to say sorry. <strong>Sighhhhhh.</strong>). The heroine wants a relationship with the hero. So, naturally, doesn’t want a fake-relationship with the hero. Because. <strong>Sighhhhhhhhhhh.</strong>.<br />– The thing is, and the narrative even admits, both of these problems could be solved in five minutes. If the hero just talked to his parents. Or the heroine just said to the hero, (who obviously, completely obviously digs her) that she likes him.<br />And because it can be solved so quickly, it’s <strong>really</strong> hard to get behind the characters. It’s just really silly.</p>
+<p>The fun thing is, though, like: with Romance Novels, you know it’s going to be a “Happily Ever After”. It doesn’t matter that you know (roughly) what the ending is going to be, it’s more interesting how the conflict is going to be resolved.</p>
+<p>Rather, if the problem can be solved in five minutes, then the pages between the establishment of the narrative, and the climax/conclusion of the book, are really just words filling in space. – <strong>Which can be fine.</strong> But it’s usually better to distract the reader, throw them off the scent that the conflict isn’t hard.</p>
+<p>(Come to think of it, “deus ex machina” is kindof the opposite; a super-hard problem is established, but ‘solved’ in a super-short amount of time..).</p>
+<p>It’s not just Romance Novels which are guilty of this, as such.<br />SciFi/Fantasy can totally play the same game, too.<br />RASalvatore’s stories were notorious at this: early on, the narrative shows some cool bag-of-tricks which the bad guy has. e.g. the ability to teleport someone in order to assassinate them. Like. If you can do that, you can kill the ‘good guy’ in five minutes. Of course there are “rules” to it. But when the narrator arbitrarily awards convenience magic to good/bad guys.. the plot can hardly be more than 5 minutes from resolution at any point in time.<br />– Perhaps the best example would be “Siege of Darkness”, where during a relentless siege the ‘bad guys’ just happen to pack up &amp; leave.</p>
+<p>In terms of “pages filling space”, Salvatore’s writing was fairly solid here: the heroes are tired, but have to press on. Then some more fighting, so the heroes are even more tired, but they have to press on even more urgently, but then there’s even more fighting, etc. etc.</p>
+<p>– But considering stories I’ve liked:<br />“Seducing Mr Knightly”: I love this book so much. In terms of the core plot: the body of the story is filled with flirtations between Annabelle and Knightly. It might be possible to trim this down to a skeleton of around three key encounters. Maybe. But since so much of the story is about Annabelle’s growth/transformation, it’s never 5-minutes away from the end.<br />“Devil in Winter”: There’s just so much character development/growth going on here, that it’s not 5-minutes-then-done.<br />“High Fidelity”: This book isn’t really about ‘plot’, so much as a collection of biographic-esque monologues, for different situations.</p>
+<p>– So. Conflicts which can be solved “in 5 minutes” aren’t inherently bad. But it takes a lot of effort, and a lot of talent to maintain a plotline through a holding place, waiting for the end of the story. (Oddly enough, reader is probably also waiting for things to progress..).</p>
+<hr />
+<p>*Ideas to make this pairing more interesting: The heroine is a materials scientist. The Hero is a doctor/surgeon. It’s okay for them to be a “love interest” in an “aliens invading the city, these two have to find a counter-weapon” plot. Explosions, excitement!<br />Or, sticking to the romance-novel genre: give points of tension between the character, which can’t be solved quickly: maybe the hero is with a girl. Not a girl who’s vain/materialistic/morally-bad, etc., but a girl who would make a good HEA. <strong>That</strong> would make the story more interesting.<br />Or perhaps the hero/heroine disagree on things which are important to them: maybe he finds his work important, she finds his time important (or vice versa).<br />etc. but the given conflict is “not really a problem”. :/</p>
+]]></summary>
+</entry>
+<entry>
+    <title>You Know You Should Be Using VCS For That</title>
+    <link href="http://www.rgoulter.com/blog//posts/programming/2015-03-29-you-know-you-should-be-using-vcs-for-that.html" />
+    <id>http://www.rgoulter.com/blog//posts/programming/2015-03-29-you-know-you-should-be-using-vcs-for-that.html</id>
+    <published>2015-03-29T00:00:00Z</published>
+    <updated>2015-03-29T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<div class="info">
+    Posted on March 29, 2015
+    
+        by Richard Goulter
+    
+</div>
+<div class="info">
+    
+    Tags: <a href="/tags/git.html">git</a>, <a href="/tags/vim.html">vim</a>, <a href="/tags/fugitive.html">fugitive</a>
+    
+</div>
+
+<p>It’s kindof cute that all programmers, if they’ve worked on any project for a long enough time before learning about VCS, surely all take the same approach to novice “version control”. e.g. Keeping folders/copies as snapshots of how the code looked at that time. – We weren’t all born knowing how to use VCS. (Though, maybe those who didn’t bother to play around with programming a lot outside of class never faced this).</p>
+<p>I’d be astounded if anyone with even only a basic grasp of VCS kept to doing things this way. VCS is obviously that much better at keeping versions.</p>
+<p>But, uh. One thing which is still not uncommon to see is, as an answer to the anxiety of “not sure if <em>this function</em> is something I’m going to need later (even though I don’t need it now). I’d better just comment it out.”.<br />It’s really quick and easy to use a decent text editor to comment/uncomment out a chunk of code. (Even the kids who don’t learn vim/emacs can do this in the text editors of IDEs).<br />This strikes me as a ‘dirty’ solution; it sounds like you’d want some <em>version</em> of the function handy. – And surely with VCS available, there shouldn’t be any doubt as to being able to get a copy of this function back if you delete it.</p>
+<p>I’m not sure I’ve met anyone who can do this well. I don’t think that’s necessarily a reflection on skill in VCS (it’s not as if anyone <strong>really</strong> needs to do somersaults in VCS all the time. … It’s probably not very good if you do have to), but perhaps this is a “common enough” thing which VCS doesn’t make accessible?<br />Rephrasing so as to be more precise/specific: if there’s some hunk of text (e.g. a function which we’d otherwise comment out) is removed in a commit, which isn’t necessarily the only modification in a commit, how to ‘recover’ this hunk of text into the current working copy of the file? (Bonus points if the function we want to recover isn’t the only modified hunk in the commit).</p>
+<p>Common enough answer of ‘how to do this’ is to look at the commit, copy-paste the hunk, and maybe remove the +‘s/-’s (the first column of the modified lines in the commit difference).<br />This also feels ’dirty’, and a bit wasteful. Especially if there’re many lines in the hunk. (Vim’s visual mode would mitigate this, sortof, but still).</p>
+<p>Checking out a commit/file, and copying the function directly, also feels … tedious.<br />I was surprised to learn Vim/Fugitive makes this not insanely brutal to pull off, though: the command <code>Glog</code> on a file in VCS will put the history of the file in a location list, so the different versions of a file can be easily traversed.<br />Though, again, it may be tedious to find which function you want to copy. (In principle, anyway, if not in practice!).</p>
+<p>I <em>think</em> what I’m after is closer to the following:<br /><code>git diff R R^ &gt; foo.diff</code> outputs a (“reverse”) of the commit. You can then either edit this <code>foo.diff</code> file, deleting the hunks you don’t want (tedious!, except for the pertinent hunk), which we can then <code>git apply foo.diff</code>. (Assuming the hunk is still relevant!).<br />Alternatively, just applying the diff (without editing it), one could then <code>git checkout --patch -- .</code> (assuming the repo was otherwise in a clean state before applying the diff..).<br />This is tedious, still, but it’s plausible that a script could perform this (“recover some hunk(s) from a commit [which removed them]”), with that assumption that a hunk could be applied to the working copy. (As far as I understand, if a file has changed so much that Git/VCS can’t figure out how to apply the diff, then this can’t work either).</p>
+<p>None of this seems a “great” solution to the problem, though.</p>
+]]></summary>
+</entry>
+<entry>
+    <title>Case Study of Conflict in Narrative</title>
+    <link href="http://www.rgoulter.com/blog//posts/narrative/2015-03-28-case-study-of-conflict-in-narrative.html" />
+    <id>http://www.rgoulter.com/blog//posts/narrative/2015-03-28-case-study-of-conflict-in-narrative.html</id>
+    <published>2015-03-28T00:00:00Z</published>
+    <updated>2015-03-28T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<div class="info">
+    Posted on March 28, 2015
+    
+        by Richard Goulter
+    
+</div>
+<div class="info">
+    
+    Tags: <a href="/tags/katherine%20ashe.html">katherine ashe</a>, <a href="/tags/at%20the%20billionaire%27s%20wedding.html">at the billionaire&#39;s wedding</a>, <a href="/tags/conflict.html">conflict</a>, <a href="/tags/character.html">character</a>
+    
+</div>
+
+<p>Maybe in my previous postings on this topic I’ve come across as a little harsh on RASalvatore, and perhaps it seems that I think all Romance Novels do character well.</p>
+<p>Okay. That’s obviously not going to be true.<br />But I’d still like to consider Katherine Ashe’s novella from the “At the Billionaire’s Wedding” anthology with regards to conflict in the narrative. And, like, how well “character development = internal conflict, plot = external conflict” model holds up.</p>
+<p>The “At the Billionaire’s Wedding” anthology takes place in the setting of the wedding of Maya Rodale’s Duke Austen and Jane Sparks. (If you figured out giving the husband’s surname to the wife makes for “Jane Austen”, you’re quicker than me). The four authors have previously done an anthology called “At the Duke’s Wedding”. (I guess they didn’t like the name “At Duke’s Wedding”).<br />– These are pretty good samplers to get a taste for how each author writes, I reckon. Since reading AtDW, I’ve read at least one novel from each of the authors.</p>
+<p>Anyway. Wasn’t a big fan of KAshe’s part of AtBW.<br />The cool thing about the novella is it’s an “interpretation”/rendition/render of “Pride and Prejudice”. (Written by Jane Austen so it’s kindof meta, ha..). [I reckon Austen hates people more than KAshe does, so, that’s one limitation]. I dunno. Considering how much of a well-loved classic P&amp;P is, I’d say it’s more audacious to do something like this as opposed to otherwise rewriting/remixing types/tropes. – I didn’t enjoy it. Your Mileage May Vary.</p>
+<p>Probably a big part of why I didn’t like it was the shrill, heavy-handed advocacy of Social Justice: The heroine suffers all sorts of woes. As far as I recall: crappy job, rape-y boss, other sexual discrimination, poor, sick sister who depends on her, abusive father. – I think that’s an album or two of country music right there. – But, also, naturally the heroine is a righteous-as-hell activist and woe the world is so evil and all.<br />– With Heroines like Penelope Featherington (even in “Offer from a Gentleman”) or Evie from “Devil in Winter” or Annabelle Swift in “Seducing Mr. Knightly”, I can’t help but want to hug these women and protect them, etc.; here I felt none of that. :/</p>
+<p>In terms of “internal”/“external” conflict, this character has zero room for character growth (unless the writer thinks that the character sounds like a twat. I think this author doesn’t think that the character sounds like a twat). ALL the conflict is external; all the conflict the character suffers are due to other people, or things outside the character.<br />Flat, boring characters can be fine, even as main characters. But it’s kindof dull in a genre filled with strong characters. (People who complain about a lack of strong female characters surely haven’t read Romance Novels recently).</p>
+<p>The Hero character in the story is similarly developed: the Hero is rich, handsome as anything, a super good lover; moreover, is deeply, totally in love with the heroine, and completely agrees with her on every moral/activist issue.<br />– I feel there’s not a lot of potential for conflict here.<br />The Hero expresses his love by following the heroine around and secretly funding her project and not talking to her or anything. But it’s totally not creepy. Because.<br />Anyway. The Hero also works at his father’s company, which is big and evil and corporate and stuff. His father also is arrogant and evil and corporate and stuff. – I suppose it’d be a spoiler to say whether or not the Hero leaves this company by the end (as a token of his love?) of the novella? I’d better not spoil it, then.</p>
+<p>Again. There’s zero room for “internal conflict” (and as per the model) character growth here.<br />It’s like a “prince comes to rescue the princess” story, where both prince/princess characters are flat. cf. “Lord of Scoundrels”, wherein the prince is the Heroine, who “sees value/treasure in things everyone else overlooks”; and the princess trapped in a castle. LoS has the princess do at least some of the work to rescue himself (after a large amount of effort from the prince). i.e. maybe the prince doesn’t grow as a character much, but it’s a helluvan interesting princess.</p>
+<p>Where the novella does present conflict is every time the Hero professes “I wuv you lots” the heroine has the angst of “obviously he’ll get bored of me eventually” (a classic trope, fair enough), as well as “my mum loved my dad but then that turned bad”. (And, of course, since the Hero works at big bad company, prejudice says that he must be big and bad. – thus the “prejudice” in “P&amp;P”.).<br />Hurrah! The “parental issues” totally counts for this whole “internal conflict” the character needs to overcome. (Like, hey, if all you’ve known tells you to distrust a situation, how d’you overcome that?).<br />As far as I recall, though, the resolution involves the Hero leaving his job and the heroine deciding “ok, I’ll date you.”. I can’t help but feel that one party is giving more to a compromise than the other. – “Okay, I’ll date the handsome/sexy/rich guy who agrees with everything I say” doesn’t feel like a prominent character development, in any case.</p>
+<p>Maybe some of this is forgivable for the narrative being a novella. It’s surely more difficult for a novella to have solid characters than a full novel. – I completely adored KAshe’s novella “Kisses, She Wrote”, though; even characters who were given less than a page. So it’s neither the author nor the format at issue here. – And I guess different people are after different things. P&amp;P has enough in it such that people get different things out of it.<br />Clearly the shoe “lack of internal conflict = boring characters” seems to fit; it’s not clear, though, that the story would obviously be better with whatever “internal conflict”. (Easy fix may be a “I would love the Hero but..”; e.g. ugly Hero [“I’d love him but he’s ugly”], arrogant Hero [“I’d love him but he’s arrogant”], etc.).<br />And maybe even if the characters are awfully constructed, that the romance is ‘solid’ is nice anyway.</p>
+<p>But for characters which aren’t flat, have growth &amp; conflict to resolve, it’s the “internal conflict = not bad character” model seems to work well enough for the Romance Novels as for the action/adventure stories.</p>
+]]></summary>
+</entry>
+<entry>
+    <title>Devil in Winter</title>
+    <link href="http://www.rgoulter.com/blog//posts/romance/2015-03-27-devil-in-winter.html" />
+    <id>http://www.rgoulter.com/blog//posts/romance/2015-03-27-devil-in-winter.html</id>
+    <published>2015-03-27T00:00:00Z</published>
+    <updated>2015-03-27T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<div class="info">
+    Posted on March 27, 2015
+    
+        by Richard Goulter
+    
+</div>
+<div class="info">
+    
+    Tags: <a href="/tags/lisa%20kleypas.html">lisa kleypas</a>, <a href="/tags/devil%20in%20winter.html">devil in winter</a>
+    
+</div>
+
+<p>So. Recently I re-read Lisa Kleypas’ “Devil in Winter”.<br />Not the first time I’ve re-read that book.</p>
+<p>There are some less-than-stellar parts of the book. (Notably, an awkward sequel-setup, which then doesn’t get follow-through in the next book besides “oh. that. haha. oops.”.).<br />But it’s such an amazing, fantastic book! I can’t believe there’re those who don’t think it a 5-outta-5.</p>
+<p>It really puts in the punches, constantly chapter-to-chapter the characters grow and interact and fight and flirt.<br />Presumably you’ve read it if you’re reading this?<br />I’m not sure I could summarise DiW well. I’m writing this post because I love the book.<br />I will say there’re so many moments I love in the book!</p>
+<p>– In the first chapter. When Sebastian insults Eva, and notices she doesn’t flinch at all. (What kindof upbringing would harden her to that?).<br />When Sebastian takes care of her on the arduous ride.<br />The wedding ceremony.<br />Evie’s concern for her husband when he’s in a fight! Evie’s jealousy of her husband! Sebastian’s jealousy of Evie!<br />When Sebastian’s wounded on the floor, Evie embrace. :’)<br />When they’re in the office, Sebastian’s familiar intimacies with his wife.<br />Sebastian coming into his own, putting his otherwise misdirected skills to good use.</p>
+<p>And while I’ve re-read it many times, I still find it hard to put down when I pick it up.</p>
+]]></summary>
+</entry>
+<entry>
+    <title>On Women in Tech</title>
+    <link href="http://www.rgoulter.com/blog//posts/argument/2015-03-27-on-women-in-tech.html" />
+    <id>http://www.rgoulter.com/blog//posts/argument/2015-03-27-on-women-in-tech.html</id>
+    <published>2015-03-27T00:00:00Z</published>
+    <updated>2015-03-27T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<div class="info">
+    Posted on March 27, 2015
+    
+        by Richard Goulter
+    
+</div>
+<div class="info">
+    
+    Tags: <a href="/tags/gender.html">gender</a>
+    
+</div>
+
+<p>So. This is a topic I see come up at various times.<br />Broadly, tech/STEM/etc. has many more men in it than women, and so naturally there we need to make efforts to remedy this.</p>
+<p>This post has also been a post which has been sticking around in my “Draft” pile for a while. Figured I should get it off the shelf sometime.<br />This post is also quite long. There may be mistakes. Hopefully no one’s forcing you to read it.</p>
+<p>If you’re wondering whether anything here intends to offend or not, then of course it’s meant to offend. Probably you, personally.</p>
+<h2 id="the-problem">The Problem</h2>
+<p>I don’t think the topic of “representation in tech” need be only about gender. I doubt tech has a good representation of class/race, also. But since the rallying cry I hear is always “we need more women in tech”, and attention/effort for other underrepresented groups is rare, I’ll stick to this.</p>
+<p>Anyway, let me take a moment to consider the statement “there aren’t a lot of women in tech”.<br />The assumption as to it being a ‘problem’ is potentially problematic itself.<br />Because the underlying assumption of “gender ratio should be 50/50” is awfully difficult to be consistent about, (is it problematic that there’re more women than men in university?); and the accusation is that this is said about positions of power or prestiege (e.g. need more women in higher paying positions), rather than with an indifferent lens.<br />(It’s fine, I think, to say “tech is high paying and so it serves women’s interests to be more involved in tech”).</p>
+<p>Part of this question is about perspective:<br />Commonly, “why aren’t more women in tech?”. Given that there’re more women in university than men, it’s probably more pertinent to ask “why aren’t more men doing not-tech?”.<br />Similarly, “why are there so many men in tech?” or “why are there so many women in non-tech?” could also be asked.</p>
+<p>Regardless, it’d probably still be interesting to ask “why are there so few women in tech?” (without necessarily presuming there should be more women in tech).<br />If the answer is “because many women choose to do other things”, then perhaps that there’re less women in tech is an example of women’s right and ability to choose. (If we’re willing to suppress this, and consider that maybe we know better than women what’s good for them, then Ashe Schow’s <a href="http://www.washingtonexaminer.com/a-modest-proposal-for-closing-the-gender-wage-gap/article/2556131">modest proposal</a> isn’t so unreasonable, right? – At least, “stop fucking studying sociology, then” is a common enough response I hear regarding woman &amp; tech in university).<br />But I guess what’s more interesting is what obstacles there may be for the women who do go into CS. Since there are some women in tech, it’s apparent that the obstacles aren’t total / insurmountable. (e.g. that there’s no rule saying you can’t enroll in a CS course if you’re a woman). – But if there are obstacles which prevent people from entering tech for arbitrary reasons, it’s going to be worth getting rid of those obstacles. (Because more people in tech = awesome, because tech is awesome. Though, I think if you ask the Art guy, he’ll say Art is awesome, etc. so..).</p>
+<p>– If women as a whole do prefer to study things other than CS, I understand the next tactic to take (by a certain class of people) is to call this “societal/patriarchal oppression”, and then figure out what ways we should change society so as to get more women into CS.<br />– This is slightly different than considering what obstacles there are for the women who enter into CS now.<br />It’s also not very respectful of women’s choices; i.e. women aren’t really “respectable” unless they behave the same way men behave. (Or, these women deciding what they want to do are obviously not choosing correctly).</p>
+<p>I’ve seen the response “there need to be more people in tech; more of those people need to be women.”<br />For example, <a href="http://www.wired.com/2014/11/code-documentary-gender-gap/">here</a>:</p>
+<blockquote>
+<p>“How many more Snapchats do we need?” Reynolds asks. “What we need are apps that are going to solve world hunger, medical issues, and environmental problems.”</p>
+</blockquote>
+<p>That’s right, folks. If you have a penis, you surely can’t write an app to solve world hunger.<br />– Let’s not restrict anyone from entering, sure. But if you’re going to say there’s a <em>need</em> for more of a certain group, your reasoning had better be good. (‘fewer role models = less inspiration or motivation’, which sounds sensible, is less sexist).</p>
+<h3 id="cmu">CMU</h3>
+<p>– I was fascinated to come across <a href="https://www.cs.cmu.edu/afs/cs/project/gendergap/www/papers/sigcse97/sigcse97.html">this from CMU</a> which discussed the question.<br />A couple of takeaways would be that the guys entered into CS because they enjoyed tinkering around with computers; the girls entered because for the purpose of harnessing tech for some purpose. All entered into CS with the misunderstanding that CS was ‘just programming’. Girls entered into CS with no prior experience, and initially they underestimated their ability.<br />– I guess not much changes in 20 years. From my experience as a tutor of an Intro CS course, I’d remark that prior experience can be a hinderance to learning. (i.e. if the hobbyist picks up the bad habits, and isn’t able to adapt to pick up the good habits). I’d also remark as a CS Undergrad that estimation of peer ability is going to be overestimation. (Generally, it’s easy to assume that everyone knows what you know, and that you’re the only one who doesn’t know anything your friends know).<br />But what interests me further is this takes the question away from an “oh those sexist white men in the patriarchy” narrative to a “how can we better market and introduce CS so as to make it more accessible for women”. (Though I guess this comes from the “women don’t know they need to be in CS” perspective).</p>
+<h2 id="feministhackerbarbie-and-cs-culture">#FeministHackerBarbie and CS Culture</h2>
+<p>So.<br /><a href="http://knowyourmeme.com/memes/barbie-i-can-be-a-computer-engineer-parodies">KnowYourMeme</a> has, as usual, a good detailing of this.<br />Someone noticed a Barbie-as-a-computer-engineer book which featured a ditsy Barbie. (Y’know. There’s a lot of hoo-hah about representation of women. The notion of ‘this is harmful for girls’ gets passed around an awful lot. e.g. <a href="https://www.youtube.com/watch?v=QZqHxw-E2Y4">Caroline Kitchens discussing GoldieBlox</a>).<br />So the feminist was upset at the political nuances of a toy, particularly one which propagated/enforced an unhealthy stereotype, and we get #FeministHackerBarbie.</p>
+<p>Sure. But what’s amusing is the followup I saw on my Twitter feed: #FeministHackerBarbie ‘fixed’ the Barbie by having her be an expert.<br />But more significantly, above and beyond portraying Barbie as a capable and competant woman, she always did things The Right Way (TM), and almost exclusively #FeministHackerBarbie was complaining about someone else’s incompetency.<br />– Perhaps to the feminists, calling women stupid is bad. The sin of calling the folk in tech ‘stupid’ here invoked the greater umbrage. Feminism met CS culture, and CS culture jumped at the opportunity of mocking the incompetent.</p>
+<p>– And this is relevant because it’s an example of CS culture.<br />There are two very important points to make here:<br />Firstly, when I say above it’s good to remove obstacles for new entrants to CS, I generally agree, but I have mixed feelings about “don’t be a dick”. (#FeministHackerBarbie is a dick. Not in a “it’s a powerful woman, and that’s scary” kindof way, but in a mocking and belittling lesser people kindof way).<br />Secondly, the notion of ‘imposter syndrome’. (The feeling that everyone else is much better than you are, and that you’re an imposter among them since you’re not as good).</p>
+<h3 id="dont-be-a-dick">“Don’t be a dick”</h3>
+<p>This one I have mixed feelings about.<br />Moreso because despite what I may say about CS culture and it’s inherent relationship with “being a dick”, I’ve a lot of love and respect for my peers.</p>
+<p>Jeff Atwood <a href="https://twitter.com/codinghorror/status/541839452914847744">had a similar thought</a>. Heh.</p>
+<p>You’d tend to think there’s no room for discussion about this; you’d think “being a dick” is a bad (and unwelcoming) thing to do, and so any line of thought could start and end with “being a dick is bad, just stop.”.<br />But even in popular culture, the “genius hero” is often enshrined as a dick. Dr. House is a supergenius doctor, and a major jerk. Sherlock as portrayed by Benedict Cumberpatch is another example. – Even in wider internet culture, it’s not uncommon to see examples of the “smart” people mocking the “dumb” people; e.g. for bad grammar in particular (which perhaps falls close to the dickishness in CS culture).</p>
+<p>Programmers love arguing over the most useless of things. The more useless a subject is, the more likely a programmer is willing to argue about it. e.g. which text editor is best, tabs vs spaces, and version numbers are famous examples of this. And yet while these things are useless (mostly), ‘argument’ is still fueled by righteous indignation that one’s own way is better, and the other person is being an idiot for not seeing it.<br />I don’t think this in and of itself is so bad. But I mean that this “disrespect” is par for the course.</p>
+<p>And, you see, there’s a pedantry about all this behaviour; pedantic by training (if not by nature), since the programming languages are formal, so even minor typos and bad grammar, unlike in English (for the most part), are not insignificant. – e.g. <a href="https://en.wikipedia.org/wiki/Binary_search_algorithm#Implementation_issues">Binary search can be difficult</a>.<br />It’s not so much being a dick because CS folk are nasty, so much as any normal “you hurt my feelings” just isn’t relevant when discussing algorithms and programming. – And just like wider society’s intolerance for typos/bad grammar (which is fine if you’re a writer, but overzealous otherwise), there’s a kind of “intolerance” bred for the inefficient. Or the stupid. (e.g. “Why would you do it that way?”).</p>
+<p>Since contributing program or suggestion better be good, you’d better take the time to make sure anything you contribute is of quality.<br />– e.g. <a href="https://www.youtube.com/watch?v=SkdrYWhh-8s">Ben Orenstein’s Expert Level Vim talk</a>. Maybe using the word <em>Expert</em> is just hubris. Maybe it’s that Vim users (ought to) hold an attitude of always looking to improve. But the comments are like ‘<em>This “expert-level vim” is really “first-hour vim”.</em>’. (That, or from people who clearly don’t know enough to call him out on this. But this is a Ruby conference, after all).</p>
+<p>For myself, while it’s certainly surprising to find out there’re things I know that some of my classmates don’t, it can be downright disappointing that students attending a “I’m-so-smart-me” prestigious course wouldn’t know fundamental programming/development concepts. Mocking incompetence is bad, sure, but where there’s expectation/demand for some level of competence, then unreasonable inability is an affront.<br />Of course, there’re many things I’m quite incompetent at. It would be awful if I claimed to be competent in any such area. And so I’d hate to ask a stupid question if I gave the impression that I otherwise knew what I was talking about.</p>
+<p>– If I write the above in favour of “being a dick”, it’s because it seems self-evident that in a discussion about being friendlier, “being a dick” can be negative.<br />But the negative impact of this dickishness is much more insidious than simply “people aren’t nice to each other, and that’s <em>bad</em>.”.<br />While intolerance for incompetence may drive people to work harder; it’s surely damaging that people aren’t so willing to admit mistakes, or limitations in ability.</p>
+<p>– Perhaps another way of rephrasing the problem is “I may be a dick, but you can’t deny I’m effective.”; and characters who live this motto (like Dr House, or recent renditions of Sherlock Holmes) seem to be popular enough. - And I’m not exactly sure what to make of that.</p>
+<h4 id="when-nerds-collide">‘When Nerds Collide’</h4>
+<p>Since I began writing this post, <span class="citation">[@maradydd's &quot;When Nerds Collide&quot;]</span>(https://medium.com/<span class="citation">@maradydd/when-nerds-collide-31895b01e68c</span>) came up on my feed.<br />The author deals with an insidious aspect of this conversation; I would phrase it as the “social justice” movement’s incursion into “tech culture”. (I suppose the “social justice” movement would describe it as giving power to the oppressed / displacing bigotry..).<br />In any case, the author proposes by the end a “hey, here’s what you could do so that there’d be less backlash.”, after discussing reasons why the “identity politics” of the incurring isn’t going down so well with a culture which values ideas &amp; proofs so highly.<br />It’s a fascinating read on the issue. There’re some pretty choice quotes/ideas in the piece.</p>
+<h3 id="imposter-culture">Imposter Culture</h3>
+<p>So, again. #FeministHackerBarbie is super pretentious/elite about everything she touches.<br />Fun as that is, it reminds me of “Imposter Syndrome”. - Which is along the lines of “Of course you’re the one idiot who has no clue what they’re doing. Maybe if you ‘pretend’ well enough, no one will notice.”.</p>
+<p>Then so long as you never appear to be stupid, no one will know you’re an imposter.<br />So, appearing “stupid” is bad.<br />– That’s a batshit insane ethos to hold in tech culture. When you acknowledge there’s something you don’t know, maybe someone else can inform you about what you don’t know. (Or, given how social CS culture is, you can look it up on your own). - Rather, it’s surely unhealthy to feel an “imposter” when you’re par-for-the-course; to feel an “outsider” when others can immediately relate to your experience.</p>
+<p>And how this relates to “women in tech”?<br />It’s intimidating to the students entering into CS, especially if they’re not one of these “hackers” / of the culture. It’s surely no wonder in the aforementioned CMU study the girls’ underrated their ability.</p>
+<p>Maybe the above isn’t really a “problem” if it only involves people’s feelings being hurt; perhaps instead people should just put on their big-person shoes and get over it?<br />Maybe. But I can’t help but thing a culture which doesn’t allow for making mistakes also isn’t all that great for creativity and productivity. (..and individuality, at that.).</p>
+<p>There’s a common anecdote of I think something those who don’t program probably don’t understand about computers/programming: “How do you solve this problem? Google it, try the whatever comes up. If that doesn’t work, repeat from Step 1.”. (When you understand the tools you’re using, you don’t need to do this; but when learning tools, it’s unusual to think of anyone doing it any other way.).<br />I mean, like. If CS is as “world changing” and beneficial as it promises to be, then those who might be discouraged by “but programming is hard / not something I can do” probably need to be told that’s bullshit. (Some problems are hard. But perhaps also programming is so easy that it makes more problems when programs aren’t made in the “right way”. Hmm. cf. <a href="https://queue.acm.org/detail.cfm?id=2349257">“A Generation Lost in the Bazaar”</a>.).</p>
+<p>– Maybe it’s nice for CS to have so much ‘elite prestiege’ about it. (Because what could go wrong about telling a society of people who value ideas how smart they are? It’s sure to improve character!). I’m a little concerned to see that the requirements for entry to study CS are becoming so high. - My classmates point out that they wouldn’t have been allowed in on such a restriction. (One such classmate, as a weekend project, decided to reverse white/black on their LED watch. It takes a skilled and willful individual to do such a thing; it’s uncommonly impressive, I’d say. And his grades weren’t so great in high school.).</p>
+]]></summary>
+</entry>
+<entry>
+    <title>Conflict in Narrative, RE: Genre</title>
+    <link href="http://www.rgoulter.com/blog//posts/narrative/2015-03-22-conflict-in-narrative-re-genre.html" />
+    <id>http://www.rgoulter.com/blog//posts/narrative/2015-03-22-conflict-in-narrative-re-genre.html</id>
+    <published>2015-03-22T00:00:00Z</published>
+    <updated>2015-03-22T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<div class="info">
+    Posted on March 22, 2015
+    
+        by Richard Goulter
+    
+</div>
+<div class="info">
+    
+    Tags: <a href="/tags/analysis.html">analysis</a>, <a href="/tags/romance.html">romance</a>
+    
+</div>
+
+<p>I rambled recently about some genres, romance and action/adventure, particularly that one genre did characters well and the other was strong in plot.<br />I wondered whether romance genre was inherently worse at plot.</p>
+<p>A tool which would help this thought would be the notion of whether conflict is ‘internal’ or ‘external’.<br />Gunfights, explosions and whatnot would be ‘external’.<br />Angst, and mustering courage, etc. would be ‘internal’.<br />Or something like that.</p>
+<p>Notably, I was introduced to this concept seeing a comment in a review of a Romance Novel which pointed out all the conflict in the book was ‘external’: everything between Hero &amp; Heroine is fine &amp; dandy.<br />If we try and map that to action movies, it’s like the heroes arrive on the scene and the battle has already been won; the cavalry arrive and the enemy have already been defeated. It’s not to say the narrative is a bad one; just that you’re not really going to be scoring points in the genre.</p>
+<p>So, Romance Novels are character strong, and this depends (at least a bit) on ‘internal’ conflict. If we try and fit it into an either/or, Action/Adventure is great at ‘plot’, which largely depends on ‘external’ conflict.</p>
+<p>– And with this tool in hand, it strikes me that one of the reasons RASalvatore sucks so much at writing character is he dresses up ‘external’ conflict, pretends it’s “internal” conflict. e.g.</p>
+<blockquote>
+<p>Drizzt has a mask which would make him look acceptable to other people. Drizzt has angst as to whether wearing this mask is good or not.</p>
+</blockquote>
+<p>Emphasised in the narrative is ‘racism is bad’, and so the key conflict is external (“other people are racist”) and not internal. Hell. RASalvatore’s novels even feature sentient. fucking. objects (e.g. talking sword which tries to influence wielder); so character growth which potentially could be ‘internal’ (“do I have mastery of my sword?”) becomes ‘external’ in Salvatore’s writing. (“do I have mastery of <em>this</em> sword, which is another living being?”).<br />There are examples in Salvatore’s writing which feature proper character; it’s easy to see how these fit in terms of ‘internal’/‘external’. e.g.</p>
+<blockquote>
+<p>Drizzt realises running off by himself to save the day was silly, and that he relies on his friends more than he thought.</p>
+</blockquote>
+<p>is ‘internal’, and one of the few moments (in 9 or so books) where Drizzt is more than a cardboard character. Another example in Salvatore’s writing:</p>
+<blockquote>
+<p>Robilard the wizard is cynical due to some past turmoil. Interacting with the light-hearted Harple, Robilard shows some happiness.</p>
+</blockquote>
+<p>also ‘internal’, even though he’s interacting with someone else. (Because the <em>conflict</em> being dealt with is internal to a person).</p>
+<p>It would be difficult to say all conflict fits easily into ‘internal’ or ‘external’, though. Romance Novels are maybe more interesting about this, since it’s rare for a character to grow just by internal reflection.<br />Consider some from “Devil in Winter”: e.g.</p>
+<blockquote>
+<p>Sebastian says rude words around his wife, Evie. Evie chastises him. Sebastian says “deal with it”. Sebastian isn’t ever seen saying rude words to his wife in this manner after this.</p>
+</blockquote>
+<p>Perhaps inter-personal conflict is particularly unsuited to this ‘internal’/‘external’ model?<br />More fun is considering examples where it really does blur, though. e.g.</p>
+<blockquote>
+<p>Some of the gaming-house workers are having a tussle. Sebastian must break them up in order to show his worth as a leader.</p>
+</blockquote>
+<p>The development isn’t “Sebastian beats up some guys and saves the day”, but “Sebastian proves his worth as a leader” kindof thing.<br />Hmm. Maybe not the best example.</p>
+<p>Regardless, it’s an interesting tool to have in the toolbox.</p>
+<p>So, going back to “do Romance Novels have plots with less conflict?”, it’s clear that RNs (probably) don’t, but instead the conflict they do have is ‘internal’ rather than ‘external’.<br />And ‘internal’ conflict is to character as ‘external’ conflict is to … ? “Plot”?<br />In any case. Worth considering next is how much RNs need ‘external’ conflict in their narratives. “Devil in Winter” features plenty. Maya Rodale’s “Seducing Mr. Knightly” features ‘external’ conflict in the form of legal inquiries. Sherry Thomas’ “Tempting the Bride” is, as far as I can recall, free of “external conflict”. (Oh. Hmm. There is Mrs Martin, whose meddling drives a key part of the plot). “Romancing Mr. Bridgerton” has a driving conflict of the mystery of ‘who is Lady Whistledon?’. “Pride and Prejudice” features conflict with Mr. Wickham. – None of this is really “guns and explosion” type stuff, but is all undoubtedly ‘extenal’ conflict.<br />Hmm.</p>
+]]></summary>
+</entry>
+<entry>
+    <title>Silly Things to Say on International Women's Day</title>
+    <link href="http://www.rgoulter.com/blog//posts/argument/2015-03-10-silly-things-to-say-on-international-womens-day.html" />
+    <id>http://www.rgoulter.com/blog//posts/argument/2015-03-10-silly-things-to-say-on-international-womens-day.html</id>
+    <published>2015-03-10T00:00:00Z</published>
+    <updated>2015-03-10T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<div class="info">
+    Posted on March 10, 2015
+    
+        by Richard Goulter
+    
+</div>
+<div class="info">
+    
+    Tags: <a href="/tags/feminism.html">feminism</a>
+    
+</div>
+
+<p>It was International Women’s Day a couple of days ago.</p>
+<p>A knee-jerk response seen on social media was:</p>
+<blockquote>
+<p>When is it ever International Men’s Day?</p>
+</blockquote>
+<p>This is a stupid thing to say.<br />Do you want an International Men’s Day? Grow up, I’d reckon. Saying “What about International Men’s day?” on International Women’s Day, when sure as shit you’d not have given it a spare thought any other day of the year, is like being the brother who wants to play with the toys only because his little sister wanted to.</p>
+<p>It’s a notch below <strong>“Why do we need International Women’s Day?”</strong> as a question, which is still not as good as <strong>“What’s International Women’s Day about, anyway?”</strong>.<br />Saying silly things, apparently. Also:</p>
+<blockquote>
+<p>Men’s day is every day!</p>
+</blockquote>
+<p>As the just-as-common, just-as-stupid response to above question.</p>
+<p>The assumption is, I guess, “you men are privileged!”.<br />– It’s <strong>not</strong> a stupid thing to remark that men have privilege, and have opportunities that others don’t have.<br />– It becomes stupid when you pretend that privilege is a one-dimensional continuum. Or, rather, that anyone who has “privilege” doesn’t also face obstacles.</p>
+<p>I mean, being a white man doesn’t look like <a href="https://www.youtube.com/watch?v=EC21NF5rbSk">this, from FunnyOrDie</a>. (As one YouTube commenter writes “I can’t tell if FOD is being run by social justice warriors or making fun of them.”).</p>
+]]></summary>
+</entry>
+<entry>
+    <title>Rambling on Genres, Romance and Action</title>
+    <link href="http://www.rgoulter.com/blog//posts/narrative/2015-02-25-rambling-on-genres-romance-and-action.html" />
+    <id>http://www.rgoulter.com/blog//posts/narrative/2015-02-25-rambling-on-genres-romance-and-action.html</id>
+    <published>2015-02-25T00:00:00Z</published>
+    <updated>2015-02-25T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<div class="info">
+    Posted on February 25, 2015
+    
+        by Richard Goulter
+    
+</div>
+<div class="info">
+    
+    Tags: <a href="/tags/analysis.html">analysis</a>, <a href="/tags/romance.html">romance</a>
+    
+</div>
+
+<p>Lately, I’ve been reading lots of RASalvatore. Specifically, his Legend of Drizzt series. I’ve read the first 11 books so far.</p>
+<p>I enjoy them well enough. They’re sword-and-sworcery stories, falling roughly under action/adventure and scifi/fantasy genres.<br />What I don’t enjoy is RASalvatore’s characters, for the most part. And so generally any monologue Drizzt has, or any morality consideration (usually early on in the books) is pretty awful. – By the end of the book, the action &amp; adventure is fantastic; unputdownable. Yet at the start, it’s unpickupable!</p>
+<p>I’ve heard somewhere, can’t remember where, that the Romance-Novel genre does characters really well, but plot not so much. It seems here that RASalvatore does plot (at least, action/adventure) well, but characters not so much.</p>
+<p>There’s more to story-telling than plot + character. e.g. setting comes into it. And these things aren’t discreet, but related &amp; all. (I mean, how d’you have a plot without any characters?). Sure.<br />And I’ve read RNs which have poor characters. Sure.</p>
+<p>– I wonder if a ‘best of both worlds’ is possible?</p>
+<p>RASalvatore does try ‘romance’, too. It doesn’t really work. e.g. the main characters Drizzt and Cattie-Brie go adventuring with each other for many years; despite admitting to each other they have feelings for each other, they put it off (for some reason). – Clearly the love between them isn’t the kind which is so passionate so as to defy “what’s for the best”. <strong>Zzzzz</strong>.</p>
+<p>On the other hand, the plots I’ve read in RNs, in terms of action/adventure, haven’t been earth-shatteringly exciting. The cliche is that there’s a kidnapping at the end.<br />– I have read RNs where the characters had to get away while under enemy fire. But in terms of the ‘action/adventure’, let’s go on a quest, rollercoaster of osbstacles-from-nowhere and rescues-from-nowhere, RNs don’t invest much.</p>
+<p>That’s not inherently a bad thing; that’s not to say that RNs are inherently without tension.<br />– Sure, in recent RNs you’re guaranteed that the Hero and Heroine have a Happily-Ever-After. But in action/adventure you can be sure the good guys win in the end. Even killing off a main character in S&amp;S/SFF, you can probably bet that the character will be brought back.</p>
+<p>Perhaps worth mentioning is Sherry Thomas. I’m not sure if she’s a unique candidate in this position, but Sherry’s written many RNs. Recently, her books have been a wuxia-epic-thing (in two parts), as well as “young adult” adventure/SFF.<br />I thought the wuxia was a bit of a miss; but her SFF series is top notch.</p>
+<p>In “The Perilous Sea”, Sherry keeps the plot going by alternating between “present” and “past” events. Moreover, in the tradition of magical-flavoured adventure, builds up a repetoire of “this magic does this”, so the climax of the narrative can get resolved in what would otherwise be cheating.<br />It’s good.<br />But more than “the characters don’t suck” (which is a pretty low bar to set), Sherry’s characters do alright with a romance.</p>
+<p>– I suppose the trick is this. In a typical action/adventure story, there’s plenty of time early on where not much is happening. (Perhaps not in the last book of a trilogy/quartet, but anyway). Sherry uses this space for introducing the conflict in the romance of the characters, then slips in the sweet (&amp; bittersweet) developments in the romance during the narrative.<br />I’m not sure Perilous Sea can stand on its own as a Romance Novel; I’m not sure there’s enough meat to it.</p>
+<p>In contrast, I don’t think Salvatore sits on his arse. Of the stories I’ve read, it’s been interesting to see him narrate the dark-elf city Menzoberrenzan (or whatever, who cares), and the political tensions &amp; intrigue of the city. It’s got vitality. His establishing descriptions of Important Places such as Calimport create a vivid setting.<br />But definitely the crafting of character isn’t done as well as Sherry’s.</p>
+<p>Perhaps it’s just that Salvatore sucks at writing character (mostly), but this weakness hardly matters in an action/adventure story. Similarly, where plots in RNs are less than thrilling, it’s not a large impact to the quality of the story as a whole.</p>
+]]></summary>
+</entry>
+<entry>
+    <title>Highlights of Emma Approved & LBD</title>
+    <link href="http://www.rgoulter.com/blog//posts/romance/2015-02-24-highlights-of-emma-approved--lbd.html" />
+    <id>http://www.rgoulter.com/blog//posts/romance/2015-02-24-highlights-of-emma-approved--lbd.html</id>
+    <published>2015-02-24T00:00:00Z</published>
+    <updated>2015-02-24T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<div class="info">
+    Posted on February 24, 2015
+    
+        by Richard Goulter
+    
+</div>
+<div class="info">
+    
+    Tags: <a href="/tags/emma%20approved.html">emma approved</a>, <a href="/tags/emma.html">emma</a>, <a href="/tags/lizzie%20bennet%20diaries.html">lizzie bennet diaries</a>
+    
+</div>
+
+<p>Ah. So. Lately my reading has been more about sword &amp; sworcery fantasy.<br />For a break from that, I thought it’d be good to go back &amp; look at some of the highlights from Lizzie Bennet Diaries &amp; it’s sister show Emma Approved.<br />(I tried watching some of their other shows; Frankenstein and Little Women, but they’ve just not been worth watching. Sigh).</p>
+<h3 id="emma-approved">Emma Approved</h3>
+<p>I hadn’t known Jane Austen’s ‘Emma’ before this series came out! I’d say Emma, at least as I understand her character, has to be a favourite of mine.</p>
+<p>So, favourite videos from ‘Emma Approved’, in order-of-release:</p>
+<p><a href="https://www.youtube.com/watch?v=KW-147_c0h4">#24</a>. Elton clarifies to Emma that he digs her, while Emma thought Elton was after Harriet. But what I love most about this is the familiar intimacy Alex shares with Emma. Upset, she tries to hide her tears from Knightly; he notices she’s organising, and knows her so very personally to know what that means.</p>
+<p><a href="https://www.youtube.com/watch?v=86yhRpuchwI">#47</a>. Elton comes in to belittle and bully Harriet. Alex shows up, and rescues Harriet’s dignity.<br />&lt;3</p>
+<p><a href="https://www.youtube.com/watch?v=xNF1w3-kT6c">#64</a>. After Emma acted like a jerk at Boxx Hill, Jane comes in and gives her setdown. (“I didn’t communicate how upset I was before, but now that I’m telling you, it’s too late and nothing can be done about it.” Oh Jane, you’re totally not a bitch at all). Sigh.<br />That aside, Alex comes in and puts Emma down as well. – I’ve <a href="../../posts/romance/2014-07-28-emma-disapproved.html">written previously</a> that they didn’t give enough credit to Emma here about this.</p>
+<p><a href="https://www.youtube.com/watch?v=y-_yiKduuM4">#68</a>. Harriet reveals that she likes Alex. Emma isn’t excited about that.<br />This is pretty catty. But the whole “Ha. Oh, wait, I wanna bonk Alex” thing is fun.</p>
+<p><a href="https://www.youtube.com/watch?v=Ht5wK5QG7fM">#69</a>. – My favourite, favourite thing about ‘Emma’ is that you have this fantastic, amazing, proud character who fucks up, realises they’re fallible, and then improves themselves. I don’t think “Emma Approved” quite gives justice to this aspect of Emma. Or maybe I enjoyed ‘Clueless’ a bit too much:</p>
+<blockquote>
+<p>Everything I think and everything I do is wrong. I was wrong about Elton, I was wrong about Christian, and now Josh hated me. It all boiled down to one inevitable conclusion, I was just totally clueless. Oh, and this Josh and Tai thing was wigging me more than anything. I mean, what was my problem? Tai is my pal, I don’t begrudge her a boyfriend, I really… Ooh, I wonder if they have that in my size. What does she want with Josh, anyway? He dresses funny, he listens to complaint rock, he’s not even cute… in a conventional way. I mean, he’s just like this slug who hangs around the house all the time. And he’s a hideous dancer, I couldn’t take him anywhere. Wait a second, what am I stressing about? This is like, Josh! OK, OK, so he’s kind of a baldwin, but what would he want with Tai? She couldn’t make him happy. Josh needed someone with imagination, someone to take care of him, someone to laugh at his jokes… in case he ever makes any. Then suddenly…</p>
+</blockquote>
+<h3 id="lizzie-bennet-diaries">Lizzie Bennet Diaries</h3>
+<p>Well, uh. Pride &amp; Prejudice is always going to have that special place.<br />And the Lizzie Bennet Diaries did a pretty good job of it.</p>
+<p>The videos with Lizzle, only Lizzie, are probably my favourite:<br /><a href="https://www.youtube.com/watch?v=-SPDX0rOuds">#7</a>, “Most awkward dance ever”, wherein Lizzie fantastically narrates the dance with Darcy. It’s adorable to see Lizzie so flustered by Darcy’s insults.<br /><a href="https://www.youtube.com/watch?v=IkGIftBxcOw">#96</a>, “Conversation with Myself”. Utterly, totally adorable to see Lizzie in the costumes of her friends.</p>
+<p>Also very cute:<br /><a href="https://www.youtube.com/watch?v=jV8EZWJNvRI">#78</a>, “The Lizzie Trap”, referenced in the above video, which has Gigi Darcy acting all adorable.<br /><a href="https://www.youtube.com/watch?v=FZv3LsrOEsY">#83</a>, “Interview”, which has Darcy costume as Fitz.</p>
+<p><a href="https://www.youtube.com/watch?v=9X68-knFQ3c">#15</a>, with Charlotte and Jane hosting the videoblog. After Carter’s dinner/party. “Pleasure a pair of fine eyes”. (&amp; Lizzie saying this in the next video!). But, also, the adorable:</p>
+<blockquote>
+<p>Caro: Are you Fake texting? Darcy: It’s super important.</p>
+</blockquote>
+<p>I’ve also gotta give credit to the <a href="https://www.youtube.com/watch?v=KisuGP2lcPs">first video</a>, which takes a moment to examine the oh-so-famous first line of P&amp;P. Particularly in terms of it’s hard to tell if Jane Austen is being serious or not about what she writes.</p>
+]]></summary>
+</entry>
+<entry>
+    <title>Eclipse Woes: Import-Plugin</title>
+    <link href="http://www.rgoulter.com/blog//posts/programming/2015-02-18-eclipse-woes-import-plugin.html" />
+    <id>http://www.rgoulter.com/blog//posts/programming/2015-02-18-eclipse-woes-import-plugin.html</id>
+    <published>2015-02-18T00:00:00Z</published>
+    <updated>2015-02-18T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<div class="info">
+    Posted on February 18, 2015
+    
+        by Richard Goulter
+    
+</div>
+<div class="info">
+    
+    Tags: <a href="/tags/eclipse.html">eclipse</a>, <a href="/tags/pde.html">pde</a>, <a href="/tags/sbt.html">sbt</a>, <a href="/tags/osgi.html">osgi</a>
+    
+</div>
+
+<p>Eclipse Plugin Development, I’ve found, has been fraught with with “learning experiences”.</p>
+<p>They say it’s easy to create Feature projects &amp; Update Sites for Eclipse.<br />Turns out when the exporter gives an error saying “I can’t find Installable Unit for your plugin”, something is wrong with your plugin project’s build!<br />– It’s possible for a PDE project to have a plugin which is valid when running an “Eclipse Application” to test the plugin; but still can’t be exported due to invalid settings.</p>
+<p>Rather. It’s possible for Eclipse PDE to know about your plugin and not know about your plugin at the same time.<br />Argh!</p>
+<p>For a PDE project created in Eclipse, my problem was a bad <code>build.properties</code> file. (Which tells Eclipse what order to build/export things, or so).<br />Sure. Fine.</p>
+<p>I also had an OSGi-bundle generated from an SBT project:<br />Because Eclipse’s classpath &amp; OSGi classpath don’t get on together at all, it’s necessary to have not just the standard Eclipse project, but a separate project with an OSGi-enabled <code>MANIFEST.MF</code>.</p>
+<p>– Eclipse plugin dependencies must be OSGi Bundles. An OSGi bundle is a <code>.jar</code> whose <code>MANIFEST.MF</code> has some additional properties, detailing what the bundle exports &amp; which bundles it needs. Eclipse needs to know about a ‘target platform’ of bundles for its plugins to work.<br />– This can be achieved by either installing the plugins to where Eclipse will load them when you run it; or, with Eclipse PDE (Plugin Development Environment), PDE can launch an Eclipse instance loading projects in the workspace as plugins. When developing plugins, it’s surely easier to not have to re-export &amp; re-install plugins each time something changes.<br />At least, I’m pretty sure that’s how it works.<br />Simple, right? Such is Eclipse.</p>
+<p>So. I need a project which has the OSGi bundle for some tool I’m working on, (a tool I might want to use outside of OSGi, because testing OSGi bundles can only be done within an OSGi environment. Working with some OSGi environment is the difficulty I’m having here, see).<br />One way to do this is PDE’s “New Plugin from Existing JAR…” project, which wraps a project around a JAR..<br />Another approach is to import a bundle and wrap a project around this JAR. (“Import Plugin…”).<br /><strong>These do not do the same thing</strong><br />One works, the other doesn’t.<br />Wut.<br />Rather, with one, “Export Plugin…” works fine, but not for the other.</p>
+<p>I mean, obviously, right?</p>
+<p>If one wanted to investigate why one works, the other doesn’t, one might look at the differences in project settings between the two; and incrementally copy the changes across until both ‘work’.<br />– Turns out copying / replacing <em>all</em> the files from the working one to the not-working one, so that they’re identical, doesn’t solve this.<br />Unless, after making such changes to the project, the project is removed from the workspace and added back to the workspace. (Clearly this updates/refreshes some setting which “Refresh Project”, Closing/Opening the project don’t update. I don’t know what).<br />Clearly, right?</p>
+<p>– Eventually I figured out that the manifest generated from an <code>sbt-osgi</code> plugin wasn’t in the format Eclipse liked it when importing it (though for running the plugin with PDE it’s okay); and a <code>build.properties</code> file wasn’t automatically generated when using “Import Plugin…”. That’s not so bad.<br />It amounts to a small amount of manual effort to setup a project with PDE. (No more ‘manual effort’ than typicap PDE things like exporting Plugins / Features / Update Sites).</p>
+<p>Finally I could export the Plugin! (or a Feature using it, or an Update Site with that feature). Again, just using the plugin with PDE itself wasn’t as bad.</p>
+<p>On a side note, it seems support for Tycho / building Features / Update-Sites for Eclipse isn’t so great for SBT compared to what support there seems to be for Gradle. - That matters in terms of automating the process of building an Update Site (particularly outside of Eclipse PDE GUI), though isn’t as pertinent to getting a PDE project of an OSGi Bundle.<br />(With an automatically generated Update Site, it’d be easier to install said plugin to the Eclipse environment you’re using, though, so..).</p>
+]]></summary>
+</entry>
+
+</feed>

@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>Richard Goulter's Blog - Novice Struggles with Haskell Syntax</title>
+        <link rel="stylesheet" type="text/css" href="../../css/default.css" />
+        <link rel="stylesheet" type="text/css" href="../../css/syntax.css" />
+    </head>
+    <body>
+        <div id="page">
+            <div id="header">
+                <div id="logo">
+                    <a href="../../">Richard Goulter's Blog</a>
+                </div>
+                <div id="navigation">
+                    <a href="../../">Home</a>
+                    <a href="../../yi.html">Yi</a>
+                    <a href="../../archive.html">Archive</a>
+                </div>
+            <div>
+                <img src="../../images/blog-banner.png" />
+            </div>
+            </div>
+
+
+            <div id="content">
+                <h1>Novice Struggles with Haskell Syntax</h1>
+
+                <div class="info">
+    Posted on July  3, 2014
+    
+        by Richard Goulter
+    
+</div>
+<div class="info">
+    
+    Tags: <a href="../../tags/haskell.html">haskell</a>, <a href="../../tags/hakyll.html">hakyll</a>
+    
+</div>
+
+<p>I’ve been trying to augment my Hakyll Site with “next post”, “previous post” links in a post. There’s a post in <a href="https://groups.google.com/forum/#!topic/hakyll/WYPjtWMm9ZU">Hakyll Google group</a> asking for the same thing. (Maybe the majority of Hakyll owners just “adapt” from other Hakyll sites…).</p>
+<p>I’ve run into trouble trying to do this. Hakyll.Web.Template.Context <a href="http://jaspervdj.be/hakyll/reference/src/Hakyll-Web-Template-Context.html">source</a> was a useful start.<br />But the trouble I ran into due to lack of experience, or understanding, of some (fundamental) Haskell concepts.</p>
+<p>Ugh.</p>
+<p>In this excerpt, <code>postContext</code> is out of scope:</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">    match postsGlob <span class="fu">$</span> <span class="kw">do</span>
+        route <span class="fu">$</span> setExtension <span class="st">&quot;html&quot;</span>
+        compile <span class="fu">$</span> <span class="kw">do</span> 
+            <span class="co">-- Cyclic dependencies here here:</span>
+            identifiers <span class="ot">&lt;-</span> getMatches postsGlob
+            urls <span class="ot">&lt;-</span> urlsOfPosts <span class="fu">=&lt;&lt;</span> recentFirst <span class="fu">=&lt;&lt;</span> return [<span class="dt">Item</span> identifier <span class="st">&quot;&quot;</span> <span class="fu">|</span> identifier <span class="ot">&lt;-</span> identifiers]
+
+            <span class="kw">let</span> postContext <span class="fu">=</span>
+                    field <span class="st">&quot;nextPost&quot;</span> (nextPostUrl urls) <span class="ot">`mappend`</span>
+                    postCtxWithTags tags
+
+            pandocCompiler
+            <span class="fu">&gt;&gt;=</span> saveSnapshot <span class="st">&quot;teaser&quot;</span>
+            <span class="fu">&gt;&gt;=</span> loadAndApplyTemplate <span class="st">&quot;templates/post.html&quot;</span>    postContext
+            <span class="fu">&gt;&gt;=</span> loadAndApplyTemplate <span class="st">&quot;templates/default.html&quot;</span> postContext
+            <span class="fu">&gt;&gt;=</span> relativizeUrls</code></pre></div>
+<p>(Yeah, I know, it’s a heinously long line).<br />Whereas in this excerpt, it’s in scope:</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">    match postsGlob <span class="fu">$</span> <span class="kw">do</span>
+        route <span class="fu">$</span> setExtension <span class="st">&quot;html&quot;</span>
+        compile <span class="fu">$</span> <span class="kw">do</span> 
+            <span class="co">-- Cyclic dependencies here here:</span>
+            identifiers <span class="ot">&lt;-</span> getMatches postsGlob
+            urls <span class="ot">&lt;-</span> urlsOfPosts <span class="fu">=&lt;&lt;</span> recentFirst <span class="fu">=&lt;&lt;</span> return [<span class="dt">Item</span> identifier <span class="st">&quot;&quot;</span> <span class="fu">|</span> identifier <span class="ot">&lt;-</span> identifiers]
+
+            <span class="kw">let</span> postContext <span class="fu">=</span>
+                    field <span class="st">&quot;nextPost&quot;</span> (nextPostUrl urls) <span class="ot">`mappend`</span>
+                    postCtxWithTags tags
+
+            pandocCompiler
+                <span class="fu">&gt;&gt;=</span> saveSnapshot <span class="st">&quot;teaser&quot;</span>
+                <span class="fu">&gt;&gt;=</span> loadAndApplyTemplate <span class="st">&quot;templates/post.html&quot;</span>    postContext
+                <span class="fu">&gt;&gt;=</span> loadAndApplyTemplate <span class="st">&quot;templates/default.html&quot;</span> postContext
+                <span class="fu">&gt;&gt;=</span> relativizeUrls</code></pre></div>
+<p>I guess this is why people don’t like Python or other non-C syntaxes where indentation matters.<br />I was able to figure that out, and considering this excerpt:</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">    urlOfPost ::</span> <span class="dt">Item</span> <span class="dt">String</span> <span class="ot">-&gt;</span> <span class="dt">Compiler</span> <span class="dt">String</span>
+    urlOfPost <span class="fu">=</span>
+        fmap (maybe empty <span class="fu">$</span> toUrl) <span class="fu">.</span> getRoute <span class="fu">.</span> itemIdentifier</code></pre></div>
+<p>But <code>urlsOfPosts</code> (used in above excerpt) has type <code>urlsOfPosts :: [Item String] -&gt; Compiler [String]</code>.<br />While it’s possible to understand <code>urlOfPost</code> by looking at the documentation of each part, it’s not clear to me the implementation of <code>urlsOfPosts</code>.</p>
+
+
+<hr />
+
+<div>
+    
+    <a href="../../posts/programming/2014-07-06-adding-nextprevious-post-to-hakyll.html" style="float:left;">Newer post</a>
+    
+    
+    <a href="../../posts/programming/2014-07-01-yi-in-a-cabal-sandbox-on-osx.html" style="float:right; text-align: right;">Older post</a>
+    
+</div>
+<br style="clear: both;" />
+
+<hr />
+
+<div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'richardgoultersblog'; // required: replace example with your forum shortname
+        var disqus_identifier = '/posts/programming/2014-07-03-novice-struggles-with-haskell-syntax.html';
+        var disqus_url = 'http://www.rgoulter.com/blog' + '/posts/programming/2014-07-03-novice-struggles-with-haskell-syntax.html';
+        var disqus_title = 'Novice Struggles with Haskell Syntax - July  3, 2014';
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+<!-- Load highlight.js for Syntax Highlighting. -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/solarized_light.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+            </div>
+            <div id="footer">
+                Site proudly generated by
+                <a href="http://jaspervdj.be/hakyll">Hakyll</a>
+            </div>
+        </div>
+    </body>
+</html>

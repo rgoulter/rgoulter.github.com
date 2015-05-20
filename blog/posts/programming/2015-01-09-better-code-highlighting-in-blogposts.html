@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>Richard Goulter's Blog - Better Code Highlighting in Blogposts</title>
+        <link rel="stylesheet" type="text/css" href="../../css/default.css" />
+        <link rel="stylesheet" type="text/css" href="../../css/syntax.css" />
+    </head>
+    <body>
+        <div id="page">
+            <div id="header">
+                <div id="logo">
+                    <a href="../../">Richard Goulter's Blog</a>
+                </div>
+                <div id="navigation">
+                    <a href="../../">Home</a>
+                    <a href="../../yi.html">Yi</a>
+                    <a href="../../archive.html">Archive</a>
+                </div>
+            <div>
+                <img src="../../images/blog-banner.png" />
+            </div>
+            </div>
+
+
+            <div id="content">
+                <h1>Better Code Highlighting in Blogposts</h1>
+
+                <div class="info">
+    Posted on January  9, 2015
+    
+        by Richard Goulter
+    
+</div>
+<div class="info">
+    
+    Tags: <a href="../../tags/hakyll.html">hakyll</a>
+    
+</div>
+
+<p>I’ve finally gotten around to improving the code syntax highlighting in my blogposts.<br />Previously, it wasn’t exactly heinous; but where my programs were too long, the code listing didn’t include a scrollbar to limit the width of the listing. e.g. <a href="../../posts/programming/2014-07-03-novice-struggles-with-haskell-syntax.html">This post</a> was a bad offender.<br />Turns out the big difference is just having the CSS attribute <code>overflow-x: auto;</code> on the <code>&lt;code&gt;</code> tag. (Or the <code>&lt;pre&gt;</code> tag).</p>
+<p>As far as I understood, previously Hakyll was highlighting my code listings using Pandoc, and so I needed to include the Pandoc-generated CSS for my blogposts.</p>
+<p>I’ve just changed it to make use of highlight.js.<br /><a href="http://blogs.visoftinc.com/2013/01/03/moving-to-highlight-js/">This</a> post (one of the early ones in a search for “highlight.js vs syntaxhighlighter.js”) suggested highlight.js since it could handle <code>&lt;pre&gt;&lt;code&gt;&lt;/code&gt;&lt;/code&gt;</code> which Hakyll/Pandoc generates; the <a href="http://softwaremaniacs.org/blog/2011/05/22/highlighters-comparison/">comparison blogpost</a> linked to says this is the HTML5 recommended way of listing code. So.</p>
+<p>As far as I can tell from playing around with it, it’s still not ideal.<br />At the moment I’m using both at-the-same-time. (My Haskell code looked a little bland without Pandoc’s generation).<br />Perhaps I could’ve tried just using a different CSS style to feed to Pandoc, or perhaps I’ll get sensible and figure out The Right Way to do this kindof thing.</p>
+
+
+<hr />
+
+<div>
+    
+    <a href="../../posts/programming/2015-01-19-gradle-or-sbt.html" style="float:left;">Newer post</a>
+    
+    
+    <a href="../../posts/programming/2015-01-08-quick-play-around-wtih-chef.html" style="float:right; text-align: right;">Older post</a>
+    
+</div>
+<br style="clear: both;" />
+
+<hr />
+
+<div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'richardgoultersblog'; // required: replace example with your forum shortname
+        var disqus_identifier = '/posts/programming/2015-01-09-better-code-highlighting-in-blogposts.html';
+        var disqus_url = 'http://www.rgoulter.com/blog' + '/posts/programming/2015-01-09-better-code-highlighting-in-blogposts.html';
+        var disqus_title = 'Better Code Highlighting in Blogposts - January  9, 2015';
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+<!-- Load highlight.js for Syntax Highlighting. -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/solarized_light.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+            </div>
+            <div id="footer">
+                Site proudly generated by
+                <a href="http://jaspervdj.be/hakyll">Hakyll</a>
+            </div>
+        </div>
+    </body>
+</html>

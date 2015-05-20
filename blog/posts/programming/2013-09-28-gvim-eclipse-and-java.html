@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>Richard Goulter's Blog - GVim, Eclipse and Java</title>
+        <link rel="stylesheet" type="text/css" href="../../css/default.css" />
+        <link rel="stylesheet" type="text/css" href="../../css/syntax.css" />
+    </head>
+    <body>
+        <div id="page">
+            <div id="header">
+                <div id="logo">
+                    <a href="../../">Richard Goulter's Blog</a>
+                </div>
+                <div id="navigation">
+                    <a href="../../">Home</a>
+                    <a href="../../yi.html">Yi</a>
+                    <a href="../../archive.html">Archive</a>
+                </div>
+            <div>
+                <img src="../../images/blog-banner.png" />
+            </div>
+            </div>
+
+
+            <div id="content">
+                <h1>GVim, Eclipse and Java</h1>
+
+                <div class="info">
+    Posted on September 28, 2013
+    
+        by richardgoulter
+    
+</div>
+<div class="info">
+    
+    Tags: <a href="../../tags/eclipse.html">eclipse</a>, <a href="../../tags/java.html">java</a>, <a href="../../tags/programming.html">programming</a>, <a href="../../tags/vim.html">vim</a>
+    
+</div>
+
+<p>If you’re going to be programming in Java, you’re probably going to need some kind of autocomplete.</p>
+<p>Eclipse IDE, we pretty much all should know, comes with that advantage.<br />So, while Notepad++ is great, you’d certainly much rather use Eclipse for such a thing.</p>
+<p>But in the same way that Eclipse is better at this than Notepad++,<br />Vim is better than Eclipse for this.</p>
+<p>A properly configured Vim has <em>awesome</em> autocompletion capabilites.</p>
+<p>As a brief aside, some things need to be clarified:<br />Eclipse is an IDE, and Vim is a text editor. When I say Eclipse is better for writing Java than Notepad++, I mean that Eclipse’s <em>editor</em> is better at writing Java than Notepad++. Of course, Eclipse comes with a suite of other features which probably make it more useful for other development tasks. e.g. I’m not yet aware of a debugger which rival’s Eclipse’s debugging.</p>
+<p>But also, I’m not talking about how fundamental, pure Vim is better than Eclipse for Java.<br />An unconfigured Vim is damn-near unusable in this day and age..</p>
+<p>Vim’s autocompletion can be damn-amazing when Vim is configured with the plugin <a href="http://val.markovic.io/blog/youcompleteme-a-fast-as-you-type-fuzzy-search-code-completion-engine-for-vim">YouCompleteMe</a>, combined with integration with Eclipse via <a href="http://eclim.org/">eclim</a>.<br />(In a sense you’re still using Eclipse with this).</p>
+<p>What makes this setup better than Eclipse’s editor is how fast and automatic the autocomplete popups show; as well as using subsequence matching (rather than substring), and the use of Tab to scroll through options (rather than using the arrow keys).</p>
+<p>And if you’re not one to want to Alt-Tab your way between Vim and Eclipse, eclim allows you to just use GVim as your code editor within Eclipse. (I’ve not tried out how this integrates with Eclipse in general, though).</p>
+
+
+<hr />
+
+<div>
+    
+    <a href="../../posts/argument/2013-11-17-oh-how-awful-to-be-young.html" style="float:left;">Newer post</a>
+    
+    
+    <a href="../../posts/programming/2013-09-28-gvim-and-javascript-with-ternjs.html" style="float:right; text-align: right;">Older post</a>
+    
+</div>
+<br style="clear: both;" />
+
+<hr />
+
+<div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'richardgoultersblog'; // required: replace example with your forum shortname
+        var disqus_identifier = '/posts/programming/2013-09-28-gvim-eclipse-and-java.html';
+        var disqus_url = 'http://www.rgoulter.com/blog' + '/posts/programming/2013-09-28-gvim-eclipse-and-java.html';
+        var disqus_title = 'GVim, Eclipse and Java - September 28, 2013';
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+<!-- Load highlight.js for Syntax Highlighting. -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/solarized_light.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+            </div>
+            <div id="footer">
+                Site proudly generated by
+                <a href="http://jaspervdj.be/hakyll">Hakyll</a>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>Richard Goulter's Blog - Notes From Some Examination of Some Yi Configs</title>
+        <link rel="stylesheet" type="text/css" href="../../css/default.css" />
+        <link rel="stylesheet" type="text/css" href="../../css/syntax.css" />
+    </head>
+    <body>
+        <div id="page">
+            <div id="header">
+                <div id="logo">
+                    <a href="../../">Richard Goulter's Blog</a>
+                </div>
+                <div id="navigation">
+                    <a href="../../">Home</a>
+                    <a href="../../yi.html">Yi</a>
+                    <a href="../../archive.html">Archive</a>
+                </div>
+            <div>
+                <img src="../../images/blog-banner.png" />
+            </div>
+            </div>
+
+
+            <div id="content">
+                <h1>Notes From Some Examination of Some Yi Configs</h1>
+
+                <div class="info">
+    Posted on July  7, 2014
+    
+        by Richard Goulter
+    
+</div>
+<div class="info">
+    
+    Tags: <a href="../../tags/haskell.html">haskell</a>, <a href="../../tags/yi.html">yi</a>
+    
+</div>
+
+<p><a href="../../posts/programming/2014-06-01-overview-of-yi-contrib-user-configs.html">Earlier</a> I’d posted very briefly about some User Yi Configs.</p>
+<p>In particular I’m currently curious as to how to customise for, say, adding a new ex command to Yi.</p>
+<p>I noted that the Ex commands were listed in <a href="https://github.com/yi-editor/yi/blob/master/yi/src/library/Yi/Keymap/Vim/Ex.hs">Yi.Keymap.Vim.Ex</a>. (Note, there is some discordance between the version on GitHub now, and Yi 0.8.1, as Vim2 has since replaced the older Vim keymappings). And somehow in <a href="https://github.com/yi-editor/yi/blob/master/yi/src/library/Yi/Keymap/Vim.hs">Yi.Keymap.Vim</a> these … are taken into the configuration. I’m not particularly sure how at present.</p>
+<p>Anyway, beyond this, I had another look at how custom actions had been configured by some users.</p>
+<h3 id="a-vim-keymap-configured-with-customized-keymap">A Vim Keymap Configured with Customized Keymap</h3>
+<p><a href="https://github.com/yi-editor/yi/blob/master/yi-contrib/src/Yi/Config/Users/Jeff.hs">Jeff’s config</a> has these lines:</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">    myConfig ::</span> <span class="dt">Config</span>
+    myConfig <span class="fu">=</span> defaultVimConfig
+      { defaultKm <span class="fu">=</span> myVimKeymap
+      , <span class="fu">...</span>
+      }
+
+    myVimKeymap <span class="fu">=</span> mkKeymap <span class="fu">$</span> defKeymap <span class="ot">`override`</span> \super self <span class="ot">-&gt;</span> super
+      { v_top_level <span class="fu">=</span> v_top_level super <span class="fu">||&gt;</span>
+          (char <span class="ch">';'</span> <span class="fu">?&gt;&gt;!</span> resetRegexE)
+
+      , v_ins_char  <span class="fu">=</span> (v_ins_char super <span class="fu">||&gt;</span> tabKeymap) <span class="fu">&lt;|&gt;</span>
+          choice [ ctrlCh <span class="ch">'s'</span> <span class="fu">?&gt;&gt;!</span> moveToNextBufferMark deleteSnippets
+                 , meta (spec <span class="dt">KLeft</span>)  <span class="fu">?&gt;&gt;!</span> prevWordB
+                 , meta (spec <span class="dt">KRight</span>) <span class="fu">?&gt;&gt;!</span> nextWordB
+                 ]
+      }</code></pre></div>
+<p><em>Note:</em></p>
+<ul>
+<li><code>myVimKeymap</code> has type <code>KeymapSet</code>.<br /></li>
+<li>The <code>override</code> thing is due to Yi’s <code>Data.Proto</code>, which isn’t exposed in Hackage. (<code>KeymapSet</code> has record entries <code>topKeymap</code> and <code>insertKeymap</code>, so I’m not sure if <code>v_top_level</code> and <code>v_ins_char</code> is archaic).<br /></li>
+<li><code>choice</code> is of type <code>MonadInteract m w e =&gt; [m a] -&gt; m a</code>, as defined in <code>Yi.Interact</code>.<br /></li>
+<li>The operator <code>(||&gt;)</code> is of type <code>MonadInteract f w e =&gt; f a -&gt; f a -&gt; f a</code> in <code>Yi.Interact</code>.<br /></li>
+<li>The operator <code>(?&gt;&gt;!)</code> is of type<br /> <code>(MonadInteract m Action Event, YiAction a x, Show x) =&gt; Event -&gt; a -&gt; m ()</code><br /> in <code>Yi.Keymap.Keys</code>.<br /></li>
+<li>(And, if you’re that novice at Haskell, <code>(&lt;|&gt;)</code> is to do with <code>Alternative</code>).</li>
+</ul>
+<p>It seems Jeff has mapped <code>';'</code> to do something like <code>:noh</code> in Vim. (<a href="https://github.com/yi-editor/yi/blob/fea9dc8a9fc39ccb3bfa389c0e395383602710b6/yi/src/library/Yi/Search.hs#L82"><code>resetRegexE</code></a> in <code>Yi.Search</code>.. hey, <code>Yi.Search</code> has documentation!).<br /><code>tabKeymap</code> is a function Jeff defines in the config, which seems to be for inserting snippets making use of <code>Yi.Snippets</code> and <code>Yi.Snippets.Haskell</code>.<br />There also seems to be inputs for Insert mode, so that <code>Alt+Left</code> (or <code>Alt+Right</code>) will move by words left/right.</p>
+<h3 id="an-emacs-keymap-with-a-simple-config">An Emacs Keymap with a Simple Config</h3>
+<p><a href="https://github.com/yi-editor/yi/blob/master/yi-contrib/src/Yi/Config/Users/Reiner.hs">Reiner’s config</a> takes a different approach (although is ‘based’ on the Emacs keymap):</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">    main <span class="fu">=</span> configMain defaultEmacsConfig setup
+
+<span class="ot">    setup ::</span> <span class="dt">ConfigM</span> ()
+    setup <span class="fu">=</span> <span class="kw">do</span>
+      setFrontendPreferences [<span class="st">&quot;pango&quot;</span>, <span class="st">&quot;vte&quot;</span>, <span class="st">&quot;vty&quot;</span>]
+      fontSize <span class="fu">.=</span> <span class="dt">Just</span> <span class="dv">9</span>
+
+      globalBindKeys globalBindings
+      evaluator <span class="fu">.=</span> publishedActionsEvaluator
+      publishAction <span class="st">&quot;createDirectory&quot;</span> yiCreateDirectory
+
+      addMode Haskell.fastMode
+      modeBindKeys Haskell.fastMode (ctrlCh <span class="ch">'c'</span> <span class="fu">?&gt;&gt;</span> ctrlCh <span class="ch">'s'</span> <span class="fu">?&gt;&gt;!</span> insertHaskSection)</code></pre></div>
+<p><em>Note:</em></p>
+<ul>
+<li><code>configMain</code> has type <code>Config -&gt; ConfigM () -&gt; IO ()</code>, in <code>Yi.Config.Simple</code></li>
+<li><code>publishAction</code> has type <code>(YiAction a x, Show x) =&gt; String -&gt; a -&gt; ConfigM ()</code> in <code>Yi.Eval</code>.</li>
+</ul>
+<p>I’m not sure what <code>&quot;vte&quot;</code> is; and am unsure about these <code>Mode</code>s. The thing to note, though, is that this configuration as per <code>Yi.Config.Simple</code> and its (ab)use of <code>do</code> notation makes for a configuration file which looks much closer to a <code>.vimrc</code> or other whatever else.</p>
+<p><code>publishAction</code> looks like a way to add a custom Ex-like command, although in this case the configuration is for Emacs not Vim. I suspect it will work, but will need to try.<br />(Not clear how the equivalent would be set with the non-<code>Simple</code> configs).</p>
+<h3 id="a-vim-keymap-with-overridden-bindings">A Vim Keymap with Overridden Bindings</h3>
+<p><a href="https://github.com/yi-editor/yi/blob/master/yi-contrib/src/Yi/Config/Users/Michal.hs">Michal’s Config</a> (which is somewhat documented) has the following code of interest:</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">    myKeymapSet ::</span> <span class="dt">KeymapSet</span>
+    myKeymapSet <span class="fu">=</span> V2.mkKeymapSet <span class="fu">$</span> V2.defVimConfig <span class="ot">`override`</span> \super this <span class="ot">-&gt;</span>
+        <span class="kw">let</span> eval <span class="fu">=</span> V2.pureEval this
+        <span class="kw">in</span> super {
+              <span class="co">-- Here we can add custom bindings.</span>
+              <span class="co">-- See Yi.Keymap.Vim.Common for datatypes and </span>
+              <span class="co">-- Yi.Keymap.Vim.Utils for useful functions like mkStringBindingE</span>
+
+              <span class="co">-- In case of conflict, that is if there exist multiple bindings</span>
+              <span class="co">-- whose prereq function returns WholeMatch,</span>
+              <span class="co">-- the first such binding is used.</span>
+              <span class="co">-- So it's important to have custom bindings first.</span>
+              V2.vimBindings <span class="fu">=</span> myBindings eval <span class="fu">++</span> V2.vimBindings super
+            }
+
+<span class="ot">    myBindings ::</span> (<span class="dt">String</span> <span class="ot">-&gt;</span> <span class="dt">EditorM</span> ()) <span class="ot">-&gt;</span> [<span class="dt">V2.VimBinding</span>]
+    myBindings eval <span class="fu">=</span>
+        <span class="kw">let</span> nmap  x y <span class="fu">=</span> V2.mkStringBindingE <span class="dt">V2.Normal</span> <span class="dt">V2.Drop</span> (x, y, id)
+            imap  x y <span class="fu">=</span> <span class="dt">V2.VimBindingE</span> (\evs state <span class="ot">-&gt;</span> <span class="kw">case</span> V2.vsMode state <span class="kw">of</span>
+                                        <span class="dt">V2.Insert</span> _ <span class="ot">-&gt;</span>
+                                            fmap (const (y <span class="fu">&gt;&gt;</span> return <span class="dt">V2.Continue</span>))
+                                                 (evs <span class="ot">`V2.matchesString`</span> x)
+                                        _ <span class="ot">-&gt;</span> <span class="dt">V2.NoMatch</span>)
+            nmap'  x y <span class="fu">=</span> V2.mkStringBindingY <span class="dt">V2.Normal</span> (x, y, id)
+        <span class="kw">in</span> [
+             <span class="co">-- Tab traversal</span>
+             nmap  <span class="st">&quot;&lt;C-h&gt;&quot;</span> previousTabE
+           , nmap  <span class="st">&quot;&lt;C-l&gt;&quot;</span> nextTabE
+           , nmap  <span class="st">&quot;&lt;C-l&gt;&quot;</span> nextTabE
+
+             <span class="co">-- Press space to clear incremental search highlight</span>
+           , nmap  <span class="st">&quot; &quot;</span> (eval <span class="st">&quot;:nohlsearch&lt;CR&gt;&quot;</span>)
+           , <span class="fu">...</span>
+           ]</code></pre></div>
+<p>All the <code>V2</code> is somewhat unnecessary.</p>
+<ul>
+<li><code>pureEval</code> has type <code>VimConfig -&gt; String -&gt; EditorM ()</code>.</li>
+<li><code>impureEval</code> has type <code>VimConfig -&gt; String -&gt; YiM ()</code>, but I’m not sure of the difference here.</li>
+<li><code>myBindings</code> has type <code>(String -&gt; EditorM ()) -&gt; [VimBinding]</code>.</li>
+</ul>
+<p>This binds keys to <code>eval</code> something. (In this case, space to call <code>:noh</code>).<br />The way Michal modifies his <code>KeymapSet</code> is quite different from Jeff’s.</p>
+
+
+<hr />
+
+<div>
+    
+    <a href="../../posts/programming/2014-07-08-trying-to-install-lime.html" style="float:left;">Newer post</a>
+    
+    
+    <a href="../../posts/programming/2014-07-06-adding-nextprevious-post-to-hakyll.html" style="float:right; text-align: right;">Older post</a>
+    
+</div>
+<br style="clear: both;" />
+
+<hr />
+
+<div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'richardgoultersblog'; // required: replace example with your forum shortname
+        var disqus_identifier = '/posts/programming/2014-07-07-notes-from-some-examination-of-some-yi-configs.html';
+        var disqus_url = 'http://www.rgoulter.com/blog' + '/posts/programming/2014-07-07-notes-from-some-examination-of-some-yi-configs.html';
+        var disqus_title = 'Notes From Some Examination of Some Yi Configs - July  7, 2014';
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+<!-- Load highlight.js for Syntax Highlighting. -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/solarized_light.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+            </div>
+            <div id="footer">
+                Site proudly generated by
+                <a href="http://jaspervdj.be/hakyll">Hakyll</a>
+            </div>
+        </div>
+    </body>
+</html>

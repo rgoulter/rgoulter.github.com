@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>Richard Goulter's Blog - Overview of Yi Contrib User Configs</title>
+        <link rel="stylesheet" type="text/css" href="../../css/default.css" />
+        <link rel="stylesheet" type="text/css" href="../../css/syntax.css" />
+    </head>
+    <body>
+        <div id="page">
+            <div id="header">
+                <div id="logo">
+                    <a href="../../">Richard Goulter's Blog</a>
+                </div>
+                <div id="navigation">
+                    <a href="../../">Home</a>
+                    <a href="../../yi.html">Yi</a>
+                    <a href="../../archive.html">Archive</a>
+                </div>
+            <div>
+                <img src="../../images/blog-banner.png" />
+            </div>
+            </div>
+
+
+            <div id="content">
+                <h1>Overview of Yi Contrib User Configs</h1>
+
+                <div class="info">
+    Posted on June  1, 2014
+    
+        by richardgoulter
+    
+</div>
+<div class="info">
+    
+    Tags: <a href="../../tags/editors.html">editors</a>, <a href="../../tags/yi.html">yi</a>, <a href="../../tags/haskell.html">haskell</a>
+    
+</div>
+
+<p>The Yi editor repository on GitHub has a yi-contrib folder with some sample configurations of Yi, which contains about a dozen Haskell files which are hopefully useful to new Yi users.</p>
+<p>See <a href="https://github.com/yi-editor/yi/tree/master/yi-contrib/src/Yi" class="uri">https://github.com/yi-editor/yi/tree/master/yi-contrib/src/Yi</a></p>
+<p><strong><a href="https://github.com/yi-editor/yi/blob/master/yi-contrib/src/Yi/FuzzyOpen.hs">FuzzyOpen.hs</a></strong>“aims to provide (the essential subset of) the same functionality that vim plugins ctrlp and command-t provide.” It’s written as a module, so that configurations can import the module and add the functionality with a statement like:</p>
+<p>(ctrlCh ‘p’ ?&gt;&gt;! fuzzyOpen)</p>
+<p><strong><a href="https://github.com/yi-editor/yi/blob/master/yi-contrib/src/Yi/Templates.hs">Template.hs</a> </strong>isn’t as “well commented” as FuzzyOpen, but seems to be a module for … inserting templates. (It looks like the templates are embedded in the Haskell code).</p>
+<p><a href="https://github.com/yi-editor/yi/blob/master/yi-contrib/src/Yi/Style/Misc.hs"><strong>Style/Misc.hs</strong></a> contains some code which is a module for two custom colour schemes. (Related, <a href="https://github.com/yi-editor/yi/blob/master/yi/src/library/Yi/Style/Library.hs">Yi/Style/Library.hs of the main codebase</a> has two color schemes, default and darkBlueTheme).</p>
+<p><strong>Config/Users </strong>The configs below appear to all be written as Haskell modules. My understanding is this allows them to be used from yi-contrib package from Haddock, but a yi.hs config file adapted from these would look largely the same.</p>
+<p><a href="https://github.com/yi-editor/yi/blob/master/yi-contrib/src/Yi/Config/Users/Amy.hs">Amy.hs</a> shows a module using the CUA keymap, which adds a keymap with a “helloworld” which inserts the text “helloworld”. (The same “helloworld” as from what shows up in a Google search for <a href="http://www.nobugs.org/developer/yi/example-helloworld.html">“Yi tutorial”</a>, from nobugs.org).</p>
+<p><a href="https://github.com/yi-editor/yi/blob/master/yi-contrib/src/Yi/Config/Users/Anders.hs">Anders.hs</a> prefers the Emacs keymap; the config adds an “increase indent” functionality, as well as some Haskell mode hooks are added to Precise Haskell mode.</p>
+<p><a href="https://github.com/yi-editor/yi/blob/master/yi-contrib/src/Yi/Config/Users/Cmcq.hs">Cmcq.hs</a> which configures: “If Yi is called with parameter”–type“, it will insert 500 characters and exit. With”–open“, it will open a buffer, type, and kill the buffer, 50 times. Pango and Vty frontends are supported.”</p>
+<p><a href="https://github.com/yi-editor/yi/blob/master/yi-contrib/src/Yi/Config/Users/Corey.hs">Corey.hs</a> a typical yi.hs “that uses the Vim keymap with these additions: - Always uses the VTY UI by default. - The color style is darkBlueTheme - The insert mode of the Vim keymap has been extended with a few additions I find useful.”</p>
+<p><a href="https://github.com/yi-editor/yi/blob/master/yi-contrib/src/Yi/Config/Users/Ertai.hs">Ertai.hs</a> I have no idea what this does; I don’t know what to highlight. Some things about mode tables and hooks, Greek letters / symbol insertion.. deleting soft-tab spaces as if they were hard-tabs..</p>
+<p><a href="https://github.com/yi-editor/yi/blob/master/yi-contrib/src/Yi/Config/Users/Gwern.hs">Gwern.hs</a> adds a “go to line” to the Emacs keymap, and has a “best Haskell mode” (which is what the others call haskellModeHooks). A relatively short config.</p>
+<p><a href="https://github.com/yi-editor/yi/blob/master/yi-contrib/src/Yi/Config/Users/JP.hs">JP.hs</a> has a bunch of good things. More than Ertai.hs.</p>
+<p><a href="https://github.com/yi-editor/yi/blob/master/yi-contrib/src/Yi/Config/Users/Jeff.hs">Jeff.hs</a> fine tunes the Vim keymap and Vim (Haskell) snippets.</p>
+<p><a href="https://github.com/yi-editor/yi/blob/master/yi-contrib/src/Yi/Config/Users/Michal.hs">Michal.hs</a> heavily configures things, with a custom colour theme, and a “Diary mode”.</p>
+<p><a href="https://github.com/yi-editor/yi/blob/master/yi-contrib/src/Yi/Config/Users/Reiner.hs">Reiner.hs</a> has some cool custom functionality like compileLatex, global keybindings, and a function to insert fancy section comments.</p>
+<p>(There’s also <a href="https://github.com/yi-editor/yi/blob/master/yi-contrib/src/Yi/Config/Users/JP/Experimental.hs">JP’s Experimental keymap</a>).</p>
+
+
+<hr />
+
+<div>
+    
+    <a href="../../posts/programming/2014-06-01-yi.html" style="float:left;">Newer post</a>
+    
+    
+    <a href="../../posts/meta/2014-06-01-interlude-2.html" style="float:right; text-align: right;">Older post</a>
+    
+</div>
+<br style="clear: both;" />
+
+<hr />
+
+<div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'richardgoultersblog'; // required: replace example with your forum shortname
+        var disqus_identifier = '/posts/programming/2014-06-01-overview-of-yi-contrib-user-configs.html';
+        var disqus_url = 'http://www.rgoulter.com/blog' + '/posts/programming/2014-06-01-overview-of-yi-contrib-user-configs.html';
+        var disqus_title = 'Overview of Yi Contrib User Configs - June  1, 2014';
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+<!-- Load highlight.js for Syntax Highlighting. -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/solarized_light.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+            </div>
+            <div id="footer">
+                Site proudly generated by
+                <a href="http://jaspervdj.be/hakyll">Hakyll</a>
+            </div>
+        </div>
+    </body>
+</html>

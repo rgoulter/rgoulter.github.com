@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>Richard Goulter's Blog - Gradle or SBT</title>
+        <link rel="stylesheet" type="text/css" href="../../css/default.css" />
+        <link rel="stylesheet" type="text/css" href="../../css/syntax.css" />
+    </head>
+    <body>
+        <div id="page">
+            <div id="header">
+                <div id="logo">
+                    <a href="../../">Richard Goulter's Blog</a>
+                </div>
+                <div id="navigation">
+                    <a href="../../">Home</a>
+                    <a href="../../yi.html">Yi</a>
+                    <a href="../../archive.html">Archive</a>
+                </div>
+            <div>
+                <img src="../../images/blog-banner.png" />
+            </div>
+            </div>
+
+
+            <div id="content">
+                <h1>Gradle or SBT</h1>
+
+                <div class="info">
+    Posted on January 19, 2015
+    
+        by Richard Goulter
+    
+</div>
+<div class="info">
+    
+    Tags: <a href="../../tags/gradle.html">gradle</a>, <a href="../../tags/sbt.html">sbt</a>, <a href="../../tags/antlr4.html">antlr4</a>, <a href="../../tags/scala.html">scala</a>, <a href="../../tags/eclipse.html">eclipse</a>, <a href="../../tags/scalatest.html">scalatest</a>
+    
+</div>
+
+<h3 id="motivation">Motivation</h3>
+<p>Somehow I find the current setup less ideal than it should be.<br />Here’s the “problem” for-which <em>gradle</em> and <em>sbt</em> are a couple of build systems which provide the “solution”:</p>
+<ul>
+<li><p>I’ve a bunch of Scala code which depends on Java sources generated from an Antlr 4 grammar.</p></li>
+<li><p>It would be nice to be able to build these easily from the command line without locking it down to a particular IDE. (Bonus points for being able to generate just the Antlr 4 files themselves).</p></li>
+<li><p>It would be nice to be able to automatically generate Eclipse project files.</p></li>
+</ul>
+<h3 id="jvm-build-systems">JVM Build Systems</h3>
+<p>– In terms of these JVM-related build-systems, the story goes something like this: <em>ant</em> used to be the big guy, but then <em>maven</em> came along which allowed for automatic dependency resolution. (It would download specified dependencies for the project).<br /><em>ant</em> got <em>ivy</em> to help with this.<br />However, <em>ant</em> and <em>maven</em> are both written in XML; <em>maven</em> has more conventions such-that while every <em>maven</em> repo looks the same, it’s difficult to get <em>maven</em> to do anything it doesn’t do already.</p>
+<p><em>gradle</em> comes across as the next ‘agnostic’ solution, (agnostic regarding which JVM language it’s for), customised with an (e)DSL in Groovy.<br /><em>sbt</em>, the Scala Build Tool, is surely more for Scala projects even if it (probably) says it can work with anything.<br />– These aren’t the only alternatives/options. Indeed, the maven repositories give convenience-code to download dependencies for more tools than this. But these two were the ones I looked at.</p>
+<h3 id="sbt-vs-gradle">SBT vs Gradle</h3>
+<p>For the above setup, both do “okay”.<br />But as things are for me now, each tool has it’s share of drawbacks for this.</p>
+<p>– Both can take a long time to run one command. (Well, the first time they run, they need to bootstrap themselves / download the project dependencies of course, etc.; but those are forgiveable/understandable). I mean for just like <code>$ tool compile</code>, both take several seconds to “load” before running the command.<br /><em>sbt</em> mitigates this by being able to run as a ‘shell’ to execute tasks.<br /><em>gradle</em> can be <a href="http://www.joningi.net/2014/10/25/gradle-deamon/">run as a daemon</a>, but is still somewhat slow compared to <em>sbt</em> for tasks which don’t need to do anything. (e.g. immediately consecutive <code>compile</code> commands, <em>sbt</em> takes no time, <em>gradle</em> takes a couple of seconds).<br />– I’ll cheat here and say that, so long as I can generate an Eclipse project, then this isn’t crucial.</p>
+<p>In general, it seems that <em>gradle</em> can have more tasks, but really needs to be customised to get much useful functionality out of it. (e.g. there’s no <code>gradle run SomeMainClass</code> task. And the <a href="http://stackoverflow.com/questions/21536651/gradle-run-a-specific-java-class">closest thing</a> doesn’t look great).</p>
+<h4 id="scala-scalatest">Scala &amp; ScalaTest</h4>
+<p>Both handle Scala compilation well-enough.<br />The “drawback” here, though, is that if you want to write tests with ScalaTest, then <em>sbt</em> scores points above <em>gradle</em>; while it may not be difficult/impossible with <em>gradle</em> (e.g. <a href="https://github.com/maiflai/gradle-scalatest">this plugin</a> presumably does the job), it looks like it’s more intuitive with <em>sbt</em>. (<a href="http://www.scalatest.org/user_guide/using_scalatest_with_sbt">ScalaTest SBT support</a>). Not by much, though.</p>
+<h4 id="antlr-4-support">Antlr 4 Support</h4>
+<p>The bigger “ugh” factor about this, for me, seems to be Antlr 4 support.</p>
+<p>Both handle this by-way-of plugins. <a href="https://github.com/melix/antlr4-gradle-plugin"><em>gradle</em></a>, <a href="https://github.com/ihji/sbt-antlr4"><em>sbt</em></a>. (That, or extending/customising the commands as each build tool allows, which would require a detailed knowledge of the tool, I suppose).<br />– For the code to add these in, though; <em>sbt</em> is concise, <em>gradle</em> less-so. Although apparently it can be <a href="http://plugins.gradle.org/plugin/me.champeau.gradle.antlr4">cleaner in recent versions</a>. (As far as I can tell, neither support the whole “just point to a GitHub repository” technique).</p>
+<p>I like the <em>gradle</em> plugin above <em>sbt</em> here because it has an <code>antlr4</code> task/command where the latter doesn’t. – This may be down to ideological differences between <em>gradle</em> and <em>sbt</em>, wherein this is on-purpose / by design. e.g. if you’re regenerating files which other Java / Scala sources depend on, surely you’d want to re-compile those too. <em>gradle</em> can manage to do this, but with <em>sbt</em> there’s no choice about it. (EDIT: ah, it seems I was mistaken about this. <code>antlr4:antlr4Generate</code> will do the job; it’s not listed under <code>tasks</code>, though).</p>
+<p><s>On the other hand, though.. neither are “great” about which version of Antlr 4 is being used.</s> EDIT (28/01): Oops, this isn’t true; I was just unfamiliar with both tools.<br />Compare my gists for<a href="https://gist.github.com/rgoulter/b04abfeb8c52b9e31377">Gradle</a> and <a href="https://gist.github.com/rgoulter/0b8009d99fb1e81ada2e">SBT</a> for more/less the same thing. – One thing I don’t understand at the moment is whether SBT (with this plugin) can have merely <code>antlr4-runtime</code> rather than <code>antlr4</code> as its runtime dependency, and only use <code>antlr4</code> for the “build script” part. (i.e. for generating Antlr4 programs).</p>
+<p>Whatsmore, apparently neither do the whole “nicely put the generated Java sources into packages by checking directory structure” thing; cf. <a href="https://github.com/melix/antlr4-gradle-plugin/issues/7"><em>gradle</em> plugin issue</a>, <a href="https://github.com/ihji/sbt-antlr4/issues/3"><em>sbt</em> plugin issue</a>. – I could be wrong as to whether this is sane behaviour to expect, though.</p>
+<h3 id="conclusion">Conclusion</h3>
+<p>As with many programs, it seems the only sensible conclusion is “they both suck”; but it’s hard to tell from the above which sucks less. (The answer: Eclipse).<br />I’m leaning towards <em>sbt</em>.</p>
+
+
+<hr />
+
+<div>
+    
+    <a href="../../posts/programming/2015-01-20-analysis-of-swkpdotfiles-repo.html" style="float:left;">Newer post</a>
+    
+    
+    <a href="../../posts/programming/2015-01-09-better-code-highlighting-in-blogposts.html" style="float:right; text-align: right;">Older post</a>
+    
+</div>
+<br style="clear: both;" />
+
+<hr />
+
+<div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'richardgoultersblog'; // required: replace example with your forum shortname
+        var disqus_identifier = '/posts/programming/2015-01-19-gradle-or-sbt.html';
+        var disqus_url = 'http://www.rgoulter.com/blog' + '/posts/programming/2015-01-19-gradle-or-sbt.html';
+        var disqus_title = 'Gradle or SBT - January 19, 2015';
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+<!-- Load highlight.js for Syntax Highlighting. -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/solarized_light.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+            </div>
+            <div id="footer">
+                Site proudly generated by
+                <a href="http://jaspervdj.be/hakyll">Hakyll</a>
+            </div>
+        </div>
+    </body>
+</html>
