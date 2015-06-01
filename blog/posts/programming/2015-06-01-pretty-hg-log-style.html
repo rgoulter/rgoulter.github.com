@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>Richard Goulter's Blog - Pretty HG Log Style</title>
+        <link rel="stylesheet" type="text/css" href="../../css/default.css" />
+        <link rel="stylesheet" type="text/css" href="../../css/syntax.css" />
+    </head>
+    <body>
+        <div id="page">
+            <div id="header">
+                <div id="logo">
+                    <a href="../../">Richard Goulter's Blog</a>
+                </div>
+                <div id="navigation">
+                    <a href="../../">Home</a>
+                    <a href="../../yi.html">Yi</a>
+                    <a href="../../emacs.html">Emacs</a>
+                    <a href="../../archive.html">Archive</a>
+                </div>
+            <div>
+                <img src="../../images/blog-banner.png" />
+            </div>
+            </div>
+
+
+            <div id="content">
+                <h1>Pretty HG Log Style</h1>
+
+                <div class="info">
+    Posted on June  1, 2015
+    
+        by Richard Goulter
+    
+</div>
+<div class="info">
+    
+    Tags: <a href="../../tags/hg.html">hg</a>, <a href="../../tags/mercurial.html">mercurial</a>, <a href="../../tags/git.html">git</a>, <a href="../../tags/terminal.html">terminal</a>, <a href="../../tags/log-style.html">log-style</a>
+    
+</div>
+
+<p>There’s a somewhat famous styled git log I have in my config. The guy I grabbed it from said it was from <a href="https://github.com/ndbroadbent/scm_breeze">scm-breeze</a>, I think maybe he meant tiimgreen’s <a href="https://github.com/tiimgreen/github-cheat-sheet#styled-git-log">github-cheat-sheet</a>. In any case, The Git one is like:</p>
+<pre><code>alias gl=&quot;git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)&lt;%an&gt;%Creset' --abbrev-commit&quot;</code></pre>
+<p>Consulting <a href="http://git-scm.com/docs/pretty-formats">the docs</a>, (who does that, right?), it’s not insane to figure out what this is doing:</p>
+<ul>
+<li><code>%h</code> - abbrev commit hash</li>
+<li><code>%d</code> - ref names (like <code>(origin/master)</code>)</li>
+<li><code>%s</code> - subject (first line of commit)</li>
+<li><code>%cr</code> - committer date, relative.</li>
+<li><code>%an</code> - author name.</li>
+</ul>
+<p>Great.<br />But I’ve been using HG. Can Mercurial haz it, too?<br />Sources:</p>
+<ul>
+<li><a href="http://stackoverflow.com/questions/3575189/mercurial-log-with-one-liners">S/O: “Mercurial Log with One-Liners”</a> Because one-liner logs themselves can be useful.<br /> This one has:<br /> <code>alias hl=&quot;hg log --template '{node|short} | {date|isodatesec} | {author|user}: {desc|strip|firstline}\n'&quot;</code></li>
+<li><a href="hgbook.red-bean.com/read/customizing-the-output-of-mercurial.html">HG Book: Customizing Output</a></li>
+<li><a href="https://www.selenic.com/hg/help/templates">HG Help / Manpages</a></li>
+</ul>
+<p>This helps us get a plain one-liner</p>
+<ul>
+<li><a href="http://stackoverflow.com/questions/3625725/can-i-add-custom-colors-to-mercurial-command-templates">HG Template Colours</a></li>
+</ul>
+<p>I’m trying for “direct equivalence”. YMMV, since Git/HG don’t exactly share all concepts. (e.g. every commit in HG has the notion of a ‘branch’, etc.).<br />So, note that when building the template, this is the stuff to put within the <code>{}</code>:</p>
+<ul>
+<li><code>node|short</code> - commit hash</li>
+<li><code>rev</code> - int, revision number.</li>
+<li><code>branches</code>/<code>branch</code> - branchname.</li>
+<li><code>desc|strip|firstline</code> - ‘subject’</li>
+<li><code>date|age</code> - human-readable difference in time.</li>
+<li><code>author|person</code> - Richard from Richard <script type="text/javascript">
+<!--
+h='&#x67;&#x6d;&#x61;&#x69;&#108;&#46;&#x63;&#x6f;&#x6d;';a='&#64;';n='&#114;&#x69;&#x63;&#104;&#x61;&#114;&#100;&#46;&#x67;&#x6f;&#x75;&#108;&#116;&#x65;&#114;';e=n+a+h;
+document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\/'+'a'+'>');
+// -->
+</script><noscript>richard.goulter at gmail dot com</noscript></li>
+</ul>
+<p>So, my <code>.hgrc</code> has:</p>
+<pre><code>[color]
+custom.rev = red
+custom.decorate = yellow
+custom.date = green
+custom.author = blue bold</code></pre>
+<p>With the hg alias: <code>alias hl=&quot;hg log --style ~/.hgrc.d/fancy.style&quot;</code>. (Or do this from your shell, whatever).</p>
+<p>And, finally, <code>~/.hgrc.d/fancy.style</code> is:</p>
+<pre><code>changeset = &quot;* {label('custom.rev', node|short)} - ({label('custom.decorate', branch)}) {desc|strip|firstline} ({label('custom.date', date|age)}) &lt;{label('custom.author' , author)}&gt;\n&quot;</code></pre>
+<p>Screenshot:<br /><img src="http://i.imgur.com/OWImYAS.png" /></p>
+<p>(The repo is old, because I don’t use HG so much, okay?).</p>
+
+
+<hr />
+
+<div>
+    
+    
+    <a href="../../posts/narrative/2015-04-28-i-could-solve-this-in-five-minutes.html" style="float:right; text-align: right;">Older post</a>
+    
+</div>
+<br style="clear: both;" />
+
+<hr />
+
+<div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'richardgoultersblog'; // required: replace example with your forum shortname
+        var disqus_identifier = '/posts/programming/2015-06-01-pretty-hg-log-style.html';
+        var disqus_url = 'http://www.rgoulter.com/blog' + '/posts/programming/2015-06-01-pretty-hg-log-style.html';
+        var disqus_title = 'Pretty HG Log Style - June  1, 2015';
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+<!-- Load highlight.js for Syntax Highlighting. -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/solarized_light.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+            </div>
+            <div id="footer">
+                Site proudly generated by
+                <a href="http://jaspervdj.be/hakyll">Hakyll</a>
+            </div>
+        </div>
+    </body>
+</html>
