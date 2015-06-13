@@ -1,40 +1,104 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!DOCTYPE HTML>
+<html lang="en">
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>Richard Goulter's Blog - GVim and JavaScript with TernJS</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>GVim and JavaScript with TernJS - Richard Goulter's Blog</title>
+
+        <!-- My (Old) CSS theme -->
         <link rel="stylesheet" type="text/css" href="../../css/default.css" />
+
+        <!--
+            jQuery & jQueryUI
+        -->
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css" />
+
+        <!--
+            Pandoc Style CSS
+            (for syntax highlighted snippets)
+        -->
         <link rel="stylesheet" type="text/css" href="../../css/syntax.css" />
+
+        <!--
+            Bootstrap
+        -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+        <!--
+            Waypoints, and Waypoints-Sticky,
+            so we can do this:
+            http://imakewebthings.com/waypoints/shortcuts/sticky-elements/
+        -->
+        <script src="../../js/jquery.waypoints.min.js"></script>
+        <script src="../../js/sticky.min.js"></script>
+
+        <!--
+            TOCify
+        -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js"></script>
+        <!--
+            Patched TOCify css file.
+            (Don't want fixed `.tocify`).
+        -->
+        <link rel="stylesheet" type="text/css" href="../../css/jquery.tocify.css" />
+
+        <style>
+        .navbar {
+            margin-bottom: 0px;
+        }
+
+        .banner-image {
+            width:100%;
+        }
+
+        .banner {
+            margin-left: 0px;
+            margin-right: 0px;
+        }
+
+        body {
+            background-color: #e2e2e2;
+        }
+
+        #page {
+            padding-left:0;
+            padding-right:0;
+            background-color: #ffffff;
+        }
+        </style>
     </head>
     <body>
-        <div id="page">
-            <div id="header">
-                <div id="logo">
-                    <a href="../../">Richard Goulter's Blog</a>
-                </div>
-                <div id="navigation">
-                    <a href="../../">Home</a>
-                    <a href="../../yi.html">Yi</a>
-                    <a href="../../emacs.html">Emacs</a>
-                    <a href="../../archive.html">Archive</a>
-                </div>
-            <div>
-                <img src="../../images/blog-banner.png" />
-            </div>
+        <div id="page" class="container">
+            <!-- This, with no padding on left/right -->
+            <div class="banner">
+                <nav class="navbar navbar-default">
+    <div class="collapse navbar-collapse">
+        <a class="navbar-brand" href="../../">Richard Goulter's Blog</a>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="../../">Home</a></li>
+            <li><a href="../../yi.html">Yi</a></li>
+            <li><a href="../../emacs.html">Emacs</a></li>
+            <li><a href="../../archive.html">Archive</a></li>
+        </ul>
+    </div>
+</nav>
+
+                <img class="banner-image" src="../../images/blog-banner.png" />
             </div>
 
+            <hr style="margin: 0px; border-top: 5px solid black;" />
 
-            <div id="content">
+            <div id="content" class="container">
                 <h1>GVim and JavaScript with TernJS</h1>
-
                 <div class="info">
     Posted on September 28, 2013
     
         by richardgoulter
-    
-</div>
-<div class="info">
+    <br />
     
     Tags: <a href="../../tags/javascript.html">javascript</a>, <a href="../../tags/linux.html">linux</a>, <a href="../../tags/programming.html">programming</a>, <a href="../../tags/vim.html">vim</a>
     
@@ -43,15 +107,23 @@
 <p>Ok. So after cross-posting the GVim and Java from my NUS blog..</p>
 <p><a href="https://github.com/Valloric/YouCompleteMe">YouCompleteMe</a> not only provides awesome functionality with EClim or Jedi (for Java / Python respectively). Since it can get along with (as I understand things) Vim’s OmniComplete, then YCM works with other intelligent completion things like TernJS.</p>
 <p><a href="http://ternjs.net/">TernJS</a>, made by the same guy who did CodeMirror, does some pretty fancy JavaScript jazz, so <a href="https://github.com/marijnh/tern_for_vim">your text editor</a> can (try to) infer a variables type, .. and can provide intelligent autocomplete suggestions.</p>
-<p>Married with YCM, the intelligence and fuzzy-completion makes for what must surely be the most powerful JavaScript editing today.<br />(Well, I dunno what the emacs or Sublime kiddies are up to; they might be pretty close too).</p>
-<p>But. This was one time where being a total noob left things easier for Windows than for Linux.<br />See, oddly enough, I managed to get this working on Windows while it was still blowing up at me on Linux.<br />(Since I don’t want to battle my OS, I go with Linux Mint 15. I’m pretty sure Linux Mint is what comes up if you Google-search “easiest Linux to use”).</p>
-<p>Turns out I had two problems:<br />First was that “node” didn’t actually run NodeJS, since this was changed due to name conflicts. A quick symlink solves this issue..<br />Second was that, since I was too lazy to build NodeJS from source, the version in I was running from the package-repository was ancient. Ancient.</p>
-<p>I’ve not tried to build much from source on Windows.<br />By a poor selective case, I understand that <a href="https://bitbucket.org/Haroogan/vim-for-windows/src">trying to build Vim on Windows is a total pain</a> in the arse. <a href="https://github.com/Valloric/YouCompleteMe/wiki/Building-Vim-from-source">Building it on Linux is really really easy</a>, though.</p>
+<p>Married with YCM, the intelligence and fuzzy-completion makes for what must surely be the most powerful JavaScript editing today.<br />
+(Well, I dunno what the emacs or Sublime kiddies are up to; they might be pretty close too).</p>
+<p>But. This was one time where being a total noob left things easier for Windows than for Linux.<br />
+See, oddly enough, I managed to get this working on Windows while it was still blowing up at me on Linux.<br />
+(Since I don’t want to battle my OS, I go with Linux Mint 15. I’m pretty sure Linux Mint is what comes up if you Google-search “easiest Linux to use”).</p>
+<p>Turns out I had two problems:<br />
+First was that “node” didn’t actually run NodeJS, since this was changed due to name conflicts. A quick symlink solves this issue..<br />
+Second was that, since I was too lazy to build NodeJS from source, the version in I was running from the package-repository was ancient. Ancient.</p>
+<p>I’ve not tried to build much from source on Windows.<br />
+By a poor selective case, I understand that <a href="https://bitbucket.org/Haroogan/vim-for-windows/src">trying to build Vim on Windows is a total pain</a> in the arse. <a href="https://github.com/Valloric/YouCompleteMe/wiki/Building-Vim-from-source">Building it on Linux is really really easy</a>, though.</p>
 <p>But I was lazy. Turns out that <a href="https://github.com/joyent/node">to build NodeJS from source</a>, after <a href="http://nodejs.org/">downloading the code</a>, was the stock-and-standard:</p>
 <pre><code>$ ./configure  
 $ make  
 $ sudo checkinstall</code></pre>
-<p>Well.<br />I used “checkinstall” rather than “make install”,<br />but that’s all there was to it, anyway.</p>
+<p>Well.<br />
+I used “checkinstall” rather than “make install”,<br />
+but that’s all there was to it, anyway.</p>
 <p>And with ‘node’ being called as expected, with an actual up-to-date version of Node, TernJS worked like it should! Fantastic.</p>
 
 
@@ -95,7 +167,10 @@ $ sudo checkinstall</code></pre>
 
 
             </div>
-            <div id="footer">
+
+            <hr style="margin-bottom: 0px; border-top: 2px solid black;" />
+
+            <div id="footer" class="pull-right" style="padding-right: 10px;">
                 Site proudly generated by
                 <a href="http://jaspervdj.be/hakyll">Hakyll</a>
             </div>

@@ -1,60 +1,141 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!DOCTYPE HTML>
+<html lang="en">
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>Richard Goulter's Blog - YouTube, Statistics and Comments</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>YouTube, Statistics and Comments - Richard Goulter's Blog</title>
+
+        <!-- My (Old) CSS theme -->
         <link rel="stylesheet" type="text/css" href="../../css/default.css" />
+
+        <!--
+            jQuery & jQueryUI
+        -->
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css" />
+
+        <!--
+            Pandoc Style CSS
+            (for syntax highlighted snippets)
+        -->
         <link rel="stylesheet" type="text/css" href="../../css/syntax.css" />
+
+        <!--
+            Bootstrap
+        -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+        <!--
+            Waypoints, and Waypoints-Sticky,
+            so we can do this:
+            http://imakewebthings.com/waypoints/shortcuts/sticky-elements/
+        -->
+        <script src="../../js/jquery.waypoints.min.js"></script>
+        <script src="../../js/sticky.min.js"></script>
+
+        <!--
+            TOCify
+        -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js"></script>
+        <!--
+            Patched TOCify css file.
+            (Don't want fixed `.tocify`).
+        -->
+        <link rel="stylesheet" type="text/css" href="../../css/jquery.tocify.css" />
+
+        <style>
+        .navbar {
+            margin-bottom: 0px;
+        }
+
+        .banner-image {
+            width:100%;
+        }
+
+        .banner {
+            margin-left: 0px;
+            margin-right: 0px;
+        }
+
+        body {
+            background-color: #e2e2e2;
+        }
+
+        #page {
+            padding-left:0;
+            padding-right:0;
+            background-color: #ffffff;
+        }
+        </style>
     </head>
     <body>
-        <div id="page">
-            <div id="header">
-                <div id="logo">
-                    <a href="../../">Richard Goulter's Blog</a>
-                </div>
-                <div id="navigation">
-                    <a href="../../">Home</a>
-                    <a href="../../yi.html">Yi</a>
-                    <a href="../../emacs.html">Emacs</a>
-                    <a href="../../archive.html">Archive</a>
-                </div>
-            <div>
-                <img src="../../images/blog-banner.png" />
-            </div>
+        <div id="page" class="container">
+            <!-- This, with no padding on left/right -->
+            <div class="banner">
+                <nav class="navbar navbar-default">
+    <div class="collapse navbar-collapse">
+        <a class="navbar-brand" href="../../">Richard Goulter's Blog</a>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="../../">Home</a></li>
+            <li><a href="../../yi.html">Yi</a></li>
+            <li><a href="../../emacs.html">Emacs</a></li>
+            <li><a href="../../archive.html">Archive</a></li>
+        </ul>
+    </div>
+</nav>
+
+                <img class="banner-image" src="../../images/blog-banner.png" />
             </div>
 
+            <hr style="margin: 0px; border-top: 5px solid black;" />
 
-            <div id="content">
+            <div id="content" class="container">
                 <h1>YouTube, Statistics and Comments</h1>
-
                 <div class="info">
     Posted on December 15, 2013
     
         by richardgoulter
-    
-</div>
-<div class="info">
+    <br />
     
     Tags: <a href="../../tags/armchairphilosphy.html">armchairphilosphy</a>, <a href="../../tags/gender.html">gender</a>, <a href="../../tags/argument.html">argument</a>
     
 </div>
 
-<p>Just to spout some more armchair-philosophy, I guess.<br />- Perhaps it’s cynical, but it’s better to try and disagree with as much as possible.<br />It’s really easy to say something stupid or daft in knee-jerk reaction (unless you’re not human). So hopefully, if an idea is daft enough, it won’t stand up to so much resistance of thought.</p>
-<p>I think that’s valuable in this social-network day &amp; age when media is distributed not because it’s good, but because it incites a reaction. (Look at your Facebook newsfeed and count up how much of it comes from sites like BuzzFeed, Upworthy, Viralnova, etc.).<br />- Though such cynicism is kindof bastardly. Or so others would think. (That’s one of those traits the INTJs have, right?).</p>
-<p>Target of my cynicism to-night is <a href="http://www.youtube.com/watch?v=yRNt7ZLY0Kc">one video I saw some time ago</a><br />There’re essentially two points the presenter focuses on:</p>
+<p>Just to spout some more armchair-philosophy, I guess.<br />
+- Perhaps it’s cynical, but it’s better to try and disagree with as much as possible.<br />
+It’s really easy to say something stupid or daft in knee-jerk reaction (unless you’re not human). So hopefully, if an idea is daft enough, it won’t stand up to so much resistance of thought.</p>
+<p>I think that’s valuable in this social-network day &amp; age when media is distributed not because it’s good, but because it incites a reaction. (Look at your Facebook newsfeed and count up how much of it comes from sites like BuzzFeed, Upworthy, Viralnova, etc.).<br />
+- Though such cynicism is kindof bastardly. Or so others would think. (That’s one of those traits the INTJs have, right?).</p>
+<p>Target of my cynicism to-night is <a href="http://www.youtube.com/watch?v=yRNt7ZLY0Kc">one video I saw some time ago</a><br />
+There’re essentially two points the presenter focuses on:</p>
 <p>The first relates to women making STEM videos,</p>
-<p>It’d be a bit tedious to nitpick at this.<br />- I’m not sure, for example, YouTube acts as a great egalitarian platform; unless you’d think everyone has an equal shot at popularity if they can get a cast &amp; crew, quality cameras &amp; microphones, good luck &amp; timing.. So I’m not sure it makes so much sense to lament that the partial/unjust agent of YouTube-popularity waves its want un-equally among its users.<br />Relatedly, issit that there are fewer women making STEM videos, or are they just not getting the views that one would expect/hope them to get?<br />Bah, whatever. That’s mere nitpicking.</p>
-<p>What’d be better to see, though, is better presentation of the numbers. In the first half of the video, the narrator laments the lack of female figures in STEM videos, and gives figures to back this up.<br />I dunno, people are bad at doing math when it involves politics. Probably the figures given show disparity, perhaps they don’t. - For certain, the numbers weren’t close to 1:1 male:female ratio; but STEM itself, despite the higher numbers of women in higher education compared to men, generally lacks in female representation also.<br />And if the ratio of men:women in STEM isn’t 1:1, I wouldn’t expect the ratio of presenters to be 1:1 either. - What I feel is missing from the information here is, if the proportion of women presenters were to reflect the proportion of women in STEM, what kind of number of women presenters should there be? (And does that mean not enough women are making STEM videos?).</p>
-<p>“Lies, damned lies, and statistics” doesn’t tell us to distrust numbers; merely our interpretation of them.<br />Again, people are bad at maths when it comes to numbers, but I’m convinced without normalization of the numbers, things may be obscured.</p>
+<p>It’d be a bit tedious to nitpick at this.<br />
+- I’m not sure, for example, YouTube acts as a great egalitarian platform; unless you’d think everyone has an equal shot at popularity if they can get a cast &amp; crew, quality cameras &amp; microphones, good luck &amp; timing.. So I’m not sure it makes so much sense to lament that the partial/unjust agent of YouTube-popularity waves its want un-equally among its users.<br />
+Relatedly, issit that there are fewer women making STEM videos, or are they just not getting the views that one would expect/hope them to get?<br />
+Bah, whatever. That’s mere nitpicking.</p>
+<p>What’d be better to see, though, is better presentation of the numbers. In the first half of the video, the narrator laments the lack of female figures in STEM videos, and gives figures to back this up.<br />
+I dunno, people are bad at doing math when it involves politics. Probably the figures given show disparity, perhaps they don’t. - For certain, the numbers weren’t close to 1:1 male:female ratio; but STEM itself, despite the higher numbers of women in higher education compared to men, generally lacks in female representation also.<br />
+And if the ratio of men:women in STEM isn’t 1:1, I wouldn’t expect the ratio of presenters to be 1:1 either. - What I feel is missing from the information here is, if the proportion of women presenters were to reflect the proportion of women in STEM, what kind of number of women presenters should there be? (And does that mean not enough women are making STEM videos?).</p>
+<p>“Lies, damned lies, and statistics” doesn’t tell us to distrust numbers; merely our interpretation of them.<br />
+Again, people are bad at maths when it comes to numbers, but I’m convinced without normalization of the numbers, things may be obscured.</p>
 <p>That said, I feel if there is under-representation of women in STEM in general, it’s likely the causes of this are complicated.</p>
 <p>The second point made was about scum-of-the-bucket YouTube videos,</p>
 <p>This I think is less complicated, and more novel.</p>
 <p>Perhaps the presenter shouldn’t be complaining about the worst of a community; but haters tend to get on one’s nerves like that.</p>
 <p>YouTube comments are awful. Famously awful. Which is <a href="http://www.tannr.com/herp-derp-youtube-comments/">why plugins like this</a> are available so you don’t even have to be tempted to read them.</p>
-<p>– And note that while “shitty YouTube comments” is perhaps a ‘social problem’, (the ‘society’ of individuals on a YouTube comment thread..), this plugin has a technical solution.<br />I don’t mean to say “just ignore it” is the problem here; but it’s worth highlighting that the technical structure has influence on the behavior of the society. (Larry Lessig, the Creative Commons guy, said something similar about behavior of markets..).</p>
-<p>The structure of YouTube as a site for its comments lend to this culture that comments can be shit.<br />Since comments on YouTube are already shit, it doesn’t matter that others make them more shit.<br />Only recent comments really get shown, so even if a particular video’s comments thread has a history of good comments, it’s not going to have an impact on more recent arrivals.</p>
-<p>– Well, that’s just armchair thinking, y’know.<br />But in contrast to YouTube’s comments threads, alternative structures for comment threads don’t seem to yield as much bullshit.<br />I don’t think I’ve ever seen bad comments on sites like Reddit. I don’t use Reddit so much, but each comment is given a vote; comments with higher votes are at the top.<br />I don’t suppose this is all that “fair” in terms of equal exposure (if people only read and upvote what’s at the top, etc.); and if the “community” of users have maligned tastes then the comments which get upvoted will have maligned tastes..<br />– I suspect, though, that - even without explicit moderation - such a comment system would be better suited to healthy discussion than YouTube’s comment section.</p>
+<p>– And note that while “shitty YouTube comments” is perhaps a ‘social problem’, (the ‘society’ of individuals on a YouTube comment thread..), this plugin has a technical solution.<br />
+I don’t mean to say “just ignore it” is the problem here; but it’s worth highlighting that the technical structure has influence on the behavior of the society. (Larry Lessig, the Creative Commons guy, said something similar about behavior of markets..).</p>
+<p>The structure of YouTube as a site for its comments lend to this culture that comments can be shit.<br />
+Since comments on YouTube are already shit, it doesn’t matter that others make them more shit.<br />
+Only recent comments really get shown, so even if a particular video’s comments thread has a history of good comments, it’s not going to have an impact on more recent arrivals.</p>
+<p>– Well, that’s just armchair thinking, y’know.<br />
+But in contrast to YouTube’s comments threads, alternative structures for comment threads don’t seem to yield as much bullshit.<br />
+I don’t think I’ve ever seen bad comments on sites like Reddit. I don’t use Reddit so much, but each comment is given a vote; comments with higher votes are at the top.<br />
+I don’t suppose this is all that “fair” in terms of equal exposure (if people only read and upvote what’s at the top, etc.); and if the “community” of users have maligned tastes then the comments which get upvoted will have maligned tastes..<br />
+– I suspect, though, that - even without explicit moderation - such a comment system would be better suited to healthy discussion than YouTube’s comment section.</p>
 
 
 <hr />
@@ -97,7 +178,10 @@
 
 
             </div>
-            <div id="footer">
+
+            <hr style="margin-bottom: 0px; border-top: 2px solid black;" />
+
+            <div id="footer" class="pull-right" style="padding-right: 10px;">
                 Site proudly generated by
                 <a href="http://jaspervdj.be/hakyll">Hakyll</a>
             </div>

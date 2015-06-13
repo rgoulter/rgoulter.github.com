@@ -1,54 +1,124 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!DOCTYPE HTML>
+<html lang="en">
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>Richard Goulter's Blog - Conflict in Narrative, RE: Genre</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Conflict in Narrative, RE: Genre - Richard Goulter's Blog</title>
+
+        <!-- My (Old) CSS theme -->
         <link rel="stylesheet" type="text/css" href="../../css/default.css" />
+
+        <!--
+            jQuery & jQueryUI
+        -->
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css" />
+
+        <!--
+            Pandoc Style CSS
+            (for syntax highlighted snippets)
+        -->
         <link rel="stylesheet" type="text/css" href="../../css/syntax.css" />
+
+        <!--
+            Bootstrap
+        -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+        <!--
+            Waypoints, and Waypoints-Sticky,
+            so we can do this:
+            http://imakewebthings.com/waypoints/shortcuts/sticky-elements/
+        -->
+        <script src="../../js/jquery.waypoints.min.js"></script>
+        <script src="../../js/sticky.min.js"></script>
+
+        <!--
+            TOCify
+        -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js"></script>
+        <!--
+            Patched TOCify css file.
+            (Don't want fixed `.tocify`).
+        -->
+        <link rel="stylesheet" type="text/css" href="../../css/jquery.tocify.css" />
+
+        <style>
+        .navbar {
+            margin-bottom: 0px;
+        }
+
+        .banner-image {
+            width:100%;
+        }
+
+        .banner {
+            margin-left: 0px;
+            margin-right: 0px;
+        }
+
+        body {
+            background-color: #e2e2e2;
+        }
+
+        #page {
+            padding-left:0;
+            padding-right:0;
+            background-color: #ffffff;
+        }
+        </style>
     </head>
     <body>
-        <div id="page">
-            <div id="header">
-                <div id="logo">
-                    <a href="../../">Richard Goulter's Blog</a>
-                </div>
-                <div id="navigation">
-                    <a href="../../">Home</a>
-                    <a href="../../yi.html">Yi</a>
-                    <a href="../../emacs.html">Emacs</a>
-                    <a href="../../archive.html">Archive</a>
-                </div>
-            <div>
-                <img src="../../images/blog-banner.png" />
-            </div>
+        <div id="page" class="container">
+            <!-- This, with no padding on left/right -->
+            <div class="banner">
+                <nav class="navbar navbar-default">
+    <div class="collapse navbar-collapse">
+        <a class="navbar-brand" href="../../">Richard Goulter's Blog</a>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="../../">Home</a></li>
+            <li><a href="../../yi.html">Yi</a></li>
+            <li><a href="../../emacs.html">Emacs</a></li>
+            <li><a href="../../archive.html">Archive</a></li>
+        </ul>
+    </div>
+</nav>
+
+                <img class="banner-image" src="../../images/blog-banner.png" />
             </div>
 
+            <hr style="margin: 0px; border-top: 5px solid black;" />
 
-            <div id="content">
+            <div id="content" class="container">
                 <h1>Conflict in Narrative, RE: Genre</h1>
-
                 <div class="info">
     Posted on March 22, 2015
     
         by Richard Goulter
-    
-</div>
-<div class="info">
+    <br />
     
     Tags: <a href="../../tags/analysis.html">analysis</a>, <a href="../../tags/romance.html">romance</a>
     
 </div>
 
-<p>I rambled recently about some genres, romance and action/adventure, particularly that one genre did characters well and the other was strong in plot.<br />I wondered whether romance genre was inherently worse at plot.</p>
-<p>A tool which would help this thought would be the notion of whether conflict is ‘internal’ or ‘external’.<br />Gunfights, explosions and whatnot would be ‘external’.<br />Angst, and mustering courage, etc. would be ‘internal’.<br />Or something like that.</p>
-<p>Notably, I was introduced to this concept seeing a comment in a review of a Romance Novel which pointed out all the conflict in the book was ‘external’: everything between Hero &amp; Heroine is fine &amp; dandy.<br />If we try and map that to action movies, it’s like the heroes arrive on the scene and the battle has already been won; the cavalry arrive and the enemy have already been defeated. It’s not to say the narrative is a bad one; just that you’re not really going to be scoring points in the genre.</p>
+<p>I rambled recently about some genres, romance and action/adventure, particularly that one genre did characters well and the other was strong in plot.<br />
+I wondered whether romance genre was inherently worse at plot.</p>
+<p>A tool which would help this thought would be the notion of whether conflict is ‘internal’ or ‘external’.<br />
+Gunfights, explosions and whatnot would be ‘external’.<br />
+Angst, and mustering courage, etc. would be ‘internal’.<br />
+Or something like that.</p>
+<p>Notably, I was introduced to this concept seeing a comment in a review of a Romance Novel which pointed out all the conflict in the book was ‘external’: everything between Hero &amp; Heroine is fine &amp; dandy.<br />
+If we try and map that to action movies, it’s like the heroes arrive on the scene and the battle has already been won; the cavalry arrive and the enemy have already been defeated. It’s not to say the narrative is a bad one; just that you’re not really going to be scoring points in the genre.</p>
 <p>So, Romance Novels are character strong, and this depends (at least a bit) on ‘internal’ conflict. If we try and fit it into an either/or, Action/Adventure is great at ‘plot’, which largely depends on ‘external’ conflict.</p>
 <p>– And with this tool in hand, it strikes me that one of the reasons RASalvatore sucks so much at writing character is he dresses up ‘external’ conflict, pretends it’s “internal” conflict. e.g.</p>
 <blockquote>
 <p>Drizzt has a mask which would make him look acceptable to other people. Drizzt has angst as to whether wearing this mask is good or not.</p>
 </blockquote>
-<p>Emphasised in the narrative is ‘racism is bad’, and so the key conflict is external (“other people are racist”) and not internal. Hell. RASalvatore’s novels even feature sentient. fucking. objects (e.g. talking sword which tries to influence wielder); so character growth which potentially could be ‘internal’ (“do I have mastery of my sword?”) becomes ‘external’ in Salvatore’s writing. (“do I have mastery of <em>this</em> sword, which is another living being?”).<br />There are examples in Salvatore’s writing which feature proper character; it’s easy to see how these fit in terms of ‘internal’/‘external’. e.g.</p>
+<p>Emphasised in the narrative is ‘racism is bad’, and so the key conflict is external (“other people are racist”) and not internal. Hell. RASalvatore’s novels even feature sentient. fucking. objects (e.g. talking sword which tries to influence wielder); so character growth which potentially could be ‘internal’ (“do I have mastery of my sword?”) becomes ‘external’ in Salvatore’s writing. (“do I have mastery of <em>this</em> sword, which is another living being?”).<br />
+There are examples in Salvatore’s writing which feature proper character; it’s easy to see how these fit in terms of ‘internal’/‘external’. e.g.</p>
 <blockquote>
 <p>Drizzt realises running off by himself to save the day was silly, and that he relies on his friends more than he thought.</p>
 </blockquote>
@@ -57,17 +127,23 @@
 <p>Robilard the wizard is cynical due to some past turmoil. Interacting with the light-hearted Harple, Robilard shows some happiness.</p>
 </blockquote>
 <p>also ‘internal’, even though he’s interacting with someone else. (Because the <em>conflict</em> being dealt with is internal to a person).</p>
-<p>It would be difficult to say all conflict fits easily into ‘internal’ or ‘external’, though. Romance Novels are maybe more interesting about this, since it’s rare for a character to grow just by internal reflection.<br />Consider some from “Devil in Winter”: e.g.</p>
+<p>It would be difficult to say all conflict fits easily into ‘internal’ or ‘external’, though. Romance Novels are maybe more interesting about this, since it’s rare for a character to grow just by internal reflection.<br />
+Consider some from “Devil in Winter”: e.g.</p>
 <blockquote>
 <p>Sebastian says rude words around his wife, Evie. Evie chastises him. Sebastian says “deal with it”. Sebastian isn’t ever seen saying rude words to his wife in this manner after this.</p>
 </blockquote>
-<p>Perhaps inter-personal conflict is particularly unsuited to this ‘internal’/‘external’ model?<br />More fun is considering examples where it really does blur, though. e.g.</p>
+<p>Perhaps inter-personal conflict is particularly unsuited to this ‘internal’/‘external’ model?<br />
+More fun is considering examples where it really does blur, though. e.g.</p>
 <blockquote>
 <p>Some of the gaming-house workers are having a tussle. Sebastian must break them up in order to show his worth as a leader.</p>
 </blockquote>
-<p>The development isn’t “Sebastian beats up some guys and saves the day”, but “Sebastian proves his worth as a leader” kindof thing.<br />Hmm. Maybe not the best example.</p>
+<p>The development isn’t “Sebastian beats up some guys and saves the day”, but “Sebastian proves his worth as a leader” kindof thing.<br />
+Hmm. Maybe not the best example.</p>
 <p>Regardless, it’s an interesting tool to have in the toolbox.</p>
-<p>So, going back to “do Romance Novels have plots with less conflict?”, it’s clear that RNs (probably) don’t, but instead the conflict they do have is ‘internal’ rather than ‘external’.<br />And ‘internal’ conflict is to character as ‘external’ conflict is to … ? “Plot”?<br />In any case. Worth considering next is how much RNs need ‘external’ conflict in their narratives. “Devil in Winter” features plenty. Maya Rodale’s “Seducing Mr. Knightly” features ‘external’ conflict in the form of legal inquiries. Sherry Thomas’ “Tempting the Bride” is, as far as I can recall, free of “external conflict”. (Oh. Hmm. There is Mrs Martin, whose meddling drives a key part of the plot). “Romancing Mr. Bridgerton” has a driving conflict of the mystery of ‘who is Lady Whistledon?’. “Pride and Prejudice” features conflict with Mr. Wickham. – None of this is really “guns and explosion” type stuff, but is all undoubtedly ‘extenal’ conflict.<br />Hmm.</p>
+<p>So, going back to “do Romance Novels have plots with less conflict?”, it’s clear that RNs (probably) don’t, but instead the conflict they do have is ‘internal’ rather than ‘external’.<br />
+And ‘internal’ conflict is to character as ‘external’ conflict is to … ? “Plot”?<br />
+In any case. Worth considering next is how much RNs need ‘external’ conflict in their narratives. “Devil in Winter” features plenty. Maya Rodale’s “Seducing Mr. Knightly” features ‘external’ conflict in the form of legal inquiries. Sherry Thomas’ “Tempting the Bride” is, as far as I can recall, free of “external conflict”. (Oh. Hmm. There is Mrs Martin, whose meddling drives a key part of the plot). “Romancing Mr. Bridgerton” has a driving conflict of the mystery of ‘who is Lady Whistledon?’. “Pride and Prejudice” features conflict with Mr. Wickham. – None of this is really “guns and explosion” type stuff, but is all undoubtedly ‘extenal’ conflict.<br />
+Hmm.</p>
 
 
 <hr />
@@ -110,7 +186,10 @@
 
 
             </div>
-            <div id="footer">
+
+            <hr style="margin-bottom: 0px; border-top: 2px solid black;" />
+
+            <div id="footer" class="pull-right" style="padding-right: 10px;">
                 Site proudly generated by
                 <a href="http://jaspervdj.be/hakyll">Hakyll</a>
             </div>

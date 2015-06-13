@@ -1,50 +1,119 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!DOCTYPE HTML>
+<html lang="en">
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>Richard Goulter's Blog - Adding Next/Previous Post to Hakyll</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Adding Next/Previous Post to Hakyll - Richard Goulter's Blog</title>
+
+        <!-- My (Old) CSS theme -->
         <link rel="stylesheet" type="text/css" href="../../css/default.css" />
+
+        <!--
+            jQuery & jQueryUI
+        -->
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css" />
+
+        <!--
+            Pandoc Style CSS
+            (for syntax highlighted snippets)
+        -->
         <link rel="stylesheet" type="text/css" href="../../css/syntax.css" />
+
+        <!--
+            Bootstrap
+        -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+        <!--
+            Waypoints, and Waypoints-Sticky,
+            so we can do this:
+            http://imakewebthings.com/waypoints/shortcuts/sticky-elements/
+        -->
+        <script src="../../js/jquery.waypoints.min.js"></script>
+        <script src="../../js/sticky.min.js"></script>
+
+        <!--
+            TOCify
+        -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js"></script>
+        <!--
+            Patched TOCify css file.
+            (Don't want fixed `.tocify`).
+        -->
+        <link rel="stylesheet" type="text/css" href="../../css/jquery.tocify.css" />
+
+        <style>
+        .navbar {
+            margin-bottom: 0px;
+        }
+
+        .banner-image {
+            width:100%;
+        }
+
+        .banner {
+            margin-left: 0px;
+            margin-right: 0px;
+        }
+
+        body {
+            background-color: #e2e2e2;
+        }
+
+        #page {
+            padding-left:0;
+            padding-right:0;
+            background-color: #ffffff;
+        }
+        </style>
     </head>
     <body>
-        <div id="page">
-            <div id="header">
-                <div id="logo">
-                    <a href="../../">Richard Goulter's Blog</a>
-                </div>
-                <div id="navigation">
-                    <a href="../../">Home</a>
-                    <a href="../../yi.html">Yi</a>
-                    <a href="../../emacs.html">Emacs</a>
-                    <a href="../../archive.html">Archive</a>
-                </div>
-            <div>
-                <img src="../../images/blog-banner.png" />
-            </div>
+        <div id="page" class="container">
+            <!-- This, with no padding on left/right -->
+            <div class="banner">
+                <nav class="navbar navbar-default">
+    <div class="collapse navbar-collapse">
+        <a class="navbar-brand" href="../../">Richard Goulter's Blog</a>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="../../">Home</a></li>
+            <li><a href="../../yi.html">Yi</a></li>
+            <li><a href="../../emacs.html">Emacs</a></li>
+            <li><a href="../../archive.html">Archive</a></li>
+        </ul>
+    </div>
+</nav>
+
+                <img class="banner-image" src="../../images/blog-banner.png" />
             </div>
 
+            <hr style="margin: 0px; border-top: 5px solid black;" />
 
-            <div id="content">
+            <div id="content" class="container">
                 <h1>Adding Next/Previous Post to Hakyll</h1>
-
                 <div class="info">
     Posted on July  6, 2014
     
         by Richard Goulter
-    
-</div>
-<div class="info">
+    <br />
     
     Tags: <a href="../../tags/hakyll.html">hakyll</a>, <a href="../../tags/haskell.html">haskell</a>
     
 </div>
 
-<p>So. The problem I was trying to solve in my last post was how to add next/prev links to a blogpost.<br />I’ve since figured out how to do that. <a href="https://github.com/rgoulter/my-hakyll-blog/commit/a4dd0513553a77f3b819a392078e59f461d884f9">See the commit</a>.</p>
-<p>My problem was, I had an <code>Item String</code>, and wanted to give a <code>Compiler String</code> corresponding to the next (or previous.. let’s ignore that for generality) post’s url.<br />I ran into difficulty by taking a list of <code>Identifier</code>s, and getting a list of <code>Compiler String</code>s. That is, I loaded all the posts, and mapped them to their urls. (At which point I was stuck with <code>[Compiler String]</code>).<br />What I figured out to do was instead take the list of <code>Identifier</code>s, take the <code>Identifier</code> of the <em>next</em> post, and map that <code>Identifier</code> to a url. (Which is of type <code>Compiler String</code>).</p>
+<p>So. The problem I was trying to solve in my last post was how to add next/prev links to a blogpost.<br />
+I’ve since figured out how to do that. <a href="https://github.com/rgoulter/my-hakyll-blog/commit/a4dd0513553a77f3b819a392078e59f461d884f9">See the commit</a>.</p>
+<p>My problem was, I had an <code>Item String</code>, and wanted to give a <code>Compiler String</code> corresponding to the next (or previous.. let’s ignore that for generality) post’s url.<br />
+I ran into difficulty by taking a list of <code>Identifier</code>s, and getting a list of <code>Compiler String</code>s. That is, I loaded all the posts, and mapped them to their urls. (At which point I was stuck with <code>[Compiler String]</code>).<br />
+What I figured out to do was instead take the list of <code>Identifier</code>s, take the <code>Identifier</code> of the <em>next</em> post, and map that <code>Identifier</code> to a url. (Which is of type <code>Compiler String</code>).</p>
 <p>If it’s unclear to you, then what I mean is that the problem I was struggling with was quite simple when done the wrong way.</p>
-<p>When I struggled, I was wanting to get a <code>Compiler [String]</code> because I figured I would be able to look up the url after some url. I thought there would be some way to treat <code>Compiler [String]</code> more like <code>[String]</code>.<br />Wrong idea, anyway.</p>
-<p>Once you can go from <code>Item a</code> to <code>Compiler String</code>, then it’s quite easy to give this to a post.<br />For those who hadn’t tinkered around enough with Hakyll for this to be so obvious, you give the <code>Item a -&gt; Compiler String</code> function to <code>field &quot;nextUrl&quot;</code>, and adding this to the <code>Context a</code> given to the post.</p>
+<p>When I struggled, I was wanting to get a <code>Compiler [String]</code> because I figured I would be able to look up the url after some url. I thought there would be some way to treat <code>Compiler [String]</code> more like <code>[String]</code>.<br />
+Wrong idea, anyway.</p>
+<p>Once you can go from <code>Item a</code> to <code>Compiler String</code>, then it’s quite easy to give this to a post.<br />
+For those who hadn’t tinkered around enough with Hakyll for this to be so obvious, you give the <code>Item a -&gt; Compiler String</code> function to <code>field &quot;nextUrl&quot;</code>, and adding this to the <code>Context a</code> given to the post.</p>
 
 
 <hr />
@@ -87,7 +156,10 @@
 
 
             </div>
-            <div id="footer">
+
+            <hr style="margin-bottom: 0px; border-top: 2px solid black;" />
+
+            <div id="footer" class="pull-right" style="padding-right: 10px;">
                 Site proudly generated by
                 <a href="http://jaspervdj.be/hakyll">Hakyll</a>
             </div>

@@ -1,55 +1,132 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!DOCTYPE HTML>
+<html lang="en">
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>Richard Goulter's Blog - Case Study of Conflict in Narrative</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Case Study of Conflict in Narrative - Richard Goulter's Blog</title>
+
+        <!-- My (Old) CSS theme -->
         <link rel="stylesheet" type="text/css" href="../../css/default.css" />
+
+        <!--
+            jQuery & jQueryUI
+        -->
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css" />
+
+        <!--
+            Pandoc Style CSS
+            (for syntax highlighted snippets)
+        -->
         <link rel="stylesheet" type="text/css" href="../../css/syntax.css" />
+
+        <!--
+            Bootstrap
+        -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+        <!--
+            Waypoints, and Waypoints-Sticky,
+            so we can do this:
+            http://imakewebthings.com/waypoints/shortcuts/sticky-elements/
+        -->
+        <script src="../../js/jquery.waypoints.min.js"></script>
+        <script src="../../js/sticky.min.js"></script>
+
+        <!--
+            TOCify
+        -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js"></script>
+        <!--
+            Patched TOCify css file.
+            (Don't want fixed `.tocify`).
+        -->
+        <link rel="stylesheet" type="text/css" href="../../css/jquery.tocify.css" />
+
+        <style>
+        .navbar {
+            margin-bottom: 0px;
+        }
+
+        .banner-image {
+            width:100%;
+        }
+
+        .banner {
+            margin-left: 0px;
+            margin-right: 0px;
+        }
+
+        body {
+            background-color: #e2e2e2;
+        }
+
+        #page {
+            padding-left:0;
+            padding-right:0;
+            background-color: #ffffff;
+        }
+        </style>
     </head>
     <body>
-        <div id="page">
-            <div id="header">
-                <div id="logo">
-                    <a href="../../">Richard Goulter's Blog</a>
-                </div>
-                <div id="navigation">
-                    <a href="../../">Home</a>
-                    <a href="../../yi.html">Yi</a>
-                    <a href="../../emacs.html">Emacs</a>
-                    <a href="../../archive.html">Archive</a>
-                </div>
-            <div>
-                <img src="../../images/blog-banner.png" />
-            </div>
+        <div id="page" class="container">
+            <!-- This, with no padding on left/right -->
+            <div class="banner">
+                <nav class="navbar navbar-default">
+    <div class="collapse navbar-collapse">
+        <a class="navbar-brand" href="../../">Richard Goulter's Blog</a>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="../../">Home</a></li>
+            <li><a href="../../yi.html">Yi</a></li>
+            <li><a href="../../emacs.html">Emacs</a></li>
+            <li><a href="../../archive.html">Archive</a></li>
+        </ul>
+    </div>
+</nav>
+
+                <img class="banner-image" src="../../images/blog-banner.png" />
             </div>
 
+            <hr style="margin: 0px; border-top: 5px solid black;" />
 
-            <div id="content">
+            <div id="content" class="container">
                 <h1>Case Study of Conflict in Narrative</h1>
-
                 <div class="info">
     Posted on March 28, 2015
     
         by Richard Goulter
-    
-</div>
-<div class="info">
+    <br />
     
     Tags: <a href="../../tags/katherine%20ashe.html">katherine ashe</a>, <a href="../../tags/at%20the%20billionaire%27s%20wedding.html">at the billionaire's wedding</a>, <a href="../../tags/conflict.html">conflict</a>, <a href="../../tags/character.html">character</a>
     
 </div>
 
 <p>Maybe in my previous postings on this topic I’ve come across as a little harsh on RASalvatore, and perhaps it seems that I think all Romance Novels do character well.</p>
-<p>Okay. That’s obviously not going to be true.<br />But I’d still like to consider Katherine Ashe’s novella from the “At the Billionaire’s Wedding” anthology with regards to conflict in the narrative. And, like, how well “character development = internal conflict, plot = external conflict” model holds up.</p>
-<p>The “At the Billionaire’s Wedding” anthology takes place in the setting of the wedding of Maya Rodale’s Duke Austen and Jane Sparks. (If you figured out giving the husband’s surname to the wife makes for “Jane Austen”, you’re quicker than me). The four authors have previously done an anthology called “At the Duke’s Wedding”. (I guess they didn’t like the name “At Duke’s Wedding”).<br />– These are pretty good samplers to get a taste for how each author writes, I reckon. Since reading AtDW, I’ve read at least one novel from each of the authors.</p>
-<p>Anyway. Wasn’t a big fan of KAshe’s part of AtBW.<br />The cool thing about the novella is it’s an “interpretation”/rendition/render of “Pride and Prejudice”. (Written by Jane Austen so it’s kindof meta, ha..). [I reckon Austen hates people more than KAshe does, so, that’s one limitation]. I dunno. Considering how much of a well-loved classic P&amp;P is, I’d say it’s more audacious to do something like this as opposed to otherwise rewriting/remixing types/tropes. – I didn’t enjoy it. Your Mileage May Vary.</p>
-<p>Probably a big part of why I didn’t like it was the shrill, heavy-handed advocacy of Social Justice: The heroine suffers all sorts of woes. As far as I recall: crappy job, rape-y boss, other sexual discrimination, poor, sick sister who depends on her, abusive father. – I think that’s an album or two of country music right there. – But, also, naturally the heroine is a righteous-as-hell activist and woe the world is so evil and all.<br />– With Heroines like Penelope Featherington (even in “Offer from a Gentleman”) or Evie from “Devil in Winter” or Annabelle Swift in “Seducing Mr. Knightly”, I can’t help but want to hug these women and protect them, etc.; here I felt none of that. :/</p>
-<p>In terms of “internal”/“external” conflict, this character has zero room for character growth (unless the writer thinks that the character sounds like a twat. I think this author doesn’t think that the character sounds like a twat). ALL the conflict is external; all the conflict the character suffers are due to other people, or things outside the character.<br />Flat, boring characters can be fine, even as main characters. But it’s kindof dull in a genre filled with strong characters. (People who complain about a lack of strong female characters surely haven’t read Romance Novels recently).</p>
-<p>The Hero character in the story is similarly developed: the Hero is rich, handsome as anything, a super good lover; moreover, is deeply, totally in love with the heroine, and completely agrees with her on every moral/activist issue.<br />– I feel there’s not a lot of potential for conflict here.<br />The Hero expresses his love by following the heroine around and secretly funding her project and not talking to her or anything. But it’s totally not creepy. Because.<br />Anyway. The Hero also works at his father’s company, which is big and evil and corporate and stuff. His father also is arrogant and evil and corporate and stuff. – I suppose it’d be a spoiler to say whether or not the Hero leaves this company by the end (as a token of his love?) of the novella? I’d better not spoil it, then.</p>
-<p>Again. There’s zero room for “internal conflict” (and as per the model) character growth here.<br />It’s like a “prince comes to rescue the princess” story, where both prince/princess characters are flat. cf. “Lord of Scoundrels”, wherein the prince is the Heroine, who “sees value/treasure in things everyone else overlooks”; and the princess trapped in a castle. LoS has the princess do at least some of the work to rescue himself (after a large amount of effort from the prince). i.e. maybe the prince doesn’t grow as a character much, but it’s a helluvan interesting princess.</p>
-<p>Where the novella does present conflict is every time the Hero professes “I wuv you lots” the heroine has the angst of “obviously he’ll get bored of me eventually” (a classic trope, fair enough), as well as “my mum loved my dad but then that turned bad”. (And, of course, since the Hero works at big bad company, prejudice says that he must be big and bad. – thus the “prejudice” in “P&amp;P”.).<br />Hurrah! The “parental issues” totally counts for this whole “internal conflict” the character needs to overcome. (Like, hey, if all you’ve known tells you to distrust a situation, how d’you overcome that?).<br />As far as I recall, though, the resolution involves the Hero leaving his job and the heroine deciding “ok, I’ll date you.”. I can’t help but feel that one party is giving more to a compromise than the other. – “Okay, I’ll date the handsome/sexy/rich guy who agrees with everything I say” doesn’t feel like a prominent character development, in any case.</p>
-<p>Maybe some of this is forgivable for the narrative being a novella. It’s surely more difficult for a novella to have solid characters than a full novel. – I completely adored KAshe’s novella “Kisses, She Wrote”, though; even characters who were given less than a page. So it’s neither the author nor the format at issue here. – And I guess different people are after different things. P&amp;P has enough in it such that people get different things out of it.<br />Clearly the shoe “lack of internal conflict = boring characters” seems to fit; it’s not clear, though, that the story would obviously be better with whatever “internal conflict”. (Easy fix may be a “I would love the Hero but..”; e.g. ugly Hero [“I’d love him but he’s ugly”], arrogant Hero [“I’d love him but he’s arrogant”], etc.).<br />And maybe even if the characters are awfully constructed, that the romance is ‘solid’ is nice anyway.</p>
+<p>Okay. That’s obviously not going to be true.<br />
+But I’d still like to consider Katherine Ashe’s novella from the “At the Billionaire’s Wedding” anthology with regards to conflict in the narrative. And, like, how well “character development = internal conflict, plot = external conflict” model holds up.</p>
+<p>The “At the Billionaire’s Wedding” anthology takes place in the setting of the wedding of Maya Rodale’s Duke Austen and Jane Sparks. (If you figured out giving the husband’s surname to the wife makes for “Jane Austen”, you’re quicker than me). The four authors have previously done an anthology called “At the Duke’s Wedding”. (I guess they didn’t like the name “At Duke’s Wedding”).<br />
+– These are pretty good samplers to get a taste for how each author writes, I reckon. Since reading AtDW, I’ve read at least one novel from each of the authors.</p>
+<p>Anyway. Wasn’t a big fan of KAshe’s part of AtBW.<br />
+The cool thing about the novella is it’s an “interpretation”/rendition/render of “Pride and Prejudice”. (Written by Jane Austen so it’s kindof meta, ha..). [I reckon Austen hates people more than KAshe does, so, that’s one limitation]. I dunno. Considering how much of a well-loved classic P&amp;P is, I’d say it’s more audacious to do something like this as opposed to otherwise rewriting/remixing types/tropes. – I didn’t enjoy it. Your Mileage May Vary.</p>
+<p>Probably a big part of why I didn’t like it was the shrill, heavy-handed advocacy of Social Justice: The heroine suffers all sorts of woes. As far as I recall: crappy job, rape-y boss, other sexual discrimination, poor, sick sister who depends on her, abusive father. – I think that’s an album or two of country music right there. – But, also, naturally the heroine is a righteous-as-hell activist and woe the world is so evil and all.<br />
+– With Heroines like Penelope Featherington (even in “Offer from a Gentleman”) or Evie from “Devil in Winter” or Annabelle Swift in “Seducing Mr. Knightly”, I can’t help but want to hug these women and protect them, etc.; here I felt none of that. :/</p>
+<p>In terms of “internal”/“external” conflict, this character has zero room for character growth (unless the writer thinks that the character sounds like a twat. I think this author doesn’t think that the character sounds like a twat). ALL the conflict is external; all the conflict the character suffers are due to other people, or things outside the character.<br />
+Flat, boring characters can be fine, even as main characters. But it’s kindof dull in a genre filled with strong characters. (People who complain about a lack of strong female characters surely haven’t read Romance Novels recently).</p>
+<p>The Hero character in the story is similarly developed: the Hero is rich, handsome as anything, a super good lover; moreover, is deeply, totally in love with the heroine, and completely agrees with her on every moral/activist issue.<br />
+– I feel there’s not a lot of potential for conflict here.<br />
+The Hero expresses his love by following the heroine around and secretly funding her project and not talking to her or anything. But it’s totally not creepy. Because.<br />
+Anyway. The Hero also works at his father’s company, which is big and evil and corporate and stuff. His father also is arrogant and evil and corporate and stuff. – I suppose it’d be a spoiler to say whether or not the Hero leaves this company by the end (as a token of his love?) of the novella? I’d better not spoil it, then.</p>
+<p>Again. There’s zero room for “internal conflict” (and as per the model) character growth here.<br />
+It’s like a “prince comes to rescue the princess” story, where both prince/princess characters are flat. cf. “Lord of Scoundrels”, wherein the prince is the Heroine, who “sees value/treasure in things everyone else overlooks”; and the princess trapped in a castle. LoS has the princess do at least some of the work to rescue himself (after a large amount of effort from the prince). i.e. maybe the prince doesn’t grow as a character much, but it’s a helluvan interesting princess.</p>
+<p>Where the novella does present conflict is every time the Hero professes “I wuv you lots” the heroine has the angst of “obviously he’ll get bored of me eventually” (a classic trope, fair enough), as well as “my mum loved my dad but then that turned bad”. (And, of course, since the Hero works at big bad company, prejudice says that he must be big and bad. – thus the “prejudice” in “P&amp;P”.).<br />
+Hurrah! The “parental issues” totally counts for this whole “internal conflict” the character needs to overcome. (Like, hey, if all you’ve known tells you to distrust a situation, how d’you overcome that?).<br />
+As far as I recall, though, the resolution involves the Hero leaving his job and the heroine deciding “ok, I’ll date you.”. I can’t help but feel that one party is giving more to a compromise than the other. – “Okay, I’ll date the handsome/sexy/rich guy who agrees with everything I say” doesn’t feel like a prominent character development, in any case.</p>
+<p>Maybe some of this is forgivable for the narrative being a novella. It’s surely more difficult for a novella to have solid characters than a full novel. – I completely adored KAshe’s novella “Kisses, She Wrote”, though; even characters who were given less than a page. So it’s neither the author nor the format at issue here. – And I guess different people are after different things. P&amp;P has enough in it such that people get different things out of it.<br />
+Clearly the shoe “lack of internal conflict = boring characters” seems to fit; it’s not clear, though, that the story would obviously be better with whatever “internal conflict”. (Easy fix may be a “I would love the Hero but..”; e.g. ugly Hero [“I’d love him but he’s ugly”], arrogant Hero [“I’d love him but he’s arrogant”], etc.).<br />
+And maybe even if the characters are awfully constructed, that the romance is ‘solid’ is nice anyway.</p>
 <p>But for characters which aren’t flat, have growth &amp; conflict to resolve, it’s the “internal conflict = not bad character” model seems to work well enough for the Romance Novels as for the action/adventure stories.</p>
 
 
@@ -93,7 +170,10 @@
 
 
             </div>
-            <div id="footer">
+
+            <hr style="margin-bottom: 0px; border-top: 2px solid black;" />
+
+            <div id="footer" class="pull-right" style="padding-right: 10px;">
                 Site proudly generated by
                 <a href="http://jaspervdj.be/hakyll">Hakyll</a>
             </div>

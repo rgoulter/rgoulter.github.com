@@ -1,49 +1,117 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!DOCTYPE HTML>
+<html lang="en">
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>Richard Goulter's Blog - A Short Disclaimer...</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>A Short Disclaimer... - Richard Goulter's Blog</title>
+
+        <!-- My (Old) CSS theme -->
         <link rel="stylesheet" type="text/css" href="../../css/default.css" />
+
+        <!--
+            jQuery & jQueryUI
+        -->
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css" />
+
+        <!--
+            Pandoc Style CSS
+            (for syntax highlighted snippets)
+        -->
         <link rel="stylesheet" type="text/css" href="../../css/syntax.css" />
+
+        <!--
+            Bootstrap
+        -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+        <!--
+            Waypoints, and Waypoints-Sticky,
+            so we can do this:
+            http://imakewebthings.com/waypoints/shortcuts/sticky-elements/
+        -->
+        <script src="../../js/jquery.waypoints.min.js"></script>
+        <script src="../../js/sticky.min.js"></script>
+
+        <!--
+            TOCify
+        -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js"></script>
+        <!--
+            Patched TOCify css file.
+            (Don't want fixed `.tocify`).
+        -->
+        <link rel="stylesheet" type="text/css" href="../../css/jquery.tocify.css" />
+
+        <style>
+        .navbar {
+            margin-bottom: 0px;
+        }
+
+        .banner-image {
+            width:100%;
+        }
+
+        .banner {
+            margin-left: 0px;
+            margin-right: 0px;
+        }
+
+        body {
+            background-color: #e2e2e2;
+        }
+
+        #page {
+            padding-left:0;
+            padding-right:0;
+            background-color: #ffffff;
+        }
+        </style>
     </head>
     <body>
-        <div id="page">
-            <div id="header">
-                <div id="logo">
-                    <a href="../../">Richard Goulter's Blog</a>
-                </div>
-                <div id="navigation">
-                    <a href="../../">Home</a>
-                    <a href="../../yi.html">Yi</a>
-                    <a href="../../emacs.html">Emacs</a>
-                    <a href="../../archive.html">Archive</a>
-                </div>
-            <div>
-                <img src="../../images/blog-banner.png" />
-            </div>
+        <div id="page" class="container">
+            <!-- This, with no padding on left/right -->
+            <div class="banner">
+                <nav class="navbar navbar-default">
+    <div class="collapse navbar-collapse">
+        <a class="navbar-brand" href="../../">Richard Goulter's Blog</a>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="../../">Home</a></li>
+            <li><a href="../../yi.html">Yi</a></li>
+            <li><a href="../../emacs.html">Emacs</a></li>
+            <li><a href="../../archive.html">Archive</a></li>
+        </ul>
+    </div>
+</nav>
+
+                <img class="banner-image" src="../../images/blog-banner.png" />
             </div>
 
+            <hr style="margin: 0px; border-top: 5px solid black;" />
 
-            <div id="content">
+            <div id="content" class="container">
                 <h1>A Short Disclaimer...</h1>
-
                 <div class="info">
     Posted on January 12, 2012
     
         by richardgoulter
-    
-</div>
-<div class="info">
+    <br />
     
     Tags: <a href="../../tags/falsepromise.html">falsepromise</a>, <a href="../../tags/meta.html">meta</a>, <a href="../../tags/waytooangsty.html">waytooangsty</a>, <a href="../../tags/whyiwrite.html">whyiwrite</a>
     
 </div>
 
-<p>The opinions I express here … are my opinions. Although, I should hope I’m in the process of maturing and improving. So, while the internet lives forever, my opinions may die.<br />I won’t be making the effort to go back and prune the posts so that it conforms to what I think and believe now.<br />Or rather, “I don’t necessarily agree with everything I say” on this blog.</p>
+<p>The opinions I express here … are my opinions. Although, I should hope I’m in the process of maturing and improving. So, while the internet lives forever, my opinions may die.<br />
+I won’t be making the effort to go back and prune the posts so that it conforms to what I think and believe now.<br />
+Or rather, “I don’t necessarily agree with everything I say” on this blog.</p>
 <p>Why keep a blog? – Good question! (Or a very boring question. Wouldn’t one have to write a blog in order to say why one writes a blog? It’s a thought to keep in mind, anyway).</p>
 <p>But regardless of what I write, let us hope I do not write merely for the sake of being correct. Hope that I do not write to try and cover every possible disagreement, and cover every gap in a thought. If I write a thought and happen to be wrong, so what? To those who do not know me, it matters nothing. (The internet is a very big place full of very incorrect thoughts). To those that know of me, I suppose it would form a poor impression of me; how unfortunate. And to those who know me well enough, I should hope that you knowing me isn’t tainted by any disagreement you would have.</p>
-<p>Ah, let’s see how this goes anyway.<br />If you’re staying to read along, then welcome.<br />Welcome to my blog….</p>
+<p>Ah, let’s see how this goes anyway.<br />
+If you’re staying to read along, then welcome.<br />
+Welcome to my blog….</p>
 
 
 <hr />
@@ -84,7 +152,10 @@
 
 
             </div>
-            <div id="footer">
+
+            <hr style="margin-bottom: 0px; border-top: 2px solid black;" />
+
+            <div id="footer" class="pull-right" style="padding-right: 10px;">
                 Site proudly generated by
                 <a href="http://jaspervdj.be/hakyll">Hakyll</a>
             </div>

@@ -1,50 +1,121 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!DOCTYPE HTML>
+<html lang="en">
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>Richard Goulter's Blog - The Duty of a Traveller</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>The Duty of a Traveller - Richard Goulter's Blog</title>
+
+        <!-- My (Old) CSS theme -->
         <link rel="stylesheet" type="text/css" href="../../css/default.css" />
+
+        <!--
+            jQuery & jQueryUI
+        -->
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css" />
+
+        <!--
+            Pandoc Style CSS
+            (for syntax highlighted snippets)
+        -->
         <link rel="stylesheet" type="text/css" href="../../css/syntax.css" />
+
+        <!--
+            Bootstrap
+        -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+        <!--
+            Waypoints, and Waypoints-Sticky,
+            so we can do this:
+            http://imakewebthings.com/waypoints/shortcuts/sticky-elements/
+        -->
+        <script src="../../js/jquery.waypoints.min.js"></script>
+        <script src="../../js/sticky.min.js"></script>
+
+        <!--
+            TOCify
+        -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js"></script>
+        <!--
+            Patched TOCify css file.
+            (Don't want fixed `.tocify`).
+        -->
+        <link rel="stylesheet" type="text/css" href="../../css/jquery.tocify.css" />
+
+        <style>
+        .navbar {
+            margin-bottom: 0px;
+        }
+
+        .banner-image {
+            width:100%;
+        }
+
+        .banner {
+            margin-left: 0px;
+            margin-right: 0px;
+        }
+
+        body {
+            background-color: #e2e2e2;
+        }
+
+        #page {
+            padding-left:0;
+            padding-right:0;
+            background-color: #ffffff;
+        }
+        </style>
     </head>
     <body>
-        <div id="page">
-            <div id="header">
-                <div id="logo">
-                    <a href="../../">Richard Goulter's Blog</a>
-                </div>
-                <div id="navigation">
-                    <a href="../../">Home</a>
-                    <a href="../../yi.html">Yi</a>
-                    <a href="../../emacs.html">Emacs</a>
-                    <a href="../../archive.html">Archive</a>
-                </div>
-            <div>
-                <img src="../../images/blog-banner.png" />
-            </div>
+        <div id="page" class="container">
+            <!-- This, with no padding on left/right -->
+            <div class="banner">
+                <nav class="navbar navbar-default">
+    <div class="collapse navbar-collapse">
+        <a class="navbar-brand" href="../../">Richard Goulter's Blog</a>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="../../">Home</a></li>
+            <li><a href="../../yi.html">Yi</a></li>
+            <li><a href="../../emacs.html">Emacs</a></li>
+            <li><a href="../../archive.html">Archive</a></li>
+        </ul>
+    </div>
+</nav>
+
+                <img class="banner-image" src="../../images/blog-banner.png" />
             </div>
 
+            <hr style="margin: 0px; border-top: 5px solid black;" />
 
-            <div id="content">
+            <div id="content" class="container">
                 <h1>The Duty of a Traveller</h1>
-
                 <div class="info">
     Posted on February 16, 2012
     
         by richardgoulter
-    
-</div>
-<div class="info">
+    <br />
     
     Tags: <a href="../../tags/conflictresolution.html">conflictresolution</a>, <a href="../../tags/armchairphilosophy.html">armchairphilosophy</a>
     
 </div>
 
-<p>Jonathan Swift, who wrote that very bitter and angry book “Gulliver’s Travels”, makes an excellent statement within it: &gt;“<em>A traveller’s chief aim should be to make men wiser and better, &gt; and to improve their minds by the bad as well as good example, of what they deliver concerning foreign places.</em>”<br />&gt; (“Gulliver’s Travels”, Part II, Chapter 12). Tell the full story, warts and all - that is what a traveller ought to do. (Who needs diplomacy, anyway, Jonathan?).<br />Let’s come back to this duty, later, though.</p>
+<p>Jonathan Swift, who wrote that very bitter and angry book “Gulliver’s Travels”, makes an excellent statement within it: &gt;“<em>A traveller’s chief aim should be to make men wiser and better, &gt; and to improve their minds by the bad as well as good example, of what they deliver concerning foreign places.</em>”<br />
+&gt; (“Gulliver’s Travels”, Part II, Chapter 12). Tell the full story, warts and all - that is what a traveller ought to do. (Who needs diplomacy, anyway, Jonathan?).<br />
+Let’s come back to this duty, later, though.</p>
 <p>Now, I dislike conflict. Why should people disagree? What do people disagree over? Useless, unimportant things, surely. - Look at YouTube. You can’t convince me that those arguments matter, that they have some higher purpose.</p>
-<p>My favourite conflict-resolution technique has been “ignore it, it will go away”. Unimportant conflicts will disappear. They weren’t important, they didn’t need resolving. I suppose the hope is that important conflicts find natural resolution, for better or worse. But minimize conflict by conflicting only where need be.<br />That was my attitude. I like that attitude.</p>
-<p>There is another attitude of “agree to disagree”; that after trying to convince someone else of your brilliant understanding (which, of course, you are correct about, and have the firm conviction that your adversary is not), and failing, it’s better to each hold your separate view and go your separate ways.<br />That sounds like a mature attitude to have. It certainly seems to be a tolerant attitude, if not an attitude of ‘ignore that you think they are incorrect’. (Heaven-forbid that you would let someone else be <em>wrong</em>).</p>
-<p>These two attitudes seem to hold this: do not have the audacity to believe you are correct. And what a wise thought this can be!<br />Yet, surely it’s one’s duty to have an opinion? What point is there in learning anything, what purpose in discovery if it is not shared? To discover, and have the conviction that others need to learn about this discovery. (It is so fun to try and argue abstractly; let me give an example: with new scientific understanding, older scientific is made somewhat redundant).<br />Just as the duty of the traveller is to report warts-and-all, it is the duty of any man of understanding to have an opinion.<br />I certainly believe it is the duty of any person to try and understand one’s environment; to explore, and learn knew things. Surely one must also share what one has learned?</p>
+<p>My favourite conflict-resolution technique has been “ignore it, it will go away”. Unimportant conflicts will disappear. They weren’t important, they didn’t need resolving. I suppose the hope is that important conflicts find natural resolution, for better or worse. But minimize conflict by conflicting only where need be.<br />
+That was my attitude. I like that attitude.</p>
+<p>There is another attitude of “agree to disagree”; that after trying to convince someone else of your brilliant understanding (which, of course, you are correct about, and have the firm conviction that your adversary is not), and failing, it’s better to each hold your separate view and go your separate ways.<br />
+That sounds like a mature attitude to have. It certainly seems to be a tolerant attitude, if not an attitude of ‘ignore that you think they are incorrect’. (Heaven-forbid that you would let someone else be <em>wrong</em>).</p>
+<p>These two attitudes seem to hold this: do not have the audacity to believe you are correct. And what a wise thought this can be!<br />
+Yet, surely it’s one’s duty to have an opinion? What point is there in learning anything, what purpose in discovery if it is not shared? To discover, and have the conviction that others need to learn about this discovery. (It is so fun to try and argue abstractly; let me give an example: with new scientific understanding, older scientific is made somewhat redundant).<br />
+Just as the duty of the traveller is to report warts-and-all, it is the duty of any man of understanding to have an opinion.<br />
+I certainly believe it is the duty of any person to try and understand one’s environment; to explore, and learn knew things. Surely one must also share what one has learned?</p>
 
 
 <hr />
@@ -87,7 +158,10 @@
 
 
             </div>
-            <div id="footer">
+
+            <hr style="margin-bottom: 0px; border-top: 2px solid black;" />
+
+            <div id="footer" class="pull-right" style="padding-right: 10px;">
                 Site proudly generated by
                 <a href="http://jaspervdj.be/hakyll">Hakyll</a>
             </div>

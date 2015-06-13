@@ -1,48 +1,114 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!DOCTYPE HTML>
+<html lang="en">
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>Richard Goulter's Blog - Rainbow Six LV2</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Rainbow Six LV2 - Richard Goulter's Blog</title>
+
+        <!-- My (Old) CSS theme -->
         <link rel="stylesheet" type="text/css" href="../../css/default.css" />
+
+        <!--
+            jQuery & jQueryUI
+        -->
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css" />
+
+        <!--
+            Pandoc Style CSS
+            (for syntax highlighted snippets)
+        -->
         <link rel="stylesheet" type="text/css" href="../../css/syntax.css" />
+
+        <!--
+            Bootstrap
+        -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+        <!--
+            Waypoints, and Waypoints-Sticky,
+            so we can do this:
+            http://imakewebthings.com/waypoints/shortcuts/sticky-elements/
+        -->
+        <script src="../../js/jquery.waypoints.min.js"></script>
+        <script src="../../js/sticky.min.js"></script>
+
+        <!--
+            TOCify
+        -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js"></script>
+        <!--
+            Patched TOCify css file.
+            (Don't want fixed `.tocify`).
+        -->
+        <link rel="stylesheet" type="text/css" href="../../css/jquery.tocify.css" />
+
+        <style>
+        .navbar {
+            margin-bottom: 0px;
+        }
+
+        .banner-image {
+            width:100%;
+        }
+
+        .banner {
+            margin-left: 0px;
+            margin-right: 0px;
+        }
+
+        body {
+            background-color: #e2e2e2;
+        }
+
+        #page {
+            padding-left:0;
+            padding-right:0;
+            background-color: #ffffff;
+        }
+        </style>
     </head>
     <body>
-        <div id="page">
-            <div id="header">
-                <div id="logo">
-                    <a href="../../">Richard Goulter's Blog</a>
-                </div>
-                <div id="navigation">
-                    <a href="../../">Home</a>
-                    <a href="../../yi.html">Yi</a>
-                    <a href="../../emacs.html">Emacs</a>
-                    <a href="../../archive.html">Archive</a>
-                </div>
-            <div>
-                <img src="../../images/blog-banner.png" />
-            </div>
+        <div id="page" class="container">
+            <!-- This, with no padding on left/right -->
+            <div class="banner">
+                <nav class="navbar navbar-default">
+    <div class="collapse navbar-collapse">
+        <a class="navbar-brand" href="../../">Richard Goulter's Blog</a>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="../../">Home</a></li>
+            <li><a href="../../yi.html">Yi</a></li>
+            <li><a href="../../emacs.html">Emacs</a></li>
+            <li><a href="../../archive.html">Archive</a></li>
+        </ul>
+    </div>
+</nav>
+
+                <img class="banner-image" src="../../images/blog-banner.png" />
             </div>
 
+            <hr style="margin: 0px; border-top: 5px solid black;" />
 
-            <div id="content">
+            <div id="content" class="container">
                 <h1>Rainbow Six LV2</h1>
-
                 <div class="info">
     Posted on February  8, 2014
     
         by richardgoulter
-    
-</div>
-<div class="info">
+    <br />
     
     Tags: <a href="../../tags/game%20design.html">game design</a>, <a href="../../tags/analysis.html">analysis</a>, <a href="../../tags/coop.html">coop</a>
     
 </div>
 
-<p>Just spent a good hour and a half playing co-op Rainbow Six: Las Vegas 2 (henceforth “R6LV2”). More specifically, “Terrorist Hunt” gameplay mode in that, which is just co-op team of two (or three or four) against some number of enemies.<br />There were about 25-35  enemies for the “Medium” number of enemies we played against. This can be set lower or higher.</p>
+<p>Just spent a good hour and a half playing co-op Rainbow Six: Las Vegas 2 (henceforth “R6LV2”). More specifically, “Terrorist Hunt” gameplay mode in that, which is just co-op team of two (or three or four) against some number of enemies.<br />
+There were about 25-35  enemies for the “Medium” number of enemies we played against. This can be set lower or higher.</p>
 <p>It’s a lot of fun! We would have continued, but I did have other work to do.</p>
-<p>Eventually we seemed to figure out, though, that the AI will behave the same way each time (depending on how you play). - So in a session, my co-op partner and I conquered each level by dying a lot, but largely trying the same way each time, so then there’s the foreknowledge of what to look out for when/where. (Not total foresight; and we still died a lot).<br />– It’s also a game where you really, <em>really</em> need to have voicechat enabled. The action can be fast-paced and intense; sometimes things go from “ok” to “all dead” within a second or two. There’s certainly a lot of “BEHIND YOU! BEHIND YOU!” messages going on, as well as the “clear? Okay, I’ll move up now.” communication.</p>
+<p>Eventually we seemed to figure out, though, that the AI will behave the same way each time (depending on how you play). - So in a session, my co-op partner and I conquered each level by dying a lot, but largely trying the same way each time, so then there’s the foreknowledge of what to look out for when/where. (Not total foresight; and we still died a lot).<br />
+– It’s also a game where you really, <em>really</em> need to have voicechat enabled. The action can be fast-paced and intense; sometimes things go from “ok” to “all dead” within a second or two. There’s certainly a lot of “BEHIND YOU! BEHIND YOU!” messages going on, as well as the “clear? Okay, I’ll move up now.” communication.</p>
 <p>There is a lot of “you kill the guys who are killing me” teamwork going on, due to where you may be positioned. (Your teammate might not be able to see around the corner which you can, for example). And lots of “Ha, saved your ass just then.” moments, too.</p>
 <p>Definitely R6LV2 is a game my co-op buddy and I will be spending much more time in; at least to clear out more of the Terrorist Hunt levels. Maybe we’ll even try replaying the levels with different strategies, and see how much fun that is.</p>
 
@@ -87,7 +153,10 @@
 
 
             </div>
-            <div id="footer">
+
+            <hr style="margin-bottom: 0px; border-top: 2px solid black;" />
+
+            <div id="footer" class="pull-right" style="padding-right: 10px;">
                 Site proudly generated by
                 <a href="http://jaspervdj.be/hakyll">Hakyll</a>
             </div>

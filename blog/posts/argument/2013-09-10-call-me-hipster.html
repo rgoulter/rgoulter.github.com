@@ -1,55 +1,133 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!DOCTYPE HTML>
+<html lang="en">
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>Richard Goulter's Blog - Call me "Hipster"...</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Call me "Hipster"... - Richard Goulter's Blog</title>
+
+        <!-- My (Old) CSS theme -->
         <link rel="stylesheet" type="text/css" href="../../css/default.css" />
+
+        <!--
+            jQuery & jQueryUI
+        -->
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css" />
+
+        <!--
+            Pandoc Style CSS
+            (for syntax highlighted snippets)
+        -->
         <link rel="stylesheet" type="text/css" href="../../css/syntax.css" />
+
+        <!--
+            Bootstrap
+        -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+        <!--
+            Waypoints, and Waypoints-Sticky,
+            so we can do this:
+            http://imakewebthings.com/waypoints/shortcuts/sticky-elements/
+        -->
+        <script src="../../js/jquery.waypoints.min.js"></script>
+        <script src="../../js/sticky.min.js"></script>
+
+        <!--
+            TOCify
+        -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js"></script>
+        <!--
+            Patched TOCify css file.
+            (Don't want fixed `.tocify`).
+        -->
+        <link rel="stylesheet" type="text/css" href="../../css/jquery.tocify.css" />
+
+        <style>
+        .navbar {
+            margin-bottom: 0px;
+        }
+
+        .banner-image {
+            width:100%;
+        }
+
+        .banner {
+            margin-left: 0px;
+            margin-right: 0px;
+        }
+
+        body {
+            background-color: #e2e2e2;
+        }
+
+        #page {
+            padding-left:0;
+            padding-right:0;
+            background-color: #ffffff;
+        }
+        </style>
     </head>
     <body>
-        <div id="page">
-            <div id="header">
-                <div id="logo">
-                    <a href="../../">Richard Goulter's Blog</a>
-                </div>
-                <div id="navigation">
-                    <a href="../../">Home</a>
-                    <a href="../../yi.html">Yi</a>
-                    <a href="../../emacs.html">Emacs</a>
-                    <a href="../../archive.html">Archive</a>
-                </div>
-            <div>
-                <img src="../../images/blog-banner.png" />
-            </div>
+        <div id="page" class="container">
+            <!-- This, with no padding on left/right -->
+            <div class="banner">
+                <nav class="navbar navbar-default">
+    <div class="collapse navbar-collapse">
+        <a class="navbar-brand" href="../../">Richard Goulter's Blog</a>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="../../">Home</a></li>
+            <li><a href="../../yi.html">Yi</a></li>
+            <li><a href="../../emacs.html">Emacs</a></li>
+            <li><a href="../../archive.html">Archive</a></li>
+        </ul>
+    </div>
+</nav>
+
+                <img class="banner-image" src="../../images/blog-banner.png" />
             </div>
 
+            <hr style="margin: 0px; border-top: 5px solid black;" />
 
-            <div id="content">
+            <div id="content" class="container">
                 <h1>Call me "Hipster"...</h1>
-
                 <div class="info">
     Posted on September 10, 2013
     
         by richardgoulter
-    
-</div>
-<div class="info">
+    <br />
     
     Tags: <a href="../../tags/analysis.html">analysis</a>, <a href="../../tags/armchairphilosophy.html">armchairphilosophy</a>, <a href="../../tags/music.html">music</a>, <a href="../../tags/opinion.html">opinion</a>, <a href="../../tags/rant.html">rant</a>
     
 </div>
 
 <p>Maybe I was just in a disagreeable mood, I don’t know.</p>
-<p>Regarding music, I’d tend to reckon it’s the <em>songs</em> that are to be liked (maybe even the styles), not the musicians who play the music themselves.<br />Perhaps I can say that because I listen to music on my computer or iPod or whatever, rather than in-person, live performances.<br />Perhaps I say that since the important thing is what you like about the song, not about how the song has been brought about.<br />– As an example, popular society says that all music from Justin Bieber is awful. This is a dumb thing to say, since, if you happen to find yourself liking a song from Justin Bieber, you’re then in a shitty situation. You’d be better off saying all the music you’ve heard from Bieber is awful.<br />The same surely applies for categorical praise of an artist. (What if they covered a Justin Bieber song?).</p>
-<p>Perhaps that’s why I was slightly disgruntled at a “I love [this particular band who happens to be popular at the moment, of which I’ve never mentioned/said a thing about before]” statement.<br />Everyone loves that band. It’s popular at the moment.<br />Those who don’t like it probably don’t like it because of its popularity. (So hipster).</p>
-<p>But perhaps I could ask.. what’s important isn’t that you <em>like</em> it. Lots of people like that music.<br />What’s more valuable to know is <em>why</em>. Why do <em>you</em> like it?</p>
-<p>I think here “because it’s good” is a crockshit answer.<br />I like music, but how the fuck could I be the judge of whether music is ‘good’ or not? (Let alone that that’s a statement about aesthetics..). I like lots of music which is good, lots which isn’t, and I’m sure there’s good music I don’t like.</p>
-<p>But music is surely an intrinsically emotional thing.<br /><em>Why</em> do you like it?</p>
-<p>I like <a href="http://www.youtube.com/watch?v=lwti4feAA6k">this music</a> because because it’s in Band of Brothers. (Duh). I remember good times watching Band of Brothers with my parents as a teenager.<br />Which mightn’t be a unique reason to like the music, but that’s why <em>I</em> like it; this reason belongs to me since I’m sure others can’t say they like it because they watched it with my parents.</p>
-<p>Less unique, but Kanye West’s Power still evokes that scene from Saints Row 3; and if you look up Bonnie Tyler’s “Holding out for a Hero”, I’d be confident one of the top comments is going to be something like “I’m coming, Shaundi!”.<br />Perhaps I can still say this reason belongs to me since I was the one who enjoyed playing through SR3. (Others did, too, I’m not saying they didn’t. But it’s a good memory for me..).</p>
-<p>Or perhaps I love the music I first heard when I was in high-school ’cause it brings me back to that time (and the nostalgic, good memories of such..).<br />And so if I were to be honest and personal about why I like that music, it’s surely going to be a personal reason.</p>
-<p>Calling bullshit on all the above, maybe, would be that I like the (fun part of) the Tchaikovsky’s 1812 Overture.<br />It’s loud and fun and cannons and shit.<br />Ah, well.</p>
+<p>Regarding music, I’d tend to reckon it’s the <em>songs</em> that are to be liked (maybe even the styles), not the musicians who play the music themselves.<br />
+Perhaps I can say that because I listen to music on my computer or iPod or whatever, rather than in-person, live performances.<br />
+Perhaps I say that since the important thing is what you like about the song, not about how the song has been brought about.<br />
+– As an example, popular society says that all music from Justin Bieber is awful. This is a dumb thing to say, since, if you happen to find yourself liking a song from Justin Bieber, you’re then in a shitty situation. You’d be better off saying all the music you’ve heard from Bieber is awful.<br />
+The same surely applies for categorical praise of an artist. (What if they covered a Justin Bieber song?).</p>
+<p>Perhaps that’s why I was slightly disgruntled at a “I love [this particular band who happens to be popular at the moment, of which I’ve never mentioned/said a thing about before]” statement.<br />
+Everyone loves that band. It’s popular at the moment.<br />
+Those who don’t like it probably don’t like it because of its popularity. (So hipster).</p>
+<p>But perhaps I could ask.. what’s important isn’t that you <em>like</em> it. Lots of people like that music.<br />
+What’s more valuable to know is <em>why</em>. Why do <em>you</em> like it?</p>
+<p>I think here “because it’s good” is a crockshit answer.<br />
+I like music, but how the fuck could I be the judge of whether music is ‘good’ or not? (Let alone that that’s a statement about aesthetics..). I like lots of music which is good, lots which isn’t, and I’m sure there’s good music I don’t like.</p>
+<p>But music is surely an intrinsically emotional thing.<br />
+<em>Why</em> do you like it?</p>
+<p>I like <a href="http://www.youtube.com/watch?v=lwti4feAA6k">this music</a> because because it’s in Band of Brothers. (Duh). I remember good times watching Band of Brothers with my parents as a teenager.<br />
+Which mightn’t be a unique reason to like the music, but that’s why <em>I</em> like it; this reason belongs to me since I’m sure others can’t say they like it because they watched it with my parents.</p>
+<p>Less unique, but Kanye West’s Power still evokes that scene from Saints Row 3; and if you look up Bonnie Tyler’s “Holding out for a Hero”, I’d be confident one of the top comments is going to be something like “I’m coming, Shaundi!”.<br />
+Perhaps I can still say this reason belongs to me since I was the one who enjoyed playing through SR3. (Others did, too, I’m not saying they didn’t. But it’s a good memory for me..).</p>
+<p>Or perhaps I love the music I first heard when I was in high-school ’cause it brings me back to that time (and the nostalgic, good memories of such..).<br />
+And so if I were to be honest and personal about why I like that music, it’s surely going to be a personal reason.</p>
+<p>Calling bullshit on all the above, maybe, would be that I like the (fun part of) the Tchaikovsky’s 1812 Overture.<br />
+It’s loud and fun and cannons and shit.<br />
+Ah, well.</p>
 
 
 <hr />
@@ -92,7 +170,10 @@
 
 
             </div>
-            <div id="footer">
+
+            <hr style="margin-bottom: 0px; border-top: 2px solid black;" />
+
+            <div id="footer" class="pull-right" style="padding-right: 10px;">
                 Site proudly generated by
                 <a href="http://jaspervdj.be/hakyll">Hakyll</a>
             </div>

@@ -1,47 +1,112 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!DOCTYPE HTML>
+<html lang="en">
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>Richard Goulter's Blog - Novice Struggles with Haskell Syntax</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Novice Struggles with Haskell Syntax - Richard Goulter's Blog</title>
+
+        <!-- My (Old) CSS theme -->
         <link rel="stylesheet" type="text/css" href="../../css/default.css" />
+
+        <!--
+            jQuery & jQueryUI
+        -->
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css" />
+
+        <!--
+            Pandoc Style CSS
+            (for syntax highlighted snippets)
+        -->
         <link rel="stylesheet" type="text/css" href="../../css/syntax.css" />
+
+        <!--
+            Bootstrap
+        -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+        <!--
+            Waypoints, and Waypoints-Sticky,
+            so we can do this:
+            http://imakewebthings.com/waypoints/shortcuts/sticky-elements/
+        -->
+        <script src="../../js/jquery.waypoints.min.js"></script>
+        <script src="../../js/sticky.min.js"></script>
+
+        <!--
+            TOCify
+        -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js"></script>
+        <!--
+            Patched TOCify css file.
+            (Don't want fixed `.tocify`).
+        -->
+        <link rel="stylesheet" type="text/css" href="../../css/jquery.tocify.css" />
+
+        <style>
+        .navbar {
+            margin-bottom: 0px;
+        }
+
+        .banner-image {
+            width:100%;
+        }
+
+        .banner {
+            margin-left: 0px;
+            margin-right: 0px;
+        }
+
+        body {
+            background-color: #e2e2e2;
+        }
+
+        #page {
+            padding-left:0;
+            padding-right:0;
+            background-color: #ffffff;
+        }
+        </style>
     </head>
     <body>
-        <div id="page">
-            <div id="header">
-                <div id="logo">
-                    <a href="../../">Richard Goulter's Blog</a>
-                </div>
-                <div id="navigation">
-                    <a href="../../">Home</a>
-                    <a href="../../yi.html">Yi</a>
-                    <a href="../../emacs.html">Emacs</a>
-                    <a href="../../archive.html">Archive</a>
-                </div>
-            <div>
-                <img src="../../images/blog-banner.png" />
-            </div>
+        <div id="page" class="container">
+            <!-- This, with no padding on left/right -->
+            <div class="banner">
+                <nav class="navbar navbar-default">
+    <div class="collapse navbar-collapse">
+        <a class="navbar-brand" href="../../">Richard Goulter's Blog</a>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="../../">Home</a></li>
+            <li><a href="../../yi.html">Yi</a></li>
+            <li><a href="../../emacs.html">Emacs</a></li>
+            <li><a href="../../archive.html">Archive</a></li>
+        </ul>
+    </div>
+</nav>
+
+                <img class="banner-image" src="../../images/blog-banner.png" />
             </div>
 
+            <hr style="margin: 0px; border-top: 5px solid black;" />
 
-            <div id="content">
+            <div id="content" class="container">
                 <h1>Novice Struggles with Haskell Syntax</h1>
-
                 <div class="info">
     Posted on July  3, 2014
     
         by Richard Goulter
-    
-</div>
-<div class="info">
+    <br />
     
     Tags: <a href="../../tags/haskell.html">haskell</a>, <a href="../../tags/hakyll.html">hakyll</a>
     
 </div>
 
 <p>I’ve been trying to augment my Hakyll Site with “next post”, “previous post” links in a post. There’s a post in <a href="https://groups.google.com/forum/#!topic/hakyll/WYPjtWMm9ZU">Hakyll Google group</a> asking for the same thing. (Maybe the majority of Hakyll owners just “adapt” from other Hakyll sites…).</p>
-<p>I’ve run into trouble trying to do this. Hakyll.Web.Template.Context <a href="http://jaspervdj.be/hakyll/reference/src/Hakyll-Web-Template-Context.html">source</a> was a useful start.<br />But the trouble I ran into due to lack of experience, or understanding, of some (fundamental) Haskell concepts.</p>
+<p>I’ve run into trouble trying to do this. Hakyll.Web.Template.Context <a href="http://jaspervdj.be/hakyll/reference/src/Hakyll-Web-Template-Context.html">source</a> was a useful start.<br />
+But the trouble I ran into due to lack of experience, or understanding, of some (fundamental) Haskell concepts.</p>
 <p>Ugh.</p>
 <p>In this excerpt, <code>postContext</code> is out of scope:</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">    match postsGlob <span class="fu">$</span> <span class="kw">do</span>
@@ -60,7 +125,8 @@
             <span class="fu">&gt;&gt;=</span> loadAndApplyTemplate <span class="st">&quot;templates/post.html&quot;</span>    postContext
             <span class="fu">&gt;&gt;=</span> loadAndApplyTemplate <span class="st">&quot;templates/default.html&quot;</span> postContext
             <span class="fu">&gt;&gt;=</span> relativizeUrls</code></pre></div>
-<p>(Yeah, I know, it’s a heinously long line).<br />Whereas in this excerpt, it’s in scope:</p>
+<p>(Yeah, I know, it’s a heinously long line).<br />
+Whereas in this excerpt, it’s in scope:</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">    match postsGlob <span class="fu">$</span> <span class="kw">do</span>
         route <span class="fu">$</span> setExtension <span class="st">&quot;html&quot;</span>
         compile <span class="fu">$</span> <span class="kw">do</span> 
@@ -77,11 +143,13 @@
                 <span class="fu">&gt;&gt;=</span> loadAndApplyTemplate <span class="st">&quot;templates/post.html&quot;</span>    postContext
                 <span class="fu">&gt;&gt;=</span> loadAndApplyTemplate <span class="st">&quot;templates/default.html&quot;</span> postContext
                 <span class="fu">&gt;&gt;=</span> relativizeUrls</code></pre></div>
-<p>I guess this is why people don’t like Python or other non-C syntaxes where indentation matters.<br />I was able to figure that out, and considering this excerpt:</p>
+<p>I guess this is why people don’t like Python or other non-C syntaxes where indentation matters.<br />
+I was able to figure that out, and considering this excerpt:</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">    urlOfPost ::</span> <span class="dt">Item</span> <span class="dt">String</span> <span class="ot">-&gt;</span> <span class="dt">Compiler</span> <span class="dt">String</span>
     urlOfPost <span class="fu">=</span>
         fmap (maybe empty <span class="fu">$</span> toUrl) <span class="fu">.</span> getRoute <span class="fu">.</span> itemIdentifier</code></pre></div>
-<p>But <code>urlsOfPosts</code> (used in above excerpt) has type <code>urlsOfPosts :: [Item String] -&gt; Compiler [String]</code>.<br />While it’s possible to understand <code>urlOfPost</code> by looking at the documentation of each part, it’s not clear to me the implementation of <code>urlsOfPosts</code>.</p>
+<p>But <code>urlsOfPosts</code> (used in above excerpt) has type <code>urlsOfPosts :: [Item String] -&gt; Compiler [String]</code>.<br />
+While it’s possible to understand <code>urlOfPost</code> by looking at the documentation of each part, it’s not clear to me the implementation of <code>urlsOfPosts</code>.</p>
 
 
 <hr />
@@ -124,7 +192,10 @@
 
 
             </div>
-            <div id="footer">
+
+            <hr style="margin-bottom: 0px; border-top: 2px solid black;" />
+
+            <div id="footer" class="pull-right" style="padding-right: 10px;">
                 Site proudly generated by
                 <a href="http://jaspervdj.be/hakyll">Hakyll</a>
             </div>

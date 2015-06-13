@@ -1,40 +1,104 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!DOCTYPE HTML>
+<html lang="en">
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>Richard Goulter's Blog - Installing Haskell Platform for Linux Mint 16</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Installing Haskell Platform for Linux Mint 16 - Richard Goulter's Blog</title>
+
+        <!-- My (Old) CSS theme -->
         <link rel="stylesheet" type="text/css" href="../../css/default.css" />
+
+        <!--
+            jQuery & jQueryUI
+        -->
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css" />
+
+        <!--
+            Pandoc Style CSS
+            (for syntax highlighted snippets)
+        -->
         <link rel="stylesheet" type="text/css" href="../../css/syntax.css" />
+
+        <!--
+            Bootstrap
+        -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+        <!--
+            Waypoints, and Waypoints-Sticky,
+            so we can do this:
+            http://imakewebthings.com/waypoints/shortcuts/sticky-elements/
+        -->
+        <script src="../../js/jquery.waypoints.min.js"></script>
+        <script src="../../js/sticky.min.js"></script>
+
+        <!--
+            TOCify
+        -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js"></script>
+        <!--
+            Patched TOCify css file.
+            (Don't want fixed `.tocify`).
+        -->
+        <link rel="stylesheet" type="text/css" href="../../css/jquery.tocify.css" />
+
+        <style>
+        .navbar {
+            margin-bottom: 0px;
+        }
+
+        .banner-image {
+            width:100%;
+        }
+
+        .banner {
+            margin-left: 0px;
+            margin-right: 0px;
+        }
+
+        body {
+            background-color: #e2e2e2;
+        }
+
+        #page {
+            padding-left:0;
+            padding-right:0;
+            background-color: #ffffff;
+        }
+        </style>
     </head>
     <body>
-        <div id="page">
-            <div id="header">
-                <div id="logo">
-                    <a href="../../">Richard Goulter's Blog</a>
-                </div>
-                <div id="navigation">
-                    <a href="../../">Home</a>
-                    <a href="../../yi.html">Yi</a>
-                    <a href="../../emacs.html">Emacs</a>
-                    <a href="../../archive.html">Archive</a>
-                </div>
-            <div>
-                <img src="../../images/blog-banner.png" />
-            </div>
+        <div id="page" class="container">
+            <!-- This, with no padding on left/right -->
+            <div class="banner">
+                <nav class="navbar navbar-default">
+    <div class="collapse navbar-collapse">
+        <a class="navbar-brand" href="../../">Richard Goulter's Blog</a>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="../../">Home</a></li>
+            <li><a href="../../yi.html">Yi</a></li>
+            <li><a href="../../emacs.html">Emacs</a></li>
+            <li><a href="../../archive.html">Archive</a></li>
+        </ul>
+    </div>
+</nav>
+
+                <img class="banner-image" src="../../images/blog-banner.png" />
             </div>
 
+            <hr style="margin: 0px; border-top: 5px solid black;" />
 
-            <div id="content">
+            <div id="content" class="container">
                 <h1>Installing Haskell Platform for Linux Mint 16</h1>
-
                 <div class="info">
     Posted on January  6, 2014
     
         by richardgoulter
-    
-</div>
-<div class="info">
+    <br />
     
     Tags: <a href="../../tags/haskell.html">haskell</a>, <a href="../../tags/linux.html">linux</a>
     
@@ -43,12 +107,22 @@
 <p>Computers are great when they work, frustrating when they don’t. – Probably a better indication of how “hard” something is to use isn’t just how simple/complex it may be when all things go right, but what obstacles there are when things don’t, and how easy it is to get around these.</p>
 <p>Installing the Haskell Platform, oddly, was much easier on Windows than on Linux Mint. (Although apparently folk point out that Mint isn’t really a developer OS. Whatever).</p>
 <p>Linux Mint lacks a “haskell-platform” package, which means installing the haskell-platform is harder than I’m used to as a Linux user.</p>
-<p>Google is my friend.<br />The following links were useful for me:<br /><a href="http://askubuntu.com/questions/286764/how-to-install-haskell-platform-for-ubuntu-13-04" class="uri">http://askubuntu.com/questions/286764/how-to-install-haskell-platform-for-ubuntu-13-04</a> <a href="http://stackoverflow.com/questions/13057254/how-to-fix-error-2-when-trying-to-make-haskell-platform" class="uri">http://stackoverflow.com/questions/13057254/how-to-fix-error-2-when-trying-to-make-haskell-platform</a></p>
+<p>Google is my friend.<br />
+The following links were useful for me:<br />
+<a href="http://askubuntu.com/questions/286764/how-to-install-haskell-platform-for-ubuntu-13-04" class="uri">http://askubuntu.com/questions/286764/how-to-install-haskell-platform-for-ubuntu-13-04</a> <a href="http://stackoverflow.com/questions/13057254/how-to-fix-error-2-when-trying-to-make-haskell-platform" class="uri">http://stackoverflow.com/questions/13057254/how-to-fix-error-2-when-trying-to-make-haskell-platform</a></p>
 <p>Things I’d note, from a fresh install of Linux Mint 16 (Petra):</p>
 <ul>
-<li><p>To compile the haskell-platform from sources, (well, 2013.2.0.0), you need to have GHC 7.6.3.<br />Linux Mint has this already in its software repository. :-)<br />“sudo apt-get install ghc” should be enough, but check the version of course.</p></li>
-<li><p>Even with the right GHC version, you need a bunch of other dependencies before you can do the “./configure” step to build the haskell-platform.<br />As the first link above mentions,<br /><code>sudo apt-get install libgl1-mesa-dev libglc-dev freeglut3-dev libedit-dev libglw1-mesa libglw1-mesa-dev</code><br />Should be enough for the configure step. (You could otherwise try the “try configuire, install whatever’s missing” thing, too).</p></li>
-<li><p>Following the above, I then ran into Error 2 on the “make” step, exactly the same as the second link above.<br />The accepted answer is useless, since there is no “haskell-platform” package; but the second answer which suggested:<br /><code>sudo apt-get install ghc*-prof</code><br />worked for me. :-)</p></li>
+<li><p>To compile the haskell-platform from sources, (well, 2013.2.0.0), you need to have GHC 7.6.3.<br />
+Linux Mint has this already in its software repository. :-)<br />
+“sudo apt-get install ghc” should be enough, but check the version of course.</p></li>
+<li><p>Even with the right GHC version, you need a bunch of other dependencies before you can do the “./configure” step to build the haskell-platform.<br />
+As the first link above mentions,<br />
+<code>sudo apt-get install libgl1-mesa-dev libglc-dev freeglut3-dev libedit-dev libglw1-mesa libglw1-mesa-dev</code><br />
+Should be enough for the configure step. (You could otherwise try the “try configuire, install whatever’s missing” thing, too).</p></li>
+<li><p>Following the above, I then ran into Error 2 on the “make” step, exactly the same as the second link above.<br />
+The accepted answer is useless, since there is no “haskell-platform” package; but the second answer which suggested:<br />
+<code>sudo apt-get install ghc*-prof</code><br />
+worked for me. :-)</p></li>
 </ul>
 <p>Did kinda suck running into difficulties, but it wasn’t too bad I suppose.</p>
 
@@ -93,7 +167,10 @@
 
 
             </div>
-            <div id="footer">
+
+            <hr style="margin-bottom: 0px; border-top: 2px solid black;" />
+
+            <div id="footer" class="pull-right" style="padding-right: 10px;">
                 Site proudly generated by
                 <a href="http://jaspervdj.be/hakyll">Hakyll</a>
             </div>

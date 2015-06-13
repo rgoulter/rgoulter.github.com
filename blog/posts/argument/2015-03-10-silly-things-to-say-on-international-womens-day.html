@@ -1,40 +1,104 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!DOCTYPE HTML>
+<html lang="en">
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>Richard Goulter's Blog - Silly Things to Say on International Women's Day</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Silly Things to Say on International Women's Day - Richard Goulter's Blog</title>
+
+        <!-- My (Old) CSS theme -->
         <link rel="stylesheet" type="text/css" href="../../css/default.css" />
+
+        <!--
+            jQuery & jQueryUI
+        -->
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css" />
+
+        <!--
+            Pandoc Style CSS
+            (for syntax highlighted snippets)
+        -->
         <link rel="stylesheet" type="text/css" href="../../css/syntax.css" />
+
+        <!--
+            Bootstrap
+        -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+        <!--
+            Waypoints, and Waypoints-Sticky,
+            so we can do this:
+            http://imakewebthings.com/waypoints/shortcuts/sticky-elements/
+        -->
+        <script src="../../js/jquery.waypoints.min.js"></script>
+        <script src="../../js/sticky.min.js"></script>
+
+        <!--
+            TOCify
+        -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js"></script>
+        <!--
+            Patched TOCify css file.
+            (Don't want fixed `.tocify`).
+        -->
+        <link rel="stylesheet" type="text/css" href="../../css/jquery.tocify.css" />
+
+        <style>
+        .navbar {
+            margin-bottom: 0px;
+        }
+
+        .banner-image {
+            width:100%;
+        }
+
+        .banner {
+            margin-left: 0px;
+            margin-right: 0px;
+        }
+
+        body {
+            background-color: #e2e2e2;
+        }
+
+        #page {
+            padding-left:0;
+            padding-right:0;
+            background-color: #ffffff;
+        }
+        </style>
     </head>
     <body>
-        <div id="page">
-            <div id="header">
-                <div id="logo">
-                    <a href="../../">Richard Goulter's Blog</a>
-                </div>
-                <div id="navigation">
-                    <a href="../../">Home</a>
-                    <a href="../../yi.html">Yi</a>
-                    <a href="../../emacs.html">Emacs</a>
-                    <a href="../../archive.html">Archive</a>
-                </div>
-            <div>
-                <img src="../../images/blog-banner.png" />
-            </div>
+        <div id="page" class="container">
+            <!-- This, with no padding on left/right -->
+            <div class="banner">
+                <nav class="navbar navbar-default">
+    <div class="collapse navbar-collapse">
+        <a class="navbar-brand" href="../../">Richard Goulter's Blog</a>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="../../">Home</a></li>
+            <li><a href="../../yi.html">Yi</a></li>
+            <li><a href="../../emacs.html">Emacs</a></li>
+            <li><a href="../../archive.html">Archive</a></li>
+        </ul>
+    </div>
+</nav>
+
+                <img class="banner-image" src="../../images/blog-banner.png" />
             </div>
 
+            <hr style="margin: 0px; border-top: 5px solid black;" />
 
-            <div id="content">
+            <div id="content" class="container">
                 <h1>Silly Things to Say on International Women's Day</h1>
-
                 <div class="info">
     Posted on March 10, 2015
     
         by Richard Goulter
-    
-</div>
-<div class="info">
+    <br />
     
     Tags: <a href="../../tags/feminism.html">feminism</a>
     
@@ -45,13 +109,17 @@
 <blockquote>
 <p>When is it ever International Men’s Day?</p>
 </blockquote>
-<p>This is a stupid thing to say.<br />Do you want an International Men’s Day? Grow up, I’d reckon. Saying “What about International Men’s day?” on International Women’s Day, when sure as shit you’d not have given it a spare thought any other day of the year, is like being the brother who wants to play with the toys only because his little sister wanted to.</p>
-<p>It’s a notch below <strong>“Why do we need International Women’s Day?”</strong> as a question, which is still not as good as <strong>“What’s International Women’s Day about, anyway?”</strong>.<br />Saying silly things, apparently. Also:</p>
+<p>This is a stupid thing to say.<br />
+Do you want an International Men’s Day? Grow up, I’d reckon. Saying “What about International Men’s day?” on International Women’s Day, when sure as shit you’d not have given it a spare thought any other day of the year, is like being the brother who wants to play with the toys only because his little sister wanted to.</p>
+<p>It’s a notch below <strong>“Why do we need International Women’s Day?”</strong> as a question, which is still not as good as <strong>“What’s International Women’s Day about, anyway?”</strong>.<br />
+Saying silly things, apparently. Also:</p>
 <blockquote>
 <p>Men’s day is every day!</p>
 </blockquote>
 <p>As the just-as-common, just-as-stupid response to above question.</p>
-<p>The assumption is, I guess, “you men are privileged!”.<br />– It’s <strong>not</strong> a stupid thing to remark that men have privilege, and have opportunities that others don’t have.<br />– It becomes stupid when you pretend that privilege is a one-dimensional continuum. Or, rather, that anyone who has “privilege” doesn’t also face obstacles.</p>
+<p>The assumption is, I guess, “you men are privileged!”.<br />
+– It’s <strong>not</strong> a stupid thing to remark that men have privilege, and have opportunities that others don’t have.<br />
+– It becomes stupid when you pretend that privilege is a one-dimensional continuum. Or, rather, that anyone who has “privilege” doesn’t also face obstacles.</p>
 <p>I mean, being a white man doesn’t look like <a href="https://www.youtube.com/watch?v=EC21NF5rbSk">this, from FunnyOrDie</a>. (As one YouTube commenter writes “I can’t tell if FOD is being run by social justice warriors or making fun of them.”).</p>
 
 
@@ -95,7 +163,10 @@
 
 
             </div>
-            <div id="footer">
+
+            <hr style="margin-bottom: 0px; border-top: 2px solid black;" />
+
+            <div id="footer" class="pull-right" style="padding-right: 10px;">
                 Site proudly generated by
                 <a href="http://jaspervdj.be/hakyll">Hakyll</a>
             </div>

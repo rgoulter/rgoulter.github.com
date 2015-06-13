@@ -1,56 +1,133 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!DOCTYPE HTML>
+<html lang="en">
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>Richard Goulter's Blog - I Could Solve This in Five Minutes</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>I Could Solve This in Five Minutes - Richard Goulter's Blog</title>
+
+        <!-- My (Old) CSS theme -->
         <link rel="stylesheet" type="text/css" href="../../css/default.css" />
+
+        <!--
+            jQuery & jQueryUI
+        -->
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css" />
+
+        <!--
+            Pandoc Style CSS
+            (for syntax highlighted snippets)
+        -->
         <link rel="stylesheet" type="text/css" href="../../css/syntax.css" />
+
+        <!--
+            Bootstrap
+        -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+        <!--
+            Waypoints, and Waypoints-Sticky,
+            so we can do this:
+            http://imakewebthings.com/waypoints/shortcuts/sticky-elements/
+        -->
+        <script src="../../js/jquery.waypoints.min.js"></script>
+        <script src="../../js/sticky.min.js"></script>
+
+        <!--
+            TOCify
+        -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js"></script>
+        <!--
+            Patched TOCify css file.
+            (Don't want fixed `.tocify`).
+        -->
+        <link rel="stylesheet" type="text/css" href="../../css/jquery.tocify.css" />
+
+        <style>
+        .navbar {
+            margin-bottom: 0px;
+        }
+
+        .banner-image {
+            width:100%;
+        }
+
+        .banner {
+            margin-left: 0px;
+            margin-right: 0px;
+        }
+
+        body {
+            background-color: #e2e2e2;
+        }
+
+        #page {
+            padding-left:0;
+            padding-right:0;
+            background-color: #ffffff;
+        }
+        </style>
     </head>
     <body>
-        <div id="page">
-            <div id="header">
-                <div id="logo">
-                    <a href="../../">Richard Goulter's Blog</a>
-                </div>
-                <div id="navigation">
-                    <a href="../../">Home</a>
-                    <a href="../../yi.html">Yi</a>
-                    <a href="../../emacs.html">Emacs</a>
-                    <a href="../../archive.html">Archive</a>
-                </div>
-            <div>
-                <img src="../../images/blog-banner.png" />
-            </div>
+        <div id="page" class="container">
+            <!-- This, with no padding on left/right -->
+            <div class="banner">
+                <nav class="navbar navbar-default">
+    <div class="collapse navbar-collapse">
+        <a class="navbar-brand" href="../../">Richard Goulter's Blog</a>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="../../">Home</a></li>
+            <li><a href="../../yi.html">Yi</a></li>
+            <li><a href="../../emacs.html">Emacs</a></li>
+            <li><a href="../../archive.html">Archive</a></li>
+        </ul>
+    </div>
+</nav>
+
+                <img class="banner-image" src="../../images/blog-banner.png" />
             </div>
 
+            <hr style="margin: 0px; border-top: 5px solid black;" />
 
-            <div id="content">
+            <div id="content" class="container">
                 <h1>I Could Solve This in Five Minutes</h1>
-
                 <div class="info">
     Posted on April 28, 2015
     
         by Richard Goulter
-    
-</div>
-<div class="info">
+    <br />
     
     Tags: <a href="../../tags/romance.html">romance</a>, <a href="../../tags/books.html">books</a>
     
 </div>
 
-<p>So, at the moment I’m sludging through Sherry Thomas’ latest, &amp; first Contemporary, “The One in my Heart”.<br />There’s lots to not-enjoy about it. (Like the character lamenting the lack of timeless marriage, at the same time as looking at her phone during lunch with her partner). Whatever. The bigger issue for the Romance Novel here is that there’s zero (internal) conflict between the characters: the hero is utterly perfect, and utterly in love with the heroine; has been for ages. And the heroine is utterly perfect, and utterly in love with the hero; has been for ages. <strong>Sighhhhh.</strong></p>
-<p>So. Romance Novel, but main characters aren’t great. Gotcha.<br />There has to be at least <strong>some</strong> conflict*, though: the hero wants to reconcile with his parents (minus having to say sorry. <strong>Sighhhhhh.</strong>). The heroine wants a relationship with the hero. So, naturally, doesn’t want a fake-relationship with the hero. Because. <strong>Sighhhhhhhhhhh.</strong>.<br />– The thing is, and the narrative even admits, both of these problems could be solved in five minutes. If the hero just talked to his parents. Or the heroine just said to the hero, (who obviously, completely obviously digs her) that she likes him.<br />And because it can be solved so quickly, it’s <strong>really</strong> hard to get behind the characters. It’s just really silly.</p>
+<p>So, at the moment I’m sludging through Sherry Thomas’ latest, &amp; first Contemporary, “The One in my Heart”.<br />
+There’s lots to not-enjoy about it. (Like the character lamenting the lack of timeless marriage, at the same time as looking at her phone during lunch with her partner). Whatever. The bigger issue for the Romance Novel here is that there’s zero (internal) conflict between the characters: the hero is utterly perfect, and utterly in love with the heroine; has been for ages. And the heroine is utterly perfect, and utterly in love with the hero; has been for ages. <strong>Sighhhhh.</strong></p>
+<p>So. Romance Novel, but main characters aren’t great. Gotcha.<br />
+There has to be at least <strong>some</strong> conflict*, though: the hero wants to reconcile with his parents (minus having to say sorry. <strong>Sighhhhhh.</strong>). The heroine wants a relationship with the hero. So, naturally, doesn’t want a fake-relationship with the hero. Because. <strong>Sighhhhhhhhhhh.</strong>.<br />
+– The thing is, and the narrative even admits, both of these problems could be solved in five minutes. If the hero just talked to his parents. Or the heroine just said to the hero, (who obviously, completely obviously digs her) that she likes him.<br />
+And because it can be solved so quickly, it’s <strong>really</strong> hard to get behind the characters. It’s just really silly.</p>
 <p>The fun thing is, though, like: with Romance Novels, you know it’s going to be a “Happily Ever After”. It doesn’t matter that you know (roughly) what the ending is going to be, it’s more interesting how the conflict is going to be resolved.</p>
 <p>Rather, if the problem can be solved in five minutes, then the pages between the establishment of the narrative, and the climax/conclusion of the book, are really just words filling in space. – <strong>Which can be fine.</strong> But it’s usually better to distract the reader, throw them off the scent that the conflict isn’t hard.</p>
 <p>(Come to think of it, “deus ex machina” is kindof the opposite; a super-hard problem is established, but ‘solved’ in a super-short amount of time..).</p>
-<p>It’s not just Romance Novels which are guilty of this, as such.<br />SciFi/Fantasy can totally play the same game, too.<br />RASalvatore’s stories were notorious at this: early on, the narrative shows some cool bag-of-tricks which the bad guy has. e.g. the ability to teleport someone in order to assassinate them. Like. If you can do that, you can kill the ‘good guy’ in five minutes. Of course there are “rules” to it. But when the narrator arbitrarily awards convenience magic to good/bad guys.. the plot can hardly be more than 5 minutes from resolution at any point in time.<br />– Perhaps the best example would be “Siege of Darkness”, where during a relentless siege the ‘bad guys’ just happen to pack up &amp; leave.</p>
+<p>It’s not just Romance Novels which are guilty of this, as such.<br />
+SciFi/Fantasy can totally play the same game, too.<br />
+RASalvatore’s stories were notorious at this: early on, the narrative shows some cool bag-of-tricks which the bad guy has. e.g. the ability to teleport someone in order to assassinate them. Like. If you can do that, you can kill the ‘good guy’ in five minutes. Of course there are “rules” to it. But when the narrator arbitrarily awards convenience magic to good/bad guys.. the plot can hardly be more than 5 minutes from resolution at any point in time.<br />
+– Perhaps the best example would be “Siege of Darkness”, where during a relentless siege the ‘bad guys’ just happen to pack up &amp; leave.</p>
 <p>In terms of “pages filling space”, Salvatore’s writing was fairly solid here: the heroes are tired, but have to press on. Then some more fighting, so the heroes are even more tired, but they have to press on even more urgently, but then there’s even more fighting, etc. etc.</p>
-<p>– But considering stories I’ve liked:<br />“Seducing Mr Knightly”: I love this book so much. In terms of the core plot: the body of the story is filled with flirtations between Annabelle and Knightly. It might be possible to trim this down to a skeleton of around three key encounters. Maybe. But since so much of the story is about Annabelle’s growth/transformation, it’s never 5-minutes away from the end.<br />“Devil in Winter”: There’s just so much character development/growth going on here, that it’s not 5-minutes-then-done.<br />“High Fidelity”: This book isn’t really about ‘plot’, so much as a collection of biographic-esque monologues, for different situations.</p>
+<p>– But considering stories I’ve liked:<br />
+“Seducing Mr Knightly”: I love this book so much. In terms of the core plot: the body of the story is filled with flirtations between Annabelle and Knightly. It might be possible to trim this down to a skeleton of around three key encounters. Maybe. But since so much of the story is about Annabelle’s growth/transformation, it’s never 5-minutes away from the end.<br />
+“Devil in Winter”: There’s just so much character development/growth going on here, that it’s not 5-minutes-then-done.<br />
+“High Fidelity”: This book isn’t really about ‘plot’, so much as a collection of biographic-esque monologues, for different situations.</p>
 <p>– So. Conflicts which can be solved “in 5 minutes” aren’t inherently bad. But it takes a lot of effort, and a lot of talent to maintain a plotline through a holding place, waiting for the end of the story. (Oddly enough, reader is probably also waiting for things to progress..).</p>
 <hr />
-<p>*Ideas to make this pairing more interesting: The heroine is a materials scientist. The Hero is a doctor/surgeon. It’s okay for them to be a “love interest” in an “aliens invading the city, these two have to find a counter-weapon” plot. Explosions, excitement!<br />Or, sticking to the romance-novel genre: give points of tension between the character, which can’t be solved quickly: maybe the hero is with a girl. Not a girl who’s vain/materialistic/morally-bad, etc., but a girl who would make a good HEA. <strong>That</strong> would make the story more interesting.<br />Or perhaps the hero/heroine disagree on things which are important to them: maybe he finds his work important, she finds his time important (or vice versa).<br />etc. but the given conflict is “not really a problem”. :/</p>
+<p>*Ideas to make this pairing more interesting: The heroine is a materials scientist. The Hero is a doctor/surgeon. It’s okay for them to be a “love interest” in an “aliens invading the city, these two have to find a counter-weapon” plot. Explosions, excitement!<br />
+Or, sticking to the romance-novel genre: give points of tension between the character, which can’t be solved quickly: maybe the hero is with a girl. Not a girl who’s vain/materialistic/morally-bad, etc., but a girl who would make a good HEA. <strong>That</strong> would make the story more interesting.<br />
+Or perhaps the hero/heroine disagree on things which are important to them: maybe he finds his work important, she finds his time important (or vice versa).<br />
+etc. but the given conflict is “not really a problem”. :/</p>
 
 
 <hr />
@@ -93,7 +170,10 @@
 
 
             </div>
-            <div id="footer">
+
+            <hr style="margin-bottom: 0px; border-top: 2px solid black;" />
+
+            <div id="footer" class="pull-right" style="padding-right: 10px;">
                 Site proudly generated by
                 <a href="http://jaspervdj.be/hakyll">Hakyll</a>
             </div>

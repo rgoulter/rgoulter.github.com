@@ -1,40 +1,104 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!DOCTYPE HTML>
+<html lang="en">
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>Richard Goulter's Blog - Notes From Some Examination of Some Yi Configs</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Notes From Some Examination of Some Yi Configs - Richard Goulter's Blog</title>
+
+        <!-- My (Old) CSS theme -->
         <link rel="stylesheet" type="text/css" href="../../css/default.css" />
+
+        <!--
+            jQuery & jQueryUI
+        -->
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css" />
+
+        <!--
+            Pandoc Style CSS
+            (for syntax highlighted snippets)
+        -->
         <link rel="stylesheet" type="text/css" href="../../css/syntax.css" />
+
+        <!--
+            Bootstrap
+        -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+        <!--
+            Waypoints, and Waypoints-Sticky,
+            so we can do this:
+            http://imakewebthings.com/waypoints/shortcuts/sticky-elements/
+        -->
+        <script src="../../js/jquery.waypoints.min.js"></script>
+        <script src="../../js/sticky.min.js"></script>
+
+        <!--
+            TOCify
+        -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js"></script>
+        <!--
+            Patched TOCify css file.
+            (Don't want fixed `.tocify`).
+        -->
+        <link rel="stylesheet" type="text/css" href="../../css/jquery.tocify.css" />
+
+        <style>
+        .navbar {
+            margin-bottom: 0px;
+        }
+
+        .banner-image {
+            width:100%;
+        }
+
+        .banner {
+            margin-left: 0px;
+            margin-right: 0px;
+        }
+
+        body {
+            background-color: #e2e2e2;
+        }
+
+        #page {
+            padding-left:0;
+            padding-right:0;
+            background-color: #ffffff;
+        }
+        </style>
     </head>
     <body>
-        <div id="page">
-            <div id="header">
-                <div id="logo">
-                    <a href="../../">Richard Goulter's Blog</a>
-                </div>
-                <div id="navigation">
-                    <a href="../../">Home</a>
-                    <a href="../../yi.html">Yi</a>
-                    <a href="../../emacs.html">Emacs</a>
-                    <a href="../../archive.html">Archive</a>
-                </div>
-            <div>
-                <img src="../../images/blog-banner.png" />
-            </div>
+        <div id="page" class="container">
+            <!-- This, with no padding on left/right -->
+            <div class="banner">
+                <nav class="navbar navbar-default">
+    <div class="collapse navbar-collapse">
+        <a class="navbar-brand" href="../../">Richard Goulter's Blog</a>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="../../">Home</a></li>
+            <li><a href="../../yi.html">Yi</a></li>
+            <li><a href="../../emacs.html">Emacs</a></li>
+            <li><a href="../../archive.html">Archive</a></li>
+        </ul>
+    </div>
+</nav>
+
+                <img class="banner-image" src="../../images/blog-banner.png" />
             </div>
 
+            <hr style="margin: 0px; border-top: 5px solid black;" />
 
-            <div id="content">
+            <div id="content" class="container">
                 <h1>Notes From Some Examination of Some Yi Configs</h1>
-
                 <div class="info">
     Posted on July  7, 2014
     
         by Richard Goulter
-    
-</div>
-<div class="info">
+    <br />
     
     Tags: <a href="../../tags/haskell.html">haskell</a>, <a href="../../tags/yi.html">yi</a>
     
@@ -64,14 +128,23 @@
       }</code></pre></div>
 <p><em>Note:</em></p>
 <ul>
-<li><code>myVimKeymap</code> has type <code>KeymapSet</code>.<br /></li>
-<li>The <code>override</code> thing is due to Yi’s <code>Data.Proto</code>, which isn’t exposed in Hackage. (<code>KeymapSet</code> has record entries <code>topKeymap</code> and <code>insertKeymap</code>, so I’m not sure if <code>v_top_level</code> and <code>v_ins_char</code> is archaic).<br /></li>
-<li><code>choice</code> is of type <code>MonadInteract m w e =&gt; [m a] -&gt; m a</code>, as defined in <code>Yi.Interact</code>.<br /></li>
-<li>The operator <code>(||&gt;)</code> is of type <code>MonadInteract f w e =&gt; f a -&gt; f a -&gt; f a</code> in <code>Yi.Interact</code>.<br /></li>
-<li>The operator <code>(?&gt;&gt;!)</code> is of type<br /> <code>(MonadInteract m Action Event, YiAction a x, Show x) =&gt; Event -&gt; a -&gt; m ()</code><br /> in <code>Yi.Keymap.Keys</code>.<br /></li>
+<li><code>myVimKeymap</code> has type <code>KeymapSet</code>.<br />
+</li>
+<li>The <code>override</code> thing is due to Yi’s <code>Data.Proto</code>, which isn’t exposed in Hackage. (<code>KeymapSet</code> has record entries <code>topKeymap</code> and <code>insertKeymap</code>, so I’m not sure if <code>v_top_level</code> and <code>v_ins_char</code> is archaic).<br />
+</li>
+<li><code>choice</code> is of type <code>MonadInteract m w e =&gt; [m a] -&gt; m a</code>, as defined in <code>Yi.Interact</code>.<br />
+</li>
+<li>The operator <code>(||&gt;)</code> is of type <code>MonadInteract f w e =&gt; f a -&gt; f a -&gt; f a</code> in <code>Yi.Interact</code>.<br />
+</li>
+<li>The operator <code>(?&gt;&gt;!)</code> is of type<br />
+ <code>(MonadInteract m Action Event, YiAction a x, Show x) =&gt; Event -&gt; a -&gt; m ()</code><br />
+ in <code>Yi.Keymap.Keys</code>.<br />
+</li>
 <li>(And, if you’re that novice at Haskell, <code>(&lt;|&gt;)</code> is to do with <code>Alternative</code>).</li>
 </ul>
-<p>It seems Jeff has mapped <code>';'</code> to do something like <code>:noh</code> in Vim. (<a href="https://github.com/yi-editor/yi/blob/fea9dc8a9fc39ccb3bfa389c0e395383602710b6/yi/src/library/Yi/Search.hs#L82"><code>resetRegexE</code></a> in <code>Yi.Search</code>.. hey, <code>Yi.Search</code> has documentation!).<br /><code>tabKeymap</code> is a function Jeff defines in the config, which seems to be for inserting snippets making use of <code>Yi.Snippets</code> and <code>Yi.Snippets.Haskell</code>.<br />There also seems to be inputs for Insert mode, so that <code>Alt+Left</code> (or <code>Alt+Right</code>) will move by words left/right.</p>
+<p>It seems Jeff has mapped <code>';'</code> to do something like <code>:noh</code> in Vim. (<a href="https://github.com/yi-editor/yi/blob/fea9dc8a9fc39ccb3bfa389c0e395383602710b6/yi/src/library/Yi/Search.hs#L82"><code>resetRegexE</code></a> in <code>Yi.Search</code>.. hey, <code>Yi.Search</code> has documentation!).<br />
+<code>tabKeymap</code> is a function Jeff defines in the config, which seems to be for inserting snippets making use of <code>Yi.Snippets</code> and <code>Yi.Snippets.Haskell</code>.<br />
+There also seems to be inputs for Insert mode, so that <code>Alt+Left</code> (or <code>Alt+Right</code>) will move by words left/right.</p>
 <h3 id="an-emacs-keymap-with-a-simple-config">An Emacs Keymap with a Simple Config</h3>
 <p><a href="https://github.com/yi-editor/yi/blob/master/yi-contrib/src/Yi/Config/Users/Reiner.hs">Reiner’s config</a> takes a different approach (although is ‘based’ on the Emacs keymap):</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">    main <span class="fu">=</span> configMain defaultEmacsConfig setup
@@ -93,7 +166,8 @@
 <li><code>publishAction</code> has type <code>(YiAction a x, Show x) =&gt; String -&gt; a -&gt; ConfigM ()</code> in <code>Yi.Eval</code>.</li>
 </ul>
 <p>I’m not sure what <code>&quot;vte&quot;</code> is; and am unsure about these <code>Mode</code>s. The thing to note, though, is that this configuration as per <code>Yi.Config.Simple</code> and its (ab)use of <code>do</code> notation makes for a configuration file which looks much closer to a <code>.vimrc</code> or other whatever else.</p>
-<p><code>publishAction</code> looks like a way to add a custom Ex-like command, although in this case the configuration is for Emacs not Vim. I suspect it will work, but will need to try.<br />(Not clear how the equivalent would be set with the non-<code>Simple</code> configs).</p>
+<p><code>publishAction</code> looks like a way to add a custom Ex-like command, although in this case the configuration is for Emacs not Vim. I suspect it will work, but will need to try.<br />
+(Not clear how the equivalent would be set with the non-<code>Simple</code> configs).</p>
 <h3 id="a-vim-keymap-with-overridden-bindings">A Vim Keymap with Overridden Bindings</h3>
 <p><a href="https://github.com/yi-editor/yi/blob/master/yi-contrib/src/Yi/Config/Users/Michal.hs">Michal’s Config</a> (which is somewhat documented) has the following code of interest:</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">    myKeymapSet ::</span> <span class="dt">KeymapSet</span>
@@ -136,7 +210,8 @@
 <li><code>impureEval</code> has type <code>VimConfig -&gt; String -&gt; YiM ()</code>, but I’m not sure of the difference here.</li>
 <li><code>myBindings</code> has type <code>(String -&gt; EditorM ()) -&gt; [VimBinding]</code>.</li>
 </ul>
-<p>This binds keys to <code>eval</code> something. (In this case, space to call <code>:noh</code>).<br />The way Michal modifies his <code>KeymapSet</code> is quite different from Jeff’s.</p>
+<p>This binds keys to <code>eval</code> something. (In this case, space to call <code>:noh</code>).<br />
+The way Michal modifies his <code>KeymapSet</code> is quite different from Jeff’s.</p>
 
 
 <hr />
@@ -179,7 +254,10 @@
 
 
             </div>
-            <div id="footer">
+
+            <hr style="margin-bottom: 0px; border-top: 2px solid black;" />
+
+            <div id="footer" class="pull-right" style="padding-right: 10px;">
                 Site proudly generated by
                 <a href="http://jaspervdj.be/hakyll">Hakyll</a>
             </div>

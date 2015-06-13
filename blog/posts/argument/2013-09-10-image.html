@@ -1,52 +1,126 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!DOCTYPE HTML>
+<html lang="en">
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>Richard Goulter's Blog - Image</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Image - Richard Goulter's Blog</title>
+
+        <!-- My (Old) CSS theme -->
         <link rel="stylesheet" type="text/css" href="../../css/default.css" />
+
+        <!--
+            jQuery & jQueryUI
+        -->
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css" />
+
+        <!--
+            Pandoc Style CSS
+            (for syntax highlighted snippets)
+        -->
         <link rel="stylesheet" type="text/css" href="../../css/syntax.css" />
+
+        <!--
+            Bootstrap
+        -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+        <!--
+            Waypoints, and Waypoints-Sticky,
+            so we can do this:
+            http://imakewebthings.com/waypoints/shortcuts/sticky-elements/
+        -->
+        <script src="../../js/jquery.waypoints.min.js"></script>
+        <script src="../../js/sticky.min.js"></script>
+
+        <!--
+            TOCify
+        -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js"></script>
+        <!--
+            Patched TOCify css file.
+            (Don't want fixed `.tocify`).
+        -->
+        <link rel="stylesheet" type="text/css" href="../../css/jquery.tocify.css" />
+
+        <style>
+        .navbar {
+            margin-bottom: 0px;
+        }
+
+        .banner-image {
+            width:100%;
+        }
+
+        .banner {
+            margin-left: 0px;
+            margin-right: 0px;
+        }
+
+        body {
+            background-color: #e2e2e2;
+        }
+
+        #page {
+            padding-left:0;
+            padding-right:0;
+            background-color: #ffffff;
+        }
+        </style>
     </head>
     <body>
-        <div id="page">
-            <div id="header">
-                <div id="logo">
-                    <a href="../../">Richard Goulter's Blog</a>
-                </div>
-                <div id="navigation">
-                    <a href="../../">Home</a>
-                    <a href="../../yi.html">Yi</a>
-                    <a href="../../emacs.html">Emacs</a>
-                    <a href="../../archive.html">Archive</a>
-                </div>
-            <div>
-                <img src="../../images/blog-banner.png" />
-            </div>
+        <div id="page" class="container">
+            <!-- This, with no padding on left/right -->
+            <div class="banner">
+                <nav class="navbar navbar-default">
+    <div class="collapse navbar-collapse">
+        <a class="navbar-brand" href="../../">Richard Goulter's Blog</a>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="../../">Home</a></li>
+            <li><a href="../../yi.html">Yi</a></li>
+            <li><a href="../../emacs.html">Emacs</a></li>
+            <li><a href="../../archive.html">Archive</a></li>
+        </ul>
+    </div>
+</nav>
+
+                <img class="banner-image" src="../../images/blog-banner.png" />
             </div>
 
+            <hr style="margin: 0px; border-top: 5px solid black;" />
 
-            <div id="content">
+            <div id="content" class="container">
                 <h1>Image</h1>
-
                 <div class="info">
     Posted on September 10, 2013
     
         by richardgoulter
-    
-</div>
-<div class="info">
+    <br />
     
     Tags: <a href="../../tags/analysis.html">analysis</a>, <a href="../../tags/armchairphilosophy.html">armchairphilosophy</a>, <a href="../../tags/opinion.html">opinion</a>, <a href="../../tags/rant.html">rant</a>
     
 </div>
 
-<p>I saw a wee advert on the train last night which read something along the lines of:<br />“Eat [our healthy brand of cereal] so that: you get more admiration.”<br />(Followed by a picture of an attractive lady in red.</p>
+<p>I saw a wee advert on the train last night which read something along the lines of:<br />
+“Eat [our healthy brand of cereal] so that: you get more admiration.”<br />
+(Followed by a picture of an attractive lady in red.</p>
 <p>I wouldn’t be convinced that this is a healthy attitude to healthy food.</p>
-<p>For one, there are probably more substantial reasons to manage a healthy diet/exercise than “to look good”; and while so long as one is being healthy the reason probably couldn’t matter less, the pursuit of vanity surely has its downsides.<br />Surely what’s important is to be comfortable with, happy with the body you have. Being unhealthy is a decent reason to be discontent with your body. “Looking ugly” is … not so much.</p>
+<p>For one, there are probably more substantial reasons to manage a healthy diet/exercise than “to look good”; and while so long as one is being healthy the reason probably couldn’t matter less, the pursuit of vanity surely has its downsides.<br />
+Surely what’s important is to be comfortable with, happy with the body you have. Being unhealthy is a decent reason to be discontent with your body. “Looking ugly” is … not so much.</p>
 <p>I suppose that depends a bit; if you want to take action so that <em>you</em> are happier with your appearance, then there’s no problem (so long as you can be happy about your appearance..). But to look better to attract the attention of others seems unhealthy if your happiness is dependent on how others perceive you.</p>
-<p>Cameron Russell, (a “sexy lady” I think she classifies herself as), has <a href="http://www.ted.com/talks/cameron_russell_looks_aren_t_everything_believe_me_i_m_a_model.html">an excellent talk on the issue of image and appearance</a> which you should watch.<br />As well as highlighting that lots of people are unhappy with how they look, she also points out that as a super good-looking person, she has anxieties about her appearance. (Actually, I suppose she points out that super good-looking people who have insecurities about appearance; but I don’t think she’d say such a thing if i) she didn’t have such anxieties herself, ii) she didn’t feel them with such conviction so as to be sure her peers feel the same).<br />I won’t say that wanting to look good is entirely pointless; but it just seems that being content about looking good is always going to be out of reach.</p>
-<p>But I gotta try and call bullshit on wanting more admiration.<br />As far as I know, it’s culturally/socially impolite to stare.<br />So, if your purpose of taking action to look better is to get more admiration/attention, your pursuit <em>ought</em> to be in vain.<br />– The interesting thing about this, though, is that the aspiration of looking good enough to be admired (probably) doesn’t imply that a person <em>wants</em> to be stared at, I’d think. I mean, it’s plausible that you want to feel you look good enough to be admired, without any burden which might come from actually being admired.<br />Erm. Not sure if I made sense there. Rather, I guess I’m borrowing the thought from one of the more meta stories of that “At the Duke’s Wedding” anthology (Katherine Ashe’s). (Or trying to..).</p>
-<p>And the “needing others to think you look good” thing just sounds unhealthy to me since I don’t suppose it any part of your happiness should depend on that kindof thing.<br />By playing to the aspiration of “others will think you look better”, it just seems to be dancing with that no-win insecurity of wanting to look good.</p>
+<p>Cameron Russell, (a “sexy lady” I think she classifies herself as), has <a href="http://www.ted.com/talks/cameron_russell_looks_aren_t_everything_believe_me_i_m_a_model.html">an excellent talk on the issue of image and appearance</a> which you should watch.<br />
+As well as highlighting that lots of people are unhappy with how they look, she also points out that as a super good-looking person, she has anxieties about her appearance. (Actually, I suppose she points out that super good-looking people who have insecurities about appearance; but I don’t think she’d say such a thing if i) she didn’t have such anxieties herself, ii) she didn’t feel them with such conviction so as to be sure her peers feel the same).<br />
+I won’t say that wanting to look good is entirely pointless; but it just seems that being content about looking good is always going to be out of reach.</p>
+<p>But I gotta try and call bullshit on wanting more admiration.<br />
+As far as I know, it’s culturally/socially impolite to stare.<br />
+So, if your purpose of taking action to look better is to get more admiration/attention, your pursuit <em>ought</em> to be in vain.<br />
+– The interesting thing about this, though, is that the aspiration of looking good enough to be admired (probably) doesn’t imply that a person <em>wants</em> to be stared at, I’d think. I mean, it’s plausible that you want to feel you look good enough to be admired, without any burden which might come from actually being admired.<br />
+Erm. Not sure if I made sense there. Rather, I guess I’m borrowing the thought from one of the more meta stories of that “At the Duke’s Wedding” anthology (Katherine Ashe’s). (Or trying to..).</p>
+<p>And the “needing others to think you look good” thing just sounds unhealthy to me since I don’t suppose it any part of your happiness should depend on that kindof thing.<br />
+By playing to the aspiration of “others will think you look better”, it just seems to be dancing with that no-win insecurity of wanting to look good.</p>
 
 
 <hr />
@@ -89,7 +163,10 @@
 
 
             </div>
-            <div id="footer">
+
+            <hr style="margin-bottom: 0px; border-top: 2px solid black;" />
+
+            <div id="footer" class="pull-right" style="padding-right: 10px;">
                 Site proudly generated by
                 <a href="http://jaspervdj.be/hakyll">Hakyll</a>
             </div>

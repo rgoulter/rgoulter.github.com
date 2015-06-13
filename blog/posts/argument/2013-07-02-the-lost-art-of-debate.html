@@ -1,52 +1,122 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!DOCTYPE HTML>
+<html lang="en">
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>Richard Goulter's Blog - '"The Lost Art of Debate"'</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>'"The Lost Art of Debate"' - Richard Goulter's Blog</title>
+
+        <!-- My (Old) CSS theme -->
         <link rel="stylesheet" type="text/css" href="../../css/default.css" />
+
+        <!--
+            jQuery & jQueryUI
+        -->
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css" />
+
+        <!--
+            Pandoc Style CSS
+            (for syntax highlighted snippets)
+        -->
         <link rel="stylesheet" type="text/css" href="../../css/syntax.css" />
+
+        <!--
+            Bootstrap
+        -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+        <!--
+            Waypoints, and Waypoints-Sticky,
+            so we can do this:
+            http://imakewebthings.com/waypoints/shortcuts/sticky-elements/
+        -->
+        <script src="../../js/jquery.waypoints.min.js"></script>
+        <script src="../../js/sticky.min.js"></script>
+
+        <!--
+            TOCify
+        -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js"></script>
+        <!--
+            Patched TOCify css file.
+            (Don't want fixed `.tocify`).
+        -->
+        <link rel="stylesheet" type="text/css" href="../../css/jquery.tocify.css" />
+
+        <style>
+        .navbar {
+            margin-bottom: 0px;
+        }
+
+        .banner-image {
+            width:100%;
+        }
+
+        .banner {
+            margin-left: 0px;
+            margin-right: 0px;
+        }
+
+        body {
+            background-color: #e2e2e2;
+        }
+
+        #page {
+            padding-left:0;
+            padding-right:0;
+            background-color: #ffffff;
+        }
+        </style>
     </head>
     <body>
-        <div id="page">
-            <div id="header">
-                <div id="logo">
-                    <a href="../../">Richard Goulter's Blog</a>
-                </div>
-                <div id="navigation">
-                    <a href="../../">Home</a>
-                    <a href="../../yi.html">Yi</a>
-                    <a href="../../emacs.html">Emacs</a>
-                    <a href="../../archive.html">Archive</a>
-                </div>
-            <div>
-                <img src="../../images/blog-banner.png" />
-            </div>
+        <div id="page" class="container">
+            <!-- This, with no padding on left/right -->
+            <div class="banner">
+                <nav class="navbar navbar-default">
+    <div class="collapse navbar-collapse">
+        <a class="navbar-brand" href="../../">Richard Goulter's Blog</a>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="../../">Home</a></li>
+            <li><a href="../../yi.html">Yi</a></li>
+            <li><a href="../../emacs.html">Emacs</a></li>
+            <li><a href="../../archive.html">Archive</a></li>
+        </ul>
+    </div>
+</nav>
+
+                <img class="banner-image" src="../../images/blog-banner.png" />
             </div>
 
+            <hr style="margin: 0px; border-top: 5px solid black;" />
 
-            <div id="content">
+            <div id="content" class="container">
                 <h1>'"The Lost Art of Debate"'</h1>
-
                 <div class="info">
     Posted on July  2, 2013
     
         by richardgoulter
-    
-</div>
-<div class="info">
+    <br />
     
     Tags: <a href="../../tags/argument.html">argument</a>, <a href="../../tags/armchairphilosophy.html">armchairphilosophy</a>
     
 </div>
 
-<p>Argument is something I’ve a wee fascination with, in a love/hate kind of way.<br />I think I can say, without being prejudicial or snobbish, that I never like listening to a poor argument.</p>
+<p>Argument is something I’ve a wee fascination with, in a love/hate kind of way.<br />
+I think I can say, without being prejudicial or snobbish, that I never like listening to a poor argument.</p>
 <p>So worth watching in this area in Michael Sandel’s video at TED, <a href="http://www.ted.com/talks/michael_sandel_the_lost_art_of_democratic_debate.html">“The Lost Art of Democratic Debate”</a>.</p>
 <p>For those who haven’t encountered Sandel, he’s the fella who lectures in <a href="http://www.justiceharvard.org/">Harvard’s Justice</a> online videos. (They’re probably a fair investment in time, but they’re absolutely fantastic).</p>
-<p>The aforementioned TED video features a butchered-down version of one of his lectures, wherein Sandel gives a response for the question “Give the best flute to whom?”.<br />The typical audience to this was “Give the best flute to the best flute player, for the greatest good (to the greatest number)”.<br />Sandel says the philosopher Aristotle would agree with the answer, but disagree with the reasoning.</p>
+<p>The aforementioned TED video features a butchered-down version of one of his lectures, wherein Sandel gives a response for the question “Give the best flute to whom?”.<br />
+The typical audience to this was “Give the best flute to the best flute player, for the greatest good (to the greatest number)”.<br />
+Sandel says the philosopher Aristotle would agree with the answer, but disagree with the reasoning.</p>
 <p>Ari would’ve said, instead, that the whole point of a good flute is to be played by a good player; it would be a waste of purpose if the flute were not played to its best.</p>
-<p>Sandel then brings up an example about a dispute in golfing.<br />More/less: A golfer with disability in the legs contested he was at a disadvantage to play golf if he wasn’t allowed to use a golfing cart; the rules made out, however, that walking between courses was an important part of the game.</p>
-<p>This all relates to Aristotle going on about the purpose of things in that, whether a golfer should be able to make use of a golf cart relates to the purpose of the sport.<br />(The dispute about walking as physical exertion is important for golf since, as Sandel quips, golfers are a little touchy about the status of golf as an athletic sport).<br />Sandal discusses that the rulings of the courts were about just that: the purpose of the sport.</p>
+<p>Sandel then brings up an example about a dispute in golfing.<br />
+More/less: A golfer with disability in the legs contested he was at a disadvantage to play golf if he wasn’t allowed to use a golfing cart; the rules made out, however, that walking between courses was an important part of the game.</p>
+<p>This all relates to Aristotle going on about the purpose of things in that, whether a golfer should be able to make use of a golf cart relates to the purpose of the sport.<br />
+(The dispute about walking as physical exertion is important for golf since, as Sandel quips, golfers are a little touchy about the status of golf as an athletic sport).<br />
+Sandal discusses that the rulings of the courts were about just that: the purpose of the sport.</p>
 <p>Sandal’s wider point, then, is a bit more focus could be brought about in debates when we discuss the purpose of things.</p>
 
 
@@ -90,7 +160,10 @@
 
 
             </div>
-            <div id="footer">
+
+            <hr style="margin-bottom: 0px; border-top: 2px solid black;" />
+
+            <div id="footer" class="pull-right" style="padding-right: 10px;">
                 Site proudly generated by
                 <a href="http://jaspervdj.be/hakyll">Hakyll</a>
             </div>

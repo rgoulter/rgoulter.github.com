@@ -1,47 +1,112 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!DOCTYPE HTML>
+<html lang="en">
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>Richard Goulter's Blog - Yi in a Cabal Sandbox on OSX</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Yi in a Cabal Sandbox on OSX - Richard Goulter's Blog</title>
+
+        <!-- My (Old) CSS theme -->
         <link rel="stylesheet" type="text/css" href="../../css/default.css" />
+
+        <!--
+            jQuery & jQueryUI
+        -->
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css" />
+
+        <!--
+            Pandoc Style CSS
+            (for syntax highlighted snippets)
+        -->
         <link rel="stylesheet" type="text/css" href="../../css/syntax.css" />
+
+        <!--
+            Bootstrap
+        -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+        <!--
+            Waypoints, and Waypoints-Sticky,
+            so we can do this:
+            http://imakewebthings.com/waypoints/shortcuts/sticky-elements/
+        -->
+        <script src="../../js/jquery.waypoints.min.js"></script>
+        <script src="../../js/sticky.min.js"></script>
+
+        <!--
+            TOCify
+        -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js"></script>
+        <!--
+            Patched TOCify css file.
+            (Don't want fixed `.tocify`).
+        -->
+        <link rel="stylesheet" type="text/css" href="../../css/jquery.tocify.css" />
+
+        <style>
+        .navbar {
+            margin-bottom: 0px;
+        }
+
+        .banner-image {
+            width:100%;
+        }
+
+        .banner {
+            margin-left: 0px;
+            margin-right: 0px;
+        }
+
+        body {
+            background-color: #e2e2e2;
+        }
+
+        #page {
+            padding-left:0;
+            padding-right:0;
+            background-color: #ffffff;
+        }
+        </style>
     </head>
     <body>
-        <div id="page">
-            <div id="header">
-                <div id="logo">
-                    <a href="../../">Richard Goulter's Blog</a>
-                </div>
-                <div id="navigation">
-                    <a href="../../">Home</a>
-                    <a href="../../yi.html">Yi</a>
-                    <a href="../../emacs.html">Emacs</a>
-                    <a href="../../archive.html">Archive</a>
-                </div>
-            <div>
-                <img src="../../images/blog-banner.png" />
-            </div>
+        <div id="page" class="container">
+            <!-- This, with no padding on left/right -->
+            <div class="banner">
+                <nav class="navbar navbar-default">
+    <div class="collapse navbar-collapse">
+        <a class="navbar-brand" href="../../">Richard Goulter's Blog</a>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="../../">Home</a></li>
+            <li><a href="../../yi.html">Yi</a></li>
+            <li><a href="../../emacs.html">Emacs</a></li>
+            <li><a href="../../archive.html">Archive</a></li>
+        </ul>
+    </div>
+</nav>
+
+                <img class="banner-image" src="../../images/blog-banner.png" />
             </div>
 
+            <hr style="margin: 0px; border-top: 5px solid black;" />
 
-            <div id="content">
+            <div id="content" class="container">
                 <h1>Yi in a Cabal Sandbox on OSX</h1>
-
                 <div class="info">
     Posted on July  1, 2014
     
         by Richard Goulter
-    
-</div>
-<div class="info">
+    <br />
     
     Tags: <a href="../../tags/yi.html">yi</a>, <a href="../../tags/haskell.html">haskell</a>, <a href="../../tags/osx.html">osx</a>
     
 </div>
 
 <p>For the most part there are instructions for this on <a href="https://github.com/yi-editor/yi#installing-inside-a-cabal-sandbox">the GitHub repo for Yi</a>.</p>
-<p>Despite that, I ran into a difficulty or two when I tried this.<br /><a href="https://gist.github.com/rgoulter/8fde851e20fc913d1ed8">Like these errors</a> One error which complained was trying to use <code>aeson-0.7.0.3</code>. Installing a newer version of <code>aeson</code> into the sandbox resolved this. (For some reason, changing the <code>yi.cabal</code> so that it had version 4.2 of the <code>lens</code> library [which requires <code>aeson &gt;= 0.7.0.5</code>] didn’t resolve this. I don’t suppose I understand how Cabal works).</p>
+<p>Despite that, I ran into a difficulty or two when I tried this.<br />
+<a href="https://gist.github.com/rgoulter/8fde851e20fc913d1ed8">Like these errors</a> One error which complained was trying to use <code>aeson-0.7.0.3</code>. Installing a newer version of <code>aeson</code> into the sandbox resolved this. (For some reason, changing the <code>yi.cabal</code> so that it had version 4.2 of the <code>lens</code> library [which requires <code>aeson &gt;= 0.7.0.5</code>] didn’t resolve this. I don’t suppose I understand how Cabal works).</p>
 <p>Having forgotten <a href="http://www.haskell.org/haskellwiki/Gtk2Hs/Mac">how to install gtk2hs on OSX</a>, naturally I ran into difficulties with <code>cabal install -fpango</code>. (For some reason, I had issues with GTK; <code>gtk-demo</code> failed to load. <a href="http://stackoverflow.com/questions/22631026/dyld-library-not-loaded-usr-local-lib-libpng16-16-dylib-with-anything-php-rel">Similar to this</a>). Word to the wise,</p>
 <pre><code>cabal install --with-gcc=gcc-4.8 -fvty -fpango</code></pre>
 <p>would be how to install it. (Alas, I’m <a href="https://gist.github.com/rgoulter/d1e94a05dd93abaa078d">plagued by errors</a> when I try to install the Pango frontend. I was able to install it earlier..).</p>
@@ -87,7 +152,10 @@
 
 
             </div>
-            <div id="footer">
+
+            <hr style="margin-bottom: 0px; border-top: 2px solid black;" />
+
+            <div id="footer" class="pull-right" style="padding-right: 10px;">
                 Site proudly generated by
                 <a href="http://jaspervdj.be/hakyll">Hakyll</a>
             </div>

@@ -1,40 +1,104 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!DOCTYPE HTML>
+<html lang="en">
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>Richard Goulter's Blog - Pretty HG Log Style</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Pretty HG Log Style - Richard Goulter's Blog</title>
+
+        <!-- My (Old) CSS theme -->
         <link rel="stylesheet" type="text/css" href="../../css/default.css" />
+
+        <!--
+            jQuery & jQueryUI
+        -->
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css" />
+
+        <!--
+            Pandoc Style CSS
+            (for syntax highlighted snippets)
+        -->
         <link rel="stylesheet" type="text/css" href="../../css/syntax.css" />
+
+        <!--
+            Bootstrap
+        -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+        <!--
+            Waypoints, and Waypoints-Sticky,
+            so we can do this:
+            http://imakewebthings.com/waypoints/shortcuts/sticky-elements/
+        -->
+        <script src="../../js/jquery.waypoints.min.js"></script>
+        <script src="../../js/sticky.min.js"></script>
+
+        <!--
+            TOCify
+        -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js"></script>
+        <!--
+            Patched TOCify css file.
+            (Don't want fixed `.tocify`).
+        -->
+        <link rel="stylesheet" type="text/css" href="../../css/jquery.tocify.css" />
+
+        <style>
+        .navbar {
+            margin-bottom: 0px;
+        }
+
+        .banner-image {
+            width:100%;
+        }
+
+        .banner {
+            margin-left: 0px;
+            margin-right: 0px;
+        }
+
+        body {
+            background-color: #e2e2e2;
+        }
+
+        #page {
+            padding-left:0;
+            padding-right:0;
+            background-color: #ffffff;
+        }
+        </style>
     </head>
     <body>
-        <div id="page">
-            <div id="header">
-                <div id="logo">
-                    <a href="../../">Richard Goulter's Blog</a>
-                </div>
-                <div id="navigation">
-                    <a href="../../">Home</a>
-                    <a href="../../yi.html">Yi</a>
-                    <a href="../../emacs.html">Emacs</a>
-                    <a href="../../archive.html">Archive</a>
-                </div>
-            <div>
-                <img src="../../images/blog-banner.png" />
-            </div>
+        <div id="page" class="container">
+            <!-- This, with no padding on left/right -->
+            <div class="banner">
+                <nav class="navbar navbar-default">
+    <div class="collapse navbar-collapse">
+        <a class="navbar-brand" href="../../">Richard Goulter's Blog</a>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="../../">Home</a></li>
+            <li><a href="../../yi.html">Yi</a></li>
+            <li><a href="../../emacs.html">Emacs</a></li>
+            <li><a href="../../archive.html">Archive</a></li>
+        </ul>
+    </div>
+</nav>
+
+                <img class="banner-image" src="../../images/blog-banner.png" />
             </div>
 
+            <hr style="margin: 0px; border-top: 5px solid black;" />
 
-            <div id="content">
+            <div id="content" class="container">
                 <h1>Pretty HG Log Style</h1>
-
                 <div class="info">
     Posted on June  1, 2015
     
         by Richard Goulter
-    
-</div>
-<div class="info">
+    <br />
     
     Tags: <a href="../../tags/hg.html">hg</a>, <a href="../../tags/mercurial.html">mercurial</a>, <a href="../../tags/git.html">git</a>, <a href="../../tags/terminal.html">terminal</a>, <a href="../../tags/log-style.html">log-style</a>
     
@@ -50,9 +114,13 @@
 <li><code>%cr</code> - committer date, relative.</li>
 <li><code>%an</code> - author name.</li>
 </ul>
-<p>Great.<br />But I’ve been using HG. Can Mercurial haz it, too?<br />Sources:</p>
+<p>Great.<br />
+But I’ve been using HG. Can Mercurial haz it, too?<br />
+Sources:</p>
 <ul>
-<li><a href="http://stackoverflow.com/questions/3575189/mercurial-log-with-one-liners">S/O: “Mercurial Log with One-Liners”</a> Because one-liner logs themselves can be useful.<br /> This one has:<br /> <code>alias hl=&quot;hg log --template '{node|short} | {date|isodatesec} | {author|user}: {desc|strip|firstline}\n'&quot;</code></li>
+<li><a href="http://stackoverflow.com/questions/3575189/mercurial-log-with-one-liners">S/O: “Mercurial Log with One-Liners”</a> Because one-liner logs themselves can be useful.<br />
+ This one has:<br />
+ <code>alias hl=&quot;hg log --template '{node|short} | {date|isodatesec} | {author|user}: {desc|strip|firstline}\n'&quot;</code></li>
 <li><a href="hgbook.red-bean.com/read/customizing-the-output-of-mercurial.html">HG Book: Customizing Output</a></li>
 <li><a href="https://www.selenic.com/hg/help/templates">HG Help / Manpages</a></li>
 </ul>
@@ -60,7 +128,8 @@
 <ul>
 <li><a href="http://stackoverflow.com/questions/3625725/can-i-add-custom-colors-to-mercurial-command-templates">HG Template Colours</a></li>
 </ul>
-<p>I’m trying for “direct equivalence”. YMMV, since Git/HG don’t exactly share all concepts. (e.g. every commit in HG has the notion of a ‘branch’, etc.).<br />So, note that when building the template, this is the stuff to put within the <code>{}</code>:</p>
+<p>I’m trying for “direct equivalence”. YMMV, since Git/HG don’t exactly share all concepts. (e.g. every commit in HG has the notion of a ‘branch’, etc.).<br />
+So, note that when building the template, this is the stuff to put within the <code>{}</code>:</p>
 <ul>
 <li><code>node|short</code> - commit hash</li>
 <li><code>rev</code> - int, revision number.</li>
@@ -83,7 +152,8 @@ custom.author = blue bold</code></pre>
 <p>With the hg alias: <code>alias hl=&quot;hg log --style ~/.hgrc.d/fancy.style&quot;</code>. (Or do this from your shell, whatever).</p>
 <p>And, finally, <code>~/.hgrc.d/fancy.style</code> is:</p>
 <pre><code>changeset = &quot;* {label('custom.rev', node|short)} - ({label('custom.decorate', branch)}) {desc|strip|firstline} ({label('custom.date', date|age)}) &lt;{label('custom.author' , author)}&gt;\n&quot;</code></pre>
-<p>Screenshot:<br /><img src="http://i.imgur.com/OWImYAS.png" /></p>
+<p>Screenshot:<br />
+<img src="http://i.imgur.com/OWImYAS.png" alt /></p>
 <p>(The repo is old, because I don’t use HG so much, okay?).</p>
 
 
@@ -125,7 +195,10 @@ custom.author = blue bold</code></pre>
 
 
             </div>
-            <div id="footer">
+
+            <hr style="margin-bottom: 0px; border-top: 2px solid black;" />
+
+            <div id="footer" class="pull-right" style="padding-right: 10px;">
                 Site proudly generated by
                 <a href="http://jaspervdj.be/hakyll">Hakyll</a>
             </div>

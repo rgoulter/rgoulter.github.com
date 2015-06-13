@@ -1,53 +1,130 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!DOCTYPE HTML>
+<html lang="en">
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>Richard Goulter's Blog - Paradox of Fandom</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Paradox of Fandom - Richard Goulter's Blog</title>
+
+        <!-- My (Old) CSS theme -->
         <link rel="stylesheet" type="text/css" href="../../css/default.css" />
+
+        <!--
+            jQuery & jQueryUI
+        -->
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css" />
+
+        <!--
+            Pandoc Style CSS
+            (for syntax highlighted snippets)
+        -->
         <link rel="stylesheet" type="text/css" href="../../css/syntax.css" />
+
+        <!--
+            Bootstrap
+        -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+        <!--
+            Waypoints, and Waypoints-Sticky,
+            so we can do this:
+            http://imakewebthings.com/waypoints/shortcuts/sticky-elements/
+        -->
+        <script src="../../js/jquery.waypoints.min.js"></script>
+        <script src="../../js/sticky.min.js"></script>
+
+        <!--
+            TOCify
+        -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js"></script>
+        <!--
+            Patched TOCify css file.
+            (Don't want fixed `.tocify`).
+        -->
+        <link rel="stylesheet" type="text/css" href="../../css/jquery.tocify.css" />
+
+        <style>
+        .navbar {
+            margin-bottom: 0px;
+        }
+
+        .banner-image {
+            width:100%;
+        }
+
+        .banner {
+            margin-left: 0px;
+            margin-right: 0px;
+        }
+
+        body {
+            background-color: #e2e2e2;
+        }
+
+        #page {
+            padding-left:0;
+            padding-right:0;
+            background-color: #ffffff;
+        }
+        </style>
     </head>
     <body>
-        <div id="page">
-            <div id="header">
-                <div id="logo">
-                    <a href="../../">Richard Goulter's Blog</a>
-                </div>
-                <div id="navigation">
-                    <a href="../../">Home</a>
-                    <a href="../../yi.html">Yi</a>
-                    <a href="../../emacs.html">Emacs</a>
-                    <a href="../../archive.html">Archive</a>
-                </div>
-            <div>
-                <img src="../../images/blog-banner.png" />
-            </div>
+        <div id="page" class="container">
+            <!-- This, with no padding on left/right -->
+            <div class="banner">
+                <nav class="navbar navbar-default">
+    <div class="collapse navbar-collapse">
+        <a class="navbar-brand" href="../../">Richard Goulter's Blog</a>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="../../">Home</a></li>
+            <li><a href="../../yi.html">Yi</a></li>
+            <li><a href="../../emacs.html">Emacs</a></li>
+            <li><a href="../../archive.html">Archive</a></li>
+        </ul>
+    </div>
+</nav>
+
+                <img class="banner-image" src="../../images/blog-banner.png" />
             </div>
 
+            <hr style="margin: 0px; border-top: 5px solid black;" />
 
-            <div id="content">
+            <div id="content" class="container">
                 <h1>Paradox of Fandom</h1>
-
                 <div class="info">
     Posted on March  8, 2014
     
         by richardgoulter
-    
-</div>
-<div class="info">
+    <br />
     
     Tags: <a href="../../tags/reading.html">reading</a>, <a href="../../tags/goodreads.html">goodreads</a>, <a href="../../tags/devil%20in%20winter.html">devil in winter</a>, <a href="../../tags/lisa%20kleypas.html">lisa kleypas</a>, <a href="../../tags/scandal%20in%20spring.html">scandal in spring</a>
     
 </div>
 
 <p>I’d say I like reading. I read a fair number of books in a year.</p>
-<p>Too bad, though, that I can now kindof see why some of those folk on GoodReads would rate books much more harshly than I would have.<br />Because they’ve probably read many more books than I have, and didn’t enjoy the book as much as I did.</p>
-<p>I get the impression this is the case, see, after I finished Lisa Kleypas’ “Scandal in Spring”.<br />- It’s the fourth book in the series. I’d held off reading it after I’d read the third because “Devil in Winter” was so amazingly fantastic.<br />There was no way “Scandal in Spring” could be anywhere near as good.<br />It wasn’t anywhere near as good.<br />But, you see, I don’t mean to say it was an unenjoyable book to read. It was good. Certainly at least as good as the first two in that series. (Which also don’t compare to “Devil in Winter”).</p>
+<p>Too bad, though, that I can now kindof see why some of those folk on GoodReads would rate books much more harshly than I would have.<br />
+Because they’ve probably read many more books than I have, and didn’t enjoy the book as much as I did.</p>
+<p>I get the impression this is the case, see, after I finished Lisa Kleypas’ “Scandal in Spring”.<br />
+- It’s the fourth book in the series. I’d held off reading it after I’d read the third because “Devil in Winter” was so amazingly fantastic.<br />
+There was no way “Scandal in Spring” could be anywhere near as good.<br />
+It wasn’t anywhere near as good.<br />
+But, you see, I don’t mean to say it was an unenjoyable book to read. It was good. Certainly at least as good as the first two in that series. (Which also don’t compare to “Devil in Winter”).</p>
 <p>And so here, you see, I have a less than enthusiastic response to what’s actually a rather decent read. Because I’d read books which I felt were much better.</p>
-<p>Because I’d read enough books to have found some which I really really love, I don’t find a decent one to be as worthy.<br />Shame that.<br />And it’s kindof a paradox of fanaticism. - Those who are the biggest haters or dissenters are, if not the ignorant, then those who are the biggest fans of a domain.</p>
-<p>There’s, unfortunately, a reliance on the average-rating of a book to get an indication of how good it is.<br />xkcd makes the joke, but an average rating of 5.0 has only rating; an average rating of 3.0 (or below) is “awful”, and ~4.0 is alright.<br />(Well, more like “greater than 4.0 is amazing”).<br />- I’m glad this isn’t always reliable. I’ve loved books which had average ratings ~ 3.0 - 3.5 (How can you know a book’s good or bad before reading it, right?).<br />But it is useful when trying out books from a new author, to see what others love.</p>
+<p>Because I’d read enough books to have found some which I really really love, I don’t find a decent one to be as worthy.<br />
+Shame that.<br />
+And it’s kindof a paradox of fanaticism. - Those who are the biggest haters or dissenters are, if not the ignorant, then those who are the biggest fans of a domain.</p>
+<p>There’s, unfortunately, a reliance on the average-rating of a book to get an indication of how good it is.<br />
+xkcd makes the joke, but an average rating of 5.0 has only rating; an average rating of 3.0 (or below) is “awful”, and ~4.0 is alright.<br />
+(Well, more like “greater than 4.0 is amazing”).<br />
+- I’m glad this isn’t always reliable. I’ve loved books which had average ratings ~ 3.0 - 3.5 (How can you know a book’s good or bad before reading it, right?).<br />
+But it is useful when trying out books from a new author, to see what others love.</p>
 <p>- Can’t help but be amused by the example of Judith McNaught’s “Whitney, My Love” where the top reviews are 5-stars, 1-star, 5-stars, 1-star, 5-stars, 1-star..</p>
-<p>Individually, though, there’s a usefulness in recording an “out of 5” score for a book; 5/5 is amazing, 4/5 is alright, 3/5 is less than alright. Less than that is awful.<br />And that’s a scheme to be derided as too nice by some, I’d think, if a typical rating is to be 4/5. (This is all under the arrogance of the reader which ignores how hard it is for a writer to write a book.. but, hey, that’s just how readers are).<br />- I wonder, though, whether those who read more will eventually tend to just give lower ratings to books, just because they’ve read more so as to be less in wonder about enjoying books.</p>
+<p>Individually, though, there’s a usefulness in recording an “out of 5” score for a book; 5/5 is amazing, 4/5 is alright, 3/5 is less than alright. Less than that is awful.<br />
+And that’s a scheme to be derided as too nice by some, I’d think, if a typical rating is to be 4/5. (This is all under the arrogance of the reader which ignores how hard it is for a writer to write a book.. but, hey, that’s just how readers are).<br />
+- I wonder, though, whether those who read more will eventually tend to just give lower ratings to books, just because they’ve read more so as to be less in wonder about enjoying books.</p>
 
 
 <hr />
@@ -90,7 +167,10 @@
 
 
             </div>
-            <div id="footer">
+
+            <hr style="margin-bottom: 0px; border-top: 2px solid black;" />
+
+            <div id="footer" class="pull-right" style="padding-right: 10px;">
                 Site proudly generated by
                 <a href="http://jaspervdj.be/hakyll">Hakyll</a>
             </div>

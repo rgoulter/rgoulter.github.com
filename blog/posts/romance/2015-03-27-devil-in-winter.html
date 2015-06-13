@@ -1,49 +1,124 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!DOCTYPE HTML>
+<html lang="en">
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>Richard Goulter's Blog - Devil in Winter</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Devil in Winter - Richard Goulter's Blog</title>
+
+        <!-- My (Old) CSS theme -->
         <link rel="stylesheet" type="text/css" href="../../css/default.css" />
+
+        <!--
+            jQuery & jQueryUI
+        -->
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css" />
+
+        <!--
+            Pandoc Style CSS
+            (for syntax highlighted snippets)
+        -->
         <link rel="stylesheet" type="text/css" href="../../css/syntax.css" />
+
+        <!--
+            Bootstrap
+        -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+        <!--
+            Waypoints, and Waypoints-Sticky,
+            so we can do this:
+            http://imakewebthings.com/waypoints/shortcuts/sticky-elements/
+        -->
+        <script src="../../js/jquery.waypoints.min.js"></script>
+        <script src="../../js/sticky.min.js"></script>
+
+        <!--
+            TOCify
+        -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js"></script>
+        <!--
+            Patched TOCify css file.
+            (Don't want fixed `.tocify`).
+        -->
+        <link rel="stylesheet" type="text/css" href="../../css/jquery.tocify.css" />
+
+        <style>
+        .navbar {
+            margin-bottom: 0px;
+        }
+
+        .banner-image {
+            width:100%;
+        }
+
+        .banner {
+            margin-left: 0px;
+            margin-right: 0px;
+        }
+
+        body {
+            background-color: #e2e2e2;
+        }
+
+        #page {
+            padding-left:0;
+            padding-right:0;
+            background-color: #ffffff;
+        }
+        </style>
     </head>
     <body>
-        <div id="page">
-            <div id="header">
-                <div id="logo">
-                    <a href="../../">Richard Goulter's Blog</a>
-                </div>
-                <div id="navigation">
-                    <a href="../../">Home</a>
-                    <a href="../../yi.html">Yi</a>
-                    <a href="../../emacs.html">Emacs</a>
-                    <a href="../../archive.html">Archive</a>
-                </div>
-            <div>
-                <img src="../../images/blog-banner.png" />
-            </div>
+        <div id="page" class="container">
+            <!-- This, with no padding on left/right -->
+            <div class="banner">
+                <nav class="navbar navbar-default">
+    <div class="collapse navbar-collapse">
+        <a class="navbar-brand" href="../../">Richard Goulter's Blog</a>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="../../">Home</a></li>
+            <li><a href="../../yi.html">Yi</a></li>
+            <li><a href="../../emacs.html">Emacs</a></li>
+            <li><a href="../../archive.html">Archive</a></li>
+        </ul>
+    </div>
+</nav>
+
+                <img class="banner-image" src="../../images/blog-banner.png" />
             </div>
 
+            <hr style="margin: 0px; border-top: 5px solid black;" />
 
-            <div id="content">
+            <div id="content" class="container">
                 <h1>Devil in Winter</h1>
-
                 <div class="info">
     Posted on March 27, 2015
     
         by Richard Goulter
-    
-</div>
-<div class="info">
+    <br />
     
     Tags: <a href="../../tags/lisa%20kleypas.html">lisa kleypas</a>, <a href="../../tags/devil%20in%20winter.html">devil in winter</a>
     
 </div>
 
-<p>So. Recently I re-read Lisa Kleypas’ “Devil in Winter”.<br />Not the first time I’ve re-read that book.</p>
-<p>There are some less-than-stellar parts of the book. (Notably, an awkward sequel-setup, which then doesn’t get follow-through in the next book besides “oh. that. haha. oops.”.).<br />But it’s such an amazing, fantastic book! I can’t believe there’re those who don’t think it a 5-outta-5.</p>
-<p>It really puts in the punches, constantly chapter-to-chapter the characters grow and interact and fight and flirt.<br />Presumably you’ve read it if you’re reading this?<br />I’m not sure I could summarise DiW well. I’m writing this post because I love the book.<br />I will say there’re so many moments I love in the book!</p>
-<p>– In the first chapter. When Sebastian insults Eva, and notices she doesn’t flinch at all. (What kindof upbringing would harden her to that?).<br />When Sebastian takes care of her on the arduous ride.<br />The wedding ceremony.<br />Evie’s concern for her husband when he’s in a fight! Evie’s jealousy of her husband! Sebastian’s jealousy of Evie!<br />When Sebastian’s wounded on the floor, Evie embrace. :’)<br />When they’re in the office, Sebastian’s familiar intimacies with his wife.<br />Sebastian coming into his own, putting his otherwise misdirected skills to good use.</p>
+<p>So. Recently I re-read Lisa Kleypas’ “Devil in Winter”.<br />
+Not the first time I’ve re-read that book.</p>
+<p>There are some less-than-stellar parts of the book. (Notably, an awkward sequel-setup, which then doesn’t get follow-through in the next book besides “oh. that. haha. oops.”.).<br />
+But it’s such an amazing, fantastic book! I can’t believe there’re those who don’t think it a 5-outta-5.</p>
+<p>It really puts in the punches, constantly chapter-to-chapter the characters grow and interact and fight and flirt.<br />
+Presumably you’ve read it if you’re reading this?<br />
+I’m not sure I could summarise DiW well. I’m writing this post because I love the book.<br />
+I will say there’re so many moments I love in the book!</p>
+<p>– In the first chapter. When Sebastian insults Eva, and notices she doesn’t flinch at all. (What kindof upbringing would harden her to that?).<br />
+When Sebastian takes care of her on the arduous ride.<br />
+The wedding ceremony.<br />
+Evie’s concern for her husband when he’s in a fight! Evie’s jealousy of her husband! Sebastian’s jealousy of Evie!<br />
+When Sebastian’s wounded on the floor, Evie embrace. :’)<br />
+When they’re in the office, Sebastian’s familiar intimacies with his wife.<br />
+Sebastian coming into his own, putting his otherwise misdirected skills to good use.</p>
 <p>And while I’ve re-read it many times, I still find it hard to put down when I pick it up.</p>
 
 
@@ -87,7 +162,10 @@
 
 
             </div>
-            <div id="footer">
+
+            <hr style="margin-bottom: 0px; border-top: 2px solid black;" />
+
+            <div id="footer" class="pull-right" style="padding-right: 10px;">
                 Site proudly generated by
                 <a href="http://jaspervdj.be/hakyll">Hakyll</a>
             </div>

@@ -1,40 +1,104 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!DOCTYPE HTML>
+<html lang="en">
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>Richard Goulter's Blog - A Quick Flirtation with Haskell</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>A Quick Flirtation with Haskell - Richard Goulter's Blog</title>
+
+        <!-- My (Old) CSS theme -->
         <link rel="stylesheet" type="text/css" href="../../css/default.css" />
+
+        <!--
+            jQuery & jQueryUI
+        -->
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css" />
+
+        <!--
+            Pandoc Style CSS
+            (for syntax highlighted snippets)
+        -->
         <link rel="stylesheet" type="text/css" href="../../css/syntax.css" />
+
+        <!--
+            Bootstrap
+        -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+        <!--
+            Waypoints, and Waypoints-Sticky,
+            so we can do this:
+            http://imakewebthings.com/waypoints/shortcuts/sticky-elements/
+        -->
+        <script src="../../js/jquery.waypoints.min.js"></script>
+        <script src="../../js/sticky.min.js"></script>
+
+        <!--
+            TOCify
+        -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js"></script>
+        <!--
+            Patched TOCify css file.
+            (Don't want fixed `.tocify`).
+        -->
+        <link rel="stylesheet" type="text/css" href="../../css/jquery.tocify.css" />
+
+        <style>
+        .navbar {
+            margin-bottom: 0px;
+        }
+
+        .banner-image {
+            width:100%;
+        }
+
+        .banner {
+            margin-left: 0px;
+            margin-right: 0px;
+        }
+
+        body {
+            background-color: #e2e2e2;
+        }
+
+        #page {
+            padding-left:0;
+            padding-right:0;
+            background-color: #ffffff;
+        }
+        </style>
     </head>
     <body>
-        <div id="page">
-            <div id="header">
-                <div id="logo">
-                    <a href="../../">Richard Goulter's Blog</a>
-                </div>
-                <div id="navigation">
-                    <a href="../../">Home</a>
-                    <a href="../../yi.html">Yi</a>
-                    <a href="../../emacs.html">Emacs</a>
-                    <a href="../../archive.html">Archive</a>
-                </div>
-            <div>
-                <img src="../../images/blog-banner.png" />
-            </div>
+        <div id="page" class="container">
+            <!-- This, with no padding on left/right -->
+            <div class="banner">
+                <nav class="navbar navbar-default">
+    <div class="collapse navbar-collapse">
+        <a class="navbar-brand" href="../../">Richard Goulter's Blog</a>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="../../">Home</a></li>
+            <li><a href="../../yi.html">Yi</a></li>
+            <li><a href="../../emacs.html">Emacs</a></li>
+            <li><a href="../../archive.html">Archive</a></li>
+        </ul>
+    </div>
+</nav>
+
+                <img class="banner-image" src="../../images/blog-banner.png" />
             </div>
 
+            <hr style="margin: 0px; border-top: 5px solid black;" />
 
-            <div id="content">
+            <div id="content" class="container">
                 <h1>A Quick Flirtation with Haskell</h1>
-
                 <div class="info">
     Posted on September 28, 2013
     
         by richardgoulter
-    
-</div>
-<div class="info">
+    <br />
     
     Tags: <a href="../../tags/eclipse.html">eclipse</a>, <a href="../../tags/haskell.html">haskell</a>, <a href="../../tags/linux.html">linux</a>, <a href="../../tags/programming.html">programming</a>
     
@@ -42,8 +106,15 @@
 
 <p>I decided I should investigate more programming languages, since I don’t hate Java as much as my CS peers do. (Well. Many of my CS peers don’t actually understand Java enough, and this is why they dislike it. But anyway..).</p>
 <p>One of these languages that isn’t the C/C++/Java which every CS student touches is Haskell.</p>
-<p>The wonderful <a href="http://learnyouahaskell.com/">Learn You a Haskell Book</a> can be read online for free.<br />Though if you’d like to give some money to the author, (say $5 or $10 for a book you might open only once or twice), the minimum contribution seems to be 40 USD, as determined by the publisher is a sensible price for the eBook.<br />I find this pricing model slightly unbalanced.</p>
-<p>Anyway.<br />While I can totally say that the book is great, and that Haskell looks like a beautiful language to think in,<br />I ran into some difficulties when trying to marry Eclipse and Haskell with EclipseFP on my installation. (I mean, Linux Mint 15. The consolation is that this also didn’t work-perfectly-first-try on Windows, either).<br />It seems the following links may be relevant to my problems:<br /><a href="http://askubuntu.com/questions/286764/how-to-install-haskell-platform-for-ubuntu-13-04" class="uri">http://askubuntu.com/questions/286764/how-to-install-haskell-platform-for-ubuntu-13-04</a><br /><a href="http://niket-kumar.blogspot.sg/2013/05/ubuntu-1304-how-to-setup-haskell.html" class="uri">http://niket-kumar.blogspot.sg/2013/05/ubuntu-1304-how-to-setup-haskell.html</a></p>
+<p>The wonderful <a href="http://learnyouahaskell.com/">Learn You a Haskell Book</a> can be read online for free.<br />
+Though if you’d like to give some money to the author, (say $5 or $10 for a book you might open only once or twice), the minimum contribution seems to be 40 USD, as determined by the publisher is a sensible price for the eBook.<br />
+I find this pricing model slightly unbalanced.</p>
+<p>Anyway.<br />
+While I can totally say that the book is great, and that Haskell looks like a beautiful language to think in,<br />
+I ran into some difficulties when trying to marry Eclipse and Haskell with EclipseFP on my installation. (I mean, Linux Mint 15. The consolation is that this also didn’t work-perfectly-first-try on Windows, either).<br />
+It seems the following links may be relevant to my problems:<br />
+<a href="http://askubuntu.com/questions/286764/how-to-install-haskell-platform-for-ubuntu-13-04" class="uri">http://askubuntu.com/questions/286764/how-to-install-haskell-platform-for-ubuntu-13-04</a><br />
+<a href="http://niket-kumar.blogspot.sg/2013/05/ubuntu-1304-how-to-setup-haskell.html" class="uri">http://niket-kumar.blogspot.sg/2013/05/ubuntu-1304-how-to-setup-haskell.html</a></p>
 <p>(I’ve not found the time to bother just at the moment. This is for my reference).</p>
 
 
@@ -87,7 +158,10 @@
 
 
             </div>
-            <div id="footer">
+
+            <hr style="margin-bottom: 0px; border-top: 2px solid black;" />
+
+            <div id="footer" class="pull-right" style="padding-right: 10px;">
                 Site proudly generated by
                 <a href="http://jaspervdj.be/hakyll">Hakyll</a>
             </div>

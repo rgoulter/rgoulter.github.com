@@ -1,50 +1,119 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!DOCTYPE HTML>
+<html lang="en">
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>Richard Goulter's Blog - The Better Half of XCOM</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>The Better Half of XCOM - Richard Goulter's Blog</title>
+
+        <!-- My (Old) CSS theme -->
         <link rel="stylesheet" type="text/css" href="../../css/default.css" />
+
+        <!--
+            jQuery & jQueryUI
+        -->
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css" />
+
+        <!--
+            Pandoc Style CSS
+            (for syntax highlighted snippets)
+        -->
         <link rel="stylesheet" type="text/css" href="../../css/syntax.css" />
+
+        <!--
+            Bootstrap
+        -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+        <!--
+            Waypoints, and Waypoints-Sticky,
+            so we can do this:
+            http://imakewebthings.com/waypoints/shortcuts/sticky-elements/
+        -->
+        <script src="../../js/jquery.waypoints.min.js"></script>
+        <script src="../../js/sticky.min.js"></script>
+
+        <!--
+            TOCify
+        -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js"></script>
+        <!--
+            Patched TOCify css file.
+            (Don't want fixed `.tocify`).
+        -->
+        <link rel="stylesheet" type="text/css" href="../../css/jquery.tocify.css" />
+
+        <style>
+        .navbar {
+            margin-bottom: 0px;
+        }
+
+        .banner-image {
+            width:100%;
+        }
+
+        .banner {
+            margin-left: 0px;
+            margin-right: 0px;
+        }
+
+        body {
+            background-color: #e2e2e2;
+        }
+
+        #page {
+            padding-left:0;
+            padding-right:0;
+            background-color: #ffffff;
+        }
+        </style>
     </head>
     <body>
-        <div id="page">
-            <div id="header">
-                <div id="logo">
-                    <a href="../../">Richard Goulter's Blog</a>
-                </div>
-                <div id="navigation">
-                    <a href="../../">Home</a>
-                    <a href="../../yi.html">Yi</a>
-                    <a href="../../emacs.html">Emacs</a>
-                    <a href="../../archive.html">Archive</a>
-                </div>
-            <div>
-                <img src="../../images/blog-banner.png" />
-            </div>
+        <div id="page" class="container">
+            <!-- This, with no padding on left/right -->
+            <div class="banner">
+                <nav class="navbar navbar-default">
+    <div class="collapse navbar-collapse">
+        <a class="navbar-brand" href="../../">Richard Goulter's Blog</a>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="../../">Home</a></li>
+            <li><a href="../../yi.html">Yi</a></li>
+            <li><a href="../../emacs.html">Emacs</a></li>
+            <li><a href="../../archive.html">Archive</a></li>
+        </ul>
+    </div>
+</nav>
+
+                <img class="banner-image" src="../../images/blog-banner.png" />
             </div>
 
+            <hr style="margin: 0px; border-top: 5px solid black;" />
 
-            <div id="content">
+            <div id="content" class="container">
                 <h1>The Better Half of XCOM</h1>
-
                 <div class="info">
     Posted on July 30, 2013
     
         by richardgoulter
-    
-</div>
-<div class="info">
+    <br />
     
     Tags: <a href="../../tags/analysis.html">analysis</a>, <a href="../../tags/game%20design.html">game design</a>
     
 </div>
 
 <p>I had a playthrough of XCOM: Enemy Unknown these holidays.</p>
-<p>For those who’ve not played it, XCOM’s thematic setting is about saving the world from an alien invasion; gameplay-wise this is (mostly) half Turn-Based-Tactics and half base-building.<br />The two are symbiotic, in that form the TBT skirmishes you gain resources (or other currency) to make use of in the base; and from the base you can build better weapons and armour.</p>
+<p>For those who’ve not played it, XCOM’s thematic setting is about saving the world from an alien invasion; gameplay-wise this is (mostly) half Turn-Based-Tactics and half base-building.<br />
+The two are symbiotic, in that form the TBT skirmishes you gain resources (or other currency) to make use of in the base; and from the base you can build better weapons and armour.</p>
 <p>I was somewhat underwhelmed by the Turn-Based Tactics side of things. Not particularly my cup of tea; but also I didn’t play it in a proper way. (Whenever I didn’t do so well, I’d reload an earlier save and come out with a better result. – In action gameplay this is like screwing up at a checkpoint and having to redo; in the mechanics/dynamics of XCOM, it happens to cheapen the experience).</p>
-<p>Anyway,<br />The base-building aspect of XCOM is pretty cool. You get an “underground facility” somewhere in the world, and with the income you get from kicking-alien-ass are able to build research facilities, engineering workshops, satellite uplinks, etc. (which improve research, building, and alien-detection respectively).<br />The base-building is the interlude between skirmishes; or is it that the base-building is interrupted by skirmishes with aliens? (You’ll spend the majority of your time in the TBT skirmishes, so probably that). – The base-building is also interrupted with ‘intercepts’ of Alien UFOs, where the game mechanics didn’t lend to complex dynamics, alas.<br />The story of XCOM is driven by certain specific missions (do this skirmish; shoot down that UFO and do that skirmish; get a super-unit and do a final skirmish). But fortunately (or unfortunately?) the rather engaging arms-race with the alien foes reaches a termination point, where your side ends up more powerful. :-)</p>
-<p>On that last point; the arms-race seems a decent enough trope in videogames for providing tension/challenge. (“my pistol from level one doesn’t do as much damage as this more expensive rifle; I’d better get money to use the rifle”..).<br />But since at the termination point your guys end up on top, the tension flattens a bit at that point. (It might be fair to say that, with a more genuine TBT experience, the tension holds: the aliens end up with super-killer robots. If caught unaware, those super-robots are pretty damaging).</p>
+<p>Anyway,<br />
+The base-building aspect of XCOM is pretty cool. You get an “underground facility” somewhere in the world, and with the income you get from kicking-alien-ass are able to build research facilities, engineering workshops, satellite uplinks, etc. (which improve research, building, and alien-detection respectively).<br />
+The base-building is the interlude between skirmishes; or is it that the base-building is interrupted by skirmishes with aliens? (You’ll spend the majority of your time in the TBT skirmishes, so probably that). – The base-building is also interrupted with ‘intercepts’ of Alien UFOs, where the game mechanics didn’t lend to complex dynamics, alas.<br />
+The story of XCOM is driven by certain specific missions (do this skirmish; shoot down that UFO and do that skirmish; get a super-unit and do a final skirmish). But fortunately (or unfortunately?) the rather engaging arms-race with the alien foes reaches a termination point, where your side ends up more powerful. :-)</p>
+<p>On that last point; the arms-race seems a decent enough trope in videogames for providing tension/challenge. (“my pistol from level one doesn’t do as much damage as this more expensive rifle; I’d better get money to use the rifle”..).<br />
+But since at the termination point your guys end up on top, the tension flattens a bit at that point. (It might be fair to say that, with a more genuine TBT experience, the tension holds: the aliens end up with super-killer robots. If caught unaware, those super-robots are pretty damaging).</p>
 <p>Regardless, I found the key aspect of building-the-base to defend the world was a pretty fun part of XCOM. It was fun to manage the research for more powerful weapons, and to strategically decide where to spend the money for a more effective defense.</p>
 
 
@@ -88,7 +157,10 @@
 
 
             </div>
-            <div id="footer">
+
+            <hr style="margin-bottom: 0px; border-top: 2px solid black;" />
+
+            <div id="footer" class="pull-right" style="padding-right: 10px;">
                 Site proudly generated by
                 <a href="http://jaspervdj.be/hakyll">Hakyll</a>
             </div>

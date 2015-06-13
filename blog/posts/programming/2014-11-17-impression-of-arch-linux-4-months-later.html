@@ -1,51 +1,124 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!DOCTYPE HTML>
+<html lang="en">
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>Richard Goulter's Blog - Impression of Arch Linux, 4 Months Later</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Impression of Arch Linux, 4 Months Later - Richard Goulter's Blog</title>
+
+        <!-- My (Old) CSS theme -->
         <link rel="stylesheet" type="text/css" href="../../css/default.css" />
+
+        <!--
+            jQuery & jQueryUI
+        -->
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css" />
+
+        <!--
+            Pandoc Style CSS
+            (for syntax highlighted snippets)
+        -->
         <link rel="stylesheet" type="text/css" href="../../css/syntax.css" />
+
+        <!--
+            Bootstrap
+        -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+        <!--
+            Waypoints, and Waypoints-Sticky,
+            so we can do this:
+            http://imakewebthings.com/waypoints/shortcuts/sticky-elements/
+        -->
+        <script src="../../js/jquery.waypoints.min.js"></script>
+        <script src="../../js/sticky.min.js"></script>
+
+        <!--
+            TOCify
+        -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js"></script>
+        <!--
+            Patched TOCify css file.
+            (Don't want fixed `.tocify`).
+        -->
+        <link rel="stylesheet" type="text/css" href="../../css/jquery.tocify.css" />
+
+        <style>
+        .navbar {
+            margin-bottom: 0px;
+        }
+
+        .banner-image {
+            width:100%;
+        }
+
+        .banner {
+            margin-left: 0px;
+            margin-right: 0px;
+        }
+
+        body {
+            background-color: #e2e2e2;
+        }
+
+        #page {
+            padding-left:0;
+            padding-right:0;
+            background-color: #ffffff;
+        }
+        </style>
     </head>
     <body>
-        <div id="page">
-            <div id="header">
-                <div id="logo">
-                    <a href="../../">Richard Goulter's Blog</a>
-                </div>
-                <div id="navigation">
-                    <a href="../../">Home</a>
-                    <a href="../../yi.html">Yi</a>
-                    <a href="../../emacs.html">Emacs</a>
-                    <a href="../../archive.html">Archive</a>
-                </div>
-            <div>
-                <img src="../../images/blog-banner.png" />
-            </div>
+        <div id="page" class="container">
+            <!-- This, with no padding on left/right -->
+            <div class="banner">
+                <nav class="navbar navbar-default">
+    <div class="collapse navbar-collapse">
+        <a class="navbar-brand" href="../../">Richard Goulter's Blog</a>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="../../">Home</a></li>
+            <li><a href="../../yi.html">Yi</a></li>
+            <li><a href="../../emacs.html">Emacs</a></li>
+            <li><a href="../../archive.html">Archive</a></li>
+        </ul>
+    </div>
+</nav>
+
+                <img class="banner-image" src="../../images/blog-banner.png" />
             </div>
 
+            <hr style="margin: 0px; border-top: 5px solid black;" />
 
-            <div id="content">
+            <div id="content" class="container">
                 <h1>Impression of Arch Linux, 4 Months Later</h1>
-
                 <div class="info">
     Posted on November 17, 2014
     
         by Richard Goulter
-    
-</div>
-<div class="info">
+    <br />
     
     Tags: <a href="../../tags/arch.html">arch</a>, <a href="../../tags/linux.html">linux</a>, <a href="../../tags/osx.html">osx</a>
     
 </div>
 
-<p>So. I’ve been busy these last few months. Phew.<br />One of my previous posts was about my initial impression of Arch Linux. That was four months ago. I’m still using Arch Linux; which tells you I either like Arch, or I’m obstinate enough to not use other things. (The truth is likely a bit of each).</p>
-<p>I will say, not everyone who uses Arch is necessarily a big fan of it. One of my supremely clever classmates (who also likes DSK) was using Arch around the time I started using it. He since stopped; he said the maintenance issues were too tedious to bother with. He was glad for the experience, though; saying that Arch Linux is one of those things you have to do once, and then never again. (He compared this to Gentoo Linux; Gentoo Linux’s thing, for folk like me who don’t know, is “compile everything from source” rather than pre-built packages).<br />– about maintenance; since I’ve now been using Arch for some time, I now have better experience so as to be able to comment on this. Don’t believe the horror stories you read on the internet, I’ll say. (As far as I know, many of these would be from when Arch was changing its bootloader). The biggest snag I ran into was when Arch upgraded/adjusted the way it handled Java; this was difficult enough such that <code># pacman -Syu</code> wasn’t enough to upgrade the system (<em>gasp</em>). It obviously broke trying this; going to archlinux.org was enough to explain what to do.<br />Besides issues of “tough upgrades” (which are rare, and not all that tough), the more arguably tedious thing about Arch is you do have to constantly keep your system up to date. (Rather, you have to constantly run the command which keeps the system up to date). <em>“What happens if you don’t?”</em>.If your packages aren’t up to date, then you’ll run into difficulties when you try to install additional packages. I can’t think of other (common) disadvantages off the top of my head. <em>“How tedious is this?”</em>. Hrm. That depends. From the main Arch repositories, this isn’t tedious at all. For packages installed from the Arch User Repository (e.g. using Yaourt), it’s more tedious since it requires so much manual intervention to do. My experience in particular is that for a handful of these packages (and in particular, GitHub’s Atom) they will update fairly frequently, and this can be tedious.<br />- I’d say this is perhaps comparable to how mobile devices frequently get App updates. Keeping your system up to date isn’t such a niche thing.</p>
-<p>Besides this, the thing to emphasise with Arch is that, by using Arch, you get to learn things. Arguably this is a euphemism for “if you want something (fixed), you have to do it yourself”.<br />No, I can’t think of examples off the top of my head.<br />Yes, it’s possible to use Arch without knowing every detail of every part of the system.</p>
-<p>Not applicable to everyone, but for those heavily into Haskell: Haskell still hasn’t solved the “cabal hell” problem all that well, even if cabal sandboxes are a good step in the right direction. To this extent, ArchHaskell, which provides package-wrappers around cabal projects, is a good way to deal with keeping a consistent, up to date Haskell distribution. (And “cabal isn’t a package manager” as anyone who’s asked how to ‘uninstall’ a package has encountered).<br />I haven’t been using ArchHaskell for an extensive period of time. I sincerely believe it’s less painful than not using it. However, perhaps the limitation is it’s not as easy to interact with older versions of dependencies? (I’m not sure about this).</p>
-<p>– I do love tools. And while I don’t necessarily improve my skills with the tools as much as the tools encourage me to; (I’m sure I’ve discussed the Vim philosophy before?), I think Arch has a similar mentality. cf. The ArchWiki, which is fantastic.<br />Rather, I mean, I would love to get more into a keyboard-focussed workflow. I would love to be able to use a second display, and make use of it without having to rely on a mouse (which just seems a painfully slow way to use a second display; it seems like diminishing returns compared to using workspaces - I say this as someone whose workflow is split between a workspace with many TMux tabs, and a workspace for the web browser. I can understand without the convenience of TMux tabs, this mighn’t seem relevant). XMonad is something I’d toyed with slightly, but I guess maybe Window Managers aren’t the easiest things to get into.</p>
-<p>Downsides of Arch? I’m convinced the wifi driver isn’t as good as the OSX wifi driver. Although when I’m logged into OSX, I suppose the wifi isn’t perfect there, either, so maybe this isn’t a sensible negative.<br />The biggest detriment is that in Cinnamon, the wiki page says the Bluetooth is unsupported. As such, I’ve not tried very hard to get Bluetooth working. When I did, my impression of using my Bluetooth mouse wasn’t that great. YMMV.</p>
+<p>So. I’ve been busy these last few months. Phew.<br />
+One of my previous posts was about my initial impression of Arch Linux. That was four months ago. I’m still using Arch Linux; which tells you I either like Arch, or I’m obstinate enough to not use other things. (The truth is likely a bit of each).</p>
+<p>I will say, not everyone who uses Arch is necessarily a big fan of it. One of my supremely clever classmates (who also likes DSK) was using Arch around the time I started using it. He since stopped; he said the maintenance issues were too tedious to bother with. He was glad for the experience, though; saying that Arch Linux is one of those things you have to do once, and then never again. (He compared this to Gentoo Linux; Gentoo Linux’s thing, for folk like me who don’t know, is “compile everything from source” rather than pre-built packages).<br />
+– about maintenance; since I’ve now been using Arch for some time, I now have better experience so as to be able to comment on this. Don’t believe the horror stories you read on the internet, I’ll say. (As far as I know, many of these would be from when Arch was changing its bootloader). The biggest snag I ran into was when Arch upgraded/adjusted the way it handled Java; this was difficult enough such that <code># pacman -Syu</code> wasn’t enough to upgrade the system (<em>gasp</em>). It obviously broke trying this; going to archlinux.org was enough to explain what to do.<br />
+Besides issues of “tough upgrades” (which are rare, and not all that tough), the more arguably tedious thing about Arch is you do have to constantly keep your system up to date. (Rather, you have to constantly run the command which keeps the system up to date). <em>“What happens if you don’t?”</em>.If your packages aren’t up to date, then you’ll run into difficulties when you try to install additional packages. I can’t think of other (common) disadvantages off the top of my head. <em>“How tedious is this?”</em>. Hrm. That depends. From the main Arch repositories, this isn’t tedious at all. For packages installed from the Arch User Repository (e.g. using Yaourt), it’s more tedious since it requires so much manual intervention to do. My experience in particular is that for a handful of these packages (and in particular, GitHub’s Atom) they will update fairly frequently, and this can be tedious.<br />
+- I’d say this is perhaps comparable to how mobile devices frequently get App updates. Keeping your system up to date isn’t such a niche thing.</p>
+<p>Besides this, the thing to emphasise with Arch is that, by using Arch, you get to learn things. Arguably this is a euphemism for “if you want something (fixed), you have to do it yourself”.<br />
+No, I can’t think of examples off the top of my head.<br />
+Yes, it’s possible to use Arch without knowing every detail of every part of the system.</p>
+<p>Not applicable to everyone, but for those heavily into Haskell: Haskell still hasn’t solved the “cabal hell” problem all that well, even if cabal sandboxes are a good step in the right direction. To this extent, ArchHaskell, which provides package-wrappers around cabal projects, is a good way to deal with keeping a consistent, up to date Haskell distribution. (And “cabal isn’t a package manager” as anyone who’s asked how to ‘uninstall’ a package has encountered).<br />
+I haven’t been using ArchHaskell for an extensive period of time. I sincerely believe it’s less painful than not using it. However, perhaps the limitation is it’s not as easy to interact with older versions of dependencies? (I’m not sure about this).</p>
+<p>– I do love tools. And while I don’t necessarily improve my skills with the tools as much as the tools encourage me to; (I’m sure I’ve discussed the Vim philosophy before?), I think Arch has a similar mentality. cf. The ArchWiki, which is fantastic.<br />
+Rather, I mean, I would love to get more into a keyboard-focussed workflow. I would love to be able to use a second display, and make use of it without having to rely on a mouse (which just seems a painfully slow way to use a second display; it seems like diminishing returns compared to using workspaces - I say this as someone whose workflow is split between a workspace with many TMux tabs, and a workspace for the web browser. I can understand without the convenience of TMux tabs, this mighn’t seem relevant). XMonad is something I’d toyed with slightly, but I guess maybe Window Managers aren’t the easiest things to get into.</p>
+<p>Downsides of Arch? I’m convinced the wifi driver isn’t as good as the OSX wifi driver. Although when I’m logged into OSX, I suppose the wifi isn’t perfect there, either, so maybe this isn’t a sensible negative.<br />
+The biggest detriment is that in Cinnamon, the wiki page says the Bluetooth is unsupported. As such, I’ve not tried very hard to get Bluetooth working. When I did, my impression of using my Bluetooth mouse wasn’t that great. YMMV.</p>
 <p>So. All in all, I do think Arch is fantastic.</p>
 
 
@@ -89,7 +162,10 @@
 
 
             </div>
-            <div id="footer">
+
+            <hr style="margin-bottom: 0px; border-top: 2px solid black;" />
+
+            <div id="footer" class="pull-right" style="padding-right: 10px;">
                 Site proudly generated by
                 <a href="http://jaspervdj.be/hakyll">Hakyll</a>
             </div>

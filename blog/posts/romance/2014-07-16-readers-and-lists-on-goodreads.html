@@ -1,48 +1,114 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!DOCTYPE HTML>
+<html lang="en">
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>Richard Goulter's Blog - Readers, and Lists on GoodReads</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Readers, and Lists on GoodReads - Richard Goulter's Blog</title>
+
+        <!-- My (Old) CSS theme -->
         <link rel="stylesheet" type="text/css" href="../../css/default.css" />
+
+        <!--
+            jQuery & jQueryUI
+        -->
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css" />
+
+        <!--
+            Pandoc Style CSS
+            (for syntax highlighted snippets)
+        -->
         <link rel="stylesheet" type="text/css" href="../../css/syntax.css" />
+
+        <!--
+            Bootstrap
+        -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+        <!--
+            Waypoints, and Waypoints-Sticky,
+            so we can do this:
+            http://imakewebthings.com/waypoints/shortcuts/sticky-elements/
+        -->
+        <script src="../../js/jquery.waypoints.min.js"></script>
+        <script src="../../js/sticky.min.js"></script>
+
+        <!--
+            TOCify
+        -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js"></script>
+        <!--
+            Patched TOCify css file.
+            (Don't want fixed `.tocify`).
+        -->
+        <link rel="stylesheet" type="text/css" href="../../css/jquery.tocify.css" />
+
+        <style>
+        .navbar {
+            margin-bottom: 0px;
+        }
+
+        .banner-image {
+            width:100%;
+        }
+
+        .banner {
+            margin-left: 0px;
+            margin-right: 0px;
+        }
+
+        body {
+            background-color: #e2e2e2;
+        }
+
+        #page {
+            padding-left:0;
+            padding-right:0;
+            background-color: #ffffff;
+        }
+        </style>
     </head>
     <body>
-        <div id="page">
-            <div id="header">
-                <div id="logo">
-                    <a href="../../">Richard Goulter's Blog</a>
-                </div>
-                <div id="navigation">
-                    <a href="../../">Home</a>
-                    <a href="../../yi.html">Yi</a>
-                    <a href="../../emacs.html">Emacs</a>
-                    <a href="../../archive.html">Archive</a>
-                </div>
-            <div>
-                <img src="../../images/blog-banner.png" />
-            </div>
+        <div id="page" class="container">
+            <!-- This, with no padding on left/right -->
+            <div class="banner">
+                <nav class="navbar navbar-default">
+    <div class="collapse navbar-collapse">
+        <a class="navbar-brand" href="../../">Richard Goulter's Blog</a>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="../../">Home</a></li>
+            <li><a href="../../yi.html">Yi</a></li>
+            <li><a href="../../emacs.html">Emacs</a></li>
+            <li><a href="../../archive.html">Archive</a></li>
+        </ul>
+    </div>
+</nav>
+
+                <img class="banner-image" src="../../images/blog-banner.png" />
             </div>
 
+            <hr style="margin: 0px; border-top: 5px solid black;" />
 
-            <div id="content">
+            <div id="content" class="container">
                 <h1>Readers, and Lists on GoodReads</h1>
-
                 <div class="info">
     Posted on July 16, 2014
     
         by Richard Goulter
-    
-</div>
-<div class="info">
+    <br />
     
     Tags: <a href="../../tags/goodreads.html">goodreads</a>, <a href="../../tags/readers.html">readers</a>
     
 </div>
 
 <p>Readers, man.</p>
-<p>GoodReads has reader lists:<br /><a href="https://www.goodreads.com/list/popular_lists" class="uri">https://www.goodreads.com/list/popular_lists</a></p>
-<p>Perhaps not surprisingly, a list of <a href="https://www.goodreads.com/list/show/497.The_Most_Begun_Read_but_Unfinished_Initiated_book_ever">The Most Begun/Read but Unfinished</a> includes <em>a lot</em> of so-called “literature”.<br />I’m under the impression people don’t finish the books because they’re boring, and they begin reading the books because it’s “literature”, rather than the books being good to read.</p>
+<p>GoodReads has reader lists:<br />
+<a href="https://www.goodreads.com/list/popular_lists" class="uri">https://www.goodreads.com/list/popular_lists</a></p>
+<p>Perhaps not surprisingly, a list of <a href="https://www.goodreads.com/list/show/497.The_Most_Begun_Read_but_Unfinished_Initiated_book_ever">The Most Begun/Read but Unfinished</a> includes <em>a lot</em> of so-called “literature”.<br />
+I’m under the impression people don’t finish the books because they’re boring, and they begin reading the books because it’s “literature”, rather than the books being good to read.</p>
 <p>There are genre-favourite lists like <a href="https://www.goodreads.com/list/show/224.Favorite_Historical_Romance_Novels">Favourite Historical Romance Novels</a> featuring the lit-classics like Pride &amp; Prejudice as well as more recent favourites; Judith M, Lisa K and Julia Q all get heavily represented here.</p>
 <p>The snark which readers hold is also very well represented by the time you get to <a href="https://www.goodreads.com/list/popular_lists?page=7">page 7</a>: <a href="https://www.goodreads.com/list/show/1519.Books_I_Have_No_Intention_of_Reading">Books I Have No Intention of Reading</a> and <a href="https://www.goodreads.com/list/show/15841.Dealbreakers_If_You_Like_This_Book_We_Won_t_Get_Along">Dealbreakers: If You Like This Book We Won’t Get Along</a> have previews of books like Twilight and books from Ann Coulter. (If people really hate Ann Coulter so much, it’s a shame that the Americans haven’t then switched to metric units.. Ann Coulter hates the metric system).</p>
 <p>– Twilight’s an interesting one on these lists; it’s consistently featured among the “I loved this book”, “Best Book”, and “Must Read” lists (at least insofar as the previews show), but also is prominent in the “Worst Book Evar” such lists.</p>
@@ -88,7 +154,10 @@
 
 
             </div>
-            <div id="footer">
+
+            <hr style="margin-bottom: 0px; border-top: 2px solid black;" />
+
+            <div id="footer" class="pull-right" style="padding-right: 10px;">
                 Site proudly generated by
                 <a href="http://jaspervdj.be/hakyll">Hakyll</a>
             </div>

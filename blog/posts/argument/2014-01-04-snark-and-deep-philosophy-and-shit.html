@@ -1,55 +1,128 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!DOCTYPE HTML>
+<html lang="en">
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>Richard Goulter's Blog - Snark and Deep Philosophy and Shit</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Snark and Deep Philosophy and Shit - Richard Goulter's Blog</title>
+
+        <!-- My (Old) CSS theme -->
         <link rel="stylesheet" type="text/css" href="../../css/default.css" />
+
+        <!--
+            jQuery & jQueryUI
+        -->
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css" />
+
+        <!--
+            Pandoc Style CSS
+            (for syntax highlighted snippets)
+        -->
         <link rel="stylesheet" type="text/css" href="../../css/syntax.css" />
+
+        <!--
+            Bootstrap
+        -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+        <!--
+            Waypoints, and Waypoints-Sticky,
+            so we can do this:
+            http://imakewebthings.com/waypoints/shortcuts/sticky-elements/
+        -->
+        <script src="../../js/jquery.waypoints.min.js"></script>
+        <script src="../../js/sticky.min.js"></script>
+
+        <!--
+            TOCify
+        -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js"></script>
+        <!--
+            Patched TOCify css file.
+            (Don't want fixed `.tocify`).
+        -->
+        <link rel="stylesheet" type="text/css" href="../../css/jquery.tocify.css" />
+
+        <style>
+        .navbar {
+            margin-bottom: 0px;
+        }
+
+        .banner-image {
+            width:100%;
+        }
+
+        .banner {
+            margin-left: 0px;
+            margin-right: 0px;
+        }
+
+        body {
+            background-color: #e2e2e2;
+        }
+
+        #page {
+            padding-left:0;
+            padding-right:0;
+            background-color: #ffffff;
+        }
+        </style>
     </head>
     <body>
-        <div id="page">
-            <div id="header">
-                <div id="logo">
-                    <a href="../../">Richard Goulter's Blog</a>
-                </div>
-                <div id="navigation">
-                    <a href="../../">Home</a>
-                    <a href="../../yi.html">Yi</a>
-                    <a href="../../emacs.html">Emacs</a>
-                    <a href="../../archive.html">Archive</a>
-                </div>
-            <div>
-                <img src="../../images/blog-banner.png" />
-            </div>
+        <div id="page" class="container">
+            <!-- This, with no padding on left/right -->
+            <div class="banner">
+                <nav class="navbar navbar-default">
+    <div class="collapse navbar-collapse">
+        <a class="navbar-brand" href="../../">Richard Goulter's Blog</a>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="../../">Home</a></li>
+            <li><a href="../../yi.html">Yi</a></li>
+            <li><a href="../../emacs.html">Emacs</a></li>
+            <li><a href="../../archive.html">Archive</a></li>
+        </ul>
+    </div>
+</nav>
+
+                <img class="banner-image" src="../../images/blog-banner.png" />
             </div>
 
+            <hr style="margin: 0px; border-top: 5px solid black;" />
 
-            <div id="content">
+            <div id="content" class="container">
                 <h1>Snark and Deep Philosophy and Shit</h1>
-
                 <div class="info">
     Posted on January  4, 2014
     
         by richardgoulter
-    
-</div>
-<div class="info">
+    <br />
     
     Tags: <a href="../../tags/armchairphilosophy.html">armchairphilosophy</a>, <a href="../../tags/argument.html">argument</a>
     
 </div>
 
 <p><a href="http://www.bloomberg.com/news/2013-12-13/why-i-try-not-to-write-bad-reviews.html" class="uri">http://www.bloomberg.com/news/2013-12-13/why-i-try-not-to-write-bad-reviews.html</a></p>
-<p>Read the comments, too. (Except for the one about Obamacare? I’m not sure how that one got in there..).<br />If you have time, perhaps even go so far as to read the opinion piece about Scocca wrote. Seems to be quite long without saying much, though.<br />There are some interesting viewpoints.<br />It’s easy to agree (or disagree) with a viewpoint, but trickier to see conflicting viewpoints and synthesize a view which pleases most, right?</p>
-<p>This stuff is kindof interesting.<br />There internet offers many avenues for ‘interesting’ things to provoke thought, sure.<br />Whatever.</p>
-<p>I’m quite the fanatic, sometimes. Or perhaps all the time.<br />Reading GoodReads reviews is a mixed bag for me. Sometimes I’ll whole-heartedly agree, “YES!”, a review loved all the things I loved. :-) Sometimes it’s quite the opposite, and I’ll get annoyed at how much someone disliked a book I liked (or liked a book a disliked. ;-) ).<br />Sadly, I fall for the trap of thinking that whatever I read first/early is <em>the</em> view held by the consensus. (Might as well, right?).<br />– But GoodReads relates to the above, as a review site you’ll be hard-pressed to guess, since some of those reviews which pissed me off on GoodReads have been snarky as hell.</p>
+<p>Read the comments, too. (Except for the one about Obamacare? I’m not sure how that one got in there..).<br />
+If you have time, perhaps even go so far as to read the opinion piece about Scocca wrote. Seems to be quite long without saying much, though.<br />
+There are some interesting viewpoints.<br />
+It’s easy to agree (or disagree) with a viewpoint, but trickier to see conflicting viewpoints and synthesize a view which pleases most, right?</p>
+<p>This stuff is kindof interesting.<br />
+There internet offers many avenues for ‘interesting’ things to provoke thought, sure.<br />
+Whatever.</p>
+<p>I’m quite the fanatic, sometimes. Or perhaps all the time.<br />
+Reading GoodReads reviews is a mixed bag for me. Sometimes I’ll whole-heartedly agree, “YES!”, a review loved all the things I loved. :-) Sometimes it’s quite the opposite, and I’ll get annoyed at how much someone disliked a book I liked (or liked a book a disliked. ;-) ).<br />
+Sadly, I fall for the trap of thinking that whatever I read first/early is <em>the</em> view held by the consensus. (Might as well, right?).<br />
+– But GoodReads relates to the above, as a review site you’ll be hard-pressed to guess, since some of those reviews which pissed me off on GoodReads have been snarky as hell.</p>
 <p>Seeing as you’re just as good an authority as I in terms of extracting gold from the opinion piece and its comments, we might as well leave each ourselves to it..</p>
 <p>But some of the points/questions raised are worth highlighting. (In no particular order).</p>
 <ul>
 <li><p>Snark is not going to convince anyone who disagrees with the view; but is always going to get positive-feedback in a community which agrees with the snark’s view.</p></li>
 <li><p>Both snark and smarm are poor form compared to “logical, reasonable” argument; but the latter is so much less appealing.</p></li>
-<li><p>“Being nice and not saying bad things” is the equivalent of pacifism.<br />– famously, Amazon top-dog Jeff Bezos tells us “It’s harder to be kind than clever”, explaining how his Grandmother was upset to hear how bad smoking was for her. The truth lies somewhere in-between..</p></li>
+<li><p>“Being nice and not saying bad things” is the equivalent of pacifism.<br />
+– famously, Amazon top-dog Jeff Bezos tells us “It’s harder to be kind than clever”, explaining how his Grandmother was upset to hear how bad smoking was for her. The truth lies somewhere in-between..</p></li>
 <li><p>If there is a “focus on the negative mentality”, issit best to reply with a “focus on the positive” mentality?</p></li>
 </ul>
 <p>Hmm, hmm.</p>
@@ -95,7 +168,10 @@
 
 
             </div>
-            <div id="footer">
+
+            <hr style="margin-bottom: 0px; border-top: 2px solid black;" />
+
+            <div id="footer" class="pull-right" style="padding-right: 10px;">
                 Site proudly generated by
                 <a href="http://jaspervdj.be/hakyll">Hakyll</a>
             </div>

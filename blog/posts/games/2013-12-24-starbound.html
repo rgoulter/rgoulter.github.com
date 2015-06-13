@@ -1,54 +1,132 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!DOCTYPE HTML>
+<html lang="en">
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>Richard Goulter's Blog - Starbound!</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Starbound! - Richard Goulter's Blog</title>
+
+        <!-- My (Old) CSS theme -->
         <link rel="stylesheet" type="text/css" href="../../css/default.css" />
+
+        <!--
+            jQuery & jQueryUI
+        -->
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css" />
+
+        <!--
+            Pandoc Style CSS
+            (for syntax highlighted snippets)
+        -->
         <link rel="stylesheet" type="text/css" href="../../css/syntax.css" />
+
+        <!--
+            Bootstrap
+        -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+        <!--
+            Waypoints, and Waypoints-Sticky,
+            so we can do this:
+            http://imakewebthings.com/waypoints/shortcuts/sticky-elements/
+        -->
+        <script src="../../js/jquery.waypoints.min.js"></script>
+        <script src="../../js/sticky.min.js"></script>
+
+        <!--
+            TOCify
+        -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js"></script>
+        <!--
+            Patched TOCify css file.
+            (Don't want fixed `.tocify`).
+        -->
+        <link rel="stylesheet" type="text/css" href="../../css/jquery.tocify.css" />
+
+        <style>
+        .navbar {
+            margin-bottom: 0px;
+        }
+
+        .banner-image {
+            width:100%;
+        }
+
+        .banner {
+            margin-left: 0px;
+            margin-right: 0px;
+        }
+
+        body {
+            background-color: #e2e2e2;
+        }
+
+        #page {
+            padding-left:0;
+            padding-right:0;
+            background-color: #ffffff;
+        }
+        </style>
     </head>
     <body>
-        <div id="page">
-            <div id="header">
-                <div id="logo">
-                    <a href="../../">Richard Goulter's Blog</a>
-                </div>
-                <div id="navigation">
-                    <a href="../../">Home</a>
-                    <a href="../../yi.html">Yi</a>
-                    <a href="../../emacs.html">Emacs</a>
-                    <a href="../../archive.html">Archive</a>
-                </div>
-            <div>
-                <img src="../../images/blog-banner.png" />
-            </div>
+        <div id="page" class="container">
+            <!-- This, with no padding on left/right -->
+            <div class="banner">
+                <nav class="navbar navbar-default">
+    <div class="collapse navbar-collapse">
+        <a class="navbar-brand" href="../../">Richard Goulter's Blog</a>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="../../">Home</a></li>
+            <li><a href="../../yi.html">Yi</a></li>
+            <li><a href="../../emacs.html">Emacs</a></li>
+            <li><a href="../../archive.html">Archive</a></li>
+        </ul>
+    </div>
+</nav>
+
+                <img class="banner-image" src="../../images/blog-banner.png" />
             </div>
 
+            <hr style="margin: 0px; border-top: 5px solid black;" />
 
-            <div id="content">
+            <div id="content" class="container">
                 <h1>Starbound!</h1>
-
                 <div class="info">
     Posted on December 24, 2013
     
         by richardgoulter
-    
-</div>
-<div class="info">
+    <br />
     
     Tags: <a href="../../tags/game%20design.html">game design</a>, <a href="../../tags/analysis.html">analysis</a>
     
 </div>
 
-<p>It’s still only in Beta, and apparently there’s more to come, but I’ve managed to put enough hours into Starbound to get top-tier armour ( aaand the most powerful crafted weapon :D ).<br />– I wonder whether, in absence of playing with friends, whether I’ll be putting many more hours into it. A big drive of playing Starbound for me was the levelling up.<br />And when there was a ‘Character Reset’ wherein I lost all the contents of my ship, but <em>not</em> the armour I was wearing ;-), it was huge fun to go back to the level-1 planet as a level-7 character, and absolutely <em>dominate</em>.</p>
-<p>Starbound is a game most easily described as “Terraria, in Space”.<br />Which isn’t all that helpful if you don’t know what Terraria is. But if you haven’t heard of either of these, you can’t be much of a PC gamer. Heh, Terraria might be most easily described as like “Minecraft, but 2D”. – Neither of these descriptions is really all that accurate, though.<br />Terraria has so much more personality than “Minecraft-clone” would imply.<br />And the differences between Starbound and Terraria?…</p>
-<p>Starbound lets you travel to different planets.<br />Each planet is procedurally generated. There are, it’s either an unlimited number, or a stupidly huge number anyway. (Which may be interesting in terms of <em>how</em> one might go about storing the state of such a game in a savegame file. … But anyway).<br />And this was the key which distinguished the playing experiences I had with the two games.</p>
-<p>Terraria I kindof liked, kindof didn’t.<br />I never played it with others, to be fair.<br />But.. one thing I really didn’t enjoy about Terraria was the rarity of materials, even though they’re used for tiered-armour and such. (e.g. Get 70 gold bars to craft gold armour; next tier is platinum or something). Trying to get all the ores for that in Terraria was such a bore I eventually ended up cheating, taking advantage of a glitch in the game to duplicate items.</p>
-<p>– It’s tedious in Terraria because there’s only the one world.<br />In Starbound, every tier-X world has plenty of resources of tier-X. There are more planets than a player will be able to practically explore … Well, the phrase “rape and pillage” has a new meaning when the universe is infinite like that. ;-)<br />So it means you can visit a planet, explore it to get as many resources as you want, and if you find you’re not getting so many resources as you were, you can travel to a new planet. Travelling between planets isn’t free, but it’s probably cheaper than trying to mine out every last bit of value from a planet.</p>
+<p>It’s still only in Beta, and apparently there’s more to come, but I’ve managed to put enough hours into Starbound to get top-tier armour ( aaand the most powerful crafted weapon :D ).<br />
+– I wonder whether, in absence of playing with friends, whether I’ll be putting many more hours into it. A big drive of playing Starbound for me was the levelling up.<br />
+And when there was a ‘Character Reset’ wherein I lost all the contents of my ship, but <em>not</em> the armour I was wearing ;-), it was huge fun to go back to the level-1 planet as a level-7 character, and absolutely <em>dominate</em>.</p>
+<p>Starbound is a game most easily described as “Terraria, in Space”.<br />
+Which isn’t all that helpful if you don’t know what Terraria is. But if you haven’t heard of either of these, you can’t be much of a PC gamer. Heh, Terraria might be most easily described as like “Minecraft, but 2D”. – Neither of these descriptions is really all that accurate, though.<br />
+Terraria has so much more personality than “Minecraft-clone” would imply.<br />
+And the differences between Starbound and Terraria?…</p>
+<p>Starbound lets you travel to different planets.<br />
+Each planet is procedurally generated. There are, it’s either an unlimited number, or a stupidly huge number anyway. (Which may be interesting in terms of <em>how</em> one might go about storing the state of such a game in a savegame file. … But anyway).<br />
+And this was the key which distinguished the playing experiences I had with the two games.</p>
+<p>Terraria I kindof liked, kindof didn’t.<br />
+I never played it with others, to be fair.<br />
+But.. one thing I really didn’t enjoy about Terraria was the rarity of materials, even though they’re used for tiered-armour and such. (e.g. Get 70 gold bars to craft gold armour; next tier is platinum or something). Trying to get all the ores for that in Terraria was such a bore I eventually ended up cheating, taking advantage of a glitch in the game to duplicate items.</p>
+<p>– It’s tedious in Terraria because there’s only the one world.<br />
+In Starbound, every tier-X world has plenty of resources of tier-X. There are more planets than a player will be able to practically explore … Well, the phrase “rape and pillage” has a new meaning when the universe is infinite like that. ;-)<br />
+So it means you can visit a planet, explore it to get as many resources as you want, and if you find you’re not getting so many resources as you were, you can travel to a new planet. Travelling between planets isn’t free, but it’s probably cheaper than trying to mine out every last bit of value from a planet.</p>
 <p>(As an aside, a second notable difference is that Starbound opts for like a recharging energy-bar as the ammo for weapons like bows, guns, etc., whereas Terraria demanded you have the arrows or bullets or such. This does remove the tedium of having to ensure materials for combat with these, but also restricts use in that missing during a fight becomes really ‘expensive’; “in a fight” isn’t the ideal situation to be waiting on you energy to refill).</p>
-<p>Starbound’s planets being so much more disposable than Terraria’s means it’s much less personal.<br />I suppose all Terraria worlds were the same. They’re generated randomly, and will have different deserts/jungles/biomes in different places, but the nature of the world will be much the same across all playthroughs of Terraria. But.. my Terraria world would definitely have felt like “mine” since I was the one who was mining it; I build a house there, and build houses for other NPCs to come visit. I constructed tunnels and pathways. (I guess the “tunnel to hell” was something others had, too, so that’s not mine as much).</p>
-<p>Starbound never really reaches that level of attachment.. though they do have a “Home planet” feature which maybe tries to simulate the above. Maybe I should try that.<br />But I suppose the allure of the game here for me is conquest, rather than world-building.. so perhaps not.</p>
-<p>“Terraria in Space”?<br />Insofar as you spend a lot of time mining, or otherwise looking for resources, sure. But I find the experience of the two games to otherwise be quite different.</p>
+<p>Starbound’s planets being so much more disposable than Terraria’s means it’s much less personal.<br />
+I suppose all Terraria worlds were the same. They’re generated randomly, and will have different deserts/jungles/biomes in different places, but the nature of the world will be much the same across all playthroughs of Terraria. But.. my Terraria world would definitely have felt like “mine” since I was the one who was mining it; I build a house there, and build houses for other NPCs to come visit. I constructed tunnels and pathways. (I guess the “tunnel to hell” was something others had, too, so that’s not mine as much).</p>
+<p>Starbound never really reaches that level of attachment.. though they do have a “Home planet” feature which maybe tries to simulate the above. Maybe I should try that.<br />
+But I suppose the allure of the game here for me is conquest, rather than world-building.. so perhaps not.</p>
+<p>“Terraria in Space”?<br />
+Insofar as you spend a lot of time mining, or otherwise looking for resources, sure. But I find the experience of the two games to otherwise be quite different.</p>
 
 
 <hr />
@@ -91,7 +169,10 @@
 
 
             </div>
-            <div id="footer">
+
+            <hr style="margin-bottom: 0px; border-top: 2px solid black;" />
+
+            <div id="footer" class="pull-right" style="padding-right: 10px;">
                 Site proudly generated by
                 <a href="http://jaspervdj.be/hakyll">Hakyll</a>
             </div>

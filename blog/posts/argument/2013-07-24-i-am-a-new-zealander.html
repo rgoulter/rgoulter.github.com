@@ -1,55 +1,133 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!DOCTYPE HTML>
+<html lang="en">
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>Richard Goulter's Blog - I am a New Zealander</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>I am a New Zealander - Richard Goulter's Blog</title>
+
+        <!-- My (Old) CSS theme -->
         <link rel="stylesheet" type="text/css" href="../../css/default.css" />
+
+        <!--
+            jQuery & jQueryUI
+        -->
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css" />
+
+        <!--
+            Pandoc Style CSS
+            (for syntax highlighted snippets)
+        -->
         <link rel="stylesheet" type="text/css" href="../../css/syntax.css" />
+
+        <!--
+            Bootstrap
+        -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+        <!--
+            Waypoints, and Waypoints-Sticky,
+            so we can do this:
+            http://imakewebthings.com/waypoints/shortcuts/sticky-elements/
+        -->
+        <script src="../../js/jquery.waypoints.min.js"></script>
+        <script src="../../js/sticky.min.js"></script>
+
+        <!--
+            TOCify
+        -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js"></script>
+        <!--
+            Patched TOCify css file.
+            (Don't want fixed `.tocify`).
+        -->
+        <link rel="stylesheet" type="text/css" href="../../css/jquery.tocify.css" />
+
+        <style>
+        .navbar {
+            margin-bottom: 0px;
+        }
+
+        .banner-image {
+            width:100%;
+        }
+
+        .banner {
+            margin-left: 0px;
+            margin-right: 0px;
+        }
+
+        body {
+            background-color: #e2e2e2;
+        }
+
+        #page {
+            padding-left:0;
+            padding-right:0;
+            background-color: #ffffff;
+        }
+        </style>
     </head>
     <body>
-        <div id="page">
-            <div id="header">
-                <div id="logo">
-                    <a href="../../">Richard Goulter's Blog</a>
-                </div>
-                <div id="navigation">
-                    <a href="../../">Home</a>
-                    <a href="../../yi.html">Yi</a>
-                    <a href="../../emacs.html">Emacs</a>
-                    <a href="../../archive.html">Archive</a>
-                </div>
-            <div>
-                <img src="../../images/blog-banner.png" />
-            </div>
+        <div id="page" class="container">
+            <!-- This, with no padding on left/right -->
+            <div class="banner">
+                <nav class="navbar navbar-default">
+    <div class="collapse navbar-collapse">
+        <a class="navbar-brand" href="../../">Richard Goulter's Blog</a>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="../../">Home</a></li>
+            <li><a href="../../yi.html">Yi</a></li>
+            <li><a href="../../emacs.html">Emacs</a></li>
+            <li><a href="../../archive.html">Archive</a></li>
+        </ul>
+    </div>
+</nav>
+
+                <img class="banner-image" src="../../images/blog-banner.png" />
             </div>
 
+            <hr style="margin: 0px; border-top: 5px solid black;" />
 
-            <div id="content">
+            <div id="content" class="container">
                 <h1>I am a New Zealander</h1>
-
                 <div class="info">
     Posted on July 24, 2013
     
         by richardgoulter
-    
-</div>
-<div class="info">
+    <br />
     
     Tags: <a href="../../tags/identity.html">identity</a>, <a href="../../tags/analysis.html">analysis</a>, <a href="../../tags/rant.html">rant</a>
     
 </div>
 
 <p>I’m a New Zealander, and I think as someone born &amp; raised in NZ there can be little disagreement about that. Sure.</p>
-<p>But one thing I am not is “New Zealand European”.<br />I see this term on question forms when asking about ethnicity. Like the census. Usually as opposed to “New Zealand Maori”. (Because any NZer who isn’t a Maori must be NZ European?).<br />There’s just something inappropriate about the term.</p>
-<p>For one, perhaps just the phrasing of the term is wrong.<br />A “yellow sailship” is a sailship (which is the color yellow).<br />A “cute kitten” is a kitten (which is cute).<br />So, surely:<br />A “New Zealand European” is a European (who is from New Zealand).<br />Perhaps the term might apply to a European who saw the light and emigrated to live in New Zealand. (But wouldn’t that be “European New Zealander”, a New Zealander…).</p>
-<p>It’d be a pretty far stretch to say I’m European. (Have you heard them speak English? It’s nothing like a good Kiwi accent. ;-) ).<br />I wasn’t born in Europe. Neither were my parents.<br />I’ve never been to Europe.<br />Only European language I can speak is English. (The world would be filled with many more Europeans if this were enough to qualify, for what it’s worth).</p>
-<p>So as a not-European, the term “(New Zealand) European” just doesn’t fit the mark.<br />Were I to say “I’m a New Zealand European.”, I would perhaps then need to say: “But I’m not European.”.</p>
+<p>But one thing I am not is “New Zealand European”.<br />
+I see this term on question forms when asking about ethnicity. Like the census. Usually as opposed to “New Zealand Maori”. (Because any NZer who isn’t a Maori must be NZ European?).<br />
+There’s just something inappropriate about the term.</p>
+<p>For one, perhaps just the phrasing of the term is wrong.<br />
+A “yellow sailship” is a sailship (which is the color yellow).<br />
+A “cute kitten” is a kitten (which is cute).<br />
+So, surely:<br />
+A “New Zealand European” is a European (who is from New Zealand).<br />
+Perhaps the term might apply to a European who saw the light and emigrated to live in New Zealand. (But wouldn’t that be “European New Zealander”, a New Zealander…).</p>
+<p>It’d be a pretty far stretch to say I’m European. (Have you heard them speak English? It’s nothing like a good Kiwi accent. ;-) ).<br />
+I wasn’t born in Europe. Neither were my parents.<br />
+I’ve never been to Europe.<br />
+Only European language I can speak is English. (The world would be filled with many more Europeans if this were enough to qualify, for what it’s worth).</p>
+<p>So as a not-European, the term “(New Zealand) European” just doesn’t fit the mark.<br />
+Were I to say “I’m a New Zealand European.”, I would perhaps then need to say: “But I’m not European.”.</p>
 <p>Regardless, there’s more wrong with the term than just the grammar of the phrase.</p>
 <p>If all the ethnicities which are “New Zealand” ethnicities are only “(New Zealand) Maori” or “(New Zealand) European”, then what choice is there for the New Zealanders who aren’t particularly of ‘European descent’?</p>
 <p>In 2010, Paul Henry <a href="http://www.nzherald.co.nz/nz/news/article.cfm?c_id=1&amp;objectid=10678115">rather infamously</a> questioned whether Governor-General Sir Anand Satyanand, born in New Zealand and of Indian/Pacific descent, was a New Zealander. (This was met with general outrage in NZ for how offensive the question was, and Henry lost his job. In case you didn’t know that).</p>
-<p>I gotta wonder what the Governor-General answered on the census.<br />I don’t doubt that he’s a New Zealander.<br />But as someone of Indian/Pacific descent, is he “New Zealand European” or “New Zealand Maori”?</p>
-<p>I don’t think his case is so unique; of someone of non-European descent coming to New Zealand. Apparently about a quarter of people living in NZ were born overseas. (Thanks Wikipedia).<br />I’m not particularly convinced the notion of ethnicity and identity for New Zealanders can be summarised with a dichotomy of “New Zealand European” and “New Zealand Maori”.</p>
+<p>I gotta wonder what the Governor-General answered on the census.<br />
+I don’t doubt that he’s a New Zealander.<br />
+But as someone of Indian/Pacific descent, is he “New Zealand European” or “New Zealand Maori”?</p>
+<p>I don’t think his case is so unique; of someone of non-European descent coming to New Zealand. Apparently about a quarter of people living in NZ were born overseas. (Thanks Wikipedia).<br />
+I’m not particularly convinced the notion of ethnicity and identity for New Zealanders can be summarised with a dichotomy of “New Zealand European” and “New Zealand Maori”.</p>
 <p>In response, I think the only sensible option left to me, as a New Zealander, is to say, as about 10% of others in my country do, is respond with “Ethnicity: Other: New Zealander”.</p>
 
 
@@ -93,7 +171,10 @@
 
 
             </div>
-            <div id="footer">
+
+            <hr style="margin-bottom: 0px; border-top: 2px solid black;" />
+
+            <div id="footer" class="pull-right" style="padding-right: 10px;">
                 Site proudly generated by
                 <a href="http://jaspervdj.be/hakyll">Hakyll</a>
             </div>

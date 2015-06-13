@@ -1,44 +1,120 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!DOCTYPE HTML>
+<html lang="en">
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>Richard Goulter's Blog - emacs</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>emacs - Richard Goulter's Blog</title>
+
+        <!-- My (Old) CSS theme -->
         <link rel="stylesheet" type="text/css" href="./css/default.css" />
+
+        <!--
+            jQuery & jQueryUI
+        -->
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css" />
+
+        <!--
+            Pandoc Style CSS
+            (for syntax highlighted snippets)
+        -->
         <link rel="stylesheet" type="text/css" href="./css/syntax.css" />
+
+        <!--
+            Bootstrap
+        -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+        <!--
+            Waypoints, and Waypoints-Sticky,
+            so we can do this:
+            http://imakewebthings.com/waypoints/shortcuts/sticky-elements/
+        -->
+        <script src="./js/jquery.waypoints.min.js"></script>
+        <script src="./js/sticky.min.js"></script>
+
+        <!--
+            TOCify
+        -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js"></script>
+        <!--
+            Patched TOCify css file.
+            (Don't want fixed `.tocify`).
+        -->
+        <link rel="stylesheet" type="text/css" href="./css/jquery.tocify.css" />
+
+        <style>
+        .navbar {
+            margin-bottom: 0px;
+        }
+
+        .banner-image {
+            width:100%;
+        }
+
+        .banner {
+            margin-left: 0px;
+            margin-right: 0px;
+        }
+
+        body {
+            background-color: #e2e2e2;
+        }
+
+        #page {
+            padding-left:0;
+            padding-right:0;
+            background-color: #ffffff;
+        }
+        </style>
     </head>
     <body>
-        <div id="page">
-            <div id="header">
-                <div id="logo">
-                    <a href="./">Richard Goulter's Blog</a>
-                </div>
-                <div id="navigation">
-                    <a href="./">Home</a>
-                    <a href="./yi.html">Yi</a>
-                    <a href="./emacs.html">Emacs</a>
-                    <a href="./archive.html">Archive</a>
-                </div>
-            <div>
-                <img src="./images/blog-banner.png" />
-            </div>
+        <div id="page" class="container">
+            <!-- This, with no padding on left/right -->
+            <div class="banner">
+                <nav class="navbar navbar-default">
+    <div class="collapse navbar-collapse">
+        <a class="navbar-brand" href="./">Richard Goulter's Blog</a>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="./">Home</a></li>
+            <li><a href="./yi.html">Yi</a></li>
+            <li><a href="./emacs.html">Emacs</a></li>
+            <li><a href="./archive.html">Archive</a></li>
+        </ul>
+    </div>
+</nav>
+
+                <img class="banner-image" src="./images/blog-banner.png" />
             </div>
 
+            <hr style="margin: 0px; border-top: 5px solid black;" />
 
-            <div id="content">
+            <div id="content" class="container">
                 <h1>emacs</h1>
+                <!--
+contentpage.html, for content-specific pages, like emacs.html/yi.html.
+-->
 
-                <h1 id="emacs">Emacs</h1>
+<div class="row">
+    <div class="col-md-8" id="page-content">
+        <h1 id="emacs">Emacs</h1>
 <p>This is my page for Emacs stuff. Because <a href="yi.html">Yi</a> gets one.</p>
-<h2 id="motivation.-no-emacs-vs-vim-doesnt-matter.">Motivation. (No, Emacs vs Vim Doesn’t Matter).</h2>
-<p>I’m a Vim user. (I might make analogies to Vim / vim community throughout. That’s what I understand). Obviously, what editor you use doesn’t matter. But which editor is better to use is a less stupid question. I’d rather use Notepad++ than Notepad. I’d rather use Atom/SublimeText than Notepad++ for working on a project. – <strong>But</strong>, discussing “which is the best” <strong>is</strong> quite daft: it’s better to discuss what (set of) features or capabilities make for a better editing experience. Other issues which crop up:</p>
+<h2 id="motivation">Motivation</h2>
+<p>No, Emacs vs Vim Doesn’t Matter.<br />
+I’m a Vim user. (I might make analogies to Vim / vim community throughout. That’s what I understand). Obviously, what editor you use doesn’t matter. But which editor is better to use is a less stupid question. I’d rather use Notepad++ than Notepad. I’d rather use Atom/SublimeText than Notepad++ for working on a project. – <strong>But</strong>, discussing “which is the best” <strong>is</strong> quite daft: it’s better to discuss what (set of) features or capabilities make for a better editing experience. Other issues which crop up:</p>
 <ul>
-<li><p><strong>Prestiege/Pretension</strong>: Vim/Emacs have the reputation as being what the ‘smart dudes’ use. So, somehow, anyone using Vim/Emacs must be smart, right? – Despite this, it’s easy to come across users of either who aren’t all that great with the tools they’re using. – This probably shouldn’t affect whether you think Vim or Emacs is better; but it’s a cultural backdrop to the discussion.<br /> (Vim/Emacs aren’t the only tools to suffer fools, btw.).</p></li>
+<li><p><strong>Prestiege/Pretension</strong>: Vim/Emacs have the reputation as being what the ‘smart dudes’ use. So, somehow, anyone using Vim/Emacs must be smart, right? – Despite this, it’s easy to come across users of either who aren’t all that great with the tools they’re using. – This probably shouldn’t affect whether you think Vim or Emacs is better; but it’s a cultural backdrop to the discussion.<br />
+ (Vim/Emacs aren’t the only tools to suffer fools, btw.).</p></li>
 <li><p><strong>Configuration vs Convention</strong>: SublimeText is a good editor, and comes with many great features out-of-the-box (which Vim/Emacs would have to have installed as plugins). That’s “convention”. On the other extreme, Emacs can be customised to the extent that another Emacs user mightn’t be able to pick-up-and-use-it if they came across it. – This is more of a continuum than one-or-the-other; and also depends on whether you want to bother tinkering around or not.</p></li>
 <li><p><strong>Editor Culture</strong>: Like. I’d say Vimmers ought to <a href="posts/programming/2014-04-26-tools.html">work on improving</a>. And the <a href="https://tkf.github.io/2013/06/04/Emacs-is-dead.html">“Emacs is Dead”</a> essay’s thesis is that “emacs culture largely involves making tools which everyone benefits from”. Whether these ones are applicable or not, mutually exclusive or not, who knows. – But you’re more likely to find Vimmers who “don’t know” VimL than Emacsers who don’t know ELisp.</p></li>
 </ul>
 <h1 id="starter-kits">Starter Kits</h1>
-<p>Vim has starter kits like SPF13, Janus, or Cream. (“Cream to make the coffee tastier”, or something).<br />The point being, an unconfigured vim/emacs is essentially an unfriendly editor, greatly enhanced with plugins/configuration.<br />– Or, in terms of “convention vs configuration”: “why not both?”.</p>
+<p>Vim has starter kits like SPF13, Janus, or Cream. (“Cream to make the coffee tastier”, or something).<br />
+The point being, an unconfigured vim/emacs is essentially an unfriendly editor, greatly enhanced with plugins/configuration.<br />
+– Or, in terms of “convention vs configuration”: “why not both?”.</p>
 <p>Turns out this is what Spacemacs is: <a href="https://www.reddit.com/r/emacs/comments/333ywx/did_anyone_else_go_wow_after_trying_spacemacs/">reddit thread</a>. Highlights (from user instant_sunshine):</p>
 <blockquote>
 <p>The WHOLE point of Emacs is to hack your own personal editor together.</p>
@@ -52,8 +128,10 @@
 <p>Sadly, Vim is highly prone to this sort of adoptive use, a package is installed and there is virtually no knowledge on how it’s implemented. Vimmers are “generally” scared of VimScript/VimL.</p>
 <p>I personally don’t want to see such users being the mainstream of Emacs users, I prefer to see Lisp hackers in this space, so we actually get better quality throughout.</p>
 </blockquote>
-<h1 id="sacha-chuas-visual-guide-to-emacs">Sacha Chua’s Visual Guide to Emacs</h1>
-<p><a href="http://sachachua.com/blog/series/a-visual-guide-to-emacs/" class="uri">http://sachachua.com/blog/series/a-visual-guide-to-emacs/</a><br />This is very cute, utterly fantastic.<br />She also links to some <a href="http://sachachua.com/blog/2014/04/emacs-beginner-resources/">Emacs Beginner Resources</a>.</p>
+<h1 id="sacha-chuas-visual-guide">Sacha Chua’s Visual Guide</h1>
+<p><a href="http://sachachua.com/blog/series/a-visual-guide-to-emacs/" class="uri">http://sachachua.com/blog/series/a-visual-guide-to-emacs/</a><br />
+This is very cute, utterly fantastic.<br />
+She also links to some <a href="http://sachachua.com/blog/2014/04/emacs-beginner-resources/">Emacs Beginner Resources</a>.</p>
 <h1 id="mastering-emacs-in-one-year">Mastering Emacs in One Year</h1>
 <p>Follow your friends on Twitter and you’ll come across weird shit like this: <a href="https://github.com/redguardtoo/mastering-emacs-in-one-year-guide/blob/master/guide-en.org">reguardtoo’s Mastering Emacs in One Year - Guide</a>.</p>
 <p>I’m not sure if it’s just the phrasing/language, but not sure I can agree with tthis guy vis-a-vis Starter-Kit discussion above:</p>
@@ -79,35 +157,84 @@
 <h2 id="mode">Mode??</h2>
 <p>What’s a ‘mode’ in Emacs? Seems to me Major/Minor modes; where the ‘Major’ mode is only-one-at-a-time, and ‘Minor’ modes contribute to the functionality. So, Major modes would handle things like language-specific functionality.</p>
 <ul>
-<li><p><a href="http://mattbriggs.net/blog/2012/02/27/awesome-emacs-plugins-evil-mode/">Matt Brigg’s blogpost about EVIL</a><br /> It explains some things for Vim users who want to try Emacs.</p></li>
+<li><p><a href="http://mattbriggs.net/blog/2012/02/27/awesome-emacs-plugins-evil-mode/">Matt Brigg’s blogpost about EVIL</a><br />
+ It explains some things for Vim users who want to try Emacs.</p></li>
 <li><p><a href="http://www.emacswiki.org/emacs/Evil">EmacsWiki EVIL page</a></p></li>
 <li><p><a href="http://stackoverflow.com/questions/8483182/evil-mode-best-practice">S/O post ‘EVIL mode best practices’</a></p></li>
 </ul>
 <h1 id="packages">Packages</h1>
-<p>Vim has, like, Vundle (successor of Pathogen). And a bunch of newer things, I hear.<br />What’s the equivalent for Emacs? Or even equivalent of <code>~/.vimrc</code>, <code>~/.vim</code>?</p>
-<p>EVIL mode wiki page above mentions various: MELPA, Marmelaide, QUELPA, el-get, etc.<br /><a href="http://www.emacswiki.org/emacs/ELPA">ELPA wiki page is enlighening</a>. ‘ELPA’ is a ‘Package Archive’ from which you download plugins. ‘QUELPA’ is the build-it-from-source-on-your-machine alternative.<br />And then issues regarding whether the repository is ‘free’ software or not, etc.</p>
+<p>Vim has, like, Vundle (successor of Pathogen). And a bunch of newer things, I hear.<br />
+What’s the equivalent for Emacs? Or even equivalent of <code>~/.vimrc</code>, <code>~/.vim</code>?</p>
+<p>EVIL mode wiki page above mentions various: MELPA, Marmelaide, QUELPA, el-get, etc.<br />
+<a href="http://www.emacswiki.org/emacs/ELPA">ELPA wiki page is enlighening</a>. ‘ELPA’ is a ‘Package Archive’ from which you download plugins. ‘QUELPA’ is the build-it-from-source-on-your-machine alternative.<br />
+And then issues regarding whether the repository is ‘free’ software or not, etc.</p>
 <ul>
-<li><p><a href="https://github.com/edvorg/req-package">req-package</a>, which builds on top of<br /> <a href="https://github.com/jwiegley/use-package">use-package</a> look promising for this.</p></li>
-<li><p>Relevant S/O question: <a href="http://stackoverflow.com/questions/24867376/what-package-manager-should-i-use-for-emacs">What package manager should I use</a>.<br /> Author points out i) there’re also some good customisations to Emacs which aren’t necessarily in a “package”. ii) it’s good to have an understanding of what’s going on, rather than blindly using <code>package.el</code>, etc.</p></li>
+<li><p><a href="https://github.com/edvorg/req-package">req-package</a>, which builds on top of<br />
+ <a href="https://github.com/jwiegley/use-package">use-package</a> look promising for this.</p></li>
+<li><p>Relevant S/O question: <a href="http://stackoverflow.com/questions/24867376/what-package-manager-should-i-use-for-emacs">What package manager should I use</a>.<br />
+ Author points out i) there’re also some good customisations to Emacs which aren’t necessarily in a “package”. ii) it’s good to have an understanding of what’s going on, rather than blindly using <code>package.el</code>, etc.</p></li>
 </ul>
 <h1 id="recommended-list-of-plugins">Recommended List of Plugins</h1>
 <p>I’ve not searched too extensively for this. So.</p>
 <p>But, naturally, since the trend at some point in the programming world was for “awesome” lists, it’s hardly surprising there’s an <a href="https://github.com/emacs-tw/awesome-emacs">awesome-emacs</a>.</p>
 <p>That’s a pretty comprehensive list. <a href="blog.binchen.org/posts/my-answer-to-what-are-some-must-have-emacs-additions-on-quora-com.html">‘My Answer Two What Are Some Must Have Emacs Additions’</a> mentions some of these; but, on the other hand, doesn’t mention alternatives.</p>
 <h1 id="emacs-tutor">Emacs Tutor</h1>
-<p><a href="http://tuhdo.github.io/emacs-tutor.html">tuhdo’s emacs-tutor</a> comes with large, pretty gifs of Emacs doing its thing.<br />I kindof like that it shows off feature based stuff at the start.</p>
+<p><a href="http://tuhdo.github.io/emacs-tutor.html">tuhdo’s emacs-tutor</a> comes with large, pretty gifs of Emacs doing its thing.<br />
+I kindof like that it shows off feature based stuff at the start.</p>
 <p>Somewhat apprehensive at the thought of a community which needs fancy-animated-gifs to get excited about anything, though: – I’m not sure about Emacs, but Vim at least has excellent help documentation.</p>
 <h1 id="org-mode">Org Mode</h1>
-<p>One of those heard-this-about-emacs things.<br />One-year-guide-to-Emacs recommends Org-mode as a gateway drug to Emacs.</p>
+<p>One of those heard-this-about-emacs things.<br />
+One-year-guide-to-Emacs recommends Org-mode as a gateway drug to Emacs.</p>
 <p>So, here are a couple of links to Org mode tutorials:</p>
 <ul>
 <li><p><a href="http://orgmode.org/worg/org-tutorials/org4beginners.html" class="uri">http://orgmode.org/worg/org-tutorials/org4beginners.html</a></p></li>
 <li><p><a href="https://emacsclub.github.io/html/org_tutorial.html" class="uri">https://emacsclub.github.io/html/org_tutorial.html</a></p></li>
 </ul>
 <h1 id="emacs.sexy">Emacs.Sexy</h1>
-<p><a href="http://emacs.sexy/">emacs.sexy</a>.<br />It has to be said. Much less amusing/fun than <a href="vim.sexy" class="uri">vim.sexy</a>, which is quite contemptuous and scathing (just like CS people in general!). Anyway. emacs.sexy is a cute-sy, fancily designed webpage with some great resources for beginners. Kindof like a better version of this page, in a way.</p>
+<p><a href="http://emacs.sexy/">emacs.sexy</a>.<br />
+It has to be said. Much less amusing/fun than <a href="vim.sexy" class="uri">vim.sexy</a>, which is quite contemptuous and scathing (just like CS people in general!). Anyway. emacs.sexy is a cute-sy, fancily designed webpage with some great resources for beginners. Kindof like a better version of this page, in a way.</p>
+    </div>
+    <div class="col-md-4">
+        Contents<br />
+        <div id="toc"></div>
+    </div>
+</div>
+
+<script>
+  //Executes your code when the DOM is ready.  Acts the same as (document).ready().
+  $(function() {
+      //Calls the tocify method on your HTML div.
+      $("#toc").tocify({context: "#page-content", selectors: "h1, h2, h3"});
+  });
+
+  // See http://imakewebthings.com/waypoints/shortcuts/sticky-elements/
+  var sticky = new Waypoint.Sticky({
+      element: $("#toc")
+  });
+</script>
+
+<style>
+  .stuck {
+      position:fixed;
+      top:0;
+  }
+</style>
+
+<!-- TOCify script seems to be using an earlier version of bootstrap. -->
+<style>
+.nav-list > li.active > a,
+.nav-list > li.active > a:hover,
+.nav-list > li.active > a:focus {
+  color: #fff;
+  background-color: #337ab7;
+}
+</style>
+
             </div>
-            <div id="footer">
+
+            <hr style="margin-bottom: 0px; border-top: 2px solid black;" />
+
+            <div id="footer" class="pull-right" style="padding-right: 10px;">
                 Site proudly generated by
                 <a href="http://jaspervdj.be/hakyll">Hakyll</a>
             </div>

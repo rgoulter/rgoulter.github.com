@@ -1,54 +1,136 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!DOCTYPE HTML>
+<html lang="en">
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>Richard Goulter's Blog - Brief Primer on Twitter and Feminism</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Brief Primer on Twitter and Feminism - Richard Goulter's Blog</title>
+
+        <!-- My (Old) CSS theme -->
         <link rel="stylesheet" type="text/css" href="../../css/default.css" />
+
+        <!--
+            jQuery & jQueryUI
+        -->
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css" />
+
+        <!--
+            Pandoc Style CSS
+            (for syntax highlighted snippets)
+        -->
         <link rel="stylesheet" type="text/css" href="../../css/syntax.css" />
+
+        <!--
+            Bootstrap
+        -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+        <!--
+            Waypoints, and Waypoints-Sticky,
+            so we can do this:
+            http://imakewebthings.com/waypoints/shortcuts/sticky-elements/
+        -->
+        <script src="../../js/jquery.waypoints.min.js"></script>
+        <script src="../../js/sticky.min.js"></script>
+
+        <!--
+            TOCify
+        -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js"></script>
+        <!--
+            Patched TOCify css file.
+            (Don't want fixed `.tocify`).
+        -->
+        <link rel="stylesheet" type="text/css" href="../../css/jquery.tocify.css" />
+
+        <style>
+        .navbar {
+            margin-bottom: 0px;
+        }
+
+        .banner-image {
+            width:100%;
+        }
+
+        .banner {
+            margin-left: 0px;
+            margin-right: 0px;
+        }
+
+        body {
+            background-color: #e2e2e2;
+        }
+
+        #page {
+            padding-left:0;
+            padding-right:0;
+            background-color: #ffffff;
+        }
+        </style>
     </head>
     <body>
-        <div id="page">
-            <div id="header">
-                <div id="logo">
-                    <a href="../../">Richard Goulter's Blog</a>
-                </div>
-                <div id="navigation">
-                    <a href="../../">Home</a>
-                    <a href="../../yi.html">Yi</a>
-                    <a href="../../emacs.html">Emacs</a>
-                    <a href="../../archive.html">Archive</a>
-                </div>
-            <div>
-                <img src="../../images/blog-banner.png" />
-            </div>
+        <div id="page" class="container">
+            <!-- This, with no padding on left/right -->
+            <div class="banner">
+                <nav class="navbar navbar-default">
+    <div class="collapse navbar-collapse">
+        <a class="navbar-brand" href="../../">Richard Goulter's Blog</a>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="../../">Home</a></li>
+            <li><a href="../../yi.html">Yi</a></li>
+            <li><a href="../../emacs.html">Emacs</a></li>
+            <li><a href="../../archive.html">Archive</a></li>
+        </ul>
+    </div>
+</nav>
+
+                <img class="banner-image" src="../../images/blog-banner.png" />
             </div>
 
+            <hr style="margin: 0px; border-top: 5px solid black;" />
 
-            <div id="content">
+            <div id="content" class="container">
                 <h1>Brief Primer on Twitter and Feminism</h1>
-
                 <div class="info">
     Posted on November 18, 2014
     
         by Richard Goulter
-    
-</div>
-<div class="info">
+    <br />
     
     Tags: <a href="../../tags/gender.html">gender</a>, <a href="../../tags/argument.html">argument</a>, <a href="../../tags/twitter.html">twitter</a>, <a href="../../tags/gamergate.html">gamergate</a>, <a href="../../tags/sjw.html">sjw</a>
     
 </div>
 
-<p>When I wrote last on this topic, I approached it with a kind of dreary anger and antagonism. I’m much more hopeful now.<br />Discussing what I’ve learned in the time since I last wrote deserves more care and attention than I have time to give it now; but I’d still like to share a brief thought-dump on it.</p>
-<p>I wrote in my last post I had a respect/admiration for Cathy Young.<br />Indeed, I still do. If I’ve spent many hours reading and thinking over discussions on issues relating to feminism, gender, .. and Social Justice Warriors, etc., then I lay the blame on her. - It was refreshing to see someone take such a balanced approach to the topic.</p>
+<p>When I wrote last on this topic, I approached it with a kind of dreary anger and antagonism. I’m much more hopeful now.<br />
+Discussing what I’ve learned in the time since I last wrote deserves more care and attention than I have time to give it now; but I’d still like to share a brief thought-dump on it.</p>
+<p>I wrote in my last post I had a respect/admiration for Cathy Young.<br />
+Indeed, I still do. If I’ve spent many hours reading and thinking over discussions on issues relating to feminism, gender, .. and Social Justice Warriors, etc., then I lay the blame on her. - It was refreshing to see someone take such a balanced approach to the topic.</p>
 <p>It’s obvious to me that I’m (or at least have been) woefully unaware, uneducated about such arguments.</p>
-<p>Issues I’ve previously reflected on on this blog include the ‘Women Against Feminism’, and Emma Watson’s talk to the UN.<br />Since then, Twitter has been home to a <em>huge</em> controversy known by the hashtag ‘#GamerGate’. (The controversy is either something you’ve heard of and have an opinion on, or something which you can’t hear an unbiased description of..). <em>This</em> blogpost won’t go into the issue. Not deeply, anyway.</p>
+<p>Issues I’ve previously reflected on on this blog include the ‘Women Against Feminism’, and Emma Watson’s talk to the UN.<br />
+Since then, Twitter has been home to a <em>huge</em> controversy known by the hashtag ‘#GamerGate’. (The controversy is either something you’ve heard of and have an opinion on, or something which you can’t hear an unbiased description of..). <em>This</em> blogpost won’t go into the issue. Not deeply, anyway.</p>
 <p>Recently I opted to follow Cathy Young’s Twitter account. It’s been fantastic, but certainly a trip down the rabbit hole.</p>
-<p>Twitter is an interesting medium for this, anyway, in that there’s a 140-character limit.<br />The dynamic this allows is for i) easy, really easy misunderstanding of viewpoints you don’t agree with (which is already hard in the best of circumstances), and ii) endorsing sarcasm and snark about views you disagree with. Sass is king.<br />I say this like I think it’s a bad thing; but while I do enjoy some, there’re certainly examples of snark too vicious for my tastes (even when my viewpoint itself doesn’t conflict).<br />– Another <em>great</em> thing about this is the terminology different ideologies go by. Disapproving of the way something is said, rather than what was said, is called “tone policing” (though my understanding is this term isn’t necessarily always applied in the right ways/circumstances. Go figure).<br />(This didn’t stop one person I got into an argument with from tweeting 31 consecutive replies to me all at once! … Said person hadn’t heard of twitlonger. I hadn’t, either).</p>
-<p>Alas, in all the controversies, namecalling and such is commonplace.<br />If one significant aspect of #GamerGate is an anti-SJW movement, then one can understand that conflicts between ideologies draw up lines of conflict; rather, the anti-SJW will co-opt the #GamerGate tag in backlash against extreme-left views. (And the left will, in kind, mock #GamerGate when expressing their views).</p>
-<p>My point?<br />Firstly, I’ve seen the lens that much of the heated disagreement involve accusations about sincerity. (Do you really mean the things you say you mean?). This is a step-forward in terms of getting people to discuss things, over “shut up you’re wrong”.<br />Secondly, the anti-SJW backlash seems to be going strong. This is a good step towards discussion. (Although, of course, we should discuss ideas by the ideas, not by labels..).<br />Thirdly, lots of this shit is ugly, on both sides. - I like Cathy Young. I’d accuse her of bias, but it’s rare to see prominent figures more balanced than her.</p>
-<p>– I’d also like to follow up on a point I had previously:<br />Last time I wrote, I acknowledged I was clueless about these “nth wave feminist” labels; I wondered if there could be a resource which we could point to which would be an easy introduction into the topic.<br />I’ve since found a candidate.<br />Christina Hoff Sommers (a name which is likely to invoke either a “<em>sigh</em>, but she’s not a <em>real</em> feminist”, or “&lt;3 based mom!” depending on your view) has come to the attention of gamers in GamerGate through her videos on Sexism in Games. It’s kindof neat to see her come to the defence of gamers; it’s kindof neat to see gamers ally with her.<br />It’s not hard to see why: CH Sommers’ agenda is set against the monopoly over feminism which zealously radical feminists have.<br />I recently read her “Freedom Feminism” book. It’s really short, and offers a brief and partial (yet alternative to what CH Sommers sees as unreasonable gender-studies’) narrative of the history of feminism.<br />It made me hopeful; rather, after reading this, different perspectives within feminism made more sense to me. Christina’s call-to-action mightn’t be fully convincing (I’m afraid it leads to more name-calling).<br />I think this is a good resource; although it’s insufficient in and of itself. So maybe I’ll certainly need to keep looking.</p>
+<p>Twitter is an interesting medium for this, anyway, in that there’s a 140-character limit.<br />
+The dynamic this allows is for i) easy, really easy misunderstanding of viewpoints you don’t agree with (which is already hard in the best of circumstances), and ii) endorsing sarcasm and snark about views you disagree with. Sass is king.<br />
+I say this like I think it’s a bad thing; but while I do enjoy some, there’re certainly examples of snark too vicious for my tastes (even when my viewpoint itself doesn’t conflict).<br />
+– Another <em>great</em> thing about this is the terminology different ideologies go by. Disapproving of the way something is said, rather than what was said, is called “tone policing” (though my understanding is this term isn’t necessarily always applied in the right ways/circumstances. Go figure).<br />
+(This didn’t stop one person I got into an argument with from tweeting 31 consecutive replies to me all at once! … Said person hadn’t heard of twitlonger. I hadn’t, either).</p>
+<p>Alas, in all the controversies, namecalling and such is commonplace.<br />
+If one significant aspect of #GamerGate is an anti-SJW movement, then one can understand that conflicts between ideologies draw up lines of conflict; rather, the anti-SJW will co-opt the #GamerGate tag in backlash against extreme-left views. (And the left will, in kind, mock #GamerGate when expressing their views).</p>
+<p>My point?<br />
+Firstly, I’ve seen the lens that much of the heated disagreement involve accusations about sincerity. (Do you really mean the things you say you mean?). This is a step-forward in terms of getting people to discuss things, over “shut up you’re wrong”.<br />
+Secondly, the anti-SJW backlash seems to be going strong. This is a good step towards discussion. (Although, of course, we should discuss ideas by the ideas, not by labels..).<br />
+Thirdly, lots of this shit is ugly, on both sides. - I like Cathy Young. I’d accuse her of bias, but it’s rare to see prominent figures more balanced than her.</p>
+<p>– I’d also like to follow up on a point I had previously:<br />
+Last time I wrote, I acknowledged I was clueless about these “nth wave feminist” labels; I wondered if there could be a resource which we could point to which would be an easy introduction into the topic.<br />
+I’ve since found a candidate.<br />
+Christina Hoff Sommers (a name which is likely to invoke either a “<em>sigh</em>, but she’s not a <em>real</em> feminist”, or “&lt;3 based mom!” depending on your view) has come to the attention of gamers in GamerGate through her videos on Sexism in Games. It’s kindof neat to see her come to the defence of gamers; it’s kindof neat to see gamers ally with her.<br />
+It’s not hard to see why: CH Sommers’ agenda is set against the monopoly over feminism which zealously radical feminists have.<br />
+I recently read her “Freedom Feminism” book. It’s really short, and offers a brief and partial (yet alternative to what CH Sommers sees as unreasonable gender-studies’) narrative of the history of feminism.<br />
+It made me hopeful; rather, after reading this, different perspectives within feminism made more sense to me. Christina’s call-to-action mightn’t be fully convincing (I’m afraid it leads to more name-calling).<br />
+I think this is a good resource; although it’s insufficient in and of itself. So maybe I’ll certainly need to keep looking.</p>
 
 
 <hr />
@@ -91,7 +173,10 @@
 
 
             </div>
-            <div id="footer">
+
+            <hr style="margin-bottom: 0px; border-top: 2px solid black;" />
+
+            <div id="footer" class="pull-right" style="padding-right: 10px;">
                 Site proudly generated by
                 <a href="http://jaspervdj.be/hakyll">Hakyll</a>
             </div>

@@ -1,57 +1,135 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!DOCTYPE HTML>
+<html lang="en">
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>Richard Goulter's Blog - Thoughts on GitHub's Atom</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Thoughts on GitHub's Atom - Richard Goulter's Blog</title>
+
+        <!-- My (Old) CSS theme -->
         <link rel="stylesheet" type="text/css" href="../../css/default.css" />
+
+        <!--
+            jQuery & jQueryUI
+        -->
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css" />
+
+        <!--
+            Pandoc Style CSS
+            (for syntax highlighted snippets)
+        -->
         <link rel="stylesheet" type="text/css" href="../../css/syntax.css" />
+
+        <!--
+            Bootstrap
+        -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+        <!--
+            Waypoints, and Waypoints-Sticky,
+            so we can do this:
+            http://imakewebthings.com/waypoints/shortcuts/sticky-elements/
+        -->
+        <script src="../../js/jquery.waypoints.min.js"></script>
+        <script src="../../js/sticky.min.js"></script>
+
+        <!--
+            TOCify
+        -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js"></script>
+        <!--
+            Patched TOCify css file.
+            (Don't want fixed `.tocify`).
+        -->
+        <link rel="stylesheet" type="text/css" href="../../css/jquery.tocify.css" />
+
+        <style>
+        .navbar {
+            margin-bottom: 0px;
+        }
+
+        .banner-image {
+            width:100%;
+        }
+
+        .banner {
+            margin-left: 0px;
+            margin-right: 0px;
+        }
+
+        body {
+            background-color: #e2e2e2;
+        }
+
+        #page {
+            padding-left:0;
+            padding-right:0;
+            background-color: #ffffff;
+        }
+        </style>
     </head>
     <body>
-        <div id="page">
-            <div id="header">
-                <div id="logo">
-                    <a href="../../">Richard Goulter's Blog</a>
-                </div>
-                <div id="navigation">
-                    <a href="../../">Home</a>
-                    <a href="../../yi.html">Yi</a>
-                    <a href="../../emacs.html">Emacs</a>
-                    <a href="../../archive.html">Archive</a>
-                </div>
-            <div>
-                <img src="../../images/blog-banner.png" />
-            </div>
+        <div id="page" class="container">
+            <!-- This, with no padding on left/right -->
+            <div class="banner">
+                <nav class="navbar navbar-default">
+    <div class="collapse navbar-collapse">
+        <a class="navbar-brand" href="../../">Richard Goulter's Blog</a>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="../../">Home</a></li>
+            <li><a href="../../yi.html">Yi</a></li>
+            <li><a href="../../emacs.html">Emacs</a></li>
+            <li><a href="../../archive.html">Archive</a></li>
+        </ul>
+    </div>
+</nav>
+
+                <img class="banner-image" src="../../images/blog-banner.png" />
             </div>
 
+            <hr style="margin: 0px; border-top: 5px solid black;" />
 
-            <div id="content">
+            <div id="content" class="container">
                 <h1>Thoughts on GitHub's Atom</h1>
-
                 <div class="info">
     Posted on February 27, 2014
     
         by richardgoulter
-    
-</div>
-<div class="info">
+    <br />
     
     Tags: <a href="../../tags/editors.html">editors</a>, <a href="../../tags/atom.html">atom</a>
     
 </div>
 
-<p>Programmers love to discuss and argue over irrelevant issues. One such issue is “which text editor to use”.<br />Some folk side-step the issue with the pragmatic “use whatever works”, but that misses out on the fun.</p>
+<p>Programmers love to discuss and argue over irrelevant issues. One such issue is “which text editor to use”.<br />
+Some folk side-step the issue with the pragmatic “use whatever works”, but that misses out on the fun.</p>
 <p>The current state of things is that for the hardcore, Vim and Emacs are the editors of choice. Sublime Text (ST) is also common for my classmates, who skip the 70 USD pricetag (either by piracy or by keeping-with the “please by this” shareware type dialogs).</p>
 <p>Well. Can’t help but agree with the idea that FOSS is a great way to get something without having to pay for it. (maximum reward, minimum effort). <a href="http://www.codinghorror.com/blog/2004/11/free-as-in-beer.html" class="uri">http://www.codinghorror.com/blog/2004/11/free-as-in-beer.html</a></p>
-<p>In case you haven’t met the discussion on editors before, Vim &amp; Emacs, despite having (the reputation of) a tough learning curve to get into, have the reputation for being the best around at what they do.<br />The less-informed will often be bemused as to why people would “still” use editors which are 20 - 40 years old. What isn’t immediately apparent is, say, the ethos among Vim users reduce time-wasting as much as possible. (Now that I think about it, VimGolf probably lampoons this idea. Huh).</p>
-<p>As I understand things, though: Vim’s customisability comes through VimL, and Emacs can be customised using (Emacs) Lisp. (One of Yegge’s rants has discussion about ELisp. <a href="http://steve-yegge.blogspot.sg/2008/11/ejacs-javascript-interpreter-for-emacs.html" class="uri">http://steve-yegge.blogspot.sg/2008/11/ejacs-javascript-interpreter-for-emacs.html</a> – That was in 2008, and Wikipedia tells me ELisp now has lexical scoping as of 2012).<br />I’ve no idea whether VimL is a bad language.<br />Regardless, my understanding is both programs suffer from not being multi-threaded. (A 5 second google search yields this about emacs <a href="http://www.emacswiki.org/emacs/NoThreading" class="uri">http://www.emacswiki.org/emacs/NoThreading</a>)</p>
-<p>So. Even though Vim/Emacs folk can probably get pretty snobbish about what’s best (and so unfriendly towards new entrants), I would believe that it’ll be possible for an editor to come along and do the same-thing-but-better.<br />Perhaps something for which a modern language is to the editor as VimL is to Vim, ELisp is to Emacs.</p>
-<p>- So it’s exciting to see editors like this come along.<br />ST’s extensibility is in Python. (But I hear it’s not all that extensible. And surely something which costs 70 USD can’t be all that hacker-friendly..).<br />One cool editor to come along recently was LightTable, also. (It’s FOSS!). LightTable’s aim, however, is about the programming environment more-than the text editor itself. (Apparently the smalltalk kids from 30 years ago all say “Yeah, I remember doing it this way back then).</p>
-<p>Anyway.<br />GitHub’s Atom recently released it’s “open beta”. My classmates are sharing beta keys with each other. (Note that with FOSS, you can just share the code instead).<br />There was some interesting reading to be had looking into this:</p>
+<p>In case you haven’t met the discussion on editors before, Vim &amp; Emacs, despite having (the reputation of) a tough learning curve to get into, have the reputation for being the best around at what they do.<br />
+The less-informed will often be bemused as to why people would “still” use editors which are 20 - 40 years old. What isn’t immediately apparent is, say, the ethos among Vim users reduce time-wasting as much as possible. (Now that I think about it, VimGolf probably lampoons this idea. Huh).</p>
+<p>As I understand things, though: Vim’s customisability comes through VimL, and Emacs can be customised using (Emacs) Lisp. (One of Yegge’s rants has discussion about ELisp. <a href="http://steve-yegge.blogspot.sg/2008/11/ejacs-javascript-interpreter-for-emacs.html" class="uri">http://steve-yegge.blogspot.sg/2008/11/ejacs-javascript-interpreter-for-emacs.html</a> – That was in 2008, and Wikipedia tells me ELisp now has lexical scoping as of 2012).<br />
+I’ve no idea whether VimL is a bad language.<br />
+Regardless, my understanding is both programs suffer from not being multi-threaded. (A 5 second google search yields this about emacs <a href="http://www.emacswiki.org/emacs/NoThreading" class="uri">http://www.emacswiki.org/emacs/NoThreading</a>)</p>
+<p>So. Even though Vim/Emacs folk can probably get pretty snobbish about what’s best (and so unfriendly towards new entrants), I would believe that it’ll be possible for an editor to come along and do the same-thing-but-better.<br />
+Perhaps something for which a modern language is to the editor as VimL is to Vim, ELisp is to Emacs.</p>
+<p>- So it’s exciting to see editors like this come along.<br />
+ST’s extensibility is in Python. (But I hear it’s not all that extensible. And surely something which costs 70 USD can’t be all that hacker-friendly..).<br />
+One cool editor to come along recently was LightTable, also. (It’s FOSS!). LightTable’s aim, however, is about the programming environment more-than the text editor itself. (Apparently the smalltalk kids from 30 years ago all say “Yeah, I remember doing it this way back then).</p>
+<p>Anyway.<br />
+GitHub’s Atom recently released it’s “open beta”. My classmates are sharing beta keys with each other. (Note that with FOSS, you can just share the code instead).<br />
+There was some interesting reading to be had looking into this:</p>
 <blockquote>
-<p>“I must be out of touch with modern development. I don’t understand the thought process that leads people to be excited about a closed source, node.js text editor that reports your usage to Google.” from <a href="http://www.reddit.com/r/programming/comments/1z0ykn/atom_launched/" class="uri">http://www.reddit.com/r/programming/comments/1z0ykn/atom_launched/</a><br />-- I like this comment.<br />NodeJS is unpopular for being JS.. but it also suffers single-threadedness in a way. (It “solves” this through asynchronous calls, as far as I know).<br />And the “reports your usage to Google” is more of a FUD remark, and somewhat baseless at that.</p>
+<p>“I must be out of touch with modern development. I don’t understand the thought process that leads people to be excited about a closed source, node.js text editor that reports your usage to Google.” from <a href="http://www.reddit.com/r/programming/comments/1z0ykn/atom_launched/" class="uri">http://www.reddit.com/r/programming/comments/1z0ykn/atom_launched/</a><br />
+-- I like this comment.<br />
+NodeJS is unpopular for being JS.. but it also suffers single-threadedness in a way. (It “solves” this through asynchronous calls, as far as I know).<br />
+And the “reports your usage to Google” is more of a FUD remark, and somewhat baseless at that.</p>
 </blockquote>
-<p>The closed-source “controversy” brings with it a link to this:<br /><a href="http://discuss.atom.io/t/why-is-atom-closed-source/82/7" class="uri">http://discuss.atom.io/t/why-is-atom-closed-source/82/7</a><br />Apparently, GitHub hope to keep the “core” closed-source and monetizable, but have the eco-system about it open-source.</p>
+<p>The closed-source “controversy” brings with it a link to this:<br />
+<a href="http://discuss.atom.io/t/why-is-atom-closed-source/82/7" class="uri">http://discuss.atom.io/t/why-is-atom-closed-source/82/7</a><br />
+Apparently, GitHub hope to keep the “core” closed-source and monetizable, but have the eco-system about it open-source.</p>
 <p>Top-Comment on the pretentious Hacker News is that old joke:</p>
 <blockquote>
 <h2 id="from-the-zen-of-programming">From “The Zen of Programming”:</h2>
@@ -64,12 +142,16 @@
 <p>A hackable text editor for the 21st century I’ll fix: A proprietary (unhackable) text editor that only runs on OS X.</p>
 </blockquote>
 </blockquote>
-<p>Apparently the editor will be available on other OSs later. But again, the conflict between “hackable” and “proprietary”.<br />The complaints about lack of FOSS aren’t purely driven by the desire for free-as-in-beer, though:</p>
+<p>Apparently the editor will be available on other OSs later. But again, the conflict between “hackable” and “proprietary”.<br />
+The complaints about lack of FOSS aren’t purely driven by the desire for free-as-in-beer, though:</p>
 <blockquote>
 <p>I developed some packages for HomeSite in the 90s. When HomeSite was integrated into Dreamweaver and development ceased, I realized that I had wasted my time developing HomeSite packages and that I should never again devote my time to extending closed-source software. Emacs has served me well ever since.</p>
 </blockquote>
 <p>Because the codebase for the “hackable” software was proprietary, effort to be a part of the eco-system is volatile.</p>
-<p>Anyway.<br />HackerNews has another thread about its closed-sourced-ness:<br /><a href="https://news.ycombinator.com/item?id=7310017" class="uri">https://news.ycombinator.com/item?id=7310017</a><br />The top comment here is quite good:</p>
+<p>Anyway.<br />
+HackerNews has another thread about its closed-sourced-ness:<br />
+<a href="https://news.ycombinator.com/item?id=7310017" class="uri">https://news.ycombinator.com/item?id=7310017</a><br />
+The top comment here is quite good:</p>
 <blockquote>
 <p>As far as I’m concerned GitHub is free to handle the licensing of their software however they like, but this opens up an interesting thought experiment:</p>
 <p>We now have at least two companies making significant Chromium-based editors, one is Adobe and the other is GitHub. One of them is developing the core of their editor technology using a fully open-source model (hosted on GitHub, naturally) under a well-understood and widely accepted license, the other isn’t (or at least isn’t currently planning to).</p>
@@ -78,11 +160,15 @@
 <p>It was pointed out GH don’t open-source everything. (They haven’t open-sourced their desktop GH clients, for example). Further down the page, we find a good discussion point to this:</p>
 <blockquote>
 <p>In an article aptly titled “Open source (almost) everything”, GitHub co-founder and current president Tom Preston-Werner writes[0], “Don’t open source anything that represents core business value.” He specifically mentions two examples of what not to open source:</p>
-<p>Core GitHub Rails app (easier to sell when closed)<br />The Jobs Sinatra app (specially crafted integration with github.com)</p>
+<p>Core GitHub Rails app (easier to sell when closed)<br />
+The Jobs Sinatra app (specially crafted integration with github.com)</p>
 <p>Now, I’d find the argument really stretched thin if you were to tell me that a text editor is your core selling point. Where does a text editor fit into GitHub’s overarching mission?</p>
 <p>[0] <a href="http://tom.preston-werner.com/2011/11/22/open-source-everything.html" class="uri">http://tom.preston-werner.com/2011/11/22/open-source-everything.html</a></p>
 </blockquote>
-<p>The attitude of entitlement is complained about just below that.<br />Expecting Open-Source certainly does seem entitled.<br />The above quote seems a good point. (Would GH really suffer financially if it open-sourced the whole editor?).<br />What’s-more, I gotta agree with those that point out there are many other great free (as in beer and speech) editors out already.</p>
+<p>The attitude of entitlement is complained about just below that.<br />
+Expecting Open-Source certainly does seem entitled.<br />
+The above quote seems a good point. (Would GH really suffer financially if it open-sourced the whole editor?).<br />
+What’s-more, I gotta agree with those that point out there are many other great free (as in beer and speech) editors out already.</p>
 <blockquote>
 <p>Though I wouldn’t worry much about Opensourcing, I might think twice to pay for a Text Editor - considering that there are really good free alternatives.</p>
 </blockquote>
@@ -130,7 +216,10 @@
 
 
             </div>
-            <div id="footer">
+
+            <hr style="margin-bottom: 0px; border-top: 2px solid black;" />
+
+            <div id="footer" class="pull-right" style="padding-right: 10px;">
                 Site proudly generated by
                 <a href="http://jaspervdj.be/hakyll">Hakyll</a>
             </div>

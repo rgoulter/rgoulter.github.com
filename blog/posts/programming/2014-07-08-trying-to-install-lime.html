@@ -1,55 +1,123 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!DOCTYPE HTML>
+<html lang="en">
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>Richard Goulter's Blog - Trying to Install Lime</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Trying to Install Lime - Richard Goulter's Blog</title>
+
+        <!-- My (Old) CSS theme -->
         <link rel="stylesheet" type="text/css" href="../../css/default.css" />
+
+        <!--
+            jQuery & jQueryUI
+        -->
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css" />
+
+        <!--
+            Pandoc Style CSS
+            (for syntax highlighted snippets)
+        -->
         <link rel="stylesheet" type="text/css" href="../../css/syntax.css" />
+
+        <!--
+            Bootstrap
+        -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+        <!--
+            Waypoints, and Waypoints-Sticky,
+            so we can do this:
+            http://imakewebthings.com/waypoints/shortcuts/sticky-elements/
+        -->
+        <script src="../../js/jquery.waypoints.min.js"></script>
+        <script src="../../js/sticky.min.js"></script>
+
+        <!--
+            TOCify
+        -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js"></script>
+        <!--
+            Patched TOCify css file.
+            (Don't want fixed `.tocify`).
+        -->
+        <link rel="stylesheet" type="text/css" href="../../css/jquery.tocify.css" />
+
+        <style>
+        .navbar {
+            margin-bottom: 0px;
+        }
+
+        .banner-image {
+            width:100%;
+        }
+
+        .banner {
+            margin-left: 0px;
+            margin-right: 0px;
+        }
+
+        body {
+            background-color: #e2e2e2;
+        }
+
+        #page {
+            padding-left:0;
+            padding-right:0;
+            background-color: #ffffff;
+        }
+        </style>
     </head>
     <body>
-        <div id="page">
-            <div id="header">
-                <div id="logo">
-                    <a href="../../">Richard Goulter's Blog</a>
-                </div>
-                <div id="navigation">
-                    <a href="../../">Home</a>
-                    <a href="../../yi.html">Yi</a>
-                    <a href="../../emacs.html">Emacs</a>
-                    <a href="../../archive.html">Archive</a>
-                </div>
-            <div>
-                <img src="../../images/blog-banner.png" />
-            </div>
+        <div id="page" class="container">
+            <!-- This, with no padding on left/right -->
+            <div class="banner">
+                <nav class="navbar navbar-default">
+    <div class="collapse navbar-collapse">
+        <a class="navbar-brand" href="../../">Richard Goulter's Blog</a>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="../../">Home</a></li>
+            <li><a href="../../yi.html">Yi</a></li>
+            <li><a href="../../emacs.html">Emacs</a></li>
+            <li><a href="../../archive.html">Archive</a></li>
+        </ul>
+    </div>
+</nav>
+
+                <img class="banner-image" src="../../images/blog-banner.png" />
             </div>
 
+            <hr style="margin: 0px; border-top: 5px solid black;" />
 
-            <div id="content">
+            <div id="content" class="container">
                 <h1>Trying to Install Lime</h1>
-
                 <div class="info">
     Posted on July  8, 2014
     
         by Richard Goulter
-    
-</div>
-<div class="info">
+    <br />
     
     Tags: <a href="../../tags/go.html">go</a>, <a href="../../tags/lime.html">lime</a>, <a href="../../tags/editors.html">editors</a>
     
 </div>
 
-<p><a href="https://github.com/limetext/lime">Lime</a> is in that category of obscure and in development text editors. If the name isn’t a hint, Lime is a clone of Sublime Text, a popular cross-platform text editor which students will either pirate or just use without registering. (Just like good ol’ WinZip).<br />(Well, I’m not sure if it’s fair to call these editors “obscure”. NeoVim, LightTable, Atom have 6-8k stars. I <em>thought</em> ST2 was open source, but I can’t find a repo for it).</p>
+<p><a href="https://github.com/limetext/lime">Lime</a> is in that category of obscure and in development text editors. If the name isn’t a hint, Lime is a clone of Sublime Text, a popular cross-platform text editor which students will either pirate or just use without registering. (Just like good ol’ WinZip).<br />
+(Well, I’m not sure if it’s fair to call these editors “obscure”. NeoVim, LightTable, Atom have 6-8k stars. I <em>thought</em> ST2 was open source, but I can’t find a repo for it).</p>
 <p>While a strong motivation for open-source-ness is “yay free stuff”, there’s an interesting comment in the README:</p>
 <blockquote>
 <p>I love the Sublime Text editor. I have created several plugins to make it even better. One thing that scares me though is that it is not open sourced and the pace of nightly releases have recently been anything but nightly, even now that version 3 is out in Beta.</p>
 <p>There was a period of about 6 months after the Sublime Text 2 “stable” version was released where pretty much nothing at all was communicated to the users about what to expect in the future, nor was there much support offered in the forums. People including myself were wondering if the product was dead and I personally wondered what would happen to all the bugs, crashes and annoyances that still existed in ST2. This lack of communication is a dealbreaker to me and I decided that I will not spend any more money on that product because of it.</p>
 </blockquote>
 <p>It seems Lime has a ‘backend’ written in Go, with the possibility of writing a frontend in whichever language. (This architecture sounds like what NeoVim is aiming for).</p>
-<p>Anyway. I wanted to try and Install it.<br />I’m not a Go user.<br />I have run into several difficulties trying to install this on OSX.</p>
+<p>Anyway. I wanted to try and Install it.<br />
+I’m not a Go user.<br />
+I have run into several difficulties trying to install this on OSX.</p>
 <p>After <a href="https://github.com/limetext/lime/wiki/Building">installing dependencies</a>, and then more/less following the “Quickstart” <a href="https://github.com/limetext/lime/wiki/Ubuntu-13.10-(and-probably-others)-quickstart">here</a>.</p>
-<p>On OSX, trying a Go installation with <code>brew install go</code> isn’t even capable of running <code>go run hello.go</code> as per <a href="http://golang.org/doc/install">install instructions here</a> (if hello.go uses package <code>fmt</code>, then it won’t be able to find that).<br />(Of course, but not apparent to a non-Go user, don’t even try <code>go get</code> whatever without having set <code>GOROOT</code>, <code>GOPATH</code>).</p>
+<p>On OSX, trying a Go installation with <code>brew install go</code> isn’t even capable of running <code>go run hello.go</code> as per <a href="http://golang.org/doc/install">install instructions here</a> (if hello.go uses package <code>fmt</code>, then it won’t be able to find that).<br />
+(Of course, but not apparent to a non-Go user, don’t even try <code>go get</code> whatever without having set <code>GOROOT</code>, <code>GOPATH</code>).</p>
 <p>Installing using a <code>.pkg</code> from <a href="http://golang.org/dl/">here</a>, I then get errors as per:</p>
 <pre><code>$ go get github.com/limetext/lime/frontend/termbox
 # github.com/limetext/gopy/lib
@@ -101,7 +169,8 @@ runfinq()
     /usr/local/go/src/pkg/runtime/mgc0.c:2644 +0xcf
 runtime.goexit()
     /usr/local/go/src/pkg/runtime/proc.c:1445</code></pre>
-<p>Presumably this is because CGo wants <em>GCC</em>, not just any C compiler like Clang.<br />(I’ve also run into GCC vs Clang with Haskell. GHC has a patch..).</p>
+<p>Presumably this is because CGo wants <em>GCC</em>, not just any C compiler like Clang.<br />
+(I’ve also run into GCC vs Clang with Haskell. GHC has a patch..).</p>
 <p>Trying out <code>go env</code> lists where it chooses that, so setting <code>CC</code> to <code>gcc-4.8</code> and <code>CXX</code> to <code>g++-4.8</code>, I then get errors as per:</p>
 <pre><code>$ go get github.com/limetext/lime/frontend/termbox
 # github.com/limetext/gopy/lib
@@ -112,7 +181,8 @@ runtime.goexit()
 ../src/github.com/limetext/gopy/lib/code.go:44: cannot use c(globals) (type *C.struct__object) as type *C.PyObject in argument to _Cfunc_PyEval_EvalCode
 ../src/github.com/limetext/gopy/lib/code.go:44: cannot use c(locals) (type *C.struct__object) as type *C.PyObject in argument to _Cfunc_PyEval_EvalCode
 ../src/github.com/limetext/gopy/lib/code.go:45: cannot use ret (type *C.PyObject) as type *C.struct__object in argument to obj2ObjErr</code></pre>
-<p>’tis rather frustrating, and I think I can declare Lime “Hard to Install”..<br />(But also, I’m curious as to how to get around this, still. Maybe a more recent Python 3.3 install.. Maybe a more recent GCC install..).</p>
+<p>’tis rather frustrating, and I think I can declare Lime “Hard to Install”..<br />
+(But also, I’m curious as to how to get around this, still. Maybe a more recent Python 3.3 install.. Maybe a more recent GCC install..).</p>
 
 
 <hr />
@@ -155,7 +225,10 @@ runtime.goexit()
 
 
             </div>
-            <div id="footer">
+
+            <hr style="margin-bottom: 0px; border-top: 2px solid black;" />
+
+            <div id="footer" class="pull-right" style="padding-right: 10px;">
                 Site proudly generated by
                 <a href="http://jaspervdj.be/hakyll">Hakyll</a>
             </div>
