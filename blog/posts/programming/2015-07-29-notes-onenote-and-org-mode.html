@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Case Study in Vim Plugin Development - Richard Goulter's Blog</title>
+        <title>Notes, OneNote and Org Mode - Richard Goulter's Blog</title>
 
         <!-- My (Old) CSS theme -->
         <link rel="stylesheet" type="text/css" href="../../css/default.css" />
@@ -104,79 +104,43 @@
             <hr style="margin: 0px; border-top: 5px solid black;" />
 
             <div id="content" class="container">
-                <h1>Case Study in Vim Plugin Development</h1>
+                <h1>Notes, OneNote and Org Mode</h1>
                 <div class="info">
-    Posted on July 22, 2015
+    Posted on July 29, 2015
     
         by Richard Goulter
     <br />
     
-    Tags: <a href="../../tags/editors.html">editors</a>, <a href="../../tags/vim.html">vim</a>
+    Tags: <a href="../../tags/notes.html">notes</a>, <a href="../../tags/onenote.html">onenote</a>, <a href="../../tags/emacs.html">emacs</a>, <a href="../../tags/org-mode.html">org-mode</a>
     
 </div>
 
-<p>I don’t know a lot about writing plugins.<br />
-My own experience goes as far as trying to write a plugin for Eclipse (which gets <em>very</em> complicated as soon as a plugin isn’t a “monolithic” bundle); as well as writing a quite small plugin for my <a href="https://github.com/rgoulter/c-worksheet.vim">C worksheet</a>. (The fanciest thing it does is to download a JAR archive dependency if not present in the system.).</p>
-<p>So I’m not particularly qualified to say what is or isn’t a good plugin architecture, etc.</p>
-<p>I recently came across the problem: “In Vim, use <code>*</code> to find next occurence of current selection in visual mode”.<br />
-Vim doesn’t offer this behaviour out of the box.<br />
-The fella on IRC was using <a href="https://github.com/nelstrom/vim-visual-star-search">nelstrom/vim-visual-star-search</a>. The readme for this somewhat helpfully links to <a href="https://github.com/thinca/vim-visualstar">thinca/vim-visualstar</a>. – Neither of these repos is outstandingly popular.</p>
-<p>Nelstrom remarks “Looks like it uses a lot more code to do pretty much the same thing. Is it better?”.</p>
-<p>Nelstrom’s plugin is simple enough to show here:</p>
-<pre><code>&quot; From http://got-ravings.blogspot.com/2008/07/vim-pr0n-visual-search-mappings.html
-
-&quot; makes * and # work on visual mode too.
-function! s:VSetSearch(cmdtype)
-  let temp = @s
-  norm! gv&quot;sy
-  let @/ = '\V' . substitute(escape(@s, a:cmdtype.'\'), '\n', '\\n', 'g')
-  let @s = temp
-endfunction
-
-xnoremap * :&lt;C-u&gt;call &lt;SID&gt;VSetSearch('/')&lt;CR&gt;/&lt;C-R&gt;=@/&lt;CR&gt;&lt;CR&gt;
-xnoremap # :&lt;C-u&gt;call &lt;SID&gt;VSetSearch('?')&lt;CR&gt;?&lt;C-R&gt;=@/&lt;CR&gt;&lt;CR&gt;
-
-&quot; recursively vimgrep for word under cursor or selection if you hit leader-star
-nmap &lt;leader&gt;* :execute 'noautocmd vimgrep /\V' . substitute(escape(expand(&quot;&lt;cword&gt;&quot;), '\'), '\n', '\\n', 'g') . '/ **'&lt;CR&gt;
-vmap &lt;leader&gt;* :&lt;C-u&gt;call &lt;SID&gt;VSetSearch()&lt;CR&gt;:execute 'noautocmd vimgrep /' . @/ . '/ **'&lt;CR&gt;</code></pre>
-<p>Thinca’s is <a href="https://raw.githubusercontent.com/thinca/vim-visualstar/master/plugin/visualstar.vim">certainly longer</a>:</p>
-<pre><code>function! s:search(type, g)
-  let s:count = v:count1 . a:type
-  let reg = '&quot;'
-  let [save_reg, save_type] = [getreg(reg), getregtype(reg)]
-  normal! gv&quot;&quot;y
-  let text = @&quot;
-  call setreg(reg, save_reg, save_type)
-
-  let [pre, post] = ['', '']
-  if !a:g
-    ....
-  endif
-
-  let text = substitute(escape(text, '\' . a:type), &quot;\n&quot;, '\\n', 'g')
-
-  let @/ = '\V' . pre . text . post
-  call histadd('/', @/)
-endfunction</code></pre>
-<p>(Code truncated at <code>....</code> for brevity).</p>
-<p>With my current proficiency, I’m sure Nelstrom writes closer to how I’d write:</p>
-<ul>
-<li><p>Cites any sources / close inspiration.</p></li>
-<li><p>Leaves comments explaining anything non-trivial. (Which Thinca doesn’t do AT ALL. Not even for functions!).</p></li>
-</ul>
-<p>Even from this snippet it’s clear that Thinca’s is of higher quality. I’d base that one the use of functions to do caretaking of the editor environment. – It’s not clear what the argument <code>g</code> is for (like the <code>g</code> in substitute?), but the ommitted lines seem to take care of some edge case.<br />
-– Something to note, I guess, it seems that in both cases the VimL is ‘impure’ in providing read-only info. (Again, I’m not sure if it’s possible to get this without the caretaking.).</p>
-<p>Not hatin’ on Nelstrom: while the Vim community has some excellent plugins, I think most Vim users don’t bother touching VimL enough to learn how to do this kindof thing.</p>
+<p>Many programmers who maintain a blog, I believe, use it as a kind of note-keeping place. Programmer-y stuff can be hard; it’s easy to forget what steps to take when building some program on some distribution – especially what difficulties come up, how to overcome them.<br />
+– I’ve used my blog for that.</p>
+<p>I’ve also kept a programming journal.<br />
+I’m not sure how common this is; I’ve never met anyone who’s done the same. One of the techniques I used was, perhaps in a similar vein to de Bono’s Thinking Hats, making use of colour: red was for things which went wrong (e.g. compiler errors which I didn’t know how to fix), green was for questions (e.g. how does X work? why is it doing that?), blue for facts, black for thoughts, purple for new ideas. – That is, when making notes, it’s useful to distinguish different kinds of thoughts.</p>
+<p>When working on my Bachelor of Computing Dissertation, my Final Year Project (FYP), I also made use of Microsoft’s OneNote, in tandem with this journal-writing.<br />
+– During my FYP, there were several aspects to the project which would be fun to explore at the start (e.g. how to write Eclipse plugins, inter-process communication between different programs using e.g. Apache Thrift, BNFs of the C grammar, diagrams of ASTs of various C declarations, etc.). - For this, I did prefer to write with pen &amp; paper: I’ve got a decently sized 5-partition folder filled with my notes for these (&amp; relevant print-outs).<br />
+OneNote was damn useful for maintaining a series of project-related links. Early on in my FYP I was trying to compile CERN’s Cling (a C++ interpreter) on Windows. I never had any success; but OneNote was invaluable in keeping notes like the output of commands, comments from similar efforts, etc.</p>
+<p>From my use and experience, being “searchable” wasn’t such a big deal. (<em>I</em> knew roughly where what I was looking for would be.). This is mitigated by OneNote’s hierarchy UX:<br />
+– What I like about OneNote, in lieu of my technique with ‘colours’ to shape thought, is that OneNote naturally shapes thought into hierarchies: a notebook has sections; sections have pages; a page is where you write, either with paragraphs, or with bullet points: it’s really, really easy to make (and remove) bullet points. (typing “*” is enough for OneNote to say “hey, this is a bullet point”.).<br />
+Of course, being able to paste links in is useful. And there’re icons you can (quite easily) embellish bulletpoints with (like “Important!” icon, etc.).</p>
+<p>Emacs’s Org mode is … not software I’ve used.<br />
+It’s “life changing” for those who do make use of it. (Apparently it’s also a nice gateway drug to Emacs. Though key aspects of Org mode exist in Vim plugins, so there’s that.).<br />
+– A key philosophy behind Org mode is the idea that ‘notes’ &amp; ‘tasks’ are inter-dependent: when you note things, you’re likely to then come up with tasks; and when you manage tasks, you’re likely to note things down.<br />
+At-a-glance, it looks like Emacs’ Org mode has a bunch of fancy .. interfaces, views of data: this data, written in a plain textfile, appears it’s somewhat similar to OneNote: an Org file has headings (and sub-headings, and sub-sub-..), within a heading can have the paragraphs, bullet points, etc.; each heading can have meta-data associated with it (which is where “tasks” come into it), in terms of “TODO/DONE”, custom tags, deadlines, priority, or custom properties.<br />
+– There’s supposedly other fancy tosh like export-to-PDF. That I can’t say I care for.</p>
+<p>A key advantage to Org mode (in native Emacs, or whether in one of the Vim ports) would be ‘lightweight’-ness compared to OneNote. (You <em>can</em> make use of OneNote on Linux, but that’d have to be by opening a web browser. Thus, internet connection required..).<br />
+But I am wondering how well Org mode’s ease-of-use, in terms of inputting bullet points/etc., compares to OneNote.<br />
+I’m also wondering whether, in lay usage, the fancy different-perspectives/searching really make that much of a difference.</p>
 
 
 <hr />
 
 <div>
     
-    <a href="../../posts/programming/2015-07-29-notes-onenote-and-org-mode.html" style="float:left;">Newer post</a>
     
-    
-    <a href="../../posts/argument/2015-07-12-comical-conservative.html" style="float:right; text-align: right;">Older post</a>
+    <a href="../../posts/programming/2015-07-22-case-study-in-vim-plugin-development.html" style="float:right; text-align: right;">Older post</a>
     
 </div>
 <br style="clear: both;" />
@@ -187,9 +151,9 @@ endfunction</code></pre>
     <script type="text/javascript">
         /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
         var disqus_shortname = 'richardgoultersblog'; // required: replace example with your forum shortname
-        var disqus_identifier = '/posts/programming/2015-07-22-case-study-in-vim-plugin-development.html';
-        var disqus_url = 'http://www.rgoulter.com/blog' + '/posts/programming/2015-07-22-case-study-in-vim-plugin-development.html';
-        var disqus_title = 'Case Study in Vim Plugin Development - July 22, 2015';
+        var disqus_identifier = '/posts/programming/2015-07-29-notes-onenote-and-org-mode.html';
+        var disqus_url = 'http://www.rgoulter.com/blog' + '/posts/programming/2015-07-29-notes-onenote-and-org-mode.html';
+        var disqus_title = 'Notes, OneNote and Org Mode - July 29, 2015';
 
         /* * * DON'T EDIT BELOW THIS LINE * * */
         (function() {
