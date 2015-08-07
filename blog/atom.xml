@@ -8,8 +8,56 @@
         <name>Richard Goulter</name>
         <email>richard.goulter+blog@gmail.com</email>
     </author>
-    <updated>2015-07-29T00:00:00Z</updated>
+    <updated>2015-08-07T00:00:00Z</updated>
     <entry>
+    <title>Impressions of Emacs and Org Mode</title>
+    <link href="http://www.rgoulter.com/blog//posts/programming/2015-08-07-impressions-of-emacs-and-org-mode.html" />
+    <id>http://www.rgoulter.com/blog//posts/programming/2015-08-07-impressions-of-emacs-and-org-mode.html</id>
+    <published>2015-08-07T00:00:00Z</published>
+    <updated>2015-08-07T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<div class="info">
+    Posted on August  7, 2015
+    
+        by Richard Goulter
+    <br/>
+    
+    Tags: <a href="/tags/emacs.html">emacs</a>, <a href="/tags/org-mode.html">org-mode</a>, <a href="/tags/vim.html">vim</a>
+    
+</div>
+
+<p>I’m a moderately capable Vim user.<br />
+I’ve not quite gained the habit of trying to <em>constantly</em> improve using Vim; but at the same time, I’m not exactly using it as something only slightly better than Notepad++.</p>
+<p>Lately I’ve been taking quick glances at Emacs.<br />
+I was impressed by <a href="http://bling.github.io/blog/2013/10/27/emacs-as-my-leader-vim-survival-guide/">this post from GitHub user bling</a>, who suggests that Vim is the better <strong>editor</strong>, with a much larger/better plugin-writing community; but suggests that Emacs makes for a better Development Environment.<br />
+– Org mode makes sense as a ‘gateway drug’ to Emacs..</p>
+<h2 id="org-mode">Org Mode</h2>
+<p>The testemonials you see of Org Mode compell interest. In terms of a comprehensive note-taking/task-managing format, I’m not aware of any other formats/doctrines which are anywhere near as popular.</p>
+<p>There are a couple of ‘implementations’ of a subset of Org mode’s features, for vim: <a href="https://github.com/jceb/vim-orgmode">jceb/vim-orgmode</a>, and <a href="https://github.com/hsitz/VimOrganizer">hsitz/VimOrganizer</a>.<br />
+The latter is somewhat less popular, and doesn’t include even a token README, and hasn’t had updates in a year. – It may still be alright, but I’ve not tried it.<br />
+The former has had commits within the last couple of months, does have a README, and is more popular.</p>
+<p><code>vim-orgmode</code> is mostly alright.<br />
+From when I’ve tried to make use of it, there’re a few annoyances I’ve had:</p>
+<ul>
+<li><p>Plain Lists: It was a battle with the auto-indentation to write unordered-lists.</p></li>
+<li><p>Header Tags Alignment: While I encountered issues with this in Emacs also; the problem with <code>vim-orgmode</code> is that it uses <em>TABS</em> to pad out the tags after a header. Tabstop <a href="https://github.com/jceb/vim-orgmode/blob/master/ftplugin/orgmode/liborgmode/headings.py#L92">is assumed</a> (and set to be!) 6. – This isn’t exactly a problem if you’re only editing org files with <code>vim-orgmode</code>, as such; but I’m not, and it’s just annoying knowing it’s there.</p></li>
+</ul>
+<p>It wasn’t a problem for me, with this <code>vim-orgmode</code> plugin, that not every (applicable) part of Org mode was implemented. Org mode seems to have an extensive feature set, and I can’t (at this stage) see myself using most of the features.<br />
+What was kindof interesting is that many of the Org mode things were implemented in Python as a library.</p>
+<p>– While perhaps using Org mode as a poor-man’s-OneNote may not be making the most out of Org mode, I’ve also found it unclear as to the distinguishment in purpose between headers and unordered lists: I often find myself with an unordered list of things, and then will want to ‘TODO’ these.</p>
+<h2 id="emacs">Emacs</h2>
+<p>So, as it is, Emacs is the tool to use to manipulate Org mode.<br />
+Evil mode certainly mitigates the pain of this.</p>
+<p>Emacs feels like it’s an editor in between worlds:<br />
+Emacs, in some sense, rightly has that “programmer’s editor of choice” feel to it: it can be customised with macros, it can be run in a terminal, a prominent irc channel, etc.; in these ways, it’s <strong>very</strong> similar to Vim.<br />
+But, it also feels like it’s a ‘modern’ editor. It’s start-up time is slow. The text isn’t regular-width, regular-height; you can embed images in the editor. Installing plugins, customising features of the editor can be done through a (somewhat shabby) UI within the editor, which includes rendered buttons, textfields and other widgets.<br />
+– Particularly jarring, for example, when writing in Org mode, the formatting of the text is shown as you edit. If text should be bold, then in Emacs the text is bold. Like how MS Word does it; but different than I’m used to when writing markup.<br />
+Yet, Emacs just doesn’t feel as ‘polished’ as these.</p>
+<p>– I ran into a problem: my Org mode looked bad. The tags were being aligned making use of tags. Org mode assumed a tab width of 8 (which somewhat defeats the point of one of the key advantages to tabs, but okay). The tab width was set to 8, but being rendered as 4-wide.<br />
+– The culprit? The <a href="https://github.com/bbatsov/solarized-emacs">solarized mode</a> I was using. I looked at the code; <strong>there’s no mention of tab anywhere!</strong><br />
+But also interesting (or horrifying) to note in the <code>solarized.el</code> file (about 2k LoC) features many lines of code dedicated to setting the colour for each face, for a multitude of different modes. It seems to me if you want to write a mode which looks good with this theme, then the theme would have to know about your mode, and be customized to that. – I’m thinking this is an example of a downside of Emacs’ flexibility. Or perhaps colour schemes are just hard to do properly, and this kind of upstream coupling is the best way.</p>
+]]></summary>
+</entry>
+<entry>
     <title>Notes, OneNote and Org Mode</title>
     <link href="http://www.rgoulter.com/blog//posts/programming/2015-07-29-notes-onenote-and-org-mode.html" />
     <id>http://www.rgoulter.com/blog//posts/programming/2015-07-29-notes-onenote-and-org-mode.html</id>
@@ -461,40 +509,6 @@ As far as I recall, though, the resolution involves the Hero leaving his job and
 Clearly the shoe “lack of internal conflict = boring characters” seems to fit; it’s not clear, though, that the story would obviously be better with whatever “internal conflict”. (Easy fix may be a “I would love the Hero but..”; e.g. ugly Hero [“I’d love him but he’s ugly”], arrogant Hero [“I’d love him but he’s arrogant”], etc.).<br />
 And maybe even if the characters are awfully constructed, that the romance is ‘solid’ is nice anyway.</p>
 <p>But for characters which aren’t flat, have growth &amp; conflict to resolve, it’s the “internal conflict = not bad character” model seems to work well enough for the Romance Novels as for the action/adventure stories.</p>
-]]></summary>
-</entry>
-<entry>
-    <title>Devil in Winter</title>
-    <link href="http://www.rgoulter.com/blog//posts/romance/2015-03-27-devil-in-winter.html" />
-    <id>http://www.rgoulter.com/blog//posts/romance/2015-03-27-devil-in-winter.html</id>
-    <published>2015-03-27T00:00:00Z</published>
-    <updated>2015-03-27T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<div class="info">
-    Posted on March 27, 2015
-    
-        by Richard Goulter
-    <br/>
-    
-    Tags: <a href="/tags/lisa%20kleypas.html">lisa kleypas</a>, <a href="/tags/devil%20in%20winter.html">devil in winter</a>
-    
-</div>
-
-<p>So. Recently I re-read Lisa Kleypas’ “Devil in Winter”.<br />
-Not the first time I’ve re-read that book.</p>
-<p>There are some less-than-stellar parts of the book. (Notably, an awkward sequel-setup, which then doesn’t get follow-through in the next book besides “oh. that. haha. oops.”.).<br />
-But it’s such an amazing, fantastic book! I can’t believe there’re those who don’t think it a 5-outta-5.</p>
-<p>It really puts in the punches, constantly chapter-to-chapter the characters grow and interact and fight and flirt.<br />
-Presumably you’ve read it if you’re reading this?<br />
-I’m not sure I could summarise DiW well. I’m writing this post because I love the book.<br />
-I will say there’re so many moments I love in the book!</p>
-<p>– In the first chapter. When Sebastian insults Eva, and notices she doesn’t flinch at all. (What kindof upbringing would harden her to that?).<br />
-When Sebastian takes care of her on the arduous ride.<br />
-The wedding ceremony.<br />
-Evie’s concern for her husband when he’s in a fight! Evie’s jealousy of her husband! Sebastian’s jealousy of Evie!<br />
-When Sebastian’s wounded on the floor, Evie embrace. :’)<br />
-When they’re in the office, Sebastian’s familiar intimacies with his wife.<br />
-Sebastian coming into his own, putting his otherwise misdirected skills to good use.</p>
-<p>And while I’ve re-read it many times, I still find it hard to put down when I pick it up.</p>
 ]]></summary>
 </entry>
 

@@ -1,0 +1,197 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Impressions of Emacs and Org Mode - Richard Goulter's Blog</title>
+
+        <!-- My (Old) CSS theme -->
+        <link rel="stylesheet" type="text/css" href="../../css/default.css" />
+
+        <!--
+            jQuery & jQueryUI
+        -->
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css" />
+
+        <!--
+            Pandoc Style CSS
+            (for syntax highlighted snippets)
+        -->
+        <link rel="stylesheet" type="text/css" href="../../css/syntax.css" />
+
+        <!--
+            Bootstrap
+        -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+        <!--
+            Waypoints, and Waypoints-Sticky,
+            so we can do this:
+            http://imakewebthings.com/waypoints/shortcuts/sticky-elements/
+        -->
+        <script src="../../js/jquery.waypoints.min.js"></script>
+        <script src="../../js/sticky.min.js"></script>
+
+        <!--
+            TOCify
+        -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js"></script>
+        <!--
+            Patched TOCify css file.
+            (Don't want fixed `.tocify`).
+        -->
+        <link rel="stylesheet" type="text/css" href="../../css/jquery.tocify.css" />
+
+        <style>
+        .navbar {
+            margin-bottom: 0px;
+        }
+
+        .banner-image {
+            width:100%;
+        }
+
+        .banner {
+            margin-left: 0px;
+            margin-right: 0px;
+        }
+
+        body {
+            background-color: #e2e2e2;
+        }
+
+        #page {
+            padding-left:0;
+            padding-right:0;
+            background-color: #ffffff;
+        }
+        </style>
+    </head>
+    <body>
+        <div id="page" class="container">
+            <!-- This, with no padding on left/right -->
+            <div class="banner">
+                <nav class="navbar navbar-default">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+
+            <!-- The Hamburger -->
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../../">Richard Goulter's Blog</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="../../">Home</a></li>
+            <li><a href="../../yi.html">Yi</a></li>
+            <li><a href="../../emacs.html">Emacs</a></li>
+            <li><a href="../../archive.html">Archive</a></li>
+        </ul>
+    </div>
+</nav>
+
+                <img class="banner-image" src="../../images/blog-banner.png" />
+            </div>
+
+            <hr style="margin: 0px; border-top: 5px solid black;" />
+
+            <div id="content" class="container">
+                <h1>Impressions of Emacs and Org Mode</h1>
+                <div class="info">
+    Posted on August  7, 2015
+    
+        by Richard Goulter
+    <br />
+    
+    Tags: <a href="../../tags/emacs.html">emacs</a>, <a href="../../tags/org-mode.html">org-mode</a>, <a href="../../tags/vim.html">vim</a>
+    
+</div>
+
+<p>I’m a moderately capable Vim user.<br />
+I’ve not quite gained the habit of trying to <em>constantly</em> improve using Vim; but at the same time, I’m not exactly using it as something only slightly better than Notepad++.</p>
+<p>Lately I’ve been taking quick glances at Emacs.<br />
+I was impressed by <a href="http://bling.github.io/blog/2013/10/27/emacs-as-my-leader-vim-survival-guide/">this post from GitHub user bling</a>, who suggests that Vim is the better <strong>editor</strong>, with a much larger/better plugin-writing community; but suggests that Emacs makes for a better Development Environment.<br />
+– Org mode makes sense as a ‘gateway drug’ to Emacs..</p>
+<h2 id="org-mode">Org Mode</h2>
+<p>The testemonials you see of Org Mode compell interest. In terms of a comprehensive note-taking/task-managing format, I’m not aware of any other formats/doctrines which are anywhere near as popular.</p>
+<p>There are a couple of ‘implementations’ of a subset of Org mode’s features, for vim: <a href="https://github.com/jceb/vim-orgmode">jceb/vim-orgmode</a>, and <a href="https://github.com/hsitz/VimOrganizer">hsitz/VimOrganizer</a>.<br />
+The latter is somewhat less popular, and doesn’t include even a token README, and hasn’t had updates in a year. – It may still be alright, but I’ve not tried it.<br />
+The former has had commits within the last couple of months, does have a README, and is more popular.</p>
+<p><code>vim-orgmode</code> is mostly alright.<br />
+From when I’ve tried to make use of it, there’re a few annoyances I’ve had:</p>
+<ul>
+<li><p>Plain Lists: It was a battle with the auto-indentation to write unordered-lists.</p></li>
+<li><p>Header Tags Alignment: While I encountered issues with this in Emacs also; the problem with <code>vim-orgmode</code> is that it uses <em>TABS</em> to pad out the tags after a header. Tabstop <a href="https://github.com/jceb/vim-orgmode/blob/master/ftplugin/orgmode/liborgmode/headings.py#L92">is assumed</a> (and set to be!) 6. – This isn’t exactly a problem if you’re only editing org files with <code>vim-orgmode</code>, as such; but I’m not, and it’s just annoying knowing it’s there.</p></li>
+</ul>
+<p>It wasn’t a problem for me, with this <code>vim-orgmode</code> plugin, that not every (applicable) part of Org mode was implemented. Org mode seems to have an extensive feature set, and I can’t (at this stage) see myself using most of the features.<br />
+What was kindof interesting is that many of the Org mode things were implemented in Python as a library.</p>
+<p>– While perhaps using Org mode as a poor-man’s-OneNote may not be making the most out of Org mode, I’ve also found it unclear as to the distinguishment in purpose between headers and unordered lists: I often find myself with an unordered list of things, and then will want to ‘TODO’ these.</p>
+<h2 id="emacs">Emacs</h2>
+<p>So, as it is, Emacs is the tool to use to manipulate Org mode.<br />
+Evil mode certainly mitigates the pain of this.</p>
+<p>Emacs feels like it’s an editor in between worlds:<br />
+Emacs, in some sense, rightly has that “programmer’s editor of choice” feel to it: it can be customised with macros, it can be run in a terminal, a prominent irc channel, etc.; in these ways, it’s <strong>very</strong> similar to Vim.<br />
+But, it also feels like it’s a ‘modern’ editor. It’s start-up time is slow. The text isn’t regular-width, regular-height; you can embed images in the editor. Installing plugins, customising features of the editor can be done through a (somewhat shabby) UI within the editor, which includes rendered buttons, textfields and other widgets.<br />
+– Particularly jarring, for example, when writing in Org mode, the formatting of the text is shown as you edit. If text should be bold, then in Emacs the text is bold. Like how MS Word does it; but different than I’m used to when writing markup.<br />
+Yet, Emacs just doesn’t feel as ‘polished’ as these.</p>
+<p>– I ran into a problem: my Org mode looked bad. The tags were being aligned making use of tags. Org mode assumed a tab width of 8 (which somewhat defeats the point of one of the key advantages to tabs, but okay). The tab width was set to 8, but being rendered as 4-wide.<br />
+– The culprit? The <a href="https://github.com/bbatsov/solarized-emacs">solarized mode</a> I was using. I looked at the code; <strong>there’s no mention of tab anywhere!</strong><br />
+But also interesting (or horrifying) to note in the <code>solarized.el</code> file (about 2k LoC) features many lines of code dedicated to setting the colour for each face, for a multitude of different modes. It seems to me if you want to write a mode which looks good with this theme, then the theme would have to know about your mode, and be customized to that. – I’m thinking this is an example of a downside of Emacs’ flexibility. Or perhaps colour schemes are just hard to do properly, and this kind of upstream coupling is the best way.</p>
+
+
+<hr />
+
+<div>
+    
+    
+    <a href="../../posts/programming/2015-07-29-notes-onenote-and-org-mode.html" style="float:right; text-align: right;">Older post</a>
+    
+</div>
+<br style="clear: both;" />
+
+<hr />
+
+<div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'richardgoultersblog'; // required: replace example with your forum shortname
+        var disqus_identifier = '/posts/programming/2015-08-07-impressions-of-emacs-and-org-mode.html';
+        var disqus_url = 'http://www.rgoulter.com/blog' + '/posts/programming/2015-08-07-impressions-of-emacs-and-org-mode.html';
+        var disqus_title = 'Impressions of Emacs and Org Mode - August  7, 2015';
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+<!-- Load highlight.js for Syntax Highlighting. -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/solarized_light.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+            </div>
+
+            <hr style="margin-bottom: 0px; border-top: 2px solid black;" />
+
+            <div id="footer" class="pull-right" style="padding-right: 10px;">
+                Site proudly generated by
+                <a href="http://jaspervdj.be/hakyll">Hakyll</a>
+            </div>
+        </div>
+    </body>
+</html>
