@@ -8,8 +8,61 @@
         <name>Richard Goulter</name>
         <email>richard.goulter+blog@gmail.com</email>
     </author>
-    <updated>2015-08-12T00:00:00Z</updated>
+    <updated>2015-08-13T00:00:00Z</updated>
     <entry>
+    <title>Curious About GoodReads Reviews and Bullying</title>
+    <link href="http://www.rgoulter.com/blog//posts/argument/2015-08-13-curious-about-goodreads-reviews-and-bullying.html" />
+    <id>http://www.rgoulter.com/blog//posts/argument/2015-08-13-curious-about-goodreads-reviews-and-bullying.html</id>
+    <published>2015-08-13T00:00:00Z</published>
+    <updated>2015-08-13T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<div class="info">
+    Posted on August 13, 2015
+    
+        by Richard Goulter
+    <br/>
+    
+    Tags: <a href="/tags/goodreads.html">goodreads</a>, <a href="/tags/internet%20abuse.html">internet abuse</a>, <a href="/tags/bullying.html">bullying</a>, <a href="/tags/for%20such%20a%20time.html">for such a time</a>
+    
+</div>
+
+<h2 id="preamble-bullying-is-bad-try-telling-the-bullies-that">Preamble (Bullying is Bad, Try Telling the Bullies That)</h2>
+<p>Amazon and GoodReads are both prominent places to review books. – My Humble Opinion is to prefer GoodReads, since I don’t use Kindle.</p>
+<p>I’ve written before about GoodReads: <a href="../../posts/romance/2014-03-08-paradox-of-fandom.html">Wondering</a> if people who read books more were less impressed by good books than people who weren’t as well read; and looking at <a href="../../posts/romance/2014-07-16-readers-and-lists-on-goodreads.html">GoodReads’ lists</a>, remarking hwo snobbish some of the lists were. (Guess which books came under “didn’t finish”, “most hated”?).</p>
+<p>So. Recently there’s been <a href="../../posts/romance/2015-08-09-open-letter-regarding-kate-breslins-for-such-a-time-and-diversity-in-romance.html">some controversy</a> in romancelandia.<br />
+A quick glance at the <a href="https://www.goodreads.com/book/show/18008080-for-such-a-time?from_search=true&amp;search_version=service_impr">GoodReads page</a> for the book shows the reviews filled with at least a dozen 1-star reviews written since August (i.e. after Wendell’s letter.). <em>Many of which even openly admit to not having read the book</em>. – I don’t care how righteous your cause: if you review books as 1-star, <em>without having read the book</em>, you’re a bully.<br />
+– Fortunately, at the time of writing the book still has an average of 3.9/5, which is at least par for “really good book”, and about as high as many authors (in the romance genre, at least) are able to achieve. (And somewhat higher than the more mainstream unpopular books.).<br />
+– Counterpoint: What about if you borrow a book from a friend, read 1 page, then 1-star it; would that still be bullying? I do think “hate reading” is a thing: reading something knowing you’re going to hate it. Surely you’ve got to be pretty bitter to do <em>that</em>. – But even more simply, if you’re going into a book with that much prejudice.. I think you misunderstand the point of “books let you understand different viewpoints.”.</p>
+<p>More importantly: does your giving a 1-star review benefit the community? Is it constructive to the community?<br />
+Of course I think there’s room for people to give 1-star reviews. The usual expectation is that they’ve read the book.</p>
+<p>– Maybe worth noting is I couldn’t find this book by searching for its title. It’s unclear whether the name was too obscure, there’s a bug in the algorithm/index, the book was unlisted automatically for receiving 1-star reviews(?), the book was unlisted on request (for being too hateful, or for being a target of hate). Or it could just be me.</p>
+<h2 id="questions-can-reviews-tell-us-anything">Questions; Can Reviews Tell Us Anything?</h2>
+<p>In any case. It would be fascinating to visualise some of this stuff.<br />
+Numbers don’t lie. (Interpretation of numbers does, but that’s a different issue.).</p>
+<p>But, I mean, I’m not just curious about this controversy. Things I’d love to see:</p>
+<ul>
+<li><p>What has the average rating of this book been over time? Per number of reviews? What has the number of 5-star, 1-star reviews been over time?</p></li>
+<li><p>What has the average rating been for other RITA nominations, from publication to nomination, from nomination to awards, and after the awards?<br />
+ <em>Compared to previous years, this would offer a control of what a typical RITA nomination looks like. Oh, comparing to a non-RITA book may be interesting too.</em><br />
+ <em>“For Such a Time” is somewhat controversial. Is the data for “For Such a Time” different in an interesting way to show this? (Could you know, given reviews of a book, whether it’s similarly “controversial”?).</em></p></li>
+<li><p>Does a reviewer’s “average rating” (the average of the ratings they’ve given) follow a trend over time / over the number of books read?<br />
+ <em>I would think it tends toward 3 or 4 over time.</em><br />
+ <em>How similar would this be between readers?</em><br />
+ <em>If some books do gain controversial attention, do the people giving 1-star, 5-star reviews share similar traits? (e.g. number of books read, average rating.).</em><br />
+ <em>If some books do get extreme reviews (1-star, 5-star) from controversial attention, how anomalous does this look per the reviewer?</em></p></li>
+<li><p>What percentage of a books reviews are read by “fans”?<br />
+ <em>Are books reviews at all by ‘fans’? (e.g. people who liked other books from the same author.).</em> <em>How consistent are authors? (If readers liked some authors book, is there a likelihood that a large proportion of readers will rate the books consistently?).</em></p></li>
+<li><p>Does the distribution of 1-5 star ratings for a book follow a trend over time?</p></li>
+</ul>
+<p>…Do these things vary by genre? (Clearly I care only about Romance Novels here; and even then only some sub-genres.).<br />
+I’m not saying these questions are well-formed or anything. (And I clearly have suspicions about some things). But it’d be interesting to see some data related to this. (Though, if you have better questions, I would be interested to hear them.).</p>
+<p>Trying my best, I think those who I disagree with might be curious about things like:</p>
+<ul>
+<li><p>Is there any association between words used in the blurb (hinting at content) and average rating, 1-star, 5-star ratings? <em>Rationale would be, books with unpleasant content get more 1-star reviews.</em></p></li>
+<li><p>Do 1-star, 5-star reviewers tend to make use of the same words as each other?</p></li>
+</ul>
+]]></summary>
+</entry>
+<entry>
     <title>Tabs vs Spaces and Elastic Tabs</title>
     <link href="http://www.rgoulter.com/blog//posts/programming/2015-08-12-tabs-vs-spaces-and-elastic-tabs.html" />
     <id>http://www.rgoulter.com/blog//posts/programming/2015-08-12-tabs-vs-spaces-and-elastic-tabs.html</id>
@@ -557,48 +610,6 @@ custom.author = blue bold</code></pre>
 <p>Screenshot:<br />
 <img src="http://i.imgur.com/OWImYAS.png" alt="" /></p>
 <p>(The repo is old, because I don’t use HG so much, okay?).</p>
-]]></summary>
-</entry>
-<entry>
-    <title>I Could Solve This in Five Minutes</title>
-    <link href="http://www.rgoulter.com/blog//posts/narrative/2015-04-28-i-could-solve-this-in-five-minutes.html" />
-    <id>http://www.rgoulter.com/blog//posts/narrative/2015-04-28-i-could-solve-this-in-five-minutes.html</id>
-    <published>2015-04-28T00:00:00Z</published>
-    <updated>2015-04-28T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<div class="info">
-    Posted on April 28, 2015
-    
-        by Richard Goulter
-    <br/>
-    
-    Tags: <a href="/tags/romance.html">romance</a>, <a href="/tags/books.html">books</a>
-    
-</div>
-
-<p>So, at the moment I’m sludging through Sherry Thomas’ latest, &amp; first Contemporary, “The One in my Heart”.<br />
-There’s lots to not-enjoy about it. (Like the character lamenting the lack of timeless marriage, at the same time as looking at her phone during lunch with her partner). Whatever. The bigger issue for the Romance Novel here is that there’s zero (internal) conflict between the characters: the hero is utterly perfect, and utterly in love with the heroine; has been for ages. And the heroine is utterly perfect, and utterly in love with the hero; has been for ages. <strong>Sighhhhh.</strong></p>
-<p>So. Romance Novel, but main characters aren’t great. Gotcha.<br />
-There has to be at least <strong>some</strong> conflict*, though: the hero wants to reconcile with his parents (minus having to say sorry. <strong>Sighhhhhh.</strong>). The heroine wants a relationship with the hero. So, naturally, doesn’t want a fake-relationship with the hero. Because. <strong>Sighhhhhhhhhhh.</strong>.<br />
-– The thing is, and the narrative even admits, both of these problems could be solved in five minutes. If the hero just talked to his parents. Or the heroine just said to the hero, (who obviously, completely obviously digs her) that she likes him.<br />
-And because it can be solved so quickly, it’s <strong>really</strong> hard to get behind the characters. It’s just really silly.</p>
-<p>The fun thing is, though, like: with Romance Novels, you know it’s going to be a “Happily Ever After”. It doesn’t matter that you know (roughly) what the ending is going to be, it’s more interesting how the conflict is going to be resolved.</p>
-<p>Rather, if the problem can be solved in five minutes, then the pages between the establishment of the narrative, and the climax/conclusion of the book, are really just words filling in space. – <strong>Which can be fine.</strong> But it’s usually better to distract the reader, throw them off the scent that the conflict isn’t hard.</p>
-<p>(Come to think of it, “deus ex machina” is kindof the opposite; a super-hard problem is established, but ‘solved’ in a super-short amount of time..).</p>
-<p>It’s not just Romance Novels which are guilty of this, as such.<br />
-SciFi/Fantasy can totally play the same game, too.<br />
-RASalvatore’s stories were notorious at this: early on, the narrative shows some cool bag-of-tricks which the bad guy has. e.g. the ability to teleport someone in order to assassinate them. Like. If you can do that, you can kill the ‘good guy’ in five minutes. Of course there are “rules” to it. But when the narrator arbitrarily awards convenience magic to good/bad guys.. the plot can hardly be more than 5 minutes from resolution at any point in time.<br />
-– Perhaps the best example would be “Siege of Darkness”, where during a relentless siege the ‘bad guys’ just happen to pack up &amp; leave.</p>
-<p>In terms of “pages filling space”, Salvatore’s writing was fairly solid here: the heroes are tired, but have to press on. Then some more fighting, so the heroes are even more tired, but they have to press on even more urgently, but then there’s even more fighting, etc. etc.</p>
-<p>– But considering stories I’ve liked:<br />
-“Seducing Mr Knightly”: I love this book so much. In terms of the core plot: the body of the story is filled with flirtations between Annabelle and Knightly. It might be possible to trim this down to a skeleton of around three key encounters. Maybe. But since so much of the story is about Annabelle’s growth/transformation, it’s never 5-minutes away from the end.<br />
-“Devil in Winter”: There’s just so much character development/growth going on here, that it’s not 5-minutes-then-done.<br />
-“High Fidelity”: This book isn’t really about ‘plot’, so much as a collection of biographic-esque monologues, for different situations.</p>
-<p>– So. Conflicts which can be solved “in 5 minutes” aren’t inherently bad. But it takes a lot of effort, and a lot of talent to maintain a plotline through a holding place, waiting for the end of the story. (Oddly enough, reader is probably also waiting for things to progress..).</p>
-<hr />
-<p>*Ideas to make this pairing more interesting: The heroine is a materials scientist. The Hero is a doctor/surgeon. It’s okay for them to be a “love interest” in an “aliens invading the city, these two have to find a counter-weapon” plot. Explosions, excitement!<br />
-Or, sticking to the romance-novel genre: give points of tension between the character, which can’t be solved quickly: maybe the hero is with a girl. Not a girl who’s vain/materialistic/morally-bad, etc., but a girl who would make a good HEA. <strong>That</strong> would make the story more interesting.<br />
-Or perhaps the hero/heroine disagree on things which are important to them: maybe he finds his work important, she finds his time important (or vice versa).<br />
-etc. but the given conflict is “not really a problem”. :/</p>
 ]]></summary>
 </entry>
 
