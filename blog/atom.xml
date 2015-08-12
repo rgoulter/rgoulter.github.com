@@ -8,8 +8,93 @@
         <name>Richard Goulter</name>
         <email>richard.goulter+blog@gmail.com</email>
     </author>
-    <updated>2015-08-09T00:00:00Z</updated>
+    <updated>2015-08-12T00:00:00Z</updated>
     <entry>
+    <title>Tabs vs Spaces and Elastic Tabs</title>
+    <link href="http://www.rgoulter.com/blog//posts/programming/2015-08-12-tabs-vs-spaces-and-elastic-tabs.html" />
+    <id>http://www.rgoulter.com/blog//posts/programming/2015-08-12-tabs-vs-spaces-and-elastic-tabs.html</id>
+    <published>2015-08-12T00:00:00Z</published>
+    <updated>2015-08-12T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<div class="info">
+    Posted on August 12, 2015
+    
+        by Richard Goulter
+    <br/>
+    
+    Tags: <a href="/tags/tabs%20vs%20spaces.html">tabs vs spaces</a>, <a href="/tags/elastic%20tabs.html">elastic tabs</a>
+    
+</div>
+
+<p>I was surprised to discover I’ve not written about “tabs vs spaces” before, despite all my love for writing about editors.</p>
+<h2 id="whats-tabs-vs-spaces-all-about">What’s “Tabs vs Spaces” All About?</h2>
+<p>The less something matters, the more programmers will argue over it. (No, not “bikeshedding”, which is similar, but doesn’t quite account for things like programmers arguing over different programming languages.).<br />
+Grammarians are similar, I suppose.</p>
+<p>The biggest part of this ‘holy war’ consists of people arguing over whether it’s better to indent with tabs or spaces. Roughly (and without any bias): if you indent with spaces, then you know that it anything aligned will still be aligned on another computer; <em>but</em>, people will have different preferences as to whether to indent with 2-spaces, 4-spaces, or some other size.<br />
+Tabs let you change the size of indentation, so when using tabs to indent, people can set the tabwidth to how they prefer it. The chief downside to this is you can’t use tabs to <em>align</em> things, because aligning means you want certain characters to be in the same column, which fixes the tabwidth.</p>
+<p>– The middle ground to this is often called “mixed”: use tabs for indentation, and spaces for alignment.</p>
+<h3 id="practicality">Practicality</h3>
+<p>There are some practical problems about this, too:<br />
+Setting up “mixed” tabs/spaces in an editor isn’t as easy as only-spaces or only-tabs.<br />
+Even using tabs-only can be messy, since it’s not always clear whether pressing the Tab key on a keyboard will insert spaces or a proper tab; so a poorly configured editor may insert spaces into what was previously a tabs-only file.<br />
+Modern editors are pretty capable at treating ‘4-spaces’ as if they were a single indentation character: pressing a Tab key will insert 4 spaces, and pressing backspace will delete 4 spaces.</p>
+<p>Working on teams, it’s important for everyone to follow the same code style.<br />
+– I’ve heard stories of my friends where there was a sequence of commits which were purely for tabifying or untabifying the codebase.<br />
+And, obviously, the diffs shown between these changes simply show “THE WHOLE FILE WAS DELETED, THE WHOLE FILE WAS CREATED.”.</p>
+<h2 id="why-this-is-whole-thing-is-dumb">Why This is Whole Thing is Dumb</h2>
+<p>One of these programming ‘holy wars’ is dumb? You don’t say!</p>
+<p>But, still.<br />
+HTML/CSS manages to separate <em>content</em> from <em>form</em>. - <a href="http://www.csszengarden.com/">CSS Zen Garden</a> is a notable example of the <em>exact same content</em> being displayed very differently with different themes.<br />
+– While <em>some</em> languages currently make use of whitespace/alignment as part of syntax (famously Python, jokingly whitespace, but also even things like Haskell [in places]), most don’t. – So, it’s kindof dumb that something which doesn’t affect content is treated as content by tools. (Well, tools like Git will offer to ignore whitespace changes in diffs; but, again, tools can be difficult to use.).<br />
+For that to work, you’d have to have some program to decode from a neutral source file so that it’s displayed how a programmer likes in an editor (2-space indent or 4-space indent; braces aligned in the same column; spaces between declarations; etc. etc.), as well as some program to encode to the source file in a neutral layout. – This is just pie-in-the-sky, of course, and it’s not hard to come up with cases where this wouldn’t work. (e.g. comments, which the programmer may prefer not aligned relative to the syntax.).</p>
+<h2 id="tabs-and-tabstops">Tabs and Tabstops</h2>
+<p>But, *gasp*, I have been a little biased in my description:<br />
+The simplest way to use tabs is strictly at the start of a line for indentation. If used in the middle of a line, different people/programs have different opinions as to whether the <em>correct</em> thing to do is to skip <em>tabwidth</em> spaces, or to align to the nearest 8th column.<br />
+– To me this sounds stupid; when I was using org-mode, I noticed it used tabs after some text as a placeholder for spaces: Emacs insisted on tabwidth being 8, while a Vim plugin insisted on tabwidth being 6.</p>
+<p>Yet, both of these are bastardisations of the <a href="http://web.archive.org/web/20090615091848/http://www.nabble.com/-long--Re:-Elastic-tabstops-p20025677.html">“tabstop” as used by typewriters.</a>:<br />
+The “tabstop” was a position set so than when pressing the ‘tab’ key, the paper would align to that point. This helped to write Tables. (TABle, TAB).</p>
+<pre>
+  Tab stop bar:   |------V-----------------V------|
+
+  Typing:         Dear Sir,
+                  We are pleased to offer:
+                         French Vanilla    $12.00
+                         English Custard   $ 8.50
+                         Irish Whiskey     $22.40
+
+                  Sincerely,
+                  Bramble & Botts Dairy
+</pre>
+<h2 id="elastic-tabstops">Elastic Tabstops</h2>
+<p>I first saw mention of elastic tabstops on Neovim’s issues page.<br />
+<a href="http://nickgravgaard.com/elastic-tabstops/">Elastic tabstops</a> are much closer in spirit to aforementioned typewriter tabstops.<br />
+The GIF perhaps explains the concept best:</p>
+<div class="figure">
+<img src="http://i.imgur.com/7MsEnA9.gif" alt="" />
+
+</div>
+<p>Although, as far as “implementation”, it seems to just render current tab(s) differently:</p>
+<blockquote>
+<p>While editors which haven’t yet implemented the elastic tabstops mechanism may not align some text properly in files where tabs were used with elastic tabstops, the problem isn’t that bad. All leading tabs (indentation) will be okay, and the chances of text not aligning correctly diminishes as the width between tabstops increases. So if you plan on switching to elastic tabstops in the future, and wish to choose a code style with that in mind (to use now), I suggest using tabs with fixed tabstops every 8 characters (or more) across. Alternatively co-workers can use tabs with fixed tabstops of whatever size they like as long as no one tries to line up text for anything other than indentation.</p>
+</blockquote>
+<h3 id="drawbacks">Drawbacks</h3>
+<p>It seems the idea was conceived in 2006. It’s 2015. That said, Neovim is in theory going to be easier to contribute to than Vim. And it has already been implemented in some array of text-editors.. so the discipline isn’t impossible.</p>
+<p>But this <a href="http://programmers.stackexchange.com/questions/137290/what-are-the-drawbacks-of-elastic-tabstops">StackExchange thread</a> makes some excellent points:</p>
+<ul>
+<li><p>Personal preference</p></li>
+<li><p>Technical implementation: It’s different to what most text editors have done, and isn’t widely available. This limits adoption.</p></li>
+<li><p>Who cares?: Developers have done well enough as-is for the last however many years; people can set aside subjective disagreements if they <em>really</em> need to, anyway.</p></li>
+<li><p>Impact: Compare the quote above; using leading tabs for indentation is pretty much the same behaviour as elastic tabstops; and the other adjustments aren’t all worth the novelty.</p></li>
+<li><p>Corner cases: Considering the Python snippet:</p>
+<pre><code>def foo( bar,
+         xyzzy ):
+    wibble()</code></pre>
+<p>it’s probably something elastic tabstops will mess up, without code intelligence.</p></li>
+</ul>
+<p>– For what it’s worth, I still don’t see this as inherently more natural than the “mixed” solution.</p>
+<p>Even so, it appears that elastic tabstops are the kind of thing which could be adopted into codebases iteratively. (I imagine this would look ugly for tools which don’t support elastic tabstops; but the same is true if a programmer assumes tabwidth to be a certain value anyway, so it’s not like the issue would be new.).</p>
+]]></summary>
+</entry>
+<entry>
     <title>Open Letter Regarding Kate Breslin's "For Such a Time", and Diversity in Romance</title>
     <link href="http://www.rgoulter.com/blog//posts/romance/2015-08-09-open-letter-regarding-kate-breslins-for-such-a-time-and-diversity-in-romance.html" />
     <id>http://www.rgoulter.com/blog//posts/romance/2015-08-09-open-letter-regarding-kate-breslins-for-such-a-time-and-diversity-in-romance.html</id>
@@ -514,41 +599,6 @@ RASalvatore’s stories were notorious at this: early on, the narrative shows so
 Or, sticking to the romance-novel genre: give points of tension between the character, which can’t be solved quickly: maybe the hero is with a girl. Not a girl who’s vain/materialistic/morally-bad, etc., but a girl who would make a good HEA. <strong>That</strong> would make the story more interesting.<br />
 Or perhaps the hero/heroine disagree on things which are important to them: maybe he finds his work important, she finds his time important (or vice versa).<br />
 etc. but the given conflict is “not really a problem”. :/</p>
-]]></summary>
-</entry>
-<entry>
-    <title>You Know You Should Be Using VCS For That</title>
-    <link href="http://www.rgoulter.com/blog//posts/programming/2015-03-29-you-know-you-should-be-using-vcs-for-that.html" />
-    <id>http://www.rgoulter.com/blog//posts/programming/2015-03-29-you-know-you-should-be-using-vcs-for-that.html</id>
-    <published>2015-03-29T00:00:00Z</published>
-    <updated>2015-03-29T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<div class="info">
-    Posted on March 29, 2015
-    
-        by Richard Goulter
-    <br/>
-    
-    Tags: <a href="/tags/git.html">git</a>, <a href="/tags/vim.html">vim</a>, <a href="/tags/fugitive.html">fugitive</a>
-    
-</div>
-
-<p>It’s kindof cute that all programmers, if they’ve worked on any project for a long enough time before learning about VCS, surely all take the same approach to novice “version control”. e.g. Keeping folders/copies as snapshots of how the code looked at that time. – We weren’t all born knowing how to use VCS. (Though, maybe those who didn’t bother to play around with programming a lot outside of class never faced this).</p>
-<p>I’d be astounded if anyone with even only a basic grasp of VCS kept to doing things this way. VCS is obviously that much better at keeping versions.</p>
-<p>But, uh. One thing which is still not uncommon to see is, as an answer to the anxiety of “not sure if <em>this function</em> is something I’m going to need later (even though I don’t need it now). I’d better just comment it out.”.<br />
-It’s really quick and easy to use a decent text editor to comment/uncomment out a chunk of code. (Even the kids who don’t learn vim/emacs can do this in the text editors of IDEs).<br />
-This strikes me as a ‘dirty’ solution; it sounds like you’d want some <em>version</em> of the function handy. – And surely with VCS available, there shouldn’t be any doubt as to being able to get a copy of this function back if you delete it.</p>
-<p>I’m not sure I’ve met anyone who can do this well. I don’t think that’s necessarily a reflection on skill in VCS (it’s not as if anyone <strong>really</strong> needs to do somersaults in VCS all the time. … It’s probably not very good if you do have to), but perhaps this is a “common enough” thing which VCS doesn’t make accessible?<br />
-Rephrasing so as to be more precise/specific: if there’s some hunk of text (e.g. a function which we’d otherwise comment out) is removed in a commit, which isn’t necessarily the only modification in a commit, how to ‘recover’ this hunk of text into the current working copy of the file? (Bonus points if the function we want to recover isn’t the only modified hunk in the commit).</p>
-<p>Common enough answer of ‘how to do this’ is to look at the commit, copy-paste the hunk, and maybe remove the +‘s/-’s (the first column of the modified lines in the commit difference).<br />
-This also feels ’dirty’, and a bit wasteful. Especially if there’re many lines in the hunk. (Vim’s visual mode would mitigate this, sortof, but still).</p>
-<p>Checking out a commit/file, and copying the function directly, also feels … tedious.<br />
-I was surprised to learn Vim/Fugitive makes this not insanely brutal to pull off, though: the command <code>Glog</code> on a file in VCS will put the history of the file in a location list, so the different versions of a file can be easily traversed.<br />
-Though, again, it may be tedious to find which function you want to copy. (In principle, anyway, if not in practice!).</p>
-<p>I <em>think</em> what I’m after is closer to the following:<br />
-<code>git diff R R^ &gt; foo.diff</code> outputs a (“reverse”) of the commit. You can then either edit this <code>foo.diff</code> file, deleting the hunks you don’t want (tedious!, except for the pertinent hunk), which we can then <code>git apply foo.diff</code>. (Assuming the hunk is still relevant!).<br />
-Alternatively, just applying the diff (without editing it), one could then <code>git checkout --patch -- .</code> (assuming the repo was otherwise in a clean state before applying the diff..).<br />
-This is tedious, still, but it’s plausible that a script could perform this (“recover some hunk(s) from a commit [which removed them]”), with that assumption that a hunk could be applied to the working copy. (As far as I understand, if a file has changed so much that Git/VCS can’t figure out how to apply the diff, then this can’t work either).</p>
-<p>None of this seems a “great” solution to the problem, though.</p>
 ]]></summary>
 </entry>
 

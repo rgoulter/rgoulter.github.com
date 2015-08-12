@@ -1,0 +1,243 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Tabs vs Spaces and Elastic Tabs - Richard Goulter's Blog</title>
+
+        <!-- My (Old) CSS theme -->
+        <link rel="stylesheet" type="text/css" href="../../css/default.css" />
+
+        <!--
+            jQuery & jQueryUI
+        -->
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css" />
+
+        <!--
+            Pandoc Style CSS
+            (for syntax highlighted snippets)
+        -->
+        <link rel="stylesheet" type="text/css" href="../../css/syntax.css" />
+
+        <!--
+            Bootstrap
+        -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+        <style>
+            /*
+             * Bootstrap defines blockquote as 17px,
+             * so it looks stupidly large in my blogposts. */
+            blockquote {
+                font-size: 14px;
+            }
+        </style>
+
+        <!--
+            Waypoints, and Waypoints-Sticky,
+            so we can do this:
+            http://imakewebthings.com/waypoints/shortcuts/sticky-elements/
+        -->
+        <script src="../../js/jquery.waypoints.min.js"></script>
+        <script src="../../js/sticky.min.js"></script>
+
+        <!--
+            TOCify
+        -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js"></script>
+        <!--
+            Patched TOCify css file.
+            (Don't want fixed `.tocify`).
+        -->
+        <link rel="stylesheet" type="text/css" href="../../css/jquery.tocify.css" />
+
+        <style>
+        .navbar {
+            margin-bottom: 0px;
+        }
+
+        .banner-image {
+            width:100%;
+        }
+
+        .banner {
+            margin-left: 0px;
+            margin-right: 0px;
+        }
+
+        body {
+            background-color: #e2e2e2;
+        }
+
+        #page {
+            padding-left:0;
+            padding-right:0;
+            background-color: #ffffff;
+        }
+        </style>
+    </head>
+    <body>
+        <div id="page" class="container">
+            <!-- This, with no padding on left/right -->
+            <div class="banner">
+                <nav class="navbar navbar-default">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+
+            <!-- The Hamburger -->
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../../">Richard Goulter's Blog</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="../../">Home</a></li>
+            <li><a href="../../yi.html">Yi</a></li>
+            <li><a href="../../emacs.html">Emacs</a></li>
+            <li><a href="../../archive.html">Archive</a></li>
+        </ul>
+    </div>
+</nav>
+
+                <img class="banner-image" src="../../images/blog-banner.png" />
+            </div>
+
+            <hr style="margin: 0px; border-top: 5px solid black;" />
+
+            <div id="content" class="container">
+                <h1>Tabs vs Spaces and Elastic Tabs</h1>
+                <div class="info">
+    Posted on August 12, 2015
+    
+        by Richard Goulter
+    <br />
+    
+    Tags: <a href="../../tags/tabs%20vs%20spaces.html">tabs vs spaces</a>, <a href="../../tags/elastic%20tabs.html">elastic tabs</a>
+    
+</div>
+
+<p>I was surprised to discover I’ve not written about “tabs vs spaces” before, despite all my love for writing about editors.</p>
+<h2 id="whats-tabs-vs-spaces-all-about">What’s “Tabs vs Spaces” All About?</h2>
+<p>The less something matters, the more programmers will argue over it. (No, not “bikeshedding”, which is similar, but doesn’t quite account for things like programmers arguing over different programming languages.).<br />
+Grammarians are similar, I suppose.</p>
+<p>The biggest part of this ‘holy war’ consists of people arguing over whether it’s better to indent with tabs or spaces. Roughly (and without any bias): if you indent with spaces, then you know that it anything aligned will still be aligned on another computer; <em>but</em>, people will have different preferences as to whether to indent with 2-spaces, 4-spaces, or some other size.<br />
+Tabs let you change the size of indentation, so when using tabs to indent, people can set the tabwidth to how they prefer it. The chief downside to this is you can’t use tabs to <em>align</em> things, because aligning means you want certain characters to be in the same column, which fixes the tabwidth.</p>
+<p>– The middle ground to this is often called “mixed”: use tabs for indentation, and spaces for alignment.</p>
+<h3 id="practicality">Practicality</h3>
+<p>There are some practical problems about this, too:<br />
+Setting up “mixed” tabs/spaces in an editor isn’t as easy as only-spaces or only-tabs.<br />
+Even using tabs-only can be messy, since it’s not always clear whether pressing the Tab key on a keyboard will insert spaces or a proper tab; so a poorly configured editor may insert spaces into what was previously a tabs-only file.<br />
+Modern editors are pretty capable at treating ‘4-spaces’ as if they were a single indentation character: pressing a Tab key will insert 4 spaces, and pressing backspace will delete 4 spaces.</p>
+<p>Working on teams, it’s important for everyone to follow the same code style.<br />
+– I’ve heard stories of my friends where there was a sequence of commits which were purely for tabifying or untabifying the codebase.<br />
+And, obviously, the diffs shown between these changes simply show “THE WHOLE FILE WAS DELETED, THE WHOLE FILE WAS CREATED.”.</p>
+<h2 id="why-this-is-whole-thing-is-dumb">Why This is Whole Thing is Dumb</h2>
+<p>One of these programming ‘holy wars’ is dumb? You don’t say!</p>
+<p>But, still.<br />
+HTML/CSS manages to separate <em>content</em> from <em>form</em>. - <a href="http://www.csszengarden.com/">CSS Zen Garden</a> is a notable example of the <em>exact same content</em> being displayed very differently with different themes.<br />
+– While <em>some</em> languages currently make use of whitespace/alignment as part of syntax (famously Python, jokingly whitespace, but also even things like Haskell [in places]), most don’t. – So, it’s kindof dumb that something which doesn’t affect content is treated as content by tools. (Well, tools like Git will offer to ignore whitespace changes in diffs; but, again, tools can be difficult to use.).<br />
+For that to work, you’d have to have some program to decode from a neutral source file so that it’s displayed how a programmer likes in an editor (2-space indent or 4-space indent; braces aligned in the same column; spaces between declarations; etc. etc.), as well as some program to encode to the source file in a neutral layout. – This is just pie-in-the-sky, of course, and it’s not hard to come up with cases where this wouldn’t work. (e.g. comments, which the programmer may prefer not aligned relative to the syntax.).</p>
+<h2 id="tabs-and-tabstops">Tabs and Tabstops</h2>
+<p>But, *gasp*, I have been a little biased in my description:<br />
+The simplest way to use tabs is strictly at the start of a line for indentation. If used in the middle of a line, different people/programs have different opinions as to whether the <em>correct</em> thing to do is to skip <em>tabwidth</em> spaces, or to align to the nearest 8th column.<br />
+– To me this sounds stupid; when I was using org-mode, I noticed it used tabs after some text as a placeholder for spaces: Emacs insisted on tabwidth being 8, while a Vim plugin insisted on tabwidth being 6.</p>
+<p>Yet, both of these are bastardisations of the <a href="http://web.archive.org/web/20090615091848/http://www.nabble.com/-long--Re:-Elastic-tabstops-p20025677.html">“tabstop” as used by typewriters.</a>:<br />
+The “tabstop” was a position set so than when pressing the ‘tab’ key, the paper would align to that point. This helped to write Tables. (TABle, TAB).</p>
+<pre>
+  Tab stop bar:   |------V-----------------V------|
+
+  Typing:         Dear Sir,
+                  We are pleased to offer:
+                         French Vanilla    $12.00
+                         English Custard   $ 8.50
+                         Irish Whiskey     $22.40
+
+                  Sincerely,
+                  Bramble & Botts Dairy
+</pre>
+<h2 id="elastic-tabstops">Elastic Tabstops</h2>
+<p>I first saw mention of elastic tabstops on Neovim’s issues page.<br />
+<a href="http://nickgravgaard.com/elastic-tabstops/">Elastic tabstops</a> are much closer in spirit to aforementioned typewriter tabstops.<br />
+The GIF perhaps explains the concept best:</p>
+<div class="figure">
+<img src="http://i.imgur.com/7MsEnA9.gif" alt />
+
+</div>
+<p>Although, as far as “implementation”, it seems to just render current tab(s) differently:</p>
+<blockquote>
+<p>While editors which haven’t yet implemented the elastic tabstops mechanism may not align some text properly in files where tabs were used with elastic tabstops, the problem isn’t that bad. All leading tabs (indentation) will be okay, and the chances of text not aligning correctly diminishes as the width between tabstops increases. So if you plan on switching to elastic tabstops in the future, and wish to choose a code style with that in mind (to use now), I suggest using tabs with fixed tabstops every 8 characters (or more) across. Alternatively co-workers can use tabs with fixed tabstops of whatever size they like as long as no one tries to line up text for anything other than indentation.</p>
+</blockquote>
+<h3 id="drawbacks">Drawbacks</h3>
+<p>It seems the idea was conceived in 2006. It’s 2015. That said, Neovim is in theory going to be easier to contribute to than Vim. And it has already been implemented in some array of text-editors.. so the discipline isn’t impossible.</p>
+<p>But this <a href="http://programmers.stackexchange.com/questions/137290/what-are-the-drawbacks-of-elastic-tabstops">StackExchange thread</a> makes some excellent points:</p>
+<ul>
+<li><p>Personal preference</p></li>
+<li><p>Technical implementation: It’s different to what most text editors have done, and isn’t widely available. This limits adoption.</p></li>
+<li><p>Who cares?: Developers have done well enough as-is for the last however many years; people can set aside subjective disagreements if they <em>really</em> need to, anyway.</p></li>
+<li><p>Impact: Compare the quote above; using leading tabs for indentation is pretty much the same behaviour as elastic tabstops; and the other adjustments aren’t all worth the novelty.</p></li>
+<li><p>Corner cases: Considering the Python snippet:</p>
+<pre><code>def foo( bar,
+         xyzzy ):
+    wibble()</code></pre>
+<p>it’s probably something elastic tabstops will mess up, without code intelligence.</p></li>
+</ul>
+<p>– For what it’s worth, I still don’t see this as inherently more natural than the “mixed” solution.</p>
+<p>Even so, it appears that elastic tabstops are the kind of thing which could be adopted into codebases iteratively. (I imagine this would look ugly for tools which don’t support elastic tabstops; but the same is true if a programmer assumes tabwidth to be a certain value anyway, so it’s not like the issue would be new.).</p>
+
+
+<hr />
+
+<div>
+    
+    
+    <a href="../../posts/romance/2015-08-09-open-letter-regarding-kate-breslins-for-such-a-time-and-diversity-in-romance.html" style="float:right; text-align: right;">Older post</a>
+    
+</div>
+<br style="clear: both;" />
+
+<hr />
+
+<div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'richardgoultersblog'; // required: replace example with your forum shortname
+        var disqus_identifier = '/posts/programming/2015-08-12-tabs-vs-spaces-and-elastic-tabs.html';
+        var disqus_url = 'http://www.rgoulter.com/blog' + '/posts/programming/2015-08-12-tabs-vs-spaces-and-elastic-tabs.html';
+        var disqus_title = 'Tabs vs Spaces and Elastic Tabs - August 12, 2015';
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+<!-- Load highlight.js for Syntax Highlighting. -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/solarized_light.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+            </div>
+
+            <hr style="margin-bottom: 0px; border-top: 2px solid black;" />
+
+            <div id="footer" class="pull-right" style="padding-right: 10px;">
+                Site proudly generated by
+                <a href="http://jaspervdj.be/hakyll">Hakyll</a>
+            </div>
+        </div>
+    </body>
+</html>
