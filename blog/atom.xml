@@ -8,62 +8,8 @@
         <name>Richard Goulter</name>
         <email>richard.goulter+blog@gmail.com</email>
     </author>
-    <updated>2015-08-18T00:00:00Z</updated>
+    <updated>2015-08-13T00:00:00Z</updated>
     <entry>
-    <title>Reflection on My Reflection</title>
-    <link href="http://www.rgoulter.com/blog//posts/meta/2015-08-18-reflection-on-my-reflection.html" />
-    <id>http://www.rgoulter.com/blog//posts/meta/2015-08-18-reflection-on-my-reflection.html</id>
-    <published>2015-08-18T00:00:00Z</published>
-    <updated>2015-08-18T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<div class="info">
-    Posted on August 18, 2015
-    
-        by Richard Goulter
-    <br/>
-    
-    Tags: <a href="/tags/rumination.html">rumination</a>, <a href="/tags/cs3216.html">cs3216</a>, <a href="/tags/elitism.html">elitism</a>
-    
-</div>
-
-<p>It’s been a year since I took CS3216 at NUS.<br />
-It’s quite a fun course, working on web app technologies. (For context of those who aren’t aware, almost all the coursework involves teamwork, and entry to the course is by-way-of application.).</p>
-<p>– I want to reflect on one of the blogposts I wrote; but to say “hey, what I wrote was great” is awful. The blogpost was warts-and-all, though, so let me reflect on it a bit..</p>
-<h2 id="cs3216-the-elite">CS3216 the Elite</h2>
-<p>– Complaints over the exclusive nature of entry into CS3216 made their way onto NUSWhispers; these complaints were met with contempt or ridicule.<br />
-(The worst of the complaints being a notion of “CS3216 is for smart/great kids; if I get in I’ll be able to be smart/great.”. – I mean, if you tell students “this class is for smart students, but you’re not invited”, what the fuck d’you expect students to feel?).<br />
-The justification given by <a href="https://www.facebook.com/notes/ben-leong/on-cs3216cs3217-and-elitism/10153053255577549">Prof Ben Leong</a> seems to be along the lines of “CS3216/7 lets top-tier students come together and make cool stuff”. This would make sense if every student in 3216/7 were top-tier, and 3216/7 evinced a nature of incubating quality projects (i.e. projects which live on after semester’s end.). – The latter doesn’t happen; and I’ve reason to doubt that everyone who gets into 3216/7 is “top tier”..<br />
-Anyway, <a href="http://nuswhispers.com/tag/5641">Beng’s post</a> is much better. (Beng is, somewhat famously, the creator of NUSMods, which is used by pretty much every NUS student to plan their timetables.). Beng’s post points out he wasn’t born amazing, and worked hard to get to where he wanted. But what I like most about it, – and where Prof Leong’s post also agrees with this – is the idea of doing work outside of school to improve one’s skill.</p>
-<p>What I would add/emphasise, though, is that.., like. While “getting work done”, and being industrious are fine virtues, I reckon when it comes to programming, this should be a matter of interest: play around with C++11, because building things “natively” is fun, and so then you can be the guy who knows C++ on the team. Play around with some non-Java JVM language, like Scala or Clojure, because these things are more fun to program than Java. Learn one of Haskell or Erlang, because their not-C/Java/Python nature makes them fascinating to a student who otherwise won’t encounter them in coursework. Learn your way around a terminal, because working in a full-screen terminal looks cool-as-shit and like leet-hacker-skills. etc. etc. – I mean, obviously not <em>all</em> of these things; obviously not <em>all</em> at once.</p>
-<h2 id="git">Git</h2>
-<p><a href="../../posts/programming/2014-04-26-online-resources-for-git.html">I wish everyone knew git better</a>.</p>
-<p>During 3216, I had a teammate who “didn’t know git”, and in a reflection blogpost <a href="http://blog.nus.edu.sg/cs3216rgoulter/2014/09/06/reflection-on-assignment-1/">I complained about that</a>.<br />
-The truth of the matter is more complicated than the guy “didn’t know git”; his incompetencies were far broader than that. And there were worse things than that post complains about. But, anyway. (Said guy was <em>in his final year of a CS degree</em> at this time. Managed to graduate with “honours”, also. And is now working at a bank prob’ly earning much more money than me. I’m not sure what the moral of the story is there.).</p>
-<p>I hadn’t read that blogpost since writing it.<br />
-I was quite surprised to see it wasn’t as whiney as I recalled. (There’s still a lot of whining; just not as much as I recalled.).<br />
-It’s not all bad. Roughly, it goes over:</p>
-<ul>
-<li><p>The “renaissance” programmer: not just good at coding, but also at living “the good life”; improving himself, e.g. also in areas of communicating with others, and health/wellbeing.</p></li>
-<li><p>Code examples of a top-tier 3216/7 student; including merge conflicts pushed to master. (This is what the blogpost was written for.).</p></li>
-<li><p>‘How am I supposed to feel about that?’.</p></li>
-</ul>
-<h2 id="tone">Tone</h2>
-<p>I’m split about the tone.</p>
-<p>There’s some self-chastisement; but it’s all in terms of “I’m being a jerk” and “I wish I were a better man”, and not in terms of “if my team sucked, it’s because I didn’t take more responsibility”. – The whole “sorry to be a dick” and then being a dick is the lamest part.</p>
-<p>But I also admire some of the anger; there’s at least anger at the “3216 is for talented kids” pitch. (It’s awful for someone to kiss their own ass, right; but, hey, if I’m criticising myself, only fair for me to like some things, too.).</p>
-<p>– Where I’m most ambivalent is about the anger shown at incompetency.<br />
-At worst,being angry at someone’s incompetence potentially has the childishness of incredulity at someone not knowing something obscure. It’s unhelpful to be angry at people for something they needn’t have known, and unwelcoming. People inherently deserve to be treated with respect, even if they’re incompetent.<br />
-On the other hand, it’s outright surprising that a final year Computer Science student wouldn’t know (or wouldn’t even learn basic) Git/VCS, let alone someone taking an ‘elite’ course. (NUS’ degree required taking software engineering courses, which teach that, so this isn’t the case of “well, computer science doesn’t necessarily involve programming.”.). – Moreover, in a course which by its nature demands quickly learning new skills/concepts (web app dev for people who haven’t done web app dev before), it’s disappointing, perhaps disrespectful, to not learn basics of what you’re working on.<br />
-<em>Frustration</em> is at least understandable, in any case.</p>
-<h2 id="excellence">Excellence</h2>
-<p>What I didn’t remember from the blogpost was the notion of “pursuing excellence”.<br />
-Not sure the term “renaissance programmer” is widely used, but then as now I like the idea of someone who pursues excellence in understanding the tools of their craft; pursues excellence in how to otherwise be efficient at their craft (e.g. good health, good communication skills).<br />
-I think this is where I link to that <a href="https://www.youtube.com/watch?v=pGFf3SRP1bE">Bruce Lee video, ‘Be Water My Friend’</a>.</p>
-<p>I’m inclined to say anyone who spends a blogpost complaining about the incompetencies of their teammates has further to go to reach such excellence..</p>
-<p>Probably also one man’s “excellence” is another person’s “competent”, I’d guess. – With Vim, say, it’s a <a href="../../posts/programming/2014-04-26-tools.html">process of continually learning</a> about commands you’ve not heard of before, and noting how to improve on that.<br />
-Surely a healthy, helpful attitude to have. :-)</p>
-]]></summary>
-</entry>
-<entry>
     <title>Curious About GoodReads Reviews and Bullying</title>
     <link href="http://www.rgoulter.com/blog//posts/argument/2015-08-13-curious-about-goodreads-reviews-and-bullying.html" />
     <id>http://www.rgoulter.com/blog//posts/argument/2015-08-13-curious-about-goodreads-reviews-and-bullying.html</id>
@@ -595,6 +541,75 @@ RNs main strength is character; mostly just the main hero/heroine. IMMHW has man
 In (modern) RNs, it’s fairly conventional that by the end of the second chapter or so, you’ll know who the main Hero and Heroine are, and that they’ll be end the story Happily-Ever-After. - In IMMHW, it’s not (to me) as apparent, given the breadth/depth of characters featured.<br />
 (I’ve only played through one ‘route’ of IMMHW. I’m not sure how inferior/shorter other ‘routes’ of the story may be. – In some sense, VNs compare to Choose Your Own Adventure stories. Choose Your Own Romance?).<br />
 – Maybe a bad example, but if Twilight where CYOR, it’d make the whole ‘Team Edward’/‘Team Jacob’ thing more fun. ;P</p>
+]]></summary>
+</entry>
+<entry>
+    <title>Pretty HG Log Style</title>
+    <link href="http://www.rgoulter.com/blog//posts/programming/2015-06-01-pretty-hg-log-style.html" />
+    <id>http://www.rgoulter.com/blog//posts/programming/2015-06-01-pretty-hg-log-style.html</id>
+    <published>2015-06-01T00:00:00Z</published>
+    <updated>2015-06-01T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<div class="info">
+    Posted on June  1, 2015
+    
+        by Richard Goulter
+    <br/>
+    
+    Tags: <a href="/tags/hg.html">hg</a>, <a href="/tags/mercurial.html">mercurial</a>, <a href="/tags/git.html">git</a>, <a href="/tags/terminal.html">terminal</a>, <a href="/tags/log-style.html">log-style</a>
+    
+</div>
+
+<p>There’s a somewhat famous styled git log I have in my config. The guy I grabbed it from said it was from <a href="https://github.com/ndbroadbent/scm_breeze">scm-breeze</a>, I think maybe he meant tiimgreen’s <a href="https://github.com/tiimgreen/github-cheat-sheet#styled-git-log">github-cheat-sheet</a>. In any case, The Git one is like:</p>
+<pre><code>alias gl=&quot;git log --graph --pretty=format:&#39;%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)&lt;%an&gt;%Creset&#39; --abbrev-commit&quot;</code></pre>
+<p>Consulting <a href="http://git-scm.com/docs/pretty-formats">the docs</a>, (who does that, right?), it’s not insane to figure out what this is doing:</p>
+<ul>
+<li><code>%h</code> - abbrev commit hash</li>
+<li><code>%d</code> - ref names (like <code>(origin/master)</code>)</li>
+<li><code>%s</code> - subject (first line of commit)</li>
+<li><code>%cr</code> - committer date, relative.</li>
+<li><code>%an</code> - author name.</li>
+</ul>
+<p>Great.<br />
+But I’ve been using HG. Can Mercurial haz it, too?<br />
+Sources:</p>
+<ul>
+<li><a href="http://stackoverflow.com/questions/3575189/mercurial-log-with-one-liners">S/O: “Mercurial Log with One-Liners”</a> Because one-liner logs themselves can be useful.<br />
+ This one has:<br />
+ <code>alias hl=&quot;hg log --template '{node|short} | {date|isodatesec} | {author|user}: {desc|strip|firstline}\n'&quot;</code></li>
+<li><a href="hgbook.red-bean.com/read/customizing-the-output-of-mercurial.html">HG Book: Customizing Output</a></li>
+<li><a href="https://www.selenic.com/hg/help/templates">HG Help / Manpages</a></li>
+</ul>
+<p>This helps us get a plain one-liner</p>
+<ul>
+<li><a href="http://stackoverflow.com/questions/3625725/can-i-add-custom-colors-to-mercurial-command-templates">HG Template Colours</a></li>
+</ul>
+<p>I’m trying for “direct equivalence”. YMMV, since Git/HG don’t exactly share all concepts. (e.g. every commit in HG has the notion of a ‘branch’, etc.).<br />
+So, note that when building the template, this is the stuff to put within the <code>{}</code>:</p>
+<ul>
+<li><code>node|short</code> - commit hash</li>
+<li><code>rev</code> - int, revision number.</li>
+<li><code>branches</code>/<code>branch</code> - branchname.</li>
+<li><code>desc|strip|firstline</code> - ‘subject’</li>
+<li><code>date|age</code> - human-readable difference in time.</li>
+<li><code>author|person</code> - Richard from Richard <script type="text/javascript">
+<!--
+h='&#x67;&#x6d;&#x61;&#x69;&#108;&#46;&#x63;&#x6f;&#x6d;';a='&#64;';n='&#114;&#x69;&#x63;&#104;&#x61;&#114;&#100;&#46;&#x67;&#x6f;&#x75;&#108;&#116;&#x65;&#114;';e=n+a+h;
+document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\/'+'a'+'>');
+// -->
+</script><noscript>&#114;&#x69;&#x63;&#104;&#x61;&#114;&#100;&#46;&#x67;&#x6f;&#x75;&#108;&#116;&#x65;&#114;&#32;&#x61;&#116;&#32;&#x67;&#x6d;&#x61;&#x69;&#108;&#32;&#100;&#x6f;&#116;&#32;&#x63;&#x6f;&#x6d;</noscript></li>
+</ul>
+<p>So, my <code>.hgrc</code> has:</p>
+<pre><code>[color]
+custom.rev = red
+custom.decorate = yellow
+custom.date = green
+custom.author = blue bold</code></pre>
+<p>With the hg alias: <code>alias hl=&quot;hg log --style ~/.hgrc.d/fancy.style&quot;</code>. (Or do this from your shell, whatever).</p>
+<p>And, finally, <code>~/.hgrc.d/fancy.style</code> is:</p>
+<pre><code>changeset = &quot;* {label(&#39;custom.rev&#39;, node|short)} - ({label(&#39;custom.decorate&#39;, branch)}) {desc|strip|firstline} ({label(&#39;custom.date&#39;, date|age)}) &lt;{label(&#39;custom.author&#39; , author)}&gt;\n&quot;</code></pre>
+<p>Screenshot:<br />
+<img src="http://i.imgur.com/OWImYAS.png" alt="" /></p>
+<p>(The repo is old, because I don’t use HG so much, okay?).</p>
 ]]></summary>
 </entry>
 
