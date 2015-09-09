@@ -8,8 +8,41 @@
         <name>Richard Goulter</name>
         <email>richard.goulter+blog@gmail.com</email>
     </author>
-    <updated>2015-08-28T00:00:00Z</updated>
+    <updated>2015-09-09T00:00:00Z</updated>
     <entry>
+    <title>Can We Play a Little Nicer?</title>
+    <link href="http://www.rgoulter.com/blog//posts/argument/2015-09-09-can-we-play-a-little-nicer.html" />
+    <id>http://www.rgoulter.com/blog//posts/argument/2015-09-09-can-we-play-a-little-nicer.html</id>
+    <published>2015-09-09T00:00:00Z</published>
+    <updated>2015-09-09T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<div class="info">
+    Posted on September  9, 2015
+    
+        by Richard Goulter
+    <br/>
+    
+    Tags: <a href="/tags/conflict.html">conflict</a>
+    
+</div>
+
+<p>It’d be nice if we could raise the level of public discourse.<br />
+Or, rather, can we talk to each other less stupidly? D’you think it’s reasonable that we can come together and talk about complicated issues without treating the people we disagree with as idiots?</p>
+<p>– Is there a country wherein political discussions are exchanges/arguments of the best ideas from different perspectives; wherein it’s not automatically assumed that those disagreeing are idiots/imbeciles?<br />
+If not, I probably shouldn’t complain about how people discuss politics in whatever country. Such discussions are fated to be shit.<br />
+But a man can dream.<br />
+And for now, surely it’s not too much to be annoyed at seeing shit-flinging on my social media newsfeeds.</p>
+<p>I don’t hope for everyone to go around using big poncy words. I rather hope everyone doesn’t.<br />
+I also don’t hope for discussion to descent to pedantic finger-pointing out of “logical fallacy!”.</p>
+<p>But how bad does your political viewpoint have to be for you to see <a href="https://en.wikipedia.org/wiki/Fear,_uncertainty_and_doubt">FUD tactics</a> as a reasonable way to argue?</p>
+<p>I wouldn’t mind all this so much if the foolery were settled on one side,<br />
+(Or if I weren’t Facebook-friends with these kindof people, damnit),<br />
+but wouldn’t some “marketplace of ideas”, to misuse the analogy, be better off if I wanted to buy from everyone selling?</p>
+<p>– There’s a reason why pictures of cats (or funny posts about Harry Potter) aren’t so annoying. You’re unlikely to sound like you’ve no clue what you’re speaking about when you share pictures of cats. (Though, speaking about … these things people get righteously uppity about … it ain’t so).<br />
+It’s also much harder to be funny or snarky in an elegant way than people tend to think. Most of what counts as “satire” is someone mocking a mis-representation of their opponents viewpoint. – Which is great if you think “ha, they’re calling the people I don’t like stupid/wrong” is a good form of humour, but insufferable otherwise.</p>
+<p>Also, yes, merely discussing how people discuss these things, over just discussing ‘these things’ isn’t necessarily any more fun, and can probably also fall into righteous hob-nobbery, but oh well.</p>
+]]></summary>
+</entry>
+<entry>
     <title>Watching Videogames</title>
     <link href="http://www.rgoulter.com/blog//posts/narrative/2015-08-28-watching-videogames.html" />
     <id>http://www.rgoulter.com/blog//posts/narrative/2015-08-28-watching-videogames.html</id>
@@ -507,88 +540,6 @@ endfunction</code></pre>
 <p>Even from this snippet it’s clear that Thinca’s is of higher quality. I’d base that one the use of functions to do caretaking of the editor environment. – It’s not clear what the argument <code>g</code> is for (like the <code>g</code> in substitute?), but the ommitted lines seem to take care of some edge case.<br />
 – Something to note, I guess, it seems that in both cases the VimL is ‘impure’ in providing read-only info. (Again, I’m not sure if it’s possible to get this without the caretaking.).</p>
 <p>Not hatin’ on Nelstrom: while the Vim community has some excellent plugins, I think most Vim users don’t bother touching VimL enough to learn how to do this kindof thing.</p>
-]]></summary>
-</entry>
-<entry>
-    <title>Comical Conservative</title>
-    <link href="http://www.rgoulter.com/blog//posts/argument/2015-07-12-comical-conservative.html" />
-    <id>http://www.rgoulter.com/blog//posts/argument/2015-07-12-comical-conservative.html</id>
-    <published>2015-07-12T00:00:00Z</published>
-    <updated>2015-07-12T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<div class="info">
-    Posted on July 12, 2015
-    
-        by Richard Goulter
-    <br/>
-    
-    Tags: <a href="/tags/politics.html">politics</a>, <a href="/tags/righteous%20mind.html">righteous mind</a>, <a href="/tags/liberals.html">liberals</a>, <a href="/tags/conservatives.html">conservatives</a>
-    
-</div>
-
-<p>Came across <a href="https://www.facebook.com/TheComicalConservative/photos/a.133361476797039.26402.133352176797969/626100744189774/?type=1">this</a> on Facebook:</p>
-<blockquote>
-<p>Liberal: I am pro-choice<br />
-Me: Can I choose my own health care?<br />
-Liberal: No.<br />
-Me: Can I choose what I do with money I earn?<br />
-Liberal: No.<br />
-Me: Can I choose how I defend my family and possessions?<br />
-Liberal: No.<br />
-Me: What can I choose?<br />
-Liberal: An abortion, and a same sex marriage.<br />
-Me: I don’t agree with your opinions.<br />
-Liberal: OH MY GOD STOP OPPRESSING ME YOU RACIST SEXIST BIGOT!</p>
-</blockquote>
-<p>It’s not particularly hard to figure out that this comes from a socially-conservative poster.<br />
-I wouldn’t criticise this post for the quality of its opinion; but what’s perhaps disappointing is the “the guy I disagree with is so stupid” nature to it. It’d be unfair, though, to say that this attitude is unique to this post (or to social conservatives).</p>
-<p>Lately I’ve been listening to some of Jonathon Haidt’s talks/lectures.<br />
-In particular</p>
-<ul>
-<li><a href="https://www.youtube.com/watch?v=b86dzTFJbkc">‘Why conservatives don’t like social justice and science’</a>, in which Haidt discusses is “Righteous Mind” thesis, how humans develop morality in regards to care/loyalty/etc., and discussing socially liberal and conservative attitudes in regards to this. Haidt finishes the talk with a resounding criticism of the social sciences discrimination against conservatives. (– Ha, Karen Straughan chips in in the comments section).</li>
-<li><a href="https://www.youtube.com/watch?v=v3o-F94S4FI">‘How Common Threats Make for Common Ground’</a> (TED talk), in which Haidt points out this hyper-partisanship makes each side deny the looming threats we face, since each threat has become a political issue.</li>
-<li><a href="https://www.youtube.com/watch?v=iOu_8yoqZoQ">‘Three Stories About Capitalism’</a> (TED talk), in which Haidt discusses that some problems are “wicked problems” since they invoke our moral beliefs to resolve them, and the political disagreement over capitalism,</li>
-<li>and <a href="https://www.youtube.com/watch?v=1OnTTWkAv_E">this talk to some law students</a> (somewhat pessimistic).</li>
-</ul>
-<p>Haidt is a social psychologist; one of his main theses is that, lately, American politics has become extremely polarised. Roughly, in “The Righteous Mind” he points out our morality brings people together, but also divides us, as we sacrilise things which are “good”, and so anything opposing it is “bad”.<br />
-e.g. social liberals ‘sacrilise’ women’s rights, so the women’s right to choose abortion is far more important than a fetus’ “right to live” or so.<br />
-– The utterly refreshing thing about these lectures from Haidt is the utterly neutral way he discusses the social left/right.</p>
-<p>With that in mind, (great if you’ve seen any of the videos, but in any case):</p>
-<blockquote>
-<p>Liberal: I am pro-choice</p>
-</blockquote>
-<p>“Pro-choice” is a heavily charged term used to refer to a pro-abortion attitude (as opposed to “pro life” [or “anti-choice”]).<br />
-It seems a slightly mis-placed phrasing. Though, as with many arguments, what’s under attack is the Liberal’s <strong>sincerity</strong> about “people should be free to do what they want”.</p>
-<p>Haidt discussed that, while everyone values “liberty”.<br />
-The social left means “liberty” as in enabling everyone to have the freedom to choose what to do. (e.g. everyone should be able to go to college.).<br />
-The social right means “liberty” as in not interfering with individual choices. (e.g. don’t tax successful people more for being successful.).</p>
-<p>Next, the post somewhat attacks the liberal attitudes on some points:</p>
-<blockquote>
-<p>Me: Can I choose my own health care?<br />
-Me: Can I choose what I do with money I earn?<br />
-Me: Can I choose how I defend my family and possessions?</p>
-</blockquote>
-<p>Briefly,<br />
-‘Can I choose my own health care?’ ObamaCare seems to’ve been quite nasty for the middle class.<br />
-‘Can I choose what I do with money I earn?’ is slightly poorly phrased. Social conservatives prefer small government / lower taxes; but any taxation would still be the govt imposing what an individual does with the money. I mean, I think with better phrasing, (perhaps “Will I be rewarded for working harder than others, and taxed at the same rate as everyone else?”) it’d be easier to push a conservative viewpoint.<br />
-‘Can I choose how I defend my family and possessions?’ is an unfortunate one; the second amendment issue seems politically charged, and I understand only in the US is anyone so in favour of ‘civilians having assault rifles’. (Though, e.g. <a href="https://www.youtube.com/watch?v=RSk1UkqBx58">Dana Loesch</a> seems to be able to argue quite well in favour).</p>
-<p>Again, this is all “look how un-liberal the social left’s attitudes are”.</p>
-<blockquote>
-<p>Me: What can I choose? Liberal: An abortion, and a same sex marriage.</p>
-</blockquote>
-<p>Somewhat interesting to note that these two things are abhorrent to the religious right.</p>
-<p>You’d think a socially conservative attitude, in favour of a limited government, would be argue something more like “it’s not the government’s duty to interfere with individual liberty in these matters, [even if they are abhorrent]”.<br />
-It’s certainly a more interesting argument than “it’s morally right for this to be able to happen, why is it not legal?”.</p>
-<p>Still, this certainly makes the post look tacky.<br />
-For the social left, it’s great that a woman can have an abortion, and that two people who love each other can marry!<br />
-– I guess what’s intended is a mocking along the lines of “this is the only ‘liberty’ the social left cares about[; they don’t <strong>really</strong> care about liberty, like we do]”. And America is all about liberty/freedom.</p>
-<blockquote>
-<p>Me: I don’t agree with your opinions. Liberal: OH MY GOD STOP OPPRESSING ME YOU RACIST SEXIST BIGOT!</p>
-</blockquote>
-<p>This part doesn’t flow at all from the rest.<br />
-Again, with regards to Haidt, the social left ‘sacrilises’ the oppressed; so, anyone who disagrees with the left is a ‘racist’, is a ‘sexist’.<br />
-Also fun is that these words short-circuit argument. To be ‘racist’ is to be a heathen to the social left. Anything ‘racist’ is bad, and so it’s not worth considering the argument, because of course anything ‘racist’ cannot be true.</p>
-<p>Adding to the depiction of the Liberal as someone who doesn’t care about liberty, this paints the Liberal as someone who isn’t into civilised discourse, as well as someone who is incapable of defending their opinion.</p>
-<p>I guess what’s disappointing is that, rather than simply saying “social conservative attitudes aren’t dumb”, the post reaches further and says “social left attitudes are dumb”. It’d be just as easy to make a similar “social right attitudes are dumb” post, which would almost certainly be similarly tacky.</p>
 ]]></summary>
 </entry>
 
