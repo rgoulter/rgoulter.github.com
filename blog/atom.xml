@@ -8,8 +8,48 @@
         <name>Richard Goulter</name>
         <email>richard.goulter+blog@gmail.com</email>
     </author>
-    <updated>2015-09-09T00:00:00Z</updated>
+    <updated>2015-09-17T00:00:00Z</updated>
     <entry>
+    <title>Thoughts on Facebook Dislike Button</title>
+    <link href="http://www.rgoulter.com/blog//posts/argument/2015-09-17-thoughts-on-facebook-dislike-button.html" />
+    <id>http://www.rgoulter.com/blog//posts/argument/2015-09-17-thoughts-on-facebook-dislike-button.html</id>
+    <published>2015-09-17T00:00:00Z</published>
+    <updated>2015-09-17T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<div class="info">
+    Posted on September 17, 2015
+    
+        by Richard Goulter
+    <br/>
+    
+    Tags: <a href="/tags/facebook.html">facebook</a>, <a href="/tags/social%20media.html">social media</a>
+    
+</div>
+
+<p>So, recently it hit my newsfeed that Facebook was working on a ‘dislike button’.<br />
+Except it’s <em>not</em> going to be a ‘dislike’ button, so much as a ‘condolences’ button; for giving one’s regards if a post isn’t appropriate to ‘like’.<br />
+– This subtlety didn’t particularly reach the many who failed to read past a headline title. (That is, pretty much everyone on my newsfeed who shared it).<br />
+Which leads to reactions like “finally” or “about time” from some,<br />
+and from the gentler parts of the internet reactions like “oh no, the <em>trolls</em> are going to ruin Facebook!”.</p>
+<p>It’s a little frustrating.</p>
+<p>“<em>finally</em>” is a classic reaction to this; I’m pretty sure I’ve seen “if only Facebook had a dislike button” snark from the time I started using Facebook.<br />
+But Facebook doesn’t exactly work that way.<br />
+You’re ‘friends’ with the people on Facebook, with some kind of connection to the contacts In-Real-Life. That’s quite different to other online sites where you can upvote/downvote posts. – It’s reasonable to ‘like’, or to comment “I love this!” for posts you like, much less reasonable to leave a comment “who cares?” or “you’re stupid” for content you don’t like.</p>
+<p>Those concerned about “<em>trolls</em>” or about filling the site with negativity are also misguided. (I mean, even if they were right about it being a “dislike” button).<br />
+Partly because friend-to-friend ‘dislikes’ wouldn’t be all that high (though, say, advertising posts or posts on unpopular brands would get quite ‘disliked’).<br />
+But also, even the idea of trying to construct a filtered community, constrained in thought by the linguistic allowances of Facebook just sounds really concerning to me. (Let’s not say “bad”, let’s say “double plus un-good”, anyone?).<br />
+– Fortunately, <a href="http://www.ted.com/talks/mark_forsyth_what_s_a_snollygoster_a_short_lesson_in_political_speak">the words we speak don’t shape reality</a> (it’s the other way around), but the desire is still unsettling. (Although, admittedly, that’s getting rather alarmist about Facebook, as well as making an Orwell analogy, so, whatever).</p>
+<p>But the problem of ‘people not being nice to each other’ isn’t only present in (nor encouraged by) forums which feature dislike buttons, and other negative feedback.<br />
+– Both Facebook and Twitter are vaguely similar in feedback mechanisms: a post/tweet can be liked/favourited, or replied-to, or shared. These are all “constructive”, positive things. The ‘negative’ feedback for each is more passive: you can unfollow/mute an account you don’t like, or you can unfriend/block an account you really don’t like, but these indications aren’t explicit on a newsfeed/timeline. – Facebook/Twitter differ in terms of visibility of posts: Facebook’s profiles are private-by-default, Twitter’s are public-by-default. This affects discussion.<br />
+The point, is, though, even absent of ‘negative’ feedback like a ‘dislike’ button, these social media sites are <a href="http://www.ted.com/talks/jon_ronson_what_happens_when_online_shaming_spirals_out_of_control">capable of awful harassment</a>. People see something they don’t like, it angers them, people share it with their network, who then also get angry and share it, etc.<br />
+– Online shaming is awful, it’s people treating other people like they’re not people, and its presence isn’t dictated by a fucking ‘dislike’ button.</p>
+<p>Worse, though, is that.. even short of ‘online shaming’, there’s nothing amazing about users of social media only being in a network with people whom they like.<br />
+It’s remarkable, concerning to see <a href="http://www.technologyreview.com/view/539856/this-is-what-controversies-look-like-in-the-twittersphere/">what controversies on Twitter look like</a>. (Hint: They’re the ones where people on each side of the discussion only interact with the people who agree with them, and there’s little discussion between each side).<br />
+I’m a big fan of <a href="https://www.youtube.com/watch?v=b86dzTFJbkc">Jonathon Haidt’s talk here</a>, discussing is ‘Righteous Mind’ book. And my thinking is, if people limit their interaction online to those they like, you won’t have folk who only share posts from Fox news being ‘friends’ with folk who only share their posts from Al-Jazeera America (or whatever). – And emphasis on “warm, fuzzy, no negativity” is more likely to lend to a close-minded, homogeneous community than a community which people disagree with each other.</p>
+<p>Doom &amp; gloom aside, is there a way to have some discussion forum which’d encourage diversity, encourage people to be able to respectfully disagree with one another?<br />
+Because I can’t think up incentive for folk to visit a site for people to tell each other “hey, you’re wrong about whatever”.</p>
+]]></summary>
+</entry>
+<entry>
     <title>Can We Play a Little Nicer?</title>
     <link href="http://www.rgoulter.com/blog//posts/argument/2015-09-09-can-we-play-a-little-nicer.html" />
     <id>http://www.rgoulter.com/blog//posts/argument/2015-09-09-can-we-play-a-little-nicer.html</id>
@@ -470,76 +510,6 @@ At-a-glance, it looks like Emacs’ Org mode has a bunch of fancy .. interfaces,
 <p>A key advantage to Org mode (in native Emacs, or whether in one of the Vim ports) would be ‘lightweight’-ness compared to OneNote. (You <em>can</em> make use of OneNote on Linux, but that’d have to be by opening a web browser. Thus, internet connection required..).<br />
 But I am wondering how well Org mode’s ease-of-use, in terms of inputting bullet points/etc., compares to OneNote.<br />
 I’m also wondering whether, in lay usage, the fancy different-perspectives/searching really make that much of a difference.</p>
-]]></summary>
-</entry>
-<entry>
-    <title>Case Study in Vim Plugin Development</title>
-    <link href="http://www.rgoulter.com/blog//posts/programming/2015-07-22-case-study-in-vim-plugin-development.html" />
-    <id>http://www.rgoulter.com/blog//posts/programming/2015-07-22-case-study-in-vim-plugin-development.html</id>
-    <published>2015-07-22T00:00:00Z</published>
-    <updated>2015-07-22T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<div class="info">
-    Posted on July 22, 2015
-    
-        by Richard Goulter
-    <br/>
-    
-    Tags: <a href="/tags/editors.html">editors</a>, <a href="/tags/vim.html">vim</a>
-    
-</div>
-
-<p>I don’t know a lot about writing plugins.<br />
-My own experience goes as far as trying to write a plugin for Eclipse (which gets <em>very</em> complicated as soon as a plugin isn’t a “monolithic” bundle); as well as writing a quite small plugin for my <a href="https://github.com/rgoulter/c-worksheet.vim">C worksheet</a>. (The fanciest thing it does is to download a JAR archive dependency if not present in the system.).</p>
-<p>So I’m not particularly qualified to say what is or isn’t a good plugin architecture, etc.</p>
-<p>I recently came across the problem: “In Vim, use <code>*</code> to find next occurence of current selection in visual mode”.<br />
-Vim doesn’t offer this behaviour out of the box.<br />
-The fella on IRC was using <a href="https://github.com/nelstrom/vim-visual-star-search">nelstrom/vim-visual-star-search</a>. The readme for this somewhat helpfully links to <a href="https://github.com/thinca/vim-visualstar">thinca/vim-visualstar</a>. – Neither of these repos is outstandingly popular.</p>
-<p>Nelstrom remarks “Looks like it uses a lot more code to do pretty much the same thing. Is it better?”.</p>
-<p>Nelstrom’s plugin is simple enough to show here:</p>
-<pre><code>&quot; From http://got-ravings.blogspot.com/2008/07/vim-pr0n-visual-search-mappings.html
-
-&quot; makes * and # work on visual mode too.
-function! s:VSetSearch(cmdtype)
-  let temp = @s
-  norm! gv&quot;sy
-  let @/ = &#39;\V&#39; . substitute(escape(@s, a:cmdtype.&#39;\&#39;), &#39;\n&#39;, &#39;\\n&#39;, &#39;g&#39;)
-  let @s = temp
-endfunction
-
-xnoremap * :&lt;C-u&gt;call &lt;SID&gt;VSetSearch(&#39;/&#39;)&lt;CR&gt;/&lt;C-R&gt;=@/&lt;CR&gt;&lt;CR&gt;
-xnoremap # :&lt;C-u&gt;call &lt;SID&gt;VSetSearch(&#39;?&#39;)&lt;CR&gt;?&lt;C-R&gt;=@/&lt;CR&gt;&lt;CR&gt;
-
-&quot; recursively vimgrep for word under cursor or selection if you hit leader-star
-nmap &lt;leader&gt;* :execute &#39;noautocmd vimgrep /\V&#39; . substitute(escape(expand(&quot;&lt;cword&gt;&quot;), &#39;\&#39;), &#39;\n&#39;, &#39;\\n&#39;, &#39;g&#39;) . &#39;/ **&#39;&lt;CR&gt;
-vmap &lt;leader&gt;* :&lt;C-u&gt;call &lt;SID&gt;VSetSearch()&lt;CR&gt;:execute &#39;noautocmd vimgrep /&#39; . @/ . &#39;/ **&#39;&lt;CR&gt;</code></pre>
-<p>Thinca’s is <a href="https://raw.githubusercontent.com/thinca/vim-visualstar/master/plugin/visualstar.vim">certainly longer</a>:</p>
-<pre><code>function! s:search(type, g)
-  let s:count = v:count1 . a:type
-  let reg = &#39;&quot;&#39;
-  let [save_reg, save_type] = [getreg(reg), getregtype(reg)]
-  normal! gv&quot;&quot;y
-  let text = @&quot;
-  call setreg(reg, save_reg, save_type)
-
-  let [pre, post] = [&#39;&#39;, &#39;&#39;]
-  if !a:g
-    ....
-  endif
-
-  let text = substitute(escape(text, &#39;\&#39; . a:type), &quot;\n&quot;, &#39;\\n&#39;, &#39;g&#39;)
-
-  let @/ = &#39;\V&#39; . pre . text . post
-  call histadd(&#39;/&#39;, @/)
-endfunction</code></pre>
-<p>(Code truncated at <code>....</code> for brevity).</p>
-<p>With my current proficiency, I’m sure Nelstrom writes closer to how I’d write:</p>
-<ul>
-<li><p>Cites any sources / close inspiration.</p></li>
-<li><p>Leaves comments explaining anything non-trivial. (Which Thinca doesn’t do AT ALL. Not even for functions!).</p></li>
-</ul>
-<p>Even from this snippet it’s clear that Thinca’s is of higher quality. I’d base that one the use of functions to do caretaking of the editor environment. – It’s not clear what the argument <code>g</code> is for (like the <code>g</code> in substitute?), but the ommitted lines seem to take care of some edge case.<br />
-– Something to note, I guess, it seems that in both cases the VimL is ‘impure’ in providing read-only info. (Again, I’m not sure if it’s possible to get this without the caretaking.).</p>
-<p>Not hatin’ on Nelstrom: while the Vim community has some excellent plugins, I think most Vim users don’t bother touching VimL enough to learn how to do this kindof thing.</p>
 ]]></summary>
 </entry>
 
