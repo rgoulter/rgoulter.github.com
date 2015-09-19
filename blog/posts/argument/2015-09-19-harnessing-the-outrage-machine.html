@@ -1,0 +1,198 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Harnessing the Outrage Machine - Richard Goulter's Blog</title>
+
+        <!-- My (Old) CSS theme -->
+        <link rel="stylesheet" type="text/css" href="../../css/default.css" />
+
+        <!--
+            jQuery & jQueryUI
+        -->
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css" />
+
+        <!--
+            Pandoc Style CSS
+            (for syntax highlighted snippets)
+        -->
+        <link rel="stylesheet" type="text/css" href="../../css/syntax.css" />
+
+        <!--
+            Bootstrap
+        -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+        <style>
+            /*
+             * Bootstrap defines blockquote as 17px,
+             * so it looks stupidly large in my blogposts. */
+            blockquote {
+                font-size: 14px;
+            }
+        </style>
+
+        <!--
+            Waypoints, and Waypoints-Sticky,
+            so we can do this:
+            http://imakewebthings.com/waypoints/shortcuts/sticky-elements/
+        -->
+        <script src="../../js/jquery.waypoints.min.js"></script>
+        <script src="../../js/sticky.min.js"></script>
+
+        <!--
+            TOCify
+        -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js"></script>
+        <!--
+            Patched TOCify css file.
+            (Don't want fixed `.tocify`).
+        -->
+        <link rel="stylesheet" type="text/css" href="../../css/jquery.tocify.css" />
+
+        <style>
+        .navbar {
+            margin-bottom: 0px;
+        }
+
+        .banner-image {
+            width:100%;
+        }
+
+        .banner {
+            margin-left: 0px;
+            margin-right: 0px;
+        }
+
+        body {
+            background-color: #e2e2e2;
+        }
+
+        #page {
+            padding-left:0;
+            padding-right:0;
+            background-color: #ffffff;
+        }
+        </style>
+    </head>
+    <body>
+        <div id="page" class="container">
+            <!-- This, with no padding on left/right -->
+            <div class="banner">
+                <nav class="navbar navbar-default">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+
+            <!-- The Hamburger -->
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../../">Richard Goulter's Blog</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="../../">Home</a></li>
+            <li><a href="../../yi.html">Yi</a></li>
+            <li><a href="../../emacs.html">Emacs</a></li>
+            <li><a href="../../archive.html">Archive</a></li>
+        </ul>
+    </div>
+</nav>
+
+                <img class="banner-image" src="../../images/blog-banner.png" />
+            </div>
+
+            <hr style="margin: 0px; border-top: 5px solid black;" />
+
+            <div id="content" class="container">
+                <h1>Harnessing the Outrage Machine</h1>
+                <div class="info">
+    Posted on September 19, 2015
+    
+        by Richard Goulter
+    <br />
+    
+    Tags: <a href="../../tags/outrage.html">outrage</a>, <a href="../../tags/south%20park.html">south park</a>, <a href="../../tags/media.html">media</a>, <a href="../../tags/sjws.html">sjws</a>
+    
+</div>
+
+<p>South Park’s S19E1 episode, introducing the ‘PC Principal’, seemed to have upset some people. (e.g. <a href="https://twitter.com/thewtfmagazine/status/644391652354879488">this tweet</a>, <a href="https://twitter.com/94_jasy/status/645026598488555520">this tweet</a>.<br />
+– For what it’s worth, the episode doesn’t say ‘political correctness is bad’, nor ‘social justice is bad’, and it certainly isn’t pandering to say these things are great. - The episode clearly attacks the disproportionate, abusive, bullying endorsed by the “social justice bullies” (as <a href="https://medium.com/@aristoNYC/social-justice-bullies-the-authoritarianism-of-millennial-social-justice-6bdb5ad3c9d3">aristoNYC’s piece</a> termed it).<br />
+The term “Social Justice Warrior” is itself.. fun, since many who endorse its characteristics don’t see it as pejorative: ‘Warrior for Social Justice? How could that be a bad thing?’. (Even aristoNYC’s piece, a pretty good article criticising SJWs, likes the term. Thus, “SJ Bullies”).<br />
+– South Parks’ contribution to the lexicon here is ‘great’: <a href="https://twitter.com/SouthPark/status/644377482129371136">“You PC bro?”</a>, <a href="https://twitter.com/SouthPark/status/644377056021602304">“It’s not BRUCE fucking Jenner, it’s Caitlyn and she’s a fucking stunning woman!”</a>, <a href="https://twitter.com/SouthPark/status/644331288426483713">“WOO WOO WOO! You hear that!? That’s the sound of 2015 pulling you over people!”</a> are all sure to be copy-pasted over as height-of-wit when people see someone being a bully. (I do like that last one, it captures the tone of ‘call out’ amazingly well).</p>
+<p>Prominent YouTube account GameTheory recently released <a href="https://www.youtube.com/watch?v=tPpBlDaKM_o">this video</a>, pointing out that when the media calls gamers “12 year old losers”, it garners a reaction of outrage. (e.g. Jimmy Kimmell managed to get 3x videos in a row, with very little creativity, each getting more views than his channel usually gets, just calling gamers “12 year old losers”).<br />
+The video also features the cliche quote of “first they ignore you, then they ridicule you, then they fight you, then you win” or so. YMMV.<br />
+– But the interesting part of the video was from ~10:30ff, when it was pointed out media sensationalism over ‘shark attacks’ were able to create widespread fear of sharks. Such a fear is irrational and unfounded. Another example it pointed out was the media as the chief culprit of the downfall-into-obscurity of some presidential candidate. – I’m not sure how accurate these examples are of how powerful the media can be, but “media’s lens on insignificant issues has an impact on public perception” is somewhat disconcerting.</p>
+<p>Surely there’s room for some level of introspection, to be able to say “hey, I’m outraged by this.” then “does it matter?”, and calm down or so?</p>
+<p>I’m not quite talking about <a href="https://medium.com/@julien/the-complete-guide-to-not-giving-a-fuck-52bc4be9e7c1">“not giving a fuck”</a>.<br />
+– Certainly “let’s ignore all negative feedback, because there’s NOTHING I can do about it” sounds like a terrible idea. (It’s not what the author <em>means</em>, but it’s a conclusion which could be <em>read</em> from it all the same).</p>
+<p>– For what it’s worth, I also think “calming down” by way of cat pictures &amp; other cute things in between bouts of outrage seems a technique to make ‘online bezerkers’: if the outrage is never discussed-through, doesn’t that make it easier to increase tensions?</p>
+<p>Anyway.<br />
+It seems to me some of the common ways to get an affiliate (of whatever) enraged at a speaker/article:</p>
+<ol style="list-style-type: decimal">
+<li>Unflattering misrepresentation</li>
+<li>Unflattering accurate representation</li>
+<li>Unflattering reality (for the affiliate)</li>
+</ol>
+<p>I’m just pulling this out of my ass, so. (Another good way to get an affiliate aroused is some anecdote/story which supports their view of reality: “something bad happened, but if people like me were in charge, it wouldn’t have happened”).<br />
+– ‘Being outraged’ is not a particularly sensible response to <em>any</em> of these things. But I suppose if they ‘hurt’ you, you gotta ‘hurt’ them back, right?</p>
+<p>– Since being abstract is awful, let me try the above in the context of the South Park episode: it’s upsetting to fans of Social Justice that the ‘PC Bros’ are the ‘bad guys’ (unflatting misrepresentation of ‘social justice’), but also hits close-to-home the vicious nature of SJ bullying online (unflattering accurate representation). – I’ve also seen comments along the lines of how ‘transphobic’ the episode was; perhaps the bullies find it upsetting that not everyone things Jenner is a hero?</p>
+<p>Issues which polarise are polarising further than they have before, it seems to me.</p>
+
+
+<hr />
+
+<div>
+    
+    
+    <a href="../../posts/argument/2015-09-17-thoughts-on-facebook-dislike-button.html" style="float:right; text-align: right;">Older post</a>
+    
+</div>
+<br style="clear: both;" />
+
+<hr />
+
+<div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'richardgoultersblog'; // required: replace example with your forum shortname
+        var disqus_identifier = '/posts/argument/2015-09-19-harnessing-the-outrage-machine.html';
+        var disqus_url = 'http://www.rgoulter.com/blog' + '/posts/argument/2015-09-19-harnessing-the-outrage-machine.html';
+        var disqus_title = 'Harnessing the Outrage Machine - September 19, 2015';
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+<!-- Load highlight.js for Syntax Highlighting. -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/solarized_light.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+            </div>
+
+            <hr style="margin-bottom: 0px; border-top: 2px solid black;" />
+
+            <div id="footer" class="pull-right" style="padding-right: 10px;">
+                Site proudly generated by
+                <a href="http://jaspervdj.be/hakyll">Hakyll</a>
+            </div>
+        </div>
+    </body>
+</html>
