@@ -1,0 +1,355 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Notes on Building a Live Coding Tool for C99 (Draft) - Richard Goulter's Blog</title>
+
+        <!-- My (Old) CSS theme -->
+        <link rel="stylesheet" type="text/css" href="../../css/default.css" />
+
+        <!--
+            jQuery & jQueryUI
+        -->
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css" />
+
+        <!--
+            Pandoc Style CSS
+            (for syntax highlighted snippets)
+        -->
+        <link rel="stylesheet" type="text/css" href="../../css/syntax.css" />
+
+        <!--
+            Bootstrap
+        -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+        <style>
+            /*
+             * Bootstrap defines blockquote as 17px,
+             * so it looks stupidly large in my blogposts. */
+            blockquote {
+                font-size: 14px;
+            }
+        </style>
+
+        <!--
+            Waypoints, and Waypoints-Sticky,
+            so we can do this:
+            http://imakewebthings.com/waypoints/shortcuts/sticky-elements/
+        -->
+        <script src="../../js/jquery.waypoints.min.js"></script>
+        <script src="../../js/sticky.min.js"></script>
+
+        <!--
+            TOCify
+        -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js"></script>
+        <!--
+            Patched TOCify css file.
+            (Don't want fixed `.tocify`).
+        -->
+        <link rel="stylesheet" type="text/css" href="../../css/jquery.tocify.css" />
+
+        <style>
+        .navbar {
+            margin-bottom: 0px;
+        }
+
+        .banner-image {
+            width:100%;
+        }
+
+        .banner {
+            margin-left: 0px;
+            margin-right: 0px;
+        }
+
+        body {
+            background-color: #e2e2e2;
+        }
+
+        #page {
+            padding-left:0;
+            padding-right:0;
+            background-color: #ffffff;
+        }
+        </style>
+    </head>
+    <body>
+        <div id="page" class="container">
+            <!-- This, with no padding on left/right -->
+            <div class="banner">
+                <nav class="navbar navbar-default">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+
+            <!-- The Hamburger -->
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../../">Richard Goulter's Blog</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="../../">Home</a></li>
+            <li><a href="../../yi.html">Yi</a></li>
+            <li><a href="../../emacs.html">Emacs</a></li>
+            <li><a href="../../archive.html">Archive</a></li>
+        </ul>
+    </div>
+</nav>
+
+                <img class="banner-image" src="../../images/blog-banner.png" />
+            </div>
+
+            <hr style="margin: 0px; border-top: 5px solid black;" />
+
+            <div id="content" class="container">
+                <h1>Notes on Building a Live Coding Tool for C99 (Draft)</h1>
+                <div class="info">
+    Posted on September 28, 2015
+    
+        by Richard Goulter
+    <br />
+    
+    Tags: <a href="../../tags/fyp.html">fyp</a>, <a href="../../tags/scala.html">scala</a>, <a href="../../tags/c.html">c</a>, <a href="../../tags/vim.html">vim</a>
+    
+</div>
+
+<p>I’ve been invited to talk at NUSHackers Friday Hacks on October 9th, about my FYP of building a ‘worksheet’/‘live coding’ environment for C.<br />
+This post is to note down anything pertinent / thinking-out-loud as to what to say.</p>
+<p>This is a draft. <a href="https://onedrive.live.com/redir?resid=D8B6217BE240272D!94378&amp;authkey=!AISnGbUV2-fE_Hw&amp;ithint=file%2cpptx">Here is a link to the presentation draft</a>.<br />
+(Obviously, the colours need to change.).</p>
+<h1 id="what-is-my-fyp">What is my FYP?</h1>
+<p>Let’s have a GIF explain that:<br />
+<img src="https://github.com/rgoulter/c-worksheet.vim/raw/master/demo.gif" alt="demo" /></p>
+<p><a href="https://github.com/rgoulter/c-worksheet.vim/raw/master/demo-slow.gif">(Here is the same gif, slower speed).</a></p>
+<p>i.e. show the results of the computation directly beside the C program itself, inside the editor. (This saves having to quit the editor, type <code>gcc &lt;whatever&gt;.c</code>, <code>./a.out</code>, then try and figure out what’s going on).<br />
+Another way to describe this as a ‘REPL on steroids’.<br />
+You might be aware of other such tools around:<br />
+* Scala IDE’s “worksheets” were the ‘inspiration’ for this. (EclipseFP copies this idea with what it calls a ‘worksheet’). * Apple’s Playground does a similar kindof thing for Objective-C and Swift. * LightTable (whose demo was very impressive, but the $300k KickStarter hasn’t given us the complete thing yet) is big on doing this for Clojure, and to a limited extent Python. * IPython notebooks are kinda-sorta similar. * <a href="https://comealive.io/">‘Alive’</a> is bringing the same thing for C# in Visual Studio. * <a href="https://github.com/jcartledge/sublime-worksheet">jcartledge/sublime-worksheet</a> is an example of an editor plugin which provides a ‘worksheet’ interface for any REPL language. (Easy to see ‘REPL on steroids’ here). * Apparently <a href="http://stackoverflow.com/questions/13059700/can-sublimetext2-execude-ruby-code-and-show-the-results-within-the-document-like">TextMate</a> can show results for Ruby. * TMux + Vim, with something like <a href="https://github.com/epeli/slimux">slimux</a> (‘send output to TMux shell’) kinda-sorta helps out with this, too. (‘slimux’ being inspired by Emacs’ SLIME).</p>
+<p>Loosely related is also, e.g. GDB/LLDB. A more sober way to describe my plugin is “auto-generated printf debugging”. – GDB/debuggers provide ‘inspect the value at some point in execution’ and ‘can easily evaluate expressions’ functionality. (GDB is known to be easy-to-use, widely used by the CS1010 kids, etc.).</p>
+<p>My project on GitHub: <a href="https://github.com/rgoulter/c-worksheet-instrumentor">rgoulter/c-worksheet-instrumentor</a> (the main logic), and <a href="https://github.com/rgoulter/c-worksheet.vim">rgoulter/c-worksheet.vim</a> (a plugin for Vim).<br />
+(It’s got a handful of stars on GitHub. You just know I’m amazing at publicity.).</p>
+<h1 id="goals-for-presentation-meta">Goals for Presentation (Meta)</h1>
+<p>Hopefully, (esp. if you play around with it yourself), you’ll think that’s kinda cool. (Btw, I should link to my FYP report. It’s not completely full of smoke. Your FYP report shouldn’t be, either).<br />
+I’ll know if I did a good job with my talk if you walk out thinking “that’s it, huh? I was expecting something complicated.” / “<em>I</em> could do that, chump.”. (I’ll’ve done an even better job if some of you go out and try and make this kindof stuff).<br />
+– I’m not being so modest. (C is a ‘nice’ + simple language for this, other languages will have their own fun). But it’s not a sit-down-and-finish-it-in-an-hour kindof project. It is a <em>lot</em> of fun. (How many kids continue working on their FYP after they’ve presented?, <em>without</em> being paid to do so?). You’ll also get <em>very</em> good at the language; I got somewhat familiar with the C99 language standard, and certainly stumbled upon the more esoteric aspects of (simple) C99, my favourite being:</p>
+<pre><code>int isWhitespace[256] = { [' '] = 1, ['\t'] = 1, ['\n'] = 1 };
+isWhitespace['a'];  //&gt; 0
+isWhitespace[' '];  //&gt; 1
+isWhitespace['\t']; //&gt; 1</code></pre>
+<p>– Also, since this is ‘plan for a presentation’ + I wrote most of this when I was tired, it’s written in ‘second person’ style. I hope you’ll forgive me for that.</p>
+<h2 id="whats-in-it-for-you-motivation-for-caring-about-the-presentation">“What’s In It For You” / Motivation For Caring About the Presentation</h2>
+<p>Something like ‘Example of a cool Programming-Language Application project you can make, once you have knowledge of how to make a parser &amp; roughly you could implement it’, esp. if the inspiration is ‘I want that for <em>my favourite language</em>’.</p>
+<h1 id="parsers-and-pl-applications">Parsers and PL Applications</h1>
+<p>– It can become clear by the terminology, the way someone talks, how much they know or don’t know about a subject. “Parsers” is one of these areas I don’t know all that much about. (I never took the compilers/parser course.).</p>
+<p>But in terms of “writing a worksheetify program”, roughly formula for this is:</p>
+<ol style="list-style-type: decimal">
+<li>Parse the source code.</li>
+<li>???</li>
+<li>Profit.</li>
+</ol>
+<p>(Which applies to writing any PL application in general.). There are different ways to do it. (And of course, there are trade-offs for different approaches.).<br />
+But a key point is, if you want to show results within functions / nested scopes / control structures, it’s not enough to just pass it off to a REPL. You must be able to parse the source code.</p>
+<h2 id="making-use-of-the-ast">Making Use of the AST</h2>
+<p>In situations where you’re writing programs whose data is other programs, you’re going to want to make use of techniques a level abstracted from directly traversing the AST.</p>
+<div class="figure">
+<img src="http://i.imgur.com/12f7qEm.png" alt="AST" />
+<p class="caption">AST</p>
+</div>
+<p>ANTLR (see below) provides two ways to handle this: Tree Listeners, Tree Visitors.<br />
+With Tree Listeners, you implement listener methods which get called as the AST is walked.<br />
+With Tree Visitors, you implement methods which then control which parts of the tree are ‘visited’; the intent is to evaluate the AST to some value. (e.g. Numeric expression to a number, like in the simple math expression grammar example).</p>
+<p>– The Tree Visitor is kindof more FP-ish, except having to explicitly call ‘visit’ on the children nodes of the AST is also a bit tedious. - This can be abstracted another level, where you have e.g. <code>AST -&gt; Option[T]</code>, and some <code>combine :: [T] -&gt; T</code>, then it’s possible to write a general <code>fold_ast :: AST -&gt; (AST -&gt; Option[T]) -&gt; ([T] -&gt; T) -&gt; T</code> function for the AST. (The <code>AST -&gt; Option[T]</code> means “maybe extract value from this AST node; if this node returns Some thing, use that, otherwise keep looking.”.). - Manipulation of AST could be done in a similar way.</p>
+<p>Anyway. The dynamic (in ANTLR) is usually that the Tree Listeners can be used to ‘grab what you want’ out of the AST, Tree Visitor is better at ‘evaluating’ some part of the AST to a value.</p>
+<h2 id="my-choice-of-parser-technique">My Choice of Parser / Technique</h2>
+<p>For the ‘parser’, I made use of ANTLR parser-generator (like flex/yacc; just give it a BNF-esque grammar, and it generates the lexer/parser for you). Mostly because this can generate a parser in Java, and I was using Scala for the project (as specified by FYP description – Though I think since FP/‘strongly-typed’ languages are kinda nicer to write parsers in, I think the hope was I’d hand-write the parser..)<br />
+[Question: alex/happy are the Haskell equivalent of lex/yacc in the Haskell world, right? How do these play around with Parsec/Atto-Parsec? &amp; If Parsec is for more ‘hand-written’ style of parser, what’s the terminology to describe what kinds of languages can just ‘cheat’ + use ANTLR for?].</p>
+<p>Making use of gccxml, or an LLVM/Clang pass might’ve also had it’s advantages, ‘but’, then I’d have to write in C++ (for the latter), it makes the executable size for my program <em>much</em> larger (which is fine if your plugin is like YouCompleteMe), and I more/less wanted to keep the approach ‘general’, rather than tied to a specific language.<br />
+[Note: a disadvantage of not using gcc/clang is that there may be divergence between what <em>they</em> parse and what <em>I</em> parse; I mitigate this in my project by first compiling the given input C file. i.e. anything I can parse, they can parse (better?)].</p>
+<p>In terms of “in my case”:<br />
+One approach might be to just pass the code of to some C interpreter anyway. (Cling is a C++ interpreter developed by the folk at CERN, a successor of an older CInt (C Interpreter) project of theirs. ‘Cling’ because it’s built upon LLVM/Clang.). This’d require potentially renaming variables so that everything is unique, and ‘unfolding’ control structures (like loops, etc.). – Quite a messy way of doing things.</p>
+<p>Another approach (which I never investigated) would be to generate a sequence of commands to give to GDB/LLDB so as to get the information (i.e. values of variables at some point in execution). (I did investigate using GDB/LLDB insofar as ‘will this let me avoid having to learn about the PL stuff?’; it’s not suffice because you still need to know for a statement e.g. <code>x = y = 4</code> <em>what</em> information you’d like to get from GDB/LLDB). – This isn’t necessarily a bad approach.</p>
+<div class="figure">
+<img src="http://i.imgur.com/i2WKSkH.png" alt />
+
+</div>
+<p>The approach I <em>did</em> take was to ‘instrument’ (or ‘augment’) the code.<br />
+i.e. insert statements into the C program so that I can run the program to get the output.</p>
+<div class="figure">
+<img src="http://i.imgur.com/P3KHZzK.png" alt />
+
+</div>
+<p>Roughly like:</p>
+<pre><code>int main() {
+  int x;
+  x = 3;
+}</code></pre>
+<p>becomes</p>
+<pre><code>int main() {
+  int x;
+  x = 3;
+  OUTPUT(x, STRING_OF(3))
+}</code></pre>
+<p>and as-if compiled with a pre-processor which handles <code>OUTPUT</code>, <code>STRING_OF</code>. <code>OUTPUT</code> outputs in a format my Scala program intercepts. (I just use <code>STDOUT</code>; it could also be done using, say, sockets, or using something like Apache Thrift / or some other IPC/RPC framework – With C, this is a bit annoying, e.g. becomes more difficult to compile on Windows. [My tool, &amp; the Vim plugin, work on Windows, btw]).</p>
+<p>The pseudocode for the instrumentor is more/less:</p>
+<pre><code>def instrument(source):
+  ast &lt;- parse source
+  types &lt;- ctypes from declarations in AST
+
+  for each declaration:
+    insert(output declaration.toEnglish)
+
+  for each expression statement:
+    // n.b. assignments are expressions
+    insert(output declaration.toString)</code></pre>
+<p>Aside from ANTLR-specific stuff (e.g. ‘inserting’ into a token stream), the key challenge here is getting the ctype from a declaration. Furthermore, you need to be able to get the ctype of an expression, and from the ctype be able to generate ‘toString’ output for it.</p>
+<h1 id="you-said-it-wouldnt-be-hard">You Said It Wouldn’t Be Hard</h1>
+<p>But I made no promises about length of this post. Soz.</p>
+<p>The hardest, most complicated bits are out of the way. The rest is just “how you’d make a program which outputs pertinent information, given a C input compilationUnit”. (Taking the ‘pertinent information’ and giving it to an editor is easy enough, &amp; not particularly interesting.).</p>
+<h1 id="considerations-made-when-doing-this-for-c">Considerations Made When Doing This For C</h1>
+<p>Specifically for C, my program basically outputs for declarations (like cdecl), and outputs values for expression statements.</p>
+<h3 id="representing-c-kinds">Representing C Kinds</h3>
+<p>A C variable/expression will be of some type: * a primitive type (e.g. int, float, char), * a pointer to some C type, * an array of some C type, * a struct/union (consisting of a sequence of identifiers, each of some C type) type, * an enum type, * a function (consisting of a return value of some C type, and a sequence of parameters each of some C type).</p>
+<p>If you can see how the above might be represented as an ‘Algebraic Data Type’, congratulations. (If not, you probably haven’t heard of ADTs.).</p>
+<p>e.g. in ML languages like OCaml/Haskell, you might write it something like:</p>
+<pre><code>type CType = Primitive of String * String
+           | Pointer   of String * CType
+           | Array     of String * CType
+           | Struct    of String * String * ((String, CType) List)
+           | Function  of String * CType * ((String, CType) List)</code></pre>
+<p>In Scala, the code (simplified) is something like:</p>
+<pre><code>sealed trait CType;
+case class PrimitiveType(id: String, type: String) extends CType;
+case class PointerType(id: String, to: CType) extends CType;
+case class ArrayType(id: String, of: CType) extends CType;
+case class StructType(id: String, tag: String, members: List[(String, CType)]) extends CType;
+case class FunctionType(id: String, rtnType: CType, params: List[(String, CType)]) extends CType;</code></pre>
+<p>In Java … ha ha ha, just kidding. (Just because you <em>can</em>, doesn’t mean you <em>should</em>.).</p>
+<p>Again, often in FP programming, once you have the types, the rest is fairly straight-forward. In my case: * I want this ‘CType’ from the AST. (kinda because C99 doesn’t have <code>typeof(x)</code>). * I want to output e.g. string-of some ‘CType’. (because C99 doesn’t have <code>stringof(x)</code>).</p>
+<h2 id="declarations">Declarations</h2>
+<div class="figure">
+<img src="http://i.imgur.com/93zni61.png" alt />
+
+</div>
+<p>The devil is in the detail, but (in terms of ANTLR): * You can use a TreeVisitor to evaluate a declaration statement to a list of CType(s). * You can then use a TreeListener to traverse the AST and pick up the declarations.</p>
+<p>The main complication here is that the listener has to care about scope. There’s also things like forward declarations, types declared in header files, &amp; typedefs.</p>
+<h3 id="cdecl">CDecl</h3>
+<p>The actual cdecl (e.g. at cdecl.org, or as a programming exercise in the “Expert C Programming” book) is more/less a heuristic, doesn’t actually take care of all C declarations.<br />
+But going from (String -&gt;) AST -&gt; CType, it’s not so hard to go CType -&gt; String to ‘explain’ what a C declaration is.<br />
+Figuring it out takes the same kindof logic as figuring out how to do AST -&gt; CType stuff.</p>
+<h2 id="expressions">Expressions</h2>
+<p>This is more/less straightforward, following the CType ADT.</p>
+<p>In particular, I use StringTemplate as a template rendering engine. (Like Python’s Jinja). So you have a <code>string_of_primitive</code>, <code>string_of_pointer</code>, <code>string_of_array</code>, etc. etc. and pass values to StringTemplate such that it can recursively generate the C code for you.</p>
+<h3 id="instrumenting-putting-it-all-together">Instrumenting: Putting it All Together</h3>
+<p>I don’t reconstruct the AST directly, but just inject the instrumenting C code into a TokenStreamRewriter (one of ANTLR’s things, for a stream of the lexed tokens).</p>
+<h2 id="segfault">Segfault</h2>
+<p>That’s all ‘nice’, but something I’m quite proud of (&amp; in terms of ‘useful for a C beginner’) is it catches <code>SEGFAULT</code>s, and marks the output there:</p>
+<pre><code>  int *px;     //&gt; px is pointer to int
+  px = 0;      //&gt; px = (nil)
+  *px = 5;     //&gt; SEGFAULT</code></pre>
+<p>‘How’ involves a bit of knowledge about C99:</p>
+<ul>
+<li><p><code>setjmp</code>/<code>longjmp</code> are kinda like a <code>GOTO</code> statement, can be used to simulate exception handling in C.</p></li>
+<li><p><code>signal</code> let’s you ‘catch’ thrown signals.</p></li>
+</ul>
+<p>So, to catch a segfault, you instrument each expression-statement (includes assignments &amp; function calls, excludes declaration statements) with the <code>setjmp</code> (like <code>try { }</code>); if a <code>SEGFAULT</code> signal is thrown, catch that in <code>signal</code>, and then use <code>longjmp</code> (like <code>throw ..</code>); in the place you jump to (like <code>catch { }</code>), output <code>SEGFAULT</code> to STDOUT, then exit.<br />
+– Of course, the instrumented C code then becomes something no sane human would ever write.</p>
+<h2 id="type-inference-on-arbitrary-c-expressions">Type Inference on Arbitrary C Expressions</h2>
+<p>Being able to infer the type of arbitrary expressions e.g. <code>4*12</code> or <code>p[q]</code> enhances the usability of the tool/plugin; the use case becomes “want to show the value of an expression at some point? Simply write that expression.”.</p>
+<p>The Type Inference takes a bit of thought, e.g. in <code>p[q]</code>, it can either be an array lookup, or a pointer offset.</p>
+<h1 id="limitations">Limitations</h1>
+<p>As discussed on the repository:</p>
+<ul>
+<li><p>No I don’t do squat with regards to <code>malloc</code>, etc. (Particularly since there’re other ways to allocate memory, e.g. <code>calloc</code>, <code>alloca</code>, not to mention custom ones like <code>xalloc</code>.).</p></li>
+<li><p>Obviously I don’t do squat with regards to concurrency, threads, etc.</p></li>
+<li><p>The tool doesn’t necessarily play nicely with C PreProcessor stuff.<br />
+ It’s easy to come up with examples which show how tricky it could be to deal with that.</p></li>
+</ul>
+<h1 id="contributors-wanted">‘Contributors Wanted’</h1>
+<p>If you find any bugs, I’d be delighted for you to file an issue.<br />
+– Keep in mind, though, that the Scala Worksheets tool doesn’t work when the program uses semicolons to delimit statements. - So I think I’ve not done a bad job.</p>
+<p>– For selfish reasons, of course I’d love to see plugins for other editors like Emacs, Sublime Text, Atom, LightTable, etc. (and it’s a bit brutal to try and learn the APIs if you don’t use the editors).<br />
+The vim plugin is fairly lightweight, since all it needs to do is communicate over a socket to the Scala server.<br />
+– Certainly it’d be interesting to see, in terms of UX, how the tool / plugin could be improved.</p>
+<p>– Originally it was supposed to be an Eclipse plugin.<br />
+I scrapped that since dealing with dependency-jars within OSGi is not straight-forward to the uninitiated. - Particularly frustrating is that the plugin would work in the dev environment, but wouldn’t work when exported (due to e.g. classpath issues.).<br />
+– Either dealing with OSGi stuff, or just imitating the ‘lightweight’ approach of tool-as-external-dependency would fix that.</p>
+<p>But of course, I’d be much happier to see people try and do some PL project with the language of their choice. (Doesn’t have to be a worksheet.).</p>
+<h1 id="if-you-didnt-attend-the-talk">If You Didn’t Attend the Talk</h1>
+<p>30 minutes is absolutely enough to cover all the detail in this post. (Including giving a demo of the tool)</p>
+<h1 id="now-that-i-have-your-attention---project-note-taking">Now That I Have Your Attention - Project Note Taking</h1>
+<p>I think it’s fair to say no particular bit there is all that ‘hard’, but I can see that altogether it’s not exactly trivial.<br />
+FWIW, I had like half a year to make it. (Half, because who does most of their work in the first half of their FYP?, and because I didn’t know squat about PL in the first half..).</p>
+<p>I really like tools. (This doesn’t really sound like a ‘cool’ FYP to do unless you’ve at least some love for tools.). – e.g. Not ‘vim vs emacs’ so much as ‘your editor should be able to do these things’.</p>
+<p>For note-taking, I kinda-sorta made use of OneNote.<br />
+Briefly, OneNote is nice for collecting details/links on a topic (it has a nice hierarchy of sections -&gt; pages -&gt; bullet points). [These days, if I’m thinking hierarchically with a keyboard, I kinda-sorta make use of Emacs’ Org-Mode. – In the hands of a power user, Org-Mode is something to behold. I am not such a user.].</p>
+<p>Physical pen &amp; paper is king, though. (or queen, whatever).<br />
+Pens, use colours: e.g. black for thoughts, green for questions, red for “wtf, shit’s not working”, blue for facts (&amp; purple for ‘todo’, if you’ve a purple pen). YMMV, but I find this useful. (esp. if you’re using one of those Bic 4-in-one); compared to monocolour, I reckon 1. helps thinking (like de Bono’s thinking hats?) 2. quicker to ‘parse’ the page 3. can write <em>much</em> more densely on the paper.<br />
+Overall, I keep a ‘programming journal’. I’ve heard “if you’re not writing, you’re not thinking”. – “how many pages I filled” makes for quite a nice metric for “how much work you’ve done”. (e.g. -if- when you encounter bugs, or other problems, you’re going to write down that you had this trouble, and alternatives as to how to overcome it.). – As an example, the “CType from arbitrary expression” system was 10 double-sided refill pages worth of work; the loop visualisation was 4 double-sided refill pages.</p>
+<p>For this project, I kept a folder full of notes. It’d have things like:</p>
+<ul>
+<li>Example C program printouts (so, e.g. figuring out what kindof instrumenting would be needed),</li>
+<li>Printout of the C BNF, (both ANTLR’s file, and from the C99 standard).</li>
+<li>Reference sheets for GDB/LLDB, Thrift, etc.</li>
+</ul>
+<p>– Point is, printed out, you can write on these, highlight things and in the <em>margins</em> ask questions. (“marginal notes” or “marginal questions”, as such).</p>
+
+
+<hr />
+
+<div>
+    
+    
+    <a href="../../posts/games/2015-09-26-black-ops-2.html" style="float:right; text-align: right;">Older post</a>
+    
+</div>
+<br style="clear: both;" />
+
+<hr />
+
+<div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'richardgoultersblog'; // required: replace example with your forum shortname
+        var disqus_identifier = '/posts/programming/2015-09-28-notes-on-building-a-live-coding-tool-for-c99.html';
+        var disqus_url = 'http://www.rgoulter.com/blog' + '/posts/programming/2015-09-28-notes-on-building-a-live-coding-tool-for-c99.html';
+        var disqus_title = 'Notes on Building a Live Coding Tool for C99 (Draft) - September 28, 2015';
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+<!-- Load highlight.js for Syntax Highlighting. -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/solarized_light.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+            </div>
+
+            <hr style="margin-bottom: 0px; border-top: 2px solid black;" />
+
+            <div id="footer" class="pull-right" style="padding-right: 10px;">
+                Site proudly generated by
+                <a href="http://jaspervdj.be/hakyll">Hakyll</a>
+            </div>
+        </div>
+    </body>
+</html>

@@ -8,8 +8,205 @@
         <name>Richard Goulter</name>
         <email>richard.goulter+blog@gmail.com</email>
     </author>
-    <updated>2015-09-26T00:00:00Z</updated>
+    <updated>2015-09-28T00:00:00Z</updated>
     <entry>
+    <title>Notes on Building a Live Coding Tool for C99 (Draft)</title>
+    <link href="http://www.rgoulter.com/blog//posts/programming/2015-09-28-notes-on-building-a-live-coding-tool-for-c99.html" />
+    <id>http://www.rgoulter.com/blog//posts/programming/2015-09-28-notes-on-building-a-live-coding-tool-for-c99.html</id>
+    <published>2015-09-28T00:00:00Z</published>
+    <updated>2015-09-28T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<div class="info">
+    Posted on September 28, 2015
+    
+        by Richard Goulter
+    <br/>
+    
+    Tags: <a href="/tags/fyp.html">fyp</a>, <a href="/tags/scala.html">scala</a>, <a href="/tags/c.html">c</a>, <a href="/tags/vim.html">vim</a>
+    
+</div>
+
+<p>I’ve been invited to talk at NUSHackers Friday Hacks on October 9th, about my FYP of building a ‘worksheet’/‘live coding’ environment for C.<br />
+This post is to note down anything pertinent / thinking-out-loud as to what to say.</p>
+<p>This is a draft. <a href="https://onedrive.live.com/redir?resid=D8B6217BE240272D!94378&amp;authkey=!AISnGbUV2-fE_Hw&amp;ithint=file%2cpptx">Here is a link to the presentation draft</a>.<br />
+(Obviously, the colours need to change.).</p>
+<h1 id="what-is-my-fyp">What is my FYP?</h1>
+<p>Let’s have a GIF explain that:<br />
+<img src="https://github.com/rgoulter/c-worksheet.vim/raw/master/demo.gif" alt="demo" /></p>
+<p><a href="https://github.com/rgoulter/c-worksheet.vim/raw/master/demo-slow.gif">(Here is the same gif, slower speed).</a></p>
+<p>i.e. show the results of the computation directly beside the C program itself, inside the editor. (This saves having to quit the editor, type <code>gcc &lt;whatever&gt;.c</code>, <code>./a.out</code>, then try and figure out what’s going on).<br />
+Another way to describe this as a ‘REPL on steroids’.<br />
+You might be aware of other such tools around:<br />
+* Scala IDE’s “worksheets” were the ‘inspiration’ for this. (EclipseFP copies this idea with what it calls a ‘worksheet’). * Apple’s Playground does a similar kindof thing for Objective-C and Swift. * LightTable (whose demo was very impressive, but the $300k KickStarter hasn’t given us the complete thing yet) is big on doing this for Clojure, and to a limited extent Python. * IPython notebooks are kinda-sorta similar. * <a href="https://comealive.io/">‘Alive’</a> is bringing the same thing for C# in Visual Studio. * <a href="https://github.com/jcartledge/sublime-worksheet">jcartledge/sublime-worksheet</a> is an example of an editor plugin which provides a ‘worksheet’ interface for any REPL language. (Easy to see ‘REPL on steroids’ here). * Apparently <a href="http://stackoverflow.com/questions/13059700/can-sublimetext2-execude-ruby-code-and-show-the-results-within-the-document-like">TextMate</a> can show results for Ruby. * TMux + Vim, with something like <a href="https://github.com/epeli/slimux">slimux</a> (‘send output to TMux shell’) kinda-sorta helps out with this, too. (‘slimux’ being inspired by Emacs’ SLIME).</p>
+<p>Loosely related is also, e.g. GDB/LLDB. A more sober way to describe my plugin is “auto-generated printf debugging”. – GDB/debuggers provide ‘inspect the value at some point in execution’ and ‘can easily evaluate expressions’ functionality. (GDB is known to be easy-to-use, widely used by the CS1010 kids, etc.).</p>
+<p>My project on GitHub: <a href="https://github.com/rgoulter/c-worksheet-instrumentor">rgoulter/c-worksheet-instrumentor</a> (the main logic), and <a href="https://github.com/rgoulter/c-worksheet.vim">rgoulter/c-worksheet.vim</a> (a plugin for Vim).<br />
+(It’s got a handful of stars on GitHub. You just know I’m amazing at publicity.).</p>
+<h1 id="goals-for-presentation-meta">Goals for Presentation (Meta)</h1>
+<p>Hopefully, (esp. if you play around with it yourself), you’ll think that’s kinda cool. (Btw, I should link to my FYP report. It’s not completely full of smoke. Your FYP report shouldn’t be, either).<br />
+I’ll know if I did a good job with my talk if you walk out thinking “that’s it, huh? I was expecting something complicated.” / “<em>I</em> could do that, chump.”. (I’ll’ve done an even better job if some of you go out and try and make this kindof stuff).<br />
+– I’m not being so modest. (C is a ‘nice’ + simple language for this, other languages will have their own fun). But it’s not a sit-down-and-finish-it-in-an-hour kindof project. It is a <em>lot</em> of fun. (How many kids continue working on their FYP after they’ve presented?, <em>without</em> being paid to do so?). You’ll also get <em>very</em> good at the language; I got somewhat familiar with the C99 language standard, and certainly stumbled upon the more esoteric aspects of (simple) C99, my favourite being:</p>
+<pre><code>int isWhitespace[256] = { [&#39; &#39;] = 1, [&#39;\t&#39;] = 1, [&#39;\n&#39;] = 1 };
+isWhitespace[&#39;a&#39;];  //&gt; 0
+isWhitespace[&#39; &#39;];  //&gt; 1
+isWhitespace[&#39;\t&#39;]; //&gt; 1</code></pre>
+<p>– Also, since this is ‘plan for a presentation’ + I wrote most of this when I was tired, it’s written in ‘second person’ style. I hope you’ll forgive me for that.</p>
+<h2 id="whats-in-it-for-you-motivation-for-caring-about-the-presentation">“What’s In It For You” / Motivation For Caring About the Presentation</h2>
+<p>Something like ‘Example of a cool Programming-Language Application project you can make, once you have knowledge of how to make a parser &amp; roughly you could implement it’, esp. if the inspiration is ‘I want that for <em>my favourite language</em>’.</p>
+<h1 id="parsers-and-pl-applications">Parsers and PL Applications</h1>
+<p>– It can become clear by the terminology, the way someone talks, how much they know or don’t know about a subject. “Parsers” is one of these areas I don’t know all that much about. (I never took the compilers/parser course.).</p>
+<p>But in terms of “writing a worksheetify program”, roughly formula for this is:</p>
+<ol style="list-style-type: decimal">
+<li>Parse the source code.</li>
+<li>???</li>
+<li>Profit.</li>
+</ol>
+<p>(Which applies to writing any PL application in general.). There are different ways to do it. (And of course, there are trade-offs for different approaches.).<br />
+But a key point is, if you want to show results within functions / nested scopes / control structures, it’s not enough to just pass it off to a REPL. You must be able to parse the source code.</p>
+<h2 id="making-use-of-the-ast">Making Use of the AST</h2>
+<p>In situations where you’re writing programs whose data is other programs, you’re going to want to make use of techniques a level abstracted from directly traversing the AST.</p>
+<div class="figure">
+<img src="http://i.imgur.com/12f7qEm.png" alt="AST" />
+<p class="caption">AST</p>
+</div>
+<p>ANTLR (see below) provides two ways to handle this: Tree Listeners, Tree Visitors.<br />
+With Tree Listeners, you implement listener methods which get called as the AST is walked.<br />
+With Tree Visitors, you implement methods which then control which parts of the tree are ‘visited’; the intent is to evaluate the AST to some value. (e.g. Numeric expression to a number, like in the simple math expression grammar example).</p>
+<p>– The Tree Visitor is kindof more FP-ish, except having to explicitly call ‘visit’ on the children nodes of the AST is also a bit tedious. - This can be abstracted another level, where you have e.g. <code>AST -&gt; Option[T]</code>, and some <code>combine :: [T] -&gt; T</code>, then it’s possible to write a general <code>fold_ast :: AST -&gt; (AST -&gt; Option[T]) -&gt; ([T] -&gt; T) -&gt; T</code> function for the AST. (The <code>AST -&gt; Option[T]</code> means “maybe extract value from this AST node; if this node returns Some thing, use that, otherwise keep looking.”.). - Manipulation of AST could be done in a similar way.</p>
+<p>Anyway. The dynamic (in ANTLR) is usually that the Tree Listeners can be used to ‘grab what you want’ out of the AST, Tree Visitor is better at ‘evaluating’ some part of the AST to a value.</p>
+<h2 id="my-choice-of-parser-technique">My Choice of Parser / Technique</h2>
+<p>For the ‘parser’, I made use of ANTLR parser-generator (like flex/yacc; just give it a BNF-esque grammar, and it generates the lexer/parser for you). Mostly because this can generate a parser in Java, and I was using Scala for the project (as specified by FYP description – Though I think since FP/‘strongly-typed’ languages are kinda nicer to write parsers in, I think the hope was I’d hand-write the parser..)<br />
+[Question: alex/happy are the Haskell equivalent of lex/yacc in the Haskell world, right? How do these play around with Parsec/Atto-Parsec? &amp; If Parsec is for more ‘hand-written’ style of parser, what’s the terminology to describe what kinds of languages can just ‘cheat’ + use ANTLR for?].</p>
+<p>Making use of gccxml, or an LLVM/Clang pass might’ve also had it’s advantages, ‘but’, then I’d have to write in C++ (for the latter), it makes the executable size for my program <em>much</em> larger (which is fine if your plugin is like YouCompleteMe), and I more/less wanted to keep the approach ‘general’, rather than tied to a specific language.<br />
+[Note: a disadvantage of not using gcc/clang is that there may be divergence between what <em>they</em> parse and what <em>I</em> parse; I mitigate this in my project by first compiling the given input C file. i.e. anything I can parse, they can parse (better?)].</p>
+<p>In terms of “in my case”:<br />
+One approach might be to just pass the code of to some C interpreter anyway. (Cling is a C++ interpreter developed by the folk at CERN, a successor of an older CInt (C Interpreter) project of theirs. ‘Cling’ because it’s built upon LLVM/Clang.). This’d require potentially renaming variables so that everything is unique, and ‘unfolding’ control structures (like loops, etc.). – Quite a messy way of doing things.</p>
+<p>Another approach (which I never investigated) would be to generate a sequence of commands to give to GDB/LLDB so as to get the information (i.e. values of variables at some point in execution). (I did investigate using GDB/LLDB insofar as ‘will this let me avoid having to learn about the PL stuff?’; it’s not suffice because you still need to know for a statement e.g. <code>x = y = 4</code> <em>what</em> information you’d like to get from GDB/LLDB). – This isn’t necessarily a bad approach.</p>
+<div class="figure">
+<img src="http://i.imgur.com/i2WKSkH.png" alt="" />
+
+</div>
+<p>The approach I <em>did</em> take was to ‘instrument’ (or ‘augment’) the code.<br />
+i.e. insert statements into the C program so that I can run the program to get the output.</p>
+<div class="figure">
+<img src="http://i.imgur.com/P3KHZzK.png" alt="" />
+
+</div>
+<p>Roughly like:</p>
+<pre><code>int main() {
+  int x;
+  x = 3;
+}</code></pre>
+<p>becomes</p>
+<pre><code>int main() {
+  int x;
+  x = 3;
+  OUTPUT(x, STRING_OF(3))
+}</code></pre>
+<p>and as-if compiled with a pre-processor which handles <code>OUTPUT</code>, <code>STRING_OF</code>. <code>OUTPUT</code> outputs in a format my Scala program intercepts. (I just use <code>STDOUT</code>; it could also be done using, say, sockets, or using something like Apache Thrift / or some other IPC/RPC framework – With C, this is a bit annoying, e.g. becomes more difficult to compile on Windows. [My tool, &amp; the Vim plugin, work on Windows, btw]).</p>
+<p>The pseudocode for the instrumentor is more/less:</p>
+<pre><code>def instrument(source):
+  ast &lt;- parse source
+  types &lt;- ctypes from declarations in AST
+
+  for each declaration:
+    insert(output declaration.toEnglish)
+
+  for each expression statement:
+    // n.b. assignments are expressions
+    insert(output declaration.toString)</code></pre>
+<p>Aside from ANTLR-specific stuff (e.g. ‘inserting’ into a token stream), the key challenge here is getting the ctype from a declaration. Furthermore, you need to be able to get the ctype of an expression, and from the ctype be able to generate ‘toString’ output for it.</p>
+<h1 id="you-said-it-wouldnt-be-hard">You Said It Wouldn’t Be Hard</h1>
+<p>But I made no promises about length of this post. Soz.</p>
+<p>The hardest, most complicated bits are out of the way. The rest is just “how you’d make a program which outputs pertinent information, given a C input compilationUnit”. (Taking the ‘pertinent information’ and giving it to an editor is easy enough, &amp; not particularly interesting.).</p>
+<h1 id="considerations-made-when-doing-this-for-c">Considerations Made When Doing This For C</h1>
+<p>Specifically for C, my program basically outputs for declarations (like cdecl), and outputs values for expression statements.</p>
+<h3 id="representing-c-kinds">Representing C Kinds</h3>
+<p>A C variable/expression will be of some type: * a primitive type (e.g. int, float, char), * a pointer to some C type, * an array of some C type, * a struct/union (consisting of a sequence of identifiers, each of some C type) type, * an enum type, * a function (consisting of a return value of some C type, and a sequence of parameters each of some C type).</p>
+<p>If you can see how the above might be represented as an ‘Algebraic Data Type’, congratulations. (If not, you probably haven’t heard of ADTs.).</p>
+<p>e.g. in ML languages like OCaml/Haskell, you might write it something like:</p>
+<pre><code>type CType = Primitive of String * String
+           | Pointer   of String * CType
+           | Array     of String * CType
+           | Struct    of String * String * ((String, CType) List)
+           | Function  of String * CType * ((String, CType) List)</code></pre>
+<p>In Scala, the code (simplified) is something like:</p>
+<pre><code>sealed trait CType;
+case class PrimitiveType(id: String, type: String) extends CType;
+case class PointerType(id: String, to: CType) extends CType;
+case class ArrayType(id: String, of: CType) extends CType;
+case class StructType(id: String, tag: String, members: List[(String, CType)]) extends CType;
+case class FunctionType(id: String, rtnType: CType, params: List[(String, CType)]) extends CType;</code></pre>
+<p>In Java … ha ha ha, just kidding. (Just because you <em>can</em>, doesn’t mean you <em>should</em>.).</p>
+<p>Again, often in FP programming, once you have the types, the rest is fairly straight-forward. In my case: * I want this ‘CType’ from the AST. (kinda because C99 doesn’t have <code>typeof(x)</code>). * I want to output e.g. string-of some ‘CType’. (because C99 doesn’t have <code>stringof(x)</code>).</p>
+<h2 id="declarations">Declarations</h2>
+<div class="figure">
+<img src="http://i.imgur.com/93zni61.png" alt="" />
+
+</div>
+<p>The devil is in the detail, but (in terms of ANTLR): * You can use a TreeVisitor to evaluate a declaration statement to a list of CType(s). * You can then use a TreeListener to traverse the AST and pick up the declarations.</p>
+<p>The main complication here is that the listener has to care about scope. There’s also things like forward declarations, types declared in header files, &amp; typedefs.</p>
+<h3 id="cdecl">CDecl</h3>
+<p>The actual cdecl (e.g. at cdecl.org, or as a programming exercise in the “Expert C Programming” book) is more/less a heuristic, doesn’t actually take care of all C declarations.<br />
+But going from (String -&gt;) AST -&gt; CType, it’s not so hard to go CType -&gt; String to ‘explain’ what a C declaration is.<br />
+Figuring it out takes the same kindof logic as figuring out how to do AST -&gt; CType stuff.</p>
+<h2 id="expressions">Expressions</h2>
+<p>This is more/less straightforward, following the CType ADT.</p>
+<p>In particular, I use StringTemplate as a template rendering engine. (Like Python’s Jinja). So you have a <code>string_of_primitive</code>, <code>string_of_pointer</code>, <code>string_of_array</code>, etc. etc. and pass values to StringTemplate such that it can recursively generate the C code for you.</p>
+<h3 id="instrumenting-putting-it-all-together">Instrumenting: Putting it All Together</h3>
+<p>I don’t reconstruct the AST directly, but just inject the instrumenting C code into a TokenStreamRewriter (one of ANTLR’s things, for a stream of the lexed tokens).</p>
+<h2 id="segfault">Segfault</h2>
+<p>That’s all ‘nice’, but something I’m quite proud of (&amp; in terms of ‘useful for a C beginner’) is it catches <code>SEGFAULT</code>s, and marks the output there:</p>
+<pre><code>  int *px;     //&gt; px is pointer to int
+  px = 0;      //&gt; px = (nil)
+  *px = 5;     //&gt; SEGFAULT</code></pre>
+<p>‘How’ involves a bit of knowledge about C99:</p>
+<ul>
+<li><p><code>setjmp</code>/<code>longjmp</code> are kinda like a <code>GOTO</code> statement, can be used to simulate exception handling in C.</p></li>
+<li><p><code>signal</code> let’s you ‘catch’ thrown signals.</p></li>
+</ul>
+<p>So, to catch a segfault, you instrument each expression-statement (includes assignments &amp; function calls, excludes declaration statements) with the <code>setjmp</code> (like <code>try { }</code>); if a <code>SEGFAULT</code> signal is thrown, catch that in <code>signal</code>, and then use <code>longjmp</code> (like <code>throw ..</code>); in the place you jump to (like <code>catch { }</code>), output <code>SEGFAULT</code> to STDOUT, then exit.<br />
+– Of course, the instrumented C code then becomes something no sane human would ever write.</p>
+<h2 id="type-inference-on-arbitrary-c-expressions">Type Inference on Arbitrary C Expressions</h2>
+<p>Being able to infer the type of arbitrary expressions e.g. <code>4*12</code> or <code>p[q]</code> enhances the usability of the tool/plugin; the use case becomes “want to show the value of an expression at some point? Simply write that expression.”.</p>
+<p>The Type Inference takes a bit of thought, e.g. in <code>p[q]</code>, it can either be an array lookup, or a pointer offset.</p>
+<h1 id="limitations">Limitations</h1>
+<p>As discussed on the repository:</p>
+<ul>
+<li><p>No I don’t do squat with regards to <code>malloc</code>, etc. (Particularly since there’re other ways to allocate memory, e.g. <code>calloc</code>, <code>alloca</code>, not to mention custom ones like <code>xalloc</code>.).</p></li>
+<li><p>Obviously I don’t do squat with regards to concurrency, threads, etc.</p></li>
+<li><p>The tool doesn’t necessarily play nicely with C PreProcessor stuff.<br />
+ It’s easy to come up with examples which show how tricky it could be to deal with that.</p></li>
+</ul>
+<h1 id="contributors-wanted">‘Contributors Wanted’</h1>
+<p>If you find any bugs, I’d be delighted for you to file an issue.<br />
+– Keep in mind, though, that the Scala Worksheets tool doesn’t work when the program uses semicolons to delimit statements. - So I think I’ve not done a bad job.</p>
+<p>– For selfish reasons, of course I’d love to see plugins for other editors like Emacs, Sublime Text, Atom, LightTable, etc. (and it’s a bit brutal to try and learn the APIs if you don’t use the editors).<br />
+The vim plugin is fairly lightweight, since all it needs to do is communicate over a socket to the Scala server.<br />
+– Certainly it’d be interesting to see, in terms of UX, how the tool / plugin could be improved.</p>
+<p>– Originally it was supposed to be an Eclipse plugin.<br />
+I scrapped that since dealing with dependency-jars within OSGi is not straight-forward to the uninitiated. - Particularly frustrating is that the plugin would work in the dev environment, but wouldn’t work when exported (due to e.g. classpath issues.).<br />
+– Either dealing with OSGi stuff, or just imitating the ‘lightweight’ approach of tool-as-external-dependency would fix that.</p>
+<p>But of course, I’d be much happier to see people try and do some PL project with the language of their choice. (Doesn’t have to be a worksheet.).</p>
+<h1 id="if-you-didnt-attend-the-talk">If You Didn’t Attend the Talk</h1>
+<p>30 minutes is absolutely enough to cover all the detail in this post. (Including giving a demo of the tool)</p>
+<h1 id="now-that-i-have-your-attention---project-note-taking">Now That I Have Your Attention - Project Note Taking</h1>
+<p>I think it’s fair to say no particular bit there is all that ‘hard’, but I can see that altogether it’s not exactly trivial.<br />
+FWIW, I had like half a year to make it. (Half, because who does most of their work in the first half of their FYP?, and because I didn’t know squat about PL in the first half..).</p>
+<p>I really like tools. (This doesn’t really sound like a ‘cool’ FYP to do unless you’ve at least some love for tools.). – e.g. Not ‘vim vs emacs’ so much as ‘your editor should be able to do these things’.</p>
+<p>For note-taking, I kinda-sorta made use of OneNote.<br />
+Briefly, OneNote is nice for collecting details/links on a topic (it has a nice hierarchy of sections -&gt; pages -&gt; bullet points). [These days, if I’m thinking hierarchically with a keyboard, I kinda-sorta make use of Emacs’ Org-Mode. – In the hands of a power user, Org-Mode is something to behold. I am not such a user.].</p>
+<p>Physical pen &amp; paper is king, though. (or queen, whatever).<br />
+Pens, use colours: e.g. black for thoughts, green for questions, red for “wtf, shit’s not working”, blue for facts (&amp; purple for ‘todo’, if you’ve a purple pen). YMMV, but I find this useful. (esp. if you’re using one of those Bic 4-in-one); compared to monocolour, I reckon 1. helps thinking (like de Bono’s thinking hats?) 2. quicker to ‘parse’ the page 3. can write <em>much</em> more densely on the paper.<br />
+Overall, I keep a ‘programming journal’. I’ve heard “if you’re not writing, you’re not thinking”. – “how many pages I filled” makes for quite a nice metric for “how much work you’ve done”. (e.g. -if- when you encounter bugs, or other problems, you’re going to write down that you had this trouble, and alternatives as to how to overcome it.). – As an example, the “CType from arbitrary expression” system was 10 double-sided refill pages worth of work; the loop visualisation was 4 double-sided refill pages.</p>
+<p>For this project, I kept a folder full of notes. It’d have things like:</p>
+<ul>
+<li>Example C program printouts (so, e.g. figuring out what kindof instrumenting would be needed),</li>
+<li>Printout of the C BNF, (both ANTLR’s file, and from the C99 standard).</li>
+<li>Reference sheets for GDB/LLDB, Thrift, etc.</li>
+</ul>
+<p>– Point is, printed out, you can write on these, highlight things and in the <em>margins</em> ask questions. (“marginal notes” or “marginal questions”, as such).</p>
+]]></summary>
+</entry>
+<entry>
     <title>Black Ops 2</title>
     <link href="http://www.rgoulter.com/blog//posts/games/2015-09-26-black-ops-2.html" />
     <id>http://www.rgoulter.com/blog//posts/games/2015-09-26-black-ops-2.html</id>
@@ -371,91 +568,6 @@ I’m not saying these questions are well-formed or anything. (And I clearly hav
 <li><p>Is there any association between words used in the blurb (hinting at content) and average rating, 1-star, 5-star ratings? <em>Rationale would be, books with unpleasant content get more 1-star reviews.</em></p></li>
 <li><p>Do 1-star, 5-star reviewers tend to make use of the same words as each other?</p></li>
 </ul>
-]]></summary>
-</entry>
-<entry>
-    <title>Tabs vs Spaces and Elastic Tabs</title>
-    <link href="http://www.rgoulter.com/blog//posts/programming/2015-08-12-tabs-vs-spaces-and-elastic-tabs.html" />
-    <id>http://www.rgoulter.com/blog//posts/programming/2015-08-12-tabs-vs-spaces-and-elastic-tabs.html</id>
-    <published>2015-08-12T00:00:00Z</published>
-    <updated>2015-08-12T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<div class="info">
-    Posted on August 12, 2015
-    
-        by Richard Goulter
-    <br/>
-    
-    Tags: <a href="/tags/tabs%20vs%20spaces.html">tabs vs spaces</a>, <a href="/tags/elastic%20tabs.html">elastic tabs</a>
-    
-</div>
-
-<p>I was surprised to discover I’ve not written about “tabs vs spaces” before, despite all my love for writing about editors.</p>
-<h2 id="whats-tabs-vs-spaces-all-about">What’s “Tabs vs Spaces” All About?</h2>
-<p>The less something matters, the more programmers will argue over it. (No, not “bikeshedding”, which is similar, but doesn’t quite account for things like programmers arguing over different programming languages.).<br />
-Grammarians are similar, I suppose.</p>
-<p>The biggest part of this ‘holy war’ consists of people arguing over whether it’s better to indent with tabs or spaces. Roughly (and without any bias): if you indent with spaces, then you know that it anything aligned will still be aligned on another computer; <em>but</em>, people will have different preferences as to whether to indent with 2-spaces, 4-spaces, or some other size.<br />
-Tabs let you change the size of indentation, so when using tabs to indent, people can set the tabwidth to how they prefer it. The chief downside to this is you can’t use tabs to <em>align</em> things, because aligning means you want certain characters to be in the same column, which fixes the tabwidth.</p>
-<p>– The middle ground to this is often called “mixed”: use tabs for indentation, and spaces for alignment.</p>
-<h3 id="practicality">Practicality</h3>
-<p>There are some practical problems about this, too:<br />
-Setting up “mixed” tabs/spaces in an editor isn’t as easy as only-spaces or only-tabs.<br />
-Even using tabs-only can be messy, since it’s not always clear whether pressing the Tab key on a keyboard will insert spaces or a proper tab; so a poorly configured editor may insert spaces into what was previously a tabs-only file.<br />
-Modern editors are pretty capable at treating ‘4-spaces’ as if they were a single indentation character: pressing a Tab key will insert 4 spaces, and pressing backspace will delete 4 spaces.</p>
-<p>Working on teams, it’s important for everyone to follow the same code style.<br />
-– I’ve heard stories of my friends where there was a sequence of commits which were purely for tabifying or untabifying the codebase.<br />
-And, obviously, the diffs shown between these changes simply show “THE WHOLE FILE WAS DELETED, THE WHOLE FILE WAS CREATED.”.</p>
-<h2 id="why-this-is-whole-thing-is-dumb">Why This is Whole Thing is Dumb</h2>
-<p>One of these programming ‘holy wars’ is dumb? You don’t say!</p>
-<p>But, still.<br />
-HTML/CSS manages to separate <em>content</em> from <em>form</em>. - <a href="http://www.csszengarden.com/">CSS Zen Garden</a> is a notable example of the <em>exact same content</em> being displayed very differently with different themes.<br />
-– While <em>some</em> languages currently make use of whitespace/alignment as part of syntax (famously Python, jokingly whitespace, but also even things like Haskell [in places]), most don’t. – So, it’s kindof dumb that something which doesn’t affect content is treated as content by tools. (Well, tools like Git will offer to ignore whitespace changes in diffs; but, again, tools can be difficult to use.).<br />
-For that to work, you’d have to have some program to decode from a neutral source file so that it’s displayed how a programmer likes in an editor (2-space indent or 4-space indent; braces aligned in the same column; spaces between declarations; etc. etc.), as well as some program to encode to the source file in a neutral layout. – This is just pie-in-the-sky, of course, and it’s not hard to come up with cases where this wouldn’t work. (e.g. comments, which the programmer may prefer not aligned relative to the syntax.).</p>
-<h2 id="tabs-and-tabstops">Tabs and Tabstops</h2>
-<p>But, *gasp*, I have been a little biased in my description:<br />
-The simplest way to use tabs is strictly at the start of a line for indentation. If used in the middle of a line, different people/programs have different opinions as to whether the <em>correct</em> thing to do is to skip <em>tabwidth</em> spaces, or to align to the nearest 8th column.<br />
-– To me this sounds stupid; when I was using org-mode, I noticed it used tabs after some text as a placeholder for spaces: Emacs insisted on tabwidth being 8, while a Vim plugin insisted on tabwidth being 6.</p>
-<p>Yet, both of these are bastardisations of the <a href="http://web.archive.org/web/20090615091848/http://www.nabble.com/-long--Re:-Elastic-tabstops-p20025677.html">“tabstop” as used by typewriters.</a>:<br />
-The “tabstop” was a position set so than when pressing the ‘tab’ key, the paper would align to that point. This helped to write Tables. (TABle, TAB).</p>
-<pre>
-  Tab stop bar:   |------V-----------------V------|
-
-  Typing:         Dear Sir,
-                  We are pleased to offer:
-                         French Vanilla    $12.00
-                         English Custard   $ 8.50
-                         Irish Whiskey     $22.40
-
-                  Sincerely,
-                  Bramble & Botts Dairy
-</pre>
-<h2 id="elastic-tabstops">Elastic Tabstops</h2>
-<p>I first saw mention of elastic tabstops on Neovim’s issues page.<br />
-<a href="http://nickgravgaard.com/elastic-tabstops/">Elastic tabstops</a> are much closer in spirit to aforementioned typewriter tabstops.<br />
-The GIF perhaps explains the concept best:</p>
-<div class="figure">
-<img src="http://i.imgur.com/7MsEnA9.gif" alt="" />
-
-</div>
-<p>Although, as far as “implementation”, it seems to just render current tab(s) differently:</p>
-<blockquote>
-<p>While editors which haven’t yet implemented the elastic tabstops mechanism may not align some text properly in files where tabs were used with elastic tabstops, the problem isn’t that bad. All leading tabs (indentation) will be okay, and the chances of text not aligning correctly diminishes as the width between tabstops increases. So if you plan on switching to elastic tabstops in the future, and wish to choose a code style with that in mind (to use now), I suggest using tabs with fixed tabstops every 8 characters (or more) across. Alternatively co-workers can use tabs with fixed tabstops of whatever size they like as long as no one tries to line up text for anything other than indentation.</p>
-</blockquote>
-<h3 id="drawbacks">Drawbacks</h3>
-<p>It seems the idea was conceived in 2006. It’s 2015. That said, Neovim is in theory going to be easier to contribute to than Vim. And it has already been implemented in some array of text-editors.. so the discipline isn’t impossible.</p>
-<p>But this <a href="http://programmers.stackexchange.com/questions/137290/what-are-the-drawbacks-of-elastic-tabstops">StackExchange thread</a> makes some excellent points:</p>
-<ul>
-<li><p>Personal preference</p></li>
-<li><p>Technical implementation: It’s different to what most text editors have done, and isn’t widely available. This limits adoption.</p></li>
-<li><p>Who cares?: Developers have done well enough as-is for the last however many years; people can set aside subjective disagreements if they <em>really</em> need to, anyway.</p></li>
-<li><p>Impact: Compare the quote above; using leading tabs for indentation is pretty much the same behaviour as elastic tabstops; and the other adjustments aren’t all worth the novelty.</p></li>
-<li><p>Corner cases: Considering the Python snippet:</p>
-<pre><code>def foo( bar,
-         xyzzy ):
-    wibble()</code></pre>
-<p>it’s probably something elastic tabstops will mess up, without code intelligence.</p></li>
-</ul>
-<p>– For what it’s worth, I still don’t see this as inherently more natural than the “mixed” solution.</p>
-<p>Even so, it appears that elastic tabstops are the kind of thing which could be adopted into codebases iteratively. (I imagine this would look ugly for tools which don’t support elastic tabstops; but the same is true if a programmer assumes tabwidth to be a certain value anyway, so it’s not like the issue would be new.).</p>
 ]]></summary>
 </entry>
 
