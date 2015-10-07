@@ -1,0 +1,207 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Scala Development for Vim-loving Developers - Richard Goulter's Blog</title>
+
+        <!-- My (Old) CSS theme -->
+        <link rel="stylesheet" type="text/css" href="../../css/default.css" />
+
+        <!--
+            jQuery & jQueryUI
+        -->
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css" />
+
+        <!--
+            Pandoc Style CSS
+            (for syntax highlighted snippets)
+        -->
+        <link rel="stylesheet" type="text/css" href="../../css/syntax.css" />
+
+        <!--
+            Bootstrap
+        -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+        <style>
+            /*
+             * Bootstrap defines blockquote as 17px,
+             * so it looks stupidly large in my blogposts. */
+            blockquote {
+                font-size: 14px;
+            }
+        </style>
+
+        <!--
+            Waypoints, and Waypoints-Sticky,
+            so we can do this:
+            http://imakewebthings.com/waypoints/shortcuts/sticky-elements/
+        -->
+        <script src="../../js/jquery.waypoints.min.js"></script>
+        <script src="../../js/sticky.min.js"></script>
+
+        <!--
+            TOCify
+        -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js"></script>
+        <!--
+            Patched TOCify css file.
+            (Don't want fixed `.tocify`).
+        -->
+        <link rel="stylesheet" type="text/css" href="../../css/jquery.tocify.css" />
+
+        <style>
+        .navbar {
+            margin-bottom: 0px;
+        }
+
+        .banner-image {
+            width:100%;
+        }
+
+        .banner {
+            margin-left: 0px;
+            margin-right: 0px;
+        }
+
+        body {
+            background-color: #e2e2e2;
+        }
+
+        #page {
+            padding-left:0;
+            padding-right:0;
+            background-color: #ffffff;
+        }
+        </style>
+    </head>
+    <body>
+        <div id="page" class="container">
+            <!-- This, with no padding on left/right -->
+            <div class="banner">
+                <nav class="navbar navbar-default">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+
+            <!-- The Hamburger -->
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../../">Richard Goulter's Blog</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="../../">Home</a></li>
+            <li><a href="../../yi.html">Yi</a></li>
+            <li><a href="../../emacs.html">Emacs</a></li>
+            <li><a href="../../archive.html">Archive</a></li>
+        </ul>
+    </div>
+</nav>
+
+                <img class="banner-image" src="../../images/blog-banner.png" />
+            </div>
+
+            <hr style="margin: 0px; border-top: 5px solid black;" />
+
+            <div id="content" class="container">
+                <h1>Scala Development for Vim-loving Developers</h1>
+                <div class="info">
+    Posted on October  6, 2015
+    
+        by Richard Goulter
+    <br />
+    
+    Tags: <a href="../../tags/vim.html">vim</a>, <a href="../../tags/eclipse.html">eclipse</a>, <a href="../../tags/scala.html">scala</a>
+    
+</div>
+
+<p>So, I’ve blogged a bit about <a href="../../tags/vim.html">Vim</a>.<br />
+Again, no, it’s not about “vim vs emacs”, so much as about “which features your text editing has”; and the vi-like modal editing fantastic for manipulating text.</p>
+<p>Recently I’ve had the fortune of programming in Scala.<br />
+The joke is that some programmers are happy to work in Scala because it’s not Java, the rest are sad to work in Scala because it’s not Haskell.<br />
+Scala is by no means an excellent language. (Again, there are two kinds of languages; those people use, and those people complain about). But I like it well enough.</p>
+<p>For the most part, I’ve done my Scala editing in Scala IDE, which is a plugin built upon the much-maligned Eclipse.<br />
+– Overall, the biggest complaint to be had about Scala IDE, from my experience, is that ScalaTest can be a bit finicky, and will often refuse to “run all tests in package” or so.</p>
+<p>– If I’m harping on about the benefits of Vim, why make use of Eclipse?<br />
+Well, for one, I have the Vrapper plugin installed. This is a great stop-gap measure; it doesn’t have every binding (by default, at least), and occasionally messes up, but mostly does the job. (When I had to use XCode, XVim was also a nice plugin to have).<br />
+Using Eclipse was the <em>pragmatic</em> best-of-what’s-available.</p>
+<p>I’ve recently tried out making use of Vim proper for Scala editing:<br />
+I love autocomplete; to get autocompletion for Scala in Vim, the easiest way is using some omnicomplete front-end (like YouCompleteMe), and plugging Eclim as a ‘back-end’ to it. – Eclim can communicate with Eclipse, and provide the autocompletion. – The <em>downside</em> to this is Vim becomes <em>heavy-weight</em>. Like, really heavy. I’m fairly sure you have to disable automatic project-building, also, otherwise there’s a huge lag every time you save. <em>That</em> isn’t great. (As it was for me, without the automatic building, there’s still noticeable/significant lag when saving, if using Eclim).</p>
+<p>The benefit is you get to use all the customisations/plugins Vim proper has.<br />
+e.g. vim-surround is quite useful for editing Scala.</p>
+<p>My workstation setup in my lab has two monitors.<br />
+For the most part, unless you’re using a keyboard-based window-manager like XMonad, I’m inclined to believe that two monitors isn’t all that enhancing to productivity: If you can, with your keyboard, switch between workspaces; within a terminal, use tmux to switch between tabs/panes, then your keyboard becomes your second monitor. The benefit of added screen real-estate is countered by the cost of moving your mouse to the other window (unless you’re using a keyboard-based window manager, where you can easily/quickly switch focus without use of mouse. Alt-Tab doesn’t suffice).<br />
+– I’ve found a use for my second monitor:<br />
+SBT has a feature (which can surely be scripted for other tools/environments) that will run a command any time the source-files change. I’ve found it useful to set up two panes on my alternate monitor: one pane will run this loop with the “not slow”-tests, the other pane will run whatever program I’m working on. – Benefits/drawbacks of the latter are, of course, “your mileage may vary”.</p>
+<p>Also, make sure if you’re building a binary-search function, you don’t leave out the base case.</p>
+<p>– Anyway, the benefit of setting up this is it’s, again, a stop-gap measure for “vim not showing me syntax errors”.<br />
+Yes, vim <em>does</em> have that feature. Syntastic is nice enough; though (due to Vim’s age), doesn’t just-work as well as in Eclipse, and doesn’t do the red-squiggly-lines thing.<br />
+Quickfix is the more ‘legacy’ equivalent. And Quickfix is really nice (I’ve used it for an OCaml project). But the equivalent “sbt compile” takes a <em>long</em> time to run. SBT itself compensates for this by providing a REPL/shell, which is quicker, but doesn’t fit the vim/makeprg model. – <a href="https://notes.pinboard.in/u:rgoulter/47e14b69d902db1e0146">There seem to be some Vim/SBT integrations</a>, but I’ve not tried any of them. (The general theme is <em>they</em> will integrate with quickfix).<br />
+– If it’s not too distracting, it certainly is useful to have an at-a-glance view of “did I break anything?”, though, so it’s not strictly inferior in and of itself.</p>
+<p>There are other things I more/less miss from Eclipse.<br />
+e.g. Eclipse’s editing just has a more “solid” feel to it, like you’re editing building blocks. This is probably the whole press-enter-to-select-option.<br />
+No doubt Vim can be customised to match this, but some of the auto-insertions are nice. (And, yes, provide nice inspirations for what an editor should have).<br />
+Convenience features like automatically-import-a-class which wasn’t otherwise in scope is useful.<br />
+– Particularly, though, and an example of “how good is your tooling” is “show type under cursor”. (These strongly typed languages, with type inference, like Scala, Haskell and OCaml, more/less demand editors with this feature).</p>
+<p>– But another big difference between these is this:<br />
+When I’m using Eclipse, I put up with any inefficiency.<br />
+When I’m using Vim, I’m imagining what I could have to improve my tooling, what features would be nice to have to make things nicer.</p>
+
+
+<hr />
+
+<div>
+    
+    
+    <a href="../../posts/programming/2015-09-28-notes-on-building-a-live-coding-tool-for-c99.html" style="float:right; text-align: right;">Older post</a>
+    
+</div>
+<br style="clear: both;" />
+
+<hr />
+
+<div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'richardgoultersblog'; // required: replace example with your forum shortname
+        var disqus_identifier = '/posts/programming/2015-10-06-scala-development-for-vim-loving-developers.html';
+        var disqus_url = 'http://www.rgoulter.com/blog' + '/posts/programming/2015-10-06-scala-development-for-vim-loving-developers.html';
+        var disqus_title = 'Scala Development for Vim-loving Developers - October  6, 2015';
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+<!-- Load highlight.js for Syntax Highlighting. -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/solarized_light.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+            </div>
+
+            <hr style="margin-bottom: 0px; border-top: 2px solid black;" />
+
+            <div id="footer" class="pull-right" style="padding-right: 10px;">
+                Site proudly generated by
+                <a href="http://jaspervdj.be/hakyll">Hakyll</a>
+            </div>
+        </div>
+    </body>
+</html>
