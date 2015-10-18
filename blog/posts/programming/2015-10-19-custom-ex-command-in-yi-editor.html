@@ -1,0 +1,216 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Custom Ex Command in Yi Editor - Richard Goulter's Blog</title>
+
+        <!-- My (Old) CSS theme -->
+        <link rel="stylesheet" type="text/css" href="../../css/default.css" />
+
+        <!--
+            jQuery & jQueryUI
+        -->
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css" />
+
+        <!--
+            Pandoc Style CSS
+            (for syntax highlighted snippets)
+        -->
+        <link rel="stylesheet" type="text/css" href="../../css/syntax.css" />
+
+        <!--
+            Bootstrap
+        -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+        <style>
+            /*
+             * Bootstrap defines blockquote as 17px,
+             * so it looks stupidly large in my blogposts. */
+            blockquote {
+                font-size: 14px;
+            }
+        </style>
+
+        <!--
+            Waypoints, and Waypoints-Sticky,
+            so we can do this:
+            http://imakewebthings.com/waypoints/shortcuts/sticky-elements/
+        -->
+        <script src="../../js/jquery.waypoints.min.js"></script>
+        <script src="../../js/sticky.min.js"></script>
+
+        <!--
+            TOCify
+        -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js"></script>
+        <!--
+            Patched TOCify css file.
+            (Don't want fixed `.tocify`).
+        -->
+        <link rel="stylesheet" type="text/css" href="../../css/jquery.tocify.css" />
+
+        <style>
+        .navbar {
+            margin-bottom: 0px;
+        }
+
+        .banner-image {
+            width:100%;
+        }
+
+        .banner {
+            margin-left: 0px;
+            margin-right: 0px;
+        }
+
+        body {
+            background-color: #e2e2e2;
+        }
+
+        #page {
+            padding-left:0;
+            padding-right:0;
+            background-color: #ffffff;
+        }
+        </style>
+    </head>
+    <body>
+        <div id="page" class="container">
+            <!-- This, with no padding on left/right -->
+            <div class="banner">
+                <nav class="navbar navbar-default">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+
+            <!-- The Hamburger -->
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../../">Richard Goulter's Blog</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="../../">Home</a></li>
+            <li><a href="../../yi.html">Yi</a></li>
+            <li><a href="../../emacs.html">Emacs</a></li>
+            <li><a href="../../archive.html">Archive</a></li>
+        </ul>
+    </div>
+</nav>
+
+                <img class="banner-image" src="../../images/blog-banner.png" />
+            </div>
+
+            <hr style="margin: 0px; border-top: 5px solid black;" />
+
+            <div id="content" class="container">
+                <h1>Custom Ex Command in Yi Editor</h1>
+                <div class="info">
+    Posted on October 19, 2015
+    
+        by Richard Goulter
+    <br />
+    
+    Tags: <a href="../../tags/haskell.html">haskell</a>, <a href="../../tags/yi.html">yi</a>, <a href="../../tags/editors.html">editors</a>
+    
+</div>
+
+<p>This is something I’ve <a href="../../yi.html">mentioned before</a>, but I see that I wasn’t entirely clear on how to achieve it.</p>
+<p>In more detail, here are some notes on how to write a “Hello World” Ex-style command for the Yi editor.<br />
+– The exciting thing about this is it’s easier to write such commands for Yi than for Vim.</p>
+<p>The following has been checked with v0.12.2 of Yi.</p>
+<p>Compare: <a href="https://github.com/yi-editor/yi/tree/v0.12.2/src/library/Yi/Keymap/Vim/Ex/Commands">Yi.Keymap.Vim.Ex.Commands</a> module. The ‘Reload’ command is the simplest. - This helps see how Ex commands for Vim-style Yi are parsed, and how they can map to an <code>ExCommand</code>, which is in turn responsible for an Action to execute.</p>
+<p>See <a href="https://gist.github.com/rgoulter/1059c35844c5e471d9e9">this gist</a> for a full, working example, but for the code itself, the highlights would be:</p>
+<ul>
+<li>The transformation itself, adding “hello world” into the buffer:</li>
+</ul>
+<pre><code>helloWorld :: YiM ()
+helloWorld = withCurrentBuffer $ insertN &quot;Hello, world!&quot;</code></pre>
+<ul>
+<li>The parser for the ex command, in the <code>HelloWorld</code> module, under the <code>lib/</code> folder (which is used by <code>dyre</code> for dependencies for the config) in <code>~/.config/yi</code>:</li>
+</ul>
+<pre><code>parse :: EventString -&gt; Maybe ExCommand
+parse &quot;helloWorld&quot; = Just $ impureExCommand {
+    cmdShow = &quot;helloWorld&quot;
+  , cmdAction = YiA $ helloWorld
+  }
+parse _ = Nothing</code></pre>
+<ul>
+<li>The config in <code>yi.hs</code>, to make use of the above <code>parse</code> function:</li>
+</ul>
+<pre><code>import qualified HelloWorld as HelloWorld
+
+...
+
+main = yi $ defaultVimConfig {
+    defaultKm = mkKeymapSet $ defVimConfig `override` \ super self -&gt; super
+            { vimExCommandParsers = myExCmdParsers ++ vimExCommandParsers super }
+ }
+
+myExCmdParsers = [HelloWorld.parse]</code></pre>
+<p>This is enough to get a “Hello World” example going.<br />
+For more sophisticated efforts, I’m guessing one would want to:</p>
+<ul>
+<li><p>Look at parsing of Ex commands, using the extant parsers for inspiration.</p></li>
+<li><p>A more sophisticated <code>Action</code> executed; this is where an understanding of <code>Buffer</code>/<code>Editor</code>/<code>Yi</code> <code>Action</code>/<code>Monad</code> would be necessary.<br />
+ Resources at <a href="http://yi-editor.github.io">yi-editor.github.io</a> may or may not be helpful here; grokking parts of the code (e.g. in the keymaps) would be a good place to start.</p></li>
+</ul>
+
+
+<hr />
+
+<div>
+    
+    
+    <a href="../../posts/argument/2015-10-16-in-anothers-shoes.html" style="float:right; text-align: right;">Older post</a>
+    
+</div>
+<br style="clear: both;" />
+
+<hr />
+
+<div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'richardgoultersblog'; // required: replace example with your forum shortname
+        var disqus_identifier = '/posts/programming/2015-10-19-custom-ex-command-in-yi-editor.html';
+        var disqus_url = 'http://www.rgoulter.com/blog' + '/posts/programming/2015-10-19-custom-ex-command-in-yi-editor.html';
+        var disqus_title = 'Custom Ex Command in Yi Editor - October 19, 2015';
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+<!-- Load highlight.js for Syntax Highlighting. -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/solarized_light.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+            </div>
+
+            <hr style="margin-bottom: 0px; border-top: 2px solid black;" />
+
+            <div id="footer" class="pull-right" style="padding-right: 10px;">
+                Site proudly generated by
+                <a href="http://jaspervdj.be/hakyll">Hakyll</a>
+            </div>
+        </div>
+    </body>
+</html>
