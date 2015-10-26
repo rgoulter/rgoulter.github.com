@@ -1,0 +1,210 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Setting up Mutt with NUS Student Email - Richard Goulter's Blog</title>
+
+        <!-- My (Old) CSS theme -->
+        <link rel="stylesheet" type="text/css" href="../../css/default.css" />
+
+        <!--
+            jQuery & jQueryUI
+        -->
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css" />
+
+        <!--
+            Pandoc Style CSS
+            (for syntax highlighted snippets)
+        -->
+        <link rel="stylesheet" type="text/css" href="../../css/syntax.css" />
+
+        <!--
+            Bootstrap
+        -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+        <style>
+            /*
+             * Bootstrap defines blockquote as 17px,
+             * so it looks stupidly large in my blogposts. */
+            blockquote {
+                font-size: 14px;
+            }
+        </style>
+
+        <!--
+            Waypoints, and Waypoints-Sticky,
+            so we can do this:
+            http://imakewebthings.com/waypoints/shortcuts/sticky-elements/
+        -->
+        <script src="../../js/jquery.waypoints.min.js"></script>
+        <script src="../../js/sticky.min.js"></script>
+
+        <!--
+            TOCify
+        -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js"></script>
+        <!--
+            Patched TOCify css file.
+            (Don't want fixed `.tocify`).
+        -->
+        <link rel="stylesheet" type="text/css" href="../../css/jquery.tocify.css" />
+
+        <style>
+        .navbar {
+            margin-bottom: 0px;
+        }
+
+        .banner-image {
+            width:100%;
+        }
+
+        .banner {
+            margin-left: 0px;
+            margin-right: 0px;
+        }
+
+        body {
+            background-color: #e2e2e2;
+        }
+
+        #page {
+            padding-left:0;
+            padding-right:0;
+            background-color: #ffffff;
+        }
+        </style>
+    </head>
+    <body>
+        <div id="page" class="container">
+            <!-- This, with no padding on left/right -->
+            <div class="banner">
+                <nav class="navbar navbar-default">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+
+            <!-- The Hamburger -->
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../../">Richard Goulter's Blog</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="../../">Home</a></li>
+            <li><a href="../../yi.html">Yi</a></li>
+            <li><a href="../../emacs.html">Emacs</a></li>
+            <li><a href="../../archive.html">Archive</a></li>
+        </ul>
+    </div>
+</nav>
+
+                <img class="banner-image" src="../../images/blog-banner.png" />
+            </div>
+
+            <hr style="margin: 0px; border-top: 5px solid black;" />
+
+            <div id="content" class="container">
+                <h1>Setting up Mutt with NUS Student Email</h1>
+                <div class="info">
+    Posted on October 26, 2015
+    
+        by Richard Goulter
+    <br />
+    
+    Tags: <a href="../../tags/mutt.html">mutt</a>, <a href="../../tags/nus.html">nus</a>, <a href="../../tags/email.html">email</a>, <a href="../../tags/office365.html">office365</a>
+    
+</div>
+
+<p>This is for setting up NUS student email (hosted with Office 365) for the Mutt Mail User Agent; particularly, using IMAP, and alongside other email accounts.</p>
+<p>Why you’d want to use Mutt, I’m not entirely sure. Probably Thunderbird will serve your needs as well as need be.<br />
+But if you’re wanting to learn something productive while procrastinating, then Mutt is a sensible choice as any.</p>
+<p>I find the Arch Wiki’s <a href="https://wiki.archlinux.org/index.php/Mutt">Mutt page</a> indispensable when setting up Mutt. - If you’ve googled your way to this page without a prior guide, I recommend this.</p>
+<p>As for setting up an account with Office 365, a <a href="http://www.blog.alexanderdbrown.com/office-365-in-the-command-line/">blogpost from Alexander Brown</a> (which comes up from a search for “mutt office365”) has a useful codedump.</p>
+<p>I’m not sure what the <em>minimal</em> set of options would be, but the example I have <a href="https://github.com/rgoulter/dotfiles/blob/4e1fb3c04d9f4c372125468a0c3bb0df165d004b/mutt/nusstu">in my dotfiles</a> (as per Arch Wiki’s “Multiple Accounts” advice):</p>
+<pre class="mutt"><code># Connection
+set ssl_starttls=yes
+set ssl_force_tls=yes
+set ssl_use_sslv3=yes
+
+# Incoming
+set imap_user=&quot;a0088816@u.nus.edu&quot;
+set imap_pass=$my_nusstu_pass
+set folder=&quot;imaps://outlook.office365.com:993&quot;
+set mbox=&quot;+INBOX&quot;
+set postponed=&quot;+Drafts&quot;
+set spoolfile=&quot;+INBOX&quot;
+set record=&quot;+Sent Items&quot;
+set imap_check_subscribed
+unset imap_passive
+
+# Outgoing
+set realname=&quot;Richard Goulter&quot;
+set from=&quot;a0088816@u.nus.edu&quot;
+set smtp_pass=$my_nusstu_pass
+set smtp_authenticators=&quot;login&quot;
+set smtp_url=&quot;smtp://$imap_user@smtp.office365.com:587&quot;
+unset hostname
+
+## Hook -- IMPORTANT!
+account-hook $folder &quot;set imap_user=$imap_user imap_pass=$imap_pass&quot;</code></pre>
+<p>Disclaimer: WFM, YMMV. This is just what I have, and clearly I’m not a well-versed Mutt user.<br />
+My Mutt configuration, in general, may be useful for other NUS students keep their NUS Office 365 account separate from their GMail account.</p>
+
+
+<hr />
+
+<div>
+    
+    
+    <a href="../../posts/games/2015-10-26-patapon-3.html" style="float:right; text-align: right;">Older post</a>
+    
+</div>
+<br style="clear: both;" />
+
+<hr />
+
+<div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'richardgoultersblog'; // required: replace example with your forum shortname
+        var disqus_identifier = '/posts/programming/2015-10-26-setting-up-mutt-with-nus-student-email.html';
+        var disqus_url = 'http://www.rgoulter.com/blog' + '/posts/programming/2015-10-26-setting-up-mutt-with-nus-student-email.html';
+        var disqus_title = 'Setting up Mutt with NUS Student Email - October 26, 2015';
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+<!-- Load highlight.js for Syntax Highlighting. -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/solarized_light.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+            </div>
+
+            <hr style="margin-bottom: 0px; border-top: 2px solid black;" />
+
+            <div id="footer" class="pull-right" style="padding-right: 10px;">
+                Site proudly generated by
+                <a href="http://jaspervdj.be/hakyll">Hakyll</a>
+            </div>
+        </div>
+    </body>
+</html>
