@@ -8,8 +8,57 @@
         <name>Richard Goulter</name>
         <email>richard.goulter+blog@gmail.com</email>
     </author>
-    <updated>2015-10-26T00:00:00Z</updated>
+    <updated>2015-12-03T00:00:00Z</updated>
     <entry>
+    <title>Thoughts on Sky Rogue</title>
+    <link href="http://www.rgoulter.com/blog//posts/games/2015-12-03-thoughts-on-sky-rogue.html" />
+    <id>http://www.rgoulter.com/blog//posts/games/2015-12-03-thoughts-on-sky-rogue.html</id>
+    <published>2015-12-03T00:00:00Z</published>
+    <updated>2015-12-03T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<div class="info">
+    Posted on December  3, 2015
+    
+        by Richard Goulter
+    <br/>
+    
+    Tags: <a href="/tags/sky%20rogue.html">sky rogue</a>, <a href="/tags/roguelike.html">roguelike</a>, <a href="/tags/arcade.html">arcade</a>, <a href="/tags/analysis.html">analysis</a>, <a href="/tags/atom%20zombie%20smasher.html">atom zombie smasher</a>, <a href="/tags/faster%20than%20light.html">faster than light</a>
+    
+</div>
+
+<p>I recently purchased a cheap flight-stick (a Logitech Extreme 3D Pro) so I could play through some of the old X-Wing games. (Although, supposedly it’s <em>possible</em> to play through these with a controller, and some thought).<br />
+Naturally, I then also bought whatever flight games that looked fun on the Steam store.</p>
+<p>Sky Rogue was one of the stand-out games.<br />
+It’s a rogue-like game, where you control a fighter-plane … in the sky.<br />
+The graphics are strikingly minimalist. (It’s indie, and apparently, <a href="http://skyroguegame.tumblr.com/">from their site</a>, only has 3 developers). – I find the graphics charming.</p>
+<p>The controlling feels excellent. I wish every arcade flight-sim were so nice to fly as this.</p>
+<h2 id="gameplay-currently">Gameplay Currently</h2>
+<p>It’s “Early Access”.<br />
+I hope they do improve it some more; as it is now, it’s already quite good:<br />
+The gameplay is this: you fly off from your air-carrier in some jet, with some loadout of guns/missiles/rockets/bombs, and can blow up bad-guy jets, buildings, ships to earn currency. There will be some designated objective, which is some particular enemy jet/building/etc. which you need to blow up. – Once you destroy the objective, return to your air-carrier, the level regenerates as “Day N+1”, with more difficult enemies and a new objective.<br />
+I’ve heard Day 4 is very hard; but I’ve not yet made it to that.</p>
+<p>Currency-wise; this was updated recently: Rogue-like means “perma-death”, &amp; typically allows for some “global progression”. e.g. in Faster Than Light, you can unlock new ships / ship layouts for your player profile, but you don’t get to re-use the same instance of a ship once you’ve died.<br />
+What Sky Rogue does now is to have a global progression by “unlocking” different types of jets/weapons, and per-session progression by “upgrading” particular weapons. (e.g. Level I gun to a Level II gun). – When you die, you don’t get to keep your upgrades, but you get to permanently unlock some new jet/weapon.<br />
+(The UI isn’t entirely clear here as to whether blowing up additional enemies yields more money for upgrades, or more tech-points).</p>
+<p>– This kindof works to create the cycle: “blow up more stuff so I can have cooler tech” / “with my cooler tech I can blow up more stuff”. <em>But</em>. Somehow it’s not a very compelling cycle.<br />
+Part of this could be the UI; from the in-game UI, there’s no description given as to what a weapon is supposedly “good for”. So. Everything just kindof looks like “point and shoot”, rather than “this is a weapon I really want for this kind of target”.<br />
+Part of it, I think, is also.. because it’s <em>“arcade”</em>, there’s no “campaign” to win. – I think this is solvable, in an engaging way beyond “Mission 1 = Day 1”, “Get to Day 10 to Face Big Bad-Guy and Win”.</p>
+<p>(As an aside; I think an unfortunate dynamic from the above rules: if you return to your carrier without having beaten the objective, you get to change which jet you use, and which loadout of weapons you’re using. – If blowing-up additional enemies/buildings is beneficial, this means that it becomes “save the objective ’till last” – if blowing up additional enemies/buildings isn’t beneficial, it’s not obvious either way).</p>
+<h2 id="arcade-game-with-campaign-atom-zombie-smasher-faster-than-light">Arcade Game with Campaign: Atom Zombie Smasher, Faster Than Light</h2>
+<p>I think Atom Zombie Smasher would make a decent example of a nice ‘campaign’ around satisfying gameplay.<br />
+AZS’ core game involves rescuing civilians from procedurally-generated cities, using a loadout of obstacles/units.<br />
+The overworld is where the ‘campaign’ is won/lost. AZS doesn’t do a great job of balancing it, but the idea is you get +10 points for each city you control, each round. The Zombies, in the overworld, will “infect” adjacent zombies. – And so the core game is played contesting one of these cities per round.<br />
+– The overworld gameplay here is simple; there’s a tug-of-war for points, and a simple map deciding where to go next. (To make things less homogeneous, some cities will be a much harder level than others to “win”; so the trade-off is whether it’s worth trying to contest a valuable-but-difficult city, or an easy-but-worth-less city).</p>
+<p>Sky Rogue could do something similar.<br />
+This could provide rationale for the objectives. Rather than “Destroy this AWACs”, the player could have a choice of territories: Perhaps a territory has an enemy AWACs unit. Perhaps another territory has an enemy airbase. Perhaps this affects what happens in the overworld after each “day”. (e.g. airbase influences how many units in an adjacent territory, or so).</p>
+<p>Faster Than Light’s overworld has a similar dynamic to AZS’, in that your choice of path affects i) the kind of environment you fight in, ii) the kind of enemies you fight against, iii) your resources. (e.g. spend a turn visiting the store? with radar, you can detect asteroid fields; worth the risk to investigate? worth the risk of spending more turns fighting enemies, as the enemy fleet advances?).<br />
+– Again, a relatively simple overworld mechanic which provides an extrinstic motivation for playing the game. – With Sky Rogue, at the moment the motivation to play is ‘intrinsic’; new jets/bombs aren’t as fun as motivating as the goal of ‘beating something’, &amp; “beating your old score” is just a lame motivation. (Sky Rogue is fun to play because the gameplay is fun, but, y’know?, something more than an arcade session would be nice).</p>
+<h2 id="carrier-vs-carrier-battles">Carrier-vs-Carrier Battles</h2>
+<p>Maybe this is just because I’ve only seen the first couple of days &amp; I suck at gameplay, but.. the gameplay doesn’t feel like belligerent-on-belligerent battles. – Sometimes the enemy air-carrier is spawned a fair distance away from your carrier, sometimes it’s right next to it. – Intuition tells me that, my carrier is important, so the enemy’s carrier must be, too. I’d’ve expected something more intense, (e.g. <a href="https://www.youtube.com/watch?v=Y42c7kJKkwc">Carrier Command Carrier-on-Carrier battle</a>, or perhaps like the station-vs-station of the 1998 Urban Assault..); as it is, the carrier is worth the same amount of points as 5-turrets, and isn’t all that difficult to destroy (with the right equipment).<br />
+– Ok, I take it back. It’s probably because I suck. <a href="http://www.lagzero.net/wp-content/uploads/2015/09/2015-09-12_00002.jpg">This thing looks bad-ass</a>.<br />
+Still. The arcade nature of the game provides a somewhat asymmetric, your-lone-fighter-vs-their-whole-fleet.</p>
+]]></summary>
+</entry>
+<entry>
     <title>Setting up Mutt with NUS Student Email</title>
     <link href="http://www.rgoulter.com/blog//posts/programming/2015-10-26-setting-up-mutt-with-nus-student-email.html" />
     <id>http://www.rgoulter.com/blog//posts/programming/2015-10-26-setting-up-mutt-with-nus-student-email.html</id>
@@ -580,46 +629,6 @@ It seems to me some of the common ways to get an affiliate (of whatever) enraged
 – ‘Being outraged’ is not a particularly sensible response to <em>any</em> of these things. But I suppose if they ‘hurt’ you, you gotta ‘hurt’ them back, right?</p>
 <p>– Since being abstract is awful, let me try the above in the context of the South Park episode: it’s upsetting to fans of Social Justice that the ‘PC Bros’ are the ‘bad guys’ (unflatting misrepresentation of ‘social justice’), but also hits close-to-home the vicious nature of SJ bullying online (unflattering accurate representation). – I’ve also seen comments along the lines of how ‘transphobic’ the episode was; perhaps the bullies find it upsetting that not everyone things Jenner is a hero?</p>
 <p>Issues which polarise are polarising further than they have before, it seems to me.</p>
-]]></summary>
-</entry>
-<entry>
-    <title>Thoughts on Facebook Dislike Button</title>
-    <link href="http://www.rgoulter.com/blog//posts/argument/2015-09-17-thoughts-on-facebook-dislike-button.html" />
-    <id>http://www.rgoulter.com/blog//posts/argument/2015-09-17-thoughts-on-facebook-dislike-button.html</id>
-    <published>2015-09-17T00:00:00Z</published>
-    <updated>2015-09-17T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<div class="info">
-    Posted on September 17, 2015
-    
-        by Richard Goulter
-    <br/>
-    
-    Tags: <a href="/tags/facebook.html">facebook</a>, <a href="/tags/social%20media.html">social media</a>
-    
-</div>
-
-<p>So, recently it hit my newsfeed that Facebook was working on a ‘dislike button’.<br />
-Except it’s <em>not</em> going to be a ‘dislike’ button, so much as a ‘condolences’ button; for giving one’s regards if a post isn’t appropriate to ‘like’.<br />
-– This subtlety didn’t particularly reach the many who failed to read past a headline title. (That is, pretty much everyone on my newsfeed who shared it).<br />
-Which leads to reactions like “finally” or “about time” from some,<br />
-and from the gentler parts of the internet reactions like “oh no, the <em>trolls</em> are going to ruin Facebook!”.</p>
-<p>It’s a little frustrating.</p>
-<p>“<em>finally</em>” is a classic reaction to this; I’m pretty sure I’ve seen “if only Facebook had a dislike button” snark from the time I started using Facebook.<br />
-But Facebook doesn’t exactly work that way.<br />
-You’re ‘friends’ with the people on Facebook, with some kind of connection to the contacts In-Real-Life. That’s quite different to other online sites where you can upvote/downvote posts. – It’s reasonable to ‘like’, or to comment “I love this!” for posts you like, much less reasonable to leave a comment “who cares?” or “you’re stupid” for content you don’t like.</p>
-<p>Those concerned about “<em>trolls</em>” or about filling the site with negativity are also misguided. (I mean, even if they were right about it being a “dislike” button).<br />
-Partly because friend-to-friend ‘dislikes’ wouldn’t be all that high (though, say, advertising posts or posts on unpopular brands would get quite ‘disliked’).<br />
-But also, even the idea of trying to construct a filtered community, constrained in thought by the linguistic allowances of Facebook just sounds really concerning to me. (Let’s not say “bad”, let’s say “double plus un-good”, anyone?).<br />
-– Fortunately, <a href="http://www.ted.com/talks/mark_forsyth_what_s_a_snollygoster_a_short_lesson_in_political_speak">the words we speak don’t shape reality</a> (it’s the other way around), but the desire is still unsettling. (Although, admittedly, that’s getting rather alarmist about Facebook, as well as making an Orwell analogy, so, whatever).</p>
-<p>But the problem of ‘people not being nice to each other’ isn’t only present in (nor encouraged by) forums which feature dislike buttons, and other negative feedback.<br />
-– Both Facebook and Twitter are vaguely similar in feedback mechanisms: a post/tweet can be liked/favourited, or replied-to, or shared. These are all “constructive”, positive things. The ‘negative’ feedback for each is more passive: you can unfollow/mute an account you don’t like, or you can unfriend/block an account you really don’t like, but these indications aren’t explicit on a newsfeed/timeline. – Facebook/Twitter differ in terms of visibility of posts: Facebook’s profiles are private-by-default, Twitter’s are public-by-default. This affects discussion.<br />
-The point, is, though, even absent of ‘negative’ feedback like a ‘dislike’ button, these social media sites are <a href="http://www.ted.com/talks/jon_ronson_what_happens_when_online_shaming_spirals_out_of_control">capable of awful harassment</a>. People see something they don’t like, it angers them, people share it with their network, who then also get angry and share it, etc.<br />
-– Online shaming is awful, it’s people treating other people like they’re not people, and its presence isn’t dictated by a fucking ‘dislike’ button.</p>
-<p>Worse, though, is that.. even short of ‘online shaming’, there’s nothing amazing about users of social media only being in a network with people whom they like.<br />
-It’s remarkable, concerning to see <a href="http://www.technologyreview.com/view/539856/this-is-what-controversies-look-like-in-the-twittersphere/">what controversies on Twitter look like</a>. (Hint: They’re the ones where people on each side of the discussion only interact with the people who agree with them, and there’s little discussion between each side).<br />
-I’m a big fan of <a href="https://www.youtube.com/watch?v=b86dzTFJbkc">Jonathon Haidt’s talk here</a>, discussing is ‘Righteous Mind’ book. And my thinking is, if people limit their interaction online to those they like, you won’t have folk who only share posts from Fox news being ‘friends’ with folk who only share their posts from Al-Jazeera America (or whatever). – And emphasis on “warm, fuzzy, no negativity” is more likely to lend to a close-minded, homogeneous community than a community which people disagree with each other.</p>
-<p>Doom &amp; gloom aside, is there a way to have some discussion forum which’d encourage diversity, encourage people to be able to respectfully disagree with one another?<br />
-Because I can’t think up incentive for folk to visit a site for people to tell each other “hey, you’re wrong about whatever”.</p>
 ]]></summary>
 </entry>
 
