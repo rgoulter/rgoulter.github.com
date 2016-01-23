@@ -8,8 +8,45 @@
         <name>Richard Goulter</name>
         <email>richard.goulter+blog@gmail.com</email>
     </author>
-    <updated>2015-12-03T00:00:00Z</updated>
+    <updated>2016-01-24T00:00:00Z</updated>
     <entry>
+    <title>What Makes a Game a Good Toy</title>
+    <link href="http://www.rgoulter.com/blog//posts/games/2016-01-24-what-makes-a-game-a-good-toy.html" />
+    <id>http://www.rgoulter.com/blog//posts/games/2016-01-24-what-makes-a-game-a-good-toy.html</id>
+    <published>2016-01-24T00:00:00Z</published>
+    <updated>2016-01-24T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<div class="info">
+    Posted on January 24, 2016
+    
+        by Richard Goulter
+    <br/>
+    
+    Tags: <a href="/tags/minecraft.html">minecraft</a>, <a href="/tags/saints%20row.html">saints row</a>, <a href="/tags/just%20cause%203.html">just cause 3</a>
+    
+</div>
+
+<p>I recently played through Just Cause 3, and had a lot of fun playing that. - I think, though, that after ‘liberating’ all the towns, collecting all the collectibles, and completing all the missions, there’s not as much innate incentive to play the game as I would’ve thought.<br />
+Considering Just Cause 3 is a game where you can fly-like-batman, grapple, and parachute your way around an environment, in addition to blowing-shit-up, hijacking all kinds of vehicles easily, etc. etc. it’s a bit strange. – I get the impression it would be fair to describe Just Cause 3 as “a game where you unlock things, so that you get a fun toy/playground at the end of it”. (e.g., unlocking more vehicles to request, or unlocking a higher request-tokens capacity as you get nearer the end). – So what makes for an interesting ‘toy’ game?</p>
+<p>Minecraft is the ultimate ‘toy’ game.<br />
+To such an insane extent. Google for it, but you hear of things like people building BASIC interpreters, or processors, or whatever using the redstone mechanics.<br />
+From what I’ve played, I think why it’s fun like this, more specific than “you can do anything you want (like farm, or fight)”, is Minecraft involves creating systems. (e.g. “here is my house, here is where I mine, here is the chest were I put stuff”). And so the <em>narrative</em> follows from that. “Here’s my mine… I’m going to mine further”, “here’s my house. I want some glass, so I’m going to get sand”, “at night, I need to fight my way back to my house, clear the surrounding area. Or maybe just survive the night through combat”. – I suppose there’s motivation which comes from taking a wild/unordered region (the generated world), and conquering/colonising it; e.g. tunnelling through the underground, chopping down trees, terraforming uneven parts of land.</p>
+<p>Minecraft is quite, quite different from Just Cause 3, in that the latter is much more obviously a “game” than the former.</p>
+<p>The Saints Row series is much closer to what Just Cause has. (In particular, I like Saints Row the Third best, but whatever).<br />
+Both these games involve having fun from destruction and unrealistic-violence in a conquerable, open-world setting.<br />
+I’ve certainly had a lot of fun screwing around in Saints Row the Third. – Though, unfortunately, if Saints Row is a better toy, Just Cause is a better game: the minigames (and missions) in Just Cause aren’t boring.</p>
+<p>So what makes Saints Row a better toy?<br />
+I wonder if part of it isn’t that in Saints Row, you get the ‘cheats’ like Invulnerability, Infinite Ammunition <em>in-game</em>. You have to buy them, (&amp; so there’s strong incentive to play the game to earn the money, etc.). – Free reign to cause havock and destruction, after earning this by playing the game ‘legitimately’ sounds fun.<br />
+And while you can’t construct/modify the environment, so can’t “create systems” like in Minecraft, Saints Row lets you customise your character and your character’s things. The character’s body/face/hair, the character’s clothing (&amp; what colours), the weapons (to an extent), and the cars. – You can choose to dress your character in all-yellow, driving an all-yellow car if you want. (Why not, right?). I think your character can even have actually-yellow, also. Or you can dress up in costume. – I guess that’s very Barbie-doll ish. But it’s fun.<br />
+The setting in Saints Row does lend itself to <em>some</em> narrative-making: gangsters from your gang will roam the streets, as will gangsters from other teams, and the police. So you can easily pick fights if you want, &amp; then have a good ol’ car-chase to escape. There’re also random-events like “defend this area for 3 waves” which the player can be prompted with.</p>
+<p>Just Cause 3 has some of these things that Saints Row has: there will be random encounters / mini-quests, involving tasks like “hijack this car, then get clear of your wanted level”. And you can ‘collect’ different vehicles. You can certainly cause mayhem if you want, &amp; there will be patrols of bad-guys you can pick fights with every now and then, too.<br />
+One (dumb) idea might be, that the enemy would try to re-conquer towns/areas that the player ‘liberated’. – This would have some narrative, but makes it quite a chore to keep the whole territory ‘liberated’. – There’s no benefit from the ‘liberated’ regions that impacts the player much; not like “more reinforcements to help you” or “hourly cash income”. (Well, the ‘main’ benefit actually seems to be there aren’t as many bad guys, and you can do ‘suspicious’ things without getting a wanted level. Still). – What I <em>do</em> like from Just Cause 3 is that you can always have some town/settlement “re-oppressed” so it can be “re-liberated”.<br />
+Perhaps the whole “not using cash to upgrade/unlock stuff” is strange, also.. in that, it <em>demands</em> skill to unlock better features (like “more ammo capacity”), rather than demanding player spend “more time playing the game”.<br />
+– And Just Cause 3 has some cool.. features that lend itself to being a fun toy, like the tether.<br />
+But I wanna be able to customise <em>my</em> car, to be able to tear-shit-up with infinite-rockets, &amp; screw-around in pew-pew shootouts without worrying too much about things like ammo, or health. (Which isn’t really a “game”, sure).</p>
+<p>All the same, I can’t help but think that a marriage of Just Cause 3 and Saints Row would be a ridiculously fun carnage-causing sandbox.</p>
+]]></summary>
+</entry>
+<entry>
     <title>Thoughts on Sky Rogue</title>
     <link href="http://www.rgoulter.com/blog//posts/games/2015-12-03-thoughts-on-sky-rogue.html" />
     <id>http://www.rgoulter.com/blog//posts/games/2015-12-03-thoughts-on-sky-rogue.html</id>
@@ -43,6 +80,9 @@ What Sky Rogue does now is to have a global progression by “unlocking” diffe
 Part of this could be the UI; from the in-game UI, there’s no description given as to what a weapon is supposedly “good for”. So. Everything just kindof looks like “point and shoot”, rather than “this is a weapon I really want for this kind of target”.<br />
 Part of it, I think, is also.. because it’s <em>“arcade”</em>, there’s no “campaign” to win. – I think this is solvable, in an engaging way beyond “Mission 1 = Day 1”, “Get to Day 10 to Face Big Bad-Guy and Win”.</p>
 <p>(As an aside; I think an unfortunate dynamic from the above rules: if you return to your carrier without having beaten the objective, you get to change which jet you use, and which loadout of weapons you’re using. – If blowing-up additional enemies/buildings is beneficial, this means that it becomes “save the objective ’till last” – if blowing up additional enemies/buildings isn’t beneficial, it’s not obvious either way).</p>
+<p>EDIT: After playing the game some more, I feel it’s worth emphasising that the gameplay they do have is very good.<br />
+The dogfighting tends to involve missiles. – The player <em>can</em> use guns, but there’s no target-lead indicator which makes this difficult. (Also, there’s a control to “fire gun”, even if the selected weapon is not a gun). – And the missiles all have some kind of lock-on. The lock-on mechanic is <em>very</em> satisfying: a wee lock-on box will drag across the UI, chasing the current target box; when it locks on, there’s a beep. (Hit not guaranteed, of course).<br />
+Bombing is quite satisfying. It maybe feels like the bombs fall quite slowly?, but it looks really cool to drop bombs on a target, fly away, and look back at the target seeing the bombs drop. (The bombs have like, streaks/trails behind them). – Unfortunately, the bomb-cam is unintuitive, and a bit ‘inaccurate’; it shows where the bomb would hit at sea-level. This makes it completely inaccurate against the sky-enemies like the carrier; &amp; slightly inaccurate against buildings.</p>
 <h2 id="arcade-game-with-campaign-atom-zombie-smasher-faster-than-light">Arcade Game with Campaign: Atom Zombie Smasher, Faster Than Light</h2>
 <p>I think Atom Zombie Smasher would make a decent example of a nice ‘campaign’ around satisfying gameplay.<br />
 AZS’ core game involves rescuing civilians from procedurally-generated cities, using a loadout of obstacles/units.<br />
@@ -54,7 +94,7 @@ This could provide rationale for the objectives. Rather than “Destroy this AWA
 – Again, a relatively simple overworld mechanic which provides an extrinstic motivation for playing the game. – With Sky Rogue, at the moment the motivation to play is ‘intrinsic’; new jets/bombs aren’t as fun as motivating as the goal of ‘beating something’, &amp; “beating your old score” is just a lame motivation. (Sky Rogue is fun to play because the gameplay is fun, but, y’know?, something more than an arcade session would be nice).</p>
 <h2 id="carrier-vs-carrier-battles">Carrier-vs-Carrier Battles</h2>
 <p>Maybe this is just because I’ve only seen the first couple of days &amp; I suck at gameplay, but.. the gameplay doesn’t feel like belligerent-on-belligerent battles. – Sometimes the enemy air-carrier is spawned a fair distance away from your carrier, sometimes it’s right next to it. – Intuition tells me that, my carrier is important, so the enemy’s carrier must be, too. I’d’ve expected something more intense, (e.g. <a href="https://www.youtube.com/watch?v=Y42c7kJKkwc">Carrier Command Carrier-on-Carrier battle</a>, or perhaps like the station-vs-station of the 1998 Urban Assault..); as it is, the carrier is worth the same amount of points as 5-turrets, and isn’t all that difficult to destroy (with the right equipment).<br />
-– Ok, I take it back. It’s probably because I suck. <a href="http://www.lagzero.net/wp-content/uploads/2015/09/2015-09-12_00002.jpg">This thing looks bad-ass</a>.<br />
+– Ok, I take it back. It’s probably because I suck. <a href="http://www.lagzero.net/wp-content/uploads/2015/09/2015-09-12_00002.jpg">This thing looks bad-ass</a>. (EDIT: This is a “corvette”. Which is a bit confusing, because the sea-ship is called a frigate, and in terms of navy ships, a corvette is smaller than a frigate. Does this hint that we’ll see a larger enemy ship? – The corvette apparently, has <em>many</em> anti-air emplacements, as well as launching aircraft).<br />
 Still. The arcade nature of the game provides a somewhat asymmetric, your-lone-fighter-vs-their-whole-fleet.</p>
 ]]></summary>
 </entry>
@@ -589,46 +629,6 @@ at ‘best’ this kind of reaching comes about from some ‘quest to find sexis
 More cynically, this kind of sexism-under-every-rock garners clicks from 1) people who strive to call out sexism 2) people annoyed at the ‘cry wolf’ call outs. – And since the passionate in either of these groups are likely to dislike the other, it’s likely to be shared emphatically.<br />
 And have people write about it on their blog.</p>
 <p>Or it could be something else entirely: an indie-lover who sees that some music is ‘too mainstream’. (And liking Swift’s mainstream music is a non-mainstream opinion). – But the idea of something as .. uninspiring as an album review trying to stir shit is fun.</p>
-]]></summary>
-</entry>
-<entry>
-    <title>Harnessing the Outrage Machine</title>
-    <link href="http://www.rgoulter.com/blog//posts/argument/2015-09-19-harnessing-the-outrage-machine.html" />
-    <id>http://www.rgoulter.com/blog//posts/argument/2015-09-19-harnessing-the-outrage-machine.html</id>
-    <published>2015-09-19T00:00:00Z</published>
-    <updated>2015-09-19T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<div class="info">
-    Posted on September 19, 2015
-    
-        by Richard Goulter
-    <br/>
-    
-    Tags: <a href="/tags/outrage.html">outrage</a>, <a href="/tags/south%20park.html">south park</a>, <a href="/tags/media.html">media</a>, <a href="/tags/sjws.html">sjws</a>
-    
-</div>
-
-<p>South Park’s S19E1 episode, introducing the ‘PC Principal’, seemed to have upset some people. (e.g. <a href="https://twitter.com/thewtfmagazine/status/644391652354879488">this tweet</a>, <a href="https://twitter.com/94_jasy/status/645026598488555520">this tweet</a>.<br />
-– For what it’s worth, the episode doesn’t say ‘political correctness is bad’, nor ‘social justice is bad’, and it certainly isn’t pandering to say these things are great. - The episode clearly attacks the disproportionate, abusive, bullying endorsed by the “social justice bullies” (as <a href="https://medium.com/@aristoNYC/social-justice-bullies-the-authoritarianism-of-millennial-social-justice-6bdb5ad3c9d3">aristoNYC’s piece</a> termed it).<br />
-The term “Social Justice Warrior” is itself.. fun, since many who endorse its characteristics don’t see it as pejorative: ‘Warrior for Social Justice? How could that be a bad thing?’. (Even aristoNYC’s piece, a pretty good article criticising SJWs, likes the term. Thus, “SJ Bullies”).<br />
-– South Parks’ contribution to the lexicon here is ‘great’: <a href="https://twitter.com/SouthPark/status/644377482129371136">“You PC bro?”</a>, <a href="https://twitter.com/SouthPark/status/644377056021602304">“It’s not BRUCE fucking Jenner, it’s Caitlyn and she’s a fucking stunning woman!”</a>, <a href="https://twitter.com/SouthPark/status/644331288426483713">“WOO WOO WOO! You hear that!? That’s the sound of 2015 pulling you over people!”</a> are all sure to be copy-pasted over as height-of-wit when people see someone being a bully. (I do like that last one, it captures the tone of ‘call out’ amazingly well).</p>
-<p>Prominent YouTube account GameTheory recently released <a href="https://www.youtube.com/watch?v=tPpBlDaKM_o">this video</a>, pointing out that when the media calls gamers “12 year old losers”, it garners a reaction of outrage. (e.g. Jimmy Kimmell managed to get 3x videos in a row, with very little creativity, each getting more views than his channel usually gets, just calling gamers “12 year old losers”).<br />
-The video also features the cliche quote of “first they ignore you, then they ridicule you, then they fight you, then you win” or so. YMMV.<br />
-– But the interesting part of the video was from ~10:30ff, when it was pointed out media sensationalism over ‘shark attacks’ were able to create widespread fear of sharks. Such a fear is irrational and unfounded. Another example it pointed out was the media as the chief culprit of the downfall-into-obscurity of some presidential candidate. – I’m not sure how accurate these examples are of how powerful the media can be, but “media’s lens on insignificant issues has an impact on public perception” is somewhat disconcerting.</p>
-<p>Surely there’s room for some level of introspection, to be able to say “hey, I’m outraged by this.” then “does it matter?”, and calm down or so?</p>
-<p>I’m not quite talking about <a href="https://medium.com/@julien/the-complete-guide-to-not-giving-a-fuck-52bc4be9e7c1">“not giving a fuck”</a>.<br />
-– Certainly “let’s ignore all negative feedback, because there’s NOTHING I can do about it” sounds like a terrible idea. (It’s not what the author <em>means</em>, but it’s a conclusion which could be <em>read</em> from it all the same).</p>
-<p>– For what it’s worth, I also think “calming down” by way of cat pictures &amp; other cute things in between bouts of outrage seems a technique to make ‘online bezerkers’: if the outrage is never discussed-through, doesn’t that make it easier to increase tensions?</p>
-<p>Anyway.<br />
-It seems to me some of the common ways to get an affiliate (of whatever) enraged at a speaker/article:</p>
-<ol style="list-style-type: decimal">
-<li>Unflattering misrepresentation</li>
-<li>Unflattering accurate representation</li>
-<li>Unflattering reality (for the affiliate)</li>
-</ol>
-<p>I’m just pulling this out of my ass, so. (Another good way to get an affiliate aroused is some anecdote/story which supports their view of reality: “something bad happened, but if people like me were in charge, it wouldn’t have happened”).<br />
-– ‘Being outraged’ is not a particularly sensible response to <em>any</em> of these things. But I suppose if they ‘hurt’ you, you gotta ‘hurt’ them back, right?</p>
-<p>– Since being abstract is awful, let me try the above in the context of the South Park episode: it’s upsetting to fans of Social Justice that the ‘PC Bros’ are the ‘bad guys’ (unflatting misrepresentation of ‘social justice’), but also hits close-to-home the vicious nature of SJ bullying online (unflattering accurate representation). – I’ve also seen comments along the lines of how ‘transphobic’ the episode was; perhaps the bullies find it upsetting that not everyone things Jenner is a hero?</p>
-<p>Issues which polarise are polarising further than they have before, it seems to me.</p>
 ]]></summary>
 </entry>
 
