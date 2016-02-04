@@ -161,7 +161,7 @@ You’d also think that a genre set on characters having Happily Ever Afters wou
         by Richard Goulter
     <br/>
     
-    Tags: <a href="/tags/minecraft.html">minecraft</a>, <a href="/tags/saints%20row.html">saints row</a>, <a href="/tags/just%20cause%203.html">just cause 3</a>
+    Tags: <a href="/tags/game.minecraft.html">game.minecraft</a>, <a href="/tags/game.saints%20row.html">game.saints row</a>, <a href="/tags/game.just%20cause.html">game.just cause</a>, <a href="/tags/game%20design.html">game design</a>, <a href="/tags/analysis.html">analysis</a>
     
 </div>
 
@@ -198,7 +198,7 @@ But I wanna be able to customise <em>my</em> car, to be able to tear-shit-up wit
         by Richard Goulter
     <br/>
     
-    Tags: <a href="/tags/sky%20rogue.html">sky rogue</a>, <a href="/tags/roguelike.html">roguelike</a>, <a href="/tags/arcade.html">arcade</a>, <a href="/tags/analysis.html">analysis</a>, <a href="/tags/atom%20zombie%20smasher.html">atom zombie smasher</a>, <a href="/tags/faster%20than%20light.html">faster than light</a>
+    Tags: <a href="/tags/game.sky%20rogue.html">game.sky rogue</a>, <a href="/tags/roguelike.html">roguelike</a>, <a href="/tags/analysis.html">analysis</a>, <a href="/tags/game.atom%20zombie%20smasher.html">game.atom zombie smasher</a>, <a href="/tags/game.faster%20than%20light.html">game.faster than light</a>
     
 </div>
 
@@ -250,7 +250,7 @@ Still. The arcade nature of the game provides a somewhat asymmetric, your-lone-f
         by Richard Goulter
     <br/>
     
-    Tags: <a href="/tags/mutt.html">mutt</a>, <a href="/tags/nus.html">nus</a>, <a href="/tags/email.html">email</a>, <a href="/tags/office365.html">office365</a>
+    Tags: <a href="/tags/programming.mutt.html">programming.mutt</a>, <a href="/tags/email.html">email</a>, <a href="/tags/office365.html">office365</a>
     
 </div>
 
@@ -302,7 +302,7 @@ My Mutt configuration, in general, may be useful for other NUS students keep the
         by Richard Goulter
     <br/>
     
-    Tags: <a href="/tags/analysis.html">analysis</a>, <a href="/tags/patapon.html">patapon</a>
+    Tags: <a href="/tags/analysis.html">analysis</a>, <a href="/tags/game.patapon.html">game.patapon</a>
     
 </div>
 
@@ -343,7 +343,7 @@ And Patapon 3 features many sections like this:<br />
         by Richard Goulter
     <br/>
     
-    Tags: <a href="/tags/haskell.html">haskell</a>, <a href="/tags/yi.html">yi</a>, <a href="/tags/editors.html">editors</a>
+    Tags: <a href="/tags/programming.haskell.html">programming.haskell</a>, <a href="/tags/programming.yi.html">programming.yi</a>, <a href="/tags/programming.editors.html">programming.editors</a>
     
 </div>
 
@@ -444,11 +444,11 @@ Just as the animals use ‘disarmament/to make the world a more peaceful place�
         by Richard Goulter
     <br/>
     
-    Tags: <a href="/tags/vim.html">vim</a>, <a href="/tags/eclipse.html">eclipse</a>, <a href="/tags/scala.html">scala</a>
+    Tags: <a href="/tags/programming.vim.html">programming.vim</a>, <a href="/tags/programming.eclipse.html">programming.eclipse</a>, <a href="/tags/programming.scala.html">programming.scala</a>
     
 </div>
 
-<p>So, I’ve blogged a bit about <a href="../../tags/vim.html">Vim</a>.<br />
+<p>So, I’ve blogged a bit about <a href="../../tags/programming.vim.html">Vim</a>.<br />
 Again, no, it’s not about “vim vs emacs”, so much as about “which features your text editing has”; and the vi-like modal editing fantastic for manipulating text.</p>
 <p>Recently I’ve had the fortune of programming in Scala.<br />
 The joke is that some programmers are happy to work in Scala because it’s not Java, the rest are sad to work in Scala because it’s not Haskell.<br />
@@ -493,7 +493,7 @@ When I’m using Vim, I’m imagining what I could have to improve my tooling, w
         by Richard Goulter
     <br/>
     
-    Tags: <a href="/tags/fyp.html">fyp</a>, <a href="/tags/scala.html">scala</a>, <a href="/tags/c.html">c</a>, <a href="/tags/vim.html">vim</a>, <a href="/tags/presentation.html">presentation</a>
+    Tags: <a href="/tags/fyp.html">fyp</a>, <a href="/tags/programming.scala.html">programming.scala</a>, <a href="/tags/programming.c.html">programming.c</a>, <a href="/tags/programming.vim.html">programming.vim</a>, <a href="/tags/presentation.html">presentation</a>
     
 </div>
 
