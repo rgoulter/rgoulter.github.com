@@ -150,8 +150,8 @@ But I’ve been using HG. Can Mercurial haz it, too?<br />
 Sources:</p>
 <ul>
 <li><a href="http://stackoverflow.com/questions/3575189/mercurial-log-with-one-liners">S/O: “Mercurial Log with One-Liners”</a> Because one-liner logs themselves can be useful.<br />
- This one has:<br />
- <code>alias hl=&quot;hg log --template '{node|short} | {date|isodatesec} | {author|user}: {desc|strip|firstline}\n'&quot;</code></li>
+This one has:<br />
+<code>alias hl=&quot;hg log --template '{node|short} | {date|isodatesec} | {author|user}: {desc|strip|firstline}\n'&quot;</code></li>
 <li><a href="hgbook.red-bean.com/read/customizing-the-output-of-mercurial.html">HG Book: Customizing Output</a></li>
 <li><a href="https://www.selenic.com/hg/help/templates">HG Help / Manpages</a></li>
 </ul>
@@ -184,7 +184,7 @@ custom.author = blue bold</code></pre>
 <p>And, finally, <code>~/.hgrc.d/fancy.style</code> is:</p>
 <pre><code>changeset = &quot;* {label('custom.rev', node|short)} - ({label('custom.decorate', branch)}) {desc|strip|firstline} ({label('custom.date', date|age)}) &lt;{label('custom.author' , author)}&gt;\n&quot;</code></pre>
 <p>Screenshot:<br />
-<img src="http://i.imgur.com/OWImYAS.png" alt /></p>
+<img src="http://i.imgur.com/OWImYAS.png" /></p>
 <p>(The repo is old, because I don’t use HG so much, okay?).</p>
 
 
@@ -201,6 +201,8 @@ custom.author = blue bold</code></pre>
 <br style="clear: both;" />
 
 <hr />
+
+<i><a href="https://help.disqus.com/customer/portal/articles/832187-guest-commenting">Guest Commenting</a> has been enabled to allow anonymous/pseudonymous commenting; select "I'd rather post as guest" when entering a name.</i><br /><br />
 
 <div id="disqus_thread"></div>
     <script type="text/javascript">

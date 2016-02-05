@@ -54,7 +54,7 @@ what’s left is the issue of effectiveness and permanence.<br />
         by Richard Goulter
     <br/>
     
-    Tags: <a href="/tags/argument.html">argument</a>, <a href="/tags/politics.html">politics</a>, <a href="/tags/diversity.html">diversity</a>
+    Tags: <a href="/tags/discourse.html">discourse</a>, <a href="/tags/politics.html">politics</a>, <a href="/tags/diversity.html">diversity</a>
     
 </div>
 
@@ -321,8 +321,8 @@ And Patapon 3 features many sections like this:<br />
 – There are various enemies in the game which can one-hit-kill the player’s units: aside from the major bosses, there are sharks which can chomp units in one go, and there are salamander enemies which will ‘explode’ when they’re killed. This in itself is not bad, but:<br />
 – Units can only be revived in one batch per quest. (Aside from the Hero unit, which will revive after a time if not insta-killed). - So, if the Shield unit is killed, then the player must use this one revive. But…<br />
 – The player’s units will be <em>uncontrollable</em> under two circumstances: if the unit is affected by some element (e.g. on fire, frozen), or <em>the player is reviving their units</em>.<br />
- For the latter, to ‘revive’ the units requires a special ‘revive’ command. (In the game’s terms, summoning a djinn). For the next while, the units will not be under player control. - They’ll generally attack; thus, vulnerable to aforementioned insta-kill enemies; thus, when facing such insta-kill enemies, this ‘revive’ can’t really be used.<br />
- For the former.. this can be largely probablistic. i.e. <em>luck-based</em>. - A unit standing beside a bush on fire won’t always go on fire; but they might <em>right before you attack</em>. Or, rather, they might go on fire right as such an insta-kill enemy is in the area, and get killed. Or they might be frozen in range of the insta-kill of an enemy. - Certain items can mitigate this <em>slightly</em>, but not completely. (As well, it can cost gold to upgrade the items; and you get gold by playing such quests, so…).</p>
+For the latter, to ‘revive’ the units requires a special ‘revive’ command. (In the game’s terms, summoning a djinn). For the next while, the units will not be under player control. - They’ll generally attack; thus, vulnerable to aforementioned insta-kill enemies; thus, when facing such insta-kill enemies, this ‘revive’ can’t really be used.<br />
+For the former.. this can be largely probablistic. i.e. <em>luck-based</em>. - A unit standing beside a bush on fire won’t always go on fire; but they might <em>right before you attack</em>. Or, rather, they might go on fire right as such an insta-kill enemy is in the area, and get killed. Or they might be frozen in range of the insta-kill of an enemy. - Certain items can mitigate this <em>slightly</em>, but not completely. (As well, it can cost gold to upgrade the items; and you get gold by playing such quests, so…).</p>
 <p>– Minor issue related to that; rather than manage all the equipment given to the unit, there is an ‘optimise’ button. - The trouble is, this optimise algorithm has no qualms giving vulnerable-to-fire equipment, when the levels very clearly demand fire-resistant equipment. - It’s a minor thing, but tedious.</p>
 <p>Some egregiously frustrating (albeit mostly minor) game design issues aside, the game puts heavy emphasis on <em>Multiplayer</em> aspects.<br />
 “Hey there, this is a tough quest, but you can play with your friends”. - There are several ‘rare’/randomly-available gigantic-boss-battle quests which are strictly ‘multiplayer-only’.</p>
@@ -385,7 +385,7 @@ For more sophisticated efforts, I’m guessing one would want to:</p>
 <ul>
 <li><p>Look at parsing of Ex commands, using the extant parsers for inspiration.</p></li>
 <li><p>A more sophisticated <code>Action</code> executed; this is where an understanding of <code>Buffer</code>/<code>Editor</code>/<code>Yi</code> <code>Action</code>/<code>Monad</code> would be necessary.<br />
- Resources at <a href="http://yi-editor.github.io">yi-editor.github.io</a> may or may not be helpful here; grokking parts of the code (e.g. in the keymaps) would be a good place to start.</p></li>
+Resources at <a href="http://yi-editor.github.io">yi-editor.github.io</a> may or may not be helpful here; grokking parts of the code (e.g. in the keymaps) would be a good place to start.</p></li>
 </ul>
 ]]></summary>
 </entry>
@@ -566,14 +566,14 @@ With Tree Visitors, you implement methods which then control which parts of the 
 One approach might be to just pass the code of to some C interpreter anyway. (Cling is a C++ interpreter developed by the folk at CERN, a successor of an older CInt (C Interpreter) project of theirs. ‘Cling’ because it’s built upon LLVM/Clang.). This’d require potentially renaming variables so that everything is unique, and ‘unfolding’ control structures (like loops, etc.). – Quite a messy way of doing things.</p>
 <p>Another approach (which I never investigated) would be to generate a sequence of commands to give to GDB/LLDB so as to get the information (i.e. values of variables at some point in execution). (I did investigate using GDB/LLDB insofar as ‘will this let me avoid having to learn about the PL stuff?’; it’s not suffice because you still need to know for a statement e.g. <code>x = y = 4</code> <em>what</em> information you’d like to get from GDB/LLDB). – This isn’t necessarily a bad approach.</p>
 <div class="figure">
-<img src="http://i.imgur.com/i2WKSkH.png" alt="" />
+<img src="http://i.imgur.com/i2WKSkH.png" />
 
 </div>
 <h3 id="instrumenting">Instrumenting</h3>
 <p>The approach I <em>did</em> take was to ‘instrument’ (or ‘augment’) the code.<br />
 i.e. insert statements into the C program so that I can run the program to get the output.</p>
 <div class="figure">
-<img src="http://i.imgur.com/P3KHZzK.png" alt="" />
+<img src="http://i.imgur.com/P3KHZzK.png" />
 
 </div>
 <p>Roughly like:</p>
@@ -624,7 +624,7 @@ case class FunctionType(id: String, rtnType: CType, params: List[(String, CType)
 <p>Again, often in FP programming, once you have the types, the rest is fairly straight-forward. In my case: * I want this ‘CType’ from the AST. (kinda because C99 doesn’t have <code>typeof(x)</code>). * I want to output e.g. string-of some ‘CType’. (because C99 doesn’t have <code>stringof(x)</code>).</p>
 <h2 id="declarations">Declarations</h2>
 <div class="figure">
-<img src="http://i.imgur.com/93zni61.png" alt="" />
+<img src="http://i.imgur.com/93zni61.png" />
 
 </div>
 <p>The devil is in the detail, but (in terms of ANTLR): * You can use a TreeVisitor to evaluate a declaration statement to a list of CType(s). * You can then use a TreeListener to traverse the AST and pick up the declarations.</p>
@@ -669,7 +669,7 @@ But, again, while the logic is somewhat tedious, the code to do this inference s
 <li><p>No I don’t do squat with regards to <code>malloc</code>, etc. (Particularly since there’re other ways to allocate memory, e.g. <code>calloc</code>, <code>alloca</code>, not to mention custom ones like <code>xalloc</code>.).</p></li>
 <li><p>Obviously I don’t do squat with regards to concurrency, threads, etc.</p></li>
 <li><p>The tool doesn’t necessarily play nicely with C PreProcessor stuff.<br />
- It’s easy to come up with examples which show how tricky it could be to deal with that.</p></li>
+It’s easy to come up with examples which show how tricky it could be to deal with that.</p></li>
 </ul>
 <h1 id="contributors-wanted">‘Contributors Wanted’</h1>
 <p>If you find any bugs, I’d be delighted for you to file an issue.<br />
