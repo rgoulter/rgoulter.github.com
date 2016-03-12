@@ -8,8 +8,249 @@
         <name>Richard Goulter</name>
         <email>richard.goulter+blog@gmail.com</email>
     </author>
-    <updated>2016-03-10T00:00:00Z</updated>
+    <updated>2016-03-13T00:00:00Z</updated>
     <entry>
+    <title>Arduino Spaceship Interface in the Atom DSL</title>
+    <link href="http://www.rgoulter.com/blog//posts/programming/2016-03-13-arduino-spaceship-interface-in-the-atom-dsl.html" />
+    <id>http://www.rgoulter.com/blog//posts/programming/2016-03-13-arduino-spaceship-interface-in-the-atom-dsl.html</id>
+    <published>2016-03-13T00:00:00Z</published>
+    <updated>2016-03-13T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<div class="info">
+    Posted on March 13, 2016
+    
+        by Richard Goulter
+    <br/>
+    
+    Tags: <a href="/tags/programming.arduino.html">programming.arduino</a>, <a href="/tags/programming.c.html">programming.c</a>, <a href="/tags/programming.atomdsl.html">programming.atomdsl</a>
+    
+</div>
+
+<p>In my <a href="../../posts/programming/2016-03-12-explaining-pure-c-blink-example.html">previous post</a>, I discussed some of the simple details behind a pure C example programming an Arduino.<br />
+Using that understanding, I was able to implement a pure C implementation of the <a href="https://www.arduino.cc/en/ArduinoStarterKit/Prj02">Spaceship Interface</a> project. (“Spaceship Interface” = “green LED + 2 blinking red LEDs”, btw).</p>
+<p>The <a href="https://hackage.haskell.org/package/atom-1.0.13">Atom EDSL</a> is a DSL embedded in Haskell; and is advantageous in <a href="https://haskellembedded.github.io/posts/2015-02-06-how-i-got-here.html">certain use cases</a>. (That “Haskell Embedded” blog is fascinating – well worth reading; and one of the few places online to have a <a href="https://haskellembedded.github.io/posts/2015-02-17-atom-examples.html">fairly involved</a> example of Atom code).</p>
+<p>Translating the code to Atom wasn’t too hard. (If you’re willing to relax your definition of “translation”; my Atom implementation stops ‘blinking’ <strong>as soon as the switch is released</strong>, whereas the Arduino implementation delays up to 250ms. – My translation captures the essence).<br />
+I thought it’d be an interesting, simple comparison.</p>
+<p>Code examples in Arduino, pure C, and Atom can be found at <a href="https://github.com/rgoulter/arduino-atom-examples">rgoulter/arduino-atom-examples</a>.<br />
+e.g. <a href="https://raw.githubusercontent.com/rgoulter/arduino-atom-examples/059aa93be42f4f523aa4802a69fbdb7ec95f9d33/blink/atom/blink.hs">the Blink example in Atom</a>, for a look at a less-involved Atom example.</p>
+<p>The main snippet from <a href="https://raw.githubusercontent.com/rgoulter/arduino-atom-examples/059aa93be42f4f523aa4802a69fbdb7ec95f9d33/spaceshipinterface/c/spaceship.c">the C code</a>:</p>
+<pre><code>if (switchState == 0) {
+    /* enable PortD3 (green), disable PortD4 &amp; PortD5 (red) */
+    PORTD |= _BV(PORTD3);
+    PORTD &amp;= ~(_BV(PORTD4) | _BV(PORTD5));
+} else {
+    /* disable PortD3 (green) */
+    PORTD &amp;= ~_BV(PORTD3);
+
+    /* disable PortD4, enable PortD5 (red) */
+    PORTD &amp;= ~_BV(PORTD4);
+    PORTD |= _BV(PORTD5);
+    _delay_ms(BLINK_DELAY_MS);
+
+    /* enable PortD4, disable PortD5 (red) */
+    PORTD |= _BV(PORTD4);
+    PORTD &amp;= ~_BV(PORTD5);
+    _delay_ms(BLINK_DELAY_MS);
+}</code></pre>
+<p>The <em>whole</em> Atom code (<a href="https://raw.githubusercontent.com/rgoulter/arduino-atom-examples/059aa93be42f4f523aa4802a69fbdb7ec95f9d33/spaceshipinterface/atom/Spaceship.hs">src</a>):</p>
+<pre><code>{-# LANGUAGE QuasiQuotes #-}
+module Spaceship (main) where
+
+import Text.Heredoc
+import Language.Atom
+
+greenLED = &quot;PORTD3&quot;
+redLED1  = &quot;PORTD4&quot;
+redLED2  = &quot;PORTD5&quot;
+
+ledOn  led = action (\v -&gt; &quot;PORTD |= _BV(&quot; ++ led ++ &quot;)&quot;)  []
+ledOff led = action (\v -&gt; &quot;PORTD &amp;= ~_BV(&quot; ++ led ++ &quot;)&quot;) []
+
+-- | Our main Atom program.
+spaceship :: Atom ()
+spaceship = do
+    switchState &lt;- bool &quot;switchState&quot; True
+
+    -- read into switchState
+    call &quot;readButton&quot;
+
+    atom &quot;standBy&quot; $ do
+        cond $ not_ (value switchState)
+        ledOn greenLED
+        ledOff redLED1
+        ledOff redLED2
+
+    atom &quot;blinking&quot; $ do
+        cond (value switchState)
+        ledOff greenLED
+
+        let halfDelay = 25000
+        let blinkPeriod = 2 * halfDelay
+
+        period blinkPeriod $ phase 0 $ atom &quot;blink1&quot; $ do
+            ledOff redLED1
+            ledOn  redLED2
+
+        period blinkPeriod $ phase halfDelay $ atom &quot;blink2&quot; $ do
+            ledOn  redLED1
+            ledOff redLED2
+
+cHeader :: String
+cHeader = [here|
+#include &lt;avr/io.h&gt;
+
+static inline void readButton(void);
+|]
+
+cFooter :: String
+cFooter = [here|
+static inline void readButton() {
+    // read switch state into the Atom variable
+    state.Spaceship.switchState = (PIND &amp; _BV(PORTD2)) != 0;
+}
+
+int main (void) {
+    // Set input PD2,
+    // Set output PD3, PD4, PD5
+    DDRD &amp;= ~_BV(DDD2);
+    DDRD |= _BV(DDD3) | _BV(DDD4) | _BV(DDD5);
+
+    while(1) {
+        Spaceship();
+    }
+
+    return 0; // Never reaches
+}
+|]
+
+main :: IO ()
+main = do
+    let atomName = &quot;Spaceship&quot;
+    let code _ _ _ = (cHeader, cFooter)
+    let cfg = defaults {cCode = code,
+                        cRuleCoverage = False,
+                        cAssert = False}
+    (schedule, _, _, _, _) &lt;- compile atomName cfg spaceship
+    putStrLn $ reportSchedule schedule</code></pre>
+<p>Remarks:</p>
+<ul>
+<li><p>There’re obviously other ways of writing the “interface with C” bits in the Haskell code. – There’re other ways to implement the C code, too.</p></li>
+<li><p>The Atom code <strong>is</strong> longer.<br />
+<em>But</em>. In a contest between “which is more obvious to read?”, I’d say the Atom code wins hands-down, once you understand that Atom is declarative. (Only 1 comment in the Atom part!).<br />
+– In a contest of “refactorability”/“changeability”, surely Atom wins here, too: the seam-points and abstractions, and thus <em>where</em> and <em>what</em> to change, are evident.<br />
+– The extra length comes from various `atom “ruleName $ do” lines (which build ‘abstractions’ of instructions), as well as the Atom boilerplate, and the C footer/header to do the low-level operations (where the code is basically the same as my C implementation).</p></li>
+<li>If I must explain on the program:<br />
+It’s structured:
+<ul>
+<li>Stuff which <code>spaceship :: Atom ()</code> uses,</li>
+<li>The main Atom program (<code>spaceship :: Atom ()</code>),<br />
+– This is further broken down into “declaration (of a variable)”, and the various “rules” of “compute-what, when-what, at what period/phase”.</li>
+<li>The C interface &amp; low-level code,</li>
+<li>The Atom boilerplate.</li>
+</ul></li>
+<li><p>Haskell usually has a promise like “if it compiles, it works” (with a footnote of “until you get a memory leak”). – Whether that applies to Atom constructs depends on the Atom compiler.</p></li>
+<li><p>There are implicit couplings between the Atom and the C code in the above program: <code>state.Spaceship.switchState</code> (in the C) depends on variables in Haskell’s <code>main</code>, as well as in the <code>spaceship :: Atom ()</code> construct. – Similarly, <code>ledOn</code>, etc. in Haskell reference <code>PORTD</code>.<br />
+– I’m not sure how to minimise such couplings.</p></li>
+<li><p>For a contrivedly (or, pedagogically) simple program, the advantage to using Atom is outweighed by the length.</p></li>
+<li><p>The <code>25000</code> seems pretty magic to me. (And I guess if you need precise timing, you’d be more explicit about that in the C code).</p></li>
+<li><p>Wow, Make <a href="https://raw.githubusercontent.com/rgoulter/arduino-atom-examples/059aa93be42f4f523aa4802a69fbdb7ec95f9d33/spaceshipinterface/atom/Makefile">can be useful</a>.</p></li>
+</ul>
+]]></summary>
+</entry>
+<entry>
+    <title>Explaining Pure C Blink Example</title>
+    <link href="http://www.rgoulter.com/blog//posts/programming/2016-03-12-explaining-pure-c-blink-example.html" />
+    <id>http://www.rgoulter.com/blog//posts/programming/2016-03-12-explaining-pure-c-blink-example.html</id>
+    <published>2016-03-12T00:00:00Z</published>
+    <updated>2016-03-12T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<div class="info">
+    Posted on March 12, 2016
+    
+        by Richard Goulter
+    <br/>
+    
+    Tags: <a href="/tags/programming.c.html">programming.c</a>, <a href="/tags/programming.arduino.html">programming.arduino</a>
+    
+</div>
+
+<p>I’ve been playing around with an Arduino Uno this past week.</p>
+<p>I came across <a href="https://balau82.wordpress.com/2011/03/29/programming-arduino-uno-in-pure-c/">this post from balau82</a>: it gives a basic “blink” example program in C, and a high-level overview of how to come up with such a program.<br />
+The high-level overview wasn’t obvious for me, so I’d complement that blogpost with this, to explain in further detail.</p>
+<p>e.g. When the post says:</p>
+<blockquote>
+<p>from the <a href="https://www.arduino.cc/en/uploads/Main/arduino-uno-schematic.pdf">Arduino Uno schematics</a> we can find out where the pins are connected, for example we can find that the LED is connected to the PB5 pin of the Atmega328p chip</p>
+</blockquote>
+<p>These are the pertinent details of the schematic:</p>
+<div class="figure">
+<img src="http://i.imgur.com/8oNoyZL.png" />
+
+</div>
+<ul>
+<li>The Arduino board also has an ‘L’ beside the LED.. and the in-built LED is <a href="https://www.arduino.cc/en/Tutorial/Blink?from=Tutorial.BlinkingLED">on ‘Pin 13’</a> (thus the green 13, I guess).</li>
+<li>PB5 is the name of the pin on the ATmega328P controller. (<a href="http://www.atmel.com/images/Atmel-8271-8-bit-AVR-Microcontroller-ATmega48A-48PA-88A-88PA-168A-168PA-328-328P_datasheet_Complete.pdf">Datasheet here</a>).</li>
+</ul>
+<hr />
+<p>Looking at snippets from the code:</p>
+<pre><code>int main (void) {
+ DDRB |= _BV(DDB5); /* set Port B bit-5 to output */
+
+ while(1) {
+  PORTB |= _BV(PORTB5); /* turn on LED */
+  ....
+ }
+}</code></pre>
+<p>This left a novice like me with questions:<br />
+Where do these constants come from? What’s <code>DDRB</code>? How does <code>DDB5</code> refer to PB5? Why <code>PORTB = ...</code> to change the LED? What’s the difference between <code>DDB5</code> and <code>PORTB5</code>?<br />
+(At least I understood the <code>magicVar |= 1 &lt;&lt; 5</code> &amp; <code>magicVar &amp;= ~(1 &lt;&lt; 5)</code> bitmasking. – my <a href="https://github.com/rgoulter/c-worksheet.vim">C-Worksheet</a> is useful for playing around with this, also, btw).</p>
+<ul>
+<li><p><strong>Where do these (macro) constants come from?</strong><br />
+Well, look at the <code>#include &lt;avr/io.h&gt;</code>. (Probably found in <code>/usr/lib/avr/include</code>), and the <a href="http://www.nongnu.org/avr-libc/user-manual/group__avr__io.html">online reference</a>:<br />
+it includes <a href="http://www.nongnu.org/avr-libc/user-manual/group__avr__sfr.html">avr/sfr_defs.h</a> (SFR = Special Function Registers), which has the <code>_BV</code> macro as well as explaining the <code>sfr |= _BV(bit)</code> replacing some <code>sbi (sfr, bit)</code> instruction. – The specific file (in this case, <code>avr/iom328p.h</code>) defines the <code>DDB5</code>, etc. macros.</p></li>
+<li><p><strong>What’s <code>DDRB</code>?</strong><br />
+Reading the datasheet, Ctrl-F for <code>DDR</code> leads us to Section 14.2 “Ports as General Digital I/O”.</p>
+<blockquote>
+<p>Each port pin consists of three register bits: DDxn, PORTxn, and PINxn. As shown in ”Register Description”, the DDxn bits are accessed at the DDRx I/O address, the PORTxn bits at the PORTx I/O address, and the PINxn bits at the PINx I/O address.<br />
+The DDxn bit in the DDRx Register selects the direction of this pin. If DDxn is written logic one, Pxn is configured as an output pin. If DDxn is written logic zero, Pxn is configured as an input pin.</p>
+</blockquote>
+<p>DDR = Data Direction Register. Ohhh.[1]<br />
+<code>DDRB</code> is the byte (of the data direction of Port B), <code>DDB5</code> for referring to Port B (x = B), and its 5th bit (n = 5). (The register summary in Section 35, p615 shows this).</p>
+<p>So, when the Arduino code has:</p>
+<pre><code>pinMode(13, OUTPUT);</code></pre>
+<p>it is <strong>essentially</strong> equivalent to:</p>
+<pre><code>DDRB |= _BV(DDB5);</code></pre>
+<p>….Obviously.[2]</p></li>
+<li><p><strong>How does <code>DDB5</code> refer to PB5?</strong><br />
+It just does?<br />
+PB5 is the 5th bit of Port B. (Section 1.1.3).<br />
+Section 14 also has this to say:</p>
+<blockquote>
+<p>Three I/O memory address locations are allocated for each port, one each for the Data Register – <code>PORTx</code>, Data Direction Register – <code>DDRx</code>, and the Port Input Pins – <code>PINx</code>. The Port Input Pins I/O location is read only, while the Data Register and the Data Direction Register are read/write. However, writing a logic one to a bit in the PINx Register, will result in a toggle in the corresponding bit in the Data Register.</p>
+</blockquote></li>
+<li><p><strong>Why <code>PORTB = ...</code> to change the LED?</strong><br />
+Because it’s the data register. Aforementioned sections of the datasheet should have made this clear by now.[3]<br />
+There’s also compiler magic translating from <code>sfr |= _BV(bit)</code> to <code>sbi</code>/<code>cbi</code> etc. as explained in the avr-libc documentation. – Section 37 of the datasheet mentions <code>sbi</code> = “set bit in I/O register”, <code>cbi</code> = “clear bit …”.</p></li>
+<li><p>What’s the difference between <code>DDB5</code> and <code>PORTB5</code>?<br />
+This should be evident from above; one is for referring to the bit of a Data-Direction register, the other for the bit of Port B.<br />
+– I think they both evaluate to <code>5</code>; so unless the compiler does any magic with them, I’m guessing one could incorrectly interchange them and the program would still work. – It’s kinda tempting to just write the number <code>5</code>, since the identifier has a <code>5</code> in it anyway..</p></li>
+</ul>
+<hr />
+<p>The commands to compile and upload it I take on faith as “just work”. (Or, rather, I didn’t need to mess with them).</p>
+<p><a href="https://raw.githubusercontent.com/rgoulter/arduino-atom-examples/059aa93be42f4f523aa4802a69fbdb7ec95f9d33/blink/c/Makefile">Here’s a Makefile</a> adapted from these commands, which will probably be useful. (<code>make upload</code> will build &amp; upload the program to an Arduino).</p>
+<hr />
+<p>I wanted to translate the <a href="https://www.arduino.cc/en/ArduinoStarterKit/Prj02">Spaceship Interface</a> (Project 02 of the book which comes with the Arduino Starter Kit) to C, also.<br />
+The only difference from the Blink example is that the Spaceship Interface example reads input from a pin.</p>
+<p>Following the aforementioned tutorial, the switch is in (Arduino) pin 2, and the LEDs in pins 3, 4, 5.<br />
+From the schematic, this corresponds to PD2 .. PD5. (<code>%s/B/D/</code> is evident, even without the above understanding).</p>
+<p>Reading from a pin should also be ‘easy’ from the above understanding.[4] – And, again, the <code>avr/sfr_defs.h</code> documentation mentions that <code>PORTx = 0x33; unsigned char i = PINx</code> will magically get translated to the correct instructions.</p>
+<p>I was able to come up with <a href="https://gist.githubusercontent.com/rgoulter/9fcc09c6524ad882f477/raw/4c826aa5ee8ac5bd57baa2bad12d8fa7a2cb2b19/spaceship.c">this</a>. And it worked and I was so happy.</p>
+<p>Then I translated the example to the <a href="https://hackage.haskell.org/package/atom-1.0.13">Atom EDSL</a>. Read about the fun in my <a href="../../posts/programming/2016-03-13-arduino-spaceship-interface-in-the-atom-dsl.html">next blog post</a>.</p>
+<hr />
+<p>[1] Reading is useful. But, on the other hand, the datasheet is like 600 pages long.</p>
+<p>[2] Is it fair to call this ‘hard’ (for non-engineers), in the sense that all that isn’t obvious by looking at the C code &amp; blog? OTOH, math is hard, and that’s kindof a problem with the user, not the content.</p>
+<p>[3] But writing lots of stupid questions is still useful for clarifying to yourself what you don’t know! – Indeed, asking questions in a programming journal is valuable even if you never get back to answering them, I’d say.</p>
+<p>[4] Or from getting lucky by finding the example in Section 14 reading from <code>PINB</code>.</p>
+]]></summary>
+</entry>
+<entry>
     <title>International Women's Day, Holidays, and Businesses</title>
     <link href="http://www.rgoulter.com/blog//posts/argument/2016-03-10-international-womens-day-and-businesses.html" />
     <id>http://www.rgoulter.com/blog//posts/argument/2016-03-10-international-womens-day-and-businesses.html</id>
@@ -420,98 +661,6 @@ For more sophisticated efforts, I’m guessing one would want to:</p>
 <li><p>A more sophisticated <code>Action</code> executed; this is where an understanding of <code>Buffer</code>/<code>Editor</code>/<code>Yi</code> <code>Action</code>/<code>Monad</code> would be necessary.<br />
 Resources at <a href="http://yi-editor.github.io">yi-editor.github.io</a> may or may not be helpful here; grokking parts of the code (e.g. in the keymaps) would be a good place to start.</p></li>
 </ul>
-]]></summary>
-</entry>
-<entry>
-    <title>In Another's Shoes</title>
-    <link href="http://www.rgoulter.com/blog//posts/argument/2015-10-16-in-anothers-shoes.html" />
-    <id>http://www.rgoulter.com/blog//posts/argument/2015-10-16-in-anothers-shoes.html</id>
-    <published>2015-10-16T00:00:00Z</published>
-    <updated>2015-10-16T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<div class="info">
-    Posted on October 16, 2015
-    
-        by Richard Goulter
-    <br/>
-    
-    Tags: <a href="/tags/politics.html">politics</a>, <a href="/tags/diversity.html">diversity</a>
-    
-</div>
-
-<p>As part of <a href="http://www.winstonchurchill.org/resources/speeches/89-a-disarmament-fable">a speech in 1928</a>, Churchill gave the following fable:</p>
-<blockquote>
-<p>Once upon a time all the animals in the Zoo decided that they would disarm, and they arranged to have a conference to arrange the matter. So the Rhinoceros said when he opened the proceedings that the use of teeth was barbarous and horrible and ought to be strictly prohibited by general consent. Horns, which were mainly defensive weapons, would, of course, have to be allowed. The Buffalo, the Stag, the Porcupine, and even the little Hedgehog all said they would vote with the Rhino, but the Lion and the Tiger took a different view. They defended teeth and even claws, which they described as honourable weapons of immemorial antiquity. The Panther, the Leopard, the Puma, and the whole tribe of small cats all supported the Lion and the Tiger.</p>
-<p>Then the Bear spoke. He proposed that both teeth and horns should be banned and never used again for fighting by any animal. It would be quite enough if animals were allowed to give each other a good hug when they quarreled. No one could object to that. It was so fraternal, and that would be a great step towards peace. However, all the other animals were very offended with the Bear, and the Turkey fell into a perfect panic.</p>
-<p>The discussion got so hot and angry, and all those animals began thinking so much about horns and teeth and hugging when they argued about the peaceful intentions that had brought them together that they began to look at one another in a very nasty way. Luckily the keepers were able to calm them down and persuade them to go back quietly to their cages, and they began to feel quite friendly with one another again.</p>
-</blockquote>
-<p>The context was (apparently) discussing why disarmament talks were ineffective. In that context, it’s not difficult to see how the fable’s metaphors of teeth and horns may map to air force, navy, etc.<br />
-– A more concise way to describe this may be along the lines of <em>“Armament for me, but not for thee”</em>; or “self-interest”. But what’s striking about the fable is more subtle:<br />
-– In terms of the fable, each agent tries to justify the value &amp; necessity in their own armaments, while pointing out the excess in their hostile’s. - More abstractly, in terms of “power”, each animal tries to keep its own power, and diminish the power of its opponent.</p>
-<p>But I can’t help but be reminded of this analogy whenever anyone mentions “diversity” (and, more broadly, any use of identity politics).<br />
-Just as the animals use ‘disarmament/to make the world a more peaceful place’ as a means to increase <em>their own</em> power, calls for diversity, etc. play out as increasing one’s own power.</p>
-<p>In a piece, as scathing as any using the term “white feminism” can be expected to be, titled <a href="https://medium.com/this-is-hard/ffffff-diversity-1bd2b3421e8a">“#FFFFFF Diversity”</a>, the writer berates the tech community’s efforts as “diversity” being limited to “more women” rather than “more people of colour”.<br />
-– The writer here shares my point, insofar as ‘white women calling for “diversity”, yet this benefit is only seen by white women’. - Writer then goes on to demonstrate my point, in that her lament is that ‘calls for diversity’ don’t extent to <em>black women</em>. (I’m not quite sure of the culture that’d use the terms “women of colour” <em>and</em> “person of colour”, but never “men of colour” when discussing diversity issues). The medium piece doesn’t mention with even so much as a comma the logical corollary: diversity efforts should (if we’re playing the <a href="http://www.checkmyprivilege.com/">privilege math</a> game) also pay heed to trans-, gays, etc.<br />
-– i.e. for the <em>woman of colour</em> author, it’s a shame that diversity doesn’t promote <em>women of colour</em>.<br />
-(There’re a number of points related to the issue in the post people can get pretty heated over. <a href="http://uberfeminist.blogspot.sg/2015/10/stop-giving-work-visas-to-men.html">For some perspectives</a>, yes, gender/sex diversity really is that much more important than ethnic diversity, which tech ostensibly has. – That Asian’s are over-represented somewhat complicates the notion of diversity beyond anything-but-straight-white-and-male. etc. etc.). – Some fun shit-stirring in the comments to that post was from an Asian offended to be so stereotyped as “model minority”, as if the job was handed to him without having to work his ass off to get to that point..</p>
-<p>This perspective, that things are inherently about increasing one’s own power/status, also presents itself in the common and shrill point that the complaints about lack-of-diversity are always for positions of power. (Would tech still be under such focus if it weren’t perceived as some kind of gold rush?). There’re more complaints about lack of women in senior positions than lack of women in dangerous jobs.<br />
-– In the context of education, it’s more common to see complaints about male-dominated fields, never about female-dominated fields. - Yet, both of these would be just as ‘diverse’ as the other.</p>
-<p>The personal bone to pick is that calls for diversity rarely include ‘gross’ or unpopular opinions. ;-)</p>
-<p>– Amongst the identity politics, the ‘ally-ship’ thing makes this a bit quaint. (And, no, “alliance” wasn’t the word I was looking for, kthx). Because, ostensibly, the ‘ally’ is the straight/white/male lookin’ out to help the little guy. (It’s common to see Twitter hashtags have a lot of fun over this). So, ostensibly, the ally is like the turkey defending the bear’s idea about hugging. - I’m sure this isn’t how it plays out, though, so-much-as the in-group/out-group dynamics are work don’t align over straight/white/male but over different lines. (e.g. ‘ally-ship’ belongs to the ‘progressives’).<br />
-– Of course, this does play with this meta-game a bit, too; if the game is that you fight for your own team, then anyone ostensibly against their own team must be favouring justice/truth..</p>
-<p>Mapping the other way, the analogy works the other way too: those who benefit from some “power” are unlikely to see that they benefit; those who don’t are likely to over-state/emphasise the benefits. Where a system of rules can be used to gain power, it will be (ab)used in such a way.<br />
-– It’d perhaps be remiss to mention these things without mentioning <a href="https://en.wikipedia.org/wiki/Harrison_Bergeron">Harrison Bergeron</a>. But perhaps what’s frustrating about discussions on ‘privilege’/etc. is that the notion of “privilege means gains advantage, it doesn’t mean ‘is without disadvantage’” is at best acknowledged, but often left at the door. - So, e.g., this leads to situations where of course women want to be <a href="http://www.advicegoddess.com/archives/2010/12/13/equal_treatment.html">treated equally, just not treated like men</a>. What often gets lost in translation is that advantages don’t come without disadvantages. This doesn’t mean striving for equality is in vain. It does mean that it’s obnoxious, though, to complain about not having the advantages, without then complaining about not having the disadvantages.<br />
-– Rather, when someone expresses a grievance, it’s polite to listen (&amp; impolite to dismiss); and the notion of ‘punching up’/‘punching down’, based upon ‘privilege math’ (explicitly or implicitly) seems a great way to be able to bypass having to listen, or reason.<br />
-(As an example of how American-centric the discussion is, though, the fun-folk in Singapore play ‘privilege math’ where ‘not-white’ isn’t the bottom of the axis).</p>
-<p>My point here isn’t “hey, people calling for ‘diversity’ just want more power, so it’s not worth listening to them”; and I do believe there’re those who genuinely believe equality-of-outcome is a necessary goal. But it’s a bias and an attitude entwined within the discussion.</p>
-]]></summary>
-</entry>
-<entry>
-    <title>Scala Development for Vim-loving Developers</title>
-    <link href="http://www.rgoulter.com/blog//posts/programming/2015-10-06-scala-development-for-vim-loving-developers.html" />
-    <id>http://www.rgoulter.com/blog//posts/programming/2015-10-06-scala-development-for-vim-loving-developers.html</id>
-    <published>2015-10-06T00:00:00Z</published>
-    <updated>2015-10-06T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<div class="info">
-    Posted on October  6, 2015
-    
-        by Richard Goulter
-    <br/>
-    
-    Tags: <a href="/tags/programming.vim.html">programming.vim</a>, <a href="/tags/programming.eclipse.html">programming.eclipse</a>, <a href="/tags/programming.scala.html">programming.scala</a>
-    
-</div>
-
-<p>So, I’ve blogged a bit about <a href="../../tags/programming.vim.html">Vim</a>.<br />
-Again, no, it’s not about “vim vs emacs”, so much as about “which features your text editing has”; and the vi-like modal editing fantastic for manipulating text.</p>
-<p>Recently I’ve had the fortune of programming in Scala.<br />
-The joke is that some programmers are happy to work in Scala because it’s not Java, the rest are sad to work in Scala because it’s not Haskell.<br />
-Scala is by no means an excellent language. (Again, there are two kinds of languages; those people use, and those people complain about). But I like it well enough.</p>
-<p>For the most part, I’ve done my Scala editing in Scala IDE, which is a plugin built upon the much-maligned Eclipse.<br />
-– Overall, the biggest complaint to be had about Scala IDE, from my experience, is that ScalaTest can be a bit finicky, and will often refuse to “run all tests in package” or so.</p>
-<p>– If I’m harping on about the benefits of Vim, why make use of Eclipse?<br />
-Well, for one, I have the Vrapper plugin installed. This is a great stop-gap measure; it doesn’t have every binding (by default, at least), and occasionally messes up, but mostly does the job. (When I had to use XCode, XVim was also a nice plugin to have).<br />
-Using Eclipse was the <em>pragmatic</em> best-of-what’s-available.</p>
-<p>I’ve recently tried out making use of Vim proper for Scala editing:<br />
-I love autocomplete; to get autocompletion for Scala in Vim, the easiest way is using some omnicomplete front-end (like YouCompleteMe), and plugging Eclim as a ‘back-end’ to it. – Eclim can communicate with Eclipse, and provide the autocompletion. – The <em>downside</em> to this is Vim becomes <em>heavy-weight</em>. Like, really heavy. I’m fairly sure you have to disable automatic project-building, also, otherwise there’s a huge lag every time you save. <em>That</em> isn’t great. (As it was for me, without the automatic building, there’s still noticeable/significant lag when saving, if using Eclim).</p>
-<p>The benefit is you get to use all the customisations/plugins Vim proper has.<br />
-e.g. vim-surround is quite useful for editing Scala.</p>
-<p>My workstation setup in my lab has two monitors.<br />
-For the most part, unless you’re using a keyboard-based window-manager like XMonad, I’m inclined to believe that two monitors isn’t all that enhancing to productivity: If you can, with your keyboard, switch between workspaces; within a terminal, use tmux to switch between tabs/panes, then your keyboard becomes your second monitor. The benefit of added screen real-estate is countered by the cost of moving your mouse to the other window (unless you’re using a keyboard-based window manager, where you can easily/quickly switch focus without use of mouse. Alt-Tab doesn’t suffice).<br />
-– I’ve found a use for my second monitor:<br />
-SBT has a feature (which can surely be scripted for other tools/environments) that will run a command any time the source-files change. I’ve found it useful to set up two panes on my alternate monitor: one pane will run this loop with the “not slow”-tests, the other pane will run whatever program I’m working on. – Benefits/drawbacks of the latter are, of course, “your mileage may vary”.</p>
-<p>Also, make sure if you’re building a binary-search function, you don’t leave out the base case.</p>
-<p>– Anyway, the benefit of setting up this is it’s, again, a stop-gap measure for “vim not showing me syntax errors”.<br />
-Yes, vim <em>does</em> have that feature. Syntastic is nice enough; though (due to Vim’s age), doesn’t just-work as well as in Eclipse, and doesn’t do the red-squiggly-lines thing.<br />
-Quickfix is the more ‘legacy’ equivalent. And Quickfix is really nice (I’ve used it for an OCaml project). But the equivalent “sbt compile” takes a <em>long</em> time to run. SBT itself compensates for this by providing a REPL/shell, which is quicker, but doesn’t fit the vim/makeprg model. – <a href="https://notes.pinboard.in/u:rgoulter/47e14b69d902db1e0146">There seem to be some Vim/SBT integrations</a>, but I’ve not tried any of them. (The general theme is <em>they</em> will integrate with quickfix).<br />
-– If it’s not too distracting, it certainly is useful to have an at-a-glance view of “did I break anything?”, though, so it’s not strictly inferior in and of itself.</p>
-<p>There are other things I more/less miss from Eclipse.<br />
-e.g. Eclipse’s editing just has a more “solid” feel to it, like you’re editing building blocks. This is probably the whole press-enter-to-select-option.<br />
-No doubt Vim can be customised to match this, but some of the auto-insertions are nice. (And, yes, provide nice inspirations for what an editor should have).<br />
-Convenience features like automatically-import-a-class which wasn’t otherwise in scope is useful.<br />
-– Particularly, though, and an example of “how good is your tooling” is “show type under cursor”. (These strongly typed languages, with type inference, like Scala, Haskell and OCaml, more/less demand editors with this feature).</p>
-<p>– But another big difference between these is this:<br />
-When I’m using Eclipse, I put up with any inefficiency.<br />
-When I’m using Vim, I’m imagining what I could have to improve my tooling, what features would be nice to have to make things nicer.</p>
 ]]></summary>
 </entry>
 
