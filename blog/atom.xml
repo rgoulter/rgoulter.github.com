@@ -8,8 +8,44 @@
         <name>Richard Goulter</name>
         <email>richard.goulter+blog@gmail.com</email>
     </author>
-    <updated>2016-03-20T00:00:00Z</updated>
+    <updated>2016-03-23T00:00:00Z</updated>
     <entry>
+    <title>Consent and Etiquette</title>
+    <link href="http://www.rgoulter.com/blog//posts/argument/2016-03-23-consent-and-etiquette.html" />
+    <id>http://www.rgoulter.com/blog//posts/argument/2016-03-23-consent-and-etiquette.html</id>
+    <published>2016-03-23T00:00:00Z</published>
+    <updated>2016-03-23T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<div class="info">
+    Posted on March 23, 2016
+    
+        by Richard Goulter
+    <br/>
+    
+    Tags: <a href="/tags/society.html">society</a>
+    
+</div>
+
+<p>I wouldn’t want to be too abstract about all this.</p>
+<p>The short story <a href="http://www.abelard.org/e-f-russell.php">“And Then There Were None”</a> by E.F. Russell describes a society where consent is of the utmost importance. (More specifically, a free society, governed by two things: “Freedom - I Won’t”, and the notion of obligations). – Meredith Patterson makes some <a href="http://status451.com/2016/02/29/exit-voice-and-lighthouses/">excellent observations/remarks</a>. – I find the story interesting in the same way that the idea of ‘Basic Income’ is fascinating: it sounds so stupid, &amp; you can’t help but ask questions “how would that system deal with …?”.</p>
+<p>The countries I’ve lived in have been governed more by politeness as the rule.<br />
+It’s impolite to cause others to be uncomfortable, etc.; which leads to various grievances as people’s feelings don’t align with the outward appearances. (This makes it awfully difficult for the INTJs to make sense of the world).<br />
+– I found it strange that my friend would update contact details as they bumped into an acquaintance, while telling me afterwards that they’d rather avoid talking with people from that circle. – If everyone’s playing the game of politeness, it adds a layer of indirection.<br />
+– Similarly, I was rebuked by a Subway worker as I ordered with “This please”, “that please”: “Sir, no ‘please this, please that’; this is my job.”. – I thought that was pretty interesting.</p>
+<p>In any case; politeness <em>usually</em> defers to consent if everyone plays by the rules; you ask to sit at the table, which respects the consent of the person you might intrude upon. (Their politeness might then dictate they not refuse, which seems unfortunate).<br />
+– The kind of ‘politeness’ which says it’s rude to grieve others seems to work against consent, though. (If it’s rude to leave an undesirable conversation; you’re stuck in a conversation you’d rather not be a part of).<br />
+That’s not necessarily a bad thing, overall.</p>
+<p>This plays out a bit on social media, of course.<br />
+I guess everyone interprets things differently. (Alice Maz has <a href="http://status451.com/2016/01/06/splain-it-to-me/">an absolutely fantastic piece</a> discussing a common scenario where tensions form due to such meta-miscommunication).<br />
+I reckon with Facebook, the dynamic is such: it’s high-cost to “unfriend” someone (especially an in-person acquaintance). Muting is cheap in comparison (since the person you mute has no direct way to tell you’ve muted them), but feels ‘bad’; and, for me, I feel if you’re muting people just for their different (or even obnoxious!) viewpoint, what’s to stop you from being in an echo-chamber or self-affirming filter-bubble? – The snobbish would phrase it like this: With Facebook, you’re stuck seeing the inane shit your friends post. (A less snobbish interpretation is you’re seeing what’s analogous to small talk).</p>
+<p>So it should be especially clear that talking about politics is “bad”.<br />
+That sounds like a “duh” statement.<br />
+How does it take paragraphs to get to such a statement?<br />
+– And yet. It’s damn annoying to see even two or three people post an absurd viewpoint. (Two or three tends to look like “a lot”, somehow). – It’s impolite/rude to shit on someone’s rug; so the Facebook equivalent of sub-tweeting is a temptation.</p>
+<p>The thing that kinda sucks about this, is it means the conscientious will suppress their political opinions. (The wise will even know it’s better to not share them!). – And the folk who do share are either obnoxious, or living in a filter-bubble. (Which I guess is pretty much the same thing).<br />
+– Sometimes I wanna small-talk inane shit; but since I hardly see my fellow countrymen on a day-to-day basis.. it can suck a bit.</p>
+]]></summary>
+</entry>
+<entry>
     <title>Jane Austen was a Bastard</title>
     <link href="http://www.rgoulter.com/blog//posts/romance/2016-03-20-jane-austen-was-a-bastard.html" />
     <id>http://www.rgoulter.com/blog//posts/romance/2016-03-20-jane-austen-was-a-bastard.html</id>
@@ -627,47 +663,6 @@ unset hostname
 account-hook $folder &quot;set imap_user=$imap_user imap_pass=$imap_pass&quot;</code></pre>
 <p>Disclaimer: WFM, YMMV. This is just what I have, and clearly I’m not a well-versed Mutt user.<br />
 My Mutt configuration, in general, may be useful for other NUS students keep their NUS Office 365 account separate from their GMail account.</p>
-]]></summary>
-</entry>
-<entry>
-    <title>Patapon 3</title>
-    <link href="http://www.rgoulter.com/blog//posts/games/2015-10-26-patapon-3.html" />
-    <id>http://www.rgoulter.com/blog//posts/games/2015-10-26-patapon-3.html</id>
-    <published>2015-10-26T00:00:00Z</published>
-    <updated>2015-10-26T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<div class="info">
-    Posted on October 26, 2015
-    
-        by Richard Goulter
-    <br/>
-    
-    Tags: <a href="/tags/analysis.html">analysis</a>, <a href="/tags/game.patapon.html">game.patapon</a>
-    
-</div>
-
-<p>Sigh.<br />
-I recently bought a PS Vita. - A long time ago I has a PSP. I started the first Patapon game on that, but never got very far. And the Singapore PlayStation store isn’t cool enough to have the first two Patapon games. So here I am.</p>
-<p>Patapon 3 is quite different to the previous games, apparently.<br />
-Patapon, for those unaware, is a rather unique game. It’s largely a rhythm-game, where you control an army of units. ‘Commands’ are entered by pressing a sequence of buttons. (e.g. “onwards” is Pata-Pata-Pata-Pon, and “attack” is “Pon-Pon-Pata-Pon”; where Square=“Pata”, Circle=“Pon” - It’s much simpler than it looks). And it has RPG-ish elements to it, in that there’s equipment which you can upgrade, and your units can change which ‘class’ they are.<br />
-– Patapon 3 is quite different, in that you’re limited to four units.</p>
-<p>It does involve a lot of grinding. I’ve been happy to do that, and have been spending much of my time playing Patapon 3 to level up my units. – It’s satisfying to find a good combination of units to get through a quest - In order to ‘grind’ sanely, it’s nice to have one over-levelled unit, with the other three units under-levelled (so they gain lots of EXP for completing the quest).<br />
-– So the whole I-want-stronger-units-so-I-can-beat-levels-quicker, I-want-to-beat-levels-quicker-so-I-can-have-stronger-units cycle is fun.</p>
-<p>But it’s not without frustrations:</p>
-<p>Most obvious is that information isn’t <em>clear</em>; some reviews (e.g. on MetaCritic) complain “oh, the ‘recommended level’ (for a quest) is bullshit”. This is unfair, as the recommended level isn’t inaccurate. But the units and what equipment chosen are <em>very</em> important, and this isn’t obvious. – On one quest, my army was blasting through every obstacle, every enemy in one-two turns each, but then reaching one particular enemy, wasn’t even able to make a scratch. My army wasn’t equipped correctly to take on the enemy, and Patapon 3 can be <em>punishingly unbalanced</em> like that.</p>
-<p>It’s frustrating to a gamer to have luck-based elements impact the game.<br />
-And Patapon 3 features many sections like this:<br />
-– The four units are a Shield unit, an Archer unit, a Spear unit, and a Hero unit (which can be one of the other classes). When the Shield unit dies, then the player’s health is vulnerable to attack. So it’s important that the Shield unit doesn’t die, since the player loses very quickly if the Shield unit dies.<br />
-– There are various enemies in the game which can one-hit-kill the player’s units: aside from the major bosses, there are sharks which can chomp units in one go, and there are salamander enemies which will ‘explode’ when they’re killed. This in itself is not bad, but:<br />
-– Units can only be revived in one batch per quest. (Aside from the Hero unit, which will revive after a time if not insta-killed). - So, if the Shield unit is killed, then the player must use this one revive. But…<br />
-– The player’s units will be <em>uncontrollable</em> under two circumstances: if the unit is affected by some element (e.g. on fire, frozen), or <em>the player is reviving their units</em>.<br />
-For the latter, to ‘revive’ the units requires a special ‘revive’ command. (In the game’s terms, summoning a djinn). For the next while, the units will not be under player control. - They’ll generally attack; thus, vulnerable to aforementioned insta-kill enemies; thus, when facing such insta-kill enemies, this ‘revive’ can’t really be used.<br />
-For the former.. this can be largely probablistic. i.e. <em>luck-based</em>. - A unit standing beside a bush on fire won’t always go on fire; but they might <em>right before you attack</em>. Or, rather, they might go on fire right as such an insta-kill enemy is in the area, and get killed. Or they might be frozen in range of the insta-kill of an enemy. - Certain items can mitigate this <em>slightly</em>, but not completely. (As well, it can cost gold to upgrade the items; and you get gold by playing such quests, so…).</p>
-<p>– Minor issue related to that; rather than manage all the equipment given to the unit, there is an ‘optimise’ button. - The trouble is, this optimise algorithm has no qualms giving vulnerable-to-fire equipment, when the levels very clearly demand fire-resistant equipment. - It’s a minor thing, but tedious.</p>
-<p>Some egregiously frustrating (albeit mostly minor) game design issues aside, the game puts heavy emphasis on <em>Multiplayer</em> aspects.<br />
-“Hey there, this is a tough quest, but you can play with your friends”. - There are several ‘rare’/randomly-available gigantic-boss-battle quests which are strictly ‘multiplayer-only’.</p>
-<p>Upgrading equipment is somewhat an example of this. The blacksmith can’t upgrade weapons beyond the blacksmith’s limit; the blacksmith’s limit is determined by the highest-level weapon (which is limited by the Hero unit’s level). - But, the equipment can only be upgraded to the nearest-10 of the highest equipment. - So, like, if you have a level-23 bow, then you can’t upgrade a level-20 sword, but you can upgrade all other equipment up-to level-20. (Until the level-23 bow becomes level-31; in which case, repeat for level-30…).<br />
-– But-of-course, if you visit <em>another player’s</em> (i.e. online/multiplayer) blacksmith, then you’re limited by their level. Or some other such, such that there’s not the same limitation.<br />
-– This isn’t game-breaking, but it is tedious.</p>
 ]]></summary>
 </entry>
 
