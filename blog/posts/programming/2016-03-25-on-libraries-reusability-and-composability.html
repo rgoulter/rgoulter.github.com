@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Consent and Etiquette - Richard Goulter's Blog</title>
+        <title>On Libraries, Reusability and Composability - Richard Goulter's Blog</title>
 
         <!-- My (Old) CSS theme -->
         <link rel="stylesheet" type="text/css" href="../../css/default.css" />
@@ -128,45 +128,53 @@
             <hr style="margin: 0px; border-top: 5px solid black;" />
 
             <div id="content" class="container">
-                <h1>Consent and Etiquette</h1>
+                <h1>On Libraries, Reusability and Composability</h1>
                 <div class="info">
-    Posted on March 23, 2016
+    Posted on March 25, 2016
     
         by Richard Goulter
     <br />
     
-    Tags: <a href="../../tags/society.html">society</a>
+    Tags: <a href="../../tags/programming.nodejs.html">programming.nodejs</a>
     
 </div>
 
-<p>I wouldn’t want to be too abstract about all this.</p>
-<p>The short story <a href="http://www.abelard.org/e-f-russell.php">“And Then There Were None”</a> by E.F. Russell describes a society where consent is of the utmost importance. (More specifically, a free society, governed by two things: “Freedom - I Won’t”, and the notion of obligations). – Meredith Patterson makes some <a href="http://status451.com/2016/02/29/exit-voice-and-lighthouses/">excellent observations/remarks</a>. – I find the story interesting in the same way that the idea of ‘Basic Income’ is fascinating: it sounds so stupid, &amp; you can’t help but ask questions “how would that system deal with …?”.</p>
-<p>The countries I’ve lived in have been governed more by politeness as the rule.<br />
-It’s impolite to cause others to be uncomfortable, etc.; which leads to various grievances as people’s feelings don’t align with the outward appearances. (This makes it awfully difficult for the INTJs to make sense of the world).<br />
-– I found it strange that my friend would update contact details as they bumped into an acquaintance, while telling me afterwards that they’d rather avoid talking with people from that circle. – If everyone’s playing the game of politeness, it adds a layer of indirection.<br />
-– Similarly, I was rebuked by a Subway worker as I ordered with “This please”, “that please”: “Sir, no ‘please this, please that’; this is my job.”. – I thought that was pretty interesting.</p>
-<p>In any case; politeness <em>usually</em> defers to consent if everyone plays by the rules; you ask to sit at the table, which respects the consent of the person you might intrude upon. (Their politeness might then dictate they not refuse, which seems unfortunate).<br />
-– The kind of ‘politeness’ which says it’s rude to grieve others seems to work against consent, though. (If it’s rude to leave an undesirable conversation; you’re stuck in a conversation you’d rather not be a part of).<br />
-That’s not necessarily a bad thing, overall.</p>
-<p>This plays out a bit on social media, of course.<br />
-I guess everyone interprets things differently. (Alice Maz has <a href="http://status451.com/2016/01/06/splain-it-to-me/">an absolutely fantastic piece</a> discussing a common scenario where tensions form due to such meta-miscommunication).<br />
-I reckon with Facebook, the dynamic is such: it’s high-cost to “unfriend” someone (especially an in-person acquaintance). Muting is cheap in comparison (since the person you mute has no direct way to tell you’ve muted them), but feels ‘bad’; and, for me, I feel if you’re muting people just for their different (or even obnoxious!) viewpoint, what’s to stop you from being in an echo-chamber or self-affirming filter-bubble? – The snobbish would phrase it like this: With Facebook, you’re stuck seeing the inane shit your friends post. (A less snobbish interpretation is you’re seeing what’s analogous to small talk).</p>
-<p>So it should be especially clear that talking about politics is “bad”.<br />
-That sounds like a “duh” statement.<br />
-How does it take paragraphs to get to such a statement?<br />
-– And yet. It’s damn annoying to see even two or three people post an absurd viewpoint. (Two or three tends to look like “a lot”, somehow). – It’s impolite/rude to shit on someone’s rug; so the Facebook equivalent of sub-tweeting is a temptation.</p>
-<p>The thing that kinda sucks about this, is it means the conscientious will suppress their political opinions. (The wise will even know it’s better to not share them!). – And the folk who do share are either obnoxious, or living in a filter-bubble. (Which I guess is pretty much the same thing).<br />
-– Sometimes I wanna small-talk inane shit; but since I hardly see my fellow countrymen on a day-to-day basis.. it can suck a bit.</p>
+<p>There’s been a lot of brouhaha and schadenfreude regarding the recent failures in the NodeJS/NPM community.</p>
+<p>Essentially the problem / schadenfreude focuses on two aspects:</p>
+<ul>
+<li><p>A mutable package repository, allowing un-publishing of packages; this creates a number of practical &amp; security problems.</p></li>
+<li><p>NodeJS’s ethos of “micropackages”; the package at the focal point of the issue was an 11-line package, to left-pad a string.</p></li>
+</ul>
+<p>Here’s a prominent post, <a href="http://www.haneycodes.net/npm-left-pad-have-we-forgotten-how-to-program/">Haney Codes’ “Have We Forgotten How to Program?”</a>, which criticises NodeJS/NPM for having packages such as “isArray” or “isPositiveInteger”; along with many other examples any non-Node programmer will find absurd, horrifying, and hilarious.<br />
+My favourite bit:</p>
+<blockquote>
+<p>if you cannot write a left-pad, is-positive-integer, or isArray function in 5 minutes flat (including the time you spend Googling), then you don’t actually know how to code. Hell, any of these would make a great code screening interview question to determine whether or not a candidate can code.</p>
+</blockquote>
+<p>(Of course, some applicants [and self-described programmers!] fail Fizz-Buzz, so).</p>
+<p>The NodeJS/NPM crowd in response point to <a href="https://github.com/sindresorhus/ama/issues/10#issuecomment-117766328">this</a> comment from sindresorhus (who, apparently, curates the very popular awesome-nodejs list), defending one-line packages. – The defense, essentially, is that these are versioned ‘snippets’, which provide a reusable abstraction.</p>
+<h3 id="composition">Composition</h3>
+<p>A fun thing is. Haskell kids take this idea, and do kindof the opposite thing. Where NodeJS says “here’s a snippet we can use everywhere”, Haskell is more like “here’s a typeclass which is used everywhere”; e.g. semi-group or monoid or any of that.</p>
+<p>– From the Category-Theory side of things, computation/programming is much more <a href="https://www.youtube.com/watch?v=ZhuHCtR3xq8">about composition</a> (than simply naming/abstracting complexity, per se). e.g. FRP as a ‘fundamental’ solution to the problems of event-handling callbacks; FRP is basically composing streams.<br />
+(“A monad is a monoid in the category of” blah blah blah – Monads are a way of composing things).</p>
+<p>I understand Haskell in particular runs into ‘cabal-hell’, ’cause of poor handling of transitive dependencies (it can’t have two copies of the same-package/same-version/different-dependency-version); and so when code is re-used so often, conflicts arise fairly often. (Moreover, since it’s compiled, it’s the ABIs conflicting, rather than a more forgiving dynamic-language interpretation like in Ruby or Python).</p>
+<p>– So I wonder how “use a good type system” allows composition; &amp; how that compares/contrasts to Node’s.<br />
+Haskell’s typeclasses allow a benefit which you can’t really get easily in the more mainstream languages.</p>
+<h3 id="purpose-of-libraries">Purpose of Libraries</h3>
+<p>Here’s a post from Benjamin Sandofsky, <a href="https://sandofsky.com/blog/third-party-libraries.html">“When to Avoid Libraries”</a>, arguing for prudence as to when to use external libraries; that programs should build their own abstractions unless they shouldn’t. (Ah, the ol’ “it depends” really is the answer to all topics in programming).<br />
+In comparison to the above, Sandofsky agrees that functions shouldn’t be packages. Sandofsky argues (interestingly) that frameworks make a good starting point, but that programmers should iterate towards proper abstractions/models for fitting the problem domain they’re trying to solve. Sandofsky concedes that a library should be used if a complicated task needs to be done, and you’re not interested in the details.</p>
+<p>Aside from saying “iterate towards a domain”, the other cute insights are “DRY code/libraries are quite difficult to debug”, and “if an abstraction leaks, no one cares which package is at fault in your program”.</p>
+<h3 id="other-thoughts">Other Thoughts</h3>
+<p>I can kindof agree with the idea of “reusable snippets of code” being a good thing. Usually the collections of snippets get called “Utils”. It’s common enough on various Java answers to see answers of “Oh, just use Apache Commons for that string encoding task”.<br />
+OCaml’s core library is infamously lacking in features.<br />
+– But since packaging systems aren’t more granular than ‘packages’/projects, I don’t see that the above ethoses can reconcile.</p>
 
 
 <hr />
 
 <div>
     
-    <a href="../../posts/programming/2016-03-25-on-libraries-reusability-and-composability.html" style="float:left;">Newer post</a>
     
-    
-    <a href="../../posts/romance/2016-03-20-jane-austen-was-a-bastard.html" style="float:right; text-align: right;">Older post</a>
+    <a href="../../posts/argument/2016-03-23-consent-and-etiquette.html" style="float:right; text-align: right;">Older post</a>
     
 </div>
 <br style="clear: both;" />
@@ -177,9 +185,9 @@ How does it take paragraphs to get to such a statement?<br />
     <script type="text/javascript">
         /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
         var disqus_shortname = 'richardgoultersblog'; // required: replace example with your forum shortname
-        var disqus_identifier = '/posts/argument/2016-03-23-consent-and-etiquette.html';
-        var disqus_url = 'http://www.rgoulter.com/blog' + '/posts/argument/2016-03-23-consent-and-etiquette.html';
-        var disqus_title = 'Consent and Etiquette - March 23, 2016';
+        var disqus_identifier = '/posts/programming/2016-03-25-on-libraries-reusability-and-composability.html';
+        var disqus_url = 'http://www.rgoulter.com/blog' + '/posts/programming/2016-03-25-on-libraries-reusability-and-composability.html';
+        var disqus_title = 'On Libraries, Reusability and Composability - March 25, 2016';
 
         /* * * DON'T EDIT BELOW THIS LINE * * */
         (function() {

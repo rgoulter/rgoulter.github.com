@@ -8,8 +8,54 @@
         <name>Richard Goulter</name>
         <email>richard.goulter+blog@gmail.com</email>
     </author>
-    <updated>2016-03-23T00:00:00Z</updated>
+    <updated>2016-03-25T00:00:00Z</updated>
     <entry>
+    <title>On Libraries, Reusability and Composability</title>
+    <link href="http://www.rgoulter.com/blog//posts/programming/2016-03-25-on-libraries-reusability-and-composability.html" />
+    <id>http://www.rgoulter.com/blog//posts/programming/2016-03-25-on-libraries-reusability-and-composability.html</id>
+    <published>2016-03-25T00:00:00Z</published>
+    <updated>2016-03-25T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<div class="info">
+    Posted on March 25, 2016
+    
+        by Richard Goulter
+    <br/>
+    
+    Tags: <a href="/tags/programming.nodejs.html">programming.nodejs</a>
+    
+</div>
+
+<p>There’s been a lot of brouhaha and schadenfreude regarding the recent failures in the NodeJS/NPM community.</p>
+<p>Essentially the problem / schadenfreude focuses on two aspects:</p>
+<ul>
+<li><p>A mutable package repository, allowing un-publishing of packages; this creates a number of practical &amp; security problems.</p></li>
+<li><p>NodeJS’s ethos of “micropackages”; the package at the focal point of the issue was an 11-line package, to left-pad a string.</p></li>
+</ul>
+<p>Here’s a prominent post, <a href="http://www.haneycodes.net/npm-left-pad-have-we-forgotten-how-to-program/">Haney Codes’ “Have We Forgotten How to Program?”</a>, which criticises NodeJS/NPM for having packages such as “isArray” or “isPositiveInteger”; along with many other examples any non-Node programmer will find absurd, horrifying, and hilarious.<br />
+My favourite bit:</p>
+<blockquote>
+<p>if you cannot write a left-pad, is-positive-integer, or isArray function in 5 minutes flat (including the time you spend Googling), then you don’t actually know how to code. Hell, any of these would make a great code screening interview question to determine whether or not a candidate can code.</p>
+</blockquote>
+<p>(Of course, some applicants [and self-described programmers!] fail Fizz-Buzz, so).</p>
+<p>The NodeJS/NPM crowd in response point to <a href="https://github.com/sindresorhus/ama/issues/10#issuecomment-117766328">this</a> comment from sindresorhus (who, apparently, curates the very popular awesome-nodejs list), defending one-line packages. – The defense, essentially, is that these are versioned ‘snippets’, which provide a reusable abstraction.</p>
+<h3 id="composition">Composition</h3>
+<p>A fun thing is. Haskell kids take this idea, and do kindof the opposite thing. Where NodeJS says “here’s a snippet we can use everywhere”, Haskell is more like “here’s a typeclass which is used everywhere”; e.g. semi-group or monoid or any of that.</p>
+<p>– From the Category-Theory side of things, computation/programming is much more <a href="https://www.youtube.com/watch?v=ZhuHCtR3xq8">about composition</a> (than simply naming/abstracting complexity, per se). e.g. FRP as a ‘fundamental’ solution to the problems of event-handling callbacks; FRP is basically composing streams.<br />
+(“A monad is a monoid in the category of” blah blah blah – Monads are a way of composing things).</p>
+<p>I understand Haskell in particular runs into ‘cabal-hell’, ’cause of poor handling of transitive dependencies (it can’t have two copies of the same-package/same-version/different-dependency-version); and so when code is re-used so often, conflicts arise fairly often. (Moreover, since it’s compiled, it’s the ABIs conflicting, rather than a more forgiving dynamic-language interpretation like in Ruby or Python).</p>
+<p>– So I wonder how “use a good type system” allows composition; &amp; how that compares/contrasts to Node’s.<br />
+Haskell’s typeclasses allow a benefit which you can’t really get easily in the more mainstream languages.</p>
+<h3 id="purpose-of-libraries">Purpose of Libraries</h3>
+<p>Here’s a post from Benjamin Sandofsky, <a href="https://sandofsky.com/blog/third-party-libraries.html">“When to Avoid Libraries”</a>, arguing for prudence as to when to use external libraries; that programs should build their own abstractions unless they shouldn’t. (Ah, the ol’ “it depends” really is the answer to all topics in programming).<br />
+In comparison to the above, Sandofsky agrees that functions shouldn’t be packages. Sandofsky argues (interestingly) that frameworks make a good starting point, but that programmers should iterate towards proper abstractions/models for fitting the problem domain they’re trying to solve. Sandofsky concedes that a library should be used if a complicated task needs to be done, and you’re not interested in the details.</p>
+<p>Aside from saying “iterate towards a domain”, the other cute insights are “DRY code/libraries are quite difficult to debug”, and “if an abstraction leaks, no one cares which package is at fault in your program”.</p>
+<h3 id="other-thoughts">Other Thoughts</h3>
+<p>I can kindof agree with the idea of “reusable snippets of code” being a good thing. Usually the collections of snippets get called “Utils”. It’s common enough on various Java answers to see answers of “Oh, just use Apache Commons for that string encoding task”.<br />
+OCaml’s core library is infamously lacking in features.<br />
+– But since packaging systems aren’t more granular than ‘packages’/projects, I don’t see that the above ethoses can reconcile.</p>
+]]></summary>
+</entry>
+<entry>
     <title>Consent and Etiquette</title>
     <link href="http://www.rgoulter.com/blog//posts/argument/2016-03-23-consent-and-etiquette.html" />
     <id>http://www.rgoulter.com/blog//posts/argument/2016-03-23-consent-and-etiquette.html</id>
@@ -611,58 +657,6 @@ This could provide rationale for the objectives. Rather than “Destroy this AWA
 <p>Maybe this is just because I’ve only seen the first couple of days &amp; I suck at gameplay, but.. the gameplay doesn’t feel like belligerent-on-belligerent battles. – Sometimes the enemy air-carrier is spawned a fair distance away from your carrier, sometimes it’s right next to it. – Intuition tells me that, my carrier is important, so the enemy’s carrier must be, too. I’d’ve expected something more intense, (e.g. <a href="https://www.youtube.com/watch?v=Y42c7kJKkwc">Carrier Command Carrier-on-Carrier battle</a>, or perhaps like the station-vs-station of the 1998 Urban Assault..); as it is, the carrier is worth the same amount of points as 5-turrets, and isn’t all that difficult to destroy (with the right equipment).<br />
 – Ok, I take it back. It’s probably because I suck. <a href="http://www.lagzero.net/wp-content/uploads/2015/09/2015-09-12_00002.jpg">This thing looks bad-ass</a>. (EDIT: This is a “corvette”. Which is a bit confusing, because the sea-ship is called a frigate, and in terms of navy ships, a corvette is smaller than a frigate. Does this hint that we’ll see a larger enemy ship? – The corvette apparently, has <em>many</em> anti-air emplacements, as well as launching aircraft).<br />
 Still. The arcade nature of the game provides a somewhat asymmetric, your-lone-fighter-vs-their-whole-fleet.</p>
-]]></summary>
-</entry>
-<entry>
-    <title>Setting up Mutt with NUS Student Email</title>
-    <link href="http://www.rgoulter.com/blog//posts/programming/2015-10-26-setting-up-mutt-with-nus-student-email.html" />
-    <id>http://www.rgoulter.com/blog//posts/programming/2015-10-26-setting-up-mutt-with-nus-student-email.html</id>
-    <published>2015-10-26T00:00:00Z</published>
-    <updated>2015-10-26T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<div class="info">
-    Posted on October 26, 2015
-    
-        by Richard Goulter
-    <br/>
-    
-    Tags: <a href="/tags/programming.mutt.html">programming.mutt</a>, <a href="/tags/email.html">email</a>, <a href="/tags/office365.html">office365</a>
-    
-</div>
-
-<p>This is for setting up NUS student email (hosted with Office 365) for the Mutt Mail User Agent; particularly, using IMAP, and alongside other email accounts.</p>
-<p>Why you’d want to use Mutt, I’m not entirely sure. Probably Thunderbird will serve your needs as well as need be.<br />
-But if you’re wanting to learn something productive while procrastinating, then Mutt is a sensible choice as any.</p>
-<p>I find the Arch Wiki’s <a href="https://wiki.archlinux.org/index.php/Mutt">Mutt page</a> indispensable when setting up Mutt. - If you’ve googled your way to this page without a prior guide, I recommend this.</p>
-<p>As for setting up an account with Office 365, a <a href="http://www.blog.alexanderdbrown.com/office-365-in-the-command-line/">blogpost from Alexander Brown</a> (which comes up from a search for “mutt office365”) has a useful codedump.</p>
-<p>I’m not sure what the <em>minimal</em> set of options would be, but the example I have <a href="https://github.com/rgoulter/dotfiles/blob/4e1fb3c04d9f4c372125468a0c3bb0df165d004b/mutt/nusstu">in my dotfiles</a> (as per Arch Wiki’s “Multiple Accounts” advice):</p>
-<pre class="mutt"><code># Connection
-set ssl_starttls=yes
-set ssl_force_tls=yes
-set ssl_use_sslv3=yes
-
-# Incoming
-set imap_user=&quot;a0088816@u.nus.edu&quot;
-set imap_pass=$my_nusstu_pass
-set folder=&quot;imaps://outlook.office365.com:993&quot;
-set mbox=&quot;+INBOX&quot;
-set postponed=&quot;+Drafts&quot;
-set spoolfile=&quot;+INBOX&quot;
-set record=&quot;+Sent Items&quot;
-set imap_check_subscribed
-unset imap_passive
-
-# Outgoing
-set realname=&quot;Richard Goulter&quot;
-set from=&quot;a0088816@u.nus.edu&quot;
-set smtp_pass=$my_nusstu_pass
-set smtp_authenticators=&quot;login&quot;
-set smtp_url=&quot;smtp://$imap_user@smtp.office365.com:587&quot;
-unset hostname
-
-## Hook -- IMPORTANT!
-account-hook $folder &quot;set imap_user=$imap_user imap_pass=$imap_pass&quot;</code></pre>
-<p>Disclaimer: WFM, YMMV. This is just what I have, and clearly I’m not a well-versed Mutt user.<br />
-My Mutt configuration, in general, may be useful for other NUS students keep their NUS Office 365 account separate from their GMail account.</p>
 ]]></summary>
 </entry>
 
