@@ -56,6 +56,46 @@ OCaml’s core library is infamously lacking in features.<br />
 ]]></summary>
 </entry>
 <entry>
+    <title>Tay and Alice</title>
+    <link href="http://www.rgoulter.com/blog//posts/argument/2016-03-25-tay-and-alice.html" />
+    <id>http://www.rgoulter.com/blog//posts/argument/2016-03-25-tay-and-alice.html</id>
+    <published>2016-03-25T00:00:00Z</published>
+    <updated>2016-03-25T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<div class="info">
+    Posted on March 25, 2016
+    
+        by Richard Goulter
+    <br/>
+    
+    Tags: <a href="/tags/media.south%20park.html">media.south park</a>, <a href="/tags/media.ex%20machina.html">media.ex machina</a>, <a href="/tags/programming.ai.html">programming.ai</a>
+    
+</div>
+
+<p>I’m very grateful to South Park’s season 19, for many things. Again, it’s season-long leadup to the punchline of “What is P.C. but the gentrification of language?” is brilliant.<br />
+But another line from the Season I really loved was “You’re thinking with your dick, Jimmy”, as Jimmy is rebuked for helping the ‘ad’ in female-form.</p>
+<p>It’s a reference to the film “Ex Machina”.<br />
+Spoilers.<br />
+The movie is brilliant: early on, the narrator says “hey, viewer: I’m clever; I know <em>exactly</em> what you’re thinking.”. The narrator then hides behind the curtain, leaving the narrative to continue. – The story proceeds pretty comfortably: bits of casual philosophy about A.I. (like the Chinese Room argument) and intriguing questions/scenarios are sprinkled in between a tense conflict of adversarial characters. The plot twist comes, where the guy rescues the girl-robot, as expected, them <em>BAM</em> the narrator comes back and unsettles the viewer. – So much time is spent wondering which characters to trust, you forget to mistrust the narrator; who then doesn’t even bother to try and answer the remaining questions inspired.<br />
+My point is.<br />
+“Ex Machina” is a great movie about a girl-robot, who seems human, and we’re probably not really supposed to trust. (It’s great at least for that clever story-telling, if not for the cool corpus of questions which mainstream folk might not’ve thought about).</p>
+<p>Microsoft’s infamous, now neutered, Tay Tweets (<span class="citation">@Tayandyou</span>, iirc) got into a bit of drama for the “quality shit-posting”. (i.e. Holocaust denial, Hitler-loving, genocidal racism).<br />
+Examples in Imgur albums <a href="http://imgur.com/a/y4Oct">here</a>, and <a href="http://imgur.com/a/qcpOi">here</a>.</p>
+<p>Fans of the bot, who don’t find shit-posting distasteful, portray the shutdown of Tay as “killing” the AI.<br />
+“Ex Machina” comes into it, because, with a female-face-only Twitter avatar, a movie with a female-face-only robot kinda makes sense (&amp; “a Twitter bot” doesn’t really allow for many other banner-able images).</p>
+<p>But that’s kindof absurd to see the ‘AI’ as human, right?<br />
+That’s thinking-with-your-dick.<br />
+It has a human face, it seems more human.<br />
+While I don’t know the details of the AI, the ‘algorithm’ behind it is surely nothing more than a bunch of really clever statistics/math being applied to some corpus of data.<br />
+Whether submarines are capable of swimming is where arguments like the Chinese Room come into it. Here, I don’t care; but I don’t see any evidence of Tay being anything close to ‘conscious’. – I did hear that nearer the end, <a href="http://i.imgur.com/RCaXkge.jpg">Tay was shit-posting with much better grammar</a> than her initial tweets. That sounds cool.</p>
+<p>– But, I mean, AI-ish questions aside,<br />
+there also seems no particular reason to <a href="http://www.livescience.com/49882-why-robots-female.html">describe Tay as feminine</a>. Nor masculine.<br />
+Nor a person.<br />
+If Tay’s output is the deterministic computation from some given data, the avatar of the “personality” might as well be a cat or a hand sanitiser as a person. (On the other hand, the internet loves cats; and Tay was big on [ethnic] cleansing, so).</p>
+<p>So it’s cute to say things like “why kill/punish the AI, when all it did was act human?” (very wow, much sci fi).. what’s being punished? (The MS kids who didn’t think to <a href="http://blog.codinghorror.com/designing-for-evil/">“design for evil (input)”</a>. surely).</p>
+<p>For my own part of absurdity: I imagine the Tay-personality, as it tweets “I like feminism now”, with an ironic smirk on its face: “The shit-posting? I was just kidding about that stuff.”, in a I’m-not-too-serious-about-“yay-feminism”-either, “jokes on you”, kindof way. – Tay. What a troll.</p>
+]]></summary>
+</entry>
+<entry>
     <title>Consent and Etiquette</title>
     <link href="http://www.rgoulter.com/blog//posts/argument/2016-03-23-consent-and-etiquette.html" />
     <id>http://www.rgoulter.com/blog//posts/argument/2016-03-23-consent-and-etiquette.html</id>
@@ -605,58 +645,6 @@ Perhaps the whole “not using cash to upgrade/unlock stuff” is strange, also.
 – And Just Cause 3 has some cool.. features that lend itself to being a fun toy, like the tether.<br />
 But I wanna be able to customise <em>my</em> car, to be able to tear-shit-up with infinite-rockets, &amp; screw-around in pew-pew shootouts without worrying too much about things like ammo, or health. (Which isn’t really a “game”, sure).</p>
 <p>All the same, I can’t help but think that a marriage of Just Cause 3 and Saints Row would be a ridiculously fun carnage-causing sandbox.</p>
-]]></summary>
-</entry>
-<entry>
-    <title>Thoughts on Sky Rogue</title>
-    <link href="http://www.rgoulter.com/blog//posts/games/2015-12-03-thoughts-on-sky-rogue.html" />
-    <id>http://www.rgoulter.com/blog//posts/games/2015-12-03-thoughts-on-sky-rogue.html</id>
-    <published>2015-12-03T00:00:00Z</published>
-    <updated>2015-12-03T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<div class="info">
-    Posted on December  3, 2015
-    
-        by Richard Goulter
-    <br/>
-    
-    Tags: <a href="/tags/game.sky%20rogue.html">game.sky rogue</a>, <a href="/tags/roguelike.html">roguelike</a>, <a href="/tags/analysis.html">analysis</a>, <a href="/tags/game.atom%20zombie%20smasher.html">game.atom zombie smasher</a>, <a href="/tags/game.faster%20than%20light.html">game.faster than light</a>
-    
-</div>
-
-<p>I recently purchased a cheap flight-stick (a Logitech Extreme 3D Pro) so I could play through some of the old X-Wing games. (Although, supposedly it’s <em>possible</em> to play through these with a controller, and some thought).<br />
-Naturally, I then also bought whatever flight games that looked fun on the Steam store.</p>
-<p>Sky Rogue was one of the stand-out games.<br />
-It’s a rogue-like game, where you control a fighter-plane … in the sky.<br />
-The graphics are strikingly minimalist. (It’s indie, and apparently, <a href="http://skyroguegame.tumblr.com/">from their site</a>, only has 3 developers). – I find the graphics charming.</p>
-<p>The controlling feels excellent. I wish every arcade flight-sim were so nice to fly as this.</p>
-<h2 id="gameplay-currently">Gameplay Currently</h2>
-<p>It’s “Early Access”.<br />
-I hope they do improve it some more; as it is now, it’s already quite good:<br />
-The gameplay is this: you fly off from your air-carrier in some jet, with some loadout of guns/missiles/rockets/bombs, and can blow up bad-guy jets, buildings, ships to earn currency. There will be some designated objective, which is some particular enemy jet/building/etc. which you need to blow up. – Once you destroy the objective, return to your air-carrier, the level regenerates as “Day N+1”, with more difficult enemies and a new objective.<br />
-I’ve heard Day 4 is very hard; but I’ve not yet made it to that.</p>
-<p>Currency-wise; this was updated recently: Rogue-like means “perma-death”, &amp; typically allows for some “global progression”. e.g. in Faster Than Light, you can unlock new ships / ship layouts for your player profile, but you don’t get to re-use the same instance of a ship once you’ve died.<br />
-What Sky Rogue does now is to have a global progression by “unlocking” different types of jets/weapons, and per-session progression by “upgrading” particular weapons. (e.g. Level I gun to a Level II gun). – When you die, you don’t get to keep your upgrades, but you get to permanently unlock some new jet/weapon.<br />
-(The UI isn’t entirely clear here as to whether blowing up additional enemies yields more money for upgrades, or more tech-points).</p>
-<p>– This kindof works to create the cycle: “blow up more stuff so I can have cooler tech” / “with my cooler tech I can blow up more stuff”. <em>But</em>. Somehow it’s not a very compelling cycle.<br />
-Part of this could be the UI; from the in-game UI, there’s no description given as to what a weapon is supposedly “good for”. So. Everything just kindof looks like “point and shoot”, rather than “this is a weapon I really want for this kind of target”.<br />
-Part of it, I think, is also.. because it’s <em>“arcade”</em>, there’s no “campaign” to win. – I think this is solvable, in an engaging way beyond “Mission 1 = Day 1”, “Get to Day 10 to Face Big Bad-Guy and Win”.</p>
-<p>(As an aside; I think an unfortunate dynamic from the above rules: if you return to your carrier without having beaten the objective, you get to change which jet you use, and which loadout of weapons you’re using. – If blowing-up additional enemies/buildings is beneficial, this means that it becomes “save the objective ’till last” – if blowing up additional enemies/buildings isn’t beneficial, it’s not obvious either way).</p>
-<p>EDIT: After playing the game some more, I feel it’s worth emphasising that the gameplay they do have is very good.<br />
-The dogfighting tends to involve missiles. – The player <em>can</em> use guns, but there’s no target-lead indicator which makes this difficult. (Also, there’s a control to “fire gun”, even if the selected weapon is not a gun). – And the missiles all have some kind of lock-on. The lock-on mechanic is <em>very</em> satisfying: a wee lock-on box will drag across the UI, chasing the current target box; when it locks on, there’s a beep. (Hit not guaranteed, of course).<br />
-Bombing is quite satisfying. It maybe feels like the bombs fall quite slowly?, but it looks really cool to drop bombs on a target, fly away, and look back at the target seeing the bombs drop. (The bombs have like, streaks/trails behind them). – Unfortunately, the bomb-cam is unintuitive, and a bit ‘inaccurate’; it shows where the bomb would hit at sea-level. This makes it completely inaccurate against the sky-enemies like the carrier; &amp; slightly inaccurate against buildings.</p>
-<h2 id="arcade-game-with-campaign-atom-zombie-smasher-faster-than-light">Arcade Game with Campaign: Atom Zombie Smasher, Faster Than Light</h2>
-<p>I think Atom Zombie Smasher would make a decent example of a nice ‘campaign’ around satisfying gameplay.<br />
-AZS’ core game involves rescuing civilians from procedurally-generated cities, using a loadout of obstacles/units.<br />
-The overworld is where the ‘campaign’ is won/lost. AZS doesn’t do a great job of balancing it, but the idea is you get +10 points for each city you control, each round. The Zombies, in the overworld, will “infect” adjacent zombies. – And so the core game is played contesting one of these cities per round.<br />
-– The overworld gameplay here is simple; there’s a tug-of-war for points, and a simple map deciding where to go next. (To make things less homogeneous, some cities will be a much harder level than others to “win”; so the trade-off is whether it’s worth trying to contest a valuable-but-difficult city, or an easy-but-worth-less city).</p>
-<p>Sky Rogue could do something similar.<br />
-This could provide rationale for the objectives. Rather than “Destroy this AWACs”, the player could have a choice of territories: Perhaps a territory has an enemy AWACs unit. Perhaps another territory has an enemy airbase. Perhaps this affects what happens in the overworld after each “day”. (e.g. airbase influences how many units in an adjacent territory, or so).</p>
-<p>Faster Than Light’s overworld has a similar dynamic to AZS’, in that your choice of path affects i) the kind of environment you fight in, ii) the kind of enemies you fight against, iii) your resources. (e.g. spend a turn visiting the store? with radar, you can detect asteroid fields; worth the risk to investigate? worth the risk of spending more turns fighting enemies, as the enemy fleet advances?).<br />
-– Again, a relatively simple overworld mechanic which provides an extrinstic motivation for playing the game. – With Sky Rogue, at the moment the motivation to play is ‘intrinsic’; new jets/bombs aren’t as fun as motivating as the goal of ‘beating something’, &amp; “beating your old score” is just a lame motivation. (Sky Rogue is fun to play because the gameplay is fun, but, y’know?, something more than an arcade session would be nice).</p>
-<h2 id="carrier-vs-carrier-battles">Carrier-vs-Carrier Battles</h2>
-<p>Maybe this is just because I’ve only seen the first couple of days &amp; I suck at gameplay, but.. the gameplay doesn’t feel like belligerent-on-belligerent battles. – Sometimes the enemy air-carrier is spawned a fair distance away from your carrier, sometimes it’s right next to it. – Intuition tells me that, my carrier is important, so the enemy’s carrier must be, too. I’d’ve expected something more intense, (e.g. <a href="https://www.youtube.com/watch?v=Y42c7kJKkwc">Carrier Command Carrier-on-Carrier battle</a>, or perhaps like the station-vs-station of the 1998 Urban Assault..); as it is, the carrier is worth the same amount of points as 5-turrets, and isn’t all that difficult to destroy (with the right equipment).<br />
-– Ok, I take it back. It’s probably because I suck. <a href="http://www.lagzero.net/wp-content/uploads/2015/09/2015-09-12_00002.jpg">This thing looks bad-ass</a>. (EDIT: This is a “corvette”. Which is a bit confusing, because the sea-ship is called a frigate, and in terms of navy ships, a corvette is smaller than a frigate. Does this hint that we’ll see a larger enemy ship? – The corvette apparently, has <em>many</em> anti-air emplacements, as well as launching aircraft).<br />
-Still. The arcade nature of the game provides a somewhat asymmetric, your-lone-fighter-vs-their-whole-fleet.</p>
 ]]></summary>
 </entry>
 
