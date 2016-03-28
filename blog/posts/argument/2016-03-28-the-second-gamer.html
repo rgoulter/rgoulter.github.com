@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>On Libraries, Reusability and Composability - Richard Goulter's Blog</title>
+        <title>The Second Gamer - Richard Goulter's Blog</title>
 
         <!-- My (Old) CSS theme -->
         <link rel="stylesheet" type="text/css" href="../../css/default.css" />
@@ -128,55 +128,43 @@
             <hr style="margin: 0px; border-top: 5px solid black;" />
 
             <div id="content" class="container">
-                <h1>On Libraries, Reusability and Composability</h1>
+                <h1>The Second Gamer</h1>
                 <div class="info">
-    Posted on March 25, 2016
+    Posted on March 28, 2016
     
         by Richard Goulter
     <br />
     
-    Tags: <a href="../../tags/programming.nodejs.html">programming.nodejs</a>
+    Tags: <a href="../../tags/author.liana%20kerzner.html">author.liana kerzner</a>, <a href="../../tags/feminism.html">feminism</a>
     
 </div>
 
-<p>There’s been a lot of brouhaha and schadenfreude regarding the recent failures in the NodeJS/NPM community.</p>
-<p>Essentially the problem / schadenfreude focuses on two aspects:</p>
-<ul>
-<li><p>A mutable package repository, allowing un-publishing of packages; this creates a number of practical &amp; security problems.</p></li>
-<li><p>NodeJS’s ethos of “micropackages”; the package at the focal point of the issue was an 11-line package, to left-pad a string.</p></li>
-</ul>
-<p>Here’s a prominent post, <a href="http://www.haneycodes.net/npm-left-pad-have-we-forgotten-how-to-program/">Haney Codes’ “Have We Forgotten How to Program?”</a>, which criticises NodeJS/NPM for having packages such as “isArray” or “isPositiveInteger”; along with many other examples any non-Node programmer will find absurd, horrifying, and hilarious.<br />
-My favourite bit:</p>
-<blockquote>
-<p>if you cannot write a left-pad, is-positive-integer, or isArray function in 5 minutes flat (including the time you spend Googling), then you don’t actually know how to code. Hell, any of these would make a great code screening interview question to determine whether or not a candidate can code.</p>
-</blockquote>
-<p>(Of course, some applicants [and self-described programmers!] fail Fizz-Buzz, so).</p>
-<p>The NodeJS/NPM crowd in response point to <a href="https://github.com/sindresorhus/ama/issues/10#issuecomment-117766328">this</a> comment from sindresorhus (who, apparently, curates the very popular awesome-nodejs list), defending one-line packages. – The defense, essentially, is that these are versioned ‘snippets’, which provide a reusable abstraction.</p>
-<h3 id="composition">Composition</h3>
-<p>A fun thing is. Haskell kids take this idea, and do kindof the opposite thing. Where NodeJS says “here’s a snippet we can use everywhere”, Haskell is more like “here’s a typeclass which is used everywhere”; e.g. semi-group or monoid or any of that.</p>
-<p>– From the Category-Theory side of things, computation/programming is much more <a href="https://www.youtube.com/watch?v=ZhuHCtR3xq8">about composition</a> (than simply naming/abstracting complexity, per se). e.g. FRP as a ‘fundamental’ solution to the problems of event-handling callbacks; FRP is basically composing streams.<br />
-(“A monad is a monoid in the category of” blah blah blah – Monads are a way of composing things).</p>
-<p>I understand Haskell in particular runs into ‘cabal-hell’, ’cause of poor handling of transitive dependencies (it can’t have two copies of the same-package/same-version/different-dependency-version); and so when code is re-used so often, conflicts arise fairly often. (Moreover, since it’s compiled, it’s the ABIs conflicting, rather than a more forgiving dynamic-language interpretation like in Ruby or Python).</p>
-<p>– So I wonder how “use a good type system” allows composition; &amp; how that compares/contrasts to Node’s.<br />
-Haskell’s typeclasses allow a benefit which you can’t really get easily in the more mainstream languages.</p>
-<h3 id="purpose-of-libraries">Purpose of Libraries</h3>
-<p>Here’s a post from Benjamin Sandofsky, <a href="https://sandofsky.com/blog/third-party-libraries.html">“When to Avoid Libraries”</a>, arguing for prudence as to when to use external libraries; that programs should build their own abstractions unless they shouldn’t. (Ah, the ol’ “it depends” really is the answer to all topics in programming).<br />
-In comparison to the above, Sandofsky agrees that functions shouldn’t be packages. Sandofsky argues (interestingly) that frameworks make a good starting point, but that programmers should iterate towards proper abstractions/models for fitting the problem domain they’re trying to solve. Sandofsky concedes that a library should be used if a complicated task needs to be done, and you’re not interested in the details.</p>
-<p>Aside from saying “iterate towards a domain”, the other cute insights are “DRY code/libraries are quite difficult to debug”, and “if an abstraction leaks, no one cares which package is at fault in your program”.</p>
-<h3 id="other-thoughts">Other Thoughts</h3>
-<p>I can kindof agree with the idea of “reusable snippets of code” being a good thing. Usually the collections of snippets get called “Utils”. It’s common enough on various Java answers to see answers of “Oh, just use Apache Commons for that string encoding task”.<br />
-OCaml’s core library is infamously lacking in features.<br />
-– But since packaging systems aren’t more granular than ‘packages’/projects, I don’t see that the above ethoses can reconcile.</p>
+<p>Liana K made <a href="https://www.youtube.com/watch?v=VMzkPIhr0Bw">a great video ’splaining Simone de Beauvoir</a> to gamers.</p>
+<p>I think if a typical gamer has any opinion of de Beauvoir, it’s not going to be a positive one; <a href="http://www.aei.org/publication/not-lost-in-translation/">CHSommers wasn’t a fan</a>.<br />
+So, if nothing else, making a video about some weird parts of feminism for gamers is a very against the grain thing to do. I think it’s brilliant that Liana K takes the examples/opinions and demonstrates it in contexts and examples gamers would understand. – It’s nice to be able to point to a reasonable, ‘legitimate’ video arguing some rather radical points.<br />
+Even after watching the video, I still find the presented ideas to be shrill. But it’s nice to see that there’s a large part of it where you can see where such people are coming from, that there are parts and premises you can agree on.</p>
+<p>Liana K summarises the video with “judge individuals as individuals”.<br />
+This is a pretty compelling soundbyte. I suspect the only tension with it is it’s used against the idea that “it’s okay to judge/assume things about people based on characteristics they’re likely to have”. (e.g. “it’s okay to assume girls like pink, because many girls like pink”). It’s a rather involved tension, seeing as it relates to identity.<br />
+That there’s a “kernel of truth to stereotypes” makes me think the latter deserves some weight, too.</p>
+<p>The biggest beef I have with the video has the same kindof tension.<br />
+‘de Beauvoir lamented the constraints gender put on the way people behaved.’ (Sure). ’Women are the other; the “privileged sex”; things are male-by-default and so girls aren’t allowed“. What?<br />
+– <em>It’s a trade-off</em>. Admittedly, it’s not a trade-off where society let’s people choose which they want; but that’s not the point under-fire here, per se.<br />
+Sure, it may be that women are treated as visual ornaments; but <a href="https://www.youtube.com/watch?v=vp8tToFv-bA">men are treated as disposable appliances</a>. (That fantastic video from another Canadian woman. Must be something about that country, huh?).</p>
+<p>It’s frustrating when women/feminists speak in way about male-dominated scenes like gaming or tech in a way that says “oh, women come second”:<br />
+<em>Look at what the attitude is towards those who are first</em>: men in games/tech are seen as “geeks”, losers, unsociable and undesirable. In Liana’s video, she uses the image from South Park of a fat male gamer; I don’t begrudge her humour for that, but I would have far more respect if the point were expressed as “gamers who are women are losers, too”. – It’s easy for a supposed outsider to say “you’re not giving me the benefits”, it’s even easier for them to not want to accept on the costs.</p>
+<p>The way the point is expressed about “girls toys” is similar.<br />
+It’s difficult to see “girls are allowed to play with any toy; boys aren’t allowed to play with toys for girls” as negative for girls: the ones who lose out are the boys who want to play with feminine toys. (Toy companies win if they make toys which as many people can play with as possible, btw. Money is a stronger incentive than ideology, here). – Indeed, if you were to imagine a society which did suppress women, favour men, you’d imagine that there would be toys which girls weren’t allowed to play with, which were just for boys.<br />
+– So, while there’s some agreement about “girls doing boy-things are less stigmatised than boys doing girl-things”, feminists tend to argue “that’s because people hate girls things” and not “that’s because society protects girls more than boys”.</p>
+<p>I don’t particularly mean to get into a game of loser-olympics. (“Worse for me than it is for you.”). My point is that there seems to be confusion in the viewpoint that being “the privileged sex” is unilaterally bad; and no acknowledgement that the un-privileged sex doesn’t get the same benefits. – From that, one can still take some of de Beauvoir’s points; one can still think “one isn’t born a woman”. – A conversation or synthesis between Karen Straughan’s extreme viewpoints, and Liana K’s extreme viewpoints, would be a fascinating thing to see.<br />
+(Hilariously, though: that the idea men face any negative costs/stigma isn’t as mentioned as the negative costs women face: this itself is an embodiment of the “women the privileged sex” - as Straughan asks in the video, “what are feminism doing to dismantle that?”).</p>
 
 
 <hr />
 
 <div>
     
-    <a href="../../posts/argument/2016-03-28-the-second-gamer.html" style="float:left;">Newer post</a>
     
-    
-    <a href="../../posts/argument/2016-03-25-tay-and-alice.html" style="float:right; text-align: right;">Older post</a>
+    <a href="../../posts/programming/2016-03-25-on-libraries-reusability-and-composability.html" style="float:right; text-align: right;">Older post</a>
     
 </div>
 <br style="clear: both;" />
@@ -187,9 +175,9 @@ OCaml’s core library is infamously lacking in features.<br />
     <script type="text/javascript">
         /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
         var disqus_shortname = 'richardgoultersblog'; // required: replace example with your forum shortname
-        var disqus_identifier = '/posts/programming/2016-03-25-on-libraries-reusability-and-composability.html';
-        var disqus_url = 'http://www.rgoulter.com/blog' + '/posts/programming/2016-03-25-on-libraries-reusability-and-composability.html';
-        var disqus_title = 'On Libraries, Reusability and Composability - March 25, 2016';
+        var disqus_identifier = '/posts/argument/2016-03-28-the-second-gamer.html';
+        var disqus_url = 'http://www.rgoulter.com/blog' + '/posts/argument/2016-03-28-the-second-gamer.html';
+        var disqus_title = 'The Second Gamer - March 28, 2016';
 
         /* * * DON'T EDIT BELOW THIS LINE * * */
         (function() {
