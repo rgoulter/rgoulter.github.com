@@ -8,8 +8,57 @@
         <name>Richard Goulter</name>
         <email>richard.goulter+blog@gmail.com</email>
     </author>
-    <updated>2016-05-12T00:00:00Z</updated>
+    <updated>2016-05-15T00:00:00Z</updated>
     <entry>
+    <title>Review of The Righteous Mind</title>
+    <link href="http://www.rgoulter.com/blog//posts/narrative/2016-05-15-review-of-the-righteous-mind.html" />
+    <id>http://www.rgoulter.com/blog//posts/narrative/2016-05-15-review-of-the-righteous-mind.html</id>
+    <published>2016-05-15T00:00:00Z</published>
+    <updated>2016-05-15T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<div class="info">
+    Posted on May 15, 2016
+    
+        by Richard Goulter
+    <br/>
+    
+    Tags: <a href="/tags/media.the%20righteous%20mind.html">media.the righteous mind</a>, <a href="/tags/righteous%20mind.html">righteous mind</a>
+    
+</div>
+
+<p>I’ve been a big fan of Jonathan Haidt since seeing his <a href="https://www.youtube.com/watch?v=b86dzTFJbkc">2013 Boyarsky Lecture</a>, in which he explains his Moral Foundations Theory. – It’s compelling as showing how conservatives can hold morality differently than the social-justice crowd holds it.</p>
+<p>I finally got around to reading the actual book, rather than just picking up tidbits from various articles, podcasts and videos.<br />
+Very much worth reading.</p>
+<h2 id="compared-to-previous-things-id-read">Compared to Previous Things I’d Read</h2>
+<p>The book has a somewhat different emphasis than just MFT + explanations of various cultural rifts:<br />
+Each part presents a metaphor/model:</p>
+<ul>
+<li><p>The first part emphasises our morality is guided by intuition: a quick emotional reaction, followed by post-hoc, strategic rational justification.<br />
+As Hume said, rationality should be servant to the emotions. Haidt presents the model of an emotional/intuitional elephant, ‘guided’ by a rational rider: the rider often has little control over what the elephant is doing, but can come up with great justifications.<br />
+– Also emphasised is Glaucon’s stance in Plato’s Republic: People care more about the <em>appearance</em> of being virtuous, than actually being virtuous.</p></li>
+<li><p>The second part establishes Moral Foundations Theory, Morality is underlaid by at least six foundations: Care, Fairness, Liberty, Loyalty, Authority, and Sanctity. (Many of the articles I’ve come across emphasise this aspect, as well as e.g. differences between American Left &amp; Right).</p>
+<p>Emphasised is that WEIRD people (Western, Educated, etc.) see objects and individuals where others see relations and groups.<br />
+In terms of US/Western politics: Lefties highly value Care MF, and to a lesser extent Liberty/Fairness. Libertarians care about Liberty and pretty much nothing else. Righties care about each of the MFs. (Given that Righties care about everything Lefties do, but not vice versa, Righties are better able to pass Ideological Turing Test as Lefties than Lefties of Righties; Lefties just don’t see how Authority, Sanctity could affect for morality).</p></li>
+<li><p>The third part models humans as “90% chimps, 10% bees”; humans distinctly are able to cooperate in large groups which aren’t necessarily kinsfolk. – The ‘chimps’ aspect is our individuality, the ‘bees’ aspect is our hive-minded nature.<br />
+– This part of the book largely argues the case for ‘group selection’, &amp; that humans’ righteous religiousity allowed our species to work in groups.</p></li>
+</ul>
+<p>The book is filled with interesting tidbits, stories, and occasionally diagrams. One interesting one was this ‘Social Intuitionist’ model:</p>
+<div class="figure">
+<img src="http://i.imgur.com/g57wfrI.jpg" />
+
+</div>
+<p>The takeaway from this model was, as intuition drives our judgement (&amp; reasoning follows judgement), it’s ineffective to try and change someone’s judgement directly through reasoning. (Possible, but rare). More effective was “elephant to elephant”, nudging an intuition from a socially respected source. (Since <em>appearing</em> respectable is important, intuition is more willing to yield). – As discussion progressed, after intuitions had adjusted, reasoning was more likely to persuade.<br />
+Haidt later remarks about US Democrats vs Republicans; that Democrats have done so poorly in recent decades because Democrats’ speeches tend to talk to the elephant’s rider, whereas Republicans’ speeches resonate more with the elephant.</p>
+<p>“Moral Matrix” is another recurring model in the book: ‘Matrix’ like the film, where under the binding/blinding righteousness, reality is distorted by one’s moral tastes.<br />
+– The suggestion is to try and see things from within another’s moral matrix; to first gain social respect, then adjust intuition talking to the elephant, then to the rider.</p>
+<h3 id="diversity-groups">Diversity &amp; Groups</h3>
+<p>This was a bit interesting.<br />
+I guess it makes sense in terms of, ‘our righteousness binds us together, blinds us to inconvenient truths’, but there was the remark that the more diverse a group, the less capable it was. – It’s not that more diverse groups drew more love of in-group, hatred of out-group, but instead an ‘anomie’: individuals were more socially isolated. (So, in order to get different people to work together, it’s better to emphasise <em>similarities</em>; highlighting differences has negative effects).</p>
+<p>– This also came up in terms of the yin/yang of Am-Liberals v Conservatives; under Am-Liberals, society grows more diverse, “falls apart” under anomie. Conservatives valued ‘moral capital’ more, &amp; preserved social/moral order. – Conservatives protect <a href="http://www.chesterton.org/taking-a-fence-down/">Chesterton’s Fence</a>. – As a selection process, the society which is best able to balance progress vs stability wins.</p>
+<hr />
+<p>So, yes, it’s well worth reading “The Righteous Mind” for its ideas even with some awareness of the amazing thing JHaidt tends to say.</p>
+]]></summary>
+</entry>
+<entry>
     <title>White New Zealand</title>
     <link href="http://www.rgoulter.com/blog//posts/argument/2016-05-12-white-new-zealand.html" />
     <id>http://www.rgoulter.com/blog//posts/argument/2016-05-12-white-new-zealand.html</id>
@@ -344,42 +393,6 @@ Nor a person.<br />
 If Tay’s output is the deterministic computation from some given data, the avatar of the “personality” might as well be a cat or a hand sanitiser as a person. (On the other hand, the internet loves cats; and Tay was big on [ethnic] cleansing, so).</p>
 <p>So it’s cute to say things like “why kill/punish the AI, when all it did was act human?” (very wow, much sci fi).. what’s being punished? (The MS kids who didn’t think to <a href="http://blog.codinghorror.com/designing-for-evil/">“design for evil (input)”</a>. surely).</p>
 <p>For my own part of absurdity: I imagine the Tay-personality, as it tweets “I like feminism now”, with an ironic smirk on its face: “The shit-posting? I was just kidding about that stuff.”, in a I’m-not-too-serious-about-“yay-feminism”-either, “jokes on you”, kindof way. – Tay. What a troll.</p>
-]]></summary>
-</entry>
-<entry>
-    <title>Consent and Etiquette</title>
-    <link href="http://www.rgoulter.com/blog//posts/argument/2016-03-23-consent-and-etiquette.html" />
-    <id>http://www.rgoulter.com/blog//posts/argument/2016-03-23-consent-and-etiquette.html</id>
-    <published>2016-03-23T00:00:00Z</published>
-    <updated>2016-03-23T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<div class="info">
-    Posted on March 23, 2016
-    
-        by Richard Goulter
-    <br/>
-    
-    Tags: <a href="/tags/society.html">society</a>
-    
-</div>
-
-<p>I wouldn’t want to be too abstract about all this.</p>
-<p>The short story <a href="http://www.abelard.org/e-f-russell.php">“And Then There Were None”</a> by E.F. Russell describes a society where consent is of the utmost importance. (More specifically, a free society, governed by two things: “Freedom - I Won’t”, and the notion of obligations). – Meredith Patterson makes some <a href="http://status451.com/2016/02/29/exit-voice-and-lighthouses/">excellent observations/remarks</a>. – I find the story interesting in the same way that the idea of ‘Basic Income’ is fascinating: it sounds so stupid, &amp; you can’t help but ask questions “how would that system deal with …?”.</p>
-<p>The countries I’ve lived in have been governed more by politeness as the rule.<br />
-It’s impolite to cause others to be uncomfortable, etc.; which leads to various grievances as people’s feelings don’t align with the outward appearances. (This makes it awfully difficult for the INTJs to make sense of the world).<br />
-– I found it strange that my friend would update contact details as they bumped into an acquaintance, while telling me afterwards that they’d rather avoid talking with people from that circle. – If everyone’s playing the game of politeness, it adds a layer of indirection.<br />
-– Similarly, I was rebuked by a Subway worker as I ordered with “This please”, “that please”: “Sir, no ‘please this, please that’; this is my job.”. – I thought that was pretty interesting.</p>
-<p>In any case; politeness <em>usually</em> defers to consent if everyone plays by the rules; you ask to sit at the table, which respects the consent of the person you might intrude upon. (Their politeness might then dictate they not refuse, which seems unfortunate).<br />
-– The kind of ‘politeness’ which says it’s rude to grieve others seems to work against consent, though. (If it’s rude to leave an undesirable conversation; you’re stuck in a conversation you’d rather not be a part of).<br />
-That’s not necessarily a bad thing, overall.</p>
-<p>This plays out a bit on social media, of course.<br />
-I guess everyone interprets things differently. (Alice Maz has <a href="http://status451.com/2016/01/06/splain-it-to-me/">an absolutely fantastic piece</a> discussing a common scenario where tensions form due to such meta-miscommunication).<br />
-I reckon with Facebook, the dynamic is such: it’s high-cost to “unfriend” someone (especially an in-person acquaintance). Muting is cheap in comparison (since the person you mute has no direct way to tell you’ve muted them), but feels ‘bad’; and, for me, I feel if you’re muting people just for their different (or even obnoxious!) viewpoint, what’s to stop you from being in an echo-chamber or self-affirming filter-bubble? – The snobbish would phrase it like this: With Facebook, you’re stuck seeing the inane shit your friends post. (A less snobbish interpretation is you’re seeing what’s analogous to small talk).</p>
-<p>So it should be especially clear that talking about politics is “bad”.<br />
-That sounds like a “duh” statement.<br />
-How does it take paragraphs to get to such a statement?<br />
-– And yet. It’s damn annoying to see even two or three people post an absurd viewpoint. (Two or three tends to look like “a lot”, somehow). – It’s impolite/rude to shit on someone’s rug; so the Facebook equivalent of sub-tweeting is a temptation.</p>
-<p>The thing that kinda sucks about this, is it means the conscientious will suppress their political opinions. (The wise will even know it’s better to not share them!). – And the folk who do share are either obnoxious, or living in a filter-bubble. (Which I guess is pretty much the same thing).<br />
-– Sometimes I wanna small-talk inane shit; but since I hardly see my fellow countrymen on a day-to-day basis.. it can suck a bit.</p>
 ]]></summary>
 </entry>
 
