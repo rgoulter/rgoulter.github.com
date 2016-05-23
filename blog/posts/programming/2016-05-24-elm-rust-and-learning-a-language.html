@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Review of The Righteous Mind - Richard Goulter's Blog</title>
+        <title>Elm, Rust, and Learning a Language - Richard Goulter's Blog</title>
 
         <!-- My (Old) CSS theme -->
         <link rel="stylesheet" type="text/css" href="../../css/default.css" />
@@ -128,58 +128,40 @@
             <hr style="margin: 0px; border-top: 5px solid black;" />
 
             <div id="content" class="container">
-                <h1>Review of The Righteous Mind</h1>
+                <h1>Elm, Rust, and Learning a Language</h1>
                 <div class="info">
-    Posted on May 15, 2016
+    Posted on May 24, 2016
     
         by Richard Goulter
     <br />
     
-    Tags: <a href="../../tags/media.the%20righteous%20mind.html">media.the righteous mind</a>, <a href="../../tags/righteous%20mind.html">righteous mind</a>
+    Tags: <a href="../../tags/programming.elm.html">programming.elm</a>, <a href="../../tags/programming.rust.html">programming.rust</a>, <a href="../../tags/programming.java.html">programming.java</a>
     
 </div>
 
-<p>I’ve been a big fan of Jonathan Haidt since seeing his <a href="https://www.youtube.com/watch?v=b86dzTFJbkc">2013 Boyarsky Lecture</a>, in which he explains his Moral Foundations Theory. – It’s compelling as showing how conservatives can hold morality differently than the social-justice crowd holds it.</p>
-<p>I finally got around to reading the actual book, rather than just picking up tidbits from various articles, podcasts and videos.<br />
-Very much worth reading.</p>
-<h2 id="compared-to-previous-things-id-read">Compared to Previous Things I’d Read</h2>
-<p>The book has a somewhat different emphasis than just MFT + explanations of various cultural rifts:<br />
-Each part presents a metaphor/model:</p>
-<ul>
-<li><p>The first part emphasises our morality is guided by intuition: a quick emotional reaction, followed by post-hoc, strategic rational justification.<br />
-As Hume said, rationality should be servant to the emotions. Haidt presents the model of an emotional/intuitional elephant, ‘guided’ by a rational rider: the rider often has little control over what the elephant is doing, but can come up with great justifications.<br />
-– Also emphasised is Glaucon’s stance in Plato’s Republic: People care more about the <em>appearance</em> of being virtuous, than actually being virtuous.</p></li>
-<li><p>The second part establishes Moral Foundations Theory, Morality is underlaid by at least six foundations: Care, Fairness, Liberty, Loyalty, Authority, and Sanctity. (Many of the articles I’ve come across emphasise this aspect, as well as e.g. differences between American Left &amp; Right).</p>
-<p>Emphasised is that WEIRD people (Western, Educated, etc.) see objects and individuals where others see relations and groups.<br />
-In terms of US/Western politics: Lefties highly value Care MF, and to a lesser extent Liberty/Fairness. Libertarians care about Liberty and pretty much nothing else. Righties care about each of the MFs. (Given that Righties care about everything Lefties do, but not vice versa, Righties are better able to pass Ideological Turing Test as Lefties than Lefties of Righties; Lefties just don’t see how Authority, Sanctity could affect for morality).</p></li>
-<li><p>The third part models humans as “90% chimps, 10% bees”; humans distinctly are able to cooperate in large groups which aren’t necessarily kinsfolk. – The ‘chimps’ aspect is our individuality, the ‘bees’ aspect is our hive-minded nature.<br />
-– This part of the book largely argues the case for ‘group selection’, &amp; that humans’ righteous religiousity allowed our species to work in groups.</p></li>
-</ul>
-<p>The book is filled with interesting tidbits, stories, and occasionally diagrams. One interesting one was this ‘Social Intuitionist’ model:</p>
-<div class="figure">
-<img src="http://i.imgur.com/g57wfrI.jpg" />
-
-</div>
-<p>The takeaway from this model was, as intuition drives our judgement (&amp; reasoning follows judgement), it’s ineffective to try and change someone’s judgement directly through reasoning. (Possible, but rare). More effective was “elephant to elephant”, nudging an intuition from a socially respected source. (Since <em>appearing</em> respectable is important, intuition is more willing to yield). – As discussion progressed, after intuitions had adjusted, reasoning was more likely to persuade.<br />
-Haidt later remarks about US Democrats vs Republicans; that Democrats have done so poorly in recent decades because Democrats’ speeches tend to talk to the elephant’s rider, whereas Republicans’ speeches resonate more with the elephant.</p>
-<p>“Moral Matrix” is another recurring model in the book: ‘Matrix’ like the film, where under the binding/blinding righteousness, reality is distorted by one’s moral tastes.<br />
-– The suggestion is to try and see things from within another’s moral matrix; to first gain social respect, then adjust intuition talking to the elephant, then to the rider.</p>
-<h3 id="diversity-groups">Diversity &amp; Groups</h3>
-<p>This was a bit interesting.<br />
-I guess it makes sense in terms of, ‘our righteousness binds us together, blinds us to inconvenient truths’, but there was the remark that the more diverse a group, the less capable it was. – It’s not that more diverse groups drew more love of in-group, hatred of out-group, but instead an ‘anomie’: individuals were more socially isolated. (So, in order to get different people to work together, it’s better to emphasise <em>similarities</em>; highlighting differences has negative effects).</p>
-<p>– This also came up in terms of the yin/yang of Am-Liberals v Conservatives; under Am-Liberals, society grows more diverse, “falls apart” under anomie. Conservatives valued ‘moral capital’ more, &amp; preserved social/moral order. – Conservatives protect <a href="http://www.chesterton.org/taking-a-fence-down/">Chesterton’s Fence</a>. – As a selection process, the society which is best able to balance progress vs stability wins.</p>
+<p>Elm and Rust are two programming languages I’m excited about (in the sense of, “wow it’d be cool to use these”).</p>
+<p>Elm is a Haskell-inspired language for client-side web development; with a philosophical emphasis at making Functional Programming <em>usable</em>/accessible. – In a talk from March, <a href="http://www.elmbark.com/2016/03/16/mainstream-elm-user-focused-design">“Let’s be mainstream”</a>, Evan Czaplicki compares JavaScript (easy to write, hard to maintain) to ML (hard to write, easy to maintain): the suggestion being that this isn’t necessarily a trade-off which must be paid; but that perhaps it’s better to try and improve JavaScript than to make ML languages easier.<br />
+There’s a cool <a href="http://elm-lang.org/try">online editor environment</a> for Elm so you can look at some examples &amp; try the language.</p>
+<p>Rust is a “safe C”, with many of the goodies of ‘modern’ languages like product and/or union types, tuples/records, pattern matching, etc.; its unique aspect is that “ownership” must be explicitly modelled.<br />
+For a taste, <a href="http://chrismorgan.info/blog/rust-fizzbuzz.html">“this post showing Fizz-Buzz programs in Rust”</a> explores various parts of Rust which you’ll encounter starting out with the language. This page <a href="http://cglab.ca/~abeinges/blah/too-many-lists/book/">showing implementing linked-lists in Rust</a> does the same thing, exploring aspects of the Rust language while programming a fairly familiar data structure.<br />
+<a href="http://rustbyexample.com">Rust by Example</a> lets you edit &amp; run each of the code snippets.<br />
+Andrei Alexandrescu (guy who coined the term “modern C++”; architect of the D language) <a href="https://www.quora.com/Which-language-has-the-brightest-future-in-replacement-of-C-between-D-Go-and-Rust-And-Why/answer/Andrei-Alexandrescu">wrote an answer on Quora</a> where he compared D, Go and Rust as “C/C++ replacements”. The criticism of Rust is whether it’s worth all the extra effort to model ownership. (On that note, D v Swift v Rust would be interesting; maybe also Scala-Native if that comes to fruition..; Go is cool &amp; all, but relates more to Python/Ruby).</p>
+<p>One thing both of these languages have in common is “great error messages”. (e.g. <a href="http://elm-lang.org/blog/compiler-errors-for-humans">“Compiler Errors for Humans”</a>, Rust’s compiler will try to explain what was wrong / suggest a solution). – One might say that because these languages are so out of wack from your typical <a href="http://www.paulgraham.com/avg.html">blub language</a> that the compiler <em>needs</em> to explain its errors, ha; but I’m more likely to think that reading compiler error messages is strange, … because I’m used to reading compiler errors as “nope” then checking the guilty line to figure out what’s wrong.</p>
 <hr />
-<p>So, yes, it’s well worth reading “The Righteous Mind” for its ideas even with some awareness of the amazing thing JHaidt tends to say.</p>
+<p>These posts about Elm and Rust are interesting and all, but there’s also a limitation to them. You certainly get a taste for the <em>language</em>, (&amp; certainly there’re differences to these languages that you’ve to pay attention to these things); but there’s also a step between “playing with the language in online environment” &amp; being able to run the examples on your computer.<br />
+’cause when someone says they “know Java”, they don’t just mean the Java language, but some familiarity with some JRE library packages, how to setup a development environment for Java, how to setup projects in Java (e.g. in Ant, Maven, Gradle or whatever).<br />
+– I guess newer languages ought to benefit from how older languages have been developed. So you get tools like <a href="https://github.com/sonnym/elmenv">elmenv</a> or <a href="https://github.com/avh4/elm-format">elm-format</a>, <a href="https://github.com/rust-lang-nursery/rustfmt">rustfmt</a>, in addition to decent platform tools like Rust’s cargo.</p>
+<p>I think what’s not immediately obvious is how to pick up &amp; use these languages for tiny projects.<br />
+Python is my go-to language for quick scripts where I just wanna scratch something together. It’s not that these aren’t “programs” or “projects”, but I don’t wanna worry about setting up any kind of package-file, nor freezing dependencies, etc.<br />
+– I don’t necessarily doubt that it’s possible to quickly get something together in Elm or Rust in the same way; but I wonder if this baggage of “things a $LANGUAGE developer knows how to do which a newcomer doesn’t” couldn’t be more obvious to pick up.</p>
 
 
 <hr />
 
 <div>
     
-    <a href="../../posts/programming/2016-05-24-elm-rust-and-learning-a-language.html" style="float:left;">Newer post</a>
     
-    
-    <a href="../../posts/argument/2016-05-12-white-new-zealand.html" style="float:right; text-align: right;">Older post</a>
+    <a href="../../posts/narrative/2016-05-15-review-of-the-righteous-mind.html" style="float:right; text-align: right;">Older post</a>
     
 </div>
 <br style="clear: both;" />
@@ -190,9 +172,9 @@ I guess it makes sense in terms of, ‘our righteousness binds us together, blin
     <script type="text/javascript">
         /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
         var disqus_shortname = 'richardgoultersblog'; // required: replace example with your forum shortname
-        var disqus_identifier = '/posts/narrative/2016-05-15-review-of-the-righteous-mind.html';
-        var disqus_url = 'http://www.rgoulter.com/blog' + '/posts/narrative/2016-05-15-review-of-the-righteous-mind.html';
-        var disqus_title = 'Review of The Righteous Mind - May 15, 2016';
+        var disqus_identifier = '/posts/programming/2016-05-24-elm-rust-and-learning-a-language.html';
+        var disqus_url = 'http://www.rgoulter.com/blog' + '/posts/programming/2016-05-24-elm-rust-and-learning-a-language.html';
+        var disqus_title = 'Elm, Rust, and Learning a Language - May 24, 2016';
 
         /* * * DON'T EDIT BELOW THIS LINE * * */
         (function() {

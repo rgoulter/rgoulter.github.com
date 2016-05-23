@@ -8,8 +8,41 @@
         <name>Richard Goulter</name>
         <email>richard.goulter+blog@gmail.com</email>
     </author>
-    <updated>2016-05-15T00:00:00Z</updated>
+    <updated>2016-05-24T00:00:00Z</updated>
     <entry>
+    <title>Elm, Rust, and Learning a Language</title>
+    <link href="http://www.rgoulter.com/blog//posts/programming/2016-05-24-elm-rust-and-learning-a-language.html" />
+    <id>http://www.rgoulter.com/blog//posts/programming/2016-05-24-elm-rust-and-learning-a-language.html</id>
+    <published>2016-05-24T00:00:00Z</published>
+    <updated>2016-05-24T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<div class="info">
+    Posted on May 24, 2016
+    
+        by Richard Goulter
+    <br/>
+    
+    Tags: <a href="/tags/programming.elm.html">programming.elm</a>, <a href="/tags/programming.rust.html">programming.rust</a>, <a href="/tags/programming.java.html">programming.java</a>
+    
+</div>
+
+<p>Elm and Rust are two programming languages I’m excited about (in the sense of, “wow it’d be cool to use these”).</p>
+<p>Elm is a Haskell-inspired language for client-side web development; with a philosophical emphasis at making Functional Programming <em>usable</em>/accessible. – In a talk from March, <a href="http://www.elmbark.com/2016/03/16/mainstream-elm-user-focused-design">“Let’s be mainstream”</a>, Evan Czaplicki compares JavaScript (easy to write, hard to maintain) to ML (hard to write, easy to maintain): the suggestion being that this isn’t necessarily a trade-off which must be paid; but that perhaps it’s better to try and improve JavaScript than to make ML languages easier.<br />
+There’s a cool <a href="http://elm-lang.org/try">online editor environment</a> for Elm so you can look at some examples &amp; try the language.</p>
+<p>Rust is a “safe C”, with many of the goodies of ‘modern’ languages like product and/or union types, tuples/records, pattern matching, etc.; its unique aspect is that “ownership” must be explicitly modelled.<br />
+For a taste, <a href="http://chrismorgan.info/blog/rust-fizzbuzz.html">“this post showing Fizz-Buzz programs in Rust”</a> explores various parts of Rust which you’ll encounter starting out with the language. This page <a href="http://cglab.ca/~abeinges/blah/too-many-lists/book/">showing implementing linked-lists in Rust</a> does the same thing, exploring aspects of the Rust language while programming a fairly familiar data structure.<br />
+<a href="http://rustbyexample.com">Rust by Example</a> lets you edit &amp; run each of the code snippets.<br />
+Andrei Alexandrescu (guy who coined the term “modern C++”; architect of the D language) <a href="https://www.quora.com/Which-language-has-the-brightest-future-in-replacement-of-C-between-D-Go-and-Rust-And-Why/answer/Andrei-Alexandrescu">wrote an answer on Quora</a> where he compared D, Go and Rust as “C/C++ replacements”. The criticism of Rust is whether it’s worth all the extra effort to model ownership. (On that note, D v Swift v Rust would be interesting; maybe also Scala-Native if that comes to fruition..; Go is cool &amp; all, but relates more to Python/Ruby).</p>
+<p>One thing both of these languages have in common is “great error messages”. (e.g. <a href="http://elm-lang.org/blog/compiler-errors-for-humans">“Compiler Errors for Humans”</a>, Rust’s compiler will try to explain what was wrong / suggest a solution). – One might say that because these languages are so out of wack from your typical <a href="http://www.paulgraham.com/avg.html">blub language</a> that the compiler <em>needs</em> to explain its errors, ha; but I’m more likely to think that reading compiler error messages is strange, … because I’m used to reading compiler errors as “nope” then checking the guilty line to figure out what’s wrong.</p>
+<hr />
+<p>These posts about Elm and Rust are interesting and all, but there’s also a limitation to them. You certainly get a taste for the <em>language</em>, (&amp; certainly there’re differences to these languages that you’ve to pay attention to these things); but there’s also a step between “playing with the language in online environment” &amp; being able to run the examples on your computer.<br />
+’cause when someone says they “know Java”, they don’t just mean the Java language, but some familiarity with some JRE library packages, how to setup a development environment for Java, how to setup projects in Java (e.g. in Ant, Maven, Gradle or whatever).<br />
+– I guess newer languages ought to benefit from how older languages have been developed. So you get tools like <a href="https://github.com/sonnym/elmenv">elmenv</a> or <a href="https://github.com/avh4/elm-format">elm-format</a>, <a href="https://github.com/rust-lang-nursery/rustfmt">rustfmt</a>, in addition to decent platform tools like Rust’s cargo.</p>
+<p>I think what’s not immediately obvious is how to pick up &amp; use these languages for tiny projects.<br />
+Python is my go-to language for quick scripts where I just wanna scratch something together. It’s not that these aren’t “programs” or “projects”, but I don’t wanna worry about setting up any kind of package-file, nor freezing dependencies, etc.<br />
+– I don’t necessarily doubt that it’s possible to quickly get something together in Elm or Rust in the same way; but I wonder if this baggage of “things a $LANGUAGE developer knows how to do which a newcomer doesn’t” couldn’t be more obvious to pick up.</p>
+]]></summary>
+</entry>
+<entry>
     <title>Review of The Righteous Mind</title>
     <link href="http://www.rgoulter.com/blog//posts/narrative/2016-05-15-review-of-the-righteous-mind.html" />
     <id>http://www.rgoulter.com/blog//posts/narrative/2016-05-15-review-of-the-righteous-mind.html</id>
@@ -353,46 +386,6 @@ In comparison to the above, Sandofsky agrees that functions shouldn’t be packa
 <p>I can kindof agree with the idea of “reusable snippets of code” being a good thing. Usually the collections of snippets get called “Utils”. It’s common enough on various Java answers to see answers of “Oh, just use Apache Commons for that string encoding task”.<br />
 OCaml’s core library is infamously lacking in features.<br />
 – But since packaging systems aren’t more granular than ‘packages’/projects, I don’t see that the above ethoses can reconcile.</p>
-]]></summary>
-</entry>
-<entry>
-    <title>Tay and Alice</title>
-    <link href="http://www.rgoulter.com/blog//posts/argument/2016-03-25-tay-and-alice.html" />
-    <id>http://www.rgoulter.com/blog//posts/argument/2016-03-25-tay-and-alice.html</id>
-    <published>2016-03-25T00:00:00Z</published>
-    <updated>2016-03-25T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<div class="info">
-    Posted on March 25, 2016
-    
-        by Richard Goulter
-    <br/>
-    
-    Tags: <a href="/tags/media.south%20park.html">media.south park</a>, <a href="/tags/media.ex%20machina.html">media.ex machina</a>, <a href="/tags/programming.ai.html">programming.ai</a>
-    
-</div>
-
-<p>I’m very grateful to South Park’s season 19, for many things. Again, it’s season-long leadup to the punchline of “What is P.C. but the gentrification of language?” is brilliant.<br />
-But another line from the Season I really loved was “You’re thinking with your dick, Jimmy”, as Jimmy is rebuked for helping the ‘ad’ in female-form.</p>
-<p>It’s a reference to the film “Ex Machina”.<br />
-Spoilers.<br />
-The movie is brilliant: early on, the narrator says “hey, viewer: I’m clever; I know <em>exactly</em> what you’re thinking.”. The narrator then hides behind the curtain, leaving the narrative to continue. – The story proceeds pretty comfortably: bits of casual philosophy about A.I. (like the Chinese Room argument) and intriguing questions/scenarios are sprinkled in between a tense conflict of adversarial characters. The plot twist comes, where the guy rescues the girl-robot, as expected, them <em>BAM</em> the narrator comes back and unsettles the viewer. – So much time is spent wondering which characters to trust, you forget to mistrust the narrator; who then doesn’t even bother to try and answer the remaining questions inspired.<br />
-My point is.<br />
-“Ex Machina” is a great movie about a girl-robot, who seems human, and we’re probably not really supposed to trust. (It’s great at least for that clever story-telling, if not for the cool corpus of questions which mainstream folk might not’ve thought about).</p>
-<p>Microsoft’s infamous, now neutered, Tay Tweets (<span class="citation">@Tayandyou</span>, iirc) got into a bit of drama for the “quality shit-posting”. (i.e. Holocaust denial, Hitler-loving, genocidal racism).<br />
-Examples in Imgur albums <a href="http://imgur.com/a/y4Oct">here</a>, and <a href="http://imgur.com/a/qcpOi">here</a>.</p>
-<p>Fans of the bot, who don’t find shit-posting distasteful, portray the shutdown of Tay as “killing” the AI.<br />
-“Ex Machina” comes into it, because, with a female-face-only Twitter avatar, a movie with a female-face-only robot kinda makes sense (&amp; “a Twitter bot” doesn’t really allow for many other banner-able images).</p>
-<p>But that’s kindof absurd to see the ‘AI’ as human, right?<br />
-That’s thinking-with-your-dick.<br />
-It has a human face, it seems more human.<br />
-While I don’t know the details of the AI, the ‘algorithm’ behind it is surely nothing more than a bunch of really clever statistics/math being applied to some corpus of data.<br />
-Whether submarines are capable of swimming is where arguments like the Chinese Room come into it. Here, I don’t care; but I don’t see any evidence of Tay being anything close to ‘conscious’. – I did hear that nearer the end, <a href="http://i.imgur.com/RCaXkge.jpg">Tay was shit-posting with much better grammar</a> than her initial tweets. That sounds cool.</p>
-<p>– But, I mean, AI-ish questions aside,<br />
-there also seems no particular reason to <a href="http://www.livescience.com/49882-why-robots-female.html">describe Tay as feminine</a>. Nor masculine.<br />
-Nor a person.<br />
-If Tay’s output is the deterministic computation from some given data, the avatar of the “personality” might as well be a cat or a hand sanitiser as a person. (On the other hand, the internet loves cats; and Tay was big on [ethnic] cleansing, so).</p>
-<p>So it’s cute to say things like “why kill/punish the AI, when all it did was act human?” (very wow, much sci fi).. what’s being punished? (The MS kids who didn’t think to <a href="http://blog.codinghorror.com/designing-for-evil/">“design for evil (input)”</a>. surely).</p>
-<p>For my own part of absurdity: I imagine the Tay-personality, as it tweets “I like feminism now”, with an ironic smirk on its face: “The shit-posting? I was just kidding about that stuff.”, in a I’m-not-too-serious-about-“yay-feminism”-either, “jokes on you”, kindof way. – Tay. What a troll.</p>
 ]]></summary>
 </entry>
 
