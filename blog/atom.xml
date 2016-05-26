@@ -8,8 +8,76 @@
         <name>Richard Goulter</name>
         <email>richard.goulter+blog@gmail.com</email>
     </author>
-    <updated>2016-05-24T00:00:00Z</updated>
+    <updated>2016-05-26T00:00:00Z</updated>
     <entry>
+    <title>Why Use Functional Programming Features?</title>
+    <link href="http://www.rgoulter.com/blog//posts/programming/2016-05-26-why-use-functional-programming-features.html" />
+    <id>http://www.rgoulter.com/blog//posts/programming/2016-05-26-why-use-functional-programming-features.html</id>
+    <published>2016-05-26T00:00:00Z</published>
+    <updated>2016-05-26T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<div class="info">
+    Posted on May 26, 2016
+    
+        by Richard Goulter
+    <br/>
+    
+    Tags: <a href="/tags/programming.python.html">programming.python</a>, <a href="/tags/programming.scala.html">programming.scala</a>, <a href="/tags/programming.exceptions.html">programming.exceptions</a>
+    
+</div>
+
+<p>I was asked in an interview “what advantages are there to coding in a functional style?”.<br />
+I’d use ‘functional’ a bit more loosely than “everything pure, monads, etc.”; I’m happy with modern language idioms like pattern matching.<br />
+– I’d say the best reason is it makes explicit dangerous things which are implicit in procedural, blub language code.</p>
+<hr />
+<p>Consider a typical <code>dictionary.get(key)</code>:<br />
+If the key is in the dictionary, get the value, the world is at peace and all is well.<br />
+But writing code where things go well is easy. Here, it’s more interesting to consider how to model “what to do when things go wrong”. – To me, returning <code>Optional[Value]</code> (as any “functional” language will do) seems the most elegant:</p>
+<p>Mainstream languages (like Java, Python) tend to return <code>null</code>/<code>None</code> for this case.<br />
+Mainstream languages also tend to throw errors when trying to use a <code>null</code>-value as if it’s not a <code>null</code>-value. So what happens is you’ll write code assuming the value is non-<code>null</code>; at some point this (implicit) assumption will be wrong. (Let he who’s never had a NullPointerException throw the first stone).</p>
+<p><code>Optional[Value]</code> is kinda morally equivalent. A dictionary returns <code>Some[Value]</code>, which contains a non-<code>null</code> value if the dictionary has the key, <code>None</code> if the key wasn’t present in the dictionary. (Well, technically it could be a <code>Some(null)</code>; but by the same argument, this’d be better as <code>Some(None)</code>).<br />
+The syntactic difference is, every time you have an <code>Optional[Value]</code> you MUST have <code>optional match { Some(x) =&gt; ...; None =&gt; ...; }</code> (or an acknowledgement of ‘danger’, like <code>optional.getValue()</code>). – With nullable variables, it’s up to the programmer’s discipline to have <code>if (x != null) { ... } else { ... }</code>; I’d be willing to bet the <code>else</code> clause is almost-always missing in code.<br />
+– Or, rather, looking at code where values are never null, you know you can’t get NPEs. With nullable-values, you’ve to rely on (implicit) assumptions, and maybe-probably the code is fine.</p>
+<hr />
+<p>There are other ways to deal with errors.<br />
+One kinda-stupid approach would be for the dictionary to loop indefinitely (until it has a value for the given key). In a concurrent/parallel program, this isn’t completely stupid, &amp; blocking-until-result <em>may</em> be desirable. But still.</p>
+<p>Throwing an exception is another approach. Python does this. It seems to me this is kindof-sortof morally equivalent to <code>Optional[Value]</code> also; the benefit being that a value isn’t going to be <code>null</code>, the drawback being it’s difficult to tell what the program is doing:</p>
+<pre><code>try {
+  x = dict.get(keyX);
+  doTask1(x);
+  y = dict.get(keyY);
+  doTask2(x, y);
+} catch KeyNotPresent ex {
+  //...
+}</code></pre>
+<p>– Obviously if an exception is thrown above, it’s not clear whether it came before or after <code>doTask1(x)</code>; perhaps less clear is that <code>y = dict.get</code> onwards ‘needs’ its own <code>try-catch</code> block. It doesn’t make sense to have <code>KeyNotPresent</code> exception cover both <code>x = dict.get</code> and <code>y = dict.get</code>; not if you want to be sure that you’re handling each alternative.</p>
+<p>Error Codes, similarly, seem kinda-sorta equivalent if your program follows discipline to handle all alternatives. Somehow <a href="http://nedbatchelder.com/text/exceptions-vs-status.html">Exceptions are seen as good</a> for allowing you to “leave error handling code out of much of your code”. (If you don’t write half your program logic, you don’t have to write half your program logic). – Though, much of the advantages of Exceptions over Error Codes here also apply to <code>Optional</code> and friends.</p>
+<p>– The advantages that Exceptions and Error Codes have over <code>Optional[Value]</code> is that the latter just says “not everything went well”, the former can describe what went wrong. (IOError, DivisionByZero, StackUnderflow, UnsupportedOperation, etc.). This can be quickly remedied by using <code>Either</code>, i.e. keeping information about what kind of error occurred.</p>
+<hr />
+<p>That’s all fine &amp; well.<br />
+<code>Optional</code> works well to model where computations may fail; <code>Either</code> for when you want to know why things went wrong (or perhaps maybe to recover depending on what went wrong). These are more explicit than nullable values or Error Codes.</p>
+<p>The bigger challenge is how well functions-which-may-fail compose with other functions-which-may-fail.</p>
+<pre><code>fun importantComputation() {
+  x = mayFailX()
+  stmt1;
+  y = mayFailY()
+  stmt2;
+  return g(x, y);
+}</code></pre>
+<p>With stateful code, one needs to be careful about assumptions about what <code>stmt1</code>, <code>mayFailY</code> mutate. – <em>Implicitly</em>, you also mustn’t assume <code>stmt2</code>, <code>g</code> are executed (&amp; so must consider state when they are executed, aren’t executed).<br />
+– While it’s true that Exceptions defer the error-handling; there’s surely more cognitive-load required to keep the above in mind while scrolling through code.</p>
+<p>Functional code also isn’t necessarily so cumbersome. <code>Optional.map</code> allows:</p>
+<pre><code>optional match {
+  Some(x) =&gt; doSomething(x)
+  None =&gt; None
+}</code></pre>
+<p>to be written as <code>optional.map({ x =&gt; doSomething(x) })</code> (or <code>.map(doSomething)</code> if you literally have a function).</p>
+<hr />
+<p>Programmers tend to make mistakes when they forget to take care of cases when things go wrong.<br />
+It’s easier to make mistakes when “something went wrong” is implicitly handled.<br />
+Functional Programming-ish code tends to be very explicit; and potentially more concise. For writing correct, complete, safe code, this is clearly an advantage.</p>
+]]></summary>
+</entry>
+<entry>
     <title>Elm, Rust, and Learning a Language</title>
     <link href="http://www.rgoulter.com/blog//posts/programming/2016-05-24-elm-rust-and-learning-a-language.html" />
     <id>http://www.rgoulter.com/blog//posts/programming/2016-05-24-elm-rust-and-learning-a-language.html</id>
@@ -340,52 +408,6 @@ It’s difficult to see “girls are allowed to play with any toy; boys aren’t
 – So, while there’s some agreement about “girls doing boy-things are less stigmatised than boys doing girl-things”, feminists tend to argue “that’s because people hate girls things” and not “that’s because society protects girls more than boys”.</p>
 <p>I don’t particularly mean to get into a game of loser-olympics. (“Worse for me than it is for you.”). My point is that there seems to be confusion in the viewpoint that being “the privileged sex” is unilaterally bad; and no acknowledgement that the un-privileged sex doesn’t get the same benefits. – From that, one can still take some of de Beauvoir’s points; one can still think “one isn’t born a woman”. – A conversation or synthesis between Karen Straughan’s extreme viewpoints, and Liana K’s extreme viewpoints, would be a fascinating thing to see.<br />
 (Hilariously, though: that the idea men face any negative costs/stigma isn’t as mentioned as the negative costs women face: this itself is an embodiment of the “women the privileged sex” - as Straughan asks in the video, “what are feminism doing to dismantle that?”).</p>
-]]></summary>
-</entry>
-<entry>
-    <title>On Libraries, Reusability and Composability</title>
-    <link href="http://www.rgoulter.com/blog//posts/programming/2016-03-25-on-libraries-reusability-and-composability.html" />
-    <id>http://www.rgoulter.com/blog//posts/programming/2016-03-25-on-libraries-reusability-and-composability.html</id>
-    <published>2016-03-25T00:00:00Z</published>
-    <updated>2016-03-25T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<div class="info">
-    Posted on March 25, 2016
-    
-        by Richard Goulter
-    <br/>
-    
-    Tags: <a href="/tags/programming.nodejs.html">programming.nodejs</a>
-    
-</div>
-
-<p>There’s been a lot of brouhaha and schadenfreude regarding the recent failures in the NodeJS/NPM community.</p>
-<p>Essentially the problem / schadenfreude focuses on two aspects:</p>
-<ul>
-<li><p>A mutable package repository, allowing un-publishing of packages; this creates a number of practical &amp; security problems.</p></li>
-<li><p>NodeJS’s ethos of “micropackages”; the package at the focal point of the issue was an 11-line package, to left-pad a string.</p></li>
-</ul>
-<p>Here’s a prominent post, <a href="http://www.haneycodes.net/npm-left-pad-have-we-forgotten-how-to-program/">Haney Codes’ “Have We Forgotten How to Program?”</a>, which criticises NodeJS/NPM for having packages such as “isArray” or “isPositiveInteger”; along with many other examples any non-Node programmer will find absurd, horrifying, and hilarious.<br />
-My favourite bit:</p>
-<blockquote>
-<p>if you cannot write a left-pad, is-positive-integer, or isArray function in 5 minutes flat (including the time you spend Googling), then you don’t actually know how to code. Hell, any of these would make a great code screening interview question to determine whether or not a candidate can code.</p>
-</blockquote>
-<p>(Of course, some applicants [and self-described programmers!] fail Fizz-Buzz, so).</p>
-<p>The NodeJS/NPM crowd in response point to <a href="https://github.com/sindresorhus/ama/issues/10#issuecomment-117766328">this</a> comment from sindresorhus (who, apparently, curates the very popular awesome-nodejs list), defending one-line packages. – The defense, essentially, is that these are versioned ‘snippets’, which provide a reusable abstraction.</p>
-<h3 id="composition">Composition</h3>
-<p>A fun thing is. Haskell kids take this idea, and do kindof the opposite thing. Where NodeJS says “here’s a snippet we can use everywhere”, Haskell is more like “here’s a typeclass which is used everywhere”; e.g. semi-group or monoid or any of that.</p>
-<p>– From the Category-Theory side of things, computation/programming is much more <a href="https://www.youtube.com/watch?v=ZhuHCtR3xq8">about composition</a> (than simply naming/abstracting complexity, per se). e.g. FRP as a ‘fundamental’ solution to the problems of event-handling callbacks; FRP is basically composing streams.<br />
-(“A monad is a monoid in the category of” blah blah blah – Monads are a way of composing things).</p>
-<p>I understand Haskell in particular runs into ‘cabal-hell’, ’cause of poor handling of transitive dependencies (it can’t have two copies of the same-package/same-version/different-dependency-version); and so when code is re-used so often, conflicts arise fairly often. (Moreover, since it’s compiled, it’s the ABIs conflicting, rather than a more forgiving dynamic-language interpretation like in Ruby or Python).</p>
-<p>– So I wonder how “use a good type system” allows composition; &amp; how that compares/contrasts to Node’s.<br />
-Haskell’s typeclasses allow a benefit which you can’t really get easily in the more mainstream languages.</p>
-<h3 id="purpose-of-libraries">Purpose of Libraries</h3>
-<p>Here’s a post from Benjamin Sandofsky, <a href="https://sandofsky.com/blog/third-party-libraries.html">“When to Avoid Libraries”</a>, arguing for prudence as to when to use external libraries; that programs should build their own abstractions unless they shouldn’t. (Ah, the ol’ “it depends” really is the answer to all topics in programming).<br />
-In comparison to the above, Sandofsky agrees that functions shouldn’t be packages. Sandofsky argues (interestingly) that frameworks make a good starting point, but that programmers should iterate towards proper abstractions/models for fitting the problem domain they’re trying to solve. Sandofsky concedes that a library should be used if a complicated task needs to be done, and you’re not interested in the details.</p>
-<p>Aside from saying “iterate towards a domain”, the other cute insights are “DRY code/libraries are quite difficult to debug”, and “if an abstraction leaks, no one cares which package is at fault in your program”.</p>
-<h3 id="other-thoughts">Other Thoughts</h3>
-<p>I can kindof agree with the idea of “reusable snippets of code” being a good thing. Usually the collections of snippets get called “Utils”. It’s common enough on various Java answers to see answers of “Oh, just use Apache Commons for that string encoding task”.<br />
-OCaml’s core library is infamously lacking in features.<br />
-– But since packaging systems aren’t more granular than ‘packages’/projects, I don’t see that the above ethoses can reconcile.</p>
 ]]></summary>
 </entry>
 
