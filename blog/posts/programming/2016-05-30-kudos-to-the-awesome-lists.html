@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Why Use Functional Programming Features? - Richard Goulter's Blog</title>
+        <title>Kudos to the Awesome Lists - Richard Goulter's Blog</title>
 
         <!-- My (Old) CSS theme -->
         <link rel="stylesheet" type="text/css" href="../../css/default.css" />
@@ -128,77 +128,30 @@
             <hr style="margin: 0px; border-top: 5px solid black;" />
 
             <div id="content" class="container">
-                <h1>Why Use Functional Programming Features?</h1>
+                <h1>Kudos to the Awesome Lists</h1>
                 <div class="info">
-    Posted on May 26, 2016
+    Posted on May 30, 2016
     
         by Richard Goulter
     <br />
     
-    Tags: <a href="../../tags/programming.python.html">programming.python</a>, <a href="../../tags/programming.scala.html">programming.scala</a>, <a href="../../tags/programming.exceptions.html">programming.exceptions</a>
+    Tags: <a href="../../tags/programming.html">programming</a>, <a href="../../tags/programming.github.html">programming.github</a>
     
 </div>
 
-<p>I was asked in an interview “what advantages are there to coding in a functional style?”.<br />
-I’d use ‘functional’ a bit more loosely than “everything pure, monads, etc.”; I’m happy with modern language idioms like pattern matching.<br />
-– I’d say the best reason is it makes explicit dangerous things which are implicit in procedural, blub language code.</p>
-<hr />
-<p>Consider a typical <code>dictionary.get(key)</code>:<br />
-If the key is in the dictionary, get the value, the world is at peace and all is well.<br />
-But writing code where things go well is easy. Here, it’s more interesting to consider how to model “what to do when things go wrong”. – To me, returning <code>Optional[Value]</code> (as any “functional” language will do) seems the most elegant:</p>
-<p>Mainstream languages (like Java, Python) tend to return <code>null</code>/<code>None</code> for this case.<br />
-Mainstream languages also tend to throw errors when trying to use a <code>null</code>-value as if it’s not a <code>null</code>-value. So what happens is you’ll write code assuming the value is non-<code>null</code>; at some point this (implicit) assumption will be wrong. (Let he who’s never had a NullPointerException throw the first stone).</p>
-<p><code>Optional[Value]</code> is kinda morally equivalent. A dictionary returns <code>Some[Value]</code>, which contains a non-<code>null</code> value if the dictionary has the key, <code>None</code> if the key wasn’t present in the dictionary. (Well, technically it could be a <code>Some(null)</code>; but by the same argument, this’d be better as <code>Some(None)</code>).<br />
-The syntactic difference is, every time you have an <code>Optional[Value]</code> you MUST have <code>optional match { Some(x) =&gt; ...; None =&gt; ...; }</code> (or an acknowledgement of ‘danger’, like <code>optional.getValue()</code>). – With nullable variables, it’s up to the programmer’s discipline to have <code>if (x != null) { ... } else { ... }</code>; I’d be willing to bet the <code>else</code> clause is almost-always missing in code.<br />
-– Or, rather, looking at code where values are never null, you know you can’t get NPEs. With nullable-values, you’ve to rely on (implicit) assumptions, and maybe-probably the code is fine.</p>
-<hr />
-<p>There are other ways to deal with errors.<br />
-One kinda-stupid approach would be for the dictionary to loop indefinitely (until it has a value for the given key). In a concurrent/parallel program, this isn’t completely stupid, &amp; blocking-until-result <em>may</em> be desirable. But still.</p>
-<p>Throwing an exception is another approach. Python does this. It seems to me this is kindof-sortof morally equivalent to <code>Optional[Value]</code> also; the benefit being that a value isn’t going to be <code>null</code>, the drawback being it’s difficult to tell what the program is doing:</p>
-<pre><code>try {
-  x = dict.get(keyX);
-  doTask1(x);
-  y = dict.get(keyY);
-  doTask2(x, y);
-} catch KeyNotPresent ex {
-  //...
-}</code></pre>
-<p>– Obviously if an exception is thrown above, it’s not clear whether it came before or after <code>doTask1(x)</code>; perhaps less clear is that <code>y = dict.get</code> onwards ‘needs’ its own <code>try-catch</code> block. It doesn’t make sense to have <code>KeyNotPresent</code> exception cover both <code>x = dict.get</code> and <code>y = dict.get</code>; not if you want to be sure that you’re handling each alternative.</p>
-<p>Error Codes, similarly, seem kinda-sorta equivalent if your program follows discipline to handle all alternatives. Somehow <a href="http://nedbatchelder.com/text/exceptions-vs-status.html">Exceptions are seen as good</a> for allowing you to “leave error handling code out of much of your code”. (If you don’t write half your program logic, you don’t have to write half your program logic). – Though, much of the advantages of Exceptions over Error Codes here also apply to <code>Optional</code> and friends.</p>
-<p>– The advantages that Exceptions and Error Codes have over <code>Optional[Value]</code> is that the latter just says “not everything went well”, the former can describe what went wrong. (IOError, DivisionByZero, StackUnderflow, UnsupportedOperation, etc.). This can be quickly remedied by using <code>Either</code>, i.e. keeping information about what kind of error occurred.</p>
-<hr />
-<p>That’s all fine &amp; well.<br />
-<code>Optional</code> works well to model where computations may fail; <code>Either</code> for when you want to know why things went wrong (or perhaps maybe to recover depending on what went wrong). These are more explicit than nullable values or Error Codes.</p>
-<p>The bigger challenge is how well functions-which-may-fail compose with other functions-which-may-fail.</p>
-<pre><code>fun importantComputation() {
-  x = mayFailX()
-  stmt1;
-  y = mayFailY()
-  stmt2;
-  return g(x, y);
-}</code></pre>
-<p>With stateful code, one needs to be careful about assumptions about what <code>stmt1</code>, <code>mayFailY</code> mutate. – <em>Implicitly</em>, you also mustn’t assume <code>stmt2</code>, <code>g</code> are executed (&amp; so must consider state when they are executed, aren’t executed).<br />
-– While it’s true that Exceptions defer the error-handling; there’s surely more cognitive-load required to keep the above in mind while scrolling through code.</p>
-<p>Functional code also isn’t necessarily so cumbersome. <code>Optional.map</code> allows:</p>
-<pre><code>optional match {
-  Some(x) =&gt; doSomething(x)
-  None =&gt; None
-}</code></pre>
-<p>to be written as <code>optional.map({ x =&gt; doSomething(x) })</code> (or <code>.map(doSomething)</code> if you literally have a function).</p>
-<hr />
-<p>Programmers tend to make mistakes when they forget to take care of cases when things go wrong.<br />
-It’s easier to make mistakes when “something went wrong” is implicitly handled.<br />
-Functional Programming-ish code tends to be very explicit; and potentially more concise. For writing correct, complete, safe code, this is clearly an advantage.</p>
+<p>I’ve a wariness for programming-languages/etc. which are hyped by the mainstream programmer community. – Computers suck, programming languages suck; the best code is no code, etc.; &amp; much of the “hey this is cool” often comes from folk without the experience to say with authority that something is cool.<br />
+(<a href="https://quoderat.megginson.com/2006/03/06/programming-languages-of-distinction/">This post</a> argues that the ‘elites’ are the one who drive a languages adoption, &amp; by the time the ‘unwashed masses’ arrive, the party is over.).</p>
+<p>But, uh, kudos to the “<em>awesome</em>” lists. e.g. this <a href="https://github.com/bayandin/awesome-awesomeness">list of awesome-lists</a>.<br />
+They seem to be good aggregates of the kinds of resources you’re supposed to somehow know-of or pick up along the way. While each list is different, it seems that the <code>awesome-$language</code> lists showcase: the popular libraries (for which problems), as well as popular tools for doing stuff with the language. (In particular, code-styling and linting tools.).</p>
+<p>(I’m not sure whether the star-/commit-counts are good indications of a language’s community, or indications of how well ninja-rockstars love a language, but still looks useful.).</p>
 
 
 <hr />
 
 <div>
     
-    <a href="../../posts/programming/2016-05-30-kudos-to-the-awesome-lists.html" style="float:left;">Newer post</a>
     
-    
-    <a href="../../posts/programming/2016-05-24-elm-rust-and-learning-a-language.html" style="float:right; text-align: right;">Older post</a>
+    <a href="../../posts/programming/2016-05-26-why-use-functional-programming-features.html" style="float:right; text-align: right;">Older post</a>
     
 </div>
 <br style="clear: both;" />
@@ -209,9 +162,9 @@ Functional Programming-ish code tends to be very explicit; and potentially more 
     <script type="text/javascript">
         /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
         var disqus_shortname = 'richardgoultersblog'; // required: replace example with your forum shortname
-        var disqus_identifier = '/posts/programming/2016-05-26-why-use-functional-programming-features.html';
-        var disqus_url = 'http://www.rgoulter.com/blog' + '/posts/programming/2016-05-26-why-use-functional-programming-features.html';
-        var disqus_title = 'Why Use Functional Programming Features? - May 26, 2016';
+        var disqus_identifier = '/posts/programming/2016-05-30-kudos-to-the-awesome-lists.html';
+        var disqus_url = 'http://www.rgoulter.com/blog' + '/posts/programming/2016-05-30-kudos-to-the-awesome-lists.html';
+        var disqus_title = 'Kudos to the Awesome Lists - May 30, 2016';
 
         /* * * DON'T EDIT BELOW THIS LINE * * */
         (function() {

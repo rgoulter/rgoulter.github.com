@@ -8,8 +8,31 @@
         <name>Richard Goulter</name>
         <email>richard.goulter+blog@gmail.com</email>
     </author>
-    <updated>2016-05-26T00:00:00Z</updated>
+    <updated>2016-05-30T00:00:00Z</updated>
     <entry>
+    <title>Kudos to the Awesome Lists</title>
+    <link href="http://www.rgoulter.com/blog//posts/programming/2016-05-30-kudos-to-the-awesome-lists.html" />
+    <id>http://www.rgoulter.com/blog//posts/programming/2016-05-30-kudos-to-the-awesome-lists.html</id>
+    <published>2016-05-30T00:00:00Z</published>
+    <updated>2016-05-30T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<div class="info">
+    Posted on May 30, 2016
+    
+        by Richard Goulter
+    <br/>
+    
+    Tags: <a href="/tags/programming.html">programming</a>, <a href="/tags/programming.github.html">programming.github</a>
+    
+</div>
+
+<p>I’ve a wariness for programming-languages/etc. which are hyped by the mainstream programmer community. – Computers suck, programming languages suck; the best code is no code, etc.; &amp; much of the “hey this is cool” often comes from folk without the experience to say with authority that something is cool.<br />
+(<a href="https://quoderat.megginson.com/2006/03/06/programming-languages-of-distinction/">This post</a> argues that the ‘elites’ are the one who drive a languages adoption, &amp; by the time the ‘unwashed masses’ arrive, the party is over.).</p>
+<p>But, uh, kudos to the “<em>awesome</em>” lists. e.g. this <a href="https://github.com/bayandin/awesome-awesomeness">list of awesome-lists</a>.<br />
+They seem to be good aggregates of the kinds of resources you’re supposed to somehow know-of or pick up along the way. While each list is different, it seems that the <code>awesome-$language</code> lists showcase: the popular libraries (for which problems), as well as popular tools for doing stuff with the language. (In particular, code-styling and linting tools.).</p>
+<p>(I’m not sure whether the star-/commit-counts are good indications of a language’s community, or indications of how well ninja-rockstars love a language, but still looks useful.).</p>
+]]></summary>
+</entry>
+<entry>
     <title>Why Use Functional Programming Features?</title>
     <link href="http://www.rgoulter.com/blog//posts/programming/2016-05-26-why-use-functional-programming-features.html" />
     <id>http://www.rgoulter.com/blog//posts/programming/2016-05-26-why-use-functional-programming-features.html</id>
@@ -372,42 +395,6 @@ ClarkHat remarks on <a href="https://popehat.com/2015/06/10/two-kinds-of-freedom
 <hr />
 <p>There’s a kind of irony to Status 451’s successful fundraising:<br />
 Those who angrily see tech as controlled by white dudebros and hostile to feminism will say “look, see how dominant white-dudebros are; see how little power/voice we have”. – The other side of the fence will say “look, see how opposed to diverse viewpoints the other side is; see how they seek to shut down that which they can’t control”. (And so they disagree; &amp; the sun also rises).</p>
-]]></summary>
-</entry>
-<entry>
-    <title>The Second Gamer</title>
-    <link href="http://www.rgoulter.com/blog//posts/argument/2016-03-28-the-second-gamer.html" />
-    <id>http://www.rgoulter.com/blog//posts/argument/2016-03-28-the-second-gamer.html</id>
-    <published>2016-03-28T00:00:00Z</published>
-    <updated>2016-03-28T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<div class="info">
-    Posted on March 28, 2016
-    
-        by Richard Goulter
-    <br/>
-    
-    Tags: <a href="/tags/author.liana%20kerzner.html">author.liana kerzner</a>, <a href="/tags/feminism.html">feminism</a>
-    
-</div>
-
-<p>Liana K made <a href="https://www.youtube.com/watch?v=VMzkPIhr0Bw">a great video ’splaining Simone de Beauvoir</a> to gamers.</p>
-<p>I think if a typical gamer has any opinion of de Beauvoir, it’s not going to be a positive one; <a href="http://www.aei.org/publication/not-lost-in-translation/">CHSommers wasn’t a fan</a>.<br />
-So, if nothing else, making a video about some weird parts of feminism for gamers is a very against the grain thing to do. I think it’s brilliant that Liana K takes the examples/opinions and demonstrates it in contexts and examples gamers would understand. – It’s nice to be able to point to a reasonable, ‘legitimate’ video arguing some rather radical points.<br />
-Even after watching the video, I still find the presented ideas to be shrill. But it’s nice to see that there’s a large part of it where you can see where such people are coming from, that there are parts and premises you can agree on.</p>
-<p>Liana K summarises the video with “judge individuals as individuals”.<br />
-This is a pretty compelling soundbyte. I suspect the only tension with it is it’s used against the idea that “it’s okay to judge/assume things about people based on characteristics they’re likely to have”. (e.g. “it’s okay to assume girls like pink, because many girls like pink”). It’s a rather involved tension, seeing as it relates to identity.<br />
-That there’s a “kernel of truth to stereotypes” makes me think the latter deserves some weight, too.</p>
-<p>The biggest beef I have with the video has the same kindof tension.<br />
-‘de Beauvoir lamented the constraints gender put on the way people behaved.’ (Sure). ’Women are the other; the “privileged sex”; things are male-by-default and so girls aren’t allowed“. What?<br />
-– <em>It’s a trade-off</em>. Admittedly, it’s not a trade-off where society let’s people choose which they want; but that’s not the point under-fire here, per se.<br />
-Sure, it may be that women are treated as visual ornaments; but <a href="https://www.youtube.com/watch?v=vp8tToFv-bA">men are treated as disposable appliances</a>. (That fantastic video from another Canadian woman. Must be something about that country, huh?).</p>
-<p>It’s frustrating when women/feminists speak in way about male-dominated scenes like gaming or tech in a way that says “oh, women come second”:<br />
-<em>Look at what the attitude is towards those who are first</em>: men in games/tech are seen as “geeks”, losers, unsociable and undesirable. In Liana’s video, she uses the image from South Park of a fat male gamer; I don’t begrudge her humour for that, but I would have far more respect if the point were expressed as “gamers who are women are losers, too”. – It’s easy for a supposed outsider to say “you’re not giving me the benefits”, it’s even easier for them to not want to accept on the costs.</p>
-<p>The way the point is expressed about “girls toys” is similar.<br />
-It’s difficult to see “girls are allowed to play with any toy; boys aren’t allowed to play with toys for girls” as negative for girls: the ones who lose out are the boys who want to play with feminine toys. (Toy companies win if they make toys which as many people can play with as possible, btw. Money is a stronger incentive than ideology, here). – Indeed, if you were to imagine a society which did suppress women, favour men, you’d imagine that there would be toys which girls weren’t allowed to play with, which were just for boys.<br />
-– So, while there’s some agreement about “girls doing boy-things are less stigmatised than boys doing girl-things”, feminists tend to argue “that’s because people hate girls things” and not “that’s because society protects girls more than boys”.</p>
-<p>I don’t particularly mean to get into a game of loser-olympics. (“Worse for me than it is for you.”). My point is that there seems to be confusion in the viewpoint that being “the privileged sex” is unilaterally bad; and no acknowledgement that the un-privileged sex doesn’t get the same benefits. – From that, one can still take some of de Beauvoir’s points; one can still think “one isn’t born a woman”. – A conversation or synthesis between Karen Straughan’s extreme viewpoints, and Liana K’s extreme viewpoints, would be a fascinating thing to see.<br />
-(Hilariously, though: that the idea men face any negative costs/stigma isn’t as mentioned as the negative costs women face: this itself is an embodiment of the “women the privileged sex” - as Straughan asks in the video, “what are feminism doing to dismantle that?”).</p>
 ]]></summary>
 </entry>
 
