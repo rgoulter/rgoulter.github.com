@@ -8,8 +8,75 @@
         <name>Richard Goulter</name>
         <email>richard.goulter+blog@gmail.com</email>
     </author>
-    <updated>2016-05-30T00:00:00Z</updated>
+    <updated>2016-06-07T00:00:00Z</updated>
     <entry>
+    <title>Organising Things</title>
+    <link href="http://www.rgoulter.com/blog//posts/meta/2016-06-07-organising-things.html" />
+    <id>http://www.rgoulter.com/blog//posts/meta/2016-06-07-organising-things.html</id>
+    <published>2016-06-07T00:00:00Z</published>
+    <updated>2016-06-07T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<div class="info">
+    Posted on June  7, 2016
+    
+        by Richard Goulter
+    <br/>
+    
+    Tags: <a href="/tags/organising.html">organising</a>
+    
+</div>
+
+<p>From the wisdom I’ve picked up so far:<br />
+Computer Science is about managing complexity.<br />
+Programming is about breaking larger, complex problems down into smaller, solveable problems. (Which involves Naming, Abstracting, Composing).<br />
+The best program is no program; second to that, the best program is a small a program as possible.<br />
+When coming up with a data-structure/algorithm for a problem, it helps to consider what operations you often do, and to make these as cheap as possible.<br />
+The tools you use are related to how you think about the problem, to how you model the domain.<br />
+The more specific a problem you solve, the more ‘elegant’ your solution can be.</p>
+<p>I’d like to give some considerations in this post about organising things.<br />
+– Maybe it helps to consider that, in the above: “program”, “code”, or “tool” work interchangeably.</p>
+<p>At the moment I’m writing a program to track/organise where I’ve spent my money[1]. Part of this ‘organising’ would involve categorising/tagging expenses. (e.g. “Spent 100 on Steam” prob’ly not as essential as “Spent 10 on phone top-up”).</p>
+<p>In a sense, “organising stuff” is rather an ubiquitous problem. (Wisdom from my Algorithms professor: algorithms are boring, but algorithms are everywhere). – Here I’d like to consider just the organising for consuming content:</p>
+<h1 id="webpage-bookmarks">Webpage Bookmarks</h1>
+<p>There are basically two ‘operations’ you need when dealing with links:</p>
+<ul>
+<li><p>storing a bookmark to a page, with some meaningful information,</p></li>
+<li><p>finding this page later.</p></li>
+</ul>
+<p>If you were to store every webpage you ever read, with all the meta-information you’d later value, then your “organisation problem” is solved. The trouble is, or the trade-off you’d have to pay to get this, is it’d be an expensive chore to bookmark literally everything. (Also, it’s tough to know <em>what</em> you’ll find interesting about the link much later on).</p>
+<p>– My current ‘approach’ to this is basically only saving bookmarks after I find I’d refer to “something I read months ago”. That’s a somewhat expensive ‘cache-miss’. (“searching browse history” would work for this if you only ever use one computer/OS/browser..). (As well as saving “obviously interesting” things, like programming tutorials, or things that’d’ve been useful in previous arguments).</p>
+<h2 id="tools-for-links">Tools for Links</h2>
+<p>The ‘tools’ helping me with links at the moment:</p>
+<ul>
+<li><p>Pinboard - Let’s you tag bookmarks.</p>
+<ul>
+<li>Secondarily, if you search ‘globally’ for tags, it’s a nifty way for discovering what links are popular among tags. e.g. <code>t:haskell</code> for popular articles about Haskell.</li>
+</ul></li>
+<li><p>Pocket - Let’s you enqueue links as “to read later”.<br />
+(Although I’m kinda bad at the “reading later” part).</p></li>
+<li><p>Facebook/Twitter - While really poor at the archival stuff, social media (and to a lesser extent, messaging apps) is nice for content discovery. (Albeit, I find it’s rather tribal, much of the time). – This way benefits from “Share generously, bookmark conservatively”.</p></li>
+<li><p>RSS Reader - For the blogs which do have RSS feeds. Unfortunately, in order to prevent other sites copying blog content, many blogs won’t include the full blogpost content in their RSS feed, which somewhat defeats the purpose. (Scraping scripts can mitigate this, but scraping blogs is a cat-and-mouse game).</p></li>
+</ul>
+<p>– There’re other tools/techniques people can use (e.g. HN/Reddit, or sharing aggregates of links on a blog), but the above works for me. (Twitter in particular, while full of tribal garbage fires of cancer, is also pretty good at content discovery; stuff which is popular on HN/Reddit can find its way onto Tweets, too).</p>
+<h2 id="tags-tag-atrophy">Tags &amp; Tag Atrophy</h2>
+<p>Pinboard uses ‘tags’ for organising things, rather than hierarchical categories.<br />
+Tags are less constrained than categories. (Bookmarking by folders/subfolders is more disjoint, say). And you could emulate categories using tags if you’d like.</p>
+<p>– The main disadvantage to tags is the ‘atrophy’.<br />
+I find there’s a bigger difference between what tags you’d think something you stored would have compared to what category you’d expect to find it in. (I’d think there’s some atrophy to categories, too, but not as quickly, not as badly).<br />
+– Pinboard does let you ‘organise’ through your collection (or subset of) to quickly edit through your bookmarks; that strikes me as a useful tool.</p>
+<h1 id="books">Books</h1>
+<p>With books, the problem isn’t particularly “how can I recall what I’ve read” (although this is useful for non-fiction); it’s “how do I organise what to read next?”.<br />
+– This’ll vary depending on how you read (&amp; seek books to read). Maybe it’s ok to consider a TBR (or even “want to read”) pile as large/unsorted. But “what’s a book I’d enjoy” is a similar question. – For myself, I recently got around 30 books from a Kobo sale, whereas before I’d usually not keep a TBR pile of more than 2-3.</p>
+<p>The Kobo eReader apps ought to have bookshelves. (IIRC, the iOS version does, the Windows Phone version doesn’t). Bookshelves do the job as well as can be hoped, although adding/removing books to shelves can be quite clunky/awkward.</p>
+<p>I like GoodReads; at least for rating books/reviewing.[2]<br />
+– GoodReads lets you mark a book as “Want to Read”, “Currently Reading”, or “Read”. – I’d consider “TBR” as “book I own” (or “book I’ve been issued from the library”), which fits somewhere between the first two. (“DNF” is another state, somewhere between the last two). – GoodReads does let you add arbitrary shelves, so it’s common to emulate these states as shelves.</p>
+<p>In terms of discovery, both vendors like Kobo and review sites like GoodReads can (try to) compute/guess what books you might like, based on what books you’ve liked already. – Without information like that, it’s hard to consider tools which could improve <em>that</em> problem.<br />
+– I guess, drawing analogy to finding interesting links on Pinboard: for fiction, if users tagged books by their tropes, then you could search a trope to find similar books. (Sounds <a href="http://www.mayarodale.com/2016/04/27/the-surprising-reason-you-cant-find-the-right-romance-novel-and-how-one-librarian-is-fixing-it/">kinda like this</a> I guess?).</p>
+<hr />
+<p>[1] “Writing my own” is perhaps NIH Syndrome; but other solutions I’d tried for this didn’t stick.</p>
+<p>[2] …And just like LinkedIn, I’m not drawn to visit it unless I’ve some action to perform on the site. “Glorified Book Spreadsheet” is one way to summarise this common usecase of GoodReads.</p>
+]]></summary>
+</entry>
+<entry>
     <title>Kudos to the Awesome Lists</title>
     <link href="http://www.rgoulter.com/blog//posts/programming/2016-05-30-kudos-to-the-awesome-lists.html" />
     <id>http://www.rgoulter.com/blog//posts/programming/2016-05-30-kudos-to-the-awesome-lists.html</id>
@@ -353,48 +420,6 @@ The caption on the page: <em>“In 2010 the National Government weakened New Zea
 – The top comment quite helpfully suggests that it’s deceptive to display such a graph starting with 25,000 at the bottom.<br />
 What kind of mindset do you have to have to look at such job loss and say “oh, must be National’s fault”.</p>
 <p>– The failure-mode here doesn’t mean anyone holding the view is wrong about everything, of course; just that you can assume the strength of the point won’t stand up under scrutiny of discussion with those who disagree.</p>
-]]></summary>
-</entry>
-<entry>
-    <title>Inclusive Conferences Upsets People for Being Inclusive</title>
-    <link href="http://www.rgoulter.com/blog//posts/argument/2016-04-09-inclusive-conferences-upsets-people-for-being-inclusive.html" />
-    <id>http://www.rgoulter.com/blog//posts/argument/2016-04-09-inclusive-conferences-upsets-people-for-being-inclusive.html</id>
-    <published>2016-04-09T00:00:00Z</published>
-    <updated>2016-04-09T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<div class="info">
-    Posted on April  9, 2016
-    
-        by Richard Goulter
-    <br/>
-    
-    Tags: <a href="/tags/status451.html">status451</a>
-    
-</div>
-
-<p>I’ve a huge amount of respect for Alice Maz, who <a href="https://twitter.com/alicemazzy/status/715767358955106304">tweeted out</a>:</p>
-<blockquote>
-<p>lambdaconf refused to bow to the outrage mob and rescind an invitation offered to a programmer under a blind submission process. so the outraged turned on the sponsors, seeking to kill the conference entirely simply because they objected to one speaker’s writings. we of http://status451.com put together the money to purchase a sponsor slot outright. now we ask you to join us in supporting lambdaconf. what is outrageous to <em>us</em> is that a band of political ideologues want to remake our spaces in their image, catering to their views alone. we oppose those who would demand that technical speakers be vetted for political hygiene before being allowed to deliver apolitical talks. above all else we want a community where <em>everyone</em> has the freedom to do the work they love, regardless of identity <em>or</em> politics. and we are sure we are not alone in this.</p>
-</blockquote>
-<hr />
-<p><a href="http://amar47shah.github.io/posts/2016-03-28-lambdaconf-yarvin.html">amar47’s letter</a> is a gorgeous example of <em>“Don’t judge me; judge the bad guys.”</em>. I don’t doubt amar’s emotion and anger.<br />
-The letter basically says “Yarvin is a <em>bad guy</em>; he is applying to speak on a tech conference <em>with bad motive</em>.<br />
-There’s a key sentence:”But [asking women/minorities for their opinion] is damning. LambdaConf believes that it is fair for speakers to contribute unpaid labor to resolve the problem of Yarvin’s inclusion“. – Asking the people most adversely affected by the decision is damning? Surely not. I’m sure if the conference organisers had asked all attendees for equally-considered opinions, the accusation would be not giving enough weight to women/minority opinions.</p>
-<p>That Yarvis’ talk passed through a double-blind process, and the objection to Yarvis is over something completely unrelated to the conference makes this particularly .. frustrating.</p>
-<p>Viewpoints like amar’s don’t seem to understand that the sword swings both ways:</p>
-<p>The point I sympathise with the most is “but Yarvis makes many attendees uncomfortable”.<br />
-Two can play at that game, with the premises: tech is full of white dudebros; feminists/progressives make white dudebros uncomfortable; those who make attendees uncomfortable should be excluded… modus ponens.</p>
-<p>Indeed, if the majority are allowed to exclude the minority for arbitrary reasons unrelated to the content of the talk, do the pro-diversity folk really want to see how that plays out if the majority happen to have different priorities?</p>
-<p>Similarly compelling is “but Yarvis is a bad person”. (Interestingly, despite STEM’s strong favour of constructivism, the point isn’t “but Curtis is wrong” but essentially “he’s gross”). – But, similarly, “exclude the gross people” hardly seems a progressive attitude to endorse. To assert “people of that kind are bad; no way will they stick to a code of conduct” is prejudicial.</p>
-<p>– It’s also a bit cute; the far left has been lampooned for their “trigger warnings”. Here, it’s not merely enough to label an idea as bad &amp; as to be avoided; but it’s considered intolerable that such people would attend the same conference.</p>
-<hr />
-<p><a href="http://argumatronic.com/posts/2016-03-29-LambdaConf-sponsorship.html">The Haskell Book’s</a> post is better in that it comes to the right answer.</p>
-<p>– I like “Free Association is cool” point.<br />
-ClarkHat remarks on <a href="https://popehat.com/2015/06/10/two-kinds-of-freedom-of-speech-or-strangeloop-vs-curtis-yarvin/">this point</a>: in that, yeah, if people withdraw from association, it’s not exactly “censorship”, but it still sucks; &amp; that the progressives weren’t known for shouting loudly in favour of freedom-of-association in the cases where the baker refused to cater to a gay wedding.</p>
-<p>The post’s point is very close to a sensible one: It’s a net benefit that different kinds of people get to come together and discuss a topic of shared interest. (<em>That</em> is the win for “tolerance”: that people can do this despite otherwise disagreeing with each other on things). HaskellBook then goes on to say “but, yeah, I would taint a double-blind process with veto’ing; I wouldn’t invite such a person” and “well, overall it’s more in-favour of my political views than against my political views to support the conference”; such attitudes aren’t exactly a win for tolerance.<br />
-– :/ Sure, people can be free to not associate with you; I’d have more respect if the progressives were to further say “feel free to not associate with these minorities”.</p>
-<hr />
-<p>There’s a kind of irony to Status 451’s successful fundraising:<br />
-Those who angrily see tech as controlled by white dudebros and hostile to feminism will say “look, see how dominant white-dudebros are; see how little power/voice we have”. – The other side of the fence will say “look, see how opposed to diverse viewpoints the other side is; see how they seek to shut down that which they can’t control”. (And so they disagree; &amp; the sun also rises).</p>
 ]]></summary>
 </entry>
 
