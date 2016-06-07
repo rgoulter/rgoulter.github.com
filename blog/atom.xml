@@ -8,8 +8,59 @@
         <name>Richard Goulter</name>
         <email>richard.goulter+blog@gmail.com</email>
     </author>
-    <updated>2016-06-07T00:00:00Z</updated>
+    <updated>2016-06-08T00:00:00Z</updated>
     <entry>
+    <title>Reflection on Haskell Programming</title>
+    <link href="http://www.rgoulter.com/blog//posts/programming/2016-06-08-reflection-on-haskell-programming.html" />
+    <id>http://www.rgoulter.com/blog//posts/programming/2016-06-08-reflection-on-haskell-programming.html</id>
+    <published>2016-06-08T00:00:00Z</published>
+    <updated>2016-06-08T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<div class="info">
+    Posted on June  8, 2016
+    
+        by Richard Goulter
+    <br/>
+    
+    Tags: <a href="/tags/programming.haskell.html">programming.haskell</a>
+    
+</div>
+
+<p>With my free time lately I’ve been tinkering on <a href="https://github.com/rgoulter/expenses-csv-utils">a Haskell project of mine</a>.<br />
+Depending on which side of the 80-20 rule you look at, I’d say I’m “about 20% done”.</p>
+<p>I love many things about Haskell, but, I didn’t have any proper pet projects written in Haskell.<br />
+– The impetus to a Haskell project, I guess, is that for quick/dirty projects Python is a much nicer choice. (Depending on your likelihood of revisiting a project after several months/years, it may be worth considering things like “maintainability” or “ease of refactoring”, where Haskell is a much better choice).</p>
+<p>Any language will have drawbacks, and Haskell certainly has some minor ones (like weird record syntax, Cabal-Hell, etc.),<br />
+the <em>BIG</em> drawback to Haskell is its pure functions. – You <em>can’t</em> just slap a <code>printf</code> function in your function. (Concepts like laziness also mean that tracing/debugging a function could result in different results than if you don’t).<br />
+– The community is a bit mixed: some Haskell folk love Category Theory and some others are amazed things compile; documentation often tends toward academic/unhelpful. There’re many concepts to understand beyond the basics (like Lenses, Monad Transformers (let alone monads, like the State Monad), and potentially things like Template Haskell, Arrows, etc.).<br />
+etc. etc.</p>
+<p>On the other hand, of Haskell they say “if it compiles, it works”.</p>
+<h2 id="first-half-parsers">First Half: Parsers</h2>
+<p>The script-ish part of the project parses in some file format, processes this and outputs it as CSV.</p>
+<p>For writing parsers from scratch, Haskell (or some ML-family language) is a good choice. I used “megaparsec”, a purported successor to the classic parsec library. “parsec” for “Parser Combinator”.<br />
+’cause Parsec is cool, and I hadn’t had much experience writing parsers.</p>
+<p>– The file format here is so trivial that (as is) regular expressions would do the trick. (But then I would’ve had two problems).<br />
+In any case, I didn’t run into much trouble writing the parser.</p>
+<p>It would’ve been better if I’d written unit-tests for the parser earlier.</p>
+<p>In this case, the program was so quick/simple that ‘debugging’ wasn’t necessary.</p>
+<h2 id="second-half-ncurses-ui">Second Half: NCurses UI</h2>
+<p>Okay, so. If it’s not clear that writing this project has been an excuse for “playing with things I’ve not used before”, maybe the choice of a NCurses-base UI gives that away.</p>
+<p>Haskell’s <a href="https://hackage.haskell.org/package/brick">brick</a> looked interesting. It constructs/defines UI declaratively. (Loosely comparable to Elm, minus FRP concepts).<br />
+– As with most “I’m just learning this” programming, I was able to iterate on some of the sample programs. (During which, I learnt details of the API anyway, so).</p>
+<p>I’d say most of the ‘programming’ I did involved writing out types, &amp; types of functions in particular.<br />
+Haskell has a value called <code>undefined</code>, which lets you quickly stub functions. (It throws an error if evaluated. Scala has <code>???</code> which does the same thing. I think these are great). – With a type signature, you roughly know whether you can construct the output given the input; &amp; as you implement this, what other functions would be useful.<br />
+In order to test anything useful, this is rather bottom-up. The Python hacking I do would be the opposite.</p>
+<p>There was one case where code compiled, but didn’t pass its unit tests. – Though, I’d left a comment saying “To Be Implemented: (some computation)”, and this computation was what was needed for the test to pass.</p>
+<p>– Only a few times did I ever think “I wish I could put a printf there”.<br />
+In one case, I was using unsafe pattern matching (e.g. assuming an input list had at-least 2 elements), &amp; this didn’t hold. (I should’ve either relaxed this assumption, or made it so that the types I used explicitly held this assumption). – Again, I’d left a comment somewhere critical saying “To Be Implemented..”.<br />
+In another, my UI was receiving a new input, but not updating the UI components to show this.</p>
+<p>What’d I think of NCurses/Brick? Not bad. The trickiest part seems to be keeping the event-handling function to a maintainable size.</p>
+<h2 id="the-next-80">The Next 80%</h2>
+<p>Sure, I’d rather maintain a Haskell project than a Python project. But that Haskell’s compiler is so good allows you write pretty unclear code, too.<br />
+– I’d certainly like the code to be prettier.</p>
+<p>I’d also expect to iterate on the UI to see if it could better fit how I’d like to use it, but anyway.</p>
+]]></summary>
+</entry>
+<entry>
     <title>Organising Things</title>
     <link href="http://www.rgoulter.com/blog//posts/meta/2016-06-07-organising-things.html" />
     <id>http://www.rgoulter.com/blog//posts/meta/2016-06-07-organising-things.html</id>
@@ -386,40 +437,6 @@ The show takes time to show raw realities second to this main thread. (The most 
 <p>And so it’s fun to watch: to try and understand the systems at play, how tensions built could be resolved, and to see if the cat catches the mice.</p>
 <p>– Season Two started off a little weaker than the First Season, in that it all seems less spontaneous about getting this formula together. (The focus of the second season is on a different set of mice, but the aftermath-conflict in the projects from the first season is shown, also, so). But still does a satisfying job.</p>
 <p>The show’s perspective is somewhat ‘realistic’. (But surely much tamer than reality, since this is an entertainment show). – A nice effect of this is that the police team isn’t omniscient, nor omnipotent. Catching the bad guys is hard, and unlikely to happen unless enough pieces fall into place properly.</p>
-]]></summary>
-</entry>
-<entry>
-    <title>Every Ill in this World the Fault of my Other</title>
-    <link href="http://www.rgoulter.com/blog//posts/argument/2016-04-14-every-ill-in-this-world-the-fault-of-my-other.html" />
-    <id>http://www.rgoulter.com/blog//posts/argument/2016-04-14-every-ill-in-this-world-the-fault-of-my-other.html</id>
-    <published>2016-04-14T00:00:00Z</published>
-    <updated>2016-04-14T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<div class="info">
-    Posted on April 14, 2016
-    
-        by Richard Goulter
-    <br/>
-    
-    Tags: <a href="/tags/politics.html">politics</a>
-    
-</div>
-
-<p>There’s a particular failure mode I’ve been noticing more, recently:<br />
-“Everything bad is the fault of {my other}”. – e.g. the stereotypical rabid feminist blames everything on the partriarchy.<br />
-I’ve noticed it in quite polarized circles.</p>
-<p>e.g. Here’s an utterly fascinating video of Larry Elder discussing racial issues on <a href="https://www.youtube.com/watch?v=piwaBO6U43U">The Rubin Report</a>.<br />
-– As an aside, my <em>favourite</em> quote from this being Elder’s <em>“When we first started the conversation, I said ‘I hope to move you towards the centre’, and you said ‘I hope to move you towards the centre’, and I said ‘it’s not going to happen’; because there’s nothing you can tell me I haven’t heard, but I can probably say things your audience hasn’t heard.”</em>. – Perhaps another way to consider this is, Elder is in a much better position to pass an <a href="http://volokh.com/2011/06/23/the-ideological-turing-test/">Ideological Turing Test</a> than Rubin. (As further “weird part of the internet”; Elder’s mention of the liberal bias in education, media, Hollywood sounds like reference to The Cathedral).<br />
-Elder’s “I’m an American, but I’m not an African” resonated with me; (<a href="../../posts/argument/2013-07-24-i-am-a-new-zealander.markdown">I’m not a NZ European</a>).<br />
-Anyway. Around the middle of the video, Elder is frothing in the mouth in anger. But the only concessions of racist treatment Elder concedes are where the problems were caused by the Democrats: Elder sighs that he’s been called “uncle tom”, “coconut”, etc., but never otherwise mentions being treated unfavourably for his skin colour; Elder complains of the welfare that Democrats gave only to families without father-figures; Elder complains of the grievance-mongering attitudes endorsed by Democrats.<br />
-– Now. In order to say he’s wrong on any of these particular issues, you’d have to bring facts to the table. My point here isn’t whether he’s right or wrong about what he says, just demonstrating that the views he presents fit within “everything wrong is the fault of {my other}”.</p>
-<p>A post from the progressive <a href="http://thespinoff.co.nz/18-03-2016/the-catton-conundrum-what-attacks-on-the-novelist-say-about-public-debate-in-nz/">Spinoff</a> is typical of the same kindof mindset in the far left: “everything wrong is the fault of the Neo-Liberals”. (Aside: <a href="http://quillette.com/2016/04/11/confusion-about-isms-is-compounding-schisms/">quick explainer</a> about ‘-isms’ like progressivism, neo-liberalism and how they relate to classic-liberalism).<br />
-I find the piece useful as kindof an insight as to how such people think; I find it a bit disingenuous, though: e.g. The phrasing of <em>“Even in elections, where we are told every vote is equal, the pattern remains.”</em> strongly implies that votes aren’t counted as equal (which is conspiratorial, and a charge against the electoral commission), rather than communicating that voter turnout diverges (slightly) from the demographics of the nation. (Another plausible interpretation of that sentence would be a criticism of the system of election/govt. e.g. gerrymandering or so).<br />
-– The call for public discussion &amp; against active silencing is noble; I hope progressives keep this attitude in favour whenever attitudes discussed are abhorred by progressives.</p>
-<p>A hilarious example of this came up on my timeline this morning, from the <a href="https://www.facebook.com/nzgreenparty/photos/a.489359751371.266952.10779081371/10153403822456372/?type=3&amp;theater">Green Party</a>.<br />
-The caption on the page: <em>“In 2010 the National Government weakened New Zealand’s labour laws to appease Warner Brothers and promised 3,000 new screen industry jobs. But since this time, the NZ screen industry has shed 3,400 jobs. National’s backroom deals with Hollywood have failed to deliver.”</em><br />
-– The top comment quite helpfully suggests that it’s deceptive to display such a graph starting with 25,000 at the bottom.<br />
-What kind of mindset do you have to have to look at such job loss and say “oh, must be National’s fault”.</p>
-<p>– The failure-mode here doesn’t mean anyone holding the view is wrong about everything, of course; just that you can assume the strength of the point won’t stand up under scrutiny of discussion with those who disagree.</p>
 ]]></summary>
 </entry>
 
