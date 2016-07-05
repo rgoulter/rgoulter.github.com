@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Thoughts on JRPGs - Richard Goulter's Blog</title>
+        <title>Reflection on Maintaining a Toy C++ Project - Richard Goulter's Blog</title>
 
         <!-- My (Old) CSS theme -->
         <link rel="stylesheet" type="text/css" href="../../css/default.css" />
@@ -128,47 +128,54 @@
             <hr style="margin: 0px; border-top: 5px solid black;" />
 
             <div id="content" class="container">
-                <h1>Thoughts on JRPGs</h1>
+                <h1>Reflection on Maintaining a Toy C++ Project</h1>
                 <div class="info">
-    Posted on June 24, 2016
+    Posted on July  5, 2016
     
         by Richard Goulter
     <br />
     
-    Tags: <a href="../../tags/game.final%20fantasy.html">game.final fantasy</a>, <a href="../../tags/game.chrono%20trigger.html">game.chrono trigger</a>
+    Tags: <a href="../../tags/programming.c%2B%2B.html">programming.c++</a>, <a href="../../tags/programming.github.html">programming.github</a>
     
 </div>
 
-<p>My friends told me the PlayStation Vita is a weaboo’s console. While I’d say Sony have badly mismanaged the console, focussing instead on their PS4, one advantage is a decent catalogue of JRPGs available. (Since the Vita is portable, you can play through these on the bus or the train or whatever).</p>
-<p>So far, my experience in JRPGs consists of Final Fantasy IV, Chrono Trigger and Final Fantasy VII. (With “South Park: Stick of Truth” being the closest I’d otherwise experienced of the genre).</p>
-<h3 id="combat">Combat</h3>
-<p>“Western RPGs are for gameplay, Japanese RPGs are for story” is the rule of thumb I was told.<br />
-In case you’ve not played (or seen) Final Fantasy’s combat in these games, it consists of turn-based-ish combat on a screen where the monsters are on the left, good guys on the right; each turn you pick an action (attack/cast magic/use item). (Then you get EXP, level up your characters, etc.). – Chrono Trigger’s combat is a bit more active/involved, but <em>roughly</em> follows the same format.</p>
-<p>The character’s Health (HP) and Mana (MP) persist across battles; and can be replenished by resting at inns (which are few / far between), or by using items (like potions, which are relatively expensive). So the gameplay-dynamic becomes trying to gain experience / get to where you need to be without using too many resources, while being careful to not let HP get too low.<br />
-– South Park’s system replenished HP/MP for each battle; with this rule, characters can simply use all their most powerful magic spells without concern for the cost to MP.</p>
-<p>So. It’s fair to say these JRPGs combat system isn’t <em>trivial</em>. And FFIV does pull dick-moves in its boss fights, such as only being able to fight particular bosses with particular magic spells (or else the boss uses super-strong counter-attacks).</p>
-<p>Yet, one main ‘drawback’ to the JRPGs is the ‘grinding’: since your characters have levels, as do the enemies, the game may demand that the player repeatedly fight through enemy encounters to level up the characters. It’s more monotonous than not. (FFIV even provides the option to automatically select the same move as previous turns; which alleviates the grinding by way of ‘not really playing the game’).</p>
-<p>In a way, it’s rather twisted way of making gameplay ‘accessible’: Typically, if you’re not skilled at playing a game, you can’t proceed. With levelled-games, all you need to do is grind-through enough enemies until what was previously insurmountable becomes .. surmountable.</p>
-<h3 id="referring-to-the-wiki">Referring to the Wiki</h3>
-<p>Perhaps my preference for games is decidedly more linear, but, sure, I looked up the wiki for these games while playing through them.<br />
-The biggest impact this has is you’ll find out about all the best items/weapons, many of which you’ll probably miss the opportunity to get on first try.</p>
-<p>There were times I got quite lost/stuck as to where I should be headed, too, in these games. That could also be due to how old these games are.</p>
-<h3 id="characters-and-story">Characters and Story</h3>
-<p>I think what FFVII was significantly weaker than FFIV and Chrono Trigger in the “ludonarrative” aspect of characters: In the latter, you have specific characters with fixed magic abilities. This strictly dictates how you can fight. (Particularly, “do you have a healer?”). – FFVII lets you pick &amp; choose which characters have which magic spells, &amp; so as far as I can tell it’s all rather arbitrary.</p>
-<p>I, uh, had quite a long hiatus during my playthrough of FFVII; so some aspects of the story confused me. (FFIV, Chrono Trigger were much more tractable).</p>
-<p>It’d be fair to say that these games let the characters develop by way of sidequests; these would elaborate more on the back-story of the character. By exploring more, you’d get more story, and better weapons/etc. (hopefully).</p>
-<h2 id="conclusion">Conclusion</h2>
-<p>These games are certainly classics, although they do show their age. I can’t say I’d enthusiastically recommend them, but the artistic style is quite cute, &amp; I don’t feel I wasted my time playing them.</p>
+<p>A few years ago, for a course on Computational Geometry, my team made a program aiming for a stain-glass effect using Voronoi Diagrams.</p>
+<p>To quickly explain:<br />
+Voronoi Diagrams show the regions which are closest to each point. e.g. for 2 points, you’d bisect the space between them. – By analogy, each ‘point’ would be pizza-delivery, and each region would be the region served by that store.<br />
+We’d found a <a href="http://www.cs.swarthmore.edu/%7Eadanner/cs97/s08/papers/gorbach.pdf">cool paper</a> explaining how to create a “stained-glass effect” using Voronoi diagrams. (Roughly, since edges in a Voronoi diagram are equidistant to two points, you wanna make points which are equidistant to edges on some input image: using an edge-detection filter of the image, you can construct a probability-distribution defined as “0 for an edge or far away from an edge, but quite high for close to an edge”… etc. etc.).</p>
+<p>But, uh, this was a school assignment.<br />
+The original assignment was in four stages; the first three iterating towards a Delaunay Algorithm, using precise big-int computations. (Delaunay is the dual of Voronoi; where Voronoi shows the regions, a Delaunay Triangulation shows which points are closest to each other. Btw, besides stained-glass effects, there’re a bunch of practical applications to this). (Another fun fact: during this assignment, one of the teammates rage-quitted to go do a whole project by himself, which he never presented on. I had all the luck for getting teammates in uni).<br />
+Part four was “do something cool”.<br />
+The trouble with this being that the assignment was initially in C++. (I think ‘cause the module was taught by the same Professor who taught ’Intro to Computer Graphics’, which used OpenGL in C++). – Fun fact, the given code wasn’t “const correct” &amp; so wouldn’t compile with compilers not on Windows; oddly, Uni courses are one of the places where Windows is presumed. The trouble with C++ in University courses is, unless the code is monkey-see-monkey-do, or the students are <em>really</em> good at C++, then there’s just too much C++ lets you screw up with to be a good language to use. (I recall at the time a teammate included a hard-coded <code>include &quot;C:\\Users\\username\\....\\whatever.h&quot;</code>, because how the hell are you supposed to know that’s not The Right Thing to do?).<br />
+(Besides that, it’s much more difficult to install/setup dependencies for a C++ than for other languages like Python or Java).<br />
+Only for the most basic things can a programmer get away with blindly writing C++.</p>
+<p>Somehow, we managed to get something which worked (ish) submitted. (When I presented it to the class, I said it was “<em>half</em> cool”; ’cause it was a really cool project but it was only half-working).</p>
+<p>I put it on my GitHub.<br />
+I’d tinkered with it a year ago, enough to fix some <code>SEGFAULT</code> I was somehow getting.<br />
+– Going through job interviews at the moment, I can see that the places I apply to will at least look at my GitHub; and <a href="https://github.com/rgoulter/cs5237-VoronoiArt">this project</a> is my only C++ project. Fortunately, no one gives enough of a shit to actually try out the project (since, as I discovered tinkering with it again recently, the code had some other <code>SEGFAULT</code> issue in normal use),=; unfortunately, I’d reckon even at a glance the project was in pretty bad shape. (Maybe not ‘typical undergrad C++’ bad, but still).</p>
+<p>– To be honest, most of what made me say that was superficial: poorly arranged files, inconsistently named files, and inconsistent coding conventions. Prob’ly my favourite being <code>halfcamelCase</code> which annoyed the hell out of me. – In fairness, there were a number of ‘bad’ C++ things (heavy use of <code>extern</code>/global variables, <em>really long</em> methods/functions, etc. – I did write down the things I reckoned were shit; it’s theraputic).<br />
+People glancing at the repo (e.g. people I’m applying to for a job) can notice the former easily; and when the latter isn’t so egregious, it’s difficult to notice. – But that’s not really a good excuse. I feel it’s not insane to say “well-designed &gt; testable &gt; working &gt; not-working”. Software is fragile, so “working” is often going to become “not working”. Testable code lets you know this <em>quickly</em>. And well-designed code is easy to bring under test (and/or, a good design makes it really difficult to write bad code on top of it).</p>
+<p>Btw, “legacy code” = any code which is untested. lol, most of aforementioned codebase is “legacy”.<br />
+In fact, in the days after we presented, the others worked their arses off to get it somewhat working. – Looking at the code again, I came across comments written in Czech. Given that my teammates were Kazakhstani and Indian, I figure this means they “adapted” the code from somewhere else. (TBH, I don’t doubt that they worked hard). – Though, looking at the code we had from the parts one to three, I kinda don’t blame them. – I don’t excuse them, either; after tidying up the code to remove the egregious Bad Things (tm), the code still doesn’t work, but at least the shit is within-functions rather than at a project-level; which is testable.<br />
+(For myself, the code I wrote was the Qt &amp; OpenGL code. The uni graphics courses are quite happy to use GLUT.. I wanted a “real GUI”. – I’d made mistakes in loading the image into OpenGL texture coordinates, so the rendering would sometimes [though not always] be wonky).</p>
+<p>– One thing I’ll note is about ‘cognitive load’: Programmers tend to know about the immediate-term cognitive-load, where if interrupted from being “in the zone”, it takes time to get back to the task at hand. – I think the thing most undergrads miss out on by not maintaining projects over a long term is the experience of why documentation is important. Coming back to the codebase after 1-2 years without touching it, especially a not-well-designed codebase, it’s <em>really</em> not clear what a particular function is for. Documentation, like <em>good names</em>, as well as describing what a function does (and what it assumes) is surely useful. Or, rather, in its absence, it takes quite some time to read through <em>to remember</em> what things were for. (&amp; that’s with the advantage of having once before carried such a cognitive load).<br />
+– As well, for non-trivial algorithms (like Delaunay Triangulation, or constructing a Voronoi Diagram using Fortune’s Algorithm), absence of high-level explanations is quite annoying.</p>
+<p>C++ itself is pretty brutal for novice-codebases.<br />
+Unlike Rust, C++ is quite happy to let you do stupid shit (but then yell at you about it at runtime). – “<code>NullPointerException</code> is for wimp languages” is what C++ must think. Apparently C++ also thinks “just wing it” when a function never returns a value (when it’s supposed to return a value), which led to some deal of “wtf, it’s not even possible to construct a value like that!”, before I realised this. (No, really, wtf C++?).<br />
+Java &amp; JVM languages happily print a stacktrace indicating <em>where</em> an error occurred; “where” meaning not just which line-of-code, but the function calls leading to it. – With a “pretty bad undergrad” codebase, it can be pretty shitty to find where the sinner is.<br />
+– I mean, Rust looks hard as hell (for the borrowing/lifetimes stuff), but at least it’s damned-hard to run into errors like this.</p>
+<p>Anyway.<br />
+The project isn’t <em>that bad</em> at the moment. (The older code for Delaunay Triangulation is, but the rest ain’t). – “Why not start from scratch?” is a nice temptation, but it’s usually better to iterate towards a good solution than to start from scratch.<br />
+If I was so concerned about a blight in my GitHub profile, yeah, maybe it’d’ve been better to remove it. But as a “cool project which mostly works”, it’d’ve been a shame to lose.</p>
+<p>Also, protip: if you go too far while climbing Ballmer’s Peak, coding becomes less interesting.</p>
 
 
 <hr />
 
 <div>
     
-    <a href="../../posts/programming/2016-07-05-reflection-on-maintaining-a-toy-c-project.html" style="float:left;">Newer post</a>
     
-    
-    <a href="../../posts/meta/2016-06-20-brief-thoughts-on-purpose-of-writing-arguing.html" style="float:right; text-align: right;">Older post</a>
+    <a href="../../posts/games/2016-06-24-thoughts-on-jrpgs.html" style="float:right; text-align: right;">Older post</a>
     
 </div>
 <br style="clear: both;" />
@@ -179,9 +186,9 @@ The biggest impact this has is you’ll find out about all the best items/weapon
     <script type="text/javascript">
         /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
         var disqus_shortname = 'richardgoultersblog'; // required: replace example with your forum shortname
-        var disqus_identifier = '/posts/games/2016-06-24-thoughts-on-jrpgs.html';
-        var disqus_url = 'http://www.rgoulter.com/blog' + '/posts/games/2016-06-24-thoughts-on-jrpgs.html';
-        var disqus_title = 'Thoughts on JRPGs - June 24, 2016';
+        var disqus_identifier = '/posts/programming/2016-07-05-reflection-on-maintaining-a-toy-c-project.html';
+        var disqus_url = 'http://www.rgoulter.com/blog' + '/posts/programming/2016-07-05-reflection-on-maintaining-a-toy-c-project.html';
+        var disqus_title = 'Reflection on Maintaining a Toy C++ Project - July  5, 2016';
 
         /* * * DON'T EDIT BELOW THIS LINE * * */
         (function() {
