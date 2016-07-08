@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Reflection on Maintaining a Toy C++ Project - Richard Goulter's Blog</title>
+        <title>Men of Valor Has Not Aged Well - Richard Goulter's Blog</title>
 
         <!-- My (Old) CSS theme -->
         <link rel="stylesheet" type="text/css" href="../../css/default.css" />
@@ -128,56 +128,37 @@
             <hr style="margin: 0px; border-top: 5px solid black;" />
 
             <div id="content" class="container">
-                <h1>Reflection on Maintaining a Toy C++ Project</h1>
+                <h1>Men of Valor Has Not Aged Well</h1>
                 <div class="info">
-    Posted on July  5, 2016
+    Posted on July  9, 2016
     
         by Richard Goulter
     <br />
     
-    Tags: <a href="../../tags/programming.c%2B%2B.html">programming.c++</a>, <a href="../../tags/programming.github.html">programming.github</a>
+    Tags: <a href="../../tags/games.men%20of%20valor.html">games.men of valor</a>, <a href="../../tags/steam.html">steam</a>
     
 </div>
 
-<p>A few years ago, for a course on Computational Geometry, my team made a program aiming for a stain-glass effect using Voronoi Diagrams.</p>
-<p>To quickly explain:<br />
-Voronoi Diagrams show the regions which are closest to each point. e.g. for 2 points, you’d bisect the space between them. – By analogy, each ‘point’ would be pizza-delivery, and each region would be the region served by that store.<br />
-We’d found a <a href="http://www.cs.swarthmore.edu/%7Eadanner/cs97/s08/papers/gorbach.pdf">cool paper</a> explaining how to create a “stained-glass effect” using Voronoi diagrams. (Roughly, since edges in a Voronoi diagram are equidistant to two points, you wanna make points which are equidistant to edges on some input image: using an edge-detection filter of the image, you can construct a probability-distribution defined as “0 for an edge or far away from an edge, but quite high for close to an edge”… etc. etc.).</p>
-<p>But, uh, this was a school assignment.<br />
-The original assignment was in four stages; the first three iterating towards a Delaunay Algorithm, using precise big-int computations. (Delaunay is the dual of Voronoi; where Voronoi shows the regions, a Delaunay Triangulation shows which points are closest to each other. Btw, besides stained-glass effects, there’re a bunch of practical applications to this). (Another fun fact: during this assignment, one of the teammates rage-quitted to go do a whole project by himself, which he never presented on. I had all the luck for getting teammates in uni).<br />
-Part four was “do something cool”.<br />
-The trouble with this being that the assignment was initially in C++. (I think ‘cause the module was taught by the same Professor who taught ’Intro to Computer Graphics’, which used OpenGL in C++). – Fun fact, the given code wasn’t “const correct” &amp; so wouldn’t compile with compilers not on Windows; oddly, Uni courses are one of the places where Windows is presumed. The trouble with C++ in University courses is, unless the code is monkey-see-monkey-do, or the students are <em>really</em> good at C++, then there’s just too much C++ lets you screw up with to be a good language to use. (I recall at the time a teammate included a hard-coded <code>include &quot;C:\\Users\\username\\....\\whatever.h&quot;</code>, because how the hell are you supposed to know that’s not The Right Thing to do?).<br />
-(Besides that, it’s much more difficult to install/setup dependencies for a C++ than for other languages like Python or Java).<br />
-Only for the most basic things can a programmer get away with blindly writing C++.</p>
-<p>Somehow, we managed to get something which worked (ish) submitted. (When I presented it to the class, I said it was “<em>half</em> cool”; ’cause it was a really cool project but it was only half-working).</p>
-<p>I put it on my GitHub.<br />
-I’d tinkered with it a year ago, enough to fix some <code>SEGFAULT</code> I was somehow getting.<br />
-– Going through job interviews at the moment, I can see that the places I apply to will at least look at my GitHub; and <a href="https://github.com/rgoulter/cs5237-VoronoiArt">this project</a> is my only C++ project. Fortunately, no one gives enough of a shit to actually try out the project (since, as I discovered tinkering with it again recently, the code had some other <code>SEGFAULT</code> issue in normal use),=; unfortunately, I’d reckon even at a glance the project was in pretty bad shape. (Maybe not ‘typical undergrad C++’ bad, but still).</p>
-<p>– To be honest, most of what made me say that was superficial: poorly arranged files, inconsistently named files, and inconsistent coding conventions. Prob’ly my favourite being <code>halfcamelCase</code> which annoyed the hell out of me. – In fairness, there were a number of ‘bad’ C++ things (heavy use of <code>extern</code>/global variables, <em>really long</em> methods/functions, etc. – I did write down the things I reckoned were shit; it’s theraputic).<br />
-People glancing at the repo (e.g. people I’m applying to for a job) can notice the former easily; and when the latter isn’t so egregious, it’s difficult to notice. – But that’s not really a good excuse. I feel it’s not insane to say “well-designed &gt; testable &gt; working &gt; not-working”. Software is fragile, so “working” is often going to become “not working”. Testable code lets you know this <em>quickly</em>. And well-designed code is easy to bring under test (and/or, a good design makes it really difficult to write bad code on top of it).</p>
-<p>Btw, “legacy code” = any code which is untested. lol, most of aforementioned codebase is “legacy”.<br />
-In fact, in the days after we presented, the others worked their arses off to get it somewhat working. – Looking at the code again, I came across comments written in Czech. Given that my teammates were Kazakhstani and Indian, I figure this means they “adapted” the code from somewhere else. (TBH, I don’t doubt that they worked hard). – Though, looking at the code we had from the parts one to three, I kinda don’t blame them. – I don’t excuse them, either; after tidying up the code to remove the egregious Bad Things (tm), the code still doesn’t work, but at least the shit is within-functions rather than at a project-level; which is testable.<br />
-(For myself, the code I wrote was the Qt &amp; OpenGL code. The uni graphics courses are quite happy to use GLUT.. I wanted a “real GUI”. – I’d made mistakes in loading the image into OpenGL texture coordinates, so the rendering would sometimes [though not always] be wonky).</p>
-<p>– One thing I’ll note is about ‘cognitive load’: Programmers tend to know about the immediate-term cognitive-load, where if interrupted from being “in the zone”, it takes time to get back to the task at hand. – I think the thing most undergrads miss out on by not maintaining projects over a long term is the experience of why documentation is important. Coming back to the codebase after 1-2 years without touching it, especially a not-well-designed codebase, it’s <em>really</em> not clear what a particular function is for. Documentation, like <em>good names</em>, as well as describing what a function does (and what it assumes) is surely useful. Or, rather, in its absence, it takes quite some time to read through <em>to remember</em> what things were for. (&amp; that’s with the advantage of having once before carried such a cognitive load).<br />
-– As well, for non-trivial algorithms (like Delaunay Triangulation, or constructing a Voronoi Diagram using Fortune’s Algorithm), absence of high-level explanations is quite annoying.</p>
-<p>C++ itself is pretty brutal for novice-codebases.<br />
-Unlike Rust, C++ is quite happy to let you do stupid shit (but then yell at you about it at runtime). – “<code>NullPointerException</code> is for wimp languages” is what C++ must think. Apparently C++ also thinks “just wing it” when a function never returns a value (when it’s supposed to return a value), which led to some deal of “wtf, it’s not even possible to construct a value like that!”, before I realised this. (No, really, wtf C++?).<br />
-Java &amp; JVM languages happily print a stacktrace indicating <em>where</em> an error occurred; “where” meaning not just which line-of-code, but the function calls leading to it. – With a “pretty bad undergrad” codebase, it can be pretty shitty to find where the sinner is.<br />
-– I mean, Rust looks hard as hell (for the borrowing/lifetimes stuff), but at least it’s damned-hard to run into errors like this.</p>
-<p>Anyway.<br />
-The project isn’t <em>that bad</em> at the moment. (The older code for Delaunay Triangulation is, but the rest ain’t). – “Why not start from scratch?” is a nice temptation, but it’s usually better to iterate towards a good solution than to start from scratch.<br />
-If I was so concerned about a blight in my GitHub profile, yeah, maybe it’d’ve been better to remove it. But as a “cool project which mostly works”, it’d’ve been a shame to lose.</p>
-<p>Also, protip: if you go too far while climbing Ballmer’s Peak, coding becomes less interesting.</p>
+<p>It’s kindof fun to see a game you’d seen on store shelves 10 years ago, available on Steam.</p>
+<p>In this case, <a href="http://store.steampowered.com/app/411330/">Men of Valor</a>, with a usual-price of S$10.50, and at the time of writing, on sale for 75% off. – Look, I removed my payment details from Steam during the Summer Sale, but I can hardly feel bad about a single S$2.62 purchase.</p>
+<p>– The other experience I’d had with ‘old shooters’ was “Shadow Ops: Red Mercury”, for S$1.05. Which, uh, wasn’t great.</p>
+<p>I think in terms of “action/war shooters”, Call of Duty gets its fair share of complaints for being …. dumb, non-stop ADHD explosions and mayhem. (A lot of the criticism also focussed on the multiplayer experience in those games; though I only play the single-player campaigns).<br />
+That’s a bit unfair, I’d say; since the older CoD games still hold up relatively well in contrast to the aforementioned.</p>
+<p>“Shadow Ops: Red Mercury”’s gameplay felt a bit awkward to me. One game mechanic absent from gameplay was, you couldn’t pick up an enemy’s gun; which seems like something insignificant, but every other shooter I’ve played featured that. It also felt cheap, the gameplay felt tacky. (So I ended up getting the cheat codes and having a lot of fun with it that way; so I can hardly regret the purchase).</p>
+<p>“Men of Valor”, while I’ve only played a handful of chapters, also feels a bit tacky in comparison. (MoH:AA was published <s>around the same time</s> in 2002, [2 years before SO:RM or MoV], CoD <s>not much later</s> in 2004; “Battlefield: Vietnam” in 2004;“Far Cry” in 2004!).<br />
+MoV’s story &amp; cutscenes are cheap and tacky, fine. But the gameplay … MoV’s health system allows you to die pretty quickly. In typical modern shooters, this is counter-balanced by mechanics like a cover-system, or by e.g. health regeneration. MoV’s mitigation is some delay before enemies shoot at you, &amp; that you must ‘bandage’ the damage received. (i.e., damage you receive is essentially ‘potential damage’, so you ‘bandage’ it to heal the potential damage. But being shot completely will kill you; so the system has all the drawbacks of a CoD-style system and a Far Cry-style system, without the benefits of either).<br />
+– It’s just not fun to play; every time I picked it up, my main motivation to keep playing the level was the thought of how fucking boring it would be to replay through the level (&amp; shitty cutscenes).</p>
+<p>In a way, I kindof feel bad about it. (Or I did, before learning that these shitty games were released the same year “Far Cry” was).<br />
+CoD’s gameplay style (frequent checkpoints, wherein checkpoints are free; quick/free recovery of health from behind cover, etc.) don’t particularly create high-stakes. The player is there for the ride, not for an experience which demands anything of them.<br />
+I guess what CoD, and other good shooters (like <a href="https://upload.wikimedia.org/wikipedia/commons/6/63/Quake_-_family_tree.svg">those using a Quake engine</a>) 10 years ago established/relied on good game mechanics (&amp; so don’t age abysmally); which these shitty cheap ones I’ve mentioned earlier … didn’t.</p>
 
 
 <hr />
 
 <div>
     
-    <a href="../../posts/games/2016-07-09-men-of-valor-has-not-aged-well.html" style="float:left;">Newer post</a>
     
-    
-    <a href="../../posts/games/2016-06-24-thoughts-on-jrpgs.html" style="float:right; text-align: right;">Older post</a>
+    <a href="../../posts/programming/2016-07-05-reflection-on-maintaining-a-toy-c-project.html" style="float:right; text-align: right;">Older post</a>
     
 </div>
 <br style="clear: both;" />
@@ -188,9 +169,9 @@ If I was so concerned about a blight in my GitHub profile, yeah, maybe it’d’
     <script type="text/javascript">
         /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
         var disqus_shortname = 'richardgoultersblog'; // required: replace example with your forum shortname
-        var disqus_identifier = '/posts/programming/2016-07-05-reflection-on-maintaining-a-toy-c-project.html';
-        var disqus_url = 'http://www.rgoulter.com/blog' + '/posts/programming/2016-07-05-reflection-on-maintaining-a-toy-c-project.html';
-        var disqus_title = 'Reflection on Maintaining a Toy C++ Project - July  5, 2016';
+        var disqus_identifier = '/posts/games/2016-07-09-men-of-valor-has-not-aged-well.html';
+        var disqus_url = 'http://www.rgoulter.com/blog' + '/posts/games/2016-07-09-men-of-valor-has-not-aged-well.html';
+        var disqus_title = 'Men of Valor Has Not Aged Well - July  9, 2016';
 
         /* * * DON'T EDIT BELOW THIS LINE * * */
         (function() {

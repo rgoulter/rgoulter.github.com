@@ -8,8 +8,38 @@
         <name>Richard Goulter</name>
         <email>richard.goulter+blog@gmail.com</email>
     </author>
-    <updated>2016-07-05T00:00:00Z</updated>
+    <updated>2016-07-09T00:00:00Z</updated>
     <entry>
+    <title>Men of Valor Has Not Aged Well</title>
+    <link href="http://www.rgoulter.com/blog//posts/games/2016-07-09-men-of-valor-has-not-aged-well.html" />
+    <id>http://www.rgoulter.com/blog//posts/games/2016-07-09-men-of-valor-has-not-aged-well.html</id>
+    <published>2016-07-09T00:00:00Z</published>
+    <updated>2016-07-09T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<div class="info">
+    Posted on July  9, 2016
+    
+        by Richard Goulter
+    <br/>
+    
+    Tags: <a href="/tags/games.men%20of%20valor.html">games.men of valor</a>, <a href="/tags/steam.html">steam</a>
+    
+</div>
+
+<p>It’s kindof fun to see a game you’d seen on store shelves 10 years ago, available on Steam.</p>
+<p>In this case, <a href="http://store.steampowered.com/app/411330/">Men of Valor</a>, with a usual-price of S$10.50, and at the time of writing, on sale for 75% off. – Look, I removed my payment details from Steam during the Summer Sale, but I can hardly feel bad about a single S$2.62 purchase.</p>
+<p>– The other experience I’d had with ‘old shooters’ was “Shadow Ops: Red Mercury”, for S$1.05. Which, uh, wasn’t great.</p>
+<p>I think in terms of “action/war shooters”, Call of Duty gets its fair share of complaints for being …. dumb, non-stop ADHD explosions and mayhem. (A lot of the criticism also focussed on the multiplayer experience in those games; though I only play the single-player campaigns).<br />
+That’s a bit unfair, I’d say; since the older CoD games still hold up relatively well in contrast to the aforementioned.</p>
+<p>“Shadow Ops: Red Mercury”’s gameplay felt a bit awkward to me. One game mechanic absent from gameplay was, you couldn’t pick up an enemy’s gun; which seems like something insignificant, but every other shooter I’ve played featured that. It also felt cheap, the gameplay felt tacky. (So I ended up getting the cheat codes and having a lot of fun with it that way; so I can hardly regret the purchase).</p>
+<p>“Men of Valor”, while I’ve only played a handful of chapters, also feels a bit tacky in comparison. (MoH:AA was published <s>around the same time</s> in 2002, [2 years before SO:RM or MoV], CoD <s>not much later</s> in 2004; “Battlefield: Vietnam” in 2004;“Far Cry” in 2004!).<br />
+MoV’s story &amp; cutscenes are cheap and tacky, fine. But the gameplay … MoV’s health system allows you to die pretty quickly. In typical modern shooters, this is counter-balanced by mechanics like a cover-system, or by e.g. health regeneration. MoV’s mitigation is some delay before enemies shoot at you, &amp; that you must ‘bandage’ the damage received. (i.e., damage you receive is essentially ‘potential damage’, so you ‘bandage’ it to heal the potential damage. But being shot completely will kill you; so the system has all the drawbacks of a CoD-style system and a Far Cry-style system, without the benefits of either).<br />
+– It’s just not fun to play; every time I picked it up, my main motivation to keep playing the level was the thought of how fucking boring it would be to replay through the level (&amp; shitty cutscenes).</p>
+<p>In a way, I kindof feel bad about it. (Or I did, before learning that these shitty games were released the same year “Far Cry” was).<br />
+CoD’s gameplay style (frequent checkpoints, wherein checkpoints are free; quick/free recovery of health from behind cover, etc.) don’t particularly create high-stakes. The player is there for the ride, not for an experience which demands anything of them.<br />
+I guess what CoD, and other good shooters (like <a href="https://upload.wikimedia.org/wikipedia/commons/6/63/Quake_-_family_tree.svg">those using a Quake engine</a>) 10 years ago established/relied on good game mechanics (&amp; so don’t age abysmally); which these shitty cheap ones I’ve mentioned earlier … didn’t.</p>
+]]></summary>
+</entry>
+<entry>
     <title>Reflection on Maintaining a Toy C++ Project</title>
     <link href="http://www.rgoulter.com/blog//posts/programming/2016-07-05-reflection-on-maintaining-a-toy-c-project.html" />
     <id>http://www.rgoulter.com/blog//posts/programming/2016-07-05-reflection-on-maintaining-a-toy-c-project.html</id>
@@ -433,55 +463,6 @@ Andrei Alexandrescu (guy who coined the term “modern C++”; architect of the 
 <p>I think what’s not immediately obvious is how to pick up &amp; use these languages for tiny projects.<br />
 Python is my go-to language for quick scripts where I just wanna scratch something together. It’s not that these aren’t “programs” or “projects”, but I don’t wanna worry about setting up any kind of package-file, nor freezing dependencies, etc.<br />
 – I don’t necessarily doubt that it’s possible to quickly get something together in Elm or Rust in the same way; but I wonder if this baggage of “things a $LANGUAGE developer knows how to do which a newcomer doesn’t” couldn’t be more obvious to pick up.</p>
-]]></summary>
-</entry>
-<entry>
-    <title>Review of The Righteous Mind</title>
-    <link href="http://www.rgoulter.com/blog//posts/narrative/2016-05-15-review-of-the-righteous-mind.html" />
-    <id>http://www.rgoulter.com/blog//posts/narrative/2016-05-15-review-of-the-righteous-mind.html</id>
-    <published>2016-05-15T00:00:00Z</published>
-    <updated>2016-05-15T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<div class="info">
-    Posted on May 15, 2016
-    
-        by Richard Goulter
-    <br/>
-    
-    Tags: <a href="/tags/media.the%20righteous%20mind.html">media.the righteous mind</a>, <a href="/tags/righteous%20mind.html">righteous mind</a>
-    
-</div>
-
-<p>I’ve been a big fan of Jonathan Haidt since seeing his <a href="https://www.youtube.com/watch?v=b86dzTFJbkc">2013 Boyarsky Lecture</a>, in which he explains his Moral Foundations Theory. – It’s compelling as showing how conservatives can hold morality differently than the social-justice crowd holds it.</p>
-<p>I finally got around to reading the actual book, rather than just picking up tidbits from various articles, podcasts and videos.<br />
-Very much worth reading.</p>
-<h2 id="compared-to-previous-things-id-read">Compared to Previous Things I’d Read</h2>
-<p>The book has a somewhat different emphasis than just MFT + explanations of various cultural rifts:<br />
-Each part presents a metaphor/model:</p>
-<ul>
-<li><p>The first part emphasises our morality is guided by intuition: a quick emotional reaction, followed by post-hoc, strategic rational justification.<br />
-As Hume said, rationality should be servant to the emotions. Haidt presents the model of an emotional/intuitional elephant, ‘guided’ by a rational rider: the rider often has little control over what the elephant is doing, but can come up with great justifications.<br />
-– Also emphasised is Glaucon’s stance in Plato’s Republic: People care more about the <em>appearance</em> of being virtuous, than actually being virtuous.</p></li>
-<li><p>The second part establishes Moral Foundations Theory, Morality is underlaid by at least six foundations: Care, Fairness, Liberty, Loyalty, Authority, and Sanctity. (Many of the articles I’ve come across emphasise this aspect, as well as e.g. differences between American Left &amp; Right).</p>
-<p>Emphasised is that WEIRD people (Western, Educated, etc.) see objects and individuals where others see relations and groups.<br />
-In terms of US/Western politics: Lefties highly value Care MF, and to a lesser extent Liberty/Fairness. Libertarians care about Liberty and pretty much nothing else. Righties care about each of the MFs. (Given that Righties care about everything Lefties do, but not vice versa, Righties are better able to pass Ideological Turing Test as Lefties than Lefties of Righties; Lefties just don’t see how Authority, Sanctity could affect for morality).</p></li>
-<li><p>The third part models humans as “90% chimps, 10% bees”; humans distinctly are able to cooperate in large groups which aren’t necessarily kinsfolk. – The ‘chimps’ aspect is our individuality, the ‘bees’ aspect is our hive-minded nature.<br />
-– This part of the book largely argues the case for ‘group selection’, &amp; that humans’ righteous religiousity allowed our species to work in groups.</p></li>
-</ul>
-<p>The book is filled with interesting tidbits, stories, and occasionally diagrams. One interesting one was this ‘Social Intuitionist’ model:</p>
-<div class="figure">
-<img src="http://i.imgur.com/g57wfrI.jpg" />
-
-</div>
-<p>The takeaway from this model was, as intuition drives our judgement (&amp; reasoning follows judgement), it’s ineffective to try and change someone’s judgement directly through reasoning. (Possible, but rare). More effective was “elephant to elephant”, nudging an intuition from a socially respected source. (Since <em>appearing</em> respectable is important, intuition is more willing to yield). – As discussion progressed, after intuitions had adjusted, reasoning was more likely to persuade.<br />
-Haidt later remarks about US Democrats vs Republicans; that Democrats have done so poorly in recent decades because Democrats’ speeches tend to talk to the elephant’s rider, whereas Republicans’ speeches resonate more with the elephant.</p>
-<p>“Moral Matrix” is another recurring model in the book: ‘Matrix’ like the film, where under the binding/blinding righteousness, reality is distorted by one’s moral tastes.<br />
-– The suggestion is to try and see things from within another’s moral matrix; to first gain social respect, then adjust intuition talking to the elephant, then to the rider.</p>
-<h3 id="diversity-groups">Diversity &amp; Groups</h3>
-<p>This was a bit interesting.<br />
-I guess it makes sense in terms of, ‘our righteousness binds us together, blinds us to inconvenient truths’, but there was the remark that the more diverse a group, the less capable it was. – It’s not that more diverse groups drew more love of in-group, hatred of out-group, but instead an ‘anomie’: individuals were more socially isolated. (So, in order to get different people to work together, it’s better to emphasise <em>similarities</em>; highlighting differences has negative effects).</p>
-<p>– This also came up in terms of the yin/yang of Am-Liberals v Conservatives; under Am-Liberals, society grows more diverse, “falls apart” under anomie. Conservatives valued ‘moral capital’ more, &amp; preserved social/moral order. – Conservatives protect <a href="http://www.chesterton.org/taking-a-fence-down/">Chesterton’s Fence</a>. – As a selection process, the society which is best able to balance progress vs stability wins.</p>
-<hr />
-<p>So, yes, it’s well worth reading “The Righteous Mind” for its ideas even with some awareness of the amazing thing JHaidt tends to say.</p>
 ]]></summary>
 </entry>
 
