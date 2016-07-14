@@ -8,8 +8,146 @@
         <name>Richard Goulter</name>
         <email>richard.goulter+blog@gmail.com</email>
     </author>
-    <updated>2016-07-09T00:00:00Z</updated>
+    <updated>2016-07-14T00:00:00Z</updated>
     <entry>
+    <title>C++ Object Copying</title>
+    <link href="http://www.rgoulter.com/blog//posts/programming/2016-07-14-c-object-copying.html" />
+    <id>http://www.rgoulter.com/blog//posts/programming/2016-07-14-c-object-copying.html</id>
+    <published>2016-07-14T00:00:00Z</published>
+    <updated>2016-07-14T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<div class="info">
+    Posted on July 14, 2016
+    
+        by Richard Goulter
+    <br/>
+    
+    Tags: <a href="/tags/programming.c%2B%2B.html">programming.c++</a>
+    
+</div>
+
+<p>C++ is quite a different beast of a language to, say, Java or Python.<br />
+My early programming experience was in the latter, so I find my ‘mental model’ for reasoning about what C++ does with the code I write is sometimes wrong.</p>
+<p>One area where I make mistakes is underestimating where C++ will make copies of objects.<br />
+That Java/Python are (largely) pass-by-reference, and C++ is pass-by-value (unless otherwise specified) is prob’ly what drives that. – Another way of saying this is that when “passing objects around”, Java/Python tend to only copy <em>pointers to</em> objects, whereas C++ (by default) usually makes copies of objects.</p>
+<p>It may be helpful to illustrate this, to see where C++ copies things. (Or, perhaps it may be easier to remember where C++ doesn’t copy things).</p>
+<p><a href="https://gist.github.com/rgoulter/b33b54ecc6f17e454387234d941e229b">Here’s one I prepared earlier</a>. (The gist program contains a good output listing for the snippets below).</p>
+<h2 id="a-custom-object">A Custom Object</h2>
+<p>Consider a custom object <code>MyObj</code>:</p>
+<pre><code>class MyObj {
+ public:
+     MyObj(int x) {
+         cout &lt;&lt; &quot;    CONS MyObj(&quot; &lt;&lt; x &lt;&lt; &quot;)&quot; &lt;&lt; endl;
+         x_ = x;
+     }
+
+     ~MyObj() {
+         cout &lt;&lt; &quot;    DEST MyObj(&quot; &lt;&lt; x_ &lt;&lt; &quot;)&quot; &lt;&lt; endl;
+     }
+
+     MyObj(const MyObj&amp; other) {
+         x_ = other.x();
+         cout &lt;&lt; &quot;    CPY  Copying from &quot; &lt;&lt; x_&lt;&lt; endl;
+     }
+
+     MyObj&amp; operator=(const MyObj&amp; rhs) {
+         cout &lt;&lt; &quot;    ASSG Assigning from &quot; &lt;&lt; rhs.x() &lt;&lt; &quot; to &quot; &lt;&lt; x_ &lt;&lt; endl;
+         if (this == &amp;rhs) return *this;
+
+         x_ = rhs.x();
+
+         return *this;
+     }
+
+     void setX(int x) { x_ = x; }
+
+     int x() const { return x_; }
+
+ private:
+    int x_;
+};</code></pre>
+<p><code>MyObj</code> is a straightforward class; we provide a constructor, destructor, copy-constructor and assignment operator which each output when they’re called.</p>
+<h2 id="in-initialisation">In Initialisation</h2>
+<pre><code>  MyObj x0 = MyObj(10);  // A1
+  MyObj x1(5);           // A2
+  MyObj x2(x1);          // A3
+  MyObj x3 = x1;         // A4</code></pre>
+<ul>
+<li><p><code>A1</code> Only calls the constructor; not the copy-constructor or assignment operator.</p></li>
+<li><p><code>A2</code> is the same as <code>A1</code>.</p></li>
+<li><p><code>A3</code> is an explicit call to the copy-constructor.</p></li>
+<li><p><code>A4</code> is also a call to the copy-constructor. (i.e. same as (<code>A3</code>)).</p></li>
+</ul>
+<h2 id="in-assignment">In Assignment</h2>
+<pre><code>  x2 = x3;  // B1</code></pre>
+<ul>
+<li><code>B1</code> is a call to the assignment operator.<br />
+The copy-constructor isn’t invoked in the assignment operator (in this example).</li>
+</ul>
+<h2 id="in-function-calls">In Function Calls</h2>
+<p>Consider functions:</p>
+<pre><code>void outp(MyObj o) {
+    cout &lt;&lt; &quot;   Output MyObj(&quot; &lt;&lt; o.x() &lt;&lt; &quot;)&quot; &lt;&lt; endl;
+}
+
+void outpC(const MyObj&amp; o) {
+    cout &lt;&lt; &quot;   Output MyObj(&quot; &lt;&lt; o.x() &lt;&lt; &quot;)&quot; &lt;&lt; endl;
+}</code></pre>
+<p>and the snippet:</p>
+<pre><code>  outp(x1);   // C1
+  outpC(x1);  // C2</code></pre>
+<ul>
+<li><p><code>C1</code>, a call to <code>outp</code> invokes a copy.</p></li>
+<li><p><code>C2</code>, where <code>outpC</code> takes a constant-reference, does not invoke a copy.</p></li>
+</ul>
+<h2 id="assigning-to-references">Assigning to References</h2>
+<pre><code>  const MyObj&amp; crx0 = x0;  // D1
+  MyObj&amp; rx0 = x0;         // D2</code></pre>
+<ul>
+<li><p><code>D1</code> doesn’t invoke a copy.</p></li>
+<li><p><code>D2</code> doesn’t invoke a copy.</p></li>
+</ul>
+<p>Assigning to references doesn’t invoke copies.</p>
+<h2 id="results-of-functions">Results of Functions</h2>
+<p>Consider the function:</p>
+<pre><code>MyObj f1() {
+    cout &lt;&lt; &quot;  f1():&quot; &lt;&lt; endl;
+    return MyObj(7);
+}</code></pre>
+<p>and the snippet:</p>
+<pre><code>  MyObj x4 = f1();          // E1
+  const MyObj&amp; crx4 = f1(); // E2
+  MyObj&amp; xr4 = f1();        // E3</code></pre>
+<p>both CONS no cpy, except 3 which doesn’t compile</p>
+<ul>
+<li><p><code>E1</code> doesn’t invoke a copy.</p>
+<ul>
+<li>I think this is the compiler optimising a way a destruct of the value from the function, and a copy-constructor to the tmp value.</li>
+</ul></li>
+<li><p><code>E2</code> also doesn’t invoke a copy.</p></li>
+<li><p><code>E3</code> doesn’t compile; that’s because a reference must point to an ‘lvalue’ (something which can be referred to by name).</p>
+<ul>
+<li>Apparently C++11 allows rvalue references (<code>&amp;&amp;</code>), which allows ‘move semantics’.</li>
+</ul></li>
+</ul>
+<h2 id="pointer-dereferencing">Pointer Dereferencing</h2>
+<pre><code>  MyObj* ptr = new MyObj(13);  // F1
+  MyObj deref = *ptr;          // F2
+  MyObj&amp; derefRef = *ptr;      // F3
+  const MyObj&amp; constDeref = *ptr;  // F4
+  delete ptr;                  // F5</code></pre>
+<ul>
+<li><p><code>F1</code> is a call to the constructor, (and <code>F5</code> to the destructor).</p></li>
+<li><p><code>F2</code> <em>invokes the copy constructor</em>.</p></li>
+<li><p><code>F3</code> doesn’t invoke a copy.</p>
+<ul>
+<li>Pointer dereferencing doesn’t necessarily demand a copy.<br />
+The dereference of <code>*this</code> in <code>MyObj&amp; operator=(...)</code> also demonstrates that.</li>
+</ul></li>
+<li><p><code>F4</code> doesn’t invoke a copy, either.</p></li>
+</ul>
+]]></summary>
+</entry>
+<entry>
     <title>Men of Valor Has Not Aged Well</title>
     <link href="http://www.rgoulter.com/blog//posts/games/2016-07-09-men-of-valor-has-not-aged-well.html" />
     <id>http://www.rgoulter.com/blog//posts/games/2016-07-09-men-of-valor-has-not-aged-well.html</id>
@@ -430,39 +568,6 @@ One kinda-stupid approach would be for the dictionary to loop indefinitely (unti
 <p>Programmers tend to make mistakes when they forget to take care of cases when things go wrong.<br />
 It’s easier to make mistakes when “something went wrong” is implicitly handled.<br />
 Functional Programming-ish code tends to be very explicit; and potentially more concise. For writing correct, complete, safe code, this is clearly an advantage.</p>
-]]></summary>
-</entry>
-<entry>
-    <title>Elm, Rust, and Learning a Language</title>
-    <link href="http://www.rgoulter.com/blog//posts/programming/2016-05-24-elm-rust-and-learning-a-language.html" />
-    <id>http://www.rgoulter.com/blog//posts/programming/2016-05-24-elm-rust-and-learning-a-language.html</id>
-    <published>2016-05-24T00:00:00Z</published>
-    <updated>2016-05-24T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<div class="info">
-    Posted on May 24, 2016
-    
-        by Richard Goulter
-    <br/>
-    
-    Tags: <a href="/tags/programming.elm.html">programming.elm</a>, <a href="/tags/programming.rust.html">programming.rust</a>, <a href="/tags/programming.java.html">programming.java</a>
-    
-</div>
-
-<p>Elm and Rust are two programming languages I’m excited about (in the sense of, “wow it’d be cool to use these”).</p>
-<p>Elm is a Haskell-inspired language for client-side web development; with a philosophical emphasis at making Functional Programming <em>usable</em>/accessible. – In a talk from March, <a href="http://www.elmbark.com/2016/03/16/mainstream-elm-user-focused-design">“Let’s be mainstream”</a>, Evan Czaplicki compares JavaScript (easy to write, hard to maintain) to ML (hard to write, easy to maintain): the suggestion being that this isn’t necessarily a trade-off which must be paid; but that perhaps it’s better to try and improve JavaScript than to make ML languages easier.<br />
-There’s a cool <a href="http://elm-lang.org/try">online editor environment</a> for Elm so you can look at some examples &amp; try the language.</p>
-<p>Rust is a “safe C”, with many of the goodies of ‘modern’ languages like product and/or union types, tuples/records, pattern matching, etc.; its unique aspect is that “ownership” must be explicitly modelled.<br />
-For a taste, <a href="http://chrismorgan.info/blog/rust-fizzbuzz.html">“this post showing Fizz-Buzz programs in Rust”</a> explores various parts of Rust which you’ll encounter starting out with the language. This page <a href="http://cglab.ca/~abeinges/blah/too-many-lists/book/">showing implementing linked-lists in Rust</a> does the same thing, exploring aspects of the Rust language while programming a fairly familiar data structure.<br />
-<a href="http://rustbyexample.com">Rust by Example</a> lets you edit &amp; run each of the code snippets.<br />
-Andrei Alexandrescu (guy who coined the term “modern C++”; architect of the D language) <a href="https://www.quora.com/Which-language-has-the-brightest-future-in-replacement-of-C-between-D-Go-and-Rust-And-Why/answer/Andrei-Alexandrescu">wrote an answer on Quora</a> where he compared D, Go and Rust as “C/C++ replacements”. The criticism of Rust is whether it’s worth all the extra effort to model ownership. (On that note, D v Swift v Rust would be interesting; maybe also Scala-Native if that comes to fruition..; Go is cool &amp; all, but relates more to Python/Ruby).</p>
-<p>One thing both of these languages have in common is “great error messages”. (e.g. <a href="http://elm-lang.org/blog/compiler-errors-for-humans">“Compiler Errors for Humans”</a>, Rust’s compiler will try to explain what was wrong / suggest a solution). – One might say that because these languages are so out of wack from your typical <a href="http://www.paulgraham.com/avg.html">blub language</a> that the compiler <em>needs</em> to explain its errors, ha; but I’m more likely to think that reading compiler error messages is strange, … because I’m used to reading compiler errors as “nope” then checking the guilty line to figure out what’s wrong.</p>
-<hr />
-<p>These posts about Elm and Rust are interesting and all, but there’s also a limitation to them. You certainly get a taste for the <em>language</em>, (&amp; certainly there’re differences to these languages that you’ve to pay attention to these things); but there’s also a step between “playing with the language in online environment” &amp; being able to run the examples on your computer.<br />
-’cause when someone says they “know Java”, they don’t just mean the Java language, but some familiarity with some JRE library packages, how to setup a development environment for Java, how to setup projects in Java (e.g. in Ant, Maven, Gradle or whatever).<br />
-– I guess newer languages ought to benefit from how older languages have been developed. So you get tools like <a href="https://github.com/sonnym/elmenv">elmenv</a> or <a href="https://github.com/avh4/elm-format">elm-format</a>, <a href="https://github.com/rust-lang-nursery/rustfmt">rustfmt</a>, in addition to decent platform tools like Rust’s cargo.</p>
-<p>I think what’s not immediately obvious is how to pick up &amp; use these languages for tiny projects.<br />
-Python is my go-to language for quick scripts where I just wanna scratch something together. It’s not that these aren’t “programs” or “projects”, but I don’t wanna worry about setting up any kind of package-file, nor freezing dependencies, etc.<br />
-– I don’t necessarily doubt that it’s possible to quickly get something together in Elm or Rust in the same way; but I wonder if this baggage of “things a $LANGUAGE developer knows how to do which a newcomer doesn’t” couldn’t be more obvious to pick up.</p>
 ]]></summary>
 </entry>
 
