@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>C++ Object Copying - Richard Goulter's Blog</title>
+        <title>Systems and Tools Have Limitations - Richard Goulter's Blog</title>
 
         <!-- My (Old) CSS theme -->
         <link rel="stylesheet" type="text/css" href="../../css/default.css" />
@@ -128,147 +128,37 @@
             <hr style="margin: 0px; border-top: 5px solid black;" />
 
             <div id="content" class="container">
-                <h1>C++ Object Copying</h1>
+                <h1>Systems and Tools Have Limitations</h1>
                 <div class="info">
-    Posted on July 14, 2016
+    Posted on July 31, 2016
     
         by Richard Goulter
     <br />
     
-    Tags: <a href="../../tags/programming.c%2B%2B.html">programming.c++</a>
+    Tags: <a href="../../tags/programming.oop.html">programming.oop</a>, <a href="../../tags/programming.fp.html">programming.fp</a>, <a href="../../tags/programming.tools.html">programming.tools</a>
     
 </div>
 
-<p>C++ is quite a different beast of a language to, say, Java or Python.<br />
-My early programming experience was in the latter, so I find my ‘mental model’ for reasoning about what C++ does with the code I write is sometimes wrong.</p>
-<p>One area where I make mistakes is underestimating where C++ will make copies of objects.<br />
-That Java/Python are (largely) pass-by-reference, and C++ is pass-by-value (unless otherwise specified) is prob’ly what drives that. – Another way of saying this is that when “passing objects around”, Java/Python tend to only copy <em>pointers to</em> objects, whereas C++ (by default) usually makes copies of objects.</p>
-<p>It may be helpful to illustrate this, to see where C++ copies things. (Or, perhaps it may be easier to remember where C++ doesn’t copy things).</p>
-<p><a href="https://gist.github.com/rgoulter/b33b54ecc6f17e454387234d941e229b">Here’s one I prepared earlier</a>. (The gist program contains a good output listing for the snippets below).</p>
-<h2 id="a-custom-object">A Custom Object</h2>
-<p>Consider a custom object <code>MyObj</code>:</p>
-<pre><code>class MyObj {
- public:
-     MyObj(int x) {
-         cout &lt;&lt; &quot;    CONS MyObj(&quot; &lt;&lt; x &lt;&lt; &quot;)&quot; &lt;&lt; endl;
-         x_ = x;
-     }
-
-     ~MyObj() {
-         cout &lt;&lt; &quot;    DEST MyObj(&quot; &lt;&lt; x_ &lt;&lt; &quot;)&quot; &lt;&lt; endl;
-     }
-
-     MyObj(const MyObj&amp; other) {
-         x_ = other.x();
-         cout &lt;&lt; &quot;    CPY  Copying from &quot; &lt;&lt; x_&lt;&lt; endl;
-     }
-
-     MyObj&amp; operator=(const MyObj&amp; rhs) {
-         cout &lt;&lt; &quot;    ASSG Assigning from &quot; &lt;&lt; rhs.x() &lt;&lt; &quot; to &quot; &lt;&lt; x_ &lt;&lt; endl;
-         if (this == &amp;rhs) return *this;
-
-         x_ = rhs.x();
-
-         return *this;
-     }
-
-     void setX(int x) { x_ = x; }
-
-     int x() const { return x_; }
-
- private:
-    int x_;
-};</code></pre>
-<p><code>MyObj</code> is a straightforward class; we provide a constructor, destructor, copy-constructor and assignment operator which each output when they’re called.</p>
-<h2 id="in-initialisation">In Initialisation</h2>
-<pre><code>  MyObj x0 = MyObj(10);  // A1
-  MyObj x1(5);           // A2
-  MyObj x2(x1);          // A3
-  MyObj x3 = x1;         // A4</code></pre>
-<ul>
-<li><p><code>A1</code> Only calls the constructor; not the copy-constructor or assignment operator.</p></li>
-<li><p><code>A2</code> is the same as <code>A1</code>.</p></li>
-<li><p><code>A3</code> is an explicit call to the copy-constructor.</p></li>
-<li><p><code>A4</code> is also a call to the copy-constructor. (i.e. same as (<code>A3</code>)).</p></li>
-</ul>
-<h2 id="in-assignment">In Assignment</h2>
-<pre><code>  x2 = x3;  // B1</code></pre>
-<ul>
-<li><code>B1</code> is a call to the assignment operator.<br />
-The copy-constructor isn’t invoked in the assignment operator (in this example).</li>
-</ul>
-<h2 id="in-function-calls">In Function Calls</h2>
-<p>Consider functions:</p>
-<pre><code>void outp(MyObj o) {
-    cout &lt;&lt; &quot;   Output MyObj(&quot; &lt;&lt; o.x() &lt;&lt; &quot;)&quot; &lt;&lt; endl;
-}
-
-void outpC(const MyObj&amp; o) {
-    cout &lt;&lt; &quot;   Output MyObj(&quot; &lt;&lt; o.x() &lt;&lt; &quot;)&quot; &lt;&lt; endl;
-}</code></pre>
-<p>and the snippet:</p>
-<pre><code>  outp(x1);   // C1
-  outpC(x1);  // C2</code></pre>
-<ul>
-<li><p><code>C1</code>, a call to <code>outp</code> invokes a copy.</p></li>
-<li><p><code>C2</code>, where <code>outpC</code> takes a constant-reference, does not invoke a copy.</p></li>
-</ul>
-<h2 id="assigning-to-references">Assigning to References</h2>
-<pre><code>  const MyObj&amp; crx0 = x0;  // D1
-  MyObj&amp; rx0 = x0;         // D2</code></pre>
-<ul>
-<li><p><code>D1</code> doesn’t invoke a copy.</p></li>
-<li><p><code>D2</code> doesn’t invoke a copy.</p></li>
-</ul>
-<p>Assigning to references doesn’t invoke copies.</p>
-<h2 id="results-of-functions">Results of Functions</h2>
-<p>Consider the function:</p>
-<pre><code>MyObj f1() {
-    cout &lt;&lt; &quot;  f1():&quot; &lt;&lt; endl;
-    return MyObj(7);
-}</code></pre>
-<p>and the snippet:</p>
-<pre><code>  MyObj x4 = f1();          // E1
-  const MyObj&amp; crx4 = f1(); // E2
-  MyObj&amp; xr4 = f1();        // E3</code></pre>
-<p>both CONS no cpy, except 3 which doesn’t compile</p>
-<ul>
-<li><p><code>E1</code> doesn’t invoke a copy.</p>
-<ul>
-<li>I think this is the compiler optimising a way a destruct of the value from the function, and a copy-constructor to the tmp value.</li>
-</ul></li>
-<li><p><code>E2</code> also doesn’t invoke a copy.</p></li>
-<li><p><code>E3</code> doesn’t compile; that’s because a reference must point to an ‘lvalue’ (something which can be referred to by name).</p>
-<ul>
-<li>Apparently C++11 allows rvalue references (<code>&amp;&amp;</code>), which allows ‘move semantics’.</li>
-</ul></li>
-</ul>
-<h2 id="pointer-dereferencing">Pointer Dereferencing</h2>
-<pre><code>  MyObj* ptr = new MyObj(13);  // F1
-  MyObj deref = *ptr;          // F2
-  MyObj&amp; derefRef = *ptr;      // F3
-  const MyObj&amp; constDeref = *ptr;  // F4
-  delete ptr;                  // F5</code></pre>
-<ul>
-<li><p><code>F1</code> is a call to the constructor, (and <code>F5</code> to the destructor).</p></li>
-<li><p><code>F2</code> <em>invokes the copy constructor</em>.</p></li>
-<li><p><code>F3</code> doesn’t invoke a copy.</p>
-<ul>
-<li>Pointer dereferencing doesn’t necessarily demand a copy.<br />
-The dereference of <code>*this</code> in <code>MyObj&amp; operator=(...)</code> also demonstrates that.</li>
-</ul></li>
-<li><p><code>F4</code> doesn’t invoke a copy, either.</p></li>
-</ul>
+<p>So <a href="https://medium.com/@cscalfani/goodbye-object-oriented-programming-a59cda4c0e53">“Goodbye OOP”</a> is a piece which has been going around.<br />
+I’ve no idea why. I wasn’t able to finish reading it. The author’s tone is amazingly cringe-worthy.<br />
+After some time the of the clearly inexpert author (adopting a faux-foolish tone) bashing bad ways of OOP, the author concludes in a paragraph or two with “but, hey, Functional Programming looks pretty cool”.<br />
+– I’m reminded of <a href="https://medium.com/@tjholowaychuk/farewell-node-js-4ba9e7f3e52b#.ppia68wvo">“Farewell NodeJS”</a> with 1.4k likes. There the author spends time bashing the shortcomings of NodeJS, (inexpertly or not I can’t tell; at least the author’s tone isn’t as mockable), with a similar naivity of “but, hey, Go-lang looks pretty cool”.</p>
+<p>I found in Undergrad there’s a politics about which tools are cool and which aren’t. PHP isn’t “cool”. (It’s also an abysmal language; I recall reading a great piece I liked, but can’t find it. There’re far too many articles on the topic). Java isn’t “cool”. – But in my experience, those that complain the loudest about how sucky these languages are rarely good programmers.<br />
+(For signalling “good programmer”, admiration of either Erlang or Haskell will do the job. They’re Hipster Cool. – In Haskell’s case, you don’t even need to have written anything in Haskell to say you love the language).<br />
+– What’s quite annoying about these posts, then, is that they try to make an evaluation/judgement (“OOP sucks, FP is cool”) without qualifications. – I like Scala; but I’m also aware there’s some <a href="https://nurkiewicz.github.io/talks/2014/scalar/#/">pretty complicated shit</a> going on. (The real downside you’ll find to Scala is it’s long compilation time, though). – I mean, praising a language/tool without also indicating it’s costs/downsides seems immature. In ComSci, almost everything is a tradeoff.</p>
+<p>– What the post did get right, (from what I read of it, anyway), was that it highlighted ways of <em>misusing</em> OOP; ways which aren’t “obviously” wrong, or which sound like they’re keeping in line with OOP discipline. (By this point, or much earlier, PL purtians would’ve pointed out the distinction between Alan Kay’s “OOP is message-passing + late-binding” from “Java OOP”. – FWIW, the author of “Goodbye OOP” claims experience with Smalltalk and C++, but from the way the author writes, inexperience with each seems evident).<br />
+– Steve Yegge’s <a href="https://sites.google.com/site/steveyegge2/when-polymorphism-fails">“When Polymorphism Fails”</a> is another piece which takes a stab at a problem OOP is unable to model.<br />
+– But there’s a difference between “this tool can’t model this problem; don’t use it for that” (&amp; how to avoid such limitations), and “I’m misusing this tool; it sucks; everyone should use this other tool I just heard of instead”.</p>
+<p>cf. Steve Yegge’s praise of Ruby <a href="http://steve-yegge.blogspot.sg/2006/09/bloggers-block-4-ruby-and-java-and.html">here</a>. Yegge’s a very talented writer, so the comparison is unfair on that front, but he qualifies his praise. (He doesn’t like Ruby, but he uses it; he doesn’t know Ruby, but he rarely needs to look at the docs, compared to languages he knows, where he does have to; it’s performance isn’t amazing, but that’s mostly ok anyway).</p>
+<p>A blogpost from Robert C Martin, <a href="http://blog.cleancoder.com/uncle-bob/2016/07/27/TheChurn.html">“The Churn”</a>, came up on my timeline. ‘The Churn’ referring to the naive programmer’s chase of all new things as “superior”. (Which makes for a fun comparison with <a href="https://quoderat.megginson.com/2006/03/06/programming-languages-of-distinction/">“the programming language cycle”</a>; these two pieces agree about new languages [which smart people like] lack in usable tools/libraries). – Martin makes good observations that OOP, FP are orthogonal; both tools used to solve problems. – I think in insinuation that FP isn’t worth learning/paying attention to drew ire from the FP kids.</p>
 
 
 <hr />
 
 <div>
     
-    <a href="../../posts/programming/2016-07-31-systems-and-tools-have-limitations.html" style="float:left;">Newer post</a>
     
-    
-    <a href="../../posts/games/2016-07-09-men-of-valor-has-not-aged-well.html" style="float:right; text-align: right;">Older post</a>
+    <a href="../../posts/programming/2016-07-14-c-object-copying.html" style="float:right; text-align: right;">Older post</a>
     
 </div>
 <br style="clear: both;" />
@@ -279,9 +169,9 @@ The dereference of <code>*this</code> in <code>MyObj&amp; operator=(...)</code> 
     <script type="text/javascript">
         /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
         var disqus_shortname = 'richardgoultersblog'; // required: replace example with your forum shortname
-        var disqus_identifier = '/posts/programming/2016-07-14-c-object-copying.html';
-        var disqus_url = 'http://www.rgoulter.com/blog' + '/posts/programming/2016-07-14-c-object-copying.html';
-        var disqus_title = 'C++ Object Copying - July 14, 2016';
+        var disqus_identifier = '/posts/programming/2016-07-31-systems-and-tools-have-limitations.html';
+        var disqus_url = 'http://www.rgoulter.com/blog' + '/posts/programming/2016-07-31-systems-and-tools-have-limitations.html';
+        var disqus_title = 'Systems and Tools Have Limitations - July 31, 2016';
 
         /* * * DON'T EDIT BELOW THIS LINE * * */
         (function() {
