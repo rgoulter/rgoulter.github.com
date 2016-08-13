@@ -8,8 +8,39 @@
         <name>Richard Goulter</name>
         <email>richard.goulter+blog@gmail.com</email>
     </author>
-    <updated>2016-07-31T00:00:00Z</updated>
+    <updated>2016-08-11T00:00:00Z</updated>
     <entry>
+    <title>Cinematic Lego Games</title>
+    <link href="http://www.rgoulter.com/blog//posts/games/2016-08-11-cinematic-lego-games.html" />
+    <id>http://www.rgoulter.com/blog//posts/games/2016-08-11-cinematic-lego-games.html</id>
+    <published>2016-08-11T00:00:00Z</published>
+    <updated>2016-08-11T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<div class="info">
+    Posted on August 11, 2016
+    
+        by Richard Goulter
+    <br/>
+    
+    Tags: <a href="/tags/media.lego.html">media.lego</a>
+    
+</div>
+
+<p>Lego Star Wars: The Complete Saga is a classic game worth having in your library. (Ironically, it’s not the <em>complete</em> saga of the Lego games).<br />
+– Since then, there’ve been many other Lego games of the same style, like Lego Indiana Jones, Batman, Harry Potter, etc.; the most recent one being for Star Wars: The Force Awakens.</p>
+<p>If you’ve played the more recent ones, I think LSW:TCS perhaps comes across as a bit archaic, but there’s something so charming about it.<br />
+The gameplay is ‘simple’. Smash stuff in the world to get points, solve puzzles to get through the level or to get collectibles. – The ‘puzzle’ part comes in terms of, you need a Jedi character to do Jedi things, a droid to do droid things, etc. – Playing with the characters of movies in Lego form really is kindof adorable.</p>
+<p>Part of what else is charming about the old classic is there’s no dialogue; so the story plays out (&amp; probably only makes sense) if you’ve seen the movie.<br />
+Sometimes with jokes thrown in.<br />
+The newer Lego games (I’m not sure since when, but I know Lego: Lord of the Rings has it) instead feature dialogue.</p>
+<p>As well as voice-dialogue, Lego LOTR adjusts the “you need this character to unlock this puzzle” formula: it’s more item-based, so you need a fishing-rod to fish, a bow &amp; arrow to shoot targets, etc.; these are items which some characters will have (e.g. Legolas has bow &amp; arrow; Gimli has an axe), or which can be unlocked as a collectible.<br />
+– The other cool thing about Lego LOTR is that, between chapters of the story, your characters get to freely roam around a small-scale Middle Earth. (So you can simply walk into M.. etc. etc.).</p>
+<p>– After replaying through these two, I decided to pick up Lego Star Wars: The Force Awakens, for the PS Vita.<br />
+It’s still a bunch of fun, but certainly feels more sophisticated than the aforementioned. – e.g., For situations when you need to interact with a particular puzzle with a particular character, LSW:TFA let’s you quickly switch to that character with the press of a button.<br />
+LSW:TFA also adds on some cover-based shooting sections throughout the levels, which felt a bit gimmicky, but managed to still retain the essence of the action + puzzle-solving that the rest of the game has.</p>
+<p>These are all still pretty fun to play. I’m not sure if it’s true for all the Lego games, but for these three at least, they get to borrow the music from their source films, and the music of Star Wars and Lord of the Rings is also pretty good.</p>
+]]></summary>
+</entry>
+<entry>
     <title>Systems and Tools Have Limitations</title>
     <link href="http://www.rgoulter.com/blog//posts/programming/2016-07-31-systems-and-tools-have-limitations.html" />
     <id>http://www.rgoulter.com/blog//posts/programming/2016-07-31-systems-and-tools-have-limitations.html</id>
@@ -507,29 +538,6 @@ I find there’s a bigger difference between what tags you’d think something y
 <hr />
 <p>[1] “Writing my own” is perhaps NIH Syndrome; but other solutions I’d tried for this didn’t stick.</p>
 <p>[2] …And just like LinkedIn, I’m not drawn to visit it unless I’ve some action to perform on the site. “Glorified Book Spreadsheet” is one way to summarise this common usecase of GoodReads.</p>
-]]></summary>
-</entry>
-<entry>
-    <title>Kudos to the Awesome Lists</title>
-    <link href="http://www.rgoulter.com/blog//posts/programming/2016-05-30-kudos-to-the-awesome-lists.html" />
-    <id>http://www.rgoulter.com/blog//posts/programming/2016-05-30-kudos-to-the-awesome-lists.html</id>
-    <published>2016-05-30T00:00:00Z</published>
-    <updated>2016-05-30T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<div class="info">
-    Posted on May 30, 2016
-    
-        by Richard Goulter
-    <br/>
-    
-    Tags: <a href="/tags/programming.html">programming</a>, <a href="/tags/programming.github.html">programming.github</a>
-    
-</div>
-
-<p>I’ve a wariness for programming-languages/etc. which are hyped by the mainstream programmer community. – Computers suck, programming languages suck; the best code is no code, etc.; &amp; much of the “hey this is cool” often comes from folk without the experience to say with authority that something is cool.<br />
-(<a href="https://quoderat.megginson.com/2006/03/06/programming-languages-of-distinction/">This post</a> argues that the ‘elites’ are the one who drive a languages adoption, &amp; by the time the ‘unwashed masses’ arrive, the party is over.).</p>
-<p>But, uh, kudos to the “<em>awesome</em>” lists. e.g. this <a href="https://github.com/bayandin/awesome-awesomeness">list of awesome-lists</a>.<br />
-They seem to be good aggregates of the kinds of resources you’re supposed to somehow know-of or pick up along the way. While each list is different, it seems that the <code>awesome-$language</code> lists showcase: the popular libraries (for which problems), as well as popular tools for doing stuff with the language. (In particular, code-styling and linting tools.).</p>
-<p>(I’m not sure whether the star-/commit-counts are good indications of a language’s community, or indications of how well ninja-rockstars love a language, but still looks useful.).</p>
 ]]></summary>
 </entry>
 
