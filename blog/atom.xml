@@ -8,8 +8,40 @@
         <name>Richard Goulter</name>
         <email>richard.goulter+blog@gmail.com</email>
     </author>
-    <updated>2016-08-11T00:00:00Z</updated>
+    <updated>2016-08-16T00:00:00Z</updated>
     <entry>
+    <title>On Revising in Programming and Blogging</title>
+    <link href="http://www.rgoulter.com/blog//posts/meta/2016-08-16-on-revising-in-programming-and-blogging.html" />
+    <id>http://www.rgoulter.com/blog//posts/meta/2016-08-16-on-revising-in-programming-and-blogging.html</id>
+    <published>2016-08-16T00:00:00Z</published>
+    <updated>2016-08-16T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<div class="info">
+    Posted on August 16, 2016
+    
+        by Richard Goulter
+    <br/>
+    
+    Tags: <a href="/tags/programming.html">programming</a>, <a href="/tags/writing.html">writing</a>
+    
+</div>
+
+<p>In one of the more fascinating sidebars in “The Cucumber Book”, Dan North discusses his first experience pair-programming with Martin Fowler; initially aghast that Fowler spent time re-arranging the test code (and at times, duplicating) snippets of code.. until realising the improvement the changes brought: the test code became a more readable story.<br />
+(The principle “Don’t Repeat Yourself” was superseeded by – wait for it – Direct And Meaningful Phrases).</p>
+<p>I mention that because it draws a connection between programming and writing.<br />
+– Two areas which at first glance share much in common (both involve textual content), then not so much in common (computationally interpreted texts by computers vs naturally interpreted texts by people; so further connections are usually interesting to make.</p>
+<p>Anyway. I bring that up because recently I’ve had fun tinkering with old side-projects of mine. (<a href="http://www.commitstrip.com/en/2014/11/25/west-side-project-story/">Obligatory commitstrip</a>). – Don’t be shocked, but such play-around side-projects tended to be in fairly unmaintainable conditions: a bad (or absent) README file; poor (or absent) documentation; poor (or absent) tests. (Let alone other things, like how easy the project is to get up and running, file organisation, etc.).</p>
+<p>It’s kind of fun to do this tinkering, especially with the goal in mind of improving maintainability and/or how polished the project is, since there’s a feeling of bringing order where there was disorder.<br />
+– In doing so, a lot of this involves re-reading code; code that was written a long time ago. I reckon this has helped me to value the importance of documenting things, and on commenting about subtle concepts which explain why things were written the way they were. (A counter-lesson of learning between bullshit documentation and good documentation probably needs me to neglect the side-project for another half-year or so before coming back to it).<br />
+This maintenance also makes it clear that more time will be spent reading the code than is spent writing it. In the case of my side-projects, presumably I’m the only one even reading it.</p>
+<p>But I find when I write blogposts, I usually hate re-reading what I’ve written. (The same applies for writing for schoolwork). – It’s not that I never hit the backspace key before I publish the post, though.</p>
+<p>I know that for authors, writing a book involves not just putting words on the page, but a process of editing and re-writing.</p>
+<p>My blog and my programming side-projects have similar standing: Neither are apparently wildly popular, but I still find value in writing them for my own sake.<br />
+– However, by parallel, just as the code in my side-projects were in an abysmal state when unmaintained, it’s hardly a stretch to say that my blogposts (and my writing ability) .. would improve with attention.</p>
+<p>– To be honest, I do feel bad about this neglected state for a handful of my blogposts: the ones which are found high-up in Google searches for particular keywords (particularly my SBT v Gradle, and OneNote v Org-Mode posts); there’s a clear difference between what I’d expect to read for the title, and what the post contains.<br />
+For opinion-based posts, though, it’s disingenuous to silently make edits without notice. (On the other hand, if old opinions cannot be removed, that makes it possible to attack someone for an opinion they used to hold, and people can be silly enough to do that).</p>
+]]></summary>
+</entry>
+<entry>
     <title>Cinematic Lego Games</title>
     <link href="http://www.rgoulter.com/blog//posts/games/2016-08-11-cinematic-lego-games.html" />
     <id>http://www.rgoulter.com/blog//posts/games/2016-08-11-cinematic-lego-games.html</id>
@@ -471,73 +503,6 @@ In another, my UI was receiving a new input, but not updating the UI components 
 <p>Sure, I’d rather maintain a Haskell project than a Python project. But that Haskell’s compiler is so good allows you write pretty unclear code, too.<br />
 – I’d certainly like the code to be prettier.</p>
 <p>I’d also expect to iterate on the UI to see if it could better fit how I’d like to use it, but anyway.</p>
-]]></summary>
-</entry>
-<entry>
-    <title>Organising Things</title>
-    <link href="http://www.rgoulter.com/blog//posts/meta/2016-06-07-organising-things.html" />
-    <id>http://www.rgoulter.com/blog//posts/meta/2016-06-07-organising-things.html</id>
-    <published>2016-06-07T00:00:00Z</published>
-    <updated>2016-06-07T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<div class="info">
-    Posted on June  7, 2016
-    
-        by Richard Goulter
-    <br/>
-    
-    Tags: <a href="/tags/organising.html">organising</a>
-    
-</div>
-
-<p>From the wisdom I’ve picked up so far:<br />
-Computer Science is about managing complexity.<br />
-Programming is about breaking larger, complex problems down into smaller, solveable problems. (Which involves Naming, Abstracting, Composing).<br />
-The best program is no program; second to that, the best program is a small a program as possible.<br />
-When coming up with a data-structure/algorithm for a problem, it helps to consider what operations you often do, and to make these as cheap as possible.<br />
-The tools you use are related to how you think about the problem, to how you model the domain.<br />
-The more specific a problem you solve, the more ‘elegant’ your solution can be.</p>
-<p>I’d like to give some considerations in this post about organising things.<br />
-– Maybe it helps to consider that, in the above: “program”, “code”, or “tool” work interchangeably.</p>
-<p>At the moment I’m writing a program to track/organise where I’ve spent my money[1]. Part of this ‘organising’ would involve categorising/tagging expenses. (e.g. “Spent 100 on Steam” prob’ly not as essential as “Spent 10 on phone top-up”).</p>
-<p>In a sense, “organising stuff” is rather an ubiquitous problem. (Wisdom from my Algorithms professor: algorithms are boring, but algorithms are everywhere). – Here I’d like to consider just the organising for consuming content:</p>
-<h1 id="webpage-bookmarks">Webpage Bookmarks</h1>
-<p>There are basically two ‘operations’ you need when dealing with links:</p>
-<ul>
-<li><p>storing a bookmark to a page, with some meaningful information,</p></li>
-<li><p>finding this page later.</p></li>
-</ul>
-<p>If you were to store every webpage you ever read, with all the meta-information you’d later value, then your “organisation problem” is solved. The trouble is, or the trade-off you’d have to pay to get this, is it’d be an expensive chore to bookmark literally everything. (Also, it’s tough to know <em>what</em> you’ll find interesting about the link much later on).</p>
-<p>– My current ‘approach’ to this is basically only saving bookmarks after I find I’d refer to “something I read months ago”. That’s a somewhat expensive ‘cache-miss’. (“searching browse history” would work for this if you only ever use one computer/OS/browser..). (As well as saving “obviously interesting” things, like programming tutorials, or things that’d’ve been useful in previous arguments).</p>
-<h2 id="tools-for-links">Tools for Links</h2>
-<p>The ‘tools’ helping me with links at the moment:</p>
-<ul>
-<li><p>Pinboard - Let’s you tag bookmarks.</p>
-<ul>
-<li>Secondarily, if you search ‘globally’ for tags, it’s a nifty way for discovering what links are popular among tags. e.g. <code>t:haskell</code> for popular articles about Haskell.</li>
-</ul></li>
-<li><p>Pocket - Let’s you enqueue links as “to read later”.<br />
-(Although I’m kinda bad at the “reading later” part).</p></li>
-<li><p>Facebook/Twitter - While really poor at the archival stuff, social media (and to a lesser extent, messaging apps) is nice for content discovery. (Albeit, I find it’s rather tribal, much of the time). – This way benefits from “Share generously, bookmark conservatively”.</p></li>
-<li><p>RSS Reader - For the blogs which do have RSS feeds. Unfortunately, in order to prevent other sites copying blog content, many blogs won’t include the full blogpost content in their RSS feed, which somewhat defeats the purpose. (Scraping scripts can mitigate this, but scraping blogs is a cat-and-mouse game).</p></li>
-</ul>
-<p>– There’re other tools/techniques people can use (e.g. HN/Reddit, or sharing aggregates of links on a blog), but the above works for me. (Twitter in particular, while full of tribal garbage fires of cancer, is also pretty good at content discovery; stuff which is popular on HN/Reddit can find its way onto Tweets, too).</p>
-<h2 id="tags-tag-atrophy">Tags &amp; Tag Atrophy</h2>
-<p>Pinboard uses ‘tags’ for organising things, rather than hierarchical categories.<br />
-Tags are less constrained than categories. (Bookmarking by folders/subfolders is more disjoint, say). And you could emulate categories using tags if you’d like.</p>
-<p>– The main disadvantage to tags is the ‘atrophy’.<br />
-I find there’s a bigger difference between what tags you’d think something you stored would have compared to what category you’d expect to find it in. (I’d think there’s some atrophy to categories, too, but not as quickly, not as badly).<br />
-– Pinboard does let you ‘organise’ through your collection (or subset of) to quickly edit through your bookmarks; that strikes me as a useful tool.</p>
-<h1 id="books">Books</h1>
-<p>With books, the problem isn’t particularly “how can I recall what I’ve read” (although this is useful for non-fiction); it’s “how do I organise what to read next?”.<br />
-– This’ll vary depending on how you read (&amp; seek books to read). Maybe it’s ok to consider a TBR (or even “want to read”) pile as large/unsorted. But “what’s a book I’d enjoy” is a similar question. – For myself, I recently got around 30 books from a Kobo sale, whereas before I’d usually not keep a TBR pile of more than 2-3.</p>
-<p>The Kobo eReader apps ought to have bookshelves. (IIRC, the iOS version does, the Windows Phone version doesn’t). Bookshelves do the job as well as can be hoped, although adding/removing books to shelves can be quite clunky/awkward.</p>
-<p>I like GoodReads; at least for rating books/reviewing.[2]<br />
-– GoodReads lets you mark a book as “Want to Read”, “Currently Reading”, or “Read”. – I’d consider “TBR” as “book I own” (or “book I’ve been issued from the library”), which fits somewhere between the first two. (“DNF” is another state, somewhere between the last two). – GoodReads does let you add arbitrary shelves, so it’s common to emulate these states as shelves.</p>
-<p>In terms of discovery, both vendors like Kobo and review sites like GoodReads can (try to) compute/guess what books you might like, based on what books you’ve liked already. – Without information like that, it’s hard to consider tools which could improve <em>that</em> problem.<br />
-– I guess, drawing analogy to finding interesting links on Pinboard: for fiction, if users tagged books by their tropes, then you could search a trope to find similar books. (Sounds <a href="http://www.mayarodale.com/2016/04/27/the-surprising-reason-you-cant-find-the-right-romance-novel-and-how-one-librarian-is-fixing-it/">kinda like this</a> I guess?).</p>
-<hr />
-<p>[1] “Writing my own” is perhaps NIH Syndrome; but other solutions I’d tried for this didn’t stick.</p>
-<p>[2] …And just like LinkedIn, I’m not drawn to visit it unless I’ve some action to perform on the site. “Glorified Book Spreadsheet” is one way to summarise this common usecase of GoodReads.</p>
 ]]></summary>
 </entry>
 
