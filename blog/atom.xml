@@ -8,8 +8,39 @@
         <name>Richard Goulter</name>
         <email>richard.goulter+blog@gmail.com</email>
     </author>
-    <updated>2016-09-04T00:00:00Z</updated>
+    <updated>2016-09-18T00:00:00Z</updated>
     <entry>
+    <title>On QA Automation Blogposts</title>
+    <link href="http://www.rgoulter.com/blog//posts/programming/2016-09-18-on-qa-automation-blogposts.html" />
+    <id>http://www.rgoulter.com/blog//posts/programming/2016-09-18-on-qa-automation-blogposts.html</id>
+    <published>2016-09-18T00:00:00Z</published>
+    <updated>2016-09-18T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<div class="info">
+    Posted on September 18, 2016
+    
+        by Richard Goulter
+    <br/>
+    
+    Tags: <a href="/tags/test-automation.html">test-automation</a>, <a href="/tags/writing.html">writing</a>
+    
+</div>
+
+<p>I’ve been reading up on the topic of test-automation.</p>
+<p>One kindof useful resource has been <a href="https://www.thoughtworks.com/insights/software-testing">ThoughtWorks’ insights blog</a>, but my feelings towards this are mixed.<br />
+Some of the posts have great insights, others are more mundane; and there’s a fetishization of nouns which makes wading through the bullshit to find the useful tips all that much harder.</p>
+<p>As an example of the latter; in response to DHH saying “TDD is dead”, everyone apparently blew-their-fucking-minds. – That makes no sense to me, unless you’ve fetishized ‘TDD’ to mean ‘some specific thing which is the best, &amp; which we all should do’.<br />
+Which is bullshit.<br />
+Either your current practices in making software work well, in which case it doesn’t matter one way or the other whether ‘TDD’ is proclaimed ‘dead’; or there are ways you can improve your software development (in which case, it doesn’t matter whether ‘TDD’ is proclaimed better than Jesus).</p>
+<p>(After reading Steve Yegge’s <a href="http://steve-yegge.blogspot.sg/2008/02/portrait-of-n00b.html">“Portrait of a n00b”</a>, I suspect closer to the truth is “all software is bad, all the time”; but that some approaches are less-bad in some circumstances).</p>
+<p>If programmers had better propensity for moderation, this wouldn’t be so bad.</p>
+<p>But fetishizing nouns is more annoying noise than anything else. (Although I suspect it also indicates immaturity).<br />
+The other flavours of blogposts tend to come in 1) “here’s this fundamentally useful concept you might not’ve heard of”. (e.g. describing the Test Pyramid, or that tests should assert about behaviours, executable specifications should be written declaratively, etc.), 2) “here are good ideas for ways to do things”.</p>
+<p>The trouble with “here are good ideas” is … it comes across as “obvious” while everyone’s still unable to readily apply it. e.g. one blogpost discussed “what to automate”: it mentioned ‘repeated, tedious/painful processes’, which makes sense, but the more salient point written was that “when you’re busy, you might not notice that these things can/should be automated”.<br />
+– Simply saying “automate tedious/repetitive processes” is tautological. Saying “be aware that there may be things you’d benefit from automating” comes from experience.</p>
+<p>It’s largely natural for programmers to ‘program’ without considering testability of their code. Some computations are hard to test. – I wish the blogposts were focussed more on “here’s why we ended up in a state where testing became difficult” (or, “here’s how we’ve improved; here’s why we were doing things we’ve improved-from”).</p>
+]]></summary>
+</entry>
+<entry>
     <title>On Wet Shaving</title>
     <link href="http://www.rgoulter.com/blog//posts/2016-09-04-on-wet-shaving.html" />
     <id>http://www.rgoulter.com/blog//posts/2016-09-04-on-wet-shaving.html</id>
@@ -470,39 +501,6 @@ The biggest impact this has is you’ll find out about all the best items/weapon
 <p>It’d be fair to say that these games let the characters develop by way of sidequests; these would elaborate more on the back-story of the character. By exploring more, you’d get more story, and better weapons/etc. (hopefully).</p>
 <h2 id="conclusion">Conclusion</h2>
 <p>These games are certainly classics, although they do show their age. I can’t say I’d enthusiastically recommend them, but the artistic style is quite cute, &amp; I don’t feel I wasted my time playing them.</p>
-]]></summary>
-</entry>
-<entry>
-    <title>Brief Thoughts on Purpose of Writing, Arguing</title>
-    <link href="http://www.rgoulter.com/blog//posts/meta/2016-06-20-brief-thoughts-on-purpose-of-writing-arguing.html" />
-    <id>http://www.rgoulter.com/blog//posts/meta/2016-06-20-brief-thoughts-on-purpose-of-writing-arguing.html</id>
-    <published>2016-06-20T00:00:00Z</published>
-    <updated>2016-06-20T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<div class="info">
-    Posted on June 20, 2016
-    
-        by Richard Goulter
-    <br/>
-    
-    Tags: <a href="/tags/persuasion.html">persuasion</a>
-    
-</div>
-
-<blockquote>
-<p>There’re two kinds of argument-posts: preaching to the choir, or convincing the doubtful.</p>
-</blockquote>
-<p>I came across this remark on a blogpost, &amp; it’s kindof interesting, because <em>does the second kind actually exist?</em><br />
-(The above remark was followed by “so don’t use these words when describing your opponent”; essentially, a call for civility, which is an interesting topic in itself).</p>
-<p>I mean. Is it common for people to come across an article, and say “you know what, I was wrong”? I feel Haidt persuasively argues in his “Righteous Mind” book that humans are driven foremost by intuition, and reason post-hoc tries to make the reason look good.</p>
-<p>– I do believe people can <em>evaluate</em> whether arguments make sense or not; at least in the case where it’s about something they’re not tribal about. (Implicitly, though, if an argument on your side is bad, it’ll disappear).<br />
-There’s value in two people arguing publicly, even in absense of persuasion, though: while, yes, the truth each believes is made stronger/richer by contact with the opposition; globally, the audience gets to pick/choose the merits of each side. (The world is complicated, and having a nuanced understanding of things is more likely to fit better than a simplified ideological viewpoint).</p>
-<p>And yet. I don’t think <em>persuasion</em> (of a disinterested audience) happens via the rational arguments, as such.<br />
-– For an argumentative post to be reasonable is a high cost, though: It’s easy to preach to the choir by merely saying “our opponents are stupid, the world would be better without them”. It’s much harder to construct sound reasons which support this. (The easiest way to do this is to showcase the worst of your opponent. “Look, they’re bad”. But this is necessarily met with a showcase of the worst of ‘your side’, so). – Rather, if rationality has much to do with persuading the elephant, then the ‘side’ which is able to keep the strongest guise of rationality (for the longest) is more likely the ‘right’ side.<br />
-(That all pre-supposes this is about arguments between tribes. I’d guess most people in whichever community are largely non-tribal; and if they pay attention to the argument at all, somewhat serve as the disinterested audience).</p>
-<hr />
-<p>Yeah, there’s a danger ‘danger’ in attention-rewarding metrics like Twitter’s Retweets/Favourites, Facebook’s Shares, etc. is that it incentivises content to seek-attention; if ‘attention to post’ isn’t related to ‘quality of post’, this disincentivises writing quality posts. – Rather, writing posts for the sake of writing posts is in defiance of the incentives of the social media.</p>
-<p>There’s also a danger in ‘everything is an argument’, in a tribalistic viewpoint, where everything must be about politics all the time.. the goal becomes less about ‘finding truth’, having good discussion and asking questions, but instead asking “how do I win? how does our side win?”.<br />
-– In that sense, it’s okay that some posts are written which don’t appeal to those outside the author’s in-group. (An echo-chamber, though, where the author &amp; audience never engage/read other viewpoints.. there’s also good cause to be concerned about that).</p>
 ]]></summary>
 </entry>
 
