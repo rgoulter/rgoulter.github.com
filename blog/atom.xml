@@ -8,8 +8,47 @@
         <name>Richard Goulter</name>
         <email>richard.goulter+blog@gmail.com</email>
     </author>
-    <updated>2016-09-18T00:00:00Z</updated>
+    <updated>2016-09-21T00:00:00Z</updated>
     <entry>
+    <title>On Programming and Testability</title>
+    <link href="http://www.rgoulter.com/blog//posts/programming/2016-09-21-on-programming-and-testability.html" />
+    <id>http://www.rgoulter.com/blog//posts/programming/2016-09-21-on-programming-and-testability.html</id>
+    <published>2016-09-21T00:00:00Z</published>
+    <updated>2016-09-21T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<div class="info">
+    Posted on September 21, 2016
+    
+        by Richard Goulter
+    <br/>
+    
+    Tags: 
+    
+</div>
+
+<p>I’ve been reading some interesting blogposts recently:</p>
+<ul>
+<li><p>This summary of <a href="https://blog.acolyer.org/2016/09/14/why-functional-programming-matters/">“Why Functional Programming Matters”</a>, (I’ve not read the piece it summarizes, would probably be interesting) argues roughly that the usual pitch of FP is its purity (“no side effects, no having to reason about side effects”), &amp; that this is a bad pitch. Rather, the benefits FP brings are that it offers a better way to write programs modularly (just as control structures allow for modularity where GOTO doesn’t).</p></li>
+<li><p><a href="https://www.youtube.com/watch?v=dawFyaWvFg4">“Beyond Design Patterns”</a> talk at PHP Conference Barcelona is a fascinating view on the GoF Design Patterns (which I’ve not read up on – this talk provides a context which might make them more bearable to look at).<br />
+<a href="https://pinboard.in/u:rgoulter/b:f41d9c055c12">My notes here</a>, but the key point he makes is that the GoF Design Patterns come down to patterns of information flow. This relates to Alan Kay’s emphasis that ‘OOP’ really ought to be more about the <em>messages</em> between objects.</p></li>
+<li><p>The <a href="http://fabiopereira.me/blog/2010/05/27/ttdd-tautological-test-driven-development-anti-pattern/">Tautological Unit Test</a> <em><em>anti-pattern</em></em>. (Because SDLC dipshits can’t communicate whether a concept is good or bad without using the word “pattern”). The post emphasises that tests ought to make assertions about a code’s behaviour, rather than the code’s implementation. It somewhat defeats the point of a “ensure nothing broke” test if you have to update it as you update the program under test. – Tests are more likely to become tautological, the post suggests, through over-use of mocking. (A small example is provided, to try to illustrate the point).</p></li>
+<li><p>cf. <a href="http://c2.com/cgi/wiki?PortsAndAdaptersArchitecture">“Ports and Adapters”</a>, which sometimes is mentioned in terms of making a system testable. (In “Working Effectively with Legacy Systems”, the idea of a ‘contact point’ is brought up; i.e. a point wherein you can change/inject a dependency without having to modify the code using it). – “Ports and Adapters” somewhat suggests for ‘large’ components, but these ideas all seem the same to me.</p></li>
+</ul>
+<p>My fresh, recent understanding of this last point is that in order to be able to inject things, constructing/initialising objects (using “new”) within methods is bad.</p>
+<pre><code>class SomeInterestingClass {
+  // ...
+  public function computeSomething($x) {
+    $service = new ServiceFromOtherModule(); // Can&#39;t be changed in here
+    return $service-&gt;compute($this-&gt;val, $x);
+  }
+}</code></pre>
+<p>The way to replace this, then, would be to store <code>$service</code> as a property, initialised in constructor instead of “where it’s used”, which can be <code>set</code>. And maybe some more complicated variation for if this class we depend on needs to be initialised with variables the constructor.<br />
+– The same more/less applies if the ‘dependency’ is a function call, etc.</p>
+<p>My understanding is, then, that for non-trivial computations, “testing behaviour” comes down to assertions on how mocked-up classes/functions are used. Some white-box understanding of how behaviour is implemented is needed to know what can be stubbed. – This somewhat makes unit tests a ‘declarative’ companion to the code: “In this circumstance, this should happen”.</p>
+<p>Rephrasing the above in roughly terms of ‘information-flow’: I’m guessing that at least some white-box knowledge of what kinds of messages are received (from what kind of sender), what kinds of messages are sent (to what kind of recipient) is an inevitability; perhaps it’s that it becomes a tautology when the mocking explicitly (albeit limitedly) declares the same messages/relations which the SUT code does.</p>
+<p>– But I don’t know. It’s something I’d like to think about some more.</p>
+]]></summary>
+</entry>
+<entry>
     <title>On QA Automation Blogposts</title>
     <link href="http://www.rgoulter.com/blog//posts/programming/2016-09-18-on-qa-automation-blogposts.html" />
     <id>http://www.rgoulter.com/blog//posts/programming/2016-09-18-on-qa-automation-blogposts.html</id>
@@ -463,44 +502,6 @@ Java &amp; JVM languages happily print a stacktrace indicating <em>where</em> an
 The project isn’t <em>that bad</em> at the moment. (The older code for Delaunay Triangulation is, but the rest ain’t). – “Why not start from scratch?” is a nice temptation, but it’s usually better to iterate towards a good solution than to start from scratch.<br />
 If I was so concerned about a blight in my GitHub profile, yeah, maybe it’d’ve been better to remove it. But as a “cool project which mostly works”, it’d’ve been a shame to lose.</p>
 <p>Also, protip: if you go too far while climbing Ballmer’s Peak, coding becomes less interesting.</p>
-]]></summary>
-</entry>
-<entry>
-    <title>Thoughts on JRPGs</title>
-    <link href="http://www.rgoulter.com/blog//posts/games/2016-06-24-thoughts-on-jrpgs.html" />
-    <id>http://www.rgoulter.com/blog//posts/games/2016-06-24-thoughts-on-jrpgs.html</id>
-    <published>2016-06-24T00:00:00Z</published>
-    <updated>2016-06-24T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<div class="info">
-    Posted on June 24, 2016
-    
-        by Richard Goulter
-    <br/>
-    
-    Tags: <a href="/tags/game.final%20fantasy.html">game.final fantasy</a>, <a href="/tags/game.chrono%20trigger.html">game.chrono trigger</a>
-    
-</div>
-
-<p>My friends told me the PlayStation Vita is a weaboo’s console. While I’d say Sony have badly mismanaged the console, focussing instead on their PS4, one advantage is a decent catalogue of JRPGs available. (Since the Vita is portable, you can play through these on the bus or the train or whatever).</p>
-<p>So far, my experience in JRPGs consists of Final Fantasy IV, Chrono Trigger and Final Fantasy VII. (With “South Park: Stick of Truth” being the closest I’d otherwise experienced of the genre).</p>
-<h3 id="combat">Combat</h3>
-<p>“Western RPGs are for gameplay, Japanese RPGs are for story” is the rule of thumb I was told.<br />
-In case you’ve not played (or seen) Final Fantasy’s combat in these games, it consists of turn-based-ish combat on a screen where the monsters are on the left, good guys on the right; each turn you pick an action (attack/cast magic/use item). (Then you get EXP, level up your characters, etc.). – Chrono Trigger’s combat is a bit more active/involved, but <em>roughly</em> follows the same format.</p>
-<p>The character’s Health (HP) and Mana (MP) persist across battles; and can be replenished by resting at inns (which are few / far between), or by using items (like potions, which are relatively expensive). So the gameplay-dynamic becomes trying to gain experience / get to where you need to be without using too many resources, while being careful to not let HP get too low.<br />
-– South Park’s system replenished HP/MP for each battle; with this rule, characters can simply use all their most powerful magic spells without concern for the cost to MP.</p>
-<p>So. It’s fair to say these JRPGs combat system isn’t <em>trivial</em>. And FFIV does pull dick-moves in its boss fights, such as only being able to fight particular bosses with particular magic spells (or else the boss uses super-strong counter-attacks).</p>
-<p>Yet, one main ‘drawback’ to the JRPGs is the ‘grinding’: since your characters have levels, as do the enemies, the game may demand that the player repeatedly fight through enemy encounters to level up the characters. It’s more monotonous than not. (FFIV even provides the option to automatically select the same move as previous turns; which alleviates the grinding by way of ‘not really playing the game’).</p>
-<p>In a way, it’s rather twisted way of making gameplay ‘accessible’: Typically, if you’re not skilled at playing a game, you can’t proceed. With levelled-games, all you need to do is grind-through enough enemies until what was previously insurmountable becomes .. surmountable.</p>
-<h3 id="referring-to-the-wiki">Referring to the Wiki</h3>
-<p>Perhaps my preference for games is decidedly more linear, but, sure, I looked up the wiki for these games while playing through them.<br />
-The biggest impact this has is you’ll find out about all the best items/weapons, many of which you’ll probably miss the opportunity to get on first try.</p>
-<p>There were times I got quite lost/stuck as to where I should be headed, too, in these games. That could also be due to how old these games are.</p>
-<h3 id="characters-and-story">Characters and Story</h3>
-<p>I think what FFVII was significantly weaker than FFIV and Chrono Trigger in the “ludonarrative” aspect of characters: In the latter, you have specific characters with fixed magic abilities. This strictly dictates how you can fight. (Particularly, “do you have a healer?”). – FFVII lets you pick &amp; choose which characters have which magic spells, &amp; so as far as I can tell it’s all rather arbitrary.</p>
-<p>I, uh, had quite a long hiatus during my playthrough of FFVII; so some aspects of the story confused me. (FFIV, Chrono Trigger were much more tractable).</p>
-<p>It’d be fair to say that these games let the characters develop by way of sidequests; these would elaborate more on the back-story of the character. By exploring more, you’d get more story, and better weapons/etc. (hopefully).</p>
-<h2 id="conclusion">Conclusion</h2>
-<p>These games are certainly classics, although they do show their age. I can’t say I’d enthusiastically recommend them, but the artistic style is quite cute, &amp; I don’t feel I wasted my time playing them.</p>
 ]]></summary>
 </entry>
 
