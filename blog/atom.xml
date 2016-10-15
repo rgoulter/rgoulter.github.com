@@ -8,8 +8,161 @@
         <name>Richard Goulter</name>
         <email>richard.goulter+blog@gmail.com</email>
     </author>
-    <updated>2016-09-21T00:00:00Z</updated>
+    <updated>2016-10-15T00:00:00Z</updated>
     <entry>
+    <title>My Impression of Ruby So Far</title>
+    <link href="http://www.rgoulter.com/blog//posts/programming/2016-10-15-my-impression-of-ruby-so-far.html" />
+    <id>http://www.rgoulter.com/blog//posts/programming/2016-10-15-my-impression-of-ruby-so-far.html</id>
+    <published>2016-10-15T00:00:00Z</published>
+    <updated>2016-10-15T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<div class="info">
+    Posted on October 15, 2016
+    
+        by Richard Goulter
+    <br/>
+    
+    Tags: <a href="/tags/programming.ruby.html">programming.ruby</a>, <a href="/tags/programming.scala.html">programming.scala</a>, <a href="/tags/programming.haskell.html">programming.haskell</a>
+    
+</div>
+
+<h3 id="background">Background</h3>
+<p>I’ve recently started programming in Ruby. I’ve inherited a codebase for writing automated-UI tests against a website. The tests make use of Capybara, which provides a high-level “DSL” for interacting with a webpage/browser in the sameway a user would; Capybara itself does this by abstracting over Selenium (or some other driver, like Poltergeist/PhantomJS); Selenium itself allows interaction with different web-browsers, by providing abstractions for different drivers of browsers (e.g. ChromeDriver).</p>
+<p>As is also common for tests like these (called “UI tests”, “acceptance tests”, “functional tests”, “specifications”, “end to end tests” depending on who you ask) is use of Cucumber. – But that’s not too important for this post.</p>
+<h3 id="very-first-impression">Very First Impression</h3>
+<p>Anyway,<br />
+I’d first read a few books before getting my hands dirty. (“Ruby Best Practices” and some of “The Ruby Way”). What I read was exciting enough: Ruby seems to be a language with decent pedigree, inheriting aspects from Lisp and the emphasis on message-passing from SmallTalk (as well as e.g. the power of Regular Expressions from Perl).<br />
+Also cool was e.g. Ruby’s dynamic features. Everything is an object, objects pass messages between each other. And so by overriding a few magic methods, some pretty cool things can be done. – e.g. the <code>method_missing</code> method is called if the object was called with a method that wasn’t defined on that object; so an object overriding this can have different behaviour.</p>
+<p>That Ruby isn’t a low-pedigree language surprised me. ‘cause I kindof thought of Ruby as a “slightly prettier Python”. (It really isn’t, the philosophies of the two languages are quite different).<br />
+And while I’d heard Ruby documentation was ’good’, it was ‘good’ by-way-of “here’s an example of probably what you’ll want to do”.<br />
+And, well, if all someone knew was “Ruby on Rails”, then it’s kindof a good indicator that that person (prob’ly) doesn’t know how to program.</p>
+<p>Steve Yegge also gave the language well-nuanced praise: that he didn’t <em>like</em> the language, but he found himself using it for everything when he had the choice; that he didn’t <em>know</em> the language, but he found he didn’t need to read the documentation while writing it (unlike other languages he was more familiar with).</p>
+<h3 id="actually-using-it">Actually Using It</h3>
+<p>I’d say, Ruby isn’t as nice a blub language as Python is. To me it feels like a blub language, but with a message-passing system.</p>
+<p>I guess I don’t like it as much coming from a Scala background:<br />
+“Ruby’s nice ’cause you can map/reduce over lists” … just like Scala. But without pattern matching.<br />
+And Ruby has nice “no brackets” syntax … like Scala. (Except in Ruby, it’s like <code>o.m(x,y,z)</code> can be <code>o.m x, y, z</code>; in Scala it’s more like <code>x.op(y)</code> can be written as <code>x op y</code>; in Haskell it’s <code>f(x,y,z)</code> must be written as <code>f x y z</code>). – Also, in Scala, operator overloading works for any symbol which is a valid method name, whereas Ruby takes C++’s approach.</p>
+<p>That Ruby has symbols (like Lisp) is one thing I certainly do like about it, though.</p>
+<p>And I guess I don’t like it as much coming from a Haskell background:<br />
+Say what you like about how shit Haskell documentation can be; (and I suppose outside “being too academic”, large-scale shit like Lenses can be god-damn atrocious to read). But at least it’s clear what <em>types</em> things have.<br />
+Ruby documentation makes clear what <em>messages</em> the objects receive. – The expectation is that the documentation give examples of different ways to use the method. Fucking good luck to you if the documentation lacks that. – This is slightly exasperated by Ruby’s “there’s more than one way to skin a monkey” philosophy, wherein a call to the same method-definition with different kinds of arguments ought to do the-right-thing.</p>
+<p>And I guess it kind-of, sort-of makes sense for those familiar with Ruby, but I was surprised to learn that methods like <code>map</code>, etc. accept <em>only</em> procs; even if an objects method receives the same type of argument as an equivalent proc, the higher-order methods only take procs.<br />
+– The lack of tuples (in the same sense as Haskell or Scala or Python) also seems strange to me.</p>
+<p>But the biggest woe I have with Ruby at the moment is “wtf errors”, presumably from the magic. – It’s not completely uncommon in statements calling Capybara (and therefore, Selenium, and ChromeDriver) to throw an <code>&quot;undefined method 'map' for 0:Fixnum</code> (or <code>nil:NilClass</code>), when the statement contains no calls to map, nor any numbers/nil values. (I guess as a hint, the same statement may sometimes throw other errors about connection problems for some pipe).<br />
+– i.e. the call-stack from the exception doesn’t show the actual call-stack.<br />
+It’s possible, but very difficult, to debug this sort of thing. I still haven’t figured it out.</p>
+<p>– All that said; this was on an non-idiomatic codebase I’d inherited. And I’m by no means yet comfortable with writing Ruby.</p>
+<h3 id="conclusion-hopes">Conclusion / Hopes</h3>
+<p>So I find the syntax and semantics of Ruby conflict with what I’d expect, coming from a Scala/Haskell/Python background.<br />
+I’m not saying Ruby is a <em>bad</em> language. It looks like it’s pretty nice at writing message-passing paradigm programs. – But I don’t yet have love for the Ruby environment.</p>
+<hr />
+<h4 id="btw-about-cucumber">Btw, About Cucumber</h4>
+<p>Cucumber is a tool to help write “executable specifications”. The specification is written in e.g. Gherkin; the main aspect of a Gherkin specification is its sequence of Given/When/Then steps, written in a natural-language like English. – Cucumber tests will then bind these steps to code by matching the steps against a regex, and executing some code for that.<br />
+(In terms of “does the program pass tests”, this is kindof a costly abstraction to make, and for programmers-only, it’s easier to just write the executed code directly. – The purported benefit of writing executable specifications is more about communication: first that those involved in writing/reviewing the specification come up with an agreement of what the program ‘is’, &amp; what terminology/phrases to use when discussing it; second that you get a (readable!) “living document” which describes what features the program has).</p>
+<p>The automated testing suite is still quite young (currently working on getting it stable). I’m interested in seeing what difficulties come up in maintaining it (both from a technical and ‘social’ standpoint).</p>
+]]></summary>
+</entry>
+<entry>
+    <title>My Hope for Political Discussion</title>
+    <link href="http://www.rgoulter.com/blog//posts/argument/2016-10-15-my-hope-for-political-discussion.html" />
+    <id>http://www.rgoulter.com/blog//posts/argument/2016-10-15-my-hope-for-political-discussion.html</id>
+    <published>2016-10-15T00:00:00Z</published>
+    <updated>2016-10-15T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<div class="info">
+    Posted on October 15, 2016
+    
+        by Richard Goulter
+    <br/>
+    
+    Tags: <a href="/tags/politics.html">politics</a>
+    
+</div>
+
+<p>The other day something wonderful happened in a chat group I’m in.<br />
+Upon reading David Wong’s excellent <a href="http://www.cracked.com/blog/6-reasons-trumps-rise-that-no-one-talks-about/">discussion of rural voter mindset</a>, a friend made the remark like “we need more ‘empathic explainers’, rather than ‘explainer’ articles”.</p>
+<p>I agree with the sentiment.. but my mind thinks in ways like “what are the obstacles”.<br />
+So I can agree that the stated “people aren’t sharing articles which empathetically discuss the other”, and prob’ly “it’s difficult to find resources to help emphathise with the other”.. essentially I’d say the people apparently don’t want to sympathise with the other; and maybe the infrastructure in place is such that they’re unlikely to.</p>
+<hr />
+<p>Taking an example. My understanding is Fox News was made as a ‘safe space’ for right-wing ideology. But it’s not hard to believe the right has <a href="https://praxis.ink/2016/08/the-conservative-media-echo-chamber-has-made-the-right-deaf-to-reality/">“constructed an intellectual ghetto that no one else wants to visit”</a>.</p>
+<p>The title of the previous link refers to an echo chamber; I’d say the problem of echo chambers isn’t unique to one side. On the other hand, though, while it’s convenient to discuss the problems as symmetric at the meta-level, I don’t believe the climate is symmetric (unless maybe considered on a long-enough timeline).</p>
+<p>But, y’see… who exactly has a neutral view of things? Something it seems my news feed doesn’t seem to understand is,<br />
+if you ask a non-fanatic Clinton supporter “who’s going to win 2016 election?”, they’re likely to say “oh, probably Trump” prob’ly followed by “so many voters are idiots”;<br />
+and similarly a non-fanatic Trump supporter, “oh, probably Clinton” prob’ly followed by “the elites &amp; MSM have pretty much rigged the system”.<br />
+– Or, rather, “who’s going to win? probably not my candidate”.<br />
+And the next iteration of thought then ought to be .. “gee, people seem to always think their side is losing; but, really, <em>those</em> people are the ones with power”.<br />
+– I don’t mean “people are biased”. My lament is that people are <em>unaware</em> that their opponents often think in the same <em>form</em> as they do.</p>
+<p>And if people don’t recognise <em>forms</em> of thought like this.. how can we expect people to themselves become more empathetic to opinions they don’t know about?</p>
+<hr />
+<p>I like Miller’s Law. I think Wikipedia’s phrasing is like “Suspend judgement until you’ve listened to find out what statement you’re hearing is true about”.<br />
+My understanding is more like this. No one genuinely says something while thinking “hey this is dumb of me to say”; but many genuinely expressed opinions are gross or otherwise dumb.<br />
+Like “how could this guy be so stupid” dumb. (ProTip, “because he’s racist/sexist/gross” isn’t sufficient effort to count as “listening”).<br />
+– Ergo, if a statement sounds really awfully dumb in such a way you couldn’t pass Intellectual-Turing-Test for it, you’ve not understood the truth the statement brings.</p>
+<p>Sturgeon’s Law is probably another nice law here: “90 percent of everything is crap”.</p>
+<p>– With the above two in mind, what fucking point is there in the common anger in how politics usually gets discussed: “look, someone from the other tribe said something dumb!”. (Watch <em>any</em> John Oliver or Daily Show video to see this form of statement). – It’s <em>so</em> satisfying to see how stupid those from the other tribe are. (Well, beneath the anger, anyway).</p>
+<p>The other tribe is disgusting <em>by definition</em>.<br />
+The other tribe isn’t bad at the things you think the other tribe is bad at; the other tribe is bad at things your tribe is good at.</p>
+<p>And your tribe is bad at things the other tribe is good at.<br />
+– In reaction to “people are biased; I’m a person and so I don’t know what things I’m wrong about”, I suppose a rational response would be to have people who can disagree with you on-hand so you can find out what you’re wrong about. Who does that? I mean, I think it’s fine that people aren’t truth-seekers like this. But still.</p>
+<p>Short of that, for myself, I’d say it’s possible to reason about the things you’re wrong about by their form.<br />
+Tools and rules ought to work impartially.<br />
+If someone from the other tribe would be a complete-fucking-idiot for saying the same kindof thing, then prob’ly you should hold off.</p>
+<p>(Other heuristics are like, e.g. “the world is a complicated place; unqualified or unnuanced statements are probably wrong overall, though may contain some truths”, or forms like “if the other side were consistent about X, then they would say/do Y”, etc.).</p>
+<hr />
+<p>“The purpose of the internet is to say all sorts of random shit, and then defend what you say as if it were God’s own truth” is something like a tweet I saw once. I quite liked it.</p>
+<p>I’d love to see an adaptation of a particular xkcd comic.<br />
+Not the “someone on the internet was <em>wrong</em>” one. (The artist is still a smug piece of shit there; holding that the artist’s opinion is probably the right one).<br />
+The one which goes “there are too many competing standards, we need a new standard to bring them together” and suddenly there are N+1 competing standards.<br />
+– There are too many dumb opinions on the internet. Someone ought to give a right opinion with nuance showing people the errors in their thinking. And suddenly there are N+1 dumb opinions on the internet.</p>
+<p>I vaguely recall an old Bertrand Russell quote(?) … <a href="http://quoteinvestigator.com/2015/03/04/self-doubt/">this one</a>. “The fundamental cause of the trouble in the modern world today is that the stupid are cocksure while the intelligent are full of doubt”.<br />
+(Russell apparently had some good quotes; e.g. <a href="https://www.brainyquote.com/quotes/quotes/b/bertrandru403503.html">“Why is propaganda so much more successful when it stirs up hatred than when it tries to stir up friendly feeling?</a>, <a href="https://en.wikiquote.org/wiki/Bertrand_Russell">“Nine-tenths of the activities of a modern Government are harmful; therefore the worse they are performed, the better.”</a>).<br />
+– I’d adapt this idea a bit: those sensible enough to know that expressing political opinions is fucking annoying know to not share their opinion.</p>
+<p>If you had a dumb opinion, how would you know?<br />
+Surely you’d still feel your opinion superior, that “the people need to know!”?</p>
+<hr />
+<p>The way Facebook and Twitter structure their interaction also shapes how people think.</p>
+<p>Tumblr is prob’ly the worst, wherein you don’t get to see responses to posts; so propaganda can proliferate uninterrupted.</p>
+<p>Facebook is ‘notorious’ in this respect for its filter-bubble, wherein its newsfeed only shows you parts of things.. – But on the whole, filtered-information-shapes-thought has been around for ages; it’s why English translations of the Bible were so controversial at first. (It’d bypass the in-place power structure, right).</p>
+<p>I’d say the limitation with Facebook is it’s “among friends”. And if your friends aren’t INTJs, arguing doesn’t seem to be so welcomed.</p>
+<p>I don’t think Twitter is necessarily limited by its 140-character posts. People seem to chain them well enough, mostly. – I even prefer it for that; the cost of a tweet is much lower, so it’s easier to share interesting tweets.<br />
+But the inevitable problem is, you’re defining your own stream of information.</p>
+<hr />
+<p>If there’s any sense to the above, it’s a “takes one to know one” kinda thing.<br />
+In that respect, I don’t suppose I’d hope for “people to get along better”, or “people to be all super-rational”, etc. – But surely at some point after enough anger and outrage, people have to be aware of the rules of the game?</p>
+]]></summary>
+</entry>
+<entry>
+    <title>Future Cop LAPD</title>
+    <link href="http://www.rgoulter.com/blog//posts/games/2016-10-07-future-cop-lapd.html" />
+    <id>http://www.rgoulter.com/blog//posts/games/2016-10-07-future-cop-lapd.html</id>
+    <published>2016-10-07T00:00:00Z</published>
+    <updated>2016-10-07T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<div class="info">
+    Posted on October  7, 2016
+    
+        by Richard Goulter
+    <br/>
+    
+    Tags: <a href="/tags/games.future%20cop.html">games.future cop</a>
+    
+</div>
+
+<p>Future Cop LAPD is an old game, released for PlayStation One, as well as PC.</p>
+<p>It looks like there are <a href="https://gaming.youtube.com/game/UCqgd3IH34aVYaV-P8FUt6aQ#tab=2">dozens</a> of videos about it on YouTube, getting ~1k-10k views each. The comments are usually filled with “man, this was such a cool game”.</p>
+<p>Sadly, as happens with ‘legacy’ games, it doesn’t look possible to purchase on modern systems. Even on Sony’s ‘PSOne Classics’, it looks <a href="https://store.playstation.com/#!/en-us/games/future-cop-lapd-(ps3-psp)/cid=UP9000-NPUJ00739_00-0000000000000001">only available for PS3, PSP</a>. (Presumably it’s not further avaible on PS4 or PSVita due to licensing/rights issues).</p>
+<p>– For myself, I have vague recollections of the game, on a family-friend’s PlayStation.</p>
+<p>The gist of the game is you play as a transforming mech/hovertank, with an arsenal of machinegun/rockets/mortar (or various upgrades). The gameplay is either a single-player campaign with the usual bells &amp; whistles, or a ‘MOBA-style’ match against another player (or an AI): ‘MOBA’ in that you control a powerful unit, but victory depends on getting a weaker AI-controlled unit to reach the enemy’s base.<br />
+– I don’t know which game would’ve been first with MOBA gameplay. I’ve heard <a href="https://en.wikipedia.org/wiki/Herzog_Zwei">Herzog Zwei</a> on the Sega Genesis as one of the first RTS/MOBA games. – These days, the game AirMech gets a mention in terms of “games with transforming mechs and underling units”.</p>
+<p>Watching a couple of the <a href="https://www.youtube.com/watch?v=v760C4AmJfQ">hard</a> <a href="https://www.youtube.com/watch?v=_uqECVDAngI">levels</a> of this MOBA-style gameplay, I do get the impression that there’s a much greater demand for polish in games these days. It looks like “wow this game was cool” is tained with nostalgia and forgotten memories:</p>
+<p>– For one, the gameplay design looks somewhat stunted; in both of these videos, the winning strategy is apparently quite similar. Since the victory objective is “get one of your tanks inside their base”, it’s better to pick the tank which can take punishment. (A potential alternative, I guess, is ‘pick a weaker tank, but from closer to the enemy base’; this doesn’t seem viable?). This also seems to require a certain amount of points have been built up first.<br />
+– But, like. It strikes me that in the video, the enemy AI has captured towers on the player’s side, and the player doesn’t seem to see benefit in destroying the tower.<br />
+– That enemy missiles travel the same speed as the player’s hovertank strikes me as a cute feature; that the player’s mortar (which can apparently destroy a tower in one hit) is so slow that the dynamic of “destroy a tower” is apparently “fire a mortar, then kindof wait around for the mortar to land” feels.. lame.<br />
+– Ammunition is kept as one large amount, rather than smaller amounts which could be replenished at a base. (The effect is, the possible-gameplay-time is the limit; when you run out of ammo you lose. Smaller-but-replenishable instead demands moderation: the short-term cost of firing is much higher).</p>
+<p>– In terms of ‘polish’… not so much ‘bad graphics’ (which I’d call ‘charming graphics’), so much as the poor interface: the camera feels wonky, which is perhaps balanced by the simple-ish maps, and short range on enemy towers. The enemy spawning a super-tank is apparently quite a big event, but the UI doesn’t make a big deal of it. There’s no healthbar on towers/tanks (YMMV); no timer or other indication of when a destroyed tower will respawn.<br />
+Outposts can be captured once. Idk, it just feels strange that there’s apparently not any (expensive) way for an outpost to be re-captured.</p>
+<p>I guess ’cause of the ostensible simplicity of the gameplay, there’s some ambition for I-could-do-that-remake. (e.g. <a href="https://theunemployedartist.wordpress.com/2016/03/22/the-project-future-cop-lapd-remake/">this</a> artists amazing recreation of the mech from the cutscenes. Wow). – “We don’t do it because it’s easy; we do it because we thought it would be.”.<br />
+– I’ll totally admit that in an undergrad module, I made an abysmal-failure of an attempt to make something inspired by Future Cop LAPD. – All the same, you’d think that e.g. the maps of the MOBA gameplay would be something more available on the internet.</p>
+]]></summary>
+</entry>
+<entry>
     <title>On Programming and Testability</title>
     <link href="http://www.rgoulter.com/blog//posts/programming/2016-09-21-on-programming-and-testability.html" />
     <id>http://www.rgoulter.com/blog//posts/programming/2016-09-21-on-programming-and-testability.html</id>
@@ -287,221 +440,6 @@ After some time the of the clearly inexpert author (adopting a faux-foolish tone
 – But there’s a difference between “this tool can’t model this problem; don’t use it for that” (&amp; how to avoid such limitations), and “I’m misusing this tool; it sucks; everyone should use this other tool I just heard of instead”.</p>
 <p>cf. Steve Yegge’s praise of Ruby <a href="http://steve-yegge.blogspot.sg/2006/09/bloggers-block-4-ruby-and-java-and.html">here</a>. Yegge’s a very talented writer, so the comparison is unfair on that front, but he qualifies his praise. (He doesn’t like Ruby, but he uses it; he doesn’t know Ruby, but he rarely needs to look at the docs, compared to languages he knows, where he does have to; it’s performance isn’t amazing, but that’s mostly ok anyway).</p>
 <p>A blogpost from Robert C Martin, <a href="http://blog.cleancoder.com/uncle-bob/2016/07/27/TheChurn.html">“The Churn”</a>, came up on my timeline. ‘The Churn’ referring to the naive programmer’s chase of all new things as “superior”. (Which makes for a fun comparison with <a href="https://quoderat.megginson.com/2006/03/06/programming-languages-of-distinction/">“the programming language cycle”</a>; these two pieces agree about new languages [which smart people like] lack in usable tools/libraries). – Martin makes good observations that OOP, FP are orthogonal; both tools used to solve problems. – I think in insinuation that FP isn’t worth learning/paying attention to drew ire from the FP kids.</p>
-]]></summary>
-</entry>
-<entry>
-    <title>C++ Object Copying</title>
-    <link href="http://www.rgoulter.com/blog//posts/programming/2016-07-14-c-object-copying.html" />
-    <id>http://www.rgoulter.com/blog//posts/programming/2016-07-14-c-object-copying.html</id>
-    <published>2016-07-14T00:00:00Z</published>
-    <updated>2016-07-14T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<div class="info">
-    Posted on July 14, 2016
-    
-        by Richard Goulter
-    <br/>
-    
-    Tags: <a href="/tags/programming.c%2B%2B.html">programming.c++</a>
-    
-</div>
-
-<p>C++ is quite a different beast of a language to, say, Java or Python.<br />
-My early programming experience was in the latter, so I find my ‘mental model’ for reasoning about what C++ does with the code I write is sometimes wrong.</p>
-<p>One area where I make mistakes is underestimating where C++ will make copies of objects.<br />
-That Java/Python are (largely) pass-by-reference, and C++ is pass-by-value (unless otherwise specified) is prob’ly what drives that. – Another way of saying this is that when “passing objects around”, Java/Python tend to only copy <em>pointers to</em> objects, whereas C++ (by default) usually makes copies of objects.</p>
-<p>It may be helpful to illustrate this, to see where C++ copies things. (Or, perhaps it may be easier to remember where C++ doesn’t copy things).</p>
-<p><a href="https://gist.github.com/rgoulter/b33b54ecc6f17e454387234d941e229b">Here’s one I prepared earlier</a>. (The gist program contains a good output listing for the snippets below).</p>
-<h2 id="a-custom-object">A Custom Object</h2>
-<p>Consider a custom object <code>MyObj</code>:</p>
-<pre><code>class MyObj {
- public:
-     MyObj(int x) {
-         cout &lt;&lt; &quot;    CONS MyObj(&quot; &lt;&lt; x &lt;&lt; &quot;)&quot; &lt;&lt; endl;
-         x_ = x;
-     }
-
-     ~MyObj() {
-         cout &lt;&lt; &quot;    DEST MyObj(&quot; &lt;&lt; x_ &lt;&lt; &quot;)&quot; &lt;&lt; endl;
-     }
-
-     MyObj(const MyObj&amp; other) {
-         x_ = other.x();
-         cout &lt;&lt; &quot;    CPY  Copying from &quot; &lt;&lt; x_&lt;&lt; endl;
-     }
-
-     MyObj&amp; operator=(const MyObj&amp; rhs) {
-         cout &lt;&lt; &quot;    ASSG Assigning from &quot; &lt;&lt; rhs.x() &lt;&lt; &quot; to &quot; &lt;&lt; x_ &lt;&lt; endl;
-         if (this == &amp;rhs) return *this;
-
-         x_ = rhs.x();
-
-         return *this;
-     }
-
-     void setX(int x) { x_ = x; }
-
-     int x() const { return x_; }
-
- private:
-    int x_;
-};</code></pre>
-<p><code>MyObj</code> is a straightforward class; we provide a constructor, destructor, copy-constructor and assignment operator which each output when they’re called.</p>
-<h2 id="in-initialisation">In Initialisation</h2>
-<pre><code>  MyObj x0 = MyObj(10);  // A1
-  MyObj x1(5);           // A2
-  MyObj x2(x1);          // A3
-  MyObj x3 = x1;         // A4</code></pre>
-<ul>
-<li><p><code>A1</code> Only calls the constructor; not the copy-constructor or assignment operator.</p></li>
-<li><p><code>A2</code> is the same as <code>A1</code>.</p></li>
-<li><p><code>A3</code> is an explicit call to the copy-constructor.</p></li>
-<li><p><code>A4</code> is also a call to the copy-constructor. (i.e. same as (<code>A3</code>)).</p></li>
-</ul>
-<h2 id="in-assignment">In Assignment</h2>
-<pre><code>  x2 = x3;  // B1</code></pre>
-<ul>
-<li><code>B1</code> is a call to the assignment operator.<br />
-The copy-constructor isn’t invoked in the assignment operator (in this example).</li>
-</ul>
-<h2 id="in-function-calls">In Function Calls</h2>
-<p>Consider functions:</p>
-<pre><code>void outp(MyObj o) {
-    cout &lt;&lt; &quot;   Output MyObj(&quot; &lt;&lt; o.x() &lt;&lt; &quot;)&quot; &lt;&lt; endl;
-}
-
-void outpC(const MyObj&amp; o) {
-    cout &lt;&lt; &quot;   Output MyObj(&quot; &lt;&lt; o.x() &lt;&lt; &quot;)&quot; &lt;&lt; endl;
-}</code></pre>
-<p>and the snippet:</p>
-<pre><code>  outp(x1);   // C1
-  outpC(x1);  // C2</code></pre>
-<ul>
-<li><p><code>C1</code>, a call to <code>outp</code> invokes a copy.</p></li>
-<li><p><code>C2</code>, where <code>outpC</code> takes a constant-reference, does not invoke a copy.</p></li>
-</ul>
-<h2 id="assigning-to-references">Assigning to References</h2>
-<pre><code>  const MyObj&amp; crx0 = x0;  // D1
-  MyObj&amp; rx0 = x0;         // D2</code></pre>
-<ul>
-<li><p><code>D1</code> doesn’t invoke a copy.</p></li>
-<li><p><code>D2</code> doesn’t invoke a copy.</p></li>
-</ul>
-<p>Assigning to references doesn’t invoke copies.</p>
-<h2 id="results-of-functions">Results of Functions</h2>
-<p>Consider the function:</p>
-<pre><code>MyObj f1() {
-    cout &lt;&lt; &quot;  f1():&quot; &lt;&lt; endl;
-    return MyObj(7);
-}</code></pre>
-<p>and the snippet:</p>
-<pre><code>  MyObj x4 = f1();          // E1
-  const MyObj&amp; crx4 = f1(); // E2
-  MyObj&amp; xr4 = f1();        // E3</code></pre>
-<p>both CONS no cpy, except 3 which doesn’t compile</p>
-<ul>
-<li><p><code>E1</code> doesn’t invoke a copy.</p>
-<ul>
-<li>I think this is the compiler optimising a way a destruct of the value from the function, and a copy-constructor to the tmp value.</li>
-</ul></li>
-<li><p><code>E2</code> also doesn’t invoke a copy.</p></li>
-<li><p><code>E3</code> doesn’t compile; that’s because a reference must point to an ‘lvalue’ (something which can be referred to by name).</p>
-<ul>
-<li>Apparently C++11 allows rvalue references (<code>&amp;&amp;</code>), which allows ‘move semantics’.</li>
-</ul></li>
-</ul>
-<h2 id="pointer-dereferencing">Pointer Dereferencing</h2>
-<pre><code>  MyObj* ptr = new MyObj(13);  // F1
-  MyObj deref = *ptr;          // F2
-  MyObj&amp; derefRef = *ptr;      // F3
-  const MyObj&amp; constDeref = *ptr;  // F4
-  delete ptr;                  // F5</code></pre>
-<ul>
-<li><p><code>F1</code> is a call to the constructor, (and <code>F5</code> to the destructor).</p></li>
-<li><p><code>F2</code> <em>invokes the copy constructor</em>.</p></li>
-<li><p><code>F3</code> doesn’t invoke a copy.</p>
-<ul>
-<li>Pointer dereferencing doesn’t necessarily demand a copy.<br />
-The dereference of <code>*this</code> in <code>MyObj&amp; operator=(...)</code> also demonstrates that.</li>
-</ul></li>
-<li><p><code>F4</code> doesn’t invoke a copy, either.</p></li>
-</ul>
-]]></summary>
-</entry>
-<entry>
-    <title>Men of Valor Has Not Aged Well</title>
-    <link href="http://www.rgoulter.com/blog//posts/games/2016-07-09-men-of-valor-has-not-aged-well.html" />
-    <id>http://www.rgoulter.com/blog//posts/games/2016-07-09-men-of-valor-has-not-aged-well.html</id>
-    <published>2016-07-09T00:00:00Z</published>
-    <updated>2016-07-09T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<div class="info">
-    Posted on July  9, 2016
-    
-        by Richard Goulter
-    <br/>
-    
-    Tags: <a href="/tags/games.men%20of%20valor.html">games.men of valor</a>, <a href="/tags/steam.html">steam</a>
-    
-</div>
-
-<p>It’s kindof fun to see a game you’d seen on store shelves 10 years ago, available on Steam.</p>
-<p>In this case, <a href="http://store.steampowered.com/app/411330/">Men of Valor</a>, with a usual-price of S$10.50, and at the time of writing, on sale for 75% off. – Look, I removed my payment details from Steam during the Summer Sale, but I can hardly feel bad about a single S$2.62 purchase.</p>
-<p>– The other experience I’d had with ‘old shooters’ was “Shadow Ops: Red Mercury”, for S$1.05. Which, uh, wasn’t great.</p>
-<p>I think in terms of “action/war shooters”, Call of Duty gets its fair share of complaints for being …. dumb, non-stop ADHD explosions and mayhem. (A lot of the criticism also focussed on the multiplayer experience in those games; though I only play the single-player campaigns).<br />
-That’s a bit unfair, I’d say; since the older CoD games still hold up relatively well in contrast to the aforementioned.</p>
-<p>“Shadow Ops: Red Mercury”’s gameplay felt a bit awkward to me. One game mechanic absent from gameplay was, you couldn’t pick up an enemy’s gun; which seems like something insignificant, but every other shooter I’ve played featured that. It also felt cheap, the gameplay felt tacky. (So I ended up getting the cheat codes and having a lot of fun with it that way; so I can hardly regret the purchase).</p>
-<p>“Men of Valor”, while I’ve only played a handful of chapters, also feels a bit tacky in comparison. (MoH:AA was published <s>around the same time</s> in 2002, [2 years before SO:RM or MoV], CoD <s>not much later</s> in 2004; “Battlefield: Vietnam” in 2004;“Far Cry” in 2004!).<br />
-MoV’s story &amp; cutscenes are cheap and tacky, fine. But the gameplay … MoV’s health system allows you to die pretty quickly. In typical modern shooters, this is counter-balanced by mechanics like a cover-system, or by e.g. health regeneration. MoV’s mitigation is some delay before enemies shoot at you, &amp; that you must ‘bandage’ the damage received. (i.e., damage you receive is essentially ‘potential damage’, so you ‘bandage’ it to heal the potential damage. But being shot completely will kill you; so the system has all the drawbacks of a CoD-style system and a Far Cry-style system, without the benefits of either).<br />
-– It’s just not fun to play; every time I picked it up, my main motivation to keep playing the level was the thought of how fucking boring it would be to replay through the level (&amp; shitty cutscenes).</p>
-<p>In a way, I kindof feel bad about it. (Or I did, before learning that these shitty games were released the same year “Far Cry” was).<br />
-CoD’s gameplay style (frequent checkpoints, wherein checkpoints are free; quick/free recovery of health from behind cover, etc.) don’t particularly create high-stakes. The player is there for the ride, not for an experience which demands anything of them.<br />
-I guess what CoD, and other good shooters (like <a href="https://upload.wikimedia.org/wikipedia/commons/6/63/Quake_-_family_tree.svg">those using a Quake engine</a>) 10 years ago established/relied on good game mechanics (&amp; so don’t age abysmally); which these shitty cheap ones I’ve mentioned earlier … didn’t.</p>
-]]></summary>
-</entry>
-<entry>
-    <title>Reflection on Maintaining a Toy C++ Project</title>
-    <link href="http://www.rgoulter.com/blog//posts/programming/2016-07-05-reflection-on-maintaining-a-toy-c-project.html" />
-    <id>http://www.rgoulter.com/blog//posts/programming/2016-07-05-reflection-on-maintaining-a-toy-c-project.html</id>
-    <published>2016-07-05T00:00:00Z</published>
-    <updated>2016-07-05T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<div class="info">
-    Posted on July  5, 2016
-    
-        by Richard Goulter
-    <br/>
-    
-    Tags: <a href="/tags/programming.c%2B%2B.html">programming.c++</a>, <a href="/tags/programming.github.html">programming.github</a>
-    
-</div>
-
-<p>A few years ago, for a course on Computational Geometry, my team made a program aiming for a stain-glass effect using Voronoi Diagrams.</p>
-<p>To quickly explain:<br />
-Voronoi Diagrams show the regions which are closest to each point. e.g. for 2 points, you’d bisect the space between them. – By analogy, each ‘point’ would be pizza-delivery, and each region would be the region served by that store.<br />
-We’d found a <a href="http://www.cs.swarthmore.edu/%7Eadanner/cs97/s08/papers/gorbach.pdf">cool paper</a> explaining how to create a “stained-glass effect” using Voronoi diagrams. (Roughly, since edges in a Voronoi diagram are equidistant to two points, you wanna make points which are equidistant to edges on some input image: using an edge-detection filter of the image, you can construct a probability-distribution defined as “0 for an edge or far away from an edge, but quite high for close to an edge”… etc. etc.).</p>
-<p>But, uh, this was a school assignment.<br />
-The original assignment was in four stages; the first three iterating towards a Delaunay Algorithm, using precise big-int computations. (Delaunay is the dual of Voronoi; where Voronoi shows the regions, a Delaunay Triangulation shows which points are closest to each other. Btw, besides stained-glass effects, there’re a bunch of practical applications to this). (Another fun fact: during this assignment, one of the teammates rage-quitted to go do a whole project by himself, which he never presented on. I had all the luck for getting teammates in uni).<br />
-Part four was “do something cool”.<br />
-The trouble with this being that the assignment was initially in C++. (I think ‘cause the module was taught by the same Professor who taught ’Intro to Computer Graphics’, which used OpenGL in C++). – Fun fact, the given code wasn’t “const correct” &amp; so wouldn’t compile with compilers not on Windows; oddly, Uni courses are one of the places where Windows is presumed. The trouble with C++ in University courses is, unless the code is monkey-see-monkey-do, or the students are <em>really</em> good at C++, then there’s just too much C++ lets you screw up with to be a good language to use. (I recall at the time a teammate included a hard-coded <code>include &quot;C:\\Users\\username\\....\\whatever.h&quot;</code>, because how the hell are you supposed to know that’s not The Right Thing to do?).<br />
-(Besides that, it’s much more difficult to install/setup dependencies for a C++ than for other languages like Python or Java).<br />
-Only for the most basic things can a programmer get away with blindly writing C++.</p>
-<p>Somehow, we managed to get something which worked (ish) submitted. (When I presented it to the class, I said it was “<em>half</em> cool”; ’cause it was a really cool project but it was only half-working).</p>
-<p>I put it on my GitHub.<br />
-I’d tinkered with it a year ago, enough to fix some <code>SEGFAULT</code> I was somehow getting.<br />
-– Going through job interviews at the moment, I can see that the places I apply to will at least look at my GitHub; and <a href="https://github.com/rgoulter/cs5237-VoronoiArt">this project</a> is my only C++ project. Fortunately, no one gives enough of a shit to actually try out the project (since, as I discovered tinkering with it again recently, the code had some other <code>SEGFAULT</code> issue in normal use),=; unfortunately, I’d reckon even at a glance the project was in pretty bad shape. (Maybe not ‘typical undergrad C++’ bad, but still).</p>
-<p>– To be honest, most of what made me say that was superficial: poorly arranged files, inconsistently named files, and inconsistent coding conventions. Prob’ly my favourite being <code>halfcamelCase</code> which annoyed the hell out of me. – In fairness, there were a number of ‘bad’ C++ things (heavy use of <code>extern</code>/global variables, <em>really long</em> methods/functions, etc. – I did write down the things I reckoned were shit; it’s theraputic).<br />
-People glancing at the repo (e.g. people I’m applying to for a job) can notice the former easily; and when the latter isn’t so egregious, it’s difficult to notice. – But that’s not really a good excuse. I feel it’s not insane to say “well-designed &gt; testable &gt; working &gt; not-working”. Software is fragile, so “working” is often going to become “not working”. Testable code lets you know this <em>quickly</em>. And well-designed code is easy to bring under test (and/or, a good design makes it really difficult to write bad code on top of it).</p>
-<p>Btw, “legacy code” = any code which is untested. lol, most of aforementioned codebase is “legacy”.<br />
-In fact, in the days after we presented, the others worked their arses off to get it somewhat working. – Looking at the code again, I came across comments written in Czech. Given that my teammates were Kazakhstani and Indian, I figure this means they “adapted” the code from somewhere else. (TBH, I don’t doubt that they worked hard). – Though, looking at the code we had from the parts one to three, I kinda don’t blame them. – I don’t excuse them, either; after tidying up the code to remove the egregious Bad Things (tm), the code still doesn’t work, but at least the shit is within-functions rather than at a project-level; which is testable.<br />
-(For myself, the code I wrote was the Qt &amp; OpenGL code. The uni graphics courses are quite happy to use GLUT.. I wanted a “real GUI”. – I’d made mistakes in loading the image into OpenGL texture coordinates, so the rendering would sometimes [though not always] be wonky).</p>
-<p>– One thing I’ll note is about ‘cognitive load’: Programmers tend to know about the immediate-term cognitive-load, where if interrupted from being “in the zone”, it takes time to get back to the task at hand. – I think the thing most undergrads miss out on by not maintaining projects over a long term is the experience of why documentation is important. Coming back to the codebase after 1-2 years without touching it, especially a not-well-designed codebase, it’s <em>really</em> not clear what a particular function is for. Documentation, like <em>good names</em>, as well as describing what a function does (and what it assumes) is surely useful. Or, rather, in its absence, it takes quite some time to read through <em>to remember</em> what things were for. (&amp; that’s with the advantage of having once before carried such a cognitive load).<br />
-– As well, for non-trivial algorithms (like Delaunay Triangulation, or constructing a Voronoi Diagram using Fortune’s Algorithm), absence of high-level explanations is quite annoying.</p>
-<p>C++ itself is pretty brutal for novice-codebases.<br />
-Unlike Rust, C++ is quite happy to let you do stupid shit (but then yell at you about it at runtime). – “<code>NullPointerException</code> is for wimp languages” is what C++ must think. Apparently C++ also thinks “just wing it” when a function never returns a value (when it’s supposed to return a value), which led to some deal of “wtf, it’s not even possible to construct a value like that!”, before I realised this. (No, really, wtf C++?).<br />
-Java &amp; JVM languages happily print a stacktrace indicating <em>where</em> an error occurred; “where” meaning not just which line-of-code, but the function calls leading to it. – With a “pretty bad undergrad” codebase, it can be pretty shitty to find where the sinner is.<br />
-– I mean, Rust looks hard as hell (for the borrowing/lifetimes stuff), but at least it’s damned-hard to run into errors like this.</p>
-<p>Anyway.<br />
-The project isn’t <em>that bad</em> at the moment. (The older code for Delaunay Triangulation is, but the rest ain’t). – “Why not start from scratch?” is a nice temptation, but it’s usually better to iterate towards a good solution than to start from scratch.<br />
-If I was so concerned about a blight in my GitHub profile, yeah, maybe it’d’ve been better to remove it. But as a “cool project which mostly works”, it’d’ve been a shame to lose.</p>
-<p>Also, protip: if you go too far while climbing Ballmer’s Peak, coding becomes less interesting.</p>
 ]]></summary>
 </entry>
 

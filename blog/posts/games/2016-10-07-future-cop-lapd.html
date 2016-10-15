@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>On Programming and Testability - Richard Goulter's Blog</title>
+        <title>Future Cop LAPD - Richard Goulter's Blog</title>
 
         <!-- My (Old) CSS theme -->
         <link rel="stylesheet" type="text/css" href="../../css/default.css" />
@@ -128,48 +128,42 @@
             <hr style="margin: 0px; border-top: 5px solid black;" />
 
             <div id="content" class="container">
-                <h1>On Programming and Testability</h1>
+                <h1>Future Cop LAPD</h1>
                 <div class="info">
-    Posted on September 21, 2016
+    Posted on October  7, 2016
     
         by Richard Goulter
     <br />
     
-    Tags: 
+    Tags: <a href="../../tags/games.future%20cop.html">games.future cop</a>
     
 </div>
 
-<p>I’ve been reading some interesting blogposts recently:</p>
-<ul>
-<li><p>This summary of <a href="https://blog.acolyer.org/2016/09/14/why-functional-programming-matters/">“Why Functional Programming Matters”</a>, (I’ve not read the piece it summarizes, would probably be interesting) argues roughly that the usual pitch of FP is its purity (“no side effects, no having to reason about side effects”), &amp; that this is a bad pitch. Rather, the benefits FP brings are that it offers a better way to write programs modularly (just as control structures allow for modularity where GOTO doesn’t).</p></li>
-<li><p><a href="https://www.youtube.com/watch?v=dawFyaWvFg4">“Beyond Design Patterns”</a> talk at PHP Conference Barcelona is a fascinating view on the GoF Design Patterns (which I’ve not read up on – this talk provides a context which might make them more bearable to look at).<br />
-<a href="https://pinboard.in/u:rgoulter/b:f41d9c055c12">My notes here</a>, but the key point he makes is that the GoF Design Patterns come down to patterns of information flow. This relates to Alan Kay’s emphasis that ‘OOP’ really ought to be more about the <em>messages</em> between objects.</p></li>
-<li><p>The <a href="http://fabiopereira.me/blog/2010/05/27/ttdd-tautological-test-driven-development-anti-pattern/">Tautological Unit Test</a> <em><em>anti-pattern</em></em>. (Because SDLC dipshits can’t communicate whether a concept is good or bad without using the word “pattern”). The post emphasises that tests ought to make assertions about a code’s behaviour, rather than the code’s implementation. It somewhat defeats the point of a “ensure nothing broke” test if you have to update it as you update the program under test. – Tests are more likely to become tautological, the post suggests, through over-use of mocking. (A small example is provided, to try to illustrate the point).</p></li>
-<li><p>cf. <a href="http://c2.com/cgi/wiki?PortsAndAdaptersArchitecture">“Ports and Adapters”</a>, which sometimes is mentioned in terms of making a system testable. (In “Working Effectively with Legacy Systems”, the idea of a ‘contact point’ is brought up; i.e. a point wherein you can change/inject a dependency without having to modify the code using it). – “Ports and Adapters” somewhat suggests for ‘large’ components, but these ideas all seem the same to me.</p></li>
-</ul>
-<p>My fresh, recent understanding of this last point is that in order to be able to inject things, constructing/initialising objects (using “new”) within methods is bad.</p>
-<pre><code>class SomeInterestingClass {
-  // ...
-  public function computeSomething($x) {
-    $service = new ServiceFromOtherModule(); // Can't be changed in here
-    return $service-&gt;compute($this-&gt;val, $x);
-  }
-}</code></pre>
-<p>The way to replace this, then, would be to store <code>$service</code> as a property, initialised in constructor instead of “where it’s used”, which can be <code>set</code>. And maybe some more complicated variation for if this class we depend on needs to be initialised with variables the constructor.<br />
-– The same more/less applies if the ‘dependency’ is a function call, etc.</p>
-<p>My understanding is, then, that for non-trivial computations, “testing behaviour” comes down to assertions on how mocked-up classes/functions are used. Some white-box understanding of how behaviour is implemented is needed to know what can be stubbed. – This somewhat makes unit tests a ‘declarative’ companion to the code: “In this circumstance, this should happen”.</p>
-<p>Rephrasing the above in roughly terms of ‘information-flow’: I’m guessing that at least some white-box knowledge of what kinds of messages are received (from what kind of sender), what kinds of messages are sent (to what kind of recipient) is an inevitability; perhaps it’s that it becomes a tautology when the mocking explicitly (albeit limitedly) declares the same messages/relations which the SUT code does.</p>
-<p>– But I don’t know. It’s something I’d like to think about some more.</p>
+<p>Future Cop LAPD is an old game, released for PlayStation One, as well as PC.</p>
+<p>It looks like there are <a href="https://gaming.youtube.com/game/UCqgd3IH34aVYaV-P8FUt6aQ#tab=2">dozens</a> of videos about it on YouTube, getting ~1k-10k views each. The comments are usually filled with “man, this was such a cool game”.</p>
+<p>Sadly, as happens with ‘legacy’ games, it doesn’t look possible to purchase on modern systems. Even on Sony’s ‘PSOne Classics’, it looks <a href="https://store.playstation.com/#!/en-us/games/future-cop-lapd-(ps3-psp)/cid=UP9000-NPUJ00739_00-0000000000000001">only available for PS3, PSP</a>. (Presumably it’s not further avaible on PS4 or PSVita due to licensing/rights issues).</p>
+<p>– For myself, I have vague recollections of the game, on a family-friend’s PlayStation.</p>
+<p>The gist of the game is you play as a transforming mech/hovertank, with an arsenal of machinegun/rockets/mortar (or various upgrades). The gameplay is either a single-player campaign with the usual bells &amp; whistles, or a ‘MOBA-style’ match against another player (or an AI): ‘MOBA’ in that you control a powerful unit, but victory depends on getting a weaker AI-controlled unit to reach the enemy’s base.<br />
+– I don’t know which game would’ve been first with MOBA gameplay. I’ve heard <a href="https://en.wikipedia.org/wiki/Herzog_Zwei">Herzog Zwei</a> on the Sega Genesis as one of the first RTS/MOBA games. – These days, the game AirMech gets a mention in terms of “games with transforming mechs and underling units”.</p>
+<p>Watching a couple of the <a href="https://www.youtube.com/watch?v=v760C4AmJfQ">hard</a> <a href="https://www.youtube.com/watch?v=_uqECVDAngI">levels</a> of this MOBA-style gameplay, I do get the impression that there’s a much greater demand for polish in games these days. It looks like “wow this game was cool” is tained with nostalgia and forgotten memories:</p>
+<p>– For one, the gameplay design looks somewhat stunted; in both of these videos, the winning strategy is apparently quite similar. Since the victory objective is “get one of your tanks inside their base”, it’s better to pick the tank which can take punishment. (A potential alternative, I guess, is ‘pick a weaker tank, but from closer to the enemy base’; this doesn’t seem viable?). This also seems to require a certain amount of points have been built up first.<br />
+– But, like. It strikes me that in the video, the enemy AI has captured towers on the player’s side, and the player doesn’t seem to see benefit in destroying the tower.<br />
+– That enemy missiles travel the same speed as the player’s hovertank strikes me as a cute feature; that the player’s mortar (which can apparently destroy a tower in one hit) is so slow that the dynamic of “destroy a tower” is apparently “fire a mortar, then kindof wait around for the mortar to land” feels.. lame.<br />
+– Ammunition is kept as one large amount, rather than smaller amounts which could be replenished at a base. (The effect is, the possible-gameplay-time is the limit; when you run out of ammo you lose. Smaller-but-replenishable instead demands moderation: the short-term cost of firing is much higher).</p>
+<p>– In terms of ‘polish’… not so much ‘bad graphics’ (which I’d call ‘charming graphics’), so much as the poor interface: the camera feels wonky, which is perhaps balanced by the simple-ish maps, and short range on enemy towers. The enemy spawning a super-tank is apparently quite a big event, but the UI doesn’t make a big deal of it. There’s no healthbar on towers/tanks (YMMV); no timer or other indication of when a destroyed tower will respawn.<br />
+Outposts can be captured once. Idk, it just feels strange that there’s apparently not any (expensive) way for an outpost to be re-captured.</p>
+<p>I guess ’cause of the ostensible simplicity of the gameplay, there’s some ambition for I-could-do-that-remake. (e.g. <a href="https://theunemployedartist.wordpress.com/2016/03/22/the-project-future-cop-lapd-remake/">this</a> artists amazing recreation of the mech from the cutscenes. Wow). – “We don’t do it because it’s easy; we do it because we thought it would be.”.<br />
+– I’ll totally admit that in an undergrad module, I made an abysmal-failure of an attempt to make something inspired by Future Cop LAPD. – All the same, you’d think that e.g. the maps of the MOBA gameplay would be something more available on the internet.</p>
 
 
 <hr />
 
 <div>
     
-    <a href="../../posts/games/2016-10-07-future-cop-lapd.html" style="float:left;">Newer post</a>
+    <a href="../../posts/argument/2016-10-15-my-hope-for-political-discussion.html" style="float:left;">Newer post</a>
     
     
-    <a href="../../posts/programming/2016-09-18-on-qa-automation-blogposts.html" style="float:right; text-align: right;">Older post</a>
+    <a href="../../posts/programming/2016-09-21-on-programming-and-testability.html" style="float:right; text-align: right;">Older post</a>
     
 </div>
 <br style="clear: both;" />
@@ -180,9 +174,9 @@
     <script type="text/javascript">
         /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
         var disqus_shortname = 'richardgoultersblog'; // required: replace example with your forum shortname
-        var disqus_identifier = '/posts/programming/2016-09-21-on-programming-and-testability.html';
-        var disqus_url = 'http://www.rgoulter.com/blog' + '/posts/programming/2016-09-21-on-programming-and-testability.html';
-        var disqus_title = 'On Programming and Testability - September 21, 2016';
+        var disqus_identifier = '/posts/games/2016-10-07-future-cop-lapd.html';
+        var disqus_url = 'http://www.rgoulter.com/blog' + '/posts/games/2016-10-07-future-cop-lapd.html';
+        var disqus_title = 'Future Cop LAPD - October  7, 2016';
 
         /* * * DON'T EDIT BELOW THIS LINE * * */
         (function() {

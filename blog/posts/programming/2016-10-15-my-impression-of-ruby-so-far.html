@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>On Programming and Testability - Richard Goulter's Blog</title>
+        <title>My Impression of Ruby So Far - Richard Goulter's Blog</title>
 
         <!-- My (Old) CSS theme -->
         <link rel="stylesheet" type="text/css" href="../../css/default.css" />
@@ -128,48 +128,59 @@
             <hr style="margin: 0px; border-top: 5px solid black;" />
 
             <div id="content" class="container">
-                <h1>On Programming and Testability</h1>
+                <h1>My Impression of Ruby So Far</h1>
                 <div class="info">
-    Posted on September 21, 2016
+    Posted on October 15, 2016
     
         by Richard Goulter
     <br />
     
-    Tags: 
+    Tags: <a href="../../tags/programming.ruby.html">programming.ruby</a>, <a href="../../tags/programming.scala.html">programming.scala</a>, <a href="../../tags/programming.haskell.html">programming.haskell</a>
     
 </div>
 
-<p>I’ve been reading some interesting blogposts recently:</p>
-<ul>
-<li><p>This summary of <a href="https://blog.acolyer.org/2016/09/14/why-functional-programming-matters/">“Why Functional Programming Matters”</a>, (I’ve not read the piece it summarizes, would probably be interesting) argues roughly that the usual pitch of FP is its purity (“no side effects, no having to reason about side effects”), &amp; that this is a bad pitch. Rather, the benefits FP brings are that it offers a better way to write programs modularly (just as control structures allow for modularity where GOTO doesn’t).</p></li>
-<li><p><a href="https://www.youtube.com/watch?v=dawFyaWvFg4">“Beyond Design Patterns”</a> talk at PHP Conference Barcelona is a fascinating view on the GoF Design Patterns (which I’ve not read up on – this talk provides a context which might make them more bearable to look at).<br />
-<a href="https://pinboard.in/u:rgoulter/b:f41d9c055c12">My notes here</a>, but the key point he makes is that the GoF Design Patterns come down to patterns of information flow. This relates to Alan Kay’s emphasis that ‘OOP’ really ought to be more about the <em>messages</em> between objects.</p></li>
-<li><p>The <a href="http://fabiopereira.me/blog/2010/05/27/ttdd-tautological-test-driven-development-anti-pattern/">Tautological Unit Test</a> <em><em>anti-pattern</em></em>. (Because SDLC dipshits can’t communicate whether a concept is good or bad without using the word “pattern”). The post emphasises that tests ought to make assertions about a code’s behaviour, rather than the code’s implementation. It somewhat defeats the point of a “ensure nothing broke” test if you have to update it as you update the program under test. – Tests are more likely to become tautological, the post suggests, through over-use of mocking. (A small example is provided, to try to illustrate the point).</p></li>
-<li><p>cf. <a href="http://c2.com/cgi/wiki?PortsAndAdaptersArchitecture">“Ports and Adapters”</a>, which sometimes is mentioned in terms of making a system testable. (In “Working Effectively with Legacy Systems”, the idea of a ‘contact point’ is brought up; i.e. a point wherein you can change/inject a dependency without having to modify the code using it). – “Ports and Adapters” somewhat suggests for ‘large’ components, but these ideas all seem the same to me.</p></li>
-</ul>
-<p>My fresh, recent understanding of this last point is that in order to be able to inject things, constructing/initialising objects (using “new”) within methods is bad.</p>
-<pre><code>class SomeInterestingClass {
-  // ...
-  public function computeSomething($x) {
-    $service = new ServiceFromOtherModule(); // Can't be changed in here
-    return $service-&gt;compute($this-&gt;val, $x);
-  }
-}</code></pre>
-<p>The way to replace this, then, would be to store <code>$service</code> as a property, initialised in constructor instead of “where it’s used”, which can be <code>set</code>. And maybe some more complicated variation for if this class we depend on needs to be initialised with variables the constructor.<br />
-– The same more/less applies if the ‘dependency’ is a function call, etc.</p>
-<p>My understanding is, then, that for non-trivial computations, “testing behaviour” comes down to assertions on how mocked-up classes/functions are used. Some white-box understanding of how behaviour is implemented is needed to know what can be stubbed. – This somewhat makes unit tests a ‘declarative’ companion to the code: “In this circumstance, this should happen”.</p>
-<p>Rephrasing the above in roughly terms of ‘information-flow’: I’m guessing that at least some white-box knowledge of what kinds of messages are received (from what kind of sender), what kinds of messages are sent (to what kind of recipient) is an inevitability; perhaps it’s that it becomes a tautology when the mocking explicitly (albeit limitedly) declares the same messages/relations which the SUT code does.</p>
-<p>– But I don’t know. It’s something I’d like to think about some more.</p>
+<h3 id="background">Background</h3>
+<p>I’ve recently started programming in Ruby. I’ve inherited a codebase for writing automated-UI tests against a website. The tests make use of Capybara, which provides a high-level “DSL” for interacting with a webpage/browser in the sameway a user would; Capybara itself does this by abstracting over Selenium (or some other driver, like Poltergeist/PhantomJS); Selenium itself allows interaction with different web-browsers, by providing abstractions for different drivers of browsers (e.g. ChromeDriver).</p>
+<p>As is also common for tests like these (called “UI tests”, “acceptance tests”, “functional tests”, “specifications”, “end to end tests” depending on who you ask) is use of Cucumber. – But that’s not too important for this post.</p>
+<h3 id="very-first-impression">Very First Impression</h3>
+<p>Anyway,<br />
+I’d first read a few books before getting my hands dirty. (“Ruby Best Practices” and some of “The Ruby Way”). What I read was exciting enough: Ruby seems to be a language with decent pedigree, inheriting aspects from Lisp and the emphasis on message-passing from SmallTalk (as well as e.g. the power of Regular Expressions from Perl).<br />
+Also cool was e.g. Ruby’s dynamic features. Everything is an object, objects pass messages between each other. And so by overriding a few magic methods, some pretty cool things can be done. – e.g. the <code>method_missing</code> method is called if the object was called with a method that wasn’t defined on that object; so an object overriding this can have different behaviour.</p>
+<p>That Ruby isn’t a low-pedigree language surprised me. ‘cause I kindof thought of Ruby as a “slightly prettier Python”. (It really isn’t, the philosophies of the two languages are quite different).<br />
+And while I’d heard Ruby documentation was ’good’, it was ‘good’ by-way-of “here’s an example of probably what you’ll want to do”.<br />
+And, well, if all someone knew was “Ruby on Rails”, then it’s kindof a good indicator that that person (prob’ly) doesn’t know how to program.</p>
+<p>Steve Yegge also gave the language well-nuanced praise: that he didn’t <em>like</em> the language, but he found himself using it for everything when he had the choice; that he didn’t <em>know</em> the language, but he found he didn’t need to read the documentation while writing it (unlike other languages he was more familiar with).</p>
+<h3 id="actually-using-it">Actually Using It</h3>
+<p>I’d say, Ruby isn’t as nice a blub language as Python is. To me it feels like a blub language, but with a message-passing system.</p>
+<p>I guess I don’t like it as much coming from a Scala background:<br />
+“Ruby’s nice ’cause you can map/reduce over lists” … just like Scala. But without pattern matching.<br />
+And Ruby has nice “no brackets” syntax … like Scala. (Except in Ruby, it’s like <code>o.m(x,y,z)</code> can be <code>o.m x, y, z</code>; in Scala it’s more like <code>x.op(y)</code> can be written as <code>x op y</code>; in Haskell it’s <code>f(x,y,z)</code> must be written as <code>f x y z</code>). – Also, in Scala, operator overloading works for any symbol which is a valid method name, whereas Ruby takes C++’s approach.</p>
+<p>That Ruby has symbols (like Lisp) is one thing I certainly do like about it, though.</p>
+<p>And I guess I don’t like it as much coming from a Haskell background:<br />
+Say what you like about how shit Haskell documentation can be; (and I suppose outside “being too academic”, large-scale shit like Lenses can be god-damn atrocious to read). But at least it’s clear what <em>types</em> things have.<br />
+Ruby documentation makes clear what <em>messages</em> the objects receive. – The expectation is that the documentation give examples of different ways to use the method. Fucking good luck to you if the documentation lacks that. – This is slightly exasperated by Ruby’s “there’s more than one way to skin a monkey” philosophy, wherein a call to the same method-definition with different kinds of arguments ought to do the-right-thing.</p>
+<p>And I guess it kind-of, sort-of makes sense for those familiar with Ruby, but I was surprised to learn that methods like <code>map</code>, etc. accept <em>only</em> procs; even if an objects method receives the same type of argument as an equivalent proc, the higher-order methods only take procs.<br />
+– The lack of tuples (in the same sense as Haskell or Scala or Python) also seems strange to me.</p>
+<p>But the biggest woe I have with Ruby at the moment is “wtf errors”, presumably from the magic. – It’s not completely uncommon in statements calling Capybara (and therefore, Selenium, and ChromeDriver) to throw an <code>&quot;undefined method 'map' for 0:Fixnum</code> (or <code>nil:NilClass</code>), when the statement contains no calls to map, nor any numbers/nil values. (I guess as a hint, the same statement may sometimes throw other errors about connection problems for some pipe).<br />
+– i.e. the call-stack from the exception doesn’t show the actual call-stack.<br />
+It’s possible, but very difficult, to debug this sort of thing. I still haven’t figured it out.</p>
+<p>– All that said; this was on an non-idiomatic codebase I’d inherited. And I’m by no means yet comfortable with writing Ruby.</p>
+<h3 id="conclusion-hopes">Conclusion / Hopes</h3>
+<p>So I find the syntax and semantics of Ruby conflict with what I’d expect, coming from a Scala/Haskell/Python background.<br />
+I’m not saying Ruby is a <em>bad</em> language. It looks like it’s pretty nice at writing message-passing paradigm programs. – But I don’t yet have love for the Ruby environment.</p>
+<hr />
+<h4 id="btw-about-cucumber">Btw, About Cucumber</h4>
+<p>Cucumber is a tool to help write “executable specifications”. The specification is written in e.g. Gherkin; the main aspect of a Gherkin specification is its sequence of Given/When/Then steps, written in a natural-language like English. – Cucumber tests will then bind these steps to code by matching the steps against a regex, and executing some code for that.<br />
+(In terms of “does the program pass tests”, this is kindof a costly abstraction to make, and for programmers-only, it’s easier to just write the executed code directly. – The purported benefit of writing executable specifications is more about communication: first that those involved in writing/reviewing the specification come up with an agreement of what the program ‘is’, &amp; what terminology/phrases to use when discussing it; second that you get a (readable!) “living document” which describes what features the program has).</p>
+<p>The automated testing suite is still quite young (currently working on getting it stable). I’m interested in seeing what difficulties come up in maintaining it (both from a technical and ‘social’ standpoint).</p>
 
 
 <hr />
 
 <div>
     
-    <a href="../../posts/games/2016-10-07-future-cop-lapd.html" style="float:left;">Newer post</a>
     
-    
-    <a href="../../posts/programming/2016-09-18-on-qa-automation-blogposts.html" style="float:right; text-align: right;">Older post</a>
+    <a href="../../posts/argument/2016-10-15-my-hope-for-political-discussion.html" style="float:right; text-align: right;">Older post</a>
     
 </div>
 <br style="clear: both;" />
@@ -180,9 +191,9 @@
     <script type="text/javascript">
         /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
         var disqus_shortname = 'richardgoultersblog'; // required: replace example with your forum shortname
-        var disqus_identifier = '/posts/programming/2016-09-21-on-programming-and-testability.html';
-        var disqus_url = 'http://www.rgoulter.com/blog' + '/posts/programming/2016-09-21-on-programming-and-testability.html';
-        var disqus_title = 'On Programming and Testability - September 21, 2016';
+        var disqus_identifier = '/posts/programming/2016-10-15-my-impression-of-ruby-so-far.html';
+        var disqus_url = 'http://www.rgoulter.com/blog' + '/posts/programming/2016-10-15-my-impression-of-ruby-so-far.html';
+        var disqus_title = 'My Impression of Ruby So Far - October 15, 2016';
 
         /* * * DON'T EDIT BELOW THIS LINE * * */
         (function() {

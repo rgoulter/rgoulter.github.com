@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>On Programming and Testability - Richard Goulter's Blog</title>
+        <title>My Hope for Political Discussion - Richard Goulter's Blog</title>
 
         <!-- My (Old) CSS theme -->
         <link rel="stylesheet" type="text/css" href="../../css/default.css" />
@@ -128,48 +128,77 @@
             <hr style="margin: 0px; border-top: 5px solid black;" />
 
             <div id="content" class="container">
-                <h1>On Programming and Testability</h1>
+                <h1>My Hope for Political Discussion</h1>
                 <div class="info">
-    Posted on September 21, 2016
+    Posted on October 15, 2016
     
         by Richard Goulter
     <br />
     
-    Tags: 
+    Tags: <a href="../../tags/politics.html">politics</a>
     
 </div>
 
-<p>I’ve been reading some interesting blogposts recently:</p>
-<ul>
-<li><p>This summary of <a href="https://blog.acolyer.org/2016/09/14/why-functional-programming-matters/">“Why Functional Programming Matters”</a>, (I’ve not read the piece it summarizes, would probably be interesting) argues roughly that the usual pitch of FP is its purity (“no side effects, no having to reason about side effects”), &amp; that this is a bad pitch. Rather, the benefits FP brings are that it offers a better way to write programs modularly (just as control structures allow for modularity where GOTO doesn’t).</p></li>
-<li><p><a href="https://www.youtube.com/watch?v=dawFyaWvFg4">“Beyond Design Patterns”</a> talk at PHP Conference Barcelona is a fascinating view on the GoF Design Patterns (which I’ve not read up on – this talk provides a context which might make them more bearable to look at).<br />
-<a href="https://pinboard.in/u:rgoulter/b:f41d9c055c12">My notes here</a>, but the key point he makes is that the GoF Design Patterns come down to patterns of information flow. This relates to Alan Kay’s emphasis that ‘OOP’ really ought to be more about the <em>messages</em> between objects.</p></li>
-<li><p>The <a href="http://fabiopereira.me/blog/2010/05/27/ttdd-tautological-test-driven-development-anti-pattern/">Tautological Unit Test</a> <em><em>anti-pattern</em></em>. (Because SDLC dipshits can’t communicate whether a concept is good or bad without using the word “pattern”). The post emphasises that tests ought to make assertions about a code’s behaviour, rather than the code’s implementation. It somewhat defeats the point of a “ensure nothing broke” test if you have to update it as you update the program under test. – Tests are more likely to become tautological, the post suggests, through over-use of mocking. (A small example is provided, to try to illustrate the point).</p></li>
-<li><p>cf. <a href="http://c2.com/cgi/wiki?PortsAndAdaptersArchitecture">“Ports and Adapters”</a>, which sometimes is mentioned in terms of making a system testable. (In “Working Effectively with Legacy Systems”, the idea of a ‘contact point’ is brought up; i.e. a point wherein you can change/inject a dependency without having to modify the code using it). – “Ports and Adapters” somewhat suggests for ‘large’ components, but these ideas all seem the same to me.</p></li>
-</ul>
-<p>My fresh, recent understanding of this last point is that in order to be able to inject things, constructing/initialising objects (using “new”) within methods is bad.</p>
-<pre><code>class SomeInterestingClass {
-  // ...
-  public function computeSomething($x) {
-    $service = new ServiceFromOtherModule(); // Can't be changed in here
-    return $service-&gt;compute($this-&gt;val, $x);
-  }
-}</code></pre>
-<p>The way to replace this, then, would be to store <code>$service</code> as a property, initialised in constructor instead of “where it’s used”, which can be <code>set</code>. And maybe some more complicated variation for if this class we depend on needs to be initialised with variables the constructor.<br />
-– The same more/less applies if the ‘dependency’ is a function call, etc.</p>
-<p>My understanding is, then, that for non-trivial computations, “testing behaviour” comes down to assertions on how mocked-up classes/functions are used. Some white-box understanding of how behaviour is implemented is needed to know what can be stubbed. – This somewhat makes unit tests a ‘declarative’ companion to the code: “In this circumstance, this should happen”.</p>
-<p>Rephrasing the above in roughly terms of ‘information-flow’: I’m guessing that at least some white-box knowledge of what kinds of messages are received (from what kind of sender), what kinds of messages are sent (to what kind of recipient) is an inevitability; perhaps it’s that it becomes a tautology when the mocking explicitly (albeit limitedly) declares the same messages/relations which the SUT code does.</p>
-<p>– But I don’t know. It’s something I’d like to think about some more.</p>
+<p>The other day something wonderful happened in a chat group I’m in.<br />
+Upon reading David Wong’s excellent <a href="http://www.cracked.com/blog/6-reasons-trumps-rise-that-no-one-talks-about/">discussion of rural voter mindset</a>, a friend made the remark like “we need more ‘empathic explainers’, rather than ‘explainer’ articles”.</p>
+<p>I agree with the sentiment.. but my mind thinks in ways like “what are the obstacles”.<br />
+So I can agree that the stated “people aren’t sharing articles which empathetically discuss the other”, and prob’ly “it’s difficult to find resources to help emphathise with the other”.. essentially I’d say the people apparently don’t want to sympathise with the other; and maybe the infrastructure in place is such that they’re unlikely to.</p>
+<hr />
+<p>Taking an example. My understanding is Fox News was made as a ‘safe space’ for right-wing ideology. But it’s not hard to believe the right has <a href="https://praxis.ink/2016/08/the-conservative-media-echo-chamber-has-made-the-right-deaf-to-reality/">“constructed an intellectual ghetto that no one else wants to visit”</a>.</p>
+<p>The title of the previous link refers to an echo chamber; I’d say the problem of echo chambers isn’t unique to one side. On the other hand, though, while it’s convenient to discuss the problems as symmetric at the meta-level, I don’t believe the climate is symmetric (unless maybe considered on a long-enough timeline).</p>
+<p>But, y’see… who exactly has a neutral view of things? Something it seems my news feed doesn’t seem to understand is,<br />
+if you ask a non-fanatic Clinton supporter “who’s going to win 2016 election?”, they’re likely to say “oh, probably Trump” prob’ly followed by “so many voters are idiots”;<br />
+and similarly a non-fanatic Trump supporter, “oh, probably Clinton” prob’ly followed by “the elites &amp; MSM have pretty much rigged the system”.<br />
+– Or, rather, “who’s going to win? probably not my candidate”.<br />
+And the next iteration of thought then ought to be .. “gee, people seem to always think their side is losing; but, really, <em>those</em> people are the ones with power”.<br />
+– I don’t mean “people are biased”. My lament is that people are <em>unaware</em> that their opponents often think in the same <em>form</em> as they do.</p>
+<p>And if people don’t recognise <em>forms</em> of thought like this.. how can we expect people to themselves become more empathetic to opinions they don’t know about?</p>
+<hr />
+<p>I like Miller’s Law. I think Wikipedia’s phrasing is like “Suspend judgement until you’ve listened to find out what statement you’re hearing is true about”.<br />
+My understanding is more like this. No one genuinely says something while thinking “hey this is dumb of me to say”; but many genuinely expressed opinions are gross or otherwise dumb.<br />
+Like “how could this guy be so stupid” dumb. (ProTip, “because he’s racist/sexist/gross” isn’t sufficient effort to count as “listening”).<br />
+– Ergo, if a statement sounds really awfully dumb in such a way you couldn’t pass Intellectual-Turing-Test for it, you’ve not understood the truth the statement brings.</p>
+<p>Sturgeon’s Law is probably another nice law here: “90 percent of everything is crap”.</p>
+<p>– With the above two in mind, what fucking point is there in the common anger in how politics usually gets discussed: “look, someone from the other tribe said something dumb!”. (Watch <em>any</em> John Oliver or Daily Show video to see this form of statement). – It’s <em>so</em> satisfying to see how stupid those from the other tribe are. (Well, beneath the anger, anyway).</p>
+<p>The other tribe is disgusting <em>by definition</em>.<br />
+The other tribe isn’t bad at the things you think the other tribe is bad at; the other tribe is bad at things your tribe is good at.</p>
+<p>And your tribe is bad at things the other tribe is good at.<br />
+– In reaction to “people are biased; I’m a person and so I don’t know what things I’m wrong about”, I suppose a rational response would be to have people who can disagree with you on-hand so you can find out what you’re wrong about. Who does that? I mean, I think it’s fine that people aren’t truth-seekers like this. But still.</p>
+<p>Short of that, for myself, I’d say it’s possible to reason about the things you’re wrong about by their form.<br />
+Tools and rules ought to work impartially.<br />
+If someone from the other tribe would be a complete-fucking-idiot for saying the same kindof thing, then prob’ly you should hold off.</p>
+<p>(Other heuristics are like, e.g. “the world is a complicated place; unqualified or unnuanced statements are probably wrong overall, though may contain some truths”, or forms like “if the other side were consistent about X, then they would say/do Y”, etc.).</p>
+<hr />
+<p>“The purpose of the internet is to say all sorts of random shit, and then defend what you say as if it were God’s own truth” is something like a tweet I saw once. I quite liked it.</p>
+<p>I’d love to see an adaptation of a particular xkcd comic.<br />
+Not the “someone on the internet was <em>wrong</em>” one. (The artist is still a smug piece of shit there; holding that the artist’s opinion is probably the right one).<br />
+The one which goes “there are too many competing standards, we need a new standard to bring them together” and suddenly there are N+1 competing standards.<br />
+– There are too many dumb opinions on the internet. Someone ought to give a right opinion with nuance showing people the errors in their thinking. And suddenly there are N+1 dumb opinions on the internet.</p>
+<p>I vaguely recall an old Bertrand Russell quote(?) … <a href="http://quoteinvestigator.com/2015/03/04/self-doubt/">this one</a>. “The fundamental cause of the trouble in the modern world today is that the stupid are cocksure while the intelligent are full of doubt”.<br />
+(Russell apparently had some good quotes; e.g. <a href="https://www.brainyquote.com/quotes/quotes/b/bertrandru403503.html">“Why is propaganda so much more successful when it stirs up hatred than when it tries to stir up friendly feeling?</a>, <a href="https://en.wikiquote.org/wiki/Bertrand_Russell">“Nine-tenths of the activities of a modern Government are harmful; therefore the worse they are performed, the better.”</a>).<br />
+– I’d adapt this idea a bit: those sensible enough to know that expressing political opinions is fucking annoying know to not share their opinion.</p>
+<p>If you had a dumb opinion, how would you know?<br />
+Surely you’d still feel your opinion superior, that “the people need to know!”?</p>
+<hr />
+<p>The way Facebook and Twitter structure their interaction also shapes how people think.</p>
+<p>Tumblr is prob’ly the worst, wherein you don’t get to see responses to posts; so propaganda can proliferate uninterrupted.</p>
+<p>Facebook is ‘notorious’ in this respect for its filter-bubble, wherein its newsfeed only shows you parts of things.. – But on the whole, filtered-information-shapes-thought has been around for ages; it’s why English translations of the Bible were so controversial at first. (It’d bypass the in-place power structure, right).</p>
+<p>I’d say the limitation with Facebook is it’s “among friends”. And if your friends aren’t INTJs, arguing doesn’t seem to be so welcomed.</p>
+<p>I don’t think Twitter is necessarily limited by its 140-character posts. People seem to chain them well enough, mostly. – I even prefer it for that; the cost of a tweet is much lower, so it’s easier to share interesting tweets.<br />
+But the inevitable problem is, you’re defining your own stream of information.</p>
+<hr />
+<p>If there’s any sense to the above, it’s a “takes one to know one” kinda thing.<br />
+In that respect, I don’t suppose I’d hope for “people to get along better”, or “people to be all super-rational”, etc. – But surely at some point after enough anger and outrage, people have to be aware of the rules of the game?</p>
 
 
 <hr />
 
 <div>
     
-    <a href="../../posts/games/2016-10-07-future-cop-lapd.html" style="float:left;">Newer post</a>
+    <a href="../../posts/programming/2016-10-15-my-impression-of-ruby-so-far.html" style="float:left;">Newer post</a>
     
     
-    <a href="../../posts/programming/2016-09-18-on-qa-automation-blogposts.html" style="float:right; text-align: right;">Older post</a>
+    <a href="../../posts/games/2016-10-07-future-cop-lapd.html" style="float:right; text-align: right;">Older post</a>
     
 </div>
 <br style="clear: both;" />
@@ -180,9 +209,9 @@
     <script type="text/javascript">
         /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
         var disqus_shortname = 'richardgoultersblog'; // required: replace example with your forum shortname
-        var disqus_identifier = '/posts/programming/2016-09-21-on-programming-and-testability.html';
-        var disqus_url = 'http://www.rgoulter.com/blog' + '/posts/programming/2016-09-21-on-programming-and-testability.html';
-        var disqus_title = 'On Programming and Testability - September 21, 2016';
+        var disqus_identifier = '/posts/argument/2016-10-15-my-hope-for-political-discussion.html';
+        var disqus_url = 'http://www.rgoulter.com/blog' + '/posts/argument/2016-10-15-my-hope-for-political-discussion.html';
+        var disqus_title = 'My Hope for Political Discussion - October 15, 2016';
 
         /* * * DON'T EDIT BELOW THIS LINE * * */
         (function() {
