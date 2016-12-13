@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>My Impression of Ruby So Far - Richard Goulter's Blog</title>
+        <title>Catching up on Action Games - Richard Goulter's Blog</title>
 
         <!-- My (Old) CSS theme -->
         <link rel="stylesheet" type="text/css" href="../../css/default.css" />
@@ -128,61 +128,46 @@
             <hr style="margin: 0px; border-top: 5px solid black;" />
 
             <div id="content" class="container">
-                <h1>My Impression of Ruby So Far</h1>
+                <h1>Catching up on Action Games</h1>
                 <div class="info">
-    Posted on October 15, 2016
+    Posted on November 26, 2016
     
         by Richard Goulter
     <br />
     
-    Tags: <a href="../../tags/programming.ruby.html">programming.ruby</a>, <a href="../../tags/programming.scala.html">programming.scala</a>, <a href="../../tags/programming.haskell.html">programming.haskell</a>
+    Tags: <a href="../../tags/game.just%20cause.html">game.just cause</a>, <a href="../../tags/game.call%20of%20duty.html">game.call of duty</a>
     
 </div>
 
-<h3 id="background">Background</h3>
-<p>I’ve recently started programming in Ruby. I’ve inherited a codebase for writing automated-UI tests against a website. The tests make use of Capybara, which provides a high-level “DSL” for interacting with a webpage/browser in the sameway a user would; Capybara itself does this by abstracting over Selenium (or some other driver, like Poltergeist/PhantomJS); Selenium itself allows interaction with different web-browsers, by providing abstractions for different drivers of browsers (e.g. ChromeDriver).</p>
-<p>As is also common for tests like these (called “UI tests”, “acceptance tests”, “functional tests”, “specifications”, “end to end tests” depending on who you ask) is use of Cucumber. – But that’s not too important for this post.</p>
-<h3 id="very-first-impression">Very First Impression</h3>
-<p>Anyway,<br />
-I’d first read a few books before getting my hands dirty. (“Ruby Best Practices” and some of “The Ruby Way”). What I read was exciting enough: Ruby seems to be a language with decent pedigree, inheriting aspects from Lisp and the emphasis on message-passing from SmallTalk (as well as e.g. the power of Regular Expressions from Perl).<br />
-Also cool was e.g. Ruby’s dynamic features. Everything is an object, objects pass messages between each other. And so by overriding a few magic methods, some pretty cool things can be done. – e.g. the <code>method_missing</code> method is called if the object was called with a method that wasn’t defined on that object; so an object overriding this can have different behaviour.</p>
-<p>That Ruby isn’t a low-pedigree language surprised me. ‘cause I kindof thought of Ruby as a “slightly prettier Python”. (It really isn’t, the philosophies of the two languages are quite different).<br />
-And while I’d heard Ruby documentation was ’good’, it was ‘good’ by-way-of “here’s an example of probably what you’ll want to do”.<br />
-And, well, if all someone knew was “Ruby on Rails”, then it’s kindof a good indicator that that person (prob’ly) doesn’t know how to program.</p>
-<p>Steve Yegge also gave the language well-nuanced praise: that he didn’t <em>like</em> the language, but he found himself using it for everything when he had the choice; that he didn’t <em>know</em> the language, but he found he didn’t need to read the documentation while writing it (unlike other languages he was more familiar with).</p>
-<h3 id="actually-using-it">Actually Using It</h3>
-<p>I’d say, Ruby isn’t as nice a blub language as Python is. To me it feels like a blub language, but with a message-passing system.</p>
-<p>I guess I don’t like it as much coming from a Scala background:<br />
-“Ruby’s nice ’cause you can map/reduce over lists” … just like Scala. But without pattern matching.<br />
-And Ruby has nice “no brackets” syntax … like Scala. (Except in Ruby, it’s like <code>o.m(x,y,z)</code> can be <code>o.m x, y, z</code>; in Scala it’s more like <code>x.op(y)</code> can be written as <code>x op y</code>; in Haskell it’s <code>f(x,y,z)</code> must be written as <code>f x y z</code>). – Also, in Scala, operator overloading works for any symbol which is a valid method name, whereas Ruby takes C++’s approach.</p>
-<p>That Ruby has symbols (like Lisp) is one thing I certainly do like about it, though.</p>
-<p>And I guess I don’t like it as much coming from a Haskell background:<br />
-Say what you like about how shit Haskell documentation can be; (and I suppose outside “being too academic”, large-scale shit like Lenses can be god-damn atrocious to read). But at least it’s clear what <em>types</em> things have.<br />
-Ruby documentation makes clear what <em>messages</em> the objects receive. – The expectation is that the documentation give examples of different ways to use the method. Fucking good luck to you if the documentation lacks that. – This is slightly exasperated by Ruby’s “there’s more than one way to skin a monkey” philosophy, wherein a call to the same method-definition with different kinds of arguments ought to do the-right-thing.</p>
-<p>And I guess it kind-of, sort-of makes sense for those familiar with Ruby, but I was surprised to learn that methods like <code>map</code>, etc. accept <em>only</em> procs; even if an objects method receives the same type of argument as an equivalent proc, the higher-order methods only take procs.<br />
-– The lack of tuples (in the same sense as Haskell or Scala or Python) also seems strange to me.</p>
-<p>But the biggest woe I have with Ruby at the moment is “wtf errors”, presumably from the magic. – It’s not completely uncommon in statements calling Capybara (and therefore, Selenium, and ChromeDriver) to throw an <code>&quot;undefined method 'map' for 0:Fixnum</code> (or <code>nil:NilClass</code>), when the statement contains no calls to map, nor any numbers/nil values. (I guess as a hint, the same statement may sometimes throw other errors about connection problems for some pipe).<br />
-– i.e. the call-stack from the exception doesn’t show the actual call-stack.<br />
-It’s possible, but very difficult, to debug this sort of thing. I still haven’t figured it out.</p>
-<p>– All that said; this was on an non-idiomatic codebase I’d inherited. And I’m by no means yet comfortable with writing Ruby.</p>
-<h3 id="conclusion-hopes">Conclusion / Hopes</h3>
-<p>So I find the syntax and semantics of Ruby conflict with what I’d expect, coming from a Scala/Haskell/Python background.<br />
-I’m not saying Ruby is a <em>bad</em> language. It looks like it’s pretty nice at writing message-passing paradigm programs. – But I don’t yet have love for the Ruby environment.</p>
-<hr />
-<h4 id="btw-about-cucumber">Btw, About Cucumber</h4>
-<p>Cucumber is a tool to help write “executable specifications”. The specification is written in e.g. Gherkin; the main aspect of a Gherkin specification is its sequence of Given/When/Then steps, written in a natural-language like English. – Cucumber tests will then bind these steps to code by matching the steps against a regex, and executing some code for that.<br />
-(In terms of “does the program pass tests”, this is kindof a costly abstraction to make, and for programmers-only, it’s easier to just write the executed code directly. – The purported benefit of writing executable specifications is more about communication: first that those involved in writing/reviewing the specification come up with an agreement of what the program ‘is’, &amp; what terminology/phrases to use when discussing it; second that you get a (readable!) “living document” which describes what features the program has).</p>
-<p>The automated testing suite is still quite young (currently working on getting it stable). I’m interested in seeing what difficulties come up in maintaining it (both from a technical and ‘social’ standpoint).</p>
+<p>So I recently got a new gaming PC. It’s good to not have to say “can’t play that game, my computer is so old”.</p>
+<p>I was able to re-play through Just Cause 3. – I’d played through on a friend’s PS4; but since then the DLC for the game has been released.<br />
+JC3 was already very much an action-playground. The DLC added to this: a jetpack (where you get to shoot machine-guns / missiles while flying around), mechs, and a super-action-jetboat (with machine-guns and missiles).<br />
+– My thoughs on JC3 remain more/less the same as at the start of the year; I still wish you could customise things (like in Saints Row), etc. – But in terms of “crazy action-man gameplay”, I can’t imagine how Just Cause 4 could possible top Just Cause 3.</p>
+<p>I’ve also spent some time catching up on the Call of Duty games. (I was able to get away with playing CoD:Black Ops 2 on my laptop, barely).<br />
+– I almost feel the need for a disavowal: CoD is barely more of a game than The Sims is. No serious, enthusiastic gamer would be proud to say they enjoyed playing CoD. (As opposed to, say, The Witcher 3 or Dark Souls or etc.). – That’s fine, but also for the most part refers to CoD <em>multiplayer</em>. Which I don’t touch. (Nor the zombies, for that matter).<br />
+– I just play the dumb action campaign, influences of which has somehow come to dominate the FPS genre. – Which is kindof weird; ’cause the CoD games tend to throw in ACTION like the player will get bored if they go for 3 seconds without seeing an explosion or something cool happen. – And games like Homefront which follow the formula pretty closely (albeit with a more budget feel) cop a lot of shit.</p>
+<p><em>That</em> stuff I don’t mind so much.<br />
+With CoD you pretty much know what you’re getting.</p>
+<p>CoD Ghosts, I recall, caught many bad reviews.<br />
+It’s “the one with the dog”.</p>
+<p>– I think Zero Punctuation’s review remarked that so much of CoD gameplay involved “hey, here’s a new toy, which you get to use once, and never again”. – I think that’s accurate, and it really limits how good a ‘game’ CoD could be.<br />
+Rather than incrementally expanding a player’s tools (&amp; the enemies they face).. fancy gimmicks which get used once leads to the game feeling like Dora-the-Explorer: receiving instructions for when to push which button at which time.</p>
+<p>So, yeah, CoD Ghosts does that.<br />
+And continues the CoD tradition of having a super-bad-guy who wants-to-get-caught. And who you fight at the end only through a series of quick-time-events.<br />
+– So, yeah. You know what you’re getting.</p>
+<p>CoD: Advanced Warfare. “the one with Kevin Spacey”.<br />
+– Holy shit, I found it hard to tell whether the (pre-rendered) cutscenes were computer-rendered or live-action. I’m fairly sure the scenes must be computer-generated.</p>
+<p>CoD:AW at least adds a game-mechanic you get to keep using throughout: you have a new exo-suit. (Kindof like a lamer version of Crysis’ exo-suit, although it’ll be different in different levels).<br />
+– There was also one interesting level: your left-arm gets injured, so you’re unable to reload and must continuously pick up weapons (with ammo) from fallen enemies. – It’s a nice example of requiring the player to <em>adapt</em> from the game’s typical gameplay.</p>
+<p>CoD:AW was less annoying than CoD:Ghosts. But they’re both the same blob-ish cinematic blur of action, which is fun enough.</p>
 
 
 <hr />
 
 <div>
     
-    <a href="../../posts/games/2016-11-26-catching-up-on-action-games.html" style="float:left;">Newer post</a>
     
-    
-    <a href="../../posts/argument/2016-10-15-my-hope-for-political-discussion.html" style="float:right; text-align: right;">Older post</a>
+    <a href="../../posts/programming/2016-10-15-my-impression-of-ruby-so-far.html" style="float:right; text-align: right;">Older post</a>
     
 </div>
 <br style="clear: both;" />
@@ -193,9 +178,9 @@ I’m not saying Ruby is a <em>bad</em> language. It looks like it’s pretty ni
     <script type="text/javascript">
         /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
         var disqus_shortname = 'richardgoultersblog'; // required: replace example with your forum shortname
-        var disqus_identifier = '/posts/programming/2016-10-15-my-impression-of-ruby-so-far.html';
-        var disqus_url = 'http://www.rgoulter.com/blog' + '/posts/programming/2016-10-15-my-impression-of-ruby-so-far.html';
-        var disqus_title = 'My Impression of Ruby So Far - October 15, 2016';
+        var disqus_identifier = '/posts/games/2016-11-26-catching-up-on-action-games.html';
+        var disqus_url = 'http://www.rgoulter.com/blog' + '/posts/games/2016-11-26-catching-up-on-action-games.html';
+        var disqus_title = 'Catching up on Action Games - November 26, 2016';
 
         /* * * DON'T EDIT BELOW THIS LINE * * */
         (function() {
