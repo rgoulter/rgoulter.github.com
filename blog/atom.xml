@@ -8,8 +8,81 @@
         <name>Richard Goulter</name>
         <email>richard.goulter+blog@gmail.com</email>
     </author>
-    <updated>2016-11-26T00:00:00Z</updated>
+    <updated>2016-12-18T00:00:00Z</updated>
     <entry>
+    <title>What even is the point of politics</title>
+    <link href="http://www.rgoulter.com/blog//posts/argument/2016-12-18-what-even-is-the-point-of-politics.html" />
+    <id>http://www.rgoulter.com/blog//posts/argument/2016-12-18-what-even-is-the-point-of-politics.html</id>
+    <published>2016-12-18T00:00:00Z</published>
+    <updated>2016-12-18T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<div class="info">
+    Posted on December 18, 2016
+    
+        by Richard Goulter
+    <br/>
+    
+    Tags: <a href="/tags/politics.html">politics</a>
+    
+</div>
+
+<p>What even is the point of politics?<br />
+The arguing-with-acquaintances-about-the-news kind of politics.</p>
+<p>It seems to be just for expressing anger.. – but moreover, to express tribal affiliation. (Meaningness’s <a href="https://meaningness.wordpress.com/2015/10/05/buddhist-ethics-is-advertising/">“Ethics is Advertising”</a> post does a good job of arguing this point: that so much of what we do is to signal that <em>we</em> are <em>good</em> people).</p>
+<p>But it seems to me all the kinds of articles which get shared about say the same thing: “Here’s something which happened; here’s why it shows my political viewpoint is correct”.<br />
+– I’m trying <em>really</em> hard to internalize that people don’t discuss politics in search of truth; that “reason is slave to the passions”. – Surely it’s at least a little pathetic that all the anger expressed has no more purpose, no more impact than a disguised way of saying “hey I’m correct?”.</p>
+<p>Perhaps it’s the INTJ in me, but I guess there’s more hope in trying to understand politics in terms of ‘incentives’, then it’s easier to find a model to describe the world; easier to discuss policies in terms of which better suits whatever set of ideals/priorities.<br />
+– That, if politics is about satisfying incentives, then we can discuss the politics of history. (“in this case, this happened; in that case, that happened, so what does that mean this time”).</p>
+<p>– That righteous-expression-of-anger has dominated the political discussion I see … I guess in order to think that this is a <em>bad</em> thing (compared to, say, a fantastic disinterested discussion of policies), you’d still be clinging to the idea that people intend to seek truth.<br />
+– Seeking out the drama of all the hypocrisies inherent in arguing over moral values, &amp; shitposting about this; that’s fun.<br />
+– But in terms of modelling &amp; making sense of politics, “righteousness” is a way better model.</p>
+]]></summary>
+</entry>
+<entry>
+    <title>Best Programming Style Always Depends</title>
+    <link href="http://www.rgoulter.com/blog//posts/programming/2016-12-17-best-programming-style-always-depends.html" />
+    <id>http://www.rgoulter.com/blog//posts/programming/2016-12-17-best-programming-style-always-depends.html</id>
+    <published>2016-12-17T00:00:00Z</published>
+    <updated>2016-12-17T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<div class="info">
+    Posted on December 17, 2016
+    
+        by Richard Goulter
+    <br/>
+    
+    Tags: <a href="/tags/programming.html">programming</a>
+    
+</div>
+
+<p>In Steve Yegge’s hauntingly interesting <a href="http://steve-yegge.blogspot.sg/2008/02/portrait-of-n00b.html">“Portrait of a n00b”</a> article, he argues that:</p>
+<ol style="list-style-type: decimal">
+<li>all meta-data is unnecessary for programs to run.</li>
+<li>n00b programmers can’t handle the complexity of code, and so prefer as much whitespacing as possible (so that there’s less code on the screen). – Expert programmers on the other hand prefer as much code on the screen as possible.</li>
+<li>So it’s unsurprising that n00b programmers will write bad code which is over-commented, with a strong preference for meta-data. (While Expert programmers will write bad code which is uncommented, and will avoid use of meta-data).</li>
+</ol>
+<p>– The article also portrays the kind of person who loves modelling how situations; who just loves meta-data. Either programmers who pickup Database Administration, or who come across an ML-language like OCaml or Haskell. – Yegge points out “you can’t force people to provide meta-data for everything, they’ll hate you”.</p>
+<hr />
+<p>The generally-accepted rule-of-thumb for function length is “fits on a screen” or “less than 50/30/20 lines”, etc. (I’ve heard the “Pragmatic Object-Oriented Design in Ruby” argues for even stricter guidelines).</p>
+<hr />
+<p>Not long ago, a post about <a href="http://number-none.com/blow/john_carmack_on_inlined_code.html">an email from John Carmack about inlining code</a> got quite popular.<br />
+Briefly: while small functions are fine for ‘pure’ functions, it’s impractical to have all functions be ‘pure’. For impure functions, there are often implicit assumptions made about state: e.g. it’s expected certain methods are called in a particular order. It’s more straightforward to ‘inline’ the ‘methods’ all in one larger method. This guarantees these ‘methods’ can’t be called elsewhere.</p>
+<hr />
+<p>I also recently came across this interesting post from <a href="http://martinfowler.com/bliki/FunctionLength.html">Martin Fowler, about ‘function length’</a>.<br />
+The first observation he makes is that “how long should a function be” is asked in lieu of “what should be contained in its own function?”.<br />
+The second observation is the astute distinction between a program’s intention and it’s implementation. – He gives the example from an old system where ‘highlighting’ text was the same as ‘reverse-image of display’; but because the intention (‘highlight’) was significantly different from the implementation (‘reverse’), there was value in a method which just deferred the work to another method.</p>
+<hr />
+<p><a href="http://degoes.net/articles/insufficiently-polymorphic">“Descriptive Names are a Code Smell”</a> is an interesting post in this regard.<br />
+To paraphrase, “long/descriptive names violate the notion of ‘keep your type-declarations as vague as they need to be’”.<br />
+– I think this only applies to ‘implementation’ of a computation. (“I want to get a result in this form, from an input in this form”). Because “descriptive names are bad” flies in the face of “keep intention clear”. – I don’t see this advice as contradictory to e.g. Fowler’s. (Implementation code occurs at a lower level of abstraction than the intention’s code).</p>
+<p>But. On the other hand.<br />
+“Keep things generic”, ‘polymorphic’ rather than ‘monomorphic’.. it’s easier to see how to do this with generic data structures like lists/arrays/dictionaries. For, say, Java, I suppose you get this polymorphims by Interfaces. (Though I guess with e.g. Python/Ruby, you could be ‘generic’ without needing to provide the meta-data).<br />
+– But I imagine this is where (mainstream) languages aren’t so expressive. It’s not so easy to provide abstractions over functions, classes, or at least modules/packages. – It’s not so hard to write a common-enough computation for any array; but not so easy to supply functionality over a module. – Though I can’t think of an example off the top of my head why that’d be necessary.</p>
+<hr />
+<p>There’s something else to be cautious of with “be as generic as possible”.<br />
+People love to over-engineer; to solve problems they used to have (or think they’ll have) rather than problems they currently have.<br />
+There may be different ways to make a program ‘more generic’.</p>
+]]></summary>
+</entry>
+<entry>
     <title>Catching up on Action Games</title>
     <link href="http://www.rgoulter.com/blog//posts/games/2016-11-26-catching-up-on-action-games.html" />
     <id>http://www.rgoulter.com/blog//posts/games/2016-11-26-catching-up-on-action-games.html</id>
@@ -397,69 +470,6 @@ It’s a little cringe-worthy, but Jaune mentions that Ren and Nora are team “
 <p>If nothing else, I guess that highlights just how much of their relationship is mutual faith and encouragement.</p>
 <hr />
 <p>The other thing I noticed re-watching the above; Ruby and Weiss’s partnership improves dramatically. W. can’t stand R. at the beginning; W.’s pride tells her that <em>she</em> should have been leader, and R. isn’t so competent. – Yet by this latest episode, W. follows R.’s leadership as Ruby makes the heroic decision to go after their missing friends in the city devastated by monsters. – That character growth/development is a really nice touch.</p>
-]]></summary>
-</entry>
-<entry>
-    <title>On Revising in Programming and Blogging</title>
-    <link href="http://www.rgoulter.com/blog//posts/meta/2016-08-16-on-revising-in-programming-and-blogging.html" />
-    <id>http://www.rgoulter.com/blog//posts/meta/2016-08-16-on-revising-in-programming-and-blogging.html</id>
-    <published>2016-08-16T00:00:00Z</published>
-    <updated>2016-08-16T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<div class="info">
-    Posted on August 16, 2016
-    
-        by Richard Goulter
-    <br/>
-    
-    Tags: <a href="/tags/programming.html">programming</a>, <a href="/tags/writing.html">writing</a>
-    
-</div>
-
-<p>In one of the more fascinating sidebars in “The Cucumber Book”, Dan North discusses his first experience pair-programming with Martin Fowler; initially aghast that Fowler spent time re-arranging the test code (and at times, duplicating) snippets of code.. until realising the improvement the changes brought: the test code became a more readable story.<br />
-(The principle “Don’t Repeat Yourself” was superseeded by – wait for it – Direct And Meaningful Phrases).</p>
-<p>I mention that because it draws a connection between programming and writing.<br />
-– Two areas which at first glance share much in common (both involve textual content), then not so much in common (computationally interpreted texts by computers vs naturally interpreted texts by people; so further connections are usually interesting to make.</p>
-<p>Anyway. I bring that up because recently I’ve had fun tinkering with old side-projects of mine. (<a href="http://www.commitstrip.com/en/2014/11/25/west-side-project-story/">Obligatory commitstrip</a>). – Don’t be shocked, but such play-around side-projects tended to be in fairly unmaintainable conditions: a bad (or absent) README file; poor (or absent) documentation; poor (or absent) tests. (Let alone other things, like how easy the project is to get up and running, file organisation, etc.).</p>
-<p>It’s kind of fun to do this tinkering, especially with the goal in mind of improving maintainability and/or how polished the project is, since there’s a feeling of bringing order where there was disorder.<br />
-– In doing so, a lot of this involves re-reading code; code that was written a long time ago. I reckon this has helped me to value the importance of documenting things, and on commenting about subtle concepts which explain why things were written the way they were. (A counter-lesson of learning between bullshit documentation and good documentation probably needs me to neglect the side-project for another half-year or so before coming back to it).<br />
-This maintenance also makes it clear that more time will be spent reading the code than is spent writing it. In the case of my side-projects, presumably I’m the only one even reading it.</p>
-<p>But I find when I write blogposts, I usually hate re-reading what I’ve written. (The same applies for writing for schoolwork). – It’s not that I never hit the backspace key before I publish the post, though.</p>
-<p>I know that for authors, writing a book involves not just putting words on the page, but a process of editing and re-writing.</p>
-<p>My blog and my programming side-projects have similar standing: Neither are apparently wildly popular, but I still find value in writing them for my own sake.<br />
-– However, by parallel, just as the code in my side-projects were in an abysmal state when unmaintained, it’s hardly a stretch to say that my blogposts (and my writing ability) .. would improve with attention.</p>
-<p>– To be honest, I do feel bad about this neglected state for a handful of my blogposts: the ones which are found high-up in Google searches for particular keywords (particularly my SBT v Gradle, and OneNote v Org-Mode posts); there’s a clear difference between what I’d expect to read for the title, and what the post contains.<br />
-For opinion-based posts, though, it’s disingenuous to silently make edits without notice. (On the other hand, if old opinions cannot be removed, that makes it possible to attack someone for an opinion they used to hold, and people can be silly enough to do that).</p>
-]]></summary>
-</entry>
-<entry>
-    <title>Cinematic Lego Games</title>
-    <link href="http://www.rgoulter.com/blog//posts/games/2016-08-11-cinematic-lego-games.html" />
-    <id>http://www.rgoulter.com/blog//posts/games/2016-08-11-cinematic-lego-games.html</id>
-    <published>2016-08-11T00:00:00Z</published>
-    <updated>2016-08-11T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<div class="info">
-    Posted on August 11, 2016
-    
-        by Richard Goulter
-    <br/>
-    
-    Tags: <a href="/tags/media.lego.html">media.lego</a>
-    
-</div>
-
-<p>Lego Star Wars: The Complete Saga is a classic game worth having in your library. (Ironically, it’s not the <em>complete</em> saga of the Lego games).<br />
-– Since then, there’ve been many other Lego games of the same style, like Lego Indiana Jones, Batman, Harry Potter, etc.; the most recent one being for Star Wars: The Force Awakens.</p>
-<p>If you’ve played the more recent ones, I think LSW:TCS perhaps comes across as a bit archaic, but there’s something so charming about it.<br />
-The gameplay is ‘simple’. Smash stuff in the world to get points, solve puzzles to get through the level or to get collectibles. – The ‘puzzle’ part comes in terms of, you need a Jedi character to do Jedi things, a droid to do droid things, etc. – Playing with the characters of movies in Lego form really is kindof adorable.</p>
-<p>Part of what else is charming about the old classic is there’s no dialogue; so the story plays out (&amp; probably only makes sense) if you’ve seen the movie.<br />
-Sometimes with jokes thrown in.<br />
-The newer Lego games (I’m not sure since when, but I know Lego: Lord of the Rings has it) instead feature dialogue.</p>
-<p>As well as voice-dialogue, Lego LOTR adjusts the “you need this character to unlock this puzzle” formula: it’s more item-based, so you need a fishing-rod to fish, a bow &amp; arrow to shoot targets, etc.; these are items which some characters will have (e.g. Legolas has bow &amp; arrow; Gimli has an axe), or which can be unlocked as a collectible.<br />
-– The other cool thing about Lego LOTR is that, between chapters of the story, your characters get to freely roam around a small-scale Middle Earth. (So you can simply walk into M.. etc. etc.).</p>
-<p>– After replaying through these two, I decided to pick up Lego Star Wars: The Force Awakens, for the PS Vita.<br />
-It’s still a bunch of fun, but certainly feels more sophisticated than the aforementioned. – e.g., For situations when you need to interact with a particular puzzle with a particular character, LSW:TFA let’s you quickly switch to that character with the press of a button.<br />
-LSW:TFA also adds on some cover-based shooting sections throughout the levels, which felt a bit gimmicky, but managed to still retain the essence of the action + puzzle-solving that the rest of the game has.</p>
-<p>These are all still pretty fun to play. I’m not sure if it’s true for all the Lego games, but for these three at least, they get to borrow the music from their source films, and the music of Star Wars and Lord of the Rings is also pretty good.</p>
 ]]></summary>
 </entry>
 
