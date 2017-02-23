@@ -283,9 +283,9 @@ The easiest way to ‘adapt’ from these was to look first at EAnalytica’s, t
                 // EVENT: Page load
                 ga('send', {
                     hitType:       'event',
-                    eventCategory: 'Scrolling',
-                    eventAction:   'pageLoad',
-                    eventValue:    String(0)
+                    eventCategory: 'pageLoad',
+                    eventAction:   'begun',
+                    eventValue:    String(ms)
                 });
 
                 // DIMENSION: visitor

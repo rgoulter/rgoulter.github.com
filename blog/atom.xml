@@ -8,8 +8,42 @@
         <name>Richard Goulter</name>
         <email>richard.goulter+blog@gmail.com</email>
     </author>
-    <updated>2017-01-15T00:00:00Z</updated>
+    <updated>2017-02-23T00:00:00Z</updated>
     <entry>
+    <title>What is Worth Writing and Reading About</title>
+    <link href="http://www.rgoulter.com/blog//posts/meta/2017-02-23-what-is-worth-writing-and-reading-about.html" />
+    <id>http://www.rgoulter.com/blog//posts/meta/2017-02-23-what-is-worth-writing-and-reading-about.html</id>
+    <published>2017-02-23T00:00:00Z</published>
+    <updated>2017-02-23T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<div class="info">
+    Posted on February 23, 2017
+    
+        by Richard Goulter
+    <br/>
+    
+    Tags: <a href="/tags/writing.html">writing</a>, <a href="/tags/reading.html">reading</a>
+    
+</div>
+
+<p>Some time ago, I came across a blogpost discussing how to write a finite-domain constraint-propagation library to write a sudoku solver.<br />
+In a missing-the-point-of-doing-them kindof way, the author compared time spent playing sudoku as a denial-of-service attack on programmers’ minds.</p>
+<p>I don’t think it’s useful to restrict actions to things which better society (or themselves). Nor that the author meant it that way. But perhaps people would be dicks to each other less often if we stopped to ask “is doing <em>whatever</em> going to make the world a better place, or a worse one?”.</p>
+<p>On Twitter in particular, it’s common to come across accounts where the purpose-of-the-account is to pick out dumb shit others say, and lambaste others for saying dumb shit. – This has more value in feeling good about not being <em>that</em> person, although little persuasion value. I think the other hope, in doing this kind of thing, is to establish ‘ways to <em>not</em> think’ or patterns of incorrectness.</p>
+<p>(Whether engineers at Twitter sit up at night thinking “does my work help make the world a better place, or worse?”, I don’t know).</p>
+<p>I think my own recent -blogposts- rants are similar in this vein: frustration that others could be so hypocritical or righteous, without acknowledging (or qualifying) their opinions.<br />
+– It’s a wish that people would behave so as to not ‘be wrong’ in obnoxious ways.</p>
+<p>I might describe my previous blogpost as “here’s something someone on the internet said; there’s some merit to it, but here’s what they’re wrong about”.<br />
+This isn’t <em>always</em> completely useless. And in terms of “I’ll write whatever I feel like writing”, cool.<br />
+But in terms of whether it benefits <em>myself</em> to write such things, or anyone else to read such things.. I suspect it’s not beneficial.</p>
+<p>Pretty much anyone saying anything will be wrong about some things.<br />
+– Thus my hitherto disgruntlement of <em>unqualified</em> propagation of information and opinion. If opinions given are faulty, then it’s valuable to consider both its faults and its merits.<br />
+– But, rather, it prob’ly be more valuable to try to compose and synthesize new information from various other (faulty) blogposts and opinions, instead of wrapping a piece with “well, consider it’s wrong about this…”.</p>
+<p>– That’s prob’ly more fun to write, although does require comparing multiple opinions.<br />
+The ideal is to have at-least two competing opinions, each doing a really good job of explaining the same phenomenon.<br />
+– But, as I’ve also wondered for some time, part of the limitation in exploring opinion-space (especially of unfamiliar domains) is how to representative (or accurate) pieces are.</p>
+]]></summary>
+</entry>
+<entry>
     <title>Toothless Dangerous Rhetoric in NZPol</title>
     <link href="http://www.rgoulter.com/blog//posts/politics/2017-01-15-toothless-dangerous-rhetoric-in-nzpol.html" />
     <id>http://www.rgoulter.com/blog//posts/politics/2017-01-15-toothless-dangerous-rhetoric-in-nzpol.html</id>
@@ -417,37 +451,6 @@ Outposts can be captured once. Idk, it just feels strange that there’s apparen
 <p>My understanding is, then, that for non-trivial computations, “testing behaviour” comes down to assertions on how mocked-up classes/functions are used. Some white-box understanding of how behaviour is implemented is needed to know what can be stubbed. – This somewhat makes unit tests a ‘declarative’ companion to the code: “In this circumstance, this should happen”.</p>
 <p>Rephrasing the above in roughly terms of ‘information-flow’: I’m guessing that at least some white-box knowledge of what kinds of messages are received (from what kind of sender), what kinds of messages are sent (to what kind of recipient) is an inevitability; perhaps it’s that it becomes a tautology when the mocking explicitly (albeit limitedly) declares the same messages/relations which the SUT code does.</p>
 <p>– But I don’t know. It’s something I’d like to think about some more.</p>
-]]></summary>
-</entry>
-<entry>
-    <title>On QA Automation Blogposts</title>
-    <link href="http://www.rgoulter.com/blog//posts/programming/2016-09-18-on-qa-automation-blogposts.html" />
-    <id>http://www.rgoulter.com/blog//posts/programming/2016-09-18-on-qa-automation-blogposts.html</id>
-    <published>2016-09-18T00:00:00Z</published>
-    <updated>2016-09-18T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<div class="info">
-    Posted on September 18, 2016
-    
-        by Richard Goulter
-    <br/>
-    
-    Tags: <a href="/tags/test-automation.html">test-automation</a>, <a href="/tags/writing.html">writing</a>
-    
-</div>
-
-<p>I’ve been reading up on the topic of test-automation.</p>
-<p>One kindof useful resource has been <a href="https://www.thoughtworks.com/insights/software-testing">ThoughtWorks’ insights blog</a>, but my feelings towards this are mixed.<br />
-Some of the posts have great insights, others are more mundane; and there’s a fetishization of nouns which makes wading through the bullshit to find the useful tips all that much harder.</p>
-<p>As an example of the latter; in response to DHH saying “TDD is dead”, everyone apparently blew-their-fucking-minds. – That makes no sense to me, unless you’ve fetishized ‘TDD’ to mean ‘some specific thing which is the best, &amp; which we all should do’.<br />
-Which is bullshit.<br />
-Either your current practices in making software work well, in which case it doesn’t matter one way or the other whether ‘TDD’ is proclaimed ‘dead’; or there are ways you can improve your software development (in which case, it doesn’t matter whether ‘TDD’ is proclaimed better than Jesus).</p>
-<p>(After reading Steve Yegge’s <a href="http://steve-yegge.blogspot.sg/2008/02/portrait-of-n00b.html">“Portrait of a n00b”</a>, I suspect closer to the truth is “all software is bad, all the time”; but that some approaches are less-bad in some circumstances).</p>
-<p>If programmers had better propensity for moderation, this wouldn’t be so bad.</p>
-<p>But fetishizing nouns is more annoying noise than anything else. (Although I suspect it also indicates immaturity).<br />
-The other flavours of blogposts tend to come in 1) “here’s this fundamentally useful concept you might not’ve heard of”. (e.g. describing the Test Pyramid, or that tests should assert about behaviours, executable specifications should be written declaratively, etc.), 2) “here are good ideas for ways to do things”.</p>
-<p>The trouble with “here are good ideas” is … it comes across as “obvious” while everyone’s still unable to readily apply it. e.g. one blogpost discussed “what to automate”: it mentioned ‘repeated, tedious/painful processes’, which makes sense, but the more salient point written was that “when you’re busy, you might not notice that these things can/should be automated”.<br />
-– Simply saying “automate tedious/repetitive processes” is tautological. Saying “be aware that there may be things you’d benefit from automating” comes from experience.</p>
-<p>It’s largely natural for programmers to ‘program’ without considering testability of their code. Some computations are hard to test. – I wish the blogposts were focussed more on “here’s why we ended up in a state where testing became difficult” (or, “here’s how we’ve improved; here’s why we were doing things we’ve improved-from”).</p>
 ]]></summary>
 </entry>
 
