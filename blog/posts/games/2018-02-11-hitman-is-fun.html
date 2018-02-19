@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Novice Struggles with Haskell Syntax - Richard Goulter's Blog</title>
+        <title>Hitman is Fun - Richard Goulter's Blog</title>
 
         <!-- My (Old) CSS theme -->
         <link rel="stylesheet" type="text/css" href="../../css/default.css" />
@@ -128,73 +128,50 @@
             <hr style="margin: 0px; border-top: 5px solid black;" />
 
             <div id="content" class="container">
-                <h1>Novice Struggles with Haskell Syntax</h1>
+                <h1>Hitman is Fun</h1>
                 <div class="info">
-    Posted on July  3, 2014
+    Posted on February 11, 2018
     
         by Richard Goulter
     <br />
     
-    Tags: <a href="../../tags/programming.haskell.html">programming.haskell</a>, <a href="../../tags/programming.hakyll.html">programming.hakyll</a>
+    Tags: 
     
 </div>
 
-<p>I’ve been trying to augment my Hakyll Site with “next post”, “previous post” links in a post. There’s a post in <a href="https://groups.google.com/forum/#!topic/hakyll/WYPjtWMm9ZU">Hakyll Google group</a> asking for the same thing. (Maybe the majority of Hakyll owners just “adapt” from other Hakyll sites…).</p>
-<p>I’ve run into trouble trying to do this. Hakyll.Web.Template.Context <a href="http://jaspervdj.be/hakyll/reference/src/Hakyll-Web-Template-Context.html">source</a> was a useful start.<br />
-But the trouble I ran into due to lack of experience, or understanding, of some (fundamental) Haskell concepts.</p>
-<p>Ugh.</p>
-<p>In this excerpt, <code>postContext</code> is out of scope:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb1-1" data-line-number="1">    match postsGlob <span class="fu">$</span> <span class="kw">do</span></a>
-<a class="sourceLine" id="cb1-2" data-line-number="2">        route <span class="fu">$</span> setExtension <span class="st">&quot;html&quot;</span></a>
-<a class="sourceLine" id="cb1-3" data-line-number="3">        compile <span class="fu">$</span> <span class="kw">do</span> </a>
-<a class="sourceLine" id="cb1-4" data-line-number="4">            <span class="co">-- Cyclic dependencies here here:</span></a>
-<a class="sourceLine" id="cb1-5" data-line-number="5">            identifiers <span class="ot">&lt;-</span> getMatches postsGlob</a>
-<a class="sourceLine" id="cb1-6" data-line-number="6">            urls <span class="ot">&lt;-</span> urlsOfPosts <span class="fu">=&lt;&lt;</span> recentFirst <span class="fu">=&lt;&lt;</span> return [<span class="dt">Item</span> identifier <span class="st">&quot;&quot;</span> <span class="fu">|</span> identifier <span class="ot">&lt;-</span> identifiers]</a>
-<a class="sourceLine" id="cb1-7" data-line-number="7"></a>
-<a class="sourceLine" id="cb1-8" data-line-number="8">            <span class="kw">let</span> postContext <span class="fu">=</span></a>
-<a class="sourceLine" id="cb1-9" data-line-number="9">                    field <span class="st">&quot;nextPost&quot;</span> (nextPostUrl urls) <span class="ot">`mappend`</span></a>
-<a class="sourceLine" id="cb1-10" data-line-number="10">                    postCtxWithTags tags</a>
-<a class="sourceLine" id="cb1-11" data-line-number="11"></a>
-<a class="sourceLine" id="cb1-12" data-line-number="12">            pandocCompiler</a>
-<a class="sourceLine" id="cb1-13" data-line-number="13">            <span class="fu">&gt;&gt;=</span> saveSnapshot <span class="st">&quot;teaser&quot;</span></a>
-<a class="sourceLine" id="cb1-14" data-line-number="14">            <span class="fu">&gt;&gt;=</span> loadAndApplyTemplate <span class="st">&quot;templates/post.html&quot;</span>    postContext</a>
-<a class="sourceLine" id="cb1-15" data-line-number="15">            <span class="fu">&gt;&gt;=</span> loadAndApplyTemplate <span class="st">&quot;templates/default.html&quot;</span> postContext</a>
-<a class="sourceLine" id="cb1-16" data-line-number="16">            <span class="fu">&gt;&gt;=</span> relativizeUrls</a></code></pre></div>
-<p>(Yeah, I know, it’s a heinously long line).<br />
-Whereas in this excerpt, it’s in scope:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb2-1" data-line-number="1">    match postsGlob <span class="fu">$</span> <span class="kw">do</span></a>
-<a class="sourceLine" id="cb2-2" data-line-number="2">        route <span class="fu">$</span> setExtension <span class="st">&quot;html&quot;</span></a>
-<a class="sourceLine" id="cb2-3" data-line-number="3">        compile <span class="fu">$</span> <span class="kw">do</span> </a>
-<a class="sourceLine" id="cb2-4" data-line-number="4">            <span class="co">-- Cyclic dependencies here here:</span></a>
-<a class="sourceLine" id="cb2-5" data-line-number="5">            identifiers <span class="ot">&lt;-</span> getMatches postsGlob</a>
-<a class="sourceLine" id="cb2-6" data-line-number="6">            urls <span class="ot">&lt;-</span> urlsOfPosts <span class="fu">=&lt;&lt;</span> recentFirst <span class="fu">=&lt;&lt;</span> return [<span class="dt">Item</span> identifier <span class="st">&quot;&quot;</span> <span class="fu">|</span> identifier <span class="ot">&lt;-</span> identifiers]</a>
-<a class="sourceLine" id="cb2-7" data-line-number="7"></a>
-<a class="sourceLine" id="cb2-8" data-line-number="8">            <span class="kw">let</span> postContext <span class="fu">=</span></a>
-<a class="sourceLine" id="cb2-9" data-line-number="9">                    field <span class="st">&quot;nextPost&quot;</span> (nextPostUrl urls) <span class="ot">`mappend`</span></a>
-<a class="sourceLine" id="cb2-10" data-line-number="10">                    postCtxWithTags tags</a>
-<a class="sourceLine" id="cb2-11" data-line-number="11"></a>
-<a class="sourceLine" id="cb2-12" data-line-number="12">            pandocCompiler</a>
-<a class="sourceLine" id="cb2-13" data-line-number="13">                <span class="fu">&gt;&gt;=</span> saveSnapshot <span class="st">&quot;teaser&quot;</span></a>
-<a class="sourceLine" id="cb2-14" data-line-number="14">                <span class="fu">&gt;&gt;=</span> loadAndApplyTemplate <span class="st">&quot;templates/post.html&quot;</span>    postContext</a>
-<a class="sourceLine" id="cb2-15" data-line-number="15">                <span class="fu">&gt;&gt;=</span> loadAndApplyTemplate <span class="st">&quot;templates/default.html&quot;</span> postContext</a>
-<a class="sourceLine" id="cb2-16" data-line-number="16">                <span class="fu">&gt;&gt;=</span> relativizeUrls</a></code></pre></div>
-<p>I guess this is why people don’t like Python or other non-C syntaxes where indentation matters.<br />
-I was able to figure that out, and considering this excerpt:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="ot">    urlOfPost ::</span> <span class="dt">Item</span> <span class="dt">String</span> <span class="ot">-&gt;</span> <span class="dt">Compiler</span> <span class="dt">String</span></a>
-<a class="sourceLine" id="cb3-2" data-line-number="2">    urlOfPost <span class="fu">=</span></a>
-<a class="sourceLine" id="cb3-3" data-line-number="3">        fmap (maybe empty <span class="fu">$</span> toUrl) <span class="fu">.</span> getRoute <span class="fu">.</span> itemIdentifier</a></code></pre></div>
-<p>But <code>urlsOfPosts</code> (used in above excerpt) has type <code>urlsOfPosts :: [Item String] -&gt; Compiler [String]</code>.<br />
-While it’s possible to understand <code>urlOfPost</code> by looking at the documentation of each part, it’s not clear to me the implementation of <code>urlsOfPosts</code>.</p>
+<p>I hadn’t really played any of the previous games in the Hitman series.<br />
+My experience was limited to watching games on YouTube.</p>
+<p>I picked up the game recently.</p>
+<p>The game was released episodically.<br />
+So, they released level-by-level. Each new release did see improvements to the gameplay and such, too. This seems much more sober and professional than “early access”.<br />
+– An advantage of not picking it up ‘as it came out’ is I have the option to play it all at once.</p>
+<p>And, interestingly, I have the option to play <em>any level I want</em>.<br />
+Which is weird for a game. Because, usually games with single-play have stories. And usually the story should be experienced in-order. And so usually the game gets you to play it in order.<br />
+Hitman <em>does</em> have a story-based single-player campaign. Which should be played in-order.<br />
+But. I think Hitman’s formula is really aimed at “replayability”. In this sense, each map isn’t so much a ‘level’ so much as an arena.<br />
+The story-based missions have particular, prominent targets; and most of the special details and potential interactions <em>are</em> designed around the main targets.<br />
+– But what makes Hitman replayable is a fairly rich set of gameplay rules, and levels designed to make the most of the dynamics which come from that.</p>
+<p>Some examples of this, which enhance replayability: - The game will highlight / show interactions, even if you don’t have the requisite disguise or equipment. This shows the player what is possible. e.g. In the first level, you can hide an explosive in a camera, and trigger the explosive when the camera is used in an interview. – So you know next time you try the level, to keep an eye out for explosives. - As per the design of “modern” games, Hitman does ‘tell’ you what things are possible by listing certain ‘challenges’ to try. (e.g. “use a sniper rifle and kill both targets within 10s of each other”). - There’s a game-mode, “escalations”, which iteratively reveals a set of objectives on each replay (of that mode). e.g. 1st stage would be “kill this target while disguised as a guard”; 2nd stage may add a complication that you <em>must</em> hide any dead bodies. Or the escalated complication might change the disguise required. - Completing certain challenges/etc. unlocks different equipment, and different entry-points into the level. (Sometimes with different disguises!).</p>
+<p>To clarify the gameplay rules: The player is on his own, and must kill targets (or sometimes steal something), and the map is filled with guards and people. Typically set in a relatively normal context. e.g. a fashion show.<br />
+But the levels aren’t especially designed for “sneak around the guards, kill the target” as much as around the particular ‘disguises’. That is, outfits that the different kinds of game characters wear. The puzzle to the game is to find out what your outfit allows you to do, how to acquire a better outfit, and how to make use of the different outfits. – e.g. if you’re disguised as a kitchen chef, you won’t be allowed into where you could go if you were disguised as a guard.<br />
+But, it’s not as if being a guard is necessarily the best outfit for every situation: some of the enemy guards will notice that they don’t recognise you! (Another example: It’s not suspicious to see a waitor add <em>something</em> to a drink (like poison). But if they see a guard adding something to a drink, that’s just suspicious).</p>
+<p>There are more subtle gameplay aspects crafted around the disguise-game. e.g. people can hear gunshots, or combat.. and will be suspicious if they see you using a picklock to open a lock, or whatever.</p>
+<p>But the dynamics this leads to?<br />
+- Learning what the layout of the level is. (Where are all the good items? Where’s the key/wrench/coin/etc.? Where are easy places to get particular outfits? Which places allow which outfits?). - More than one way to skin a cat! – In particular, you usually get the feeling that maybe there was a less ‘awkward’ way to complete the mission than you did.</p>
+<p>Simple plain run-and-gun is discouraged.<br />
+The player isn’t a bullet-sponge, and will die fairly quickly to a guard shooting him. That said, with the right choke points it is possible to eliminate the guards in an area. – IMHO, this is kindof useful for learning the location of certain key items, and getting familiar with the layout of a map.</p>
+<hr />
+<p>So far I’ve spent my time only in one map. But I’ve poured more time into it than a typical Call of Duty campaign, so I’m kindof impressed by how the game manages to achieve a degree of “replayability”.</p>
 
 
 <hr />
 
 <div>
     
-    <a href="../../posts/programming/2014-07-06-adding-nextprevious-post-to-hakyll.html" style="float:left;">Newer post</a>
+    <a href="../../posts/programming/2018-02-19-on-maintaining-on-old-side-project.html" style="float:left;">Newer post</a>
     
     
-    <a href="../../posts/programming/2014-07-01-yi-in-a-cabal-sandbox-on-osx.html" style="float:right; text-align: right;">Older post</a>
+    <a href="../../posts/programming/2017-11-08-asking-for-help-threshold.html" style="float:right; text-align: right;">Older post</a>
     
 </div>
 <br style="clear: both;" />
@@ -205,9 +182,9 @@ While it’s possible to understand <code>urlOfPost</code> by looking at the doc
     <script type="text/javascript">
         /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
         var disqus_shortname = 'richardgoultersblog'; // required: replace example with your forum shortname
-        var disqus_identifier = '/posts/programming/2014-07-03-novice-struggles-with-haskell-syntax.html';
-        var disqus_url = 'http://www.rgoulter.com/blog' + '/posts/programming/2014-07-03-novice-struggles-with-haskell-syntax.html';
-        var disqus_title = 'Novice Struggles with Haskell Syntax - July  3, 2014';
+        var disqus_identifier = '/posts/games/2018-02-11-hitman-is-fun.html';
+        var disqus_url = 'http://www.rgoulter.com/blog' + '/posts/games/2018-02-11-hitman-is-fun.html';
+        var disqus_title = 'Hitman is Fun - February 11, 2018';
 
         /* * * DON'T EDIT BELOW THIS LINE * * */
         (function() {

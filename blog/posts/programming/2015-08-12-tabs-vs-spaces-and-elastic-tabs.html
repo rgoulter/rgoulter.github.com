@@ -182,10 +182,7 @@ The “tabstop” was a position set so than when pressing the ‘tab’ key, th
 <p>I first saw mention of elastic tabstops on Neovim’s issues page.<br />
 <a href="http://nickgravgaard.com/elastic-tabstops/">Elastic tabstops</a> are much closer in spirit to aforementioned typewriter tabstops.<br />
 The GIF perhaps explains the concept best:</p>
-<div class="figure">
-<img src="http://i.imgur.com/7MsEnA9.gif" />
-
-</div>
+<p><img src="http://i.imgur.com/7MsEnA9.gif" /></p>
 <p>Although, as far as “implementation”, it seems to just render current tab(s) differently:</p>
 <blockquote>
 <p>While editors which haven’t yet implemented the elastic tabstops mechanism may not align some text properly in files where tabs were used with elastic tabstops, the problem isn’t that bad. All leading tabs (indentation) will be okay, and the chances of text not aligning correctly diminishes as the width between tabstops increases. So if you plan on switching to elastic tabstops in the future, and wish to choose a code style with that in mind (to use now), I suggest using tabs with fixed tabstops every 8 characters (or more) across. Alternatively co-workers can use tabs with fixed tabstops of whatever size they like as long as no one tries to line up text for anything other than indentation.</p>
@@ -198,11 +195,7 @@ The GIF perhaps explains the concept best:</p>
 <li><p>Technical implementation: It’s different to what most text editors have done, and isn’t widely available. This limits adoption.</p></li>
 <li><p>Who cares?: Developers have done well enough as-is for the last however many years; people can set aside subjective disagreements if they <em>really</em> need to, anyway.</p></li>
 <li><p>Impact: Compare the quote above; using leading tabs for indentation is pretty much the same behaviour as elastic tabstops; and the other adjustments aren’t all worth the novelty.</p></li>
-<li><p>Corner cases: Considering the Python snippet:</p>
-<pre><code>def foo( bar,
-         xyzzy ):
-    wibble()</code></pre>
-<p>it’s probably something elastic tabstops will mess up, without code intelligence.</p></li>
+<li><p>Corner cases: Considering the Python snippet: <code>def foo( bar,            xyzzy ):       wibble()</code> it’s probably something elastic tabstops will mess up, without code intelligence.</p></li>
 </ul>
 <p>– For what it’s worth, I still don’t see this as inherently more natural than the “mixed” solution.</p>
 <p>Even so, it appears that elastic tabstops are the kind of thing which could be adopted into codebases iteratively. (I imagine this would look ugly for tools which don’t support elastic tabstops; but the same is true if a programmer assumes tabwidth to be a certain value anyway, so it’s not like the issue would be new.).</p>

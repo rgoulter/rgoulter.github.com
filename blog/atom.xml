@@ -8,8 +8,214 @@
         <name>Richard Goulter</name>
         <email>richard.goulter+blog@gmail.com</email>
     </author>
-    <updated>2017-01-15T00:00:00Z</updated>
+    <updated>2018-02-19T00:00:00Z</updated>
     <entry>
+    <title>Vigilant Reflection</title>
+    <link href="http://www.rgoulter.com/blog//posts/programming/2018-02-19-vigilant-reflection.html" />
+    <id>http://www.rgoulter.com/blog//posts/programming/2018-02-19-vigilant-reflection.html</id>
+    <published>2018-02-19T00:00:00Z</published>
+    <updated>2018-02-19T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<div class="info">
+    Posted on February 19, 2018
+    
+        by Richard Goulter
+    <br/>
+    
+    Tags: 
+    
+</div>
+
+<p>One good, sensible motto that is worth keeping in mind every now and then is to reflect: ‘Where am I at? Where do I want to be? How can I get there?’. – I’m not sure how that works for ‘I don’t know what I want’; but it’s much better to know that you don’t know, than to just have the angst.</p>
+<p>I think this is useful especially if you find yourself in the same ‘situations’ repeatedly.<br />
+– I like to think it’s helped me figure out some of my failure-modes in terms of how I work. e.g. I like having ‘flow’ with my work. This can be described as work with ‘the right level of challenge, for your current level of skill’. (I’ve seen different diagrams for this; I don’t know which are reliable, but this sounds a sensible model).<br />
+For me, if I’ve found if I don’t have ‘flow’, it can be difficult to find motivation and to live up to my potential. And if I’m not aware of this, I’ll end up stuck.</p>
+<p>So it’s useful to have tools to help reflect.</p>
+<p>The term ‘Emotional Intelligence’ (EQ) gets thrown around every now and then.<br />
+It certainly sounds like a bullshit term made for cuddly-feely for people who may not have high IQ, but can get on with other people.<br />
+But the concepts related to it seem useful enough tools: awareness and management of self, awareness and management of others. <a href="https://www.keystepmedia.com/emotional-social-intelligence-leadership-competencies/">This link</a> looks like cuddly-feely MBA nonsense, but it sensibly expands on examples of these kinds of things. e.g. ‘awareness of self’ includes ‘understanding my emotions and the effects they have on me’; ‘management of others’ includes ‘can you influence others: have a positive impact, and persuade them to gain their support’.</p>
+<p>I think a big limitation with the EQ stuff is it kindof splits into ‘good with people’ and ‘bad with people’.<br />
+But people can be complicated. This doesn’t mean EQ is nonsense, so much as I think it’s useful to be aware of this limitation.</p>
+<p>It can be fascinating to reflect / consider the different ways people interact.<br />
+Mis-alignment of assumptions between people inevitably leads to conflict.<br />
+This is made clear by Alice Maz’s excellent <a href="https://status451.com/2016/01/06/splain-it-to-me/">‘Splain it to me’</a>. I think another interesting example is e.g. <a href="https://www.theatlantic.com/national/archive/2010/05/askers-vs-guessers/340891/">Askers vs Guessers</a>. – The point of these tools isn’t to model people as entirely fitting into the model’s boxes, so much as they help understand / explain interactions between people.</p>
+<p>I think something that’s unfortunately omitted in discussions of diversity, where the claim is that it’s beneficial to have different kinds of people working on a task:<br />
+Differences risk mis-aligned assumptions.<br />
+Which surely leads to tension, and conflict.<br />
+– This can be mitigated by emphasis on a shared identity (e.g. Between citizens, a shared national identity. Between employees, a shared company identity), rather than emphasis on differences between identity.<br />
+But my concern is: pro-diversity folk often encourage situations which lead to tension/conflict without acknowledging the potential conflict, and without providing tools to mitigate and work around this.</p>
+<p>Similarly, I think ‘cultural differences’ aren’t just ‘demographic differences’.</p>
+<p>Yet. I kindof wonder if other people in teams reflect on differences like this.<br />
+For myself, I think I can get as far as aware of how others feel. I don’t think I’m the kind of person who could easily manipulate others. So I guess ‘Where am I at? etc.’ is useful for ‘What are my limitations? How should I approach these situations from that?’.</p>
+]]></summary>
+</entry>
+<entry>
+    <title>On Maintaining on Old Side Project</title>
+    <link href="http://www.rgoulter.com/blog//posts/programming/2018-02-19-on-maintaining-on-old-side-project.html" />
+    <id>http://www.rgoulter.com/blog//posts/programming/2018-02-19-on-maintaining-on-old-side-project.html</id>
+    <published>2018-02-19T00:00:00Z</published>
+    <updated>2018-02-19T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<div class="info">
+    Posted on February 19, 2018
+    
+        by Richard Goulter
+    <br/>
+    
+    Tags: 
+    
+</div>
+
+<p>Recently I’ve had the motivation to try and maintain one of my side-projects.<br />
+Or at least, brush it up from being “completely awful” to “not terrible”.</p>
+<p>This is mostly just for fun.<br />
+But in a way, it’s valuable in that I learn the lessons of what it’s like to maintain a project which isn’t freshly-written. That’s the kindof learning which fresh programmers can’t easily get.</p>
+<p>Partly this also comes from wanting to be able to display a ‘portfolio’ of ‘look, I can program’.<br />
+Albeit, it’s hard to justify it from this perspective, since: - The <a href="http://www.daedtech.com/hiring-is-broken/">original post mentioned here</a> essentially says “I had a great personal brand, but didn’t get hired anyway”. - On the one hand, this is great in terms of ‘equal opportunity’, in that what supposedly matters is ‘ability to pass a tech interview’, not ‘ability to present yourself well’. And <em>in theory</em> the former ought to be better than the latter at predicting ‘will do a good job’. - I saw a post on LinkedIn where a guy pointed out that, although he had applied via LinkedIn to over 900 job listings, the only times he got a job was through networking. - On the other hand, this is concerning in terms of ‘equal opportunity’, in that effects of networking aren’t going to be as fair as a more ‘systematic’ process of finding a candidate. (Or so you’d think!).</p>
+<p>So. While I think it makes sense that ‘polished side project’ means ‘good portfolio’ and a step towards ‘good personal brand’; it seems like tech doesn’t particularly respect ‘good personal brand’.<br />
+So, side projects are just for fun. :-)</p>
+<h2 id="things-i-didnt-dounderstand-in-c-as-an-undergraduate">Things I Didn’t Do/Understand in C++ as an Undergraduate</h2>
+<h3 id="properly-setting-up-the-windows-build">Properly Setting Up the Windows Build</h3>
+<p>The project is an old C++ project which was initially done for a computational geometry course. Generally, as an undergraduate, the process for such projects is “here’s how to manually install any dependency, here’s how to configure the project”.</p>
+<p>My experience of not-C++ projects is “here’s the project dependencies file, and here’s the command to install the dependencies”.<br />
+I don’t know which language did this first, but this is my experience with e.g. Ruby, Python, Haskell, even Java/Scala.</p>
+<p>This recent iteration of maintaining the side-project was aimed at getting the project to work on Windows. Previous refactoring efforts (e.g. to use CMake, adding a <code>.travis.yml</code> file to the repository) improved the project for Linux/macOS, but broke the Windows build.<br />
+Joy.</p>
+<p>I ran into a couple of problems getting the project working on Windows.<br />
+One was getting the compiler to find the dependencies. (On Linux, this is more/less a process of “use system package manager to install dependencies).<br />
+The other was that, I’d refactored the code to use a class called”Polygon“, and one of my files included <code>&lt;windows.h&gt;</code>, which has a function called <code>Polygon</code> which pollutes the global namespace and etc.<br />
+Fun to figure out.</p>
+<p>Windows C++ development is made a bit more confusing in that there are different compilers / environments. e.g. MSYS2/MinGW, and MSVC (Visual Studio’s C/C++ compiler).<br />
+– It took me way too long to figure out fundamental things about these. In the end, I figured out the easiest thing to do was write a <code>.bat</code> script which adds the relevant compiler to <code>PATH</code>.</p>
+<p>As an example of how ‘weird’ this is, CMake’s “MinGW Makefiles” didn’t work if MSYS2’s <code>sh.exe</code> was on <code>PATH</code>. With <code>MSYS2</code> and <code>MinGW</code> on the <code>PATH</code>, the correct generator to use would be <code>MSYS Makefiles</code>.</p>
+<h3 id="getting-the-thing-to-run-maybe-deploy">Getting the Thing to Run (&amp; Maybe Deploy)</h3>
+<p>My experience with programming in other languages:<br />
+If you can build the project, you can run the project.<br />
+My experience with C++:<br />
+Just because the project built, doesn’t mean that the project would run.</p>
+<p>The reason for this is fairly straightforward: C++ builds the executable, and the dependencies in other libraries will get ‘linked’ dynamically when the program runs. (On Windows, from Dynamically-Linked Libraries. On unix, from shared libraries). And so these need to be on the <code>PATH</code> when running the program. But not when building the program.<br />
+– Perhaps you’ll forgive me if this wasn’t immediately obvious to me (given the ‘can build the thing =&gt; can run the thing’ expectation).</p>
+<p>I’m aware that one way to get around this is to ‘statically link’ the dependencies into the built executable.<br />
+– But I’m not aware of a trivial/easy way to do this on Windows. (Especially not if there’re complicated transitive dependencies!).</p>
+<p>Unfortunately, I’m <em>still</em> not aware of an easy way to <em>find</em> all these requisite DLLs for running the executable.<br />
+– It occurs to me that for “other languages”, I never really dealt with “how to deploy the program; how to share it with someone else”. This is one BIG advantage to JavaScript / web browser programs. (Or web applications).</p>
+<h3 id="vcpkg-is-great">VCPKG is Great</h3>
+<p>I am vaguely aware that conan.io is one piece of software trying to bring the concept of ‘modern language dependency installer’ to C++.</p>
+<p>I saw that an example of competing software is vcpkg.<br />
+I tried it, it’s <em>amazing</em>.</p>
+<p>It’s only for the Visual Studio compiler, and is analogous to pacman for MSYS2’s MinGW-w64 compiler.</p>
+<p>It Just Works.<br />
+– You use it to install certain packages (e.g. OpenCV, Qt5) and it downloads the source, builds the project.</p>
+<p>When using vcpkg to build a project, it copies the DLLs to the build directory which makes the program easier to deploy/share. Whoa!</p>
+<p>As far as I can tell, static-linking with vcpkg would be easy, too, since vcpkg builds the packages from source.</p>
+<p>One downside is that not all projects support all generators. (e.g. I couldn’t use ninja with OpenCV on Windows for MSVC. But this is upstream, and not vcpkg’s fault).</p>
+<p>Compared to conan.io?<br />
+The vcpkg FAQ argues that vcpkg targets only Windows/MSVC, so doesn’t have to solve the problems which conan.io is trying to solve (and which are solved by distribution package managers like brew, pacman).<br />
+And that since vcpkgs is a privately-maintained repository of packages, rather than a ‘public federation’ of packages, there’s less effort required to find the dependencies which work for your project.</p>
+<h3 id="setting-up-appveyor">Setting Up AppVeyor</h3>
+<p>One of the cool things about open-source projects these days is the fancy badges they have saying “hey the project is working”.</p>
+<p>Travis-CI is one such CI service which offers free builds for “open source” projects. (i.e. free stuff for public repositories).<br />
+But Travis-CI only supports Linux/macOS. The equivalent for Windows is AppVeyor.</p>
+<p>Despite my newfound knowledge of how to build the project reliably on Windows, I found this not-so-easy.</p>
+<p>Using vcpkg for the build is a nice idea. But vcpkg doesn’t use binaries for its packages. So although vcpkg makes it super easy to get a development environment going, … it takes too long for an AppVeyor build, if using sufficiently heavy dependencies. (AppVeyor builds time out after an hour).</p>
+<p>Fortunately, the machine does have common heavy dependencies like Qt5 installed already.<br />
+But it didn’t have OpenCV.</p>
+<p>It may be that using chocolatey (Windows’ answer to macOS’ homebrew) to install OpenCV is probably ‘best’.<br />
+But I wanted to keep with vcpkg.</p>
+<p>The main difficult I had was to cache the vcpkg directory. It took me some time to realise that I was the caching didn’t affect the <code>init</code> section of the AppVeyor build. (i.e. the cache only gets loaded for the <code>build</code> step, and cache gets saved after the <code>build</code> step).<br />
+Oops.</p>
+<h3 id="thoughts-on-the-c-language">Thoughts on the C++ Language</h3>
+<p>The above remarks (e.g. about not knowing how to find DLLs, &amp; that it’s hard to install dependencies) are more about the environment C++ runs in, and the developer ecosystem.<br />
+But considering C++ as a language:</p>
+<p>Okay to be fair, I don’t think anyone really defends C++ as a “good” language (aside from maybe the pragmatic case that “it’s what people use”, and that having an imperfect which works is better than not having anything, etc.).</p>
+<p>C++ is monstrously complex. (e.g. a C++ parser is something which has to be hand-written, since the language is so complex). “Effective C++” describes C++ as a ‘federation of four languages’. (If I recall correctly: C, C with classes, standard-template library, and template meta-programming).<br />
+– There are competing languages for “better C” replacement: Go, Rust, and then more obscure languages like D (which I’ve heard is really nice, but seems to lack the community which e.g. Rust has gunned for).</p>
+<p>What I’ve come to realise maintaining this C++ project is that there’s a lot of C++ stuff which I’d consider ‘fundamental’ in other languages, where with C++ “I just don’t know it”.<br />
+And I don’t think other languages suffer this problem as easily.</p>
+<p>The details sound fairly easy, but it’s not necessarily clear how they combine.<br />
+For example: individually the words <code>const</code>, <code>pointer</code>, <code>reference</code> are individually easy to understand, but very quickly difficult to understand when combined.<br />
+<em>Especially</em> for someone who hasn’t maintained a C++ project in a long time.</p>
+<p>e.g. Coming from other languages, it may not be clear that there’s a difference between ‘direct initialization’ and ‘copy initialization’. cf. <a href="http://en.cppreference.com/w/cpp/language/initialization">CPP Reference</a>.</p>
+<p>Every language inevitably has a ‘long tail’ of obscure details that an experienced programmer will run into. I don’t even know what kindof weird stuff that’d involve for C++!<br />
+But with C++, I feel it’s more like the ‘lowest common denominator’ of being able to write simple C++ programs (e.g. “Undergrad C++”) doesn’t cover very much.</p>
+<h2 id="concluding-thoughts">Concluding Thoughts</h2>
+<p>One way to summarize the above is I’ve gone from ‘I wrote a project in C++ while not knowing much about C++’ to ‘I had to learn a bit more about how C++ stuff works for polishing the project’.<br />
+– I kindof have mixed thoughts about these things. It’s .. nice that with programming, it’s ‘easy’ to do a lot of cool stuff without having a good understanding of what’s really going on.<br />
+But it also seems a bit uncraftsmanlike to make stuff with such a poor understanding.</p>
+<p>I think polishing this side-project a bit has been a good project for understanding what to avoid in a project, and what’s good to have.</p>
+]]></summary>
+</entry>
+<entry>
+    <title>Hitman is Fun</title>
+    <link href="http://www.rgoulter.com/blog//posts/games/2018-02-11-hitman-is-fun.html" />
+    <id>http://www.rgoulter.com/blog//posts/games/2018-02-11-hitman-is-fun.html</id>
+    <published>2018-02-11T00:00:00Z</published>
+    <updated>2018-02-11T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<div class="info">
+    Posted on February 11, 2018
+    
+        by Richard Goulter
+    <br/>
+    
+    Tags: 
+    
+</div>
+
+<p>I hadn’t really played any of the previous games in the Hitman series.<br />
+My experience was limited to watching games on YouTube.</p>
+<p>I picked up the game recently.</p>
+<p>The game was released episodically.<br />
+So, they released level-by-level. Each new release did see improvements to the gameplay and such, too. This seems much more sober and professional than “early access”.<br />
+– An advantage of not picking it up ‘as it came out’ is I have the option to play it all at once.</p>
+<p>And, interestingly, I have the option to play <em>any level I want</em>.<br />
+Which is weird for a game. Because, usually games with single-play have stories. And usually the story should be experienced in-order. And so usually the game gets you to play it in order.<br />
+Hitman <em>does</em> have a story-based single-player campaign. Which should be played in-order.<br />
+But. I think Hitman’s formula is really aimed at “replayability”. In this sense, each map isn’t so much a ‘level’ so much as an arena.<br />
+The story-based missions have particular, prominent targets; and most of the special details and potential interactions <em>are</em> designed around the main targets.<br />
+– But what makes Hitman replayable is a fairly rich set of gameplay rules, and levels designed to make the most of the dynamics which come from that.</p>
+<p>Some examples of this, which enhance replayability: - The game will highlight / show interactions, even if you don’t have the requisite disguise or equipment. This shows the player what is possible. e.g. In the first level, you can hide an explosive in a camera, and trigger the explosive when the camera is used in an interview. – So you know next time you try the level, to keep an eye out for explosives. - As per the design of “modern” games, Hitman does ‘tell’ you what things are possible by listing certain ‘challenges’ to try. (e.g. “use a sniper rifle and kill both targets within 10s of each other”). - There’s a game-mode, “escalations”, which iteratively reveals a set of objectives on each replay (of that mode). e.g. 1st stage would be “kill this target while disguised as a guard”; 2nd stage may add a complication that you <em>must</em> hide any dead bodies. Or the escalated complication might change the disguise required. - Completing certain challenges/etc. unlocks different equipment, and different entry-points into the level. (Sometimes with different disguises!).</p>
+<p>To clarify the gameplay rules: The player is on his own, and must kill targets (or sometimes steal something), and the map is filled with guards and people. Typically set in a relatively normal context. e.g. a fashion show.<br />
+But the levels aren’t especially designed for “sneak around the guards, kill the target” as much as around the particular ‘disguises’. That is, outfits that the different kinds of game characters wear. The puzzle to the game is to find out what your outfit allows you to do, how to acquire a better outfit, and how to make use of the different outfits. – e.g. if you’re disguised as a kitchen chef, you won’t be allowed into where you could go if you were disguised as a guard.<br />
+But, it’s not as if being a guard is necessarily the best outfit for every situation: some of the enemy guards will notice that they don’t recognise you! (Another example: It’s not suspicious to see a waitor add <em>something</em> to a drink (like poison). But if they see a guard adding something to a drink, that’s just suspicious).</p>
+<p>There are more subtle gameplay aspects crafted around the disguise-game. e.g. people can hear gunshots, or combat.. and will be suspicious if they see you using a picklock to open a lock, or whatever.</p>
+<p>But the dynamics this leads to?<br />
+- Learning what the layout of the level is. (Where are all the good items? Where’s the key/wrench/coin/etc.? Where are easy places to get particular outfits? Which places allow which outfits?). - More than one way to skin a cat! – In particular, you usually get the feeling that maybe there was a less ‘awkward’ way to complete the mission than you did.</p>
+<p>Simple plain run-and-gun is discouraged.<br />
+The player isn’t a bullet-sponge, and will die fairly quickly to a guard shooting him. That said, with the right choke points it is possible to eliminate the guards in an area. – IMHO, this is kindof useful for learning the location of certain key items, and getting familiar with the layout of a map.</p>
+<hr />
+<p>So far I’ve spent my time only in one map. But I’ve poured more time into it than a typical Call of Duty campaign, so I’m kindof impressed by how the game manages to achieve a degree of “replayability”.</p>
+]]></summary>
+</entry>
+<entry>
+    <title>Asking for Help Threshold</title>
+    <link href="http://www.rgoulter.com/blog//posts/programming/2017-11-08-asking-for-help-threshold.html" />
+    <id>http://www.rgoulter.com/blog//posts/programming/2017-11-08-asking-for-help-threshold.html</id>
+    <published>2017-11-08T00:00:00Z</published>
+    <updated>2017-11-08T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<div class="info">
+    Posted on November  8, 2017
+    
+        by Richard Goulter
+    <br/>
+    
+    Tags: 
+    
+</div>
+
+<p>I think my experience is probably similar to other talented programmers fresh to the workforce: To not ‘ask for help’ with a problem until too much time has been spent stuck on the problem.</p>
+<p>This isn’t too strange.<br />
+As hobbyists, or as students in school, we program and learn individually. I think ‘talented’ really means ‘has made more mistakes’. Surely you can’t be ‘talented’ without having curiousity to understand how the tools/programs you’re using work.</p>
+<p>For what it’s worth: Personally, I’m not curious about <em>everything</em>. I find git a tool where add/commit/push/pull covers 95% of what I do, 5% is Googling for how to undo some mistake.</p>
+<p>On the other hand, there are people who apparently lack all curiousity (or capability) to investigate how to self-correct.<br />
+My experience is they’ll ask for help as soon as possible.<br />
+Which is fine for project-specific knowledge which I know and they don’t. And ‘okay’ for things which they might not have known.</p>
+<p>But “asking for help without trying” is just irritating. I like the admonishment “don’t ask the same question twice”. (I mean, I’ll answer it, but eventually the asker loses my respect).</p>
+<p>I saw some tech-culture discussion complaining about this kindof thing:<br />
+“no one is really ‘self-taught’; e.g. communities like StackOverflow involve <em>people</em>”.<br />
+I think that’s a somewhat disingenuous point. – If the programmer attitude of ‘I shouldn’t have to bother learning it to know how to do it’ weren’t so prevalent, then StackOverflow wouldn’t be so popular.<br />
+It’s fair to say the process of ‘try it’, ‘search it’, ‘try that again’ (without asking someone else directly) is ‘self-taught’. Since anyone can do try doing that. By themselves.<br />
+– On the other hand, it’s interesting to point out that “on the shoulders of giants” does include someone else who had the same stupid question you’re googling for.</p>
+]]></summary>
+</entry>
+<entry>
     <title>Toothless Dangerous Rhetoric in NZPol</title>
     <link href="http://www.rgoulter.com/blog//posts/politics/2017-01-15-toothless-dangerous-rhetoric-in-nzpol.html" />
     <id>http://www.rgoulter.com/blog//posts/politics/2017-01-15-toothless-dangerous-rhetoric-in-nzpol.html</id>
@@ -38,7 +244,7 @@ Moreso since the intended audience is presumably one which would tell you “cas
 The piece takes Sir Peter “Mad Butcher” Leitch as its excuse for saying “current events demonstrate my political view is correct”.<br />
 The author’s point, perhaps more elegantly phrased, is that “1) all kinds of racism are racism 2) racism is bad 3) therefore, to categorise kinds of racism means defending racism as ‘not that bad’”. – Thus, referring to any remark as “casually racist” is saying “racism isn’t <em>that</em> bad”. (In the author’s words: <em>“How can you categorise racism in any form and excuse racism in any form?”</em>).</p>
 <p>Or, to look at it from another perspective:</p>
-<ol style="list-style-type: upper-alpha">
+<ol type="A">
 <li><p>Racism is a problem in NZ. e.g. Maoris are over-represented in NZ’s Criminal-Justice System, and Maoris are victims of unconscious bias against them.</p></li>
 <li><p>A prominent New Zealander said a racially-tinged remark which the conversant took offence at; the conversant received an immediate apology.</p></li>
 <li><p>To defend (B) as ‘not as bad as’ (A) is to defend racism.</p></li>
@@ -94,8 +300,10 @@ There’s a well-known fable about four blind folk describing what they sense; f
 I guess fear is a better motivator than hope; and each side of some conflict will see their side as losing. e.g.:</p>
 <ul>
 <li><p>in the culture-wars of the tech industry, the progressives see the industry as full of white dudebros even as every major tech company does their best to make efforts toward diverse ethnic/gender identities. Whether the public efforts are lightweight lip-service (without impact) or wasteful tithing to ideology depends on your tribe. (Or: Is <em>saying</em> you’re going to make things better sufficient to show things will get better?).</p></li>
-<li><p>Many are exclaiming that 2016 has been a bad year for liberal politics in Western Democracies; those who dissent claim the extreme difficulty with which the non-elite masses have to get their voice heard in democracy.</p></li>
-<li><p>Nutcases will use the phrase “Age of Trump” to describe an epidemic of sexism and racism (this dramatic interpretation all because Trump won by ~1% of the vote!), whereas the other side points to those who are fired (or harassed) for not toeing the progressive politics.</p></li>
+<li><p>Many are exclaiming that 2016 has been a bad year for liberal politics in Western Democracies; those who dissent claim the extreme difficulty with which the non-elite masses have to get their voice heard in democracy.</p>
+<ul>
+<li>Nutcases will use the phrase “Age of Trump” to describe an epidemic of sexism and racism (this dramatic interpretation all because Trump won by ~1% of the vote!), whereas the other side points to those who are fired (or harassed) for not toeing the progressive politics.</li>
+</ul></li>
 </ul>
 <p>On Facebook, my friends share posts with phrases like “..your Facebook feed full of Trump supporters..”, and such an experience is completely alien to me.</p>
 <p>– Of course, none of that is much of a <em>surprise</em>: people don’t question claims which support their beliefs; and will be doubtful about claims which go against their beliefs.<br />
@@ -149,7 +357,7 @@ The arguing-with-acquaintances-about-the-news kind of politics.</p>
 </div>
 
 <p>In Steve Yegge’s hauntingly interesting <a href="http://steve-yegge.blogspot.sg/2008/02/portrait-of-n00b.html">“Portrait of a n00b”</a> article, he argues that:</p>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li>all meta-data is unnecessary for programs to run.</li>
 <li>n00b programmers can’t handle the complexity of code, and so prefer as much whitespacing as possible (so that there’s less code on the screen). – Expert programmers on the other hand prefer as much code on the screen as possible.</li>
 <li>So it’s unsurprising that n00b programmers will write bad code which is over-commented, with a strong preference for meta-data. (While Expert programmers will write bad code which is uncommented, and will avoid use of meta-data).</li>
@@ -266,188 +474,6 @@ I’m not saying Ruby is a <em>bad</em> language. It looks like it’s pretty ni
 <p>Cucumber is a tool to help write “executable specifications”. The specification is written in e.g. Gherkin; the main aspect of a Gherkin specification is its sequence of Given/When/Then steps, written in a natural-language like English. – Cucumber tests will then bind these steps to code by matching the steps against a regex, and executing some code for that.<br />
 (In terms of “does the program pass tests”, this is kindof a costly abstraction to make, and for programmers-only, it’s easier to just write the executed code directly. – The purported benefit of writing executable specifications is more about communication: first that those involved in writing/reviewing the specification come up with an agreement of what the program ‘is’, &amp; what terminology/phrases to use when discussing it; second that you get a (readable!) “living document” which describes what features the program has).</p>
 <p>The automated testing suite is still quite young (currently working on getting it stable). I’m interested in seeing what difficulties come up in maintaining it (both from a technical and ‘social’ standpoint).</p>
-]]></summary>
-</entry>
-<entry>
-    <title>My Hope for Political Discussion</title>
-    <link href="http://www.rgoulter.com/blog//posts/argument/2016-10-15-my-hope-for-political-discussion.html" />
-    <id>http://www.rgoulter.com/blog//posts/argument/2016-10-15-my-hope-for-political-discussion.html</id>
-    <published>2016-10-15T00:00:00Z</published>
-    <updated>2016-10-15T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<div class="info">
-    Posted on October 15, 2016
-    
-        by Richard Goulter
-    <br/>
-    
-    Tags: <a href="/tags/politics.html">politics</a>
-    
-</div>
-
-<p>The other day something wonderful happened in a chat group I’m in.<br />
-Upon reading David Wong’s excellent <a href="http://www.cracked.com/blog/6-reasons-trumps-rise-that-no-one-talks-about/">discussion of rural voter mindset</a>, a friend made the remark like “we need more ‘empathic explainers’, rather than ‘explainer’ articles”.</p>
-<p>I agree with the sentiment.. but my mind thinks in ways like “what are the obstacles”.<br />
-So I can agree that the stated “people aren’t sharing articles which empathetically discuss the other”, and prob’ly “it’s difficult to find resources to help emphathise with the other”.. essentially I’d say the people apparently don’t want to sympathise with the other; and maybe the infrastructure in place is such that they’re unlikely to.</p>
-<hr />
-<p>Taking an example. My understanding is Fox News was made as a ‘safe space’ for right-wing ideology. But it’s not hard to believe the right has <a href="https://praxis.ink/2016/08/the-conservative-media-echo-chamber-has-made-the-right-deaf-to-reality/">“constructed an intellectual ghetto that no one else wants to visit”</a>.</p>
-<p>The title of the previous link refers to an echo chamber; I’d say the problem of echo chambers isn’t unique to one side. On the other hand, though, while it’s convenient to discuss the problems as symmetric at the meta-level, I don’t believe the climate is symmetric (unless maybe considered on a long-enough timeline).</p>
-<p>But, y’see… who exactly has a neutral view of things? Something it seems my news feed doesn’t seem to understand is,<br />
-if you ask a non-fanatic Clinton supporter “who’s going to win 2016 election?”, they’re likely to say “oh, probably Trump” prob’ly followed by “so many voters are idiots”;<br />
-and similarly a non-fanatic Trump supporter, “oh, probably Clinton” prob’ly followed by “the elites &amp; MSM have pretty much rigged the system”.<br />
-– Or, rather, “who’s going to win? probably not my candidate”.<br />
-And the next iteration of thought then ought to be .. “gee, people seem to always think their side is losing; but, really, <em>those</em> people are the ones with power”.<br />
-– I don’t mean “people are biased”. My lament is that people are <em>unaware</em> that their opponents often think in the same <em>form</em> as they do.</p>
-<p>And if people don’t recognise <em>forms</em> of thought like this.. how can we expect people to themselves become more empathetic to opinions they don’t know about?</p>
-<hr />
-<p>I like Miller’s Law. I think Wikipedia’s phrasing is like “Suspend judgement until you’ve listened to find out what statement you’re hearing is true about”.<br />
-My understanding is more like this. No one genuinely says something while thinking “hey this is dumb of me to say”; but many genuinely expressed opinions are gross or otherwise dumb.<br />
-Like “how could this guy be so stupid” dumb. (ProTip, “because he’s racist/sexist/gross” isn’t sufficient effort to count as “listening”).<br />
-– Ergo, if a statement sounds really awfully dumb in such a way you couldn’t pass Intellectual-Turing-Test for it, you’ve not understood the truth the statement brings.</p>
-<p>Sturgeon’s Law is probably another nice law here: “90 percent of everything is crap”.</p>
-<p>– With the above two in mind, what fucking point is there in the common anger in how politics usually gets discussed: “look, someone from the other tribe said something dumb!”. (Watch <em>any</em> John Oliver or Daily Show video to see this form of statement). – It’s <em>so</em> satisfying to see how stupid those from the other tribe are. (Well, beneath the anger, anyway).</p>
-<p>The other tribe is disgusting <em>by definition</em>.<br />
-The other tribe isn’t bad at the things you think the other tribe is bad at; the other tribe is bad at things your tribe is good at.</p>
-<p>And your tribe is bad at things the other tribe is good at.<br />
-– In reaction to “people are biased; I’m a person and so I don’t know what things I’m wrong about”, I suppose a rational response would be to have people who can disagree with you on-hand so you can find out what you’re wrong about. Who does that? I mean, I think it’s fine that people aren’t truth-seekers like this. But still.</p>
-<p>Short of that, for myself, I’d say it’s possible to reason about the things you’re wrong about by their form.<br />
-Tools and rules ought to work impartially.<br />
-If someone from the other tribe would be a complete-fucking-idiot for saying the same kindof thing, then prob’ly you should hold off.</p>
-<p>(Other heuristics are like, e.g. “the world is a complicated place; unqualified or unnuanced statements are probably wrong overall, though may contain some truths”, or forms like “if the other side were consistent about X, then they would say/do Y”, etc.).</p>
-<hr />
-<p>“The purpose of the internet is to say all sorts of random shit, and then defend what you say as if it were God’s own truth” is something like a tweet I saw once. I quite liked it.</p>
-<p>I’d love to see an adaptation of a particular xkcd comic.<br />
-Not the “someone on the internet was <em>wrong</em>” one. (The artist is still a smug piece of shit there; holding that the artist’s opinion is probably the right one).<br />
-The one which goes “there are too many competing standards, we need a new standard to bring them together” and suddenly there are N+1 competing standards.<br />
-– There are too many dumb opinions on the internet. Someone ought to give a right opinion with nuance showing people the errors in their thinking. And suddenly there are N+1 dumb opinions on the internet.</p>
-<p>I vaguely recall an old Bertrand Russell quote(?) … <a href="http://quoteinvestigator.com/2015/03/04/self-doubt/">this one</a>. “The fundamental cause of the trouble in the modern world today is that the stupid are cocksure while the intelligent are full of doubt”.<br />
-(Russell apparently had some good quotes; e.g. <a href="https://www.brainyquote.com/quotes/quotes/b/bertrandru403503.html">“Why is propaganda so much more successful when it stirs up hatred than when it tries to stir up friendly feeling?</a>, <a href="https://en.wikiquote.org/wiki/Bertrand_Russell">“Nine-tenths of the activities of a modern Government are harmful; therefore the worse they are performed, the better.”</a>).<br />
-– I’d adapt this idea a bit: those sensible enough to know that expressing political opinions is fucking annoying know to not share their opinion.</p>
-<p>If you had a dumb opinion, how would you know?<br />
-Surely you’d still feel your opinion superior, that “the people need to know!”?</p>
-<hr />
-<p>The way Facebook and Twitter structure their interaction also shapes how people think.</p>
-<p>Tumblr is prob’ly the worst, wherein you don’t get to see responses to posts; so propaganda can proliferate uninterrupted.</p>
-<p>Facebook is ‘notorious’ in this respect for its filter-bubble, wherein its newsfeed only shows you parts of things.. – But on the whole, filtered-information-shapes-thought has been around for ages; it’s why English translations of the Bible were so controversial at first. (It’d bypass the in-place power structure, right).<br />
-– But, really, wouldn’t it be great if your tribe could have such influence over mainstream media and education, etc. such that the views of the other tribe were pretty much unheard of?</p>
-<p>I’d say the limitation with Facebook is it’s “among friends”. And if your friends aren’t INTJs, arguing doesn’t seem to be so welcomed.</p>
-<p>I don’t think Twitter is necessarily limited by its 140-character posts. People seem to chain them well enough, mostly. – I even prefer it for that; the cost of a tweet is much lower, so it’s easier to share interesting tweets.<br />
-But the inevitable problem is, you’re defining your own stream of information.</p>
-<hr />
-<p><a href="https://popehat.com/2014/10/10/strange-seeds-on-distant-shores/">“fish don’t know that they’re in water”</a>. (The quote continues “We’re so surrounded by people who think like us, that it’s impossible to see that what we think are universal truths are just our local culture. / We can’t see it until we get outside of it.”).<br />
-– The quote is well enough in theme with the above; the article is a nice discussion of the culture-wars, going all the way back to English Civil War.</p>
-<p><a href="http://status451.com/2016/01/06/splain-it-to-me/">Alice Maz’s utterly fantastic post here</a> discusses, ostensibly, how different people view interactions on Twitter differently; and goes on to discuss ‘status-games and signalling’; how the social games people play forms culture. (And how the same actions get seen as normal or as rude depending on which cultural group you’re from).</p>
-<p>Similarly good is anything from Jonathan Haidt discussing morality.<br />
-His book “The Righteous Mind” discusses humanity’s righteousness as “a feature, not a bug”.<br />
-The most fascinating model from the book is the <a href="http://moralfoundations.org/">Moral Foundation Theory</a>. (The link includes a paragraph discussing MFT for modelling the culture wars of recent decades in the US).</p>
-<hr />
-<p>I use the terms “tribal” and “the other” a lot in the above; for a good overview of tribalism, I’d recommend <a href="http://slatestarcodex.com/2014/09/30/i-can-tolerate-anything-except-the-outgroup/">“I can tolerate anything except the outgroup”</a> (although it is rather long, yes).</p>
-<p>While of course all models are wrong, some models are useful; and I’d think tribalism well-covers the culture wars, and you’d be hard-pressed to find a different model you can substitute in its place.</p>
-<hr />
-<p>If there’s any sense to the above, it’s a “takes one to know one” kinda thing.<br />
-In that respect, I don’t suppose I’d hope for “people to get along better”, or “people to be all super-rational”, etc. – But surely at some point after enough anger and outrage, people have to be aware of the rules of the game?</p>
-]]></summary>
-</entry>
-<entry>
-    <title>Future Cop LAPD</title>
-    <link href="http://www.rgoulter.com/blog//posts/games/2016-10-07-future-cop-lapd.html" />
-    <id>http://www.rgoulter.com/blog//posts/games/2016-10-07-future-cop-lapd.html</id>
-    <published>2016-10-07T00:00:00Z</published>
-    <updated>2016-10-07T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<div class="info">
-    Posted on October  7, 2016
-    
-        by Richard Goulter
-    <br/>
-    
-    Tags: <a href="/tags/games.future%20cop.html">games.future cop</a>
-    
-</div>
-
-<p>Future Cop LAPD is an old game, released for PlayStation One, as well as PC.</p>
-<p>It looks like there are <a href="https://gaming.youtube.com/game/UCqgd3IH34aVYaV-P8FUt6aQ#tab=2">dozens</a> of videos about it on YouTube, getting ~1k-10k views each. The comments are usually filled with “man, this was such a cool game”.</p>
-<p>Sadly, as happens with ‘legacy’ games, it doesn’t look possible to purchase on modern systems. Even on Sony’s ‘PSOne Classics’, it looks <a href="https://store.playstation.com/#!/en-us/games/future-cop-lapd-(ps3-psp)/cid=UP9000-NPUJ00739_00-0000000000000001">only available for PS3, PSP</a>. (Presumably it’s not further avaible on PS4 or PSVita due to licensing/rights issues).</p>
-<p>– For myself, I have vague recollections of the game, on a family-friend’s PlayStation.</p>
-<p>The gist of the game is you play as a transforming mech/hovertank, with an arsenal of machinegun/rockets/mortar (or various upgrades). The gameplay is either a single-player campaign with the usual bells &amp; whistles, or a ‘MOBA-style’ match against another player (or an AI): ‘MOBA’ in that you control a powerful unit, but victory depends on getting a weaker AI-controlled unit to reach the enemy’s base.<br />
-– I don’t know which game would’ve been first with MOBA gameplay. I’ve heard <a href="https://en.wikipedia.org/wiki/Herzog_Zwei">Herzog Zwei</a> on the Sega Genesis as one of the first RTS/MOBA games. – These days, the game AirMech gets a mention in terms of “games with transforming mechs and underling units”.</p>
-<p>Watching a couple of the <a href="https://www.youtube.com/watch?v=v760C4AmJfQ">hard</a> <a href="https://www.youtube.com/watch?v=_uqECVDAngI">levels</a> of this MOBA-style gameplay, I do get the impression that there’s a much greater demand for polish in games these days. It looks like “wow this game was cool” is tained with nostalgia and forgotten memories:</p>
-<p>– For one, the gameplay design looks somewhat stunted; in both of these videos, the winning strategy is apparently quite similar. Since the victory objective is “get one of your tanks inside their base”, it’s better to pick the tank which can take punishment. (A potential alternative, I guess, is ‘pick a weaker tank, but from closer to the enemy base’; this doesn’t seem viable?). This also seems to require a certain amount of points have been built up first.<br />
-– But, like. It strikes me that in the video, the enemy AI has captured towers on the player’s side, and the player doesn’t seem to see benefit in destroying the tower.<br />
-– That enemy missiles travel the same speed as the player’s hovertank strikes me as a cute feature; that the player’s mortar (which can apparently destroy a tower in one hit) is so slow that the dynamic of “destroy a tower” is apparently “fire a mortar, then kindof wait around for the mortar to land” feels.. lame.<br />
-– Ammunition is kept as one large amount, rather than smaller amounts which could be replenished at a base. (The effect is, the possible-gameplay-time is the limit; when you run out of ammo you lose. Smaller-but-replenishable instead demands moderation: the short-term cost of firing is much higher).</p>
-<p>– In terms of ‘polish’… not so much ‘bad graphics’ (which I’d call ‘charming graphics’), so much as the poor interface: the camera feels wonky, which is perhaps balanced by the simple-ish maps, and short range on enemy towers. The enemy spawning a super-tank is apparently quite a big event, but the UI doesn’t make a big deal of it. There’s no healthbar on towers/tanks (YMMV); no timer or other indication of when a destroyed tower will respawn.<br />
-Outposts can be captured once. Idk, it just feels strange that there’s apparently not any (expensive) way for an outpost to be re-captured.</p>
-<p>I guess ’cause of the ostensible simplicity of the gameplay, there’s some ambition for I-could-do-that-remake. (e.g. <a href="https://theunemployedartist.wordpress.com/2016/03/22/the-project-future-cop-lapd-remake/">this</a> artists amazing recreation of the mech from the cutscenes. Wow). – “We don’t do it because it’s easy; we do it because we thought it would be.”.<br />
-– I’ll totally admit that in an undergrad module, I made an abysmal-failure of an attempt to make something inspired by Future Cop LAPD. – All the same, you’d think that e.g. the maps of the MOBA gameplay would be something more available on the internet.</p>
-]]></summary>
-</entry>
-<entry>
-    <title>On Programming and Testability</title>
-    <link href="http://www.rgoulter.com/blog//posts/programming/2016-09-21-on-programming-and-testability.html" />
-    <id>http://www.rgoulter.com/blog//posts/programming/2016-09-21-on-programming-and-testability.html</id>
-    <published>2016-09-21T00:00:00Z</published>
-    <updated>2016-09-21T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<div class="info">
-    Posted on September 21, 2016
-    
-        by Richard Goulter
-    <br/>
-    
-    Tags: 
-    
-</div>
-
-<p>I’ve been reading some interesting blogposts recently:</p>
-<ul>
-<li><p>This summary of <a href="https://blog.acolyer.org/2016/09/14/why-functional-programming-matters/">“Why Functional Programming Matters”</a>, (I’ve not read the piece it summarizes, would probably be interesting) argues roughly that the usual pitch of FP is its purity (“no side effects, no having to reason about side effects”), &amp; that this is a bad pitch. Rather, the benefits FP brings are that it offers a better way to write programs modularly (just as control structures allow for modularity where GOTO doesn’t).</p></li>
-<li><p><a href="https://www.youtube.com/watch?v=dawFyaWvFg4">“Beyond Design Patterns”</a> talk at PHP Conference Barcelona is a fascinating view on the GoF Design Patterns (which I’ve not read up on – this talk provides a context which might make them more bearable to look at).<br />
-<a href="https://pinboard.in/u:rgoulter/b:f41d9c055c12">My notes here</a>, but the key point he makes is that the GoF Design Patterns come down to patterns of information flow. This relates to Alan Kay’s emphasis that ‘OOP’ really ought to be more about the <em>messages</em> between objects.</p></li>
-<li><p>The <a href="http://fabiopereira.me/blog/2010/05/27/ttdd-tautological-test-driven-development-anti-pattern/">Tautological Unit Test</a> <em><em>anti-pattern</em></em>. (Because SDLC dipshits can’t communicate whether a concept is good or bad without using the word “pattern”). The post emphasises that tests ought to make assertions about a code’s behaviour, rather than the code’s implementation. It somewhat defeats the point of a “ensure nothing broke” test if you have to update it as you update the program under test. – Tests are more likely to become tautological, the post suggests, through over-use of mocking. (A small example is provided, to try to illustrate the point).</p></li>
-<li><p>cf. <a href="http://c2.com/cgi/wiki?PortsAndAdaptersArchitecture">“Ports and Adapters”</a>, which sometimes is mentioned in terms of making a system testable. (In “Working Effectively with Legacy Systems”, the idea of a ‘contact point’ is brought up; i.e. a point wherein you can change/inject a dependency without having to modify the code using it). – “Ports and Adapters” somewhat suggests for ‘large’ components, but these ideas all seem the same to me.</p></li>
-</ul>
-<p>My fresh, recent understanding of this last point is that in order to be able to inject things, constructing/initialising objects (using “new”) within methods is bad.</p>
-<pre><code>class SomeInterestingClass {
-  // ...
-  public function computeSomething($x) {
-    $service = new ServiceFromOtherModule(); // Can&#39;t be changed in here
-    return $service-&gt;compute($this-&gt;val, $x);
-  }
-}</code></pre>
-<p>The way to replace this, then, would be to store <code>$service</code> as a property, initialised in constructor instead of “where it’s used”, which can be <code>set</code>. And maybe some more complicated variation for if this class we depend on needs to be initialised with variables the constructor.<br />
-– The same more/less applies if the ‘dependency’ is a function call, etc.</p>
-<p>My understanding is, then, that for non-trivial computations, “testing behaviour” comes down to assertions on how mocked-up classes/functions are used. Some white-box understanding of how behaviour is implemented is needed to know what can be stubbed. – This somewhat makes unit tests a ‘declarative’ companion to the code: “In this circumstance, this should happen”.</p>
-<p>Rephrasing the above in roughly terms of ‘information-flow’: I’m guessing that at least some white-box knowledge of what kinds of messages are received (from what kind of sender), what kinds of messages are sent (to what kind of recipient) is an inevitability; perhaps it’s that it becomes a tautology when the mocking explicitly (albeit limitedly) declares the same messages/relations which the SUT code does.</p>
-<p>– But I don’t know. It’s something I’d like to think about some more.</p>
-]]></summary>
-</entry>
-<entry>
-    <title>On QA Automation Blogposts</title>
-    <link href="http://www.rgoulter.com/blog//posts/programming/2016-09-18-on-qa-automation-blogposts.html" />
-    <id>http://www.rgoulter.com/blog//posts/programming/2016-09-18-on-qa-automation-blogposts.html</id>
-    <published>2016-09-18T00:00:00Z</published>
-    <updated>2016-09-18T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<div class="info">
-    Posted on September 18, 2016
-    
-        by Richard Goulter
-    <br/>
-    
-    Tags: <a href="/tags/test-automation.html">test-automation</a>, <a href="/tags/writing.html">writing</a>
-    
-</div>
-
-<p>I’ve been reading up on the topic of test-automation.</p>
-<p>One kindof useful resource has been <a href="https://www.thoughtworks.com/insights/software-testing">ThoughtWorks’ insights blog</a>, but my feelings towards this are mixed.<br />
-Some of the posts have great insights, others are more mundane; and there’s a fetishization of nouns which makes wading through the bullshit to find the useful tips all that much harder.</p>
-<p>As an example of the latter; in response to DHH saying “TDD is dead”, everyone apparently blew-their-fucking-minds. – That makes no sense to me, unless you’ve fetishized ‘TDD’ to mean ‘some specific thing which is the best, &amp; which we all should do’.<br />
-Which is bullshit.<br />
-Either your current practices in making software work well, in which case it doesn’t matter one way or the other whether ‘TDD’ is proclaimed ‘dead’; or there are ways you can improve your software development (in which case, it doesn’t matter whether ‘TDD’ is proclaimed better than Jesus).</p>
-<p>(After reading Steve Yegge’s <a href="http://steve-yegge.blogspot.sg/2008/02/portrait-of-n00b.html">“Portrait of a n00b”</a>, I suspect closer to the truth is “all software is bad, all the time”; but that some approaches are less-bad in some circumstances).</p>
-<p>If programmers had better propensity for moderation, this wouldn’t be so bad.</p>
-<p>But fetishizing nouns is more annoying noise than anything else. (Although I suspect it also indicates immaturity).<br />
-The other flavours of blogposts tend to come in 1) “here’s this fundamentally useful concept you might not’ve heard of”. (e.g. describing the Test Pyramid, or that tests should assert about behaviours, executable specifications should be written declaratively, etc.), 2) “here are good ideas for ways to do things”.</p>
-<p>The trouble with “here are good ideas” is … it comes across as “obvious” while everyone’s still unable to readily apply it. e.g. one blogpost discussed “what to automate”: it mentioned ‘repeated, tedious/painful processes’, which makes sense, but the more salient point written was that “when you’re busy, you might not notice that these things can/should be automated”.<br />
-– Simply saying “automate tedious/repetitive processes” is tautological. Saying “be aware that there may be things you’d benefit from automating” comes from experience.</p>
-<p>It’s largely natural for programmers to ‘program’ without considering testability of their code. Some computations are hard to test. – I wish the blogposts were focussed more on “here’s why we ended up in a state where testing became difficult” (or, “here’s how we’ve improved; here’s why we were doing things we’ve improved-from”).</p>
 ]]></summary>
 </entry>
 

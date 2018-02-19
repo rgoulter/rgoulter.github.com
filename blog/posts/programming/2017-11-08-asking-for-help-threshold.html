@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Novice Struggles with Haskell Syntax - Richard Goulter's Blog</title>
+        <title>Asking for Help Threshold - Richard Goulter's Blog</title>
 
         <!-- My (Old) CSS theme -->
         <link rel="stylesheet" type="text/css" href="../../css/default.css" />
@@ -128,73 +128,40 @@
             <hr style="margin: 0px; border-top: 5px solid black;" />
 
             <div id="content" class="container">
-                <h1>Novice Struggles with Haskell Syntax</h1>
+                <h1>Asking for Help Threshold</h1>
                 <div class="info">
-    Posted on July  3, 2014
+    Posted on November  8, 2017
     
         by Richard Goulter
     <br />
     
-    Tags: <a href="../../tags/programming.haskell.html">programming.haskell</a>, <a href="../../tags/programming.hakyll.html">programming.hakyll</a>
+    Tags: 
     
 </div>
 
-<p>I’ve been trying to augment my Hakyll Site with “next post”, “previous post” links in a post. There’s a post in <a href="https://groups.google.com/forum/#!topic/hakyll/WYPjtWMm9ZU">Hakyll Google group</a> asking for the same thing. (Maybe the majority of Hakyll owners just “adapt” from other Hakyll sites…).</p>
-<p>I’ve run into trouble trying to do this. Hakyll.Web.Template.Context <a href="http://jaspervdj.be/hakyll/reference/src/Hakyll-Web-Template-Context.html">source</a> was a useful start.<br />
-But the trouble I ran into due to lack of experience, or understanding, of some (fundamental) Haskell concepts.</p>
-<p>Ugh.</p>
-<p>In this excerpt, <code>postContext</code> is out of scope:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb1-1" data-line-number="1">    match postsGlob <span class="fu">$</span> <span class="kw">do</span></a>
-<a class="sourceLine" id="cb1-2" data-line-number="2">        route <span class="fu">$</span> setExtension <span class="st">&quot;html&quot;</span></a>
-<a class="sourceLine" id="cb1-3" data-line-number="3">        compile <span class="fu">$</span> <span class="kw">do</span> </a>
-<a class="sourceLine" id="cb1-4" data-line-number="4">            <span class="co">-- Cyclic dependencies here here:</span></a>
-<a class="sourceLine" id="cb1-5" data-line-number="5">            identifiers <span class="ot">&lt;-</span> getMatches postsGlob</a>
-<a class="sourceLine" id="cb1-6" data-line-number="6">            urls <span class="ot">&lt;-</span> urlsOfPosts <span class="fu">=&lt;&lt;</span> recentFirst <span class="fu">=&lt;&lt;</span> return [<span class="dt">Item</span> identifier <span class="st">&quot;&quot;</span> <span class="fu">|</span> identifier <span class="ot">&lt;-</span> identifiers]</a>
-<a class="sourceLine" id="cb1-7" data-line-number="7"></a>
-<a class="sourceLine" id="cb1-8" data-line-number="8">            <span class="kw">let</span> postContext <span class="fu">=</span></a>
-<a class="sourceLine" id="cb1-9" data-line-number="9">                    field <span class="st">&quot;nextPost&quot;</span> (nextPostUrl urls) <span class="ot">`mappend`</span></a>
-<a class="sourceLine" id="cb1-10" data-line-number="10">                    postCtxWithTags tags</a>
-<a class="sourceLine" id="cb1-11" data-line-number="11"></a>
-<a class="sourceLine" id="cb1-12" data-line-number="12">            pandocCompiler</a>
-<a class="sourceLine" id="cb1-13" data-line-number="13">            <span class="fu">&gt;&gt;=</span> saveSnapshot <span class="st">&quot;teaser&quot;</span></a>
-<a class="sourceLine" id="cb1-14" data-line-number="14">            <span class="fu">&gt;&gt;=</span> loadAndApplyTemplate <span class="st">&quot;templates/post.html&quot;</span>    postContext</a>
-<a class="sourceLine" id="cb1-15" data-line-number="15">            <span class="fu">&gt;&gt;=</span> loadAndApplyTemplate <span class="st">&quot;templates/default.html&quot;</span> postContext</a>
-<a class="sourceLine" id="cb1-16" data-line-number="16">            <span class="fu">&gt;&gt;=</span> relativizeUrls</a></code></pre></div>
-<p>(Yeah, I know, it’s a heinously long line).<br />
-Whereas in this excerpt, it’s in scope:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb2-1" data-line-number="1">    match postsGlob <span class="fu">$</span> <span class="kw">do</span></a>
-<a class="sourceLine" id="cb2-2" data-line-number="2">        route <span class="fu">$</span> setExtension <span class="st">&quot;html&quot;</span></a>
-<a class="sourceLine" id="cb2-3" data-line-number="3">        compile <span class="fu">$</span> <span class="kw">do</span> </a>
-<a class="sourceLine" id="cb2-4" data-line-number="4">            <span class="co">-- Cyclic dependencies here here:</span></a>
-<a class="sourceLine" id="cb2-5" data-line-number="5">            identifiers <span class="ot">&lt;-</span> getMatches postsGlob</a>
-<a class="sourceLine" id="cb2-6" data-line-number="6">            urls <span class="ot">&lt;-</span> urlsOfPosts <span class="fu">=&lt;&lt;</span> recentFirst <span class="fu">=&lt;&lt;</span> return [<span class="dt">Item</span> identifier <span class="st">&quot;&quot;</span> <span class="fu">|</span> identifier <span class="ot">&lt;-</span> identifiers]</a>
-<a class="sourceLine" id="cb2-7" data-line-number="7"></a>
-<a class="sourceLine" id="cb2-8" data-line-number="8">            <span class="kw">let</span> postContext <span class="fu">=</span></a>
-<a class="sourceLine" id="cb2-9" data-line-number="9">                    field <span class="st">&quot;nextPost&quot;</span> (nextPostUrl urls) <span class="ot">`mappend`</span></a>
-<a class="sourceLine" id="cb2-10" data-line-number="10">                    postCtxWithTags tags</a>
-<a class="sourceLine" id="cb2-11" data-line-number="11"></a>
-<a class="sourceLine" id="cb2-12" data-line-number="12">            pandocCompiler</a>
-<a class="sourceLine" id="cb2-13" data-line-number="13">                <span class="fu">&gt;&gt;=</span> saveSnapshot <span class="st">&quot;teaser&quot;</span></a>
-<a class="sourceLine" id="cb2-14" data-line-number="14">                <span class="fu">&gt;&gt;=</span> loadAndApplyTemplate <span class="st">&quot;templates/post.html&quot;</span>    postContext</a>
-<a class="sourceLine" id="cb2-15" data-line-number="15">                <span class="fu">&gt;&gt;=</span> loadAndApplyTemplate <span class="st">&quot;templates/default.html&quot;</span> postContext</a>
-<a class="sourceLine" id="cb2-16" data-line-number="16">                <span class="fu">&gt;&gt;=</span> relativizeUrls</a></code></pre></div>
-<p>I guess this is why people don’t like Python or other non-C syntaxes where indentation matters.<br />
-I was able to figure that out, and considering this excerpt:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="ot">    urlOfPost ::</span> <span class="dt">Item</span> <span class="dt">String</span> <span class="ot">-&gt;</span> <span class="dt">Compiler</span> <span class="dt">String</span></a>
-<a class="sourceLine" id="cb3-2" data-line-number="2">    urlOfPost <span class="fu">=</span></a>
-<a class="sourceLine" id="cb3-3" data-line-number="3">        fmap (maybe empty <span class="fu">$</span> toUrl) <span class="fu">.</span> getRoute <span class="fu">.</span> itemIdentifier</a></code></pre></div>
-<p>But <code>urlsOfPosts</code> (used in above excerpt) has type <code>urlsOfPosts :: [Item String] -&gt; Compiler [String]</code>.<br />
-While it’s possible to understand <code>urlOfPost</code> by looking at the documentation of each part, it’s not clear to me the implementation of <code>urlsOfPosts</code>.</p>
+<p>I think my experience is probably similar to other talented programmers fresh to the workforce: To not ‘ask for help’ with a problem until too much time has been spent stuck on the problem.</p>
+<p>This isn’t too strange.<br />
+As hobbyists, or as students in school, we program and learn individually. I think ‘talented’ really means ‘has made more mistakes’. Surely you can’t be ‘talented’ without having curiousity to understand how the tools/programs you’re using work.</p>
+<p>For what it’s worth: Personally, I’m not curious about <em>everything</em>. I find git a tool where add/commit/push/pull covers 95% of what I do, 5% is Googling for how to undo some mistake.</p>
+<p>On the other hand, there are people who apparently lack all curiousity (or capability) to investigate how to self-correct.<br />
+My experience is they’ll ask for help as soon as possible.<br />
+Which is fine for project-specific knowledge which I know and they don’t. And ‘okay’ for things which they might not have known.</p>
+<p>But “asking for help without trying” is just irritating. I like the admonishment “don’t ask the same question twice”. (I mean, I’ll answer it, but eventually the asker loses my respect).</p>
+<p>I saw some tech-culture discussion complaining about this kindof thing:<br />
+“no one is really ‘self-taught’; e.g. communities like StackOverflow involve <em>people</em>”.<br />
+I think that’s a somewhat disingenuous point. – If the programmer attitude of ‘I shouldn’t have to bother learning it to know how to do it’ weren’t so prevalent, then StackOverflow wouldn’t be so popular.<br />
+It’s fair to say the process of ‘try it’, ‘search it’, ‘try that again’ (without asking someone else directly) is ‘self-taught’. Since anyone can do try doing that. By themselves.<br />
+– On the other hand, it’s interesting to point out that “on the shoulders of giants” does include someone else who had the same stupid question you’re googling for.</p>
 
 
 <hr />
 
 <div>
     
-    <a href="../../posts/programming/2014-07-06-adding-nextprevious-post-to-hakyll.html" style="float:left;">Newer post</a>
+    <a href="../../posts/games/2018-02-11-hitman-is-fun.html" style="float:left;">Newer post</a>
     
     
-    <a href="../../posts/programming/2014-07-01-yi-in-a-cabal-sandbox-on-osx.html" style="float:right; text-align: right;">Older post</a>
+    <a href="../../posts/politics/2017-01-15-toothless-dangerous-rhetoric-in-nzpol.html" style="float:right; text-align: right;">Older post</a>
     
 </div>
 <br style="clear: both;" />
@@ -205,9 +172,9 @@ While it’s possible to understand <code>urlOfPost</code> by looking at the doc
     <script type="text/javascript">
         /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
         var disqus_shortname = 'richardgoultersblog'; // required: replace example with your forum shortname
-        var disqus_identifier = '/posts/programming/2014-07-03-novice-struggles-with-haskell-syntax.html';
-        var disqus_url = 'http://www.rgoulter.com/blog' + '/posts/programming/2014-07-03-novice-struggles-with-haskell-syntax.html';
-        var disqus_title = 'Novice Struggles with Haskell Syntax - July  3, 2014';
+        var disqus_identifier = '/posts/programming/2017-11-08-asking-for-help-threshold.html';
+        var disqus_url = 'http://www.rgoulter.com/blog' + '/posts/programming/2017-11-08-asking-for-help-threshold.html';
+        var disqus_title = 'Asking for Help Threshold - November  8, 2017';
 
         /* * * DON'T EDIT BELOW THIS LINE * * */
         (function() {

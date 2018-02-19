@@ -178,10 +178,7 @@ Using <a href="https://github.com/rgoulter/dotfiles/blob/28b9712fc66c84121eed821
 <h2 id="searching">Searching</h2>
 <p>Yi does have Incremental Searching, and it does this the way Emacs does, which is better than Vim.<br />
 That is, while typing the search, all things which match are highlighted, rather than just one entry.</p>
-<div class="figure">
-<img src="http://i.imgur.com/QE5fNXu.png" />
-
-</div>
+<p><img src="http://i.imgur.com/QE5fNXu.png" /></p>
 <h2 id="jumplist">Jumplist</h2>
 <p>Yi does appear to have <code>C-I</code>, <code>C-O</code> for navigating between cursor jumps.<br />
 The <code>:ju</code> Ex command to show the jumplist isn’t there.<br />
@@ -192,22 +189,22 @@ The changelist (<code>g;</code>, <code>g,</code>) also doesn’t appear to be im
 <ul>
 <li><p><em>How to write in some extra function and bind it with a keymap?</em></p>
 <p>The sample user configs have an example of this. e.g. <a href="https://github.com/yi-editor/yi/blob/master/yi-contrib/src/Yi/Config/Users/Amy.hs">yi-contrib’s Amy.hs</a>,</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">myConfig <span class="fu">=</span> defaultCuaConfig {
-    <span class="co">-- Keymap Configuration</span>
-    defaultKm <span class="fu">=</span> extendedCuaKeymapSet,
-    <span class="fu">....</span>
-}
-
-<span class="co">-- Add M-x (which is probably Alt-x on your system) to the default</span>
-<span class="co">-- keyset, and have it launch our custom macro.</span>
-extendedCuaKeymapSet <span class="fu">=</span> customizedCuaKeymapSet <span class="fu">$</span>
-    choice [
-        metaCh <span class="ch">'x'</span> <span class="fu">?&gt;&gt;!</span> helloWorld
-    ]
-
-<span class="co">-- A custom macro</span>
-<span class="ot">helloWorld ::</span> <span class="dt">YiM</span> ()
-helloWorld <span class="fu">=</span> withBuffer <span class="fu">$</span> insertN <span class="st">&quot;Hello, world!&quot;</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb1-1" data-line-number="1">myConfig <span class="fu">=</span> defaultCuaConfig {</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">    <span class="co">-- Keymap Configuration</span></a>
+<a class="sourceLine" id="cb1-3" data-line-number="3">    defaultKm <span class="fu">=</span> extendedCuaKeymapSet,</a>
+<a class="sourceLine" id="cb1-4" data-line-number="4">    <span class="fu">....</span></a>
+<a class="sourceLine" id="cb1-5" data-line-number="5">}</a>
+<a class="sourceLine" id="cb1-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb1-7" data-line-number="7"><span class="co">-- Add M-x (which is probably Alt-x on your system) to the default</span></a>
+<a class="sourceLine" id="cb1-8" data-line-number="8"><span class="co">-- keyset, and have it launch our custom macro.</span></a>
+<a class="sourceLine" id="cb1-9" data-line-number="9">extendedCuaKeymapSet <span class="fu">=</span> customizedCuaKeymapSet <span class="fu">$</span></a>
+<a class="sourceLine" id="cb1-10" data-line-number="10">    choice [</a>
+<a class="sourceLine" id="cb1-11" data-line-number="11">        metaCh <span class="ch">'x'</span> <span class="fu">?&gt;&gt;!</span> helloWorld</a>
+<a class="sourceLine" id="cb1-12" data-line-number="12">    ]</a>
+<a class="sourceLine" id="cb1-13" data-line-number="13"></a>
+<a class="sourceLine" id="cb1-14" data-line-number="14"><span class="co">-- A custom macro</span></a>
+<a class="sourceLine" id="cb1-15" data-line-number="15"><span class="ot">helloWorld ::</span> <span class="dt">YiM</span> ()</a>
+<a class="sourceLine" id="cb1-16" data-line-number="16">helloWorld <span class="fu">=</span> withBuffer <span class="fu">$</span> insertN <span class="st">&quot;Hello, world!&quot;</span></a></code></pre></div>
 <p>Unfortunately, this is specifically for the CUA bindings. (Emacs, Vim don’t get the equivalent of <code>customizedCuaKeymapSet</code>).<br />
 Fortunately, there are multiple ways to customize bindings for Vim. See <a href="./posts/programming/2014-07-07-notes-from-some-examination-of-some-yi-configs.html">some notes</a> on this.</p></li>
 <li><p><em>How to add in some extra function and bind it to an Ex expression? (e.g. <code>:helloWorld</code>).</em></p>
@@ -215,8 +212,8 @@ Fortunately, there are multiple ways to customize bindings for Vim. See <a href=
 For non-Simple configs, it’s not clear how to ‘publish’ an Action, and trying the same doesn’t work. What happens instead is Yi complains about <code>helloWorld</code> not being in scope. <a href="https://github.com/yi-editor/yi/blob/master/yi/src/library/Yi/Eval.hs">Yi.Eval</a> mentions <code>$HOME/.config/yi/local/Env.hs</code>. Trying to put my <code>helloWorld</code> in here didn’t work for me.</p>
 <p>It appears that this only works for functions of type <code>Yim()</code>, as opposed to <code>Int -&gt; Yim()</code> or so. (Or, if possible, it’s not as trivial as I’d hope). (as of 2014-07-08).</p>
 <p>If you really want to have an Ex command <code>:helloWorld</code>, then you need to implement an Ex command parser, and your code would look like:</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">        defaultKM <span class="fu">=</span> mkKeymapSet <span class="fu">$</span> defVimConfig <span class="ot">`override`</span> \ super self <span class="ot">-&gt;</span> super
-            { vimExCommandParsers <span class="fu">=</span> myExCmdParsers <span class="fu">++</span> vimExCommandParsers super }</code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb2-1" data-line-number="1">        defaultKM <span class="fu">=</span> mkKeymapSet <span class="fu">$</span> defVimConfig <span class="ot">`override`</span> \ super self <span class="ot">-&gt;</span> super</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2">            { vimExCommandParsers <span class="fu">=</span> myExCmdParsers <span class="fu">++</span> vimExCommandParsers super }</a></code></pre></div>
 <p>where <code>myExCmdParsers</code> is of type <code>[String -&gt; Maybe ExCommand]</code>, something like <code>[helloWorldEC.parser, ...]</code>. While none of the samples have a custom Ex command, <a href="https://gist.github.com/rgoulter/5b291e7d00945661aa71/49bac9d873b885ee54ace67f99a99be53401f588">here’s</a> a simple Hello World example.</p></li>
 <li><p><em>How can I modularise code I write to customize Yi? e.g. like “source extra-stuff.vim”</em></p>
 <p>The answer is <em>not</em> to just put it in <code>~/.config/yi</code>, alongside <code>yi.hs</code>. Bummer. I asked about this on <a href="https://groups.google.com/forum/#!topic/yi-devel/hYvT2Sz4M3w">the Google group</a>.</p>
@@ -233,7 +230,7 @@ When the dependency is updated, to register this with Yi I’d need to</p>
 <p>i.e. get Cabal to rebuild its dependencies, and then ‘modify’ the yi.hs file so that Yi will re-compile (and thus know about the updated dependency). “dependency” here, btw, could mean things like plugin, or aspects of a <code>yi.hs</code> which you’d rather have split up into different <code>.hs</code> files.</p>
 <p>If there are many such dependencies for your <code>yi.hs</code>, it may make sense to have a cabal package like <code>yi-config-rgoulter</code>; if this acts as the ‘root’ of your yi dependencies, then it means you’d only need to deal with installing this package. (Well, and adding the sources for the other dependencies, but a package typically updates more often than it’s moved).</p>
 <p>At the extreme, you could have a one-liner <code>yi.hs</code> like:</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">    <span class="kw">import </span><span class="dt">Yi.Config.Rgoulter</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb5-1" data-line-number="1">    <span class="kw">import</span> <span class="dt">Yi.Config.Rgoulter</span></a></code></pre></div>
 <p>because of how Haskell’s packages work; the disadvantage of <em>that</em> is the need to constantly <code>cabal build</code> as it updates, in contrast to just having Yi recompile a modified <code>yi.hs</code>.</p>
 <p>I still need to investigate some more about development in such a dependency, especially with (say) a shared Cabal Sandbox.</p></li>
 <li><p><em>How to show a list of keybindings, or something else which can show me what Yi can do?</em></p>

@@ -145,22 +145,22 @@
 <p>Anyway, beyond this, I had another look at how custom actions had been configured by some users.</p>
 <h3 id="a-vim-keymap-configured-with-customized-keymap">A Vim Keymap Configured with Customized Keymap</h3>
 <p><a href="https://github.com/yi-editor/yi/blob/master/yi-contrib/src/Yi/Config/Users/Jeff.hs">Jeff’s config</a> has these lines:</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">    myConfig ::</span> <span class="dt">Config</span>
-    myConfig <span class="fu">=</span> defaultVimConfig
-      { defaultKm <span class="fu">=</span> myVimKeymap
-      , <span class="fu">...</span>
-      }
-
-    myVimKeymap <span class="fu">=</span> mkKeymap <span class="fu">$</span> defKeymap <span class="ot">`override`</span> \super self <span class="ot">-&gt;</span> super
-      { v_top_level <span class="fu">=</span> v_top_level super <span class="fu">||&gt;</span>
-          (char <span class="ch">';'</span> <span class="fu">?&gt;&gt;!</span> resetRegexE)
-
-      , v_ins_char  <span class="fu">=</span> (v_ins_char super <span class="fu">||&gt;</span> tabKeymap) <span class="fu">&lt;|&gt;</span>
-          choice [ ctrlCh <span class="ch">'s'</span> <span class="fu">?&gt;&gt;!</span> moveToNextBufferMark deleteSnippets
-                 , meta (spec <span class="dt">KLeft</span>)  <span class="fu">?&gt;&gt;!</span> prevWordB
-                 , meta (spec <span class="dt">KRight</span>) <span class="fu">?&gt;&gt;!</span> nextWordB
-                 ]
-      }</code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="ot">    myConfig ::</span> <span class="dt">Config</span></a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">    myConfig <span class="fu">=</span> defaultVimConfig</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3">      { defaultKm <span class="fu">=</span> myVimKeymap</a>
+<a class="sourceLine" id="cb1-4" data-line-number="4">      , <span class="fu">...</span></a>
+<a class="sourceLine" id="cb1-5" data-line-number="5">      }</a>
+<a class="sourceLine" id="cb1-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb1-7" data-line-number="7">    myVimKeymap <span class="fu">=</span> mkKeymap <span class="fu">$</span> defKeymap <span class="ot">`override`</span> \super self <span class="ot">-&gt;</span> super</a>
+<a class="sourceLine" id="cb1-8" data-line-number="8">      { v_top_level <span class="fu">=</span> v_top_level super <span class="fu">||&gt;</span></a>
+<a class="sourceLine" id="cb1-9" data-line-number="9">          (char <span class="ch">';'</span> <span class="fu">?&gt;&gt;!</span> resetRegexE)</a>
+<a class="sourceLine" id="cb1-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb1-11" data-line-number="11">      , v_ins_char  <span class="fu">=</span> (v_ins_char super <span class="fu">||&gt;</span> tabKeymap) <span class="fu">&lt;|&gt;</span></a>
+<a class="sourceLine" id="cb1-12" data-line-number="12">          choice [ ctrlCh <span class="ch">'s'</span> <span class="fu">?&gt;&gt;!</span> moveToNextBufferMark deleteSnippets</a>
+<a class="sourceLine" id="cb1-13" data-line-number="13">                 , meta (spec <span class="dt">KLeft</span>)  <span class="fu">?&gt;&gt;!</span> prevWordB</a>
+<a class="sourceLine" id="cb1-14" data-line-number="14">                 , meta (spec <span class="dt">KRight</span>) <span class="fu">?&gt;&gt;!</span> nextWordB</a>
+<a class="sourceLine" id="cb1-15" data-line-number="15">                 ]</a>
+<a class="sourceLine" id="cb1-16" data-line-number="16">      }</a></code></pre></div>
 <p><em>Note:</em></p>
 <ul>
 <li><code>myVimKeymap</code> has type <code>KeymapSet</code>.<br />
@@ -182,19 +182,19 @@ in <code>Yi.Keymap.Keys</code>.<br />
 There also seems to be inputs for Insert mode, so that <code>Alt+Left</code> (or <code>Alt+Right</code>) will move by words left/right.</p>
 <h3 id="an-emacs-keymap-with-a-simple-config">An Emacs Keymap with a Simple Config</h3>
 <p><a href="https://github.com/yi-editor/yi/blob/master/yi-contrib/src/Yi/Config/Users/Reiner.hs">Reiner’s config</a> takes a different approach (although is ‘based’ on the Emacs keymap):</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">    main <span class="fu">=</span> configMain defaultEmacsConfig setup
-
-<span class="ot">    setup ::</span> <span class="dt">ConfigM</span> ()
-    setup <span class="fu">=</span> <span class="kw">do</span>
-      setFrontendPreferences [<span class="st">&quot;pango&quot;</span>, <span class="st">&quot;vte&quot;</span>, <span class="st">&quot;vty&quot;</span>]
-      fontSize <span class="fu">.=</span> <span class="dt">Just</span> <span class="dv">9</span>
-
-      globalBindKeys globalBindings
-      evaluator <span class="fu">.=</span> publishedActionsEvaluator
-      publishAction <span class="st">&quot;createDirectory&quot;</span> yiCreateDirectory
-
-      addMode Haskell.fastMode
-      modeBindKeys Haskell.fastMode (ctrlCh <span class="ch">'c'</span> <span class="fu">?&gt;&gt;</span> ctrlCh <span class="ch">'s'</span> <span class="fu">?&gt;&gt;!</span> insertHaskSection)</code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb2-1" data-line-number="1">    main <span class="fu">=</span> configMain defaultEmacsConfig setup</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="ot">    setup ::</span> <span class="dt">ConfigM</span> ()</a>
+<a class="sourceLine" id="cb2-4" data-line-number="4">    setup <span class="fu">=</span> <span class="kw">do</span></a>
+<a class="sourceLine" id="cb2-5" data-line-number="5">      setFrontendPreferences [<span class="st">&quot;pango&quot;</span>, <span class="st">&quot;vte&quot;</span>, <span class="st">&quot;vty&quot;</span>]</a>
+<a class="sourceLine" id="cb2-6" data-line-number="6">      fontSize <span class="fu">.=</span> <span class="dt">Just</span> <span class="dv">9</span></a>
+<a class="sourceLine" id="cb2-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb2-8" data-line-number="8">      globalBindKeys globalBindings</a>
+<a class="sourceLine" id="cb2-9" data-line-number="9">      evaluator <span class="fu">.=</span> publishedActionsEvaluator</a>
+<a class="sourceLine" id="cb2-10" data-line-number="10">      publishAction <span class="st">&quot;createDirectory&quot;</span> yiCreateDirectory</a>
+<a class="sourceLine" id="cb2-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb2-12" data-line-number="12">      addMode Haskell.fastMode</a>
+<a class="sourceLine" id="cb2-13" data-line-number="13">      modeBindKeys Haskell.fastMode (ctrlCh <span class="ch">'c'</span> <span class="fu">?&gt;&gt;</span> ctrlCh <span class="ch">'s'</span> <span class="fu">?&gt;&gt;!</span> insertHaskSection)</a></code></pre></div>
 <p><em>Note:</em></p>
 <ul>
 <li><code>configMain</code> has type <code>Config -&gt; ConfigM () -&gt; IO ()</code>, in <code>Yi.Config.Simple</code></li>
@@ -205,40 +205,40 @@ There also seems to be inputs for Insert mode, so that <code>Alt+Left</code> (or
 (Not clear how the equivalent would be set with the non-<code>Simple</code> configs).</p>
 <h3 id="a-vim-keymap-with-overridden-bindings">A Vim Keymap with Overridden Bindings</h3>
 <p><a href="https://github.com/yi-editor/yi/blob/master/yi-contrib/src/Yi/Config/Users/Michal.hs">Michal’s Config</a> (which is somewhat documented) has the following code of interest:</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">    myKeymapSet ::</span> <span class="dt">KeymapSet</span>
-    myKeymapSet <span class="fu">=</span> V2.mkKeymapSet <span class="fu">$</span> V2.defVimConfig <span class="ot">`override`</span> \super this <span class="ot">-&gt;</span>
-        <span class="kw">let</span> eval <span class="fu">=</span> V2.pureEval this
-        <span class="kw">in</span> super {
-              <span class="co">-- Here we can add custom bindings.</span>
-              <span class="co">-- See Yi.Keymap.Vim.Common for datatypes and </span>
-              <span class="co">-- Yi.Keymap.Vim.Utils for useful functions like mkStringBindingE</span>
-
-              <span class="co">-- In case of conflict, that is if there exist multiple bindings</span>
-              <span class="co">-- whose prereq function returns WholeMatch,</span>
-              <span class="co">-- the first such binding is used.</span>
-              <span class="co">-- So it's important to have custom bindings first.</span>
-              V2.vimBindings <span class="fu">=</span> myBindings eval <span class="fu">++</span> V2.vimBindings super
-            }
-
-<span class="ot">    myBindings ::</span> (<span class="dt">String</span> <span class="ot">-&gt;</span> <span class="dt">EditorM</span> ()) <span class="ot">-&gt;</span> [<span class="dt">V2.VimBinding</span>]
-    myBindings eval <span class="fu">=</span>
-        <span class="kw">let</span> nmap  x y <span class="fu">=</span> V2.mkStringBindingE <span class="dt">V2.Normal</span> <span class="dt">V2.Drop</span> (x, y, id)
-            imap  x y <span class="fu">=</span> <span class="dt">V2.VimBindingE</span> (\evs state <span class="ot">-&gt;</span> <span class="kw">case</span> V2.vsMode state <span class="kw">of</span>
-                                        <span class="dt">V2.Insert</span> _ <span class="ot">-&gt;</span>
-                                            fmap (const (y <span class="fu">&gt;&gt;</span> return <span class="dt">V2.Continue</span>))
-                                                 (evs <span class="ot">`V2.matchesString`</span> x)
-                                        _ <span class="ot">-&gt;</span> <span class="dt">V2.NoMatch</span>)
-            nmap'  x y <span class="fu">=</span> V2.mkStringBindingY <span class="dt">V2.Normal</span> (x, y, id)
-        <span class="kw">in</span> [
-             <span class="co">-- Tab traversal</span>
-             nmap  <span class="st">&quot;&lt;C-h&gt;&quot;</span> previousTabE
-           , nmap  <span class="st">&quot;&lt;C-l&gt;&quot;</span> nextTabE
-           , nmap  <span class="st">&quot;&lt;C-l&gt;&quot;</span> nextTabE
-
-             <span class="co">-- Press space to clear incremental search highlight</span>
-           , nmap  <span class="st">&quot; &quot;</span> (eval <span class="st">&quot;:nohlsearch&lt;CR&gt;&quot;</span>)
-           , <span class="fu">...</span>
-           ]</code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="ot">    myKeymapSet ::</span> <span class="dt">KeymapSet</span></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2">    myKeymapSet <span class="fu">=</span> V2.mkKeymapSet <span class="fu">$</span> V2.defVimConfig <span class="ot">`override`</span> \super this <span class="ot">-&gt;</span></a>
+<a class="sourceLine" id="cb3-3" data-line-number="3">        <span class="kw">let</span> eval <span class="fu">=</span> V2.pureEval this</a>
+<a class="sourceLine" id="cb3-4" data-line-number="4">        <span class="kw">in</span> super {</a>
+<a class="sourceLine" id="cb3-5" data-line-number="5">              <span class="co">-- Here we can add custom bindings.</span></a>
+<a class="sourceLine" id="cb3-6" data-line-number="6">              <span class="co">-- See Yi.Keymap.Vim.Common for datatypes and </span></a>
+<a class="sourceLine" id="cb3-7" data-line-number="7">              <span class="co">-- Yi.Keymap.Vim.Utils for useful functions like mkStringBindingE</span></a>
+<a class="sourceLine" id="cb3-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb3-9" data-line-number="9">              <span class="co">-- In case of conflict, that is if there exist multiple bindings</span></a>
+<a class="sourceLine" id="cb3-10" data-line-number="10">              <span class="co">-- whose prereq function returns WholeMatch,</span></a>
+<a class="sourceLine" id="cb3-11" data-line-number="11">              <span class="co">-- the first such binding is used.</span></a>
+<a class="sourceLine" id="cb3-12" data-line-number="12">              <span class="co">-- So it's important to have custom bindings first.</span></a>
+<a class="sourceLine" id="cb3-13" data-line-number="13">              V2.vimBindings <span class="fu">=</span> myBindings eval <span class="fu">++</span> V2.vimBindings super</a>
+<a class="sourceLine" id="cb3-14" data-line-number="14">            }</a>
+<a class="sourceLine" id="cb3-15" data-line-number="15"></a>
+<a class="sourceLine" id="cb3-16" data-line-number="16"><span class="ot">    myBindings ::</span> (<span class="dt">String</span> <span class="ot">-&gt;</span> <span class="dt">EditorM</span> ()) <span class="ot">-&gt;</span> [<span class="dt">V2.VimBinding</span>]</a>
+<a class="sourceLine" id="cb3-17" data-line-number="17">    myBindings eval <span class="fu">=</span></a>
+<a class="sourceLine" id="cb3-18" data-line-number="18">        <span class="kw">let</span> nmap  x y <span class="fu">=</span> V2.mkStringBindingE <span class="dt">V2.Normal</span> <span class="dt">V2.Drop</span> (x, y, id)</a>
+<a class="sourceLine" id="cb3-19" data-line-number="19">            imap  x y <span class="fu">=</span> <span class="dt">V2.VimBindingE</span> (\evs state <span class="ot">-&gt;</span> <span class="kw">case</span> V2.vsMode state <span class="kw">of</span></a>
+<a class="sourceLine" id="cb3-20" data-line-number="20">                                        <span class="dt">V2.Insert</span> _ <span class="ot">-&gt;</span></a>
+<a class="sourceLine" id="cb3-21" data-line-number="21">                                            fmap (const (y <span class="fu">&gt;&gt;</span> return <span class="dt">V2.Continue</span>))</a>
+<a class="sourceLine" id="cb3-22" data-line-number="22">                                                 (evs <span class="ot">`V2.matchesString`</span> x)</a>
+<a class="sourceLine" id="cb3-23" data-line-number="23">                                        _ <span class="ot">-&gt;</span> <span class="dt">V2.NoMatch</span>)</a>
+<a class="sourceLine" id="cb3-24" data-line-number="24">            nmap'  x y <span class="fu">=</span> V2.mkStringBindingY <span class="dt">V2.Normal</span> (x, y, id)</a>
+<a class="sourceLine" id="cb3-25" data-line-number="25">        <span class="kw">in</span> [</a>
+<a class="sourceLine" id="cb3-26" data-line-number="26">             <span class="co">-- Tab traversal</span></a>
+<a class="sourceLine" id="cb3-27" data-line-number="27">             nmap  <span class="st">&quot;&lt;C-h&gt;&quot;</span> previousTabE</a>
+<a class="sourceLine" id="cb3-28" data-line-number="28">           , nmap  <span class="st">&quot;&lt;C-l&gt;&quot;</span> nextTabE</a>
+<a class="sourceLine" id="cb3-29" data-line-number="29">           , nmap  <span class="st">&quot;&lt;C-l&gt;&quot;</span> nextTabE</a>
+<a class="sourceLine" id="cb3-30" data-line-number="30"></a>
+<a class="sourceLine" id="cb3-31" data-line-number="31">             <span class="co">-- Press space to clear incremental search highlight</span></a>
+<a class="sourceLine" id="cb3-32" data-line-number="32">           , nmap  <span class="st">&quot; &quot;</span> (eval <span class="st">&quot;:nohlsearch&lt;CR&gt;&quot;</span>)</a>
+<a class="sourceLine" id="cb3-33" data-line-number="33">           , <span class="fu">...</span></a>
+<a class="sourceLine" id="cb3-34" data-line-number="34">           ]</a></code></pre></div>
 <p>All the <code>V2</code> is somewhat unnecessary.</p>
 <ul>
 <li><code>pureEval</code> has type <code>VimConfig -&gt; String -&gt; EditorM ()</code>.</li>

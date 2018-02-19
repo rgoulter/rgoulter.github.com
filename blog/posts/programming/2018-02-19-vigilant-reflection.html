@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Novice Struggles with Haskell Syntax - Richard Goulter's Blog</title>
+        <title>Vigilant Reflection - Richard Goulter's Blog</title>
 
         <!-- My (Old) CSS theme -->
         <link rel="stylesheet" type="text/css" href="../../css/default.css" />
@@ -128,73 +128,46 @@
             <hr style="margin: 0px; border-top: 5px solid black;" />
 
             <div id="content" class="container">
-                <h1>Novice Struggles with Haskell Syntax</h1>
+                <h1>Vigilant Reflection</h1>
                 <div class="info">
-    Posted on July  3, 2014
+    Posted on February 19, 2018
     
         by Richard Goulter
     <br />
     
-    Tags: <a href="../../tags/programming.haskell.html">programming.haskell</a>, <a href="../../tags/programming.hakyll.html">programming.hakyll</a>
+    Tags: 
     
 </div>
 
-<p>I’ve been trying to augment my Hakyll Site with “next post”, “previous post” links in a post. There’s a post in <a href="https://groups.google.com/forum/#!topic/hakyll/WYPjtWMm9ZU">Hakyll Google group</a> asking for the same thing. (Maybe the majority of Hakyll owners just “adapt” from other Hakyll sites…).</p>
-<p>I’ve run into trouble trying to do this. Hakyll.Web.Template.Context <a href="http://jaspervdj.be/hakyll/reference/src/Hakyll-Web-Template-Context.html">source</a> was a useful start.<br />
-But the trouble I ran into due to lack of experience, or understanding, of some (fundamental) Haskell concepts.</p>
-<p>Ugh.</p>
-<p>In this excerpt, <code>postContext</code> is out of scope:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb1-1" data-line-number="1">    match postsGlob <span class="fu">$</span> <span class="kw">do</span></a>
-<a class="sourceLine" id="cb1-2" data-line-number="2">        route <span class="fu">$</span> setExtension <span class="st">&quot;html&quot;</span></a>
-<a class="sourceLine" id="cb1-3" data-line-number="3">        compile <span class="fu">$</span> <span class="kw">do</span> </a>
-<a class="sourceLine" id="cb1-4" data-line-number="4">            <span class="co">-- Cyclic dependencies here here:</span></a>
-<a class="sourceLine" id="cb1-5" data-line-number="5">            identifiers <span class="ot">&lt;-</span> getMatches postsGlob</a>
-<a class="sourceLine" id="cb1-6" data-line-number="6">            urls <span class="ot">&lt;-</span> urlsOfPosts <span class="fu">=&lt;&lt;</span> recentFirst <span class="fu">=&lt;&lt;</span> return [<span class="dt">Item</span> identifier <span class="st">&quot;&quot;</span> <span class="fu">|</span> identifier <span class="ot">&lt;-</span> identifiers]</a>
-<a class="sourceLine" id="cb1-7" data-line-number="7"></a>
-<a class="sourceLine" id="cb1-8" data-line-number="8">            <span class="kw">let</span> postContext <span class="fu">=</span></a>
-<a class="sourceLine" id="cb1-9" data-line-number="9">                    field <span class="st">&quot;nextPost&quot;</span> (nextPostUrl urls) <span class="ot">`mappend`</span></a>
-<a class="sourceLine" id="cb1-10" data-line-number="10">                    postCtxWithTags tags</a>
-<a class="sourceLine" id="cb1-11" data-line-number="11"></a>
-<a class="sourceLine" id="cb1-12" data-line-number="12">            pandocCompiler</a>
-<a class="sourceLine" id="cb1-13" data-line-number="13">            <span class="fu">&gt;&gt;=</span> saveSnapshot <span class="st">&quot;teaser&quot;</span></a>
-<a class="sourceLine" id="cb1-14" data-line-number="14">            <span class="fu">&gt;&gt;=</span> loadAndApplyTemplate <span class="st">&quot;templates/post.html&quot;</span>    postContext</a>
-<a class="sourceLine" id="cb1-15" data-line-number="15">            <span class="fu">&gt;&gt;=</span> loadAndApplyTemplate <span class="st">&quot;templates/default.html&quot;</span> postContext</a>
-<a class="sourceLine" id="cb1-16" data-line-number="16">            <span class="fu">&gt;&gt;=</span> relativizeUrls</a></code></pre></div>
-<p>(Yeah, I know, it’s a heinously long line).<br />
-Whereas in this excerpt, it’s in scope:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb2-1" data-line-number="1">    match postsGlob <span class="fu">$</span> <span class="kw">do</span></a>
-<a class="sourceLine" id="cb2-2" data-line-number="2">        route <span class="fu">$</span> setExtension <span class="st">&quot;html&quot;</span></a>
-<a class="sourceLine" id="cb2-3" data-line-number="3">        compile <span class="fu">$</span> <span class="kw">do</span> </a>
-<a class="sourceLine" id="cb2-4" data-line-number="4">            <span class="co">-- Cyclic dependencies here here:</span></a>
-<a class="sourceLine" id="cb2-5" data-line-number="5">            identifiers <span class="ot">&lt;-</span> getMatches postsGlob</a>
-<a class="sourceLine" id="cb2-6" data-line-number="6">            urls <span class="ot">&lt;-</span> urlsOfPosts <span class="fu">=&lt;&lt;</span> recentFirst <span class="fu">=&lt;&lt;</span> return [<span class="dt">Item</span> identifier <span class="st">&quot;&quot;</span> <span class="fu">|</span> identifier <span class="ot">&lt;-</span> identifiers]</a>
-<a class="sourceLine" id="cb2-7" data-line-number="7"></a>
-<a class="sourceLine" id="cb2-8" data-line-number="8">            <span class="kw">let</span> postContext <span class="fu">=</span></a>
-<a class="sourceLine" id="cb2-9" data-line-number="9">                    field <span class="st">&quot;nextPost&quot;</span> (nextPostUrl urls) <span class="ot">`mappend`</span></a>
-<a class="sourceLine" id="cb2-10" data-line-number="10">                    postCtxWithTags tags</a>
-<a class="sourceLine" id="cb2-11" data-line-number="11"></a>
-<a class="sourceLine" id="cb2-12" data-line-number="12">            pandocCompiler</a>
-<a class="sourceLine" id="cb2-13" data-line-number="13">                <span class="fu">&gt;&gt;=</span> saveSnapshot <span class="st">&quot;teaser&quot;</span></a>
-<a class="sourceLine" id="cb2-14" data-line-number="14">                <span class="fu">&gt;&gt;=</span> loadAndApplyTemplate <span class="st">&quot;templates/post.html&quot;</span>    postContext</a>
-<a class="sourceLine" id="cb2-15" data-line-number="15">                <span class="fu">&gt;&gt;=</span> loadAndApplyTemplate <span class="st">&quot;templates/default.html&quot;</span> postContext</a>
-<a class="sourceLine" id="cb2-16" data-line-number="16">                <span class="fu">&gt;&gt;=</span> relativizeUrls</a></code></pre></div>
-<p>I guess this is why people don’t like Python or other non-C syntaxes where indentation matters.<br />
-I was able to figure that out, and considering this excerpt:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="ot">    urlOfPost ::</span> <span class="dt">Item</span> <span class="dt">String</span> <span class="ot">-&gt;</span> <span class="dt">Compiler</span> <span class="dt">String</span></a>
-<a class="sourceLine" id="cb3-2" data-line-number="2">    urlOfPost <span class="fu">=</span></a>
-<a class="sourceLine" id="cb3-3" data-line-number="3">        fmap (maybe empty <span class="fu">$</span> toUrl) <span class="fu">.</span> getRoute <span class="fu">.</span> itemIdentifier</a></code></pre></div>
-<p>But <code>urlsOfPosts</code> (used in above excerpt) has type <code>urlsOfPosts :: [Item String] -&gt; Compiler [String]</code>.<br />
-While it’s possible to understand <code>urlOfPost</code> by looking at the documentation of each part, it’s not clear to me the implementation of <code>urlsOfPosts</code>.</p>
+<p>One good, sensible motto that is worth keeping in mind every now and then is to reflect: ‘Where am I at? Where do I want to be? How can I get there?’. – I’m not sure how that works for ‘I don’t know what I want’; but it’s much better to know that you don’t know, than to just have the angst.</p>
+<p>I think this is useful especially if you find yourself in the same ‘situations’ repeatedly.<br />
+– I like to think it’s helped me figure out some of my failure-modes in terms of how I work. e.g. I like having ‘flow’ with my work. This can be described as work with ‘the right level of challenge, for your current level of skill’. (I’ve seen different diagrams for this; I don’t know which are reliable, but this sounds a sensible model).<br />
+For me, if I’ve found if I don’t have ‘flow’, it can be difficult to find motivation and to live up to my potential. And if I’m not aware of this, I’ll end up stuck.</p>
+<p>So it’s useful to have tools to help reflect.</p>
+<p>The term ‘Emotional Intelligence’ (EQ) gets thrown around every now and then.<br />
+It certainly sounds like a bullshit term made for cuddly-feely for people who may not have high IQ, but can get on with other people.<br />
+But the concepts related to it seem useful enough tools: awareness and management of self, awareness and management of others. <a href="https://www.keystepmedia.com/emotional-social-intelligence-leadership-competencies/">This link</a> looks like cuddly-feely MBA nonsense, but it sensibly expands on examples of these kinds of things. e.g. ‘awareness of self’ includes ‘understanding my emotions and the effects they have on me’; ‘management of others’ includes ‘can you influence others: have a positive impact, and persuade them to gain their support’.</p>
+<p>I think a big limitation with the EQ stuff is it kindof splits into ‘good with people’ and ‘bad with people’.<br />
+But people can be complicated. This doesn’t mean EQ is nonsense, so much as I think it’s useful to be aware of this limitation.</p>
+<p>It can be fascinating to reflect / consider the different ways people interact.<br />
+Mis-alignment of assumptions between people inevitably leads to conflict.<br />
+This is made clear by Alice Maz’s excellent <a href="https://status451.com/2016/01/06/splain-it-to-me/">‘Splain it to me’</a>. I think another interesting example is e.g. <a href="https://www.theatlantic.com/national/archive/2010/05/askers-vs-guessers/340891/">Askers vs Guessers</a>. – The point of these tools isn’t to model people as entirely fitting into the model’s boxes, so much as they help understand / explain interactions between people.</p>
+<p>I think something that’s unfortunately omitted in discussions of diversity, where the claim is that it’s beneficial to have different kinds of people working on a task:<br />
+Differences risk mis-aligned assumptions.<br />
+Which surely leads to tension, and conflict.<br />
+– This can be mitigated by emphasis on a shared identity (e.g. Between citizens, a shared national identity. Between employees, a shared company identity), rather than emphasis on differences between identity.<br />
+But my concern is: pro-diversity folk often encourage situations which lead to tension/conflict without acknowledging the potential conflict, and without providing tools to mitigate and work around this.</p>
+<p>Similarly, I think ‘cultural differences’ aren’t just ‘demographic differences’.</p>
+<p>Yet. I kindof wonder if other people in teams reflect on differences like this.<br />
+For myself, I think I can get as far as aware of how others feel. I don’t think I’m the kind of person who could easily manipulate others. So I guess ‘Where am I at? etc.’ is useful for ‘What are my limitations? How should I approach these situations from that?’.</p>
 
 
 <hr />
 
 <div>
     
-    <a href="../../posts/programming/2014-07-06-adding-nextprevious-post-to-hakyll.html" style="float:left;">Newer post</a>
     
-    
-    <a href="../../posts/programming/2014-07-01-yi-in-a-cabal-sandbox-on-osx.html" style="float:right; text-align: right;">Older post</a>
+    <a href="../../posts/programming/2018-02-19-on-maintaining-on-old-side-project.html" style="float:right; text-align: right;">Older post</a>
     
 </div>
 <br style="clear: both;" />
@@ -205,9 +178,9 @@ While it’s possible to understand <code>urlOfPost</code> by looking at the doc
     <script type="text/javascript">
         /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
         var disqus_shortname = 'richardgoultersblog'; // required: replace example with your forum shortname
-        var disqus_identifier = '/posts/programming/2014-07-03-novice-struggles-with-haskell-syntax.html';
-        var disqus_url = 'http://www.rgoulter.com/blog' + '/posts/programming/2014-07-03-novice-struggles-with-haskell-syntax.html';
-        var disqus_title = 'Novice Struggles with Haskell Syntax - July  3, 2014';
+        var disqus_identifier = '/posts/programming/2018-02-19-vigilant-reflection.html';
+        var disqus_url = 'http://www.rgoulter.com/blog' + '/posts/programming/2018-02-19-vigilant-reflection.html';
+        var disqus_title = 'Vigilant Reflection - February 19, 2018';
 
         /* * * DON'T EDIT BELOW THIS LINE * * */
         (function() {
