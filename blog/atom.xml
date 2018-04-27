@@ -8,8 +8,67 @@
         <name>Richard Goulter</name>
         <email>richard.goulter+blog@gmail.com</email>
     </author>
-    <updated>2018-03-27T00:00:00Z</updated>
+    <updated>2018-04-27T00:00:00Z</updated>
     <entry>
+    <title>StackOverflow, Elitism, and Community</title>
+    <link href="http://www.rgoulter.com/blog//posts/programming/2018-04-27-stackoverflow-and-elitism.html" />
+    <id>http://www.rgoulter.com/blog//posts/programming/2018-04-27-stackoverflow-and-elitism.html</id>
+    <published>2018-04-27T00:00:00Z</published>
+    <updated>2018-04-27T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<div class="info">
+    Posted on April 27, 2018
+    
+        by Richard Goulter
+    <br/>
+    
+    Tags: 
+    
+</div>
+
+<p><a href="So%20this%20came%20up%20on%20HackerNews">https://news.ycombinator.com/item?id=16934942</a>. StackOverflow’s discussion that it ought to do more to be more welcoming.</p>
+<p>Some of the points highlighted:</p>
+<ul>
+<li>Dickish behaviour on StackOverflow comes from the perverse incentives of its reputation system.<br />
+e.g. one way to be rewarded with reputation is to ‘edit’ an answer. This leads to frivolous editing, such as removing “thanks” from a question.
+<ul>
+<li>There’s also a big imbalance between the role of asker and moderator: An asker only wants a response to their question, whereas a moderator will see hundreds of “low-quality” questions being asked. (So can hardly care to be kind to all of these).</li>
+<li>One commenter points out that with Reddit, the system is more ‘democratic’ as the cost to ‘exit’ is so cheap: if leadership screw up, it’s cheap to just create another sub-reddit the community can move to.</li>
+</ul></li>
+<li><p>There’s a selection-bias against quality in questions:<br />
+Anyone who can go to the effort to search for previous/similar questions, as well as refine their question down to its essence is more likely to be capable of <em>then</em> finding an answer themselves,<br />
+compared to someone who just blindly asks.</p></li>
+<li><p>“StackOverflow is elitist…”<br />
+HackerNews is <em>on board</em>.<br />
+“…to newbies…”<br />
+<em>Totally</em>.<br />
+“…and women, people-of-colour”.<br />
+Those be fighting words.</p></li>
+</ul>
+<p>It seems that (roughly) StackOverflow has three kinds of users: - Those who ask questions - Those who answer, and moderate - Those who browse the site (from search-engine results page) but don’t ask/answer questions.</p>
+<p>My experience personally was joining the site + being ‘reputation blocked’ from helping where I wanted to.<br />
+Well, whatever.</p>
+<p>Part of the discussion is about the purpose/role of StackOverflow as a site. How its mechanics work (as opposed to, say, mechanics of Reddit). Whether it wants to be a quick/dirty my-question-my-answer or the-question-the-answer site.</p>
+<p>Part of the discussion is about how much of an effort askers need to make to ask a question.<br />
+And how much of an effort answerers need to make to be considerate.<br />
+– Though I think this involves pointing out that people interact in different ways like how <a href="https://status451.com/2016/01/06/splain-it-to-me/">Alice Maz did with “Splain it to me”</a>.</p>
+<hr />
+<p>I have the concern that much of the “but women are hurting” comments come from people who don’t see that the established norms can be legitimate.<br />
+e.g. <a href="https://medium.com/@maradydd/when-nerds-collide-31895b01e68c">Meredith Patterson’s excellent “When Nerds Collide”</a> discusses this. (Patterson’s concerns discussed elsewhere include that these feminists are unconcerned about excluding people they dislike; e.g. autists).</p>
+<p><a href="https://status451.com/2016/09/15/social-gentrification/">Simon Penner’s “Social Gentrification”</a> is a good discussion about community interactions like this, too. (Progs are “social gentrifiers”, who invade a place a predominantly “poor” place, and make it nicer, but in doing so exclude those who inhabited the community already).</p>
+<p>But that the “StackOverflow isn’t welcoming to women” is fighting words whereas “StackOverflow isn’t welcoming” isn’t:<br />
+This is so closely politics and culture wars that it’s disingenuous to discuss without pointing that out.</p>
+<p>Most of the interactions of the culture war are driven by fear, not love. And what people value is the notion of relief, and safety.<br />
+StackOverflow’s remarks are clearly in reply to support women and people of colour who fear they aren’t welcome.<br />
+– As Patterson points out, some nerds get antsy about this since they grew up at the bottom of the social hierarchy (i.e. excluded); then found a place which they belonged. Tech happened to get popular, and these people are now being told they deserve to be on the bottom of the hierarchy, when they’d prefer that no hierarchy were there at all.</p>
+<p>I think it’s useful to highlight that the interactions are political because it shows why those involved express &amp; feel things differently:<br />
+- e.g. The “as a straight-white man I need to be doing better” is certainly coming from someone who identifies as progressive.<br />
+(i.e. other people who value ‘progressive’ as part of their identity are likely to speak the same way; whereas in my experience “white men” don’t). - The claim “StackOverflow isn’t welcoming to women” is parsed as “sexism”.<br />
+- Non-progressives consider “sexism” as “discrimination against a women, because she’s a women”. This fails to pattern-match against interactions on StackOverflow since anonymous accounts aren’t distinguishable by gender traits.<br />
+Interactions are judged at the level of the individual. - Whereas a progressive considers “sexism” as: the structures in place or the way that women feel. So if most of StackOverflow’s users are men, then that’s evidence of sexism. If women don’t feel welcome, the culture is sexist.<br />
+Interactions are judged at the level of the group.</p>
+]]></summary>
+</entry>
+<entry>
     <title>Employment Interactions are a Mix of Market and Social</title>
     <link href="http://www.rgoulter.com/blog//posts/politics/2018-03-27-employment-interactions-are-a-mix-of-market-and-social.html" />
     <id>http://www.rgoulter.com/blog//posts/politics/2018-03-27-employment-interactions-are-a-mix-of-market-and-social.html</id>
@@ -523,42 +582,6 @@ Let alone, if people are condemned regardless of what they do, there’s nothing
 People like this, righteous &amp; not with majority viewpoint, need to see value in “playing politics” (or “being persuasive”) if they hope to make any changes to the problems they see in the world. Signalling what <em>good people</em> they are only feels good.<br />
 – To that extent, it’s still valuable to rebut “casual racism is racism”. (Albeit, with the tradeoffs/risks noted at the start of this post).<br />
 One dumb, preaching-to-the-choir internet blogpost to another.</p>
-]]></summary>
-</entry>
-<entry>
-    <title>Internet Myopia</title>
-    <link href="http://www.rgoulter.com/blog//posts/argument/2016-12-26-internet-myopia.html" />
-    <id>http://www.rgoulter.com/blog//posts/argument/2016-12-26-internet-myopia.html</id>
-    <published>2016-12-26T00:00:00Z</published>
-    <updated>2016-12-26T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<div class="info">
-    Posted on December 26, 2016
-    
-        by Richard Goulter
-    <br/>
-    
-    Tags: <a href="/tags/politics.html">politics</a>
-    
-</div>
-
-<p>Twitter is a great website for righteous anger. Recently, I’ve observed that people on Twitter tend to be myopic. – You can be fairly sure that the things people tweet about (or retweet) will all have a single focus. It’s more specific than “my tribe is awesome/good”.</p>
-<p>I tend to be hesitant about giving object-level opinions.<br />
-There’s a well-known fable about four blind folk describing what they sense; four unique/different parts of an elephant. It’s often recounted in a kumbaya, “people may each see a different part of truth” kindof way. (Similarly, there’s the cartoon about the cylinder projected as a circle and a rectangle, and two folk arguing..; I think that’s pretty dumb/bullshit, because it does a poor job of modelling how people disagree over things).<br />
-– What I’d emphasise here is the <em>limited</em> nature the opinions (rather than the “everyone sees some truth”). – The blind folk still only know the parts of the elephant they encounter. – You can kinda-sorta dismiss <em>any</em> opinion off-hand as limited and probably-wrong. (This is why ‘qualifying’ the opinion is useful). But it’s still probably useful to have some marketplace of ideas where different opinions get thrown about.</p>
-<p>Something which is pretty fascinating is, in their myopic anger.. it’s interesting to see the way one group describes their out-group. – People remain pettily angry about some incident/issue for a long time.<br />
-I guess fear is a better motivator than hope; and each side of some conflict will see their side as losing. e.g.:</p>
-<ul>
-<li><p>in the culture-wars of the tech industry, the progressives see the industry as full of white dudebros even as every major tech company does their best to make efforts toward diverse ethnic/gender identities. Whether the public efforts are lightweight lip-service (without impact) or wasteful tithing to ideology depends on your tribe. (Or: Is <em>saying</em> you’re going to make things better sufficient to show things will get better?).</p></li>
-<li><p>Many are exclaiming that 2016 has been a bad year for liberal politics in Western Democracies; those who dissent claim the extreme difficulty with which the non-elite masses have to get their voice heard in democracy.</p>
-<ul>
-<li>Nutcases will use the phrase “Age of Trump” to describe an epidemic of sexism and racism (this dramatic interpretation all because Trump won by ~1% of the vote!), whereas the other side points to those who are fired (or harassed) for not toeing the progressive politics.</li>
-</ul></li>
-</ul>
-<p>On Facebook, my friends share posts with phrases like “..your Facebook feed full of Trump supporters..”, and such an experience is completely alien to me.</p>
-<p>– Of course, none of that is much of a <em>surprise</em>: people don’t question claims which support their beliefs; and will be doubtful about claims which go against their beliefs.<br />
-“<em>Can</em> I believe it?” (for things you want to believe),<br />
-“<em>Must</em> I believe it?” (for things you don’t want to believe).<br />
-– And in a sense all the above is just an example of “talking past each other”. But it’s fascinating to see.</p>
 ]]></summary>
 </entry>
 
