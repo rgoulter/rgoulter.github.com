@@ -8,8 +8,83 @@
         <name>Richard Goulter</name>
         <email>richard.goulter+blog@gmail.com</email>
     </author>
-    <updated>2018-04-27T00:00:00Z</updated>
+    <updated>2018-10-12T00:00:00Z</updated>
     <entry>
+    <title>"What I've Been Up To" Ramble</title>
+    <link href="http://www.rgoulter.com/blog//posts/2018-10-12-what-ive-been-up-to-ramble.html" />
+    <id>http://www.rgoulter.com/blog//posts/2018-10-12-what-ive-been-up-to-ramble.html</id>
+    <published>2018-10-12T00:00:00Z</published>
+    <updated>2018-10-12T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<div class="info">
+    Posted on October 12, 2018
+    
+        by Richard Goulter
+    <br/>
+    
+    Tags: 
+    
+</div>
+
+<p>I haven’t published anything on this blog for some time.</p>
+<p>I’ll break that absense with a bit of a ramble.</p>
+<p>I’ve just relocated to Vietnam, to live with my girlfriend.<br />
+Currently, I’m on a “personal sabbatical”.</p>
+<p>The first part of this ‘sabbatical’ has been spent on relocating, and on catching up on some of my Steam backlog.<br />
+(I did meet with some of my friends before leaving Singapore, too).</p>
+<p>Currently I’m transitioning from “playing games” to “personal organisation”. I’m trying to establish some discipline or deliberateness about how I go about being productive.<br />
+One part of that is looking at <a href="https://plaintextaccounting.org">PlainTextAccounting</a> as an improvement on how I have (or haven’t) been tracking where my money goes.<br />
+Another aspect of this is to actually make use of the org-files I’ve been dumping content into.</p>
+<p>I’ve been fairly good at “write-only notes”. This could be considered as journalling or logging.<br />
+I haven’t been good at considering “why?” about these notes. And without a purpose, there’s no cost for the notes not having any structure. (Without structure, it’s expensive to refer to notes; but if you’re not referring to the notes, then this doesn’t matter).</p>
+<p>Part of that is fine. You don’t know what the structure/discipline should be until you do it.<br />
+But, uh, now I can see that there’s value in: 1) reflecting on what you’re doing, 2) having some criteria to consider when reflecting.<br />
+– That sounds rigid; but the point of the structure is to guide and serve, rather than to limit realised potential.</p>
+<p>On the topic of “being productive” and disciplined, some interesting media:</p>
+<ul>
+<li><p>Cal Newport’s “Deep Work”. What a fascinating book. It criticises the “busy” and distracted modern work environment as detrimental to a craftsman’s work, and suggests rules for how to focus on getting meaningful work done.</p></li>
+<li><p>“Getting Things Done”. I haven’t read the book, but. People who like Emacs’ org-mode also seem to like GTD. (org-mode and GTD both seem to be flexible such that they can be used per individual preference).<br />
+Compared to “Deep Work”, GTD’s emphasis seems to be on “avoid distraction” by way of: keep track of everything on paper (rather than in your head), and have a process to sort out the things you want to keep track of.</p></li>
+<li><p>I finally watched a Joe Rogan podcast with Jordan Peterson as a guest. Seems like JBP often argues in favour discipline &amp; <em>incremental</em> improvement.</p></li>
+</ul>
+<hr />
+<p>Related to this: social media.<br />
+I haven’t been spending as much time on social media recently as I used to.<br />
+This isn’t a “I’m being disciplined about it” thing.<br />
+It’s partly a “not especially interested”; and I think partly I want to organise my social media stuff too.</p>
+<p>I’m not particularly negatively affected by “people post their perfect selves on social media”. Albeit, I suppose I’m guilty of posting some good times on social media, which maybe does affect others.</p>
+<p>I do find myself drawn-in by e.g. the titles/questions in the Quora Digest emails. (I haven’t thought much about why this annoys me).<br />
+I’m also drawn in by the “what’s next? what am I missing out on?” allure of Twitter and Hacker News. (I think Reddit communities have the same draw to them, so I don’t go on Reddit).</p>
+<p>Well, uh, yeah, Twitter is probably my favourite social media site for arguments, which I’m fascinated with.<br />
+And while the tribalism and culture-war politics is admittedly a big draw for me,<br />
+I think another aspect of what I liked about Twitter was its referential nature. Since the 140 characters wasn’t enough to explain or link to any context, tweets would inherently refer to events. As a user, you had to be “in the know” for this to make sense. My experience was often having to puzzle together what people were talking about from various tweets.<br />
+There’s a kind of “open to anyone who makes the effort” inclusion to that.</p>
+<p>In terms of “organising myself” and “being disciplined”, my concern here is a lack of deliberateness in consumption.<br />
+e.g. Spending about an hour looking through various programmer-related discussions on Hacker News or trending GitHub repositories seems fine (especially if it’s an hour I have set aside to do that).<br />
+But spending however-long getting mad about slights against my tribe (or dumb things my out-group do) on Twitter until I’ve seen pretty much everything people in my timeline have gotten mad about … doesn’t seem so good.</p>
+<hr />
+<p>One sensible solution here is “don’t go on Twitter to consume politics if it’s unhealthy for you”.<br />
+But I kinda reckon if recommendation-algorithms will naturally find this kindof stuff for me: Instagram’s recommendation manages to show me cartoons with a propaganda-level of political fervour.<br />
+– On the other hand: most people are able to move through life and the internet without being politically, tribally worked up about everything. (I’m not sure if this is a case of “once you’ve tasted the forbidden fruit, you can’t go back” kinda thing).</p>
+<p><a href="https://www.codesections.com/blog/mastodon-elevator-pitch">CodeSections’s “Mastodon Elevator Pitch”</a> argues in favour of Mastodon essentially as a ‘technical solution’ over Twitters outrage-encouraging site. The incentives of the system are geared to avoid the outrage that Twitter’s induces.</p>
+<p><a href="https://www.kialo.com/tour/">Kialo</a> is another ‘technical solution’. Kialo is interested in visualising and structuring the arguments on contentious topics.<br />
+I haven’t looked at it enough to have much of an opinion; the only one I’ve looked at was <a href="https://www.kialo.com/is-the-last-jedi-one-of-the-weakest-star-wars-movies-so-far-7055/7055.0=7055.1/=7055.1">“The Last Jedi is one of the Weakest Star Wars Movies So Far”</a>. I guess the hope is that, if points must be made (and supported), this doesn’t give much room for emotion to sway perspective. Yet, I still like Haidt’s “reason is the press secretary of the emotions”.<br />
+– Perhaps the point of the site isn’t <em>persuasion</em> so much as a dialogue with less heat to it.</p>
+<p>For myself, I’d first wonder whether “doing social media slower” would be ‘better’.<br />
+Like, instead of a “retweet and this gets retweeted immediately”, a “review in 24 hours, and retweet if I think it’s still a good idea to do that”. But I suspect if shown the same input I’d behave in the same way, and still be mad again 24 hours later.</p>
+<p>Another couple of dumb ideas:</p>
+<p>I wonder how analogous the “outrage machine” of social media (and its ills to society) is to “herd immunity” with vaccinations.<br />
+As in, if a critical mass of people were immune to outrage, or “fake news” or mainstream media clickbait, then the pathogens won’t go viral amongst vulnerable.<br />
+– With biological diseases, a vaccine is an inert (or very weak) form of the disease. This strengthens the body so that the actual disease can’t take hold.</p>
+<p>I stumbled across a conspiracy-theory video on YouTube once.<br />
+I didn’t stay to watch it.<br />
+And <em>obviously</em> only idiots fall for conspiracy videos, right?<br />
+But, I kinda wonder how much of the crap in those videos I’d fall for.</p>
+<p>Another idea,<br />
+maybe I’d be less annoyed by dumb tweets or whatever if I took the time to (1) describe why I’m annoyed by it, (2) figure out an explanation for why the dumb tweet was said, in a way that provides dignity.<br />
+– Like, maybe trying to code content <a href="http://slatestarcodex.com/2018/05/08/varieties-of-argumentative-experience/">to a model like SSC’s “Varieties of Argument”</a> is another way to deal with the emotion?</p>
+]]></summary>
+</entry>
+<entry>
     <title>StackOverflow, Elitism, and Community</title>
     <link href="http://www.rgoulter.com/blog//posts/programming/2018-04-27-stackoverflow-and-elitism.html" />
     <id>http://www.rgoulter.com/blog//posts/programming/2018-04-27-stackoverflow-and-elitism.html</id>
@@ -66,70 +141,6 @@ StackOverflow’s remarks are clearly in reply to support women and people of co
 - Non-progressives consider “sexism” as “discrimination against a women, because she’s a women”. This fails to pattern-match against interactions on StackOverflow since anonymous accounts aren’t distinguishable by gender traits.<br />
 Interactions are judged at the level of the individual. - Whereas a progressive considers “sexism” as: the structures in place or the way that women feel. So if most of StackOverflow’s users are men, then that’s evidence of sexism. If women don’t feel welcome, the culture is sexist.<br />
 Interactions are judged at the level of the group.</p>
-]]></summary>
-</entry>
-<entry>
-    <title>My Thoughts on Far Cry 5</title>
-    <link href="http://www.rgoulter.com/blog//posts/games/2018-04-02-my-thoughts-on-far-cry-5.html" />
-    <id>http://www.rgoulter.com/blog//posts/games/2018-04-02-my-thoughts-on-far-cry-5.html</id>
-    <published>2018-04-02T00:00:00Z</published>
-    <updated>2018-04-02T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<div class="info">
-    Posted on April  2, 2018
-    
-        by Richard Goulter
-    <br/>
-    
-    Tags: 
-    
-</div>
-
-<p>So I put my nice gaming PC to use and played through Far Cry 5.</p>
-<p>I’ve enjoyed the Far Cry 3-ish series of Far Crys.<br />
-They can fairly be accused of being ‘bland’. (Those, and other Ubisoft sandbox games, like Ghost Recon Wildlands; although I didn’t play it).<br />
-I think FC5 manages to pack a bit of flavour into its gameplay without being entirely bland.</p>
-<p>Anyway.<br />
-It’s set in some rural part of America with crazy cultish gun-nuts as the bad guys.<br />
-I saw that game reviewers disliked its story for not being, idk, “Trump is bad” or whatever. lol.</p>
-<p>All the same, the ending to the story is a bit annoying.<br />
-It’s annoying enough to be worth spoiling.<br />
-Recall that in Far Cry 3, there’s a north island, and a south island; the player liberates the north island before going on to liberate the south island. FC4 followed the same formula.<br />
-Far Cry 5 is more open. The map is divided into three areas, each must be liberated before facing a final boss for that region. Each region has a slightly different flavour of enemies. And each boss has their own quirks as they menace the player liberating the island.<br />
-Well. The game ends with the more-foresight-than-God final boss winning over the player.</p>
-<p>This is annoying because it’s a stupid ‘surprise’ twist; but it doesn’t feel like a particularly foreshadowed or established twist.<br />
-When liberating each three regions, the player is repeatedly captured by the baddies in the region. It’s scripted and unavoidable, but it’s also decided by the story that the player beats them.<br />
-– So that the player doesn’t get to beat the mighty big bad final boss is just kindof a “look I tricked you” twist, but inconsistent with the established rules.<br />
-– The closest I can see it to ‘fair’ is that at the beginning the player gets randomly rescued; so that the player gets randomly defeated at the end has a very “God giveth, God taketh-away” kinda ring to it. But, eh…</p>
-<p>It’s kindof natural for Far Cry and such to have ludo-narrative dissonance.<br />
-A disconnect between the story and the gameplay.<br />
-Like. In the game. If your allied characters get shot, you can ‘revive’ them; or you can call them back into battle after 15 minutes. – In such a context, it’s difficult to sympathise when the story says “nah, this character got shot and dies”.</p>
-<hr />
-<p>The gameplay itself is pretty fun.<br />
-I think it’s fair to call it the “Far Cry sandbox formula refined”.</p>
-<p>It definitely felt like the game-story didn’t get in the way of the sandbox gameplay as much as previous games had.</p>
-<p>The sandbox is filled with toys to play with.<br />
-e.g. “outposts” which are occupied by enemy troops, but can be ‘liberated’.<br />
-e.g. various objective-based missions can be played. e.g. different “prepper stashes” are dotted around, which are usually hidden behind some kind of puzzle.</p>
-<p>I kindof felt the game had fewer weapons than previous iterations.<br />
-Part of that was they dropped the “special” weapons (which were enhanced versions of regular weapons, that had to be unlocked). – These were dropped in favour of a microtransaction system. Oddly, the microtransactions are for nice weapon skins. But these can also be purchased for a moderate amount of in-game effort. (It’s not an unreasonable amount of effort. But it’s just weird, ’cause I can’t imagine who would spend money on them, they’re strictly cosmetic).</p>
-<p>The sandbox mechanics of ‘liberating’ an outpost can be summarised as “try and stealthily kill the enemies, until you get spotted, in which case charge in all guns blazing”.<br />
-The tool for this job is the silenced sniper rifle. So, easily the best gun in the game for most tasks is the first sniper rifle that can be unlocked.<br />
-Pretty much every weapon can have a silencer. It’s quite satisfying to face off a bunch of bad guys and ‘bip’ them with headshots without being noticed.</p>
-<p>The game also lets you drive helicopters and fighter planes.<br />
-These aren’t overpowered, oddly enough, since .. there aren’t that many enemies to shoot.<br />
-And they’re not easy to spot/hit from the vehicles.<br />
-(Unlike, say, the Saints Row games.. where helicopter gunships in the sandbox were very overpowered).</p>
-<p>What <em>was</em> overpowered were the buddies.<br />
-Far Cry Primal introduced the ‘buddy’ system. – In that, you would befriend some fierce animal (a tiger, a bear, whatever).. and then later the animal’ would help you in combat.<br />
-FC5 keeps this system (albeit, you can’t befriend animals in the wild), but adds other human characters. You can have two buddies at a time, even.<br />
-– There are 6 special human characters to buddy with; or you can buddy with a ‘normal’ liberated ally.<br />
-The ‘normal’ liberated ally has a more cookie-cutter personality. And some weapon. I saw different characters with rifles, or a bow and arrow, or a shotgun, or a machine gun, or an RPG.</p>
-<p>Fortunately, the ‘normal’ liberated ally characters with the RPGs were amusingly stupid.<br />
-Like. There were times when there was some enemy right at the feet of the character (a wolf or something); and the guy fired the RPG right at his feet. He killed the enemy, but had to be revived.<br />
-– Another time.. there was an encounter with an enemy prisoner van. The expected interaction is to shoot the enemy driver.. or maybe shoot out the tyres from the van; then you can release the prisoners. – RPG-guy saw an enemy van, fired, and blew it up. (The player isn’t penalised for this).</p>
-<p>But, yeah, the buddies are generally over-powered.<br />
-e.g. they can revive you if you get shot (and they’re still alive).<br />
-– The game acknowledges this, by not allowing you to take your buddies on the important story missions.</p>
 ]]></summary>
 </entry>
 <entry>
@@ -339,6 +350,51 @@ Completing the optional objectives also earns you points which you can spend aft
 ]]></summary>
 </entry>
 <entry>
+    <title>LinkedIn Can Be Fun Sometimes</title>
+    <link href="http://www.rgoulter.com/blog//posts/2018-02-20-linkedin-can-be-fun-sometimes.html" />
+    <id>http://www.rgoulter.com/blog//posts/2018-02-20-linkedin-can-be-fun-sometimes.html</id>
+    <published>2018-02-20T00:00:00Z</published>
+    <updated>2018-02-20T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<div class="info">
+    Posted on February 20, 2018
+    
+        by Richard Goulter
+    <br/>
+    
+    Tags: 
+    
+</div>
+
+<p>LinkedIn always strikes me as one of those networks which people will just kind of ‘have’ for ‘job stuff’. The folk you’ve met when you’re at work or when they’re at work or when you meet someone and they mention they have a job or they mention they want a job.<br />
+“Professional Network”.</p>
+<p>From what I can tell glancing at my LinkedIn newsfeed (timeline?), it refreshingly doesn’t have so many “so brave” opinions. – You don’t see “share this post if you love Jesus” (or whatever other tribal equivalent) on LinkedIn.<br />
+“Professional Network”. Or maybe people just aren’t “themselves” on LinkedIn.</p>
+<p>So, I think ideally it’s “Twitter minus garbage fire”.<br />
+– I kinda wonder why e.g. GitHub doesn’t have more about this.. a place to share thoughts like “so I last looked at CSS 20 years ago; what’s new?”. GitHub does allow adding ‘friends’. But one way of describing GitHub’s newsfeed is that it’s filled with “actual work” rather than your friend’s baby pictures. (Commits are “actual work” right?).</p>
+<p>LinkedIn is also mostly without the stuffy feeling of superiority of how great a social media site it is. (Compared to Quora of yester-year or people who use Google Plus lawl).<br />
+Mostly, anyway. I did meet someone years ago who said “if they don’t exist on LinkedIn, then they don’t exist”. Wouldn’t’ve been surprised to find out his degree was the one which rhymes with NBA.</p>
+<p>My LinkedIn profile bio begins with “Don’t hate the players, hate the game; but seems like LinkedIn promotes treating profiles as ‘livestock commodities’” and a link to this excellent discussion about tech interviews: http://www.daedtech.com/hiring-is-broken/</p>
+<p>I like “don’t hate the players, hate the game”.<br />
+Because it seems the players often don’t like each other. e.g. <a href="https://twitter.com/iamdevloper/status/958304675345960960">this tweet</a> makes fun of recruiters who show up to programmer-interest groups. It resonated with some. (Not as much as <a href="https://twitter.com/StevieBuckley/status/958297693251670016">the tweet just before it</a>; although that could be due to the culture-war progressive-leaning mention of ‘white males’).<br />
+– It’s a bit mean-spirited. But I’d call it “the game” in that it’s different groups with different amounts of power competing.</p>
+<p>But another difference which comes up whether a use is a “LinkedIn Open Networker”. I guess most of the joke of “I’d like to add you to my professional network on LinkedIn” is about people who say this IRL (why?!). But I don’t wonder if it works for LIONs, too.<br />
+– For LIONs, it seems the main purpose of LinkedIn is expanding their ‘professional network’. For myself, I don’t understand what makes “increase the size of an arbitrary sub-graph of LinkedIn’s graph” so special. (I’d call “only add people you’ve met” non-arbitrary).<br />
+Though I can accept ‘each to their own’. And I can click “I don’t know this person” any time a LION connects with me on LinkedIn with no message. :-)</p>
+<p>I had a bit of fun recently.<br />
+I recruiter messaged with stock-standard “hi I’d like to connect”. (Albeit, this message isn’t added by default to a connection request. So I guess it’s personal enough that they thought to add it).<br />
+I decided to ask what they thought about the difference between ‘connecting’ on LinkedIn (which is cheap) vs ‘networking’ in person (which is more useful for finding a job).<br />
+Recruiter did reply to that.<br />
+But also surprisingly showed some personality/connection by asking a question back. “Why have a LinkedIn profile? Your profile writeup seems pretty against it”.<br />
+I guess if the question were “what do I wanna get out of LinkedIn?” I don’t think I could point to anything. (And “what I use LinkedIn for?” would be the same as why I have an Instagram account, I guess).<br />
+I thought it was fun to think about it. (Glorified Spreadsheet about what jobs my friends have).<br />
+But also fun to discuss that cheap interactions make for a lot of noise.</p>
+<p>I’ve heard “betting is taxation against bullshit”.<br />
+I kinda wonder (with pixie dust) what the effect would be if everyone with a year’s experience had to pay 10% of the salary they hoped to get when applying for a job. (In my pixie dust: companies which do a poor job of providing expectations would then suffer from people not applying for the job)<br />
+And (maybe it’s just super anti-LION), but some sort of scaled fee for messaging someone. Unpopular profile? Cheap to message! Popular profile which receives many messages? Expensive to message. (Oh, uh, in pixie-dust land: the profile receives some of the money, too, for reading the messages).<br />
+– I can’t say I’m particularly serious about this. (It’d apply just as well to dating for people who have money, right?). But since ‘apply for job’ (or ‘message profile’) has no cost, and a positive potential reward, there’s a better expected result from just applying/messaging without sincerity.</p>
+]]></summary>
+</entry>
+<entry>
     <title>Vigilant Reflection</title>
     <link href="http://www.rgoulter.com/blog//posts/programming/2018-02-19-vigilant-reflection.html" />
     <id>http://www.rgoulter.com/blog//posts/programming/2018-02-19-vigilant-reflection.html</id>
@@ -410,7 +466,7 @@ I don’t know which language did this first, but this is my experience with e.g
 Joy.</p>
 <p>I ran into a couple of problems getting the project working on Windows.<br />
 One was getting the compiler to find the dependencies. (On Linux, this is more/less a process of “use system package manager to install dependencies).<br />
-The other was that, I’d refactored the code to use a class called”Polygon“, and one of my files included <code>&lt;windows.h&gt;</code>, which has a function called <code>Polygon</code> which pollutes the global namespace and etc.<br />
+The other was that, I’d refactored the code to use a class called”Polygon&quot;, and one of my files included <code>&lt;windows.h&gt;</code>, which has a function called <code>Polygon</code> which pollutes the global namespace and etc.<br />
 Fun to figure out.</p>
 <p>Windows C++ development is made a bit more confusing in that there are different compilers / environments. e.g. MSYS2/MinGW, and MSVC (Visual Studio’s C/C++ compiler).<br />
 – It took me way too long to figure out fundamental things about these. In the end, I figured out the easiest thing to do was write a <code>.bat</code> script which adds the relevant compiler to <code>PATH</code>.</p>
@@ -542,49 +598,6 @@ Which is fine for project-specific knowledge which I know and they don’t. And 
 I think that’s a somewhat disingenuous point. – If the programmer attitude of ‘I shouldn’t have to bother learning it to know how to do it’ weren’t so prevalent, then StackOverflow wouldn’t be so popular.<br />
 It’s fair to say the process of ‘try it’, ‘search it’, ‘try that again’ (without asking someone else directly) is ‘self-taught’. Since anyone can do try doing that. By themselves.<br />
 – On the other hand, it’s interesting to point out that “on the shoulders of giants” does include someone else who had the same stupid question you’re googling for.</p>
-]]></summary>
-</entry>
-<entry>
-    <title>Thoughts on Using DuoLingo</title>
-    <link href="http://www.rgoulter.com/blog//posts/2017-08-24-thoughts-on-using-duolingo.html" />
-    <id>http://www.rgoulter.com/blog//posts/2017-08-24-thoughts-on-using-duolingo.html</id>
-    <published>2017-08-24T00:00:00Z</published>
-    <updated>2017-08-24T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<div class="info">
-    Posted on August 24, 2017
-    
-        by Richard Goulter
-    <br/>
-    
-    Tags: 
-    
-</div>
-
-<p>So I’ve been using DuoLingo for just over two weeks now.</p>
-<p>It’s been fun.<br />
-And I think if you’re interested in learning a language, it’s another tool-in-the-belt to use. As in, it has its limitations.<br />
-My impression is, though, that it’s great for introducing words, and some grammar.</p>
-<p>For better or worse, DuoLingo is quite gamified.<br />
-I don’t think that is so bad.<br />
-DuoLingo organises its vocabulary into groups of words around a theme (e.g. ‘Food’, ‘Animals’, ‘Verbs 1’, etc.); and within each of these groups, has sub-groups of up-to five or six words.<br />
-The groups of words are organised visually, like a skill-progression tree in an RPG game. As you complete the exercises on these groups, they light up; and, they decay over time as you get questions with these words wrong, or due to an induced decay over time.</p>
-<p>I guess people have different expectations for motivation/feedback.<br />
-DuoLingo errs on the side of ‘motivational’.<br />
-e.g. The way the groups of words are organised disguises just how many words you can be introduced to. (Some groups have 20, some of the bigger groups have 50 words).</p>
-<p>Maybe DuoLingo knows better than be about what a good way to ‘learn’ words is.<br />
-But at the moment, I feel the feedback is a false “you’re doing well”. (As opposed to, “here’s where you’re at; but, going far requires constant effort over a long time, so”).<br />
-Maybe I’d prefer it were more explicit about how it plans to progress.</p>
-<p>You see, the exercises ranging in difficulty. Generally an exercise consists of a question in source-language, and user must provide a target translation. (Also, sometimes vice versa). - Sometimes the UI may allow you to check the translations of the words in the question. - Besides this, most of the variation comes from input method, ranging from: - Multichoice: select the correct answers. (This is easiest, since you generally only need to recognise the words of the question/answer which you know). - Word-boxes: Possible word choices are provided. Sometimes with spare words. (This is relatively easy; when the word-boxes are your native-language, you’ll recognise which sentences make sense. When in the language you’re learning, then it reminds you of the words you need to remember). - Free-form input.</p>
-<p>What makes it a bit easier to game-the-system is that it may become easy to remember what the translation of a sentence is, rather than understanding how to translate it. (e.g. within the same exercise session, the same question may come up in foreign-to-English, English-to-foreign forms; as well as an iteratively more difficult input kind. – So, being able to answer a hard question may be done with the same memory as answering an easier question).<br />
-– Or, to put it another way: If I show my friend the list of words I’ve seen on DuoLingo, it doesn’t necessarily mean I can remember the source-to-target (or vice versa) translation. Which is <em>fine</em>. Because ‘learning progress’ isn’t a binary value.</p>
-<p>I imagine my progression is something like: - “recognise it in questions with English word-box” - “recognise the word in questions with foreign-language word-box” - “recognise the word is free-form English input” - “get vaguely the right letters in free-form foreign input” - “get the right letters in free-form free-form input”</p>
-<p>So when DuoLingo says I’ve ‘mastered’ a group of words (because I can use English word-boxes for answering questions), I feel a little deceived.<br />
-I guess it’s for motivation.<br />
-I just wish I had more visibility on a “progress indicator”. (&amp; their expectation of progress).</p>
-<p>Again.<br />
-DuoLingo is really fun to use.<br />
-But it has limitations.<br />
-And I think when used combined with other resources for learning a language, it’s quite cool (since what you learn in DuoLingo you’ll see elsewhere, and vice versa).</p>
 ]]></summary>
 </entry>
 

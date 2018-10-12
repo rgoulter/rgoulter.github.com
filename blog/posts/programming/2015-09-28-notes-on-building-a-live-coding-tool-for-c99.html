@@ -264,7 +264,7 @@ There’s also things like forward declarations, types declared in header files,
 <p>It can be a bit tedious to figure this out, since you have to care about <em>all</em> occurrences of whatever AST node you’re working with. e.g. <code>declaration</code> can appear in the global scope, outside of functions; the identifiers of a struct’s members will look the same as a ‘normal’ declaration, etc.<br />
 – What helps here is comparing the ASTs of declarations which are quite similar. <code>int *(*a)[5];</code>, <code>int **b[5];</code>, <code>int (**c)[5]</code> have similar-ish trees, but very different semantics.</p>
 <h3 id="the-adts-make-it-easier">The ADTs make it easier</h3>
-<p>In case the above diagram doesn’t make that obvious, then it’s roughly “collect the type specifiers and any point-to-(type-specifier) info; this is passed to the declarator as the AST is traversed. Something something recursion, and that’s how simple it is.<br />
+<p>In case the above diagram doesn’t make that obvious, then it’s roughly &quot;collect the type specifiers and any point-to-(type-specifier) info; this is passed to the declarator as the AST is traversed. Something something recursion, and that’s how simple it is.<br />
 Again, roughly, since each alternative for the declarator corresponds to some alternative of the above ADT, it does help write the program logic.</p>
 <h3 id="cdecl">CDecl</h3>
 <p>The actual cdecl (e.g. at cdecl.org, or as a programming exercise in the “Expert C Programming” book) is more/less a heuristic, doesn’t actually take care of all C declarations.<br />

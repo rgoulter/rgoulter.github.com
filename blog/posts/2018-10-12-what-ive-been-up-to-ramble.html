@@ -1,0 +1,337 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>"What I've Been Up To" Ramble - Richard Goulter's Blog</title>
+
+        <!-- My (Old) CSS theme -->
+        <link rel="stylesheet" type="text/css" href="../css/default.css" />
+
+        <!--
+            jQuery & jQueryUI
+        -->
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css" />
+
+        <!--
+            Pandoc Style CSS
+            (for syntax highlighted snippets)
+        -->
+        <link rel="stylesheet" type="text/css" href="../css/syntax.css" />
+
+        <!--
+            Bootstrap
+        -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+        <style>
+            /*
+             * Bootstrap defines blockquote as 17px,
+             * so it looks stupidly large in my blogposts. */
+            blockquote {
+                font-size: 14px;
+            }
+        </style>
+
+        <!--
+            Waypoints, and Waypoints-Sticky,
+            so we can do this:
+            http://imakewebthings.com/waypoints/shortcuts/sticky-elements/
+        -->
+        <script src="../js/jquery.waypoints.min.js"></script>
+        <script src="../js/sticky.min.js"></script>
+
+        <!-- My analytics stuff -->
+        <script src="../js/my_analytics.js"></script>
+        <script src="../js/my_analytics_debug.js"></script>
+
+        <!--
+            TOCify
+        -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js"></script>
+        <!--
+            Patched TOCify css file.
+            (Don't want fixed `.tocify`).
+        -->
+        <link rel="stylesheet" type="text/css" href="../css/jquery.tocify.css" />
+
+        <style>
+        .navbar {
+            margin-bottom: 0px;
+        }
+
+        .banner-image {
+            width:100%;
+        }
+
+        .banner {
+            margin-left: 0px;
+            margin-right: 0px;
+        }
+
+        body {
+            background-color: #e2e2e2;
+        }
+
+        #page {
+            padding-left:0;
+            padding-right:0;
+            background-color: #ffffff;
+        }
+        </style>
+
+        <!-- Google Analytics -->
+        <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+          ga('create', 'UA-73116015-1', 'auto');
+          ga('send', 'pageview');
+        </script>
+    </head>
+    <body>
+        <div id="page" class="container">
+            <!-- This, with no padding on left/right -->
+            <div class="banner">
+                <nav class="navbar navbar-default">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+
+            <!-- The Hamburger -->
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../">Richard Goulter's Blog</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="../">Home</a></li>
+            <li><a href="../yi.html">Yi</a></li>
+            <li><a href="../emacs.html">Emacs</a></li>
+            <li><a href="../archive.html">Archive</a></li>
+        </ul>
+    </div>
+</nav>
+
+                <img class="banner-image" src="../images/blog-banner.png" />
+            </div>
+
+            <hr style="margin: 0px; border-top: 5px solid black;" />
+
+            <div id="content" class="container">
+                <h1>"What I've Been Up To" Ramble</h1>
+                <div class="info">
+    Posted on October 12, 2018
+    
+        by Richard Goulter
+    <br />
+    
+    Tags: 
+    
+</div>
+
+<p>I haven’t published anything on this blog for some time.</p>
+<p>I’ll break that absense with a bit of a ramble.</p>
+<p>I’ve just relocated to Vietnam, to live with my girlfriend.<br />
+Currently, I’m on a “personal sabbatical”.</p>
+<p>The first part of this ‘sabbatical’ has been spent on relocating, and on catching up on some of my Steam backlog.<br />
+(I did meet with some of my friends before leaving Singapore, too).</p>
+<p>Currently I’m transitioning from “playing games” to “personal organisation”. I’m trying to establish some discipline or deliberateness about how I go about being productive.<br />
+One part of that is looking at <a href="https://plaintextaccounting.org">PlainTextAccounting</a> as an improvement on how I have (or haven’t) been tracking where my money goes.<br />
+Another aspect of this is to actually make use of the org-files I’ve been dumping content into.</p>
+<p>I’ve been fairly good at “write-only notes”. This could be considered as journalling or logging.<br />
+I haven’t been good at considering “why?” about these notes. And without a purpose, there’s no cost for the notes not having any structure. (Without structure, it’s expensive to refer to notes; but if you’re not referring to the notes, then this doesn’t matter).</p>
+<p>Part of that is fine. You don’t know what the structure/discipline should be until you do it.<br />
+But, uh, now I can see that there’s value in: 1) reflecting on what you’re doing, 2) having some criteria to consider when reflecting.<br />
+– That sounds rigid; but the point of the structure is to guide and serve, rather than to limit realised potential.</p>
+<p>On the topic of “being productive” and disciplined, some interesting media:</p>
+<ul>
+<li><p>Cal Newport’s “Deep Work”. What a fascinating book. It criticises the “busy” and distracted modern work environment as detrimental to a craftsman’s work, and suggests rules for how to focus on getting meaningful work done.</p></li>
+<li><p>“Getting Things Done”. I haven’t read the book, but. People who like Emacs’ org-mode also seem to like GTD. (org-mode and GTD both seem to be flexible such that they can be used per individual preference).<br />
+Compared to “Deep Work”, GTD’s emphasis seems to be on “avoid distraction” by way of: keep track of everything on paper (rather than in your head), and have a process to sort out the things you want to keep track of.</p></li>
+<li><p>I finally watched a Joe Rogan podcast with Jordan Peterson as a guest. Seems like JBP often argues in favour discipline &amp; <em>incremental</em> improvement.</p></li>
+</ul>
+<hr />
+<p>Related to this: social media.<br />
+I haven’t been spending as much time on social media recently as I used to.<br />
+This isn’t a “I’m being disciplined about it” thing.<br />
+It’s partly a “not especially interested”; and I think partly I want to organise my social media stuff too.</p>
+<p>I’m not particularly negatively affected by “people post their perfect selves on social media”. Albeit, I suppose I’m guilty of posting some good times on social media, which maybe does affect others.</p>
+<p>I do find myself drawn-in by e.g. the titles/questions in the Quora Digest emails. (I haven’t thought much about why this annoys me).<br />
+I’m also drawn in by the “what’s next? what am I missing out on?” allure of Twitter and Hacker News. (I think Reddit communities have the same draw to them, so I don’t go on Reddit).</p>
+<p>Well, uh, yeah, Twitter is probably my favourite social media site for arguments, which I’m fascinated with.<br />
+And while the tribalism and culture-war politics is admittedly a big draw for me,<br />
+I think another aspect of what I liked about Twitter was its referential nature. Since the 140 characters wasn’t enough to explain or link to any context, tweets would inherently refer to events. As a user, you had to be “in the know” for this to make sense. My experience was often having to puzzle together what people were talking about from various tweets.<br />
+There’s a kind of “open to anyone who makes the effort” inclusion to that.</p>
+<p>In terms of “organising myself” and “being disciplined”, my concern here is a lack of deliberateness in consumption.<br />
+e.g. Spending about an hour looking through various programmer-related discussions on Hacker News or trending GitHub repositories seems fine (especially if it’s an hour I have set aside to do that).<br />
+But spending however-long getting mad about slights against my tribe (or dumb things my out-group do) on Twitter until I’ve seen pretty much everything people in my timeline have gotten mad about … doesn’t seem so good.</p>
+<hr />
+<p>One sensible solution here is “don’t go on Twitter to consume politics if it’s unhealthy for you”.<br />
+But I kinda reckon if recommendation-algorithms will naturally find this kindof stuff for me: Instagram’s recommendation manages to show me cartoons with a propaganda-level of political fervour.<br />
+– On the other hand: most people are able to move through life and the internet without being politically, tribally worked up about everything. (I’m not sure if this is a case of “once you’ve tasted the forbidden fruit, you can’t go back” kinda thing).</p>
+<p><a href="https://www.codesections.com/blog/mastodon-elevator-pitch">CodeSections’s “Mastodon Elevator Pitch”</a> argues in favour of Mastodon essentially as a ‘technical solution’ over Twitters outrage-encouraging site. The incentives of the system are geared to avoid the outrage that Twitter’s induces.</p>
+<p><a href="https://www.kialo.com/tour/">Kialo</a> is another ‘technical solution’. Kialo is interested in visualising and structuring the arguments on contentious topics.<br />
+I haven’t looked at it enough to have much of an opinion; the only one I’ve looked at was <a href="https://www.kialo.com/is-the-last-jedi-one-of-the-weakest-star-wars-movies-so-far-7055/7055.0=7055.1/=7055.1">“The Last Jedi is one of the Weakest Star Wars Movies So Far”</a>. I guess the hope is that, if points must be made (and supported), this doesn’t give much room for emotion to sway perspective. Yet, I still like Haidt’s “reason is the press secretary of the emotions”.<br />
+– Perhaps the point of the site isn’t <em>persuasion</em> so much as a dialogue with less heat to it.</p>
+<p>For myself, I’d first wonder whether “doing social media slower” would be ‘better’.<br />
+Like, instead of a “retweet and this gets retweeted immediately”, a “review in 24 hours, and retweet if I think it’s still a good idea to do that”. But I suspect if shown the same input I’d behave in the same way, and still be mad again 24 hours later.</p>
+<p>Another couple of dumb ideas:</p>
+<p>I wonder how analogous the “outrage machine” of social media (and its ills to society) is to “herd immunity” with vaccinations.<br />
+As in, if a critical mass of people were immune to outrage, or “fake news” or mainstream media clickbait, then the pathogens won’t go viral amongst vulnerable.<br />
+– With biological diseases, a vaccine is an inert (or very weak) form of the disease. This strengthens the body so that the actual disease can’t take hold.</p>
+<p>I stumbled across a conspiracy-theory video on YouTube once.<br />
+I didn’t stay to watch it.<br />
+And <em>obviously</em> only idiots fall for conspiracy videos, right?<br />
+But, I kinda wonder how much of the crap in those videos I’d fall for.</p>
+<p>Another idea,<br />
+maybe I’d be less annoyed by dumb tweets or whatever if I took the time to (1) describe why I’m annoyed by it, (2) figure out an explanation for why the dumb tweet was said, in a way that provides dignity.<br />
+– Like, maybe trying to code content <a href="http://slatestarcodex.com/2018/05/08/varieties-of-argumentative-experience/">to a model like SSC’s “Varieties of Argument”</a> is another way to deal with the emotion?</p>
+
+
+<hr />
+
+<div>
+    
+    
+    <a href="../posts/programming/2018-04-27-stackoverflow-and-elitism.html" style="float:right; text-align: right;">Older post</a>
+    
+</div>
+<br style="clear: both;" />
+
+<hr />
+
+<div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'richardgoultersblog'; // required: replace example with your forum shortname
+        var disqus_identifier = '/posts/2018-10-12-what-ive-been-up-to-ramble.html';
+        var disqus_url = 'http://www.rgoulter.com/blog' + '/posts/2018-10-12-what-ive-been-up-to-ramble.html';
+        var disqus_title = '"What I've Been Up To" Ramble - October 12, 2018';
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+<!-- Load highlight.js for Syntax Highlighting. -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/solarized_light.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+            </div>
+
+            <hr style="margin-bottom: 0px; border-top: 2px solid black;" />
+
+            <div id="footer" class="pull-right" style="padding-right: 10px;">
+                Site proudly generated by
+                <a href="http://jaspervdj.be/hakyll">Hakyll</a>
+            </div>
+        </div>
+
+        <script>
+            // The callbacks we wanna use
+            // Phone-home, telling Google Analytics various metrics/dimensions
+
+            // Use custom dimensions & metrics
+            var AnalyticDimensionReaderKind = 'dimension1';
+            var AnalyticMetricActiveTime      = 'metric1';
+            var AnalyticMetricLongestIdleTime = 'metric2';
+            var AnalyticMetricReadCount       = 'metric3';
+
+            var gaCallbacks = {
+                "scrollPercent": function(ms, perc) {
+                    if (perc > 85) {
+                        // EVENT: Page read
+                        ga('send', {
+                            hitType:       'event',
+                            eventCategory: 'Scrolling',
+                            eventAction:   'atBottom',
+                            eventValue:    String(ms)
+                        });
+                    }
+                },
+                "read": function(ms, ct, timeToReach) {
+                    // Use this to set DIMENSION
+                    // timeToReach < 5s ==> Skim (default = Visitor)
+                    if (timeToReach < 5 * 1000) {
+                        // dimension1 = ReaderKind
+                        ga('set', AnalyticDimensionReaderKind, "skimmer");
+                    }
+
+                    // timeToReach > 30s ==> Reader
+                    if (timeToReach > 30 * 1000) {
+                        // dimension1 = ReaderKind
+                        ga('set', AnalyticDimensionReaderKind, "reader");
+                    }
+
+                    // EVENT: Page read
+                    ga('send', {
+                        hitType:       'event',
+                        eventCategory: 'Reading',
+                        eventAction:   'read',
+                        eventValue:    String(timeToReach)
+                    });
+
+                    // METRIC
+                    ga('set', AnalyticMetricReadCount, String(ct));
+                },
+                "initialIdle": function(ms) {
+                    // EVENT: Started Reading
+                    ga('send', {
+                        hitType:       'event',
+                        eventCategory: 'Scrolling',
+                        eventAction:   'begun',
+                        eventValue:    String(ms)
+                    });
+                },
+                "timeSpent": function(total, active, curIdle, initIdle, longestIdle) {
+                    // Update METRIC(S)?
+                    ga('set', AnalyticMetricActiveTime, String(active));
+                    ga('set', AnalyticMetricLongestIdleTime, String(longestIdle));
+                },
+                "idle": function(ms) {
+                },
+                "longestIdle": function(ms) {
+                }
+            }
+
+            window.onload = function() {
+                myAnalyticsInit(gaCallbacks);
+
+                //
+                // Initial dimensions & metrics
+                //
+
+                ga('set', AnalyticMetricReadCount, String(0));
+
+                // EVENT: Page load
+                ga('send', {
+                    hitType:       'event',
+                    eventCategory: 'pageLoad',
+                    eventAction:   'begun',
+                    eventValue:    String(ms)
+                });
+
+                // DIMENSION: visitor
+                ga('set', AnalyticDimensionReaderKind, "visitor");
+            }
+        </script>
+    </body>
+</html>
