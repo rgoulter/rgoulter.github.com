@@ -139,24 +139,98 @@
     
 </div>
 
-<p>Many programmers who maintain a blog, I believe, use it as a kind of note-keeping place. Programmer-y stuff can be hard; it’s easy to forget what steps to take when building some program on some distribution – especially what difficulties come up, how to overcome them.<br />
-– I’ve used my blog for that.</p>
-<p>I’ve also kept a programming journal.<br />
-I’m not sure how common this is; I’ve never met anyone who’s done the same. One of the techniques I used was, perhaps in a similar vein to de Bono’s Thinking Hats, making use of colour: red was for things which went wrong (e.g. compiler errors which I didn’t know how to fix), green was for questions (e.g. how does X work? why is it doing that?), blue for facts, black for thoughts, purple for new ideas. – That is, when making notes, it’s useful to distinguish different kinds of thoughts.</p>
-<p>When working on my Bachelor of Computing Dissertation, my Final Year Project (FYP), I also made use of Microsoft’s OneNote, in tandem with this journal-writing.<br />
-– During my FYP, there were several aspects to the project which would be fun to explore at the start (e.g. how to write Eclipse plugins, inter-process communication between different programs using e.g. Apache Thrift, BNFs of the C grammar, diagrams of ASTs of various C declarations, etc.). - For this, I did prefer to write with pen &amp; paper: I’ve got a decently sized 5-partition folder filled with my notes for these (&amp; relevant print-outs).<br />
-OneNote was damn useful for maintaining a series of project-related links. Early on in my FYP I was trying to compile CERN’s Cling (a C++ interpreter) on Windows. I never had any success; but OneNote was invaluable in keeping notes like the output of commands, comments from similar efforts, etc.</p>
-<p>From my use and experience, being “searchable” wasn’t such a big deal. (<em>I</em> knew roughly where what I was looking for would be.). This is mitigated by OneNote’s hierarchy UX:<br />
-– What I like about OneNote, in lieu of my technique with ‘colours’ to shape thought, is that OneNote naturally shapes thought into hierarchies: a notebook has sections; sections have pages; a page is where you write, either with paragraphs, or with bullet points: it’s really, really easy to make (and remove) bullet points. (typing “*” is enough for OneNote to say “hey, this is a bullet point”.).<br />
-Of course, being able to paste links in is useful. And there’re icons you can (quite easily) embellish bulletpoints with (like “Important!” icon, etc.).</p>
-<p>Emacs’s Org mode is … not software I’ve used.<br />
-It’s “life changing” for those who do make use of it. (Apparently it’s also a nice gateway drug to Emacs. Though key aspects of Org mode exist in Vim plugins, so there’s that.).<br />
-– A key philosophy behind Org mode is the idea that ‘notes’ &amp; ‘tasks’ are inter-dependent: when you note things, you’re likely to then come up with tasks; and when you manage tasks, you’re likely to note things down.<br />
-At-a-glance, it looks like Emacs’ Org mode has a bunch of fancy .. interfaces, views of data: this data, written in a plain textfile, appears it’s somewhat similar to OneNote: an Org file has headings (and sub-headings, and sub-sub-..), within a heading can have the paragraphs, bullet points, etc.; each heading can have meta-data associated with it (which is where “tasks” come into it), in terms of “TODO/DONE”, custom tags, deadlines, priority, or custom properties.<br />
-– There’s supposedly other fancy tosh like export-to-PDF. That I can’t say I care for.</p>
-<p>A key advantage to Org mode (in native Emacs, or whether in one of the Vim ports) would be ‘lightweight’-ness compared to OneNote. (You <em>can</em> make use of OneNote on Linux, but that’d have to be by opening a web browser. Thus, internet connection required..).<br />
-But I am wondering how well Org mode’s ease-of-use, in terms of inputting bullet points/etc., compares to OneNote.<br />
-I’m also wondering whether, in lay usage, the fancy different-perspectives/searching really make that much of a difference.</p>
+<p>[Updated 2018-11; my understanding of org-mode has improved]</p>
+<h3 id="onenote">OneNote</h3>
+<p>Roughly: A OneNote Notebook has Sections, and Pages within the section. Editing the notes in a page feels similar to editing a simple Word document.</p>
+<h3 id="org-mode">Org Mode</h3>
+<p>Roughly: org-mode is a renowned organisation tool, which is built on top of Emacs.<br />
+org files are plaintext, with notes structured using a “heading”. In addition to marked-up content, each heading can have tags, key-value properties, and sub-headings associated with it.</p>
+<h3 id="comparisons">Comparisons</h3>
+<ul>
+<li>Both are free (as in “free-beer”).
+<ul>
+<li>org-mode is licensed under GPL, so it’s “free as in free speech”.</li>
+</ul></li>
+<li>OneNote is much simpler to use out of the box, compared to org-mode:
+<ul>
+<li>Usage and discovering what OneNote can do is easier out-of-the-box.</li>
+<li>OneNote is much easier to sync OneNote notebooks between multiple devices (desktops, tablets, phones).</li>
+<li>org-mode is a part of Emacs. Which is itself a great tool but is also not necessarily to pick up and use out of the box.
+<ul>
+<li>For what it’s worth, there are distributions of Emacs which make it easier to pick up and use out of the box (compared to an unconfigured Emacs).</li>
+<li>For what it’s worth, since “org mode” is a set of features implemented for a plaintext file format, it’s possible for non-Emacs editors to have “org mode”s.</li>
+</ul></li>
+</ul></li>
+<li>Sharing and collaborating:
+<ul>
+<li>OneNote puts heavy emphasis on cloud-service. Sharing a OneNote document is as straightforward as getting a link to share with them. Collaborating is also simple, as changes are synced.</li>
+<li>org-mode is a plaintext file. This allows for different solutions depending on the capabilities and requirements involved. (e.g. I’d be surprised if any long-lasting org-mode file weren’t under version control or in a DropBox/etc. folder).</li>
+</ul></li>
+<li>Notes format:
+<ul>
+<li>simple notes (prose, or simple lists, hyperlinks, various markup) are as good in either format.</li>
+<li>OneNote is much better for very visual notes. e.g. OneNote supports tablets/pens; as well as diagrams. (Similar how ‘visual’ MS Powerpoint can be).
+<ul>
+<li>It is possible to get images/diagrams in org-mode, though. <a href="https://stackoverflow.com/questions/27129338/inline-images-in-org-mode">But it’s not as simple out of the box</a></li>
+</ul></li>
+<li>org-mode’s emphasis on headings allows for much greater flexibility. But it’s not very clear how to effectively make use of this when first looking at org-mode.</li>
+</ul></li>
+<li>For task management:
+<ul>
+<li>org-mode excels as a system for organising where it’s not always clear what’s a note (to be referenced later) or a task (to be reminded of / done).</li>
+<li>OneNote’s support for this is extremely rudimentary. (e.g. checkboxes beside a bullet-point).
+<ul>
+<li>OneNote 2016 (which is different than OneNote for Windows 10) had support for integration with Outlook Tasks. And people who love Outlook love Outlook.</li>
+</ul></li>
+</ul></li>
+<li>Search:
+<ul>
+<li>OneNote’s searching is very primitive. e.g. matching words
+<ul>
+<li>You <em>can</em> link to a different part of the notebook.</li>
+<li>OneNote 2016 did have “tags”. This is “coming soon” to OneNote.</li>
+</ul></li>
+<li>org-mode is <em>great</em> at this.
+<ul>
+<li>Because org-mode’s note structure is a hierarchy of headings, and different meta-data (tags, properties) can be attached to each heading, org-mode is able to provide a variety of ways to “see what you want to see”.
+<ul>
+<li>e.g. show the headings from all the note files which are scheduled for upcoming day(s). (An “agenda”).</li>
+<li>e.g. show the headings which have state “TODO” and have the tag <code>@work</code>.</li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+<h3 id="recommended-use-cases">Recommended Use Cases</h3>
+<p>org-mode is a much more sophisticated tool, with a much harder learning curve than org-mode. The added complexity provides a rich set of features for making use of notes in org-mode.</p>
+<p>org-mode’s complexity can also be justified like this: - if you’re writing notes, maybe you want to add some tasks to do - if you have tasks to do, you might want to schedule this on a calendar - it’s also probable you’ll want to make notes from your appointments or tasks.</p>
+<p>If you have the time to learn it, I’d recommend org-mode as the better tool, in cases: - notes don’t need multiple collaborators.<br />
+<em>or</em> all collaborators are willing to set up a way to sync the same set of notes. - you can spare some time to learn a few features of org-mode - your note-taking workflow doesn’t need PowerPoint-style visual note-taking, nor tablet-input.</p>
+<p>OneNote and org-mode are both excellent tools. OneNote has a simpler set of features. Simpler means easier to use; but here it also means “more limited”.<br />
+If you’ve not used either, I’d start with OneNote and consider org-mode.</p>
+<h3 id="links-to-org-mode-manual-for-some-features-onenote-lacks">Links to org-mode Manual for Some Features OneNote Lacks</h3>
+<ul>
+<li>Agenda Views https://orgmode.org/manual/Agenda-views.html
+<ul>
+<li>I’d say this is the main thing which makes org-mode so much more powerful than OneNote (and other tools).</li>
+</ul></li>
+<li>org-mode’s Babel https://orgmode.org/manual/Working-with-source-code.html
+<ul>
+<li>This is programmer-oriented, but if org-mode is a killer feature of emacs; babel is a killer feature of org-mode.</li>
+<li>I like using Babel for ledger-cli journals.</li>
+</ul></li>
+<li>Column View https://orgmode.org/manual/Using-column-view.html
+<ul>
+<li>A more concise way for viewing a sequence of headings and their properties. (This is like JIRA’s query results view; the equivalent org-mode view would have tasks/issues/tickets as headings).</li>
+</ul></li>
+<li>Document Exporting https://orgmode.org/manual/Exporting.html
+<ul>
+<li>Personally I’ve not made use of this. It may be useful for exporting to icalendar, LaTeX/PDF, HTML, beamer.</li>
+</ul></li>
+<li>Time Management https://orgmode.org/manual/Dates-and-times.html
+<ul>
+<li>org-mode has a dauntingly large set of features related to date/time. This relates to using org-mode as a calendar, as well as time tracking.</li>
+</ul></li>
+</ul>
 
 
 <hr />
