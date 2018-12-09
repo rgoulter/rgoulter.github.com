@@ -122,7 +122,6 @@
     </div>
 </nav>
 
-                <img class="banner-image" src="./images/blog-banner.png" />
             </div>
 
             <hr style="margin: 0px; border-top: 5px solid black;" />
@@ -136,38 +135,90 @@ contentpage.html, for content-specific pages, like emacs.html/yi.html.
 <div class="row">
     <div class="col-md-8" id="page-content">
         <h1 id="emacs">Emacs</h1>
-<p>This is my page for Emacs stuff. Because <a href="yi.html">Yi</a> gets one.</p>
-<h2 id="motivation">Motivation</h2>
-<p>No, Emacs vs Vim Doesn’t Matter.<br />
-I’m a Vim user. (I might make analogies to Vim / vim community throughout. That’s what I understand). Obviously, what editor you use doesn’t matter. But which editor is better to use is a less stupid question. I’d rather use Notepad++ than Notepad. I’d rather use Atom/SublimeText than Notepad++ for working on a project. – <strong>But</strong>, discussing “which is the best” <strong>is</strong> quite daft: it’s better to discuss what (set of) features or capabilities make for a better editing experience. Other issues which crop up:</p>
+<p><code>[Updated 2018-11]</code></p>
+<p>I’ve been using Emacs recently, primarily for its org-mode feature.</p>
+<p>Before using emacs, I had spent some time using vim (and vim-bindings in other editing environments).</p>
+<h2 id="emacs-and-vim-broadly-are-very-similar">Emacs and Vim, Broadly, Are Very Similar</h2>
+<p>Emacs and vim are mostly driven using the keyboard.<br />
+The big benefit of being keyboard driven is not having to move your hand to move the mouse.<br />
+The downside to this there’s a steeper learning curve to learning the key bindings in either editor.</p>
+<p>Emacs and vim take different approaches to keyboard input:</p>
+<p>vim is a modal editor. It behaves differently than “normal” text editors.<br />
+With normal text editors, pressing keys types the letters into the text area.<br />
+With vim, pressing keys will do different things depending on which “mode” vim is in.<br />
+When vim is in “insert” mode, it behaves the same as a regular text editor: pressing keys types the letters.<br />
+The difference from “normal” text editors is other modes. e.g. “normal” mode binds the keys to different actions and movements. (e.g. the “d” key is a “delete” action, and the “<span class="math inline">$&quot; key moves to the end of the line. So, pushing &quot;d$</span>” deletes the rest of the line).</p>
+<p>Vim’s approach to “driven by the keyboard” is to use different modes.</p>
+<p>Emacs’ approach to “driven by the keyboard” is to use modifier keys like “Ctrl” and “Alt”.<br />
+Emacs’ editing environment is much closer to a normal text editor.<br />
+The use of modifier keys is sane enough that macOS input adopts many of the Emacs-style bindings. (e.g. “command-a” will move to the beginning of the line, “command-e” moves to the end).</p>
+<p>This is worth mentioning because “emacs vs vim” is a classic flamewar between programmers. I haven’t lurked in places where these disagreements happen in a while. Using either is fine. But it’s interesting to see the approaches these editors are taking.</p>
+<h2 id="great-things-about-emacs-hard-to-find-elsewhere">Great Things About Emacs (Hard to Find Elsewhere)</h2>
+<h4 id="org-mode">Org Mode</h4>
 <ul>
-<li><p><strong>Prestiege/Pretension</strong>: Vim/Emacs have the reputation as being what the ‘smart dudes’ use. So, somehow, anyone using Vim/Emacs must be smart, right? – Despite this, it’s easy to come across users of either who aren’t all that great with the tools they’re using. – This probably shouldn’t affect whether you think Vim or Emacs is better; but it’s a cultural backdrop to the discussion.<br />
-(Vim/Emacs aren’t the only tools to suffer fools, btw.).</p></li>
-<li><p><strong>Configuration vs Convention</strong>: SublimeText is a good editor, and comes with many great features out-of-the-box (which Vim/Emacs would have to have installed as plugins). That’s “convention”. On the other extreme, Emacs can be customised to the extent that another Emacs user mightn’t be able to pick-up-and-use-it if they came across it. – This is more of a continuum than one-or-the-other; and also depends on whether you want to bother tinkering around or not.</p></li>
-<li><p><strong>Editor Culture</strong>: Like. I’d say Vimmers ought to <a href="posts/programming/2014-04-26-tools.html">work on improving</a>. And the <a href="https://tkf.github.io/2013/06/04/Emacs-is-dead.html">“Emacs is Dead”</a> essay’s thesis is that “emacs culture largely involves making tools which everyone benefits from”. Whether these ones are applicable or not, mutually exclusive or not, who knows. – But you’re more likely to find Vimmers who “don’t know” VimL than Emacsers who don’t know ELisp.</p></li>
+<li>Not without its limitations and downsides. But. org mode deserves its reputation as an excellent tool for organising things in plain text.</li>
+<li>What I love about org-mode:
+<ul>
+<li>An org mode file is a bunch of headings and sub-headings. The headings can be collapsed/expanded (like code-folding in other editors).</li>
+<li>The headings can have meta-data like key-value properties, tags, a “TODO” state, etc..</li>
+<li>All of which is nice for writing notes in org-mode.<br />
+But a great aspect of this is org-mode’s “agenda” feature. Org agenda provides ways to search through and display org headings. (It’s an “agenda” because dates can be attached to headings, so this can serve as an “agenda”).
+<ul>
+<li>This might sound underwhelming, but it allows you to structure your tasks and notes in org documents in a way which suits you, and to be able to quickly find what you need to see.</li>
+<li>I’ve heard WorkFlowy is an example of software which aims for this expressiveness, with the trade-off of being simpler to use than org-mode.<br />
+But as far as I can tell, the default go-to note taking, task management and calendar tools people use aren’t as flexible.</li>
+</ul></li>
+</ul></li>
+<li>For what it’s worth, Org mode has various other features I haven’t made use of. e.g. it has support for exporting org files into other formats, it has great table editing features, it can be used to track time (by clocking in and out of headlines).</li>
 </ul>
-<h1 id="starter-kits">Starter Kits</h1>
-<p>Vim has starter kits like SPF13, Janus, or Cream. (“Cream to make the coffee tastier”, or something).<br />
-The point being, an unconfigured vim/emacs is essentially an unfriendly editor, greatly enhanced with plugins/configuration.<br />
-– Or, in terms of “convention vs configuration”: “why not both?”.</p>
-<p>Turns out this is what Spacemacs is: <a href="https://www.reddit.com/r/emacs/comments/333ywx/did_anyone_else_go_wow_after_trying_spacemacs/">reddit thread</a>. Highlights (from user instant_sunshine):</p>
-<blockquote>
-<p>The WHOLE point of Emacs is to hack your own personal editor together.</p>
-<p>Packages make this ludicrously easy.</p>
-<p>Despite the highly opinionated views of some, this is what Emacs has been about since day one.</p>
-<p>Spacemacs is the best starter kit so far. Also, fairly unsurprisingly it strongly targets Vim switchers. …. There is also extraordinary value in knowing what exactly is going on in your config, and being its author.</p>
-</blockquote>
-<p>The following is a bit ‘snobbish’; I’d phrase it instead “I’d hate to see pretending to have skills they dont’ have”:</p>
-<blockquote>
-<p>Keeping people at a distance from their own config, and that is exactly what all starter kits do, is not such a wonderful thing.</p>
-<p>Sadly, Vim is highly prone to this sort of adoptive use, a package is installed and there is virtually no knowledge on how it’s implemented. Vimmers are “generally” scared of VimScript/VimL.</p>
-<p>I personally don’t want to see such users being the mainstream of Emacs users, I prefer to see Lisp hackers in this space, so we actually get better quality throughout.</p>
-</blockquote>
-<h1 id="sacha-chuas-visual-guide">Sacha Chua’s Visual Guide</h1>
+<h4 id="extensibility">Extensibility</h4>
+<ul>
+<li>I know that most programs have plugins/extensions. But it seems that the approach Emacs takes (with a heavy emphasis on “commands”) allows for extending the program that’s hard to find elsewhere.</li>
+<li>“Everything is a command”, seems like a huge win in the interactions with the editors it allows.<br />
+Especially since with the commands in Elisp, you can:
+<ul>
+<li>look at the source code</li>
+<li>find the documentation documentation</li>
+<li>run by typing out the command name</li>
+<li>bind to keybindings</li>
+</ul></li>
+</ul>
+<h4 id="discoverability">Discoverability</h4>
+<ul>
+<li>which-key is fantastic, especially in tandem with Emacs style of executing commands via key sequences.</li>
+<li>magit’s user interface
+<ul>
+<li>magit itself is great; but imo vim’s git plugin is pretty neat too.</li>
+</ul></li>
+<li>the <code>describe-*</code> help commands.
+<ul>
+<li>e.g. C-h w binds to “where-is”, which lists keybindings to a command.</li>
+<li>C-h c binds to describe-key-briefly, which shows the command for a key sequence</li>
+<li>C-h k binds to describe-key, which opens the documentation for a command.</li>
+<li>C-h b binds to describe-bindings, describe mode are also really good for listing the currently available bindings.
+<ul>
+<li>helm and ivy/counsel have <code>descbinds</code> makes this really convenient.</li>
+</ul></li>
+</ul></li>
+</ul>
+<h2 id="what-i-wish-id-known-about-emacs-coming-from-vim">“What I wish I’d known about Emacs, coming from vim”</h2>
+<ul>
+<li>Plugins/Packages
+<ul>
+<li>Vim has some very nice plugins for downloading other plugins. (typically by cloning a git repository, and adding this to the runtime path). As far as I understand, https://www.vim.org/scripts/ was used as a way to distribute vim scripts for others to use.</li>
+<li>Emacs has “Emacs Lisp Package Archive” (ELPA).</li>
+</ul></li>
+<li>Discoverability
+<ul>
+<li>as per the previous section.</li>
+</ul></li>
+</ul>
+<h2 id="useful-guides">Useful Guides</h2>
+<h4 id="sacha-chuas-visual-guide">Sacha Chua’s Visual Guide</h4>
 <p><a href="http://sachachua.com/blog/series/a-visual-guide-to-emacs/" class="uri">http://sachachua.com/blog/series/a-visual-guide-to-emacs/</a><br />
 This is very cute, utterly fantastic.<br />
 She also links to some <a href="http://sachachua.com/blog/2014/04/emacs-beginner-resources/">Emacs Beginner Resources</a>.</p>
-<h1 id="mastering-emacs-in-one-year">Mastering Emacs in One Year</h1>
+<h4 id="mastering-emacs-in-one-year">Mastering Emacs in One Year</h4>
 <p>Follow your friends on Twitter and you’ll come across weird shit like this: <a href="https://github.com/redguardtoo/mastering-emacs-in-one-year-guide/blob/master/guide-en.org">reguardtoo’s Mastering Emacs in One Year - Guide</a>.</p>
 <p>I’m not sure if it’s just the phrasing/language, but not sure I can agree with tthis guy vis-a-vis Starter-Kit discussion above:</p>
 <blockquote>
@@ -186,48 +237,12 @@ She also links to some <a href="http://sachachua.com/blog/2014/04/emacs-beginner
 <p>There is a difference between best and easiest. For example, a setup using Vim key bindings is NOT easy but definitely best.</p>
 </blockquote>
 <p>(This guide has &gt; 1,000 stars on GitHub; <a href="https://github.com/purcell/emacs.d">purcell/emacs.d</a> which he links to has ~1,900 stars. Some seriously popular stuff – though, honestly, I’d wonder how much this is kids getting excited about starting Emacs and not following through? <strong><em>cough</em></strong>. – <a href="posts/programming/2015-01-20-analysis-of-swkpdotfiles-repo.html">I had some thoughts about superstar swkp/dotfiles, also..</a>.).</p>
-<h1 id="evil-mode">EVIL Mode</h1>
-<p>– Vim keybindings are clearly superior for navigating text (when using a keyboard). And there’s always the notion that ‘vim’ doesn’t necessarily refer to one particular program, so much as including ‘vi-emulation’ of the keybindings. (e.g. like XVim for XCode).</p>
-<p>I understand these days EVIL is the clear winner for Vim-emulation in Emacs.</p>
-<h2 id="mode">Mode??</h2>
-<p>What’s a ‘mode’ in Emacs? Seems to me Major/Minor modes; where the ‘Major’ mode is only-one-at-a-time, and ‘Minor’ modes contribute to the functionality. So, Major modes would handle things like language-specific functionality.</p>
-<ul>
-<li><p><a href="http://mattbriggs.net/blog/2012/02/27/awesome-emacs-plugins-evil-mode/">Matt Brigg’s blogpost about EVIL</a><br />
-It explains some things for Vim users who want to try Emacs.</p></li>
-<li><p><a href="http://www.emacswiki.org/emacs/Evil">EmacsWiki EVIL page</a></p></li>
-<li><p><a href="http://stackoverflow.com/questions/8483182/evil-mode-best-practice">S/O post ‘EVIL mode best practices’</a></p></li>
-</ul>
-<h1 id="packages">Packages</h1>
-<p>Vim has, like, Vundle (successor of Pathogen). And a bunch of newer things, I hear.<br />
-What’s the equivalent for Emacs? Or even equivalent of <code>~/.vimrc</code>, <code>~/.vim</code>?</p>
-<p>EVIL mode wiki page above mentions various: MELPA, Marmelaide, QUELPA, el-get, etc.<br />
-<a href="http://www.emacswiki.org/emacs/ELPA">ELPA wiki page is enlighening</a>. ‘ELPA’ is a ‘Package Archive’ from which you download plugins. ‘QUELPA’ is the build-it-from-source-on-your-machine alternative.<br />
-And then issues regarding whether the repository is ‘free’ software or not, etc.</p>
-<ul>
-<li><p><a href="https://github.com/edvorg/req-package">req-package</a>, which builds on top of<br />
-<a href="https://github.com/jwiegley/use-package">use-package</a> look promising for this.</p></li>
-<li><p>Relevant S/O question: <a href="http://stackoverflow.com/questions/24867376/what-package-manager-should-i-use-for-emacs">What package manager should I use</a>.<br />
-Author points out i) there’re also some good customisations to Emacs which aren’t necessarily in a “package”. ii) it’s good to have an understanding of what’s going on, rather than blindly using <code>package.el</code>, etc.</p></li>
-</ul>
-<h1 id="recommended-list-of-plugins">Recommended List of Plugins</h1>
-<p>I’ve not searched too extensively for this. So.</p>
-<p>But, naturally, since the trend at some point in the programming world was for “awesome” lists, it’s hardly surprising there’s an <a href="https://github.com/emacs-tw/awesome-emacs">awesome-emacs</a>.</p>
-<p>That’s a pretty comprehensive list. <a href="blog.binchen.org/posts/my-answer-to-what-are-some-must-have-emacs-additions-on-quora-com.html">‘My Answer Two What Are Some Must Have Emacs Additions’</a> mentions some of these; but, on the other hand, doesn’t mention alternatives.</p>
-<h1 id="emacs-tutor">Emacs Tutor</h1>
+<h2 id="tuhdos-emacs-tutor">Tuhdo’s Emacs Tutor</h2>
 <p><a href="http://tuhdo.github.io/emacs-tutor.html">tuhdo’s emacs-tutor</a> comes with large, pretty gifs of Emacs doing its thing.<br />
 I kindof like that it shows off feature based stuff at the start.</p>
 <p>Somewhat apprehensive at the thought of a community which needs fancy-animated-gifs to get excited about anything, though: – I’m not sure about Emacs, but Vim at least has excellent help documentation.</p>
-<h1 id="org-mode">Org Mode</h1>
-<p>One of those heard-this-about-emacs things.<br />
-One-year-guide-to-Emacs recommends Org-mode as a gateway drug to Emacs.</p>
-<p>So, here are a couple of links to Org mode tutorials:</p>
-<ul>
-<li><p><a href="http://orgmode.org/worg/org-tutorials/org4beginners.html" class="uri">http://orgmode.org/worg/org-tutorials/org4beginners.html</a></p></li>
-<li><p><a href="https://emacsclub.github.io/html/org_tutorial.html" class="uri">https://emacsclub.github.io/html/org_tutorial.html</a></p></li>
-</ul>
-<h1 id="emacs.sexy">Emacs.Sexy</h1>
-<p><a href="http://emacs.sexy/">emacs.sexy</a>.<br />
-It has to be said. Much less amusing/fun than <a href="vim.sexy" class="uri">vim.sexy</a>, which is quite contemptuous and scathing (just like CS people in general!). Anyway. emacs.sexy is a cute-sy, fancily designed webpage with some great resources for beginners. Kindof like a better version of this page, in a way.</p>
+<h2 id="recommended-list-of-plugins">Recommended List of Plugins</h2>
+<p><a href="https://github.com/emacs-tw/awesome-emacs">awesome-emacs</a> is a pretty good starting point.</p>
     </div>
     <div class="col-md-4">
         Contents<br />
