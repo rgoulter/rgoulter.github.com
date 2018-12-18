@@ -1,0 +1,354 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>"Patch Grid" Sounds Like a Useful Editor Technique - Richard Goulter's Blog</title>
+
+        <!-- My (Old) CSS theme -->
+        <link rel="stylesheet" type="text/css" href="../../css/default.css" />
+
+        <!--
+            jQuery & jQueryUI
+        -->
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css" />
+
+        <!--
+            Pandoc Style CSS
+            (for syntax highlighted snippets)
+        -->
+        <link rel="stylesheet" type="text/css" href="../../css/syntax.css" />
+
+        <!--
+            Bootstrap
+        -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+        <style>
+            /*
+             * Bootstrap defines blockquote as 17px,
+             * so it looks stupidly large in my blogposts. */
+            blockquote {
+                font-size: 14px;
+            }
+        </style>
+
+        <!--
+            Waypoints, and Waypoints-Sticky,
+            so we can do this:
+            http://imakewebthings.com/waypoints/shortcuts/sticky-elements/
+        -->
+        <script src="../../js/jquery.waypoints.min.js"></script>
+        <script src="../../js/sticky.min.js"></script>
+
+        <!-- My analytics stuff -->
+        <script src="../../js/my_analytics.js"></script>
+        <script src="../../js/my_analytics_debug.js"></script>
+
+        <!--
+            TOCify
+        -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js"></script>
+        <!--
+            Patched TOCify css file.
+            (Don't want fixed `.tocify`).
+        -->
+        <link rel="stylesheet" type="text/css" href="../../css/jquery.tocify.css" />
+
+        <style>
+        .navbar {
+            margin-bottom: 0px;
+        }
+
+        .banner-image {
+            width:100%;
+        }
+
+        .banner {
+            margin-left: 0px;
+            margin-right: 0px;
+        }
+
+        body {
+            background-color: #e2e2e2;
+        }
+
+        #page {
+            padding-left:0;
+            padding-right:0;
+            background-color: #ffffff;
+        }
+        </style>
+
+        <!-- Google Analytics -->
+        <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+          ga('create', 'UA-73116015-1', 'auto');
+          ga('send', 'pageview');
+        </script>
+    </head>
+    <body>
+        <div id="page" class="container">
+            <!-- This, with no padding on left/right -->
+            <div class="banner">
+                <nav class="navbar navbar-default">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+
+            <!-- The Hamburger -->
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../../">Richard Goulter's Blog</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="../../">Home</a></li>
+            <li><a href="../../yi.html">Yi</a></li>
+            <li><a href="../../emacs.html">Emacs</a></li>
+            <li><a href="../../archive.html">Archive</a></li>
+        </ul>
+    </div>
+</nav>
+
+            </div>
+
+            <hr style="margin: 0px; border-top: 5px solid black;" />
+
+            <div id="content" class="container">
+                <h1>"Patch Grid" Sounds Like a Useful Editor Technique</h1>
+                <div class="info">
+    Posted on December 18, 2018
+    
+        by Richard Goulter
+    <br />
+    
+    Tags: 
+    
+</div>
+
+<p>I came across a link to Austin Henley’s dissertation <a href="http://web.eecs.utk.edu/~azh/pubs/Henley2018bDissertation.pdf">“Human Centric Tools for Code Navigation”</a>.</p>
+<p>There are three interesting tools discussed Henley discusses for navigating code:</p>
+<ul>
+<li><p>navigating code you’re working on now</p></li>
+<li><p>navigating through the history of code you’re working on<br />
+(though his tool is for visual dataflow languages)</p></li>
+<li><p>navigating the structure of the code you’re working on</p></li>
+</ul>
+<h2 id="ribbon-of-open-files-is-a-great-idea">“Ribbon” of Open Files is a Great Idea</h2>
+<p>Of these, I found the “navigating code you’re working on” most exciting. The “navigating through history of code” discussed was aimed at visual dataflow languages; and tools to navigate code structure sound cool but it’s probably a difficult tool to get working outside of full-fledged IDEs.</p>
+<p>Henley’s Patchworks sounds like it’d be useful for navigating code you’re currently working on. <a href="https://www.youtube.com/watch?v=GwcxDZT3pXE">Short video visualising the idea</a>. I’d describe it this way:</p>
+<ul>
+<li>A scrollable pair of tiled rows of editing panes.</li>
+<li>A “ribbon” is the 2*m array of open files.</li>
+<li>A “patch grid” is the grid / scroll viewport over the open files.</li>
+</ul>
+<p>That is, your editor window shows a 2x3 grid (2 rows, 3 column) grid of editing panes, and you can scroll the open files.</p>
+<p>This is comparable to navigating multiple “desktops” in window managers. (A feature so useful that now even Windows has this out of the box).</p>
+<p>I think it’s also worth mentioning a couple of details:</p>
+<ul>
+<li>It’s beneficial if the user can quickly “zoom” into the split tab pane. (e.g. Tmux has split panes, but also offers a “zoom into pane” feature).
+<ul>
+<li>Although “keep the unit of code you’re editing small enough that it can be managed in a pane” sounds a nice ideal.</li>
+</ul></li>
+<li>Henley’s Patchworks offers a “zoomed out” view of the ribbon, so that it’s easy to recognise which open files are where in the ribbon.</li>
+</ul>
+<h3 id="reasons-to-be-excited">Reasons to Be Excited</h3>
+<p>I think there are many reasons to be excited for this idea:</p>
+<ol type="1">
+<li><p>I might not be the most eloquent, but I feel like it’s relatively easy to to describe in terms of features developers are used to at the moment. Scrolling, editing panes, tiling.</p></li>
+<li>I feel this idea is kinda-sorta close to workflows I like at the moment.
+<ul>
+<li>e.g. in vim I <em>love</em> using unimpaired so that I can press <code>[b</code> and <code>]b</code> to switch between “previous buffer” and “next buffer”. (buffer = “open file” in vim terminology).</li>
+<li>e.g. I love switching between multiple desktops. Usually I’ll have “terminal”, “IDE”, and “internet browser” as a working group of 3 desktops focused on the same task.</li>
+<li>e.g. I already often split the panes to make use of “code I’m working on” and “output”. Plugins like <a href="https://github.com/epeli/slimux">slimux</a> make use of this idiom.</li>
+</ul></li>
+<li><p>The editing programs developers use tend to have split editing panes. So, “scroll a ‘ribbon’ of files through a grid of editing panes” seems like it’s a feature which can be implemented broadly.</p></li>
+<li><p>I feel that the workflow of: “I’m looking at these functions (which aren’t all next to each other in the same file” is fundamental to maintaining non-trivial software.<br />
+The idea of a “patch grid” sounds like it supports this workflow better than “switch between files in the editing pane”.</p></li>
+</ol>
+<h3 id="reasons-to-not-be-excited">Reasons to Not Be Excited</h3>
+<p>I even made an effort at writing <a href="https://github.com/rgoulter/buffer-ribbon.el">a plugin for Emacs</a>, so I’ll be trying the idea out. (It’s usable, but still a work in progress).</p>
+<h4 id="navigating-to-another-file-is-already-very-quick">Navigating To Another File is Already Very Quick</h4>
+<p>“Navigating” to a different file is something that’s already <em>really</em> easy in modern editing environments.<br />
+e.g. in an IDE I can have a “jump to file/function” with fuzzy searching which takes as long as “command invocation + type query + select result”.</p>
+<p>The discussion in the dissertation is comparing how long it takes developers to navigate to files using Patchworks vs Eclipse IDE; but AFAICT the users were using the mouse to navigate files.</p>
+<p>But, using the keyboard to control a text editor can be very quick, so I think it oversells the idea that the benefit is in navigation speed.<br />
+I might believe that using “patch grid + scrollable ribbon” would allow for less time navigating for power-users of an editor across an editing session. But that feels like a less tangible benefit.</p>
+<h4 id="editors-already-support-grid-of-split-editing-panes">Editors Already Support Grid of Split Editing Panes</h4>
+<p>The ‘novel’ idea to me of Henley’s Patchworks is the “ribbon” of open files that the editor should be able to scroll through.</p>
+<p>A “patch grid” minus scrolling the “ribbon” is just a 2x3 grid of editing panes, which editors already support at the moment.<br />
+People don’t commonly split panes in IDEs, and AFAICT it’s uncommon to see people use 2x3 grids of panes <em>like that</em>.<br />
+I think people don’t use them because it’s difficult to set up, and there’s hardly an obvious benefit to splitting an editing pane into <em>6</em>.<br />
+(Right now, I split an editing pane into <em>2</em> all the time).</p>
+<p>Maybe the idea of a scrolling ribbon means that it’s less of a hassle to work with a set of open files with a grid of editing panes. (You don’t have to decide which open file to replace; you just have to scroll the ribbon over and open in an unused tile).</p>
+<h4 id="existing-workflows-already-work">Existing Workflows Already Work</h4>
+<p>Editors / IDEs these days are <em>packed</em> with all sorts of complicated features such as multiple cursors or multiline editing.<br />
+There may be features that would be more efficient ways of doing what I want to achieve that my editor already has. I have to go out and deliberately try to improve.<br />
+Most of the time, whatever you’re doing to get the work done is good enough as it is.</p>
+<p>If making effective use of a “patch grid” (and scrolling it) isn’t intuitive out-of-the-box (or from seeing someone else make use of it, I guess) then it might not be worth picking up.</p>
+<p>That said,<br />
+not every user is a fan of “keyboard for everything”, and if using a “patch grid” is a big navigation improvement over other mouse-oriented workflows, maybe that’s good enough.</p>
+<h4 id="benefits-of-patch-grid-and-ribbon-may-be-unclear-and-unintuitive">Benefits of Patch Grid and Ribbon May Be Unclear and Unintuitive</h4>
+<p>My impression is that a big benefit to a “patch grid”‘s structuring “open working set of files” this way isn’t exactly “see everything you need to see at once” so much as the mental model of a ’ribbon’ of buffers makes better use of <em>associative memory</em>, <em>episodic memory</em>, and <em>spatial memory</em>. (cf. section 2.4 “Human Memory of Code Navigation” of Henley’s dissertation).</p>
+<p>I’d think a workflow of “quickly switch to other open file in the current editing pane” requires the developer to remember the code in the other files in their working set of open files.<br />
+So, surely a “patch grid” of open files make better use of associative/spacial memory than “quickly switch to another file” allows.</p>
+<p>Henley’s dissertation discusses that one recommendation is to use the ribbon chronologically, by putting newer open files to the right of currently occupied panes.<br />
+I’m curious to try this out for myself, I’m curious to see how easy it can be to scroll the ribbon to open a different file, compared to just switching the file in the current editing pane.</p>
+<h4 id="on-a-laptop-screen-2x3-grid-panes-are-really-tiny">On a Laptop Screen, 2x3 Grid Panes are Really Tiny</h4>
+<p>2x3 isn’t a magical grid size set in stone.<br />
+“2 rows of tiles” is more restrictive than a free-form 2D canvas of editing panes.<br />
+Maybe “3 columns of a pair of editing panes” a good number of editing panes to fit in human memory.</p>
+<p>But from what I’ve tried on even a 15&quot; laptop screen, a 2x3 grid of tiles feels like editing in a grid pane is an editor pane for ants.<br />
+This doesn’t matter <em>much</em>, since I think the benefit of a patch grid isn’t “editing in the grid panes”.</p>
+<p>I’ll have to try it on a larger screen to see the difference.</p>
+
+
+<hr />
+
+<div>
+    
+    
+    <a href="../../posts/2018-10-12-what-ive-been-up-to-ramble.html" style="float:right; text-align: right;">Older post</a>
+    
+</div>
+<br style="clear: both;" />
+
+<hr />
+
+<div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'richardgoultersblog'; // required: replace example with your forum shortname
+        var disqus_identifier = '/posts/programming/2018-12-18-patch-grid-sounds-a-useful-editor-technique.html';
+        var disqus_url = 'http://www.rgoulter.com/blog' + '/posts/programming/2018-12-18-patch-grid-sounds-a-useful-editor-technique.html';
+        var disqus_title = '"Patch Grid" Sounds Like a Useful Editor Technique - December 18, 2018';
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+<!-- Load highlight.js for Syntax Highlighting. -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/solarized_light.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+            </div>
+
+            <hr style="margin-bottom: 0px; border-top: 2px solid black;" />
+
+            <div id="footer" class="pull-right" style="padding-right: 10px;">
+                Site proudly generated by
+                <a href="http://jaspervdj.be/hakyll">Hakyll</a>
+            </div>
+        </div>
+
+        <script>
+            // The callbacks we wanna use
+            // Phone-home, telling Google Analytics various metrics/dimensions
+
+            // Use custom dimensions & metrics
+            var AnalyticDimensionReaderKind = 'dimension1';
+            var AnalyticMetricActiveTime      = 'metric1';
+            var AnalyticMetricLongestIdleTime = 'metric2';
+            var AnalyticMetricReadCount       = 'metric3';
+
+            var gaCallbacks = {
+                "scrollPercent": function(ms, perc) {
+                    if (perc > 85) {
+                        // EVENT: Page read
+                        ga('send', {
+                            hitType:       'event',
+                            eventCategory: 'Scrolling',
+                            eventAction:   'atBottom',
+                            eventValue:    String(ms)
+                        });
+                    }
+                },
+                "read": function(ms, ct, timeToReach) {
+                    // Use this to set DIMENSION
+                    // timeToReach < 5s ==> Skim (default = Visitor)
+                    if (timeToReach < 5 * 1000) {
+                        // dimension1 = ReaderKind
+                        ga('set', AnalyticDimensionReaderKind, "skimmer");
+                    }
+
+                    // timeToReach > 30s ==> Reader
+                    if (timeToReach > 30 * 1000) {
+                        // dimension1 = ReaderKind
+                        ga('set', AnalyticDimensionReaderKind, "reader");
+                    }
+
+                    // EVENT: Page read
+                    ga('send', {
+                        hitType:       'event',
+                        eventCategory: 'Reading',
+                        eventAction:   'read',
+                        eventValue:    String(timeToReach)
+                    });
+
+                    // METRIC
+                    ga('set', AnalyticMetricReadCount, String(ct));
+                },
+                "initialIdle": function(ms) {
+                    // EVENT: Started Reading
+                    ga('send', {
+                        hitType:       'event',
+                        eventCategory: 'Scrolling',
+                        eventAction:   'begun',
+                        eventValue:    String(ms)
+                    });
+                },
+                "timeSpent": function(total, active, curIdle, initIdle, longestIdle) {
+                    // Update METRIC(S)?
+                    ga('set', AnalyticMetricActiveTime, String(active));
+                    ga('set', AnalyticMetricLongestIdleTime, String(longestIdle));
+                },
+                "idle": function(ms) {
+                },
+                "longestIdle": function(ms) {
+                }
+            }
+
+            window.onload = function() {
+                myAnalyticsInit(gaCallbacks);
+
+                //
+                // Initial dimensions & metrics
+                //
+
+                ga('set', AnalyticMetricReadCount, String(0));
+
+                // EVENT: Page load
+                ga('send', {
+                    hitType:       'event',
+                    eventCategory: 'pageLoad',
+                    eventAction:   'begun',
+                    eventValue:    String(ms)
+                });
+
+                // DIMENSION: visitor
+                ga('set', AnalyticDimensionReaderKind, "visitor");
+            }
+        </script>
+    </body>
+</html>

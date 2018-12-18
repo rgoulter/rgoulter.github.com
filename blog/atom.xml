@@ -8,8 +8,101 @@
         <name>Richard Goulter</name>
         <email>richard.goulter+blog@gmail.com</email>
     </author>
-    <updated>2018-10-12T00:00:00Z</updated>
+    <updated>2018-12-18T00:00:00Z</updated>
     <entry>
+    <title>"Patch Grid" Sounds Like a Useful Editor Technique</title>
+    <link href="http://www.rgoulter.com/blog//posts/programming/2018-12-18-patch-grid-sounds-a-useful-editor-technique.html" />
+    <id>http://www.rgoulter.com/blog//posts/programming/2018-12-18-patch-grid-sounds-a-useful-editor-technique.html</id>
+    <published>2018-12-18T00:00:00Z</published>
+    <updated>2018-12-18T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<div class="info">
+    Posted on December 18, 2018
+    
+        by Richard Goulter
+    <br/>
+    
+    Tags: 
+    
+</div>
+
+<p>I came across a link to Austin Henley’s dissertation <a href="http://web.eecs.utk.edu/~azh/pubs/Henley2018bDissertation.pdf">“Human Centric Tools for Code Navigation”</a>.</p>
+<p>There are three interesting tools discussed Henley discusses for navigating code:</p>
+<ul>
+<li><p>navigating code you’re working on now</p></li>
+<li><p>navigating through the history of code you’re working on<br />
+(though his tool is for visual dataflow languages)</p></li>
+<li><p>navigating the structure of the code you’re working on</p></li>
+</ul>
+<h2 id="ribbon-of-open-files-is-a-great-idea">“Ribbon” of Open Files is a Great Idea</h2>
+<p>Of these, I found the “navigating code you’re working on” most exciting. The “navigating through history of code” discussed was aimed at visual dataflow languages; and tools to navigate code structure sound cool but it’s probably a difficult tool to get working outside of full-fledged IDEs.</p>
+<p>Henley’s Patchworks sounds like it’d be useful for navigating code you’re currently working on. <a href="https://www.youtube.com/watch?v=GwcxDZT3pXE">Short video visualising the idea</a>. I’d describe it this way:</p>
+<ul>
+<li>A scrollable pair of tiled rows of editing panes.</li>
+<li>A “ribbon” is the 2*m array of open files.</li>
+<li>A “patch grid” is the grid / scroll viewport over the open files.</li>
+</ul>
+<p>That is, your editor window shows a 2x3 grid (2 rows, 3 column) grid of editing panes, and you can scroll the open files.</p>
+<p>This is comparable to navigating multiple “desktops” in window managers. (A feature so useful that now even Windows has this out of the box).</p>
+<p>I think it’s also worth mentioning a couple of details:</p>
+<ul>
+<li>It’s beneficial if the user can quickly “zoom” into the split tab pane. (e.g. Tmux has split panes, but also offers a “zoom into pane” feature).
+<ul>
+<li>Although “keep the unit of code you’re editing small enough that it can be managed in a pane” sounds a nice ideal.</li>
+</ul></li>
+<li>Henley’s Patchworks offers a “zoomed out” view of the ribbon, so that it’s easy to recognise which open files are where in the ribbon.</li>
+</ul>
+<h3 id="reasons-to-be-excited">Reasons to Be Excited</h3>
+<p>I think there are many reasons to be excited for this idea:</p>
+<ol type="1">
+<li><p>I might not be the most eloquent, but I feel like it’s relatively easy to to describe in terms of features developers are used to at the moment. Scrolling, editing panes, tiling.</p></li>
+<li>I feel this idea is kinda-sorta close to workflows I like at the moment.
+<ul>
+<li>e.g. in vim I <em>love</em> using unimpaired so that I can press <code>[b</code> and <code>]b</code> to switch between “previous buffer” and “next buffer”. (buffer = “open file” in vim terminology).</li>
+<li>e.g. I love switching between multiple desktops. Usually I’ll have “terminal”, “IDE”, and “internet browser” as a working group of 3 desktops focused on the same task.</li>
+<li>e.g. I already often split the panes to make use of “code I’m working on” and “output”. Plugins like <a href="https://github.com/epeli/slimux">slimux</a> make use of this idiom.</li>
+</ul></li>
+<li><p>The editing programs developers use tend to have split editing panes. So, “scroll a ‘ribbon’ of files through a grid of editing panes” seems like it’s a feature which can be implemented broadly.</p></li>
+<li><p>I feel that the workflow of: “I’m looking at these functions (which aren’t all next to each other in the same file” is fundamental to maintaining non-trivial software.<br />
+The idea of a “patch grid” sounds like it supports this workflow better than “switch between files in the editing pane”.</p></li>
+</ol>
+<h3 id="reasons-to-not-be-excited">Reasons to Not Be Excited</h3>
+<p>I even made an effort at writing <a href="https://github.com/rgoulter/buffer-ribbon.el">a plugin for Emacs</a>, so I’ll be trying the idea out. (It’s usable, but still a work in progress).</p>
+<h4 id="navigating-to-another-file-is-already-very-quick">Navigating To Another File is Already Very Quick</h4>
+<p>“Navigating” to a different file is something that’s already <em>really</em> easy in modern editing environments.<br />
+e.g. in an IDE I can have a “jump to file/function” with fuzzy searching which takes as long as “command invocation + type query + select result”.</p>
+<p>The discussion in the dissertation is comparing how long it takes developers to navigate to files using Patchworks vs Eclipse IDE; but AFAICT the users were using the mouse to navigate files.</p>
+<p>But, using the keyboard to control a text editor can be very quick, so I think it oversells the idea that the benefit is in navigation speed.<br />
+I might believe that using “patch grid + scrollable ribbon” would allow for less time navigating for power-users of an editor across an editing session. But that feels like a less tangible benefit.</p>
+<h4 id="editors-already-support-grid-of-split-editing-panes">Editors Already Support Grid of Split Editing Panes</h4>
+<p>The ‘novel’ idea to me of Henley’s Patchworks is the “ribbon” of open files that the editor should be able to scroll through.</p>
+<p>A “patch grid” minus scrolling the “ribbon” is just a 2x3 grid of editing panes, which editors already support at the moment.<br />
+People don’t commonly split panes in IDEs, and AFAICT it’s uncommon to see people use 2x3 grids of panes <em>like that</em>.<br />
+I think people don’t use them because it’s difficult to set up, and there’s hardly an obvious benefit to splitting an editing pane into <em>6</em>.<br />
+(Right now, I split an editing pane into <em>2</em> all the time).</p>
+<p>Maybe the idea of a scrolling ribbon means that it’s less of a hassle to work with a set of open files with a grid of editing panes. (You don’t have to decide which open file to replace; you just have to scroll the ribbon over and open in an unused tile).</p>
+<h4 id="existing-workflows-already-work">Existing Workflows Already Work</h4>
+<p>Editors / IDEs these days are <em>packed</em> with all sorts of complicated features such as multiple cursors or multiline editing.<br />
+There may be features that would be more efficient ways of doing what I want to achieve that my editor already has. I have to go out and deliberately try to improve.<br />
+Most of the time, whatever you’re doing to get the work done is good enough as it is.</p>
+<p>If making effective use of a “patch grid” (and scrolling it) isn’t intuitive out-of-the-box (or from seeing someone else make use of it, I guess) then it might not be worth picking up.</p>
+<p>That said,<br />
+not every user is a fan of “keyboard for everything”, and if using a “patch grid” is a big navigation improvement over other mouse-oriented workflows, maybe that’s good enough.</p>
+<h4 id="benefits-of-patch-grid-and-ribbon-may-be-unclear-and-unintuitive">Benefits of Patch Grid and Ribbon May Be Unclear and Unintuitive</h4>
+<p>My impression is that a big benefit to a “patch grid”‘s structuring “open working set of files” this way isn’t exactly “see everything you need to see at once” so much as the mental model of a ’ribbon’ of buffers makes better use of <em>associative memory</em>, <em>episodic memory</em>, and <em>spatial memory</em>. (cf. section 2.4 “Human Memory of Code Navigation” of Henley’s dissertation).</p>
+<p>I’d think a workflow of “quickly switch to other open file in the current editing pane” requires the developer to remember the code in the other files in their working set of open files.<br />
+So, surely a “patch grid” of open files make better use of associative/spacial memory than “quickly switch to another file” allows.</p>
+<p>Henley’s dissertation discusses that one recommendation is to use the ribbon chronologically, by putting newer open files to the right of currently occupied panes.<br />
+I’m curious to try this out for myself, I’m curious to see how easy it can be to scroll the ribbon to open a different file, compared to just switching the file in the current editing pane.</p>
+<h4 id="on-a-laptop-screen-2x3-grid-panes-are-really-tiny">On a Laptop Screen, 2x3 Grid Panes are Really Tiny</h4>
+<p>2x3 isn’t a magical grid size set in stone.<br />
+“2 rows of tiles” is more restrictive than a free-form 2D canvas of editing panes.<br />
+Maybe “3 columns of a pair of editing panes” a good number of editing panes to fit in human memory.</p>
+<p>But from what I’ve tried on even a 15&quot; laptop screen, a 2x3 grid of tiles feels like editing in a grid pane is an editor pane for ants.<br />
+This doesn’t matter <em>much</em>, since I think the benefit of a patch grid isn’t “editing in the grid panes”.</p>
+<p>I’ll have to try it on a larger screen to see the difference.</p>
+]]></summary>
+</entry>
+<entry>
     <title>"What I've Been Up To" Ramble</title>
     <link href="http://www.rgoulter.com/blog//posts/2018-10-12-what-ive-been-up-to-ramble.html" />
     <id>http://www.rgoulter.com/blog//posts/2018-10-12-what-ive-been-up-to-ramble.html</id>
@@ -567,37 +660,6 @@ But, it’s not as if being a guard is necessarily the best outfit for every sit
 The player isn’t a bullet-sponge, and will die fairly quickly to a guard shooting him. That said, with the right choke points it is possible to eliminate the guards in an area. – IMHO, this is kindof useful for learning the location of certain key items, and getting familiar with the layout of a map.</p>
 <hr />
 <p>So far I’ve spent my time only in one map. But I’ve poured more time into it than a typical Call of Duty campaign, so I’m kindof impressed by how the game manages to achieve a degree of “replayability”.</p>
-]]></summary>
-</entry>
-<entry>
-    <title>Asking for Help Threshold</title>
-    <link href="http://www.rgoulter.com/blog//posts/programming/2017-11-08-asking-for-help-threshold.html" />
-    <id>http://www.rgoulter.com/blog//posts/programming/2017-11-08-asking-for-help-threshold.html</id>
-    <published>2017-11-08T00:00:00Z</published>
-    <updated>2017-11-08T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<div class="info">
-    Posted on November  8, 2017
-    
-        by Richard Goulter
-    <br/>
-    
-    Tags: 
-    
-</div>
-
-<p>I think my experience is probably similar to other talented programmers fresh to the workforce: To not ‘ask for help’ with a problem until too much time has been spent stuck on the problem.</p>
-<p>This isn’t too strange.<br />
-As hobbyists, or as students in school, we program and learn individually. I think ‘talented’ really means ‘has made more mistakes’. Surely you can’t be ‘talented’ without having curiousity to understand how the tools/programs you’re using work.</p>
-<p>For what it’s worth: Personally, I’m not curious about <em>everything</em>. I find git a tool where add/commit/push/pull covers 95% of what I do, 5% is Googling for how to undo some mistake.</p>
-<p>On the other hand, there are people who apparently lack all curiousity (or capability) to investigate how to self-correct.<br />
-My experience is they’ll ask for help as soon as possible.<br />
-Which is fine for project-specific knowledge which I know and they don’t. And ‘okay’ for things which they might not have known.</p>
-<p>But “asking for help without trying” is just irritating. I like the admonishment “don’t ask the same question twice”. (I mean, I’ll answer it, but eventually the asker loses my respect).</p>
-<p>I saw some tech-culture discussion complaining about this kindof thing:<br />
-“no one is really ‘self-taught’; e.g. communities like StackOverflow involve <em>people</em>”.<br />
-I think that’s a somewhat disingenuous point. – If the programmer attitude of ‘I shouldn’t have to bother learning it to know how to do it’ weren’t so prevalent, then StackOverflow wouldn’t be so popular.<br />
-It’s fair to say the process of ‘try it’, ‘search it’, ‘try that again’ (without asking someone else directly) is ‘self-taught’. Since anyone can do try doing that. By themselves.<br />
-– On the other hand, it’s interesting to point out that “on the shoulders of giants” does include someone else who had the same stupid question you’re googling for.</p>
 ]]></summary>
 </entry>
 
