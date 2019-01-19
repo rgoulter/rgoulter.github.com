@@ -1,0 +1,300 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Comparing Cucumber vs All-in-Code BDD Specs - Richard Goulter's Blog</title>
+
+        <!-- My (Old) CSS theme -->
+        <link rel="stylesheet" type="text/css" href="../../css/default.css" />
+
+        <!--
+            jQuery & jQueryUI
+        -->
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css" />
+
+        <!--
+            Pandoc Style CSS
+            (for syntax highlighted snippets)
+        -->
+        <link rel="stylesheet" type="text/css" href="../../css/syntax.css" />
+
+        <!--
+            Bootstrap
+        -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+        <style>
+            /*
+             * Bootstrap defines blockquote as 17px,
+             * so it looks stupidly large in my blogposts. */
+            blockquote {
+                font-size: 14px;
+            }
+        </style>
+
+        <!--
+            Waypoints, and Waypoints-Sticky,
+            so we can do this:
+            http://imakewebthings.com/waypoints/shortcuts/sticky-elements/
+        -->
+        <script src="../../js/jquery.waypoints.min.js"></script>
+        <script src="../../js/sticky.min.js"></script>
+
+        <!-- My analytics stuff -->
+        <script src="../../js/my_analytics.js"></script>
+        <script src="../../js/my_analytics_debug.js"></script>
+
+        <!--
+            TOCify
+        -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js"></script>
+        <!--
+            Patched TOCify css file.
+            (Don't want fixed `.tocify`).
+        -->
+        <link rel="stylesheet" type="text/css" href="../../css/jquery.tocify.css" />
+
+        <style>
+        .navbar {
+            margin-bottom: 0px;
+        }
+
+        .banner-image {
+            width:100%;
+        }
+
+        .banner {
+            margin-left: 0px;
+            margin-right: 0px;
+        }
+
+        body {
+            background-color: #e2e2e2;
+        }
+
+        #page {
+            padding-left:0;
+            padding-right:0;
+            background-color: #ffffff;
+        }
+        </style>
+
+        <!-- Google Analytics -->
+        <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+          ga('create', 'UA-73116015-1', 'auto');
+          ga('send', 'pageview');
+        </script>
+    </head>
+    <body>
+        <div id="page" class="container">
+            <!-- This, with no padding on left/right -->
+            <div class="banner">
+                <nav class="navbar navbar-default">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+
+            <!-- The Hamburger -->
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../../">Richard Goulter's Blog</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="../../">Home</a></li>
+            <li><a href="../../yi.html">Yi</a></li>
+            <li><a href="../../emacs.html">Emacs</a></li>
+            <li><a href="../../archive.html">Archive</a></li>
+        </ul>
+    </div>
+</nav>
+
+            </div>
+
+            <hr style="margin: 0px; border-top: 5px solid black;" />
+
+            <div id="content" class="container">
+                <h1>Comparing Cucumber vs All-in-Code BDD Specs</h1>
+                <div class="info">
+    Posted on January 19, 2019
+    
+        by Richard Goulter
+    <br />
+    
+    Tags: 
+    
+</div>
+
+<p>A couple of years ago I added a couple of Cucumber specs to a side-project of mine.<br />
+I did this because I was learning to use Cucumber since I was being hired as a Software Engineer in Test. (Their existing automated acceptance tests used Cucumber).</p>
+<p>I recently picked the project up again to do some maintenance on it, and I chose to migrate from using Cucumber to using all-in-code ScalaTest for implementing the same specifications.</p>
+<p>When using Cucumber, you must ask “why use Cucumber over an all-in-code tool like RSpec (or ScalaTest)”. So, here are some considerations about the trade-offs between using Cucumber and using all-in-language tests:</p>
+<h1 id="recap-cucumber-and-bdd">Recap: Cucumber and BDD</h1>
+<p>Cucumber is a tool which enables structuring tests in a certain way. This structure particularly supports a “Behaviour Driven Development” (BDD) workflow.<br />
+BDD is the idea of specifying behaviours (after having refined what these behaviours should be from examples).<br />
+That is: a specification is an artifact from the project-management side; and Cucumber is a tool which executes specifications of behaviours.<br />
+BDD’s selling point is “build the right product”. And executable specifications aim to provide “living documentation” about what the code actually does.</p>
+<p>Well, that’s my understanding of it from Gojko Adzic’s fantastic “Specification By Example”.</p>
+<p>Specifications and Cucumber, from a developers perspective: - Any automated test involves 3 things: - Set up some System Under Test (SUT) - Get the SUT to perform some action - Check that the SUT did what it was supposed to do. - Technically, automated tests may also need to clean up the environment they run in; but this is a technical detail about running the tests, not a detail about checking the SUT. - I’ve seen these three steps described with the mnemonic “Assemble, Act, Assert” which I quite like. - Typically, documentation about what a program does is hand-written. (Although there are interesting tools which try and address this, like <a href="https://stackoverflow.com/questions/50332885/how-do-i-install-and-use-gpg-agent-on-windows/50412924#50412924">Java’s Spring’s REST Docs</a>). - Cucumber’s file format involves describing a “feature” which is a sequence of “scenarios”. (Roughly corresponding to “suite” and “test” in xUnit terms). Each scenario consists of steps. - For example. from <a href="https://relishapp.com/rspec/rspec-expectations/v/3-8/docs/built-in-matchers/equality-matchers">rspec-expectations</a>: <code>cucumber     Given a file named &quot;compare_using_eq.rb&quot; with:       .... Ruby code using RSpec Expectations ....     When I run rspec compare_using_eq.rb     Then the output should contain &quot;3 examples, 0 failures&quot;</code> - it’s a good convention to write the scenario’s steps in a “Given/When/Then” sequence; and this corresponds to “Assemble, Act, Assert”. - Cucumber’s differentiating feature is that the executable specification is separate from the code which runs it. - i.e. a Cucumber test suite has its executable specification in a <code>.feature</code> file, written in Gherkin syntax. This is then executed using test code in “step definitions”. - My impression is that there are different styles of writing Given/When/Then steps: - steps as a convenient way to arrange test code/examples. e.g. for libraries (or APIs) like RSpec. This seems to be the easiest kind of product to write executable specifications for. - steps as “pseudo code”. This seems a compromise for getting documentation which is tested, with less emphasis on readability. - steps as declared descriptions. This is what I think is best for high-level end to end specifications. (Although this ends up with steps which are too vague if they are too high level and don’t mention any details).</p>
+<h1 id="advantages-and-disadvantages-of-each-approach">Advantages and Disadvantages of Each Approach</h1>
+<p>Relevant advantages/disadvantages for Cucumber vs all-in-code specs: (As opposed to inherent difficulties with end-to-end or out-of-process acceptance tests).</p>
+<p>Advantages of Cucumber: - Cucumber specification features are English-readable in plaintext files. This is useful if you want to see “what are the specifications? what does the software do?” at a glance. - It’s much harder to access the “executable specification” from in-code specs (like RSpec or ScalaTest’s FeatureSpec). The “Given/When/Then” are mixed in with the step-execution code. - Cucumber makes it easier to adhere to an “executable specification discipline”. Because scenarios in the Feature file are idiomatically written with “Given/When/Then” steps, writing test code outside that convention naturally <em>smells</em>. - Similarly, if the step-definition code doesn’t “obviously agree” with the step it’s defining, this is another clear smell. - It “smells” if the executable specifications aren’t used anywhere. My experience is that tests tend to be ignored (beyond whether they pass and maybe coverage metrics); but I think tests could be leveraged to provide more value than this. - With all-in-code specs, it’s much easier to be sloppy and have poorly written specs or poorly engineered code which tests the code. - It “smells” if the Feature files aren’t used anywhere. (IME, It’s typical to ignore tests anyway. But I think this is a smell). - It’s easier to produce “living documentation” from a tool like Cucumber than a tool like RSpec.</p>
+<p>Disadvantages of Cucumber: - Cucumber step-definitions code has a weird “interface”. “interface” in <a href="https://www.youtube.com/watch?v=bmSAYlu0NcY">John Ousterhaut’s use of the word</a>: “interface” is the stuff you need to be aware of in order to use code.<br />
+- With normal imperative code: each statement is essentially adjacent to each statement in the program, or is embedded in some structure like a function or a class.<br />
+It’s typically straightforward that the ‘interface’ is all the code in the function, any incoming parameters; and if unlucky, access to “global” state. - With step definitions: It’s possible that some steps will need to store information for later steps or make use of information from previous steps. Steps need to be written in a way that makes the assumed interface as obvious as possible, at the same time as being an idiomatic way to describe some step in a test scenario. - It’s really hard to write good specifications.</p>
+<p>Disadvantage of all-in-code specs: - With code, it’s really tempting to “Dont Repeat Yourself” (DRY) so that there’s less code to read.<br />
+Whereas, tests should “tell a story”. (They should use “Descriptive and Meaningful Phrases” rather than be ‘DRY’).<br />
+With all-in-code specs, if a test step is re-used, then either subsequent steps are nested (which may be hard to read) or copy-pasted elsewhere in the test code. - Cucumber’s approach is to organise test code by step definitions. So, to see the full code listing for a test scenario, you have to view each step definition.<br />
+Each step may be “DAMP”, but not the whole scenario.</p>
+
+
+<hr />
+
+<div>
+    
+    
+    <a href="../../posts/programming/2018-12-18-patch-grid-sounds-a-useful-editor-technique.html" style="float:right; text-align: right;">Older post</a>
+    
+</div>
+<br style="clear: both;" />
+
+<hr />
+
+<div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'richardgoultersblog'; // required: replace example with your forum shortname
+        var disqus_identifier = '/posts/programming/2019-01-19-comparing-cucumber-vs-all-in-code-bdd.html';
+        var disqus_url = 'http://www.rgoulter.com/blog' + '/posts/programming/2019-01-19-comparing-cucumber-vs-all-in-code-bdd.html';
+        var disqus_title = 'Comparing Cucumber vs All-in-Code BDD Specs - January 19, 2019';
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+<!-- Load highlight.js for Syntax Highlighting. -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/solarized_light.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+            </div>
+
+            <hr style="margin-bottom: 0px; border-top: 2px solid black;" />
+
+            <div id="footer" class="pull-right" style="padding-right: 10px;">
+                Site proudly generated by
+                <a href="http://jaspervdj.be/hakyll">Hakyll</a>
+            </div>
+        </div>
+
+        <script>
+            // The callbacks we wanna use
+            // Phone-home, telling Google Analytics various metrics/dimensions
+
+            // Use custom dimensions & metrics
+            var AnalyticDimensionReaderKind = 'dimension1';
+            var AnalyticMetricActiveTime      = 'metric1';
+            var AnalyticMetricLongestIdleTime = 'metric2';
+            var AnalyticMetricReadCount       = 'metric3';
+
+            var gaCallbacks = {
+                "scrollPercent": function(ms, perc) {
+                    if (perc > 85) {
+                        // EVENT: Page read
+                        ga('send', {
+                            hitType:       'event',
+                            eventCategory: 'Scrolling',
+                            eventAction:   'atBottom',
+                            eventValue:    String(ms)
+                        });
+                    }
+                },
+                "read": function(ms, ct, timeToReach) {
+                    // Use this to set DIMENSION
+                    // timeToReach < 5s ==> Skim (default = Visitor)
+                    if (timeToReach < 5 * 1000) {
+                        // dimension1 = ReaderKind
+                        ga('set', AnalyticDimensionReaderKind, "skimmer");
+                    }
+
+                    // timeToReach > 30s ==> Reader
+                    if (timeToReach > 30 * 1000) {
+                        // dimension1 = ReaderKind
+                        ga('set', AnalyticDimensionReaderKind, "reader");
+                    }
+
+                    // EVENT: Page read
+                    ga('send', {
+                        hitType:       'event',
+                        eventCategory: 'Reading',
+                        eventAction:   'read',
+                        eventValue:    String(timeToReach)
+                    });
+
+                    // METRIC
+                    ga('set', AnalyticMetricReadCount, String(ct));
+                },
+                "initialIdle": function(ms) {
+                    // EVENT: Started Reading
+                    ga('send', {
+                        hitType:       'event',
+                        eventCategory: 'Scrolling',
+                        eventAction:   'begun',
+                        eventValue:    String(ms)
+                    });
+                },
+                "timeSpent": function(total, active, curIdle, initIdle, longestIdle) {
+                    // Update METRIC(S)?
+                    ga('set', AnalyticMetricActiveTime, String(active));
+                    ga('set', AnalyticMetricLongestIdleTime, String(longestIdle));
+                },
+                "idle": function(ms) {
+                },
+                "longestIdle": function(ms) {
+                }
+            }
+
+            window.onload = function() {
+                myAnalyticsInit(gaCallbacks);
+
+                //
+                // Initial dimensions & metrics
+                //
+
+                ga('set', AnalyticMetricReadCount, String(0));
+
+                // EVENT: Page load
+                ga('send', {
+                    hitType:       'event',
+                    eventCategory: 'pageLoad',
+                    eventAction:   'begun',
+                    eventValue:    String(ms)
+                });
+
+                // DIMENSION: visitor
+                ga('set', AnalyticDimensionReaderKind, "visitor");
+            }
+        </script>
+    </body>
+</html>

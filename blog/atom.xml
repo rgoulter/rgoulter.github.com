@@ -8,8 +8,47 @@
         <name>Richard Goulter</name>
         <email>richard.goulter+blog@gmail.com</email>
     </author>
-    <updated>2018-12-18T00:00:00Z</updated>
+    <updated>2019-01-19T00:00:00Z</updated>
     <entry>
+    <title>Comparing Cucumber vs All-in-Code BDD Specs</title>
+    <link href="http://www.rgoulter.com/blog//posts/programming/2019-01-19-comparing-cucumber-vs-all-in-code-bdd.html" />
+    <id>http://www.rgoulter.com/blog//posts/programming/2019-01-19-comparing-cucumber-vs-all-in-code-bdd.html</id>
+    <published>2019-01-19T00:00:00Z</published>
+    <updated>2019-01-19T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<div class="info">
+    Posted on January 19, 2019
+    
+        by Richard Goulter
+    <br/>
+    
+    Tags: 
+    
+</div>
+
+<p>A couple of years ago I added a couple of Cucumber specs to a side-project of mine.<br />
+I did this because I was learning to use Cucumber since I was being hired as a Software Engineer in Test. (Their existing automated acceptance tests used Cucumber).</p>
+<p>I recently picked the project up again to do some maintenance on it, and I chose to migrate from using Cucumber to using all-in-code ScalaTest for implementing the same specifications.</p>
+<p>When using Cucumber, you must ask “why use Cucumber over an all-in-code tool like RSpec (or ScalaTest)”. So, here are some considerations about the trade-offs between using Cucumber and using all-in-language tests:</p>
+<h1 id="recap-cucumber-and-bdd">Recap: Cucumber and BDD</h1>
+<p>Cucumber is a tool which enables structuring tests in a certain way. This structure particularly supports a “Behaviour Driven Development” (BDD) workflow.<br />
+BDD is the idea of specifying behaviours (after having refined what these behaviours should be from examples).<br />
+That is: a specification is an artifact from the project-management side; and Cucumber is a tool which executes specifications of behaviours.<br />
+BDD’s selling point is “build the right product”. And executable specifications aim to provide “living documentation” about what the code actually does.</p>
+<p>Well, that’s my understanding of it from Gojko Adzic’s fantastic “Specification By Example”.</p>
+<p>Specifications and Cucumber, from a developers perspective: - Any automated test involves 3 things: - Set up some System Under Test (SUT) - Get the SUT to perform some action - Check that the SUT did what it was supposed to do. - Technically, automated tests may also need to clean up the environment they run in; but this is a technical detail about running the tests, not a detail about checking the SUT. - I’ve seen these three steps described with the mnemonic “Assemble, Act, Assert” which I quite like. - Typically, documentation about what a program does is hand-written. (Although there are interesting tools which try and address this, like <a href="https://stackoverflow.com/questions/50332885/how-do-i-install-and-use-gpg-agent-on-windows/50412924#50412924">Java’s Spring’s REST Docs</a>). - Cucumber’s file format involves describing a “feature” which is a sequence of “scenarios”. (Roughly corresponding to “suite” and “test” in xUnit terms). Each scenario consists of steps. - For example. from <a href="https://relishapp.com/rspec/rspec-expectations/v/3-8/docs/built-in-matchers/equality-matchers">rspec-expectations</a>: <code>cucumber     Given a file named &quot;compare_using_eq.rb&quot; with:       .... Ruby code using RSpec Expectations ....     When I run rspec compare_using_eq.rb     Then the output should contain &quot;3 examples, 0 failures&quot;</code> - it’s a good convention to write the scenario’s steps in a “Given/When/Then” sequence; and this corresponds to “Assemble, Act, Assert”. - Cucumber’s differentiating feature is that the executable specification is separate from the code which runs it. - i.e. a Cucumber test suite has its executable specification in a <code>.feature</code> file, written in Gherkin syntax. This is then executed using test code in “step definitions”. - My impression is that there are different styles of writing Given/When/Then steps: - steps as a convenient way to arrange test code/examples. e.g. for libraries (or APIs) like RSpec. This seems to be the easiest kind of product to write executable specifications for. - steps as “pseudo code”. This seems a compromise for getting documentation which is tested, with less emphasis on readability. - steps as declared descriptions. This is what I think is best for high-level end to end specifications. (Although this ends up with steps which are too vague if they are too high level and don’t mention any details).</p>
+<h1 id="advantages-and-disadvantages-of-each-approach">Advantages and Disadvantages of Each Approach</h1>
+<p>Relevant advantages/disadvantages for Cucumber vs all-in-code specs: (As opposed to inherent difficulties with end-to-end or out-of-process acceptance tests).</p>
+<p>Advantages of Cucumber: - Cucumber specification features are English-readable in plaintext files. This is useful if you want to see “what are the specifications? what does the software do?” at a glance. - It’s much harder to access the “executable specification” from in-code specs (like RSpec or ScalaTest’s FeatureSpec). The “Given/When/Then” are mixed in with the step-execution code. - Cucumber makes it easier to adhere to an “executable specification discipline”. Because scenarios in the Feature file are idiomatically written with “Given/When/Then” steps, writing test code outside that convention naturally <em>smells</em>. - Similarly, if the step-definition code doesn’t “obviously agree” with the step it’s defining, this is another clear smell. - It “smells” if the executable specifications aren’t used anywhere. My experience is that tests tend to be ignored (beyond whether they pass and maybe coverage metrics); but I think tests could be leveraged to provide more value than this. - With all-in-code specs, it’s much easier to be sloppy and have poorly written specs or poorly engineered code which tests the code. - It “smells” if the Feature files aren’t used anywhere. (IME, It’s typical to ignore tests anyway. But I think this is a smell). - It’s easier to produce “living documentation” from a tool like Cucumber than a tool like RSpec.</p>
+<p>Disadvantages of Cucumber: - Cucumber step-definitions code has a weird “interface”. “interface” in <a href="https://www.youtube.com/watch?v=bmSAYlu0NcY">John Ousterhaut’s use of the word</a>: “interface” is the stuff you need to be aware of in order to use code.<br />
+- With normal imperative code: each statement is essentially adjacent to each statement in the program, or is embedded in some structure like a function or a class.<br />
+It’s typically straightforward that the ‘interface’ is all the code in the function, any incoming parameters; and if unlucky, access to “global” state. - With step definitions: It’s possible that some steps will need to store information for later steps or make use of information from previous steps. Steps need to be written in a way that makes the assumed interface as obvious as possible, at the same time as being an idiomatic way to describe some step in a test scenario. - It’s really hard to write good specifications.</p>
+<p>Disadvantage of all-in-code specs: - With code, it’s really tempting to “Dont Repeat Yourself” (DRY) so that there’s less code to read.<br />
+Whereas, tests should “tell a story”. (They should use “Descriptive and Meaningful Phrases” rather than be ‘DRY’).<br />
+With all-in-code specs, if a test step is re-used, then either subsequent steps are nested (which may be hard to read) or copy-pasted elsewhere in the test code. - Cucumber’s approach is to organise test code by step definitions. So, to see the full code listing for a test scenario, you have to view each step definition.<br />
+Each step may be “DAMP”, but not the whole scenario.</p>
+]]></summary>
+</entry>
+<entry>
     <title>"Patch Grid" Sounds Like a Useful Editor Technique</title>
     <link href="http://www.rgoulter.com/blog//posts/programming/2018-12-18-patch-grid-sounds-a-useful-editor-technique.html" />
     <id>http://www.rgoulter.com/blog//posts/programming/2018-12-18-patch-grid-sounds-a-useful-editor-technique.html</id>
@@ -619,47 +658,6 @@ But with C++, I feel it’s more like the ‘lowest common denominator’ of bei
 – I kindof have mixed thoughts about these things. It’s .. nice that with programming, it’s ‘easy’ to do a lot of cool stuff without having a good understanding of what’s really going on.<br />
 But it also seems a bit uncraftsmanlike to make stuff with such a poor understanding.</p>
 <p>I think polishing this side-project a bit has been a good project for understanding what to avoid in a project, and what’s good to have.</p>
-]]></summary>
-</entry>
-<entry>
-    <title>Hitman is Fun</title>
-    <link href="http://www.rgoulter.com/blog//posts/games/2018-02-11-hitman-is-fun.html" />
-    <id>http://www.rgoulter.com/blog//posts/games/2018-02-11-hitman-is-fun.html</id>
-    <published>2018-02-11T00:00:00Z</published>
-    <updated>2018-02-11T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<div class="info">
-    Posted on February 11, 2018
-    
-        by Richard Goulter
-    <br/>
-    
-    Tags: 
-    
-</div>
-
-<p>I hadn’t really played any of the previous games in the Hitman series.<br />
-My experience was limited to watching games on YouTube.</p>
-<p>I picked up the game recently.</p>
-<p>The game was released episodically.<br />
-So, they released level-by-level. Each new release did see improvements to the gameplay and such, too. This seems much more sober and professional than “early access”.<br />
-– An advantage of not picking it up ‘as it came out’ is I have the option to play it all at once.</p>
-<p>And, interestingly, I have the option to play <em>any level I want</em>.<br />
-Which is weird for a game. Because, usually games with single-play have stories. And usually the story should be experienced in-order. And so usually the game gets you to play it in order.<br />
-Hitman <em>does</em> have a story-based single-player campaign. Which should be played in-order.<br />
-But. I think Hitman’s formula is really aimed at “replayability”. In this sense, each map isn’t so much a ‘level’ so much as an arena.<br />
-The story-based missions have particular, prominent targets; and most of the special details and potential interactions <em>are</em> designed around the main targets.<br />
-– But what makes Hitman replayable is a fairly rich set of gameplay rules, and levels designed to make the most of the dynamics which come from that.</p>
-<p>Some examples of this, which enhance replayability: - The game will highlight / show interactions, even if you don’t have the requisite disguise or equipment. This shows the player what is possible. e.g. In the first level, you can hide an explosive in a camera, and trigger the explosive when the camera is used in an interview. – So you know next time you try the level, to keep an eye out for explosives. - As per the design of “modern” games, Hitman does ‘tell’ you what things are possible by listing certain ‘challenges’ to try. (e.g. “use a sniper rifle and kill both targets within 10s of each other”). - There’s a game-mode, “escalations”, which iteratively reveals a set of objectives on each replay (of that mode). e.g. 1st stage would be “kill this target while disguised as a guard”; 2nd stage may add a complication that you <em>must</em> hide any dead bodies. Or the escalated complication might change the disguise required. - Completing certain challenges/etc. unlocks different equipment, and different entry-points into the level. (Sometimes with different disguises!).</p>
-<p>To clarify the gameplay rules: The player is on his own, and must kill targets (or sometimes steal something), and the map is filled with guards and people. Typically set in a relatively normal context. e.g. a fashion show.<br />
-But the levels aren’t especially designed for “sneak around the guards, kill the target” as much as around the particular ‘disguises’. That is, outfits that the different kinds of game characters wear. The puzzle to the game is to find out what your outfit allows you to do, how to acquire a better outfit, and how to make use of the different outfits. – e.g. if you’re disguised as a kitchen chef, you won’t be allowed into where you could go if you were disguised as a guard.<br />
-But, it’s not as if being a guard is necessarily the best outfit for every situation: some of the enemy guards will notice that they don’t recognise you! (Another example: It’s not suspicious to see a waitor add <em>something</em> to a drink (like poison). But if they see a guard adding something to a drink, that’s just suspicious).</p>
-<p>There are more subtle gameplay aspects crafted around the disguise-game. e.g. people can hear gunshots, or combat.. and will be suspicious if they see you using a picklock to open a lock, or whatever.</p>
-<p>But the dynamics this leads to?<br />
-- Learning what the layout of the level is. (Where are all the good items? Where’s the key/wrench/coin/etc.? Where are easy places to get particular outfits? Which places allow which outfits?). - More than one way to skin a cat! – In particular, you usually get the feeling that maybe there was a less ‘awkward’ way to complete the mission than you did.</p>
-<p>Simple plain run-and-gun is discouraged.<br />
-The player isn’t a bullet-sponge, and will die fairly quickly to a guard shooting him. That said, with the right choke points it is possible to eliminate the guards in an area. – IMHO, this is kindof useful for learning the location of certain key items, and getting familiar with the layout of a map.</p>
-<hr />
-<p>So far I’ve spent my time only in one map. But I’ve poured more time into it than a typical Call of Duty campaign, so I’m kindof impressed by how the game manages to achieve a degree of “replayability”.</p>
 ]]></summary>
 </entry>
 
