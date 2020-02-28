@@ -8,8 +8,100 @@
         <name>Richard Goulter</name>
         <email>richard.goulter+blog@gmail.com</email>
     </author>
-    <updated>2020-01-25T00:00:00Z</updated>
+    <updated>2020-02-28T00:00:00Z</updated>
     <entry>
+    <title>Early Impression of Elm</title>
+    <link href="http://www.rgoulter.com/blog//posts/programming/2020-02-28-early-impression-of-elm-lang.html" />
+    <id>http://www.rgoulter.com/blog//posts/programming/2020-02-28-early-impression-of-elm-lang.html</id>
+    <published>2020-02-28T00:00:00Z</published>
+    <updated>2020-02-28T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<div class="info">
+    Posted on February 28, 2020
+    
+        by Richard Goulter
+    <br/>
+    
+    Tags: 
+    
+</div>
+
+<p>Recently I wrote some Elm-lang code as part of a casual side-project.</p>
+<p>The Elm program was simple, though non-trivial.<br />
+The program was a UI for making notes from emails. The Elm program presented a list of emails for the user to select, and let the user CRUD a note for the selected email.</p>
+<p>Some changesets: - https://github.com/rgoulter/simple-email-data-tool/pull/1/files Initially adding the Elm program with Travis-CI config, RSpec spec with Capybara, and the Elm program. - https://github.com/rgoulter/simple-email-data-tool/pull/5 Changing from a <code>&lt;select/&gt;</code> to a <code>&lt;table&gt;</code> for one of the widgets. (I was surprised by how easy this change was). - https://github.com/rgoulter/simple-email-data-tool/pull/6/files Adding keybindings to the input. - https://github.com/rgoulter/simple-email-data-tool/pull/8/files Adding date filtering, using a third-party pure-Elm library.</p>
+<h3 id="where-im-coming-from">Where I’m Coming From</h3>
+<ul>
+<li><p>I’d be lying if I said I was very experienced with front-end code. e.g. I can’t think of any big mistakes I’ve made and things I’ve learned from said mistakes. The basics are straightforward; and a deep understanding of front-end web development requires an appreciation for all aspects of how a web browser works, which isn’t easy.</p></li>
+<li>On the continuum of ‘liberal programmer’ (“if it breaks, just fix it”; likes Python, Ruby) to ‘conservative programmer’ (wants to know if it works at compile time; likes Haskell) I’m towards the ‘conservative’ end.
+<ul>
+<li>I’m inclined to like Elm.</li>
+</ul></li>
+</ul>
+<h3 id="what-i-didnt-like-about-elm">What I Didn’t Like About Elm</h3>
+<ul>
+<li>I was surprised that some things in Elm were (much) harder than they would be in JavaScript.
+<ul>
+<li>I wasn’t able to figure out how to nicely access the query parameters of the URI. (I ended up getting something which could access the query parameters at a specific path; but I couldn’t figure it out for any arbitrary path). This is an example of “easy in JavaScript, hard in Elm”.
+<ul>
+<li>While I found this frustrating, I think the Elm-lang documentation makes it clear <em>why</em> it makes this kind of thing ‘hard’.
+<ul>
+<li>Elm is all about removing footguns. In this case, easy access to the window’s URI query params would introduce impurity; so, to access window’s URI your Elm program also need to ‘manage’ the URI.</li>
+</ul></li>
+<li>But I would anticipate further “of <em>course</em> that wouldn’t be straightforward in Elm” when considering Elm as a language.</li>
+</ul></li>
+</ul></li>
+<li><p>e.g. I wouldn’t wanna write this blog website’s page with Elm, since the Elm runtime is JavaScript; so if I used Elm then it wouldn’t be accessible to users with JavaScript disabled.</p></li>
+<li><p>I still have to look into idioms or idiosyncracies about combining modules together. I’m not sure I ‘get’ it, or if the approach I took was stupid or fine.</p></li>
+</ul>
+<h3 id="what-i-found-interesting-about-elm">What I Found Interesting About Elm</h3>
+<ul>
+<li>The Elm Architecture. The restricted nature of Elm’s code means that, while code still doesn’t magically end up well designed, it still ends up being somewhat (or close to) idiomatic.
+<ul>
+<li>My experience with GUIs other than Elm has been with languages that allow you to more/less update the code’s state from anywhere.</li>
+<li>With Elm, you have a ‘model’ Algebraic type, a ‘message’ Algebraic type.
+<ul>
+<li>Anything the Elm program needs to care about goes in its model.</li>
+<li>Any ‘action’ that might happen in the Elm program is represented by a message.</li>
+<li>The only place the model gets changes is in its update function.</li>
+<li>The only way effects happen is through messages.</li>
+</ul></li>
+<li>The question becomes “what nouns, what verbs do I want in this system? What is each noun? What does each verb do?”.</li>
+</ul></li>
+<li>Because of that explicitness and lack of mutation, edge cases (and race conditions) are surfaced.</li>
+</ul>
+<h3 id="what-i-liked-about-elm">What I Liked About Elm</h3>
+<ul>
+<li><p>It’s not JavaScript. Programming in JavaScript is .. fine. But I don’t particularly like JavaScript. It feels very blobbish.</p></li>
+<li><p>95% of the time it’s a joy to write in Elm. (Most of the time it’s not a joy to write in are the times when you’re trying to do something which would be easy to do in JavaScript. Or with impurity like time/randomness).</p></li>
+<li><p>Elm mostly has the “if it compiles it works” aspect to it.</p></li>
+<li>Elm programs/modules are self contained and small.
+<ul>
+<li>Everything you need in a module must be explicitly imported.</li>
+<li>The lack of mutation means things are much more explicit.</li>
+</ul></li>
+<li><p>Elm’s record syntax is nicer than Haskell’s.</p></li>
+</ul>
+<h3 id="my-development-experience">My Development Experience</h3>
+<ul>
+<li><p>I mocked the API that my Elm program would call with simple Ruby’s Sinatra servers.</p></li>
+<li><p>I wrote RSpec specs which would compile the Elm program before running Selenium tests against the Elm program.</p></li>
+<li><p>My program wasn’t sophisticated enough to need much development work on components individually. But I did find it easy enough to use “elm reactor” (compiles + serves the Elm source) to focus on one component at a time.</p></li>
+<li>I developed my Elm program using Emacs. The most popular elm-mode gave me syntax highlighting. I didn’t feel the need to make use of elm-mode’s other IDE features.
+<ul>
+<li>For code completion: I developed my Elm program on Windows. There’s an Elm language server. Unfortunately, I think because Windows is slow at launching processes, I found it was too slow for me to use with Emacs on Windows.</li>
+</ul></li>
+<li><p>I didn’t make good use of it, but there is support in universal-ctags.</p></li>
+</ul>
+<h3 id="would-i-use-it">Would I Use It?</h3>
+<p>After having used it for a side-project, without the burden of needing to ship something reliable by some deadline:</p>
+<p>Yes, I’m quite happy with the experience.</p>
+<p>Obivously I’m interested in liking it, though; and this wasn’t a high-risk project, so:<br />
+What situations/cases would I not recommend using it for?<br />
+- Projects which benefit from a rapid prototyping/delivery (e.g. code maintainability/quality can be traded off) by an experienced team which lacks any experience Elm. - Projects which already show evidence of some kind of a “lava flow” antipattern, or projects where using Elm is likely to lead (or contribute) to an anti-pattern like this. - Projects where Elm is chosen without consideration for <a href="https://mcfunley.com/choose-boring-technology">‘Choose Boring Technology’</a>. - If I were given responsibility to maintain some front-end application code which was poorly written in JavaScript using ReactJS: - While it’s possible to interop Elm and JavaScript, I think the complexity of the same maintainers mixing the code would outweigh benefits of using Elm. - etc.</p>
+<p>I think websites would be better maintained if they were developed with the discipline that Elm does a lot to help.</p>
+]]></summary>
+</entry>
+<entry>
     <title>On Agile</title>
     <link href="http://www.rgoulter.com/blog//posts/programming/2020-01-25-on-agile.html" />
     <id>http://www.rgoulter.com/blog//posts/programming/2020-01-25-on-agile.html</id>
@@ -334,99 +426,6 @@ It’s typically straightforward that the ‘interface’ is all the code in the
 Whereas, tests should “tell a story”. (They should use “Descriptive and Meaningful Phrases” rather than be ‘DRY’).<br />
 With all-in-code specs, if a test step is re-used, then either subsequent steps are nested (which may be hard to read) or copy-pasted elsewhere in the test code. - Cucumber’s approach is to organise test code by step definitions. So, to see the full code listing for a test scenario, you have to view each step definition.<br />
 Each step may be “DAMP”, but not the whole scenario.</p>
-]]></summary>
-</entry>
-<entry>
-    <title>"Patch Grid" Sounds Like a Useful Editor Technique</title>
-    <link href="http://www.rgoulter.com/blog//posts/programming/2018-12-18-patch-grid-sounds-a-useful-editor-technique.html" />
-    <id>http://www.rgoulter.com/blog//posts/programming/2018-12-18-patch-grid-sounds-a-useful-editor-technique.html</id>
-    <published>2018-12-18T00:00:00Z</published>
-    <updated>2018-12-18T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<div class="info">
-    Posted on December 18, 2018
-    
-        by Richard Goulter
-    <br/>
-    
-    Tags: 
-    
-</div>
-
-<p>I came across a link to Austin Henley’s dissertation <a href="http://web.eecs.utk.edu/~azh/pubs/Henley2018bDissertation.pdf">“Human Centric Tools for Code Navigation”</a>.</p>
-<p>There are three interesting tools discussed Henley discusses for navigating code:</p>
-<ul>
-<li><p>navigating code you’re working on now</p></li>
-<li><p>navigating through the history of code you’re working on<br />
-(though his tool is for visual dataflow languages)</p></li>
-<li><p>navigating the structure of the code you’re working on</p></li>
-</ul>
-<h2 id="ribbon-of-open-files-is-a-great-idea">“Ribbon” of Open Files is a Great Idea</h2>
-<p>Of these, I found the “navigating code you’re working on” most exciting. The “navigating through history of code” discussed was aimed at visual dataflow languages; and tools to navigate code structure sound cool but it’s probably a difficult tool to get working outside of full-fledged IDEs.</p>
-<p>Henley’s Patchworks sounds like it’d be useful for navigating code you’re currently working on. <a href="https://www.youtube.com/watch?v=GwcxDZT3pXE">Short video visualising the idea</a>. I’d describe it this way:</p>
-<ul>
-<li>A scrollable pair of tiled rows of editing panes.</li>
-<li>A “ribbon” is the 2*m array of open files.</li>
-<li>A “patch grid” is the grid / scroll viewport over the open files.</li>
-</ul>
-<p>That is, your editor window shows a 2x3 grid (2 rows, 3 column) grid of editing panes, and you can scroll the open files.</p>
-<p>This is comparable to navigating multiple “desktops” in window managers. (A feature so useful that now even Windows has this out of the box).</p>
-<p>I think it’s also worth mentioning a couple of details:</p>
-<ul>
-<li>It’s beneficial if the user can quickly “zoom” into the split tab pane. (e.g. Tmux has split panes, but also offers a “zoom into pane” feature).
-<ul>
-<li>Although “keep the unit of code you’re editing small enough that it can be managed in a pane” sounds a nice ideal.</li>
-</ul></li>
-<li>Henley’s Patchworks offers a “zoomed out” view of the ribbon, so that it’s easy to recognise which open files are where in the ribbon.</li>
-</ul>
-<h3 id="reasons-to-be-excited">Reasons to Be Excited</h3>
-<p>I think there are many reasons to be excited for this idea:</p>
-<ol type="1">
-<li><p>I might not be the most eloquent, but I feel like it’s relatively easy to to describe in terms of features developers are used to at the moment. Scrolling, editing panes, tiling.</p></li>
-<li>I feel this idea is kinda-sorta close to workflows I like at the moment.
-<ul>
-<li>e.g. in vim I <em>love</em> using unimpaired so that I can press <code>[b</code> and <code>]b</code> to switch between “previous buffer” and “next buffer”. (buffer = “open file” in vim terminology).</li>
-<li>e.g. I love switching between multiple desktops. Usually I’ll have “terminal”, “IDE”, and “internet browser” as a working group of 3 desktops focused on the same task.</li>
-<li>e.g. I already often split the panes to make use of “code I’m working on” and “output”. Plugins like <a href="https://github.com/epeli/slimux">slimux</a> make use of this idiom.</li>
-</ul></li>
-<li><p>The editing programs developers use tend to have split editing panes. So, “scroll a ‘ribbon’ of files through a grid of editing panes” seems like it’s a feature which can be implemented broadly.</p></li>
-<li><p>I feel that the workflow of: “I’m looking at these functions (which aren’t all next to each other in the same file” is fundamental to maintaining non-trivial software.<br />
-The idea of a “patch grid” sounds like it supports this workflow better than “switch between files in the editing pane”.</p></li>
-</ol>
-<h3 id="reasons-to-not-be-excited">Reasons to Not Be Excited</h3>
-<p>I even made an effort at writing <a href="https://github.com/rgoulter/buffer-ribbon.el">a plugin for Emacs</a>, so I’ll be trying the idea out. (It’s usable, but still a work in progress).</p>
-<h4 id="navigating-to-another-file-is-already-very-quick">Navigating To Another File is Already Very Quick</h4>
-<p>“Navigating” to a different file is something that’s already <em>really</em> easy in modern editing environments.<br />
-e.g. in an IDE I can have a “jump to file/function” with fuzzy searching which takes as long as “command invocation + type query + select result”.</p>
-<p>The discussion in the dissertation is comparing how long it takes developers to navigate to files using Patchworks vs Eclipse IDE; but AFAICT the users were using the mouse to navigate files.</p>
-<p>But, using the keyboard to control a text editor can be very quick, so I think it oversells the idea that the benefit is in navigation speed.<br />
-I might believe that using “patch grid + scrollable ribbon” would allow for less time navigating for power-users of an editor across an editing session. But that feels like a less tangible benefit.</p>
-<h4 id="editors-already-support-grid-of-split-editing-panes">Editors Already Support Grid of Split Editing Panes</h4>
-<p>The ‘novel’ idea to me of Henley’s Patchworks is the “ribbon” of open files that the editor should be able to scroll through.</p>
-<p>A “patch grid” minus scrolling the “ribbon” is just a 2x3 grid of editing panes, which editors already support at the moment.<br />
-People don’t commonly split panes in IDEs, and AFAICT it’s uncommon to see people use 2x3 grids of panes <em>like that</em>.<br />
-I think people don’t use them because it’s difficult to set up, and there’s hardly an obvious benefit to splitting an editing pane into <em>6</em>.<br />
-(Right now, I split an editing pane into <em>2</em> all the time).</p>
-<p>Maybe the idea of a scrolling ribbon means that it’s less of a hassle to work with a set of open files with a grid of editing panes. (You don’t have to decide which open file to replace; you just have to scroll the ribbon over and open in an unused tile).</p>
-<h4 id="existing-workflows-already-work">Existing Workflows Already Work</h4>
-<p>Editors / IDEs these days are <em>packed</em> with all sorts of complicated features such as multiple cursors or multiline editing.<br />
-There may be features that would be more efficient ways of doing what I want to achieve that my editor already has. I have to go out and deliberately try to improve.<br />
-Most of the time, whatever you’re doing to get the work done is good enough as it is.</p>
-<p>If making effective use of a “patch grid” (and scrolling it) isn’t intuitive out-of-the-box (or from seeing someone else make use of it, I guess) then it might not be worth picking up.</p>
-<p>That said,<br />
-not every user is a fan of “keyboard for everything”, and if using a “patch grid” is a big navigation improvement over other mouse-oriented workflows, maybe that’s good enough.</p>
-<h4 id="benefits-of-patch-grid-and-ribbon-may-be-unclear-and-unintuitive">Benefits of Patch Grid and Ribbon May Be Unclear and Unintuitive</h4>
-<p>My impression is that a big benefit to a “patch grid”‘s structuring “open working set of files” this way isn’t exactly “see everything you need to see at once” so much as the mental model of a ’ribbon’ of buffers makes better use of <em>associative memory</em>, <em>episodic memory</em>, and <em>spatial memory</em>. (cf. section 2.4 “Human Memory of Code Navigation” of Henley’s dissertation).</p>
-<p>I’d think a workflow of “quickly switch to other open file in the current editing pane” requires the developer to remember the code in the other files in their working set of open files.<br />
-So, surely a “patch grid” of open files make better use of associative/spacial memory than “quickly switch to another file” allows.</p>
-<p>Henley’s dissertation discusses that one recommendation is to use the ribbon chronologically, by putting newer open files to the right of currently occupied panes.<br />
-I’m curious to try this out for myself, I’m curious to see how easy it can be to scroll the ribbon to open a different file, compared to just switching the file in the current editing pane.</p>
-<h4 id="on-a-laptop-screen-2x3-grid-panes-are-really-tiny">On a Laptop Screen, 2x3 Grid Panes are Really Tiny</h4>
-<p>2x3 isn’t a magical grid size set in stone.<br />
-“2 rows of tiles” is more restrictive than a free-form 2D canvas of editing panes.<br />
-Maybe “3 columns of a pair of editing panes” a good number of editing panes to fit in human memory.</p>
-<p>But from what I’ve tried on even a 15&quot; laptop screen, a 2x3 grid of tiles feels like editing in a grid pane is an editor pane for ants.<br />
-This doesn’t matter <em>much</em>, since I think the benefit of a patch grid isn’t “editing in the grid panes”.</p>
-<p>I’ll have to try it on a larger screen to see the difference.</p>
 ]]></summary>
 </entry>
 

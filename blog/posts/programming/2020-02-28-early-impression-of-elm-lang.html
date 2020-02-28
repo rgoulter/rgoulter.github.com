@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>On Agile - Richard Goulter's Blog</title>
+        <title>Early Impression of Elm - Richard Goulter's Blog</title>
 
         <!-- My (Old) CSS theme -->
         <link rel="stylesheet" type="text/css" href="../../css/default.css" />
@@ -127,9 +127,9 @@
             <hr style="margin: 0px; border-top: 5px solid black;" />
 
             <div id="content" class="container">
-                <h1>On Agile</h1>
+                <h1>Early Impression of Elm</h1>
                 <div class="info">
-    Posted on January 25, 2020
+    Posted on February 28, 2020
     
         by Richard Goulter
     <br />
@@ -138,33 +138,88 @@
     
 </div>
 
-<p>“Agile”, “Scrum” and “Kanban” all get a rather bad reputation among developers on the internet. They seem to work well for <em>some</em> teams, but for others these are <a href="https://media.defense.gov/2018/Oct/09/2002049591/-1/-1/0/DIB_DETECTING_AGILE_BS_2018.10.05.PDF">“waterfall or spiral development in agile clothing”</a>.</p>
-<p>At worst, teams take tasks off a todo list however they would anyway and call it ‘agile’.</p>
-<p>At best, maybe the differences can be explained as “‘agile’ works well for some kinds of development work; but not well for others” (I’m not convinced by this as-such) or “‘agile’ works well for good teams. For good teams, anything would work well”. (Which wouldn’t mean ‘agile’ is useless; so much as, it’s not a silver bullet).</p>
-<p>But <em>part</em> of the disagreement, I think, comes from the ol’ “people using the same words to refer to different things”. Especially people with different understandings, let alone experiences.</p>
-<p>I’d come across the terms ‘kanban’ and ‘kanban board’ for years before I picked up a book which discussed kanban. I was surprised to see the idea of a kanban board was related to principles: visualize the workflow, limit work in progress.<br />
-“Either a worker is idle or a task is idle”. The idea is to maximise ‘flow’ of tasks. Limiting work in progress and visualizing it on a board ought to help identify bottlenecks, which can be addressed.</p>
-<p>Beyond that, there are all sorts of details as to tactics and techniques for implementing this. But the basic idea sounds ‘obvious’ and intuitive and, for some workflows, a good idea.</p>
-<p>I, uh, don’t know if a ‘kanban board’ can properly be called a ‘kanban board’ if these principles aren’t followed. I suspect places which just use the column-of-tasks aren’t likely to follow “limit WIP”. But I suspect most places which don’t follow “limit WIP” are still happy to say they “do kanban” and are agile.</p>
-<p>In any case, it seems unprofessional that so many development teams would be using ‘kanban’ or ‘scrum’ but without following (or knowing) the key ideas. I think this is because agile <em>sounds</em> hip.</p>
-<hr />
-<p>Being surprised about ‘kanban’, I’ve decided to read up on ‘scrum’. (The one with ‘sprints’ and stuff).</p>
-<p>At a glance, it seems to have the same “oh <em>that</em> makes sense” as kanban, as <em>well</em> as “…because of these underlying values”.</p>
-<p>But the book I was reading pointed out: <em>of course</em> if the team doesn’t have psychological safety / trust / respect for each other, then ‘scrum’ isn’t going to work.</p>
-<p>I’d guess there’s still value in following a process in order to try and surface problems. But surely a political and unsafe team isn’t going to identify or address problems easily.</p>
-<p>I think, then, the hype over ‘agile’ is a bit misplaced.<br />
-Not because the ideas around it are worthless so much as the heavy-lifting of effective teams seems to be the psychological safety aspect.<br />
-From there, I think the ‘agile’ ideas make sense for a reasonably wide variety of work. (I imagine obstacles like: e.g. a focus on small improvements may obscure long-term strategic mistakes).</p>
+<p>Recently I wrote some Elm-lang code as part of a casual side-project.</p>
+<p>The Elm program was simple, though non-trivial.<br />
+The program was a UI for making notes from emails. The Elm program presented a list of emails for the user to select, and let the user CRUD a note for the selected email.</p>
+<p>Some changesets: - https://github.com/rgoulter/simple-email-data-tool/pull/1/files Initially adding the Elm program with Travis-CI config, RSpec spec with Capybara, and the Elm program. - https://github.com/rgoulter/simple-email-data-tool/pull/5 Changing from a <code>&lt;select/&gt;</code> to a <code>&lt;table&gt;</code> for one of the widgets. (I was surprised by how easy this change was). - https://github.com/rgoulter/simple-email-data-tool/pull/6/files Adding keybindings to the input. - https://github.com/rgoulter/simple-email-data-tool/pull/8/files Adding date filtering, using a third-party pure-Elm library.</p>
+<h3 id="where-im-coming-from">Where I’m Coming From</h3>
+<ul>
+<li><p>I’d be lying if I said I was very experienced with front-end code. e.g. I can’t think of any big mistakes I’ve made and things I’ve learned from said mistakes. The basics are straightforward; and a deep understanding of front-end web development requires an appreciation for all aspects of how a web browser works, which isn’t easy.</p></li>
+<li>On the continuum of ‘liberal programmer’ (“if it breaks, just fix it”; likes Python, Ruby) to ‘conservative programmer’ (wants to know if it works at compile time; likes Haskell) I’m towards the ‘conservative’ end.
+<ul>
+<li>I’m inclined to like Elm.</li>
+</ul></li>
+</ul>
+<h3 id="what-i-didnt-like-about-elm">What I Didn’t Like About Elm</h3>
+<ul>
+<li>I was surprised that some things in Elm were (much) harder than they would be in JavaScript.
+<ul>
+<li>I wasn’t able to figure out how to nicely access the query parameters of the URI. (I ended up getting something which could access the query parameters at a specific path; but I couldn’t figure it out for any arbitrary path). This is an example of “easy in JavaScript, hard in Elm”.
+<ul>
+<li>While I found this frustrating, I think the Elm-lang documentation makes it clear <em>why</em> it makes this kind of thing ‘hard’.
+<ul>
+<li>Elm is all about removing footguns. In this case, easy access to the window’s URI query params would introduce impurity; so, to access window’s URI your Elm program also need to ‘manage’ the URI.</li>
+</ul></li>
+<li>But I would anticipate further “of <em>course</em> that wouldn’t be straightforward in Elm” when considering Elm as a language.</li>
+</ul></li>
+</ul></li>
+<li><p>e.g. I wouldn’t wanna write this blog website’s page with Elm, since the Elm runtime is JavaScript; so if I used Elm then it wouldn’t be accessible to users with JavaScript disabled.</p></li>
+<li><p>I still have to look into idioms or idiosyncracies about combining modules together. I’m not sure I ‘get’ it, or if the approach I took was stupid or fine.</p></li>
+</ul>
+<h3 id="what-i-found-interesting-about-elm">What I Found Interesting About Elm</h3>
+<ul>
+<li>The Elm Architecture. The restricted nature of Elm’s code means that, while code still doesn’t magically end up well designed, it still ends up being somewhat (or close to) idiomatic.
+<ul>
+<li>My experience with GUIs other than Elm has been with languages that allow you to more/less update the code’s state from anywhere.</li>
+<li>With Elm, you have a ‘model’ Algebraic type, a ‘message’ Algebraic type.
+<ul>
+<li>Anything the Elm program needs to care about goes in its model.</li>
+<li>Any ‘action’ that might happen in the Elm program is represented by a message.</li>
+<li>The only place the model gets changes is in its update function.</li>
+<li>The only way effects happen is through messages.</li>
+</ul></li>
+<li>The question becomes “what nouns, what verbs do I want in this system? What is each noun? What does each verb do?”.</li>
+</ul></li>
+<li>Because of that explicitness and lack of mutation, edge cases (and race conditions) are surfaced.</li>
+</ul>
+<h3 id="what-i-liked-about-elm">What I Liked About Elm</h3>
+<ul>
+<li><p>It’s not JavaScript. Programming in JavaScript is .. fine. But I don’t particularly like JavaScript. It feels very blobbish.</p></li>
+<li><p>95% of the time it’s a joy to write in Elm. (Most of the time it’s not a joy to write in are the times when you’re trying to do something which would be easy to do in JavaScript. Or with impurity like time/randomness).</p></li>
+<li><p>Elm mostly has the “if it compiles it works” aspect to it.</p></li>
+<li>Elm programs/modules are self contained and small.
+<ul>
+<li>Everything you need in a module must be explicitly imported.</li>
+<li>The lack of mutation means things are much more explicit.</li>
+</ul></li>
+<li><p>Elm’s record syntax is nicer than Haskell’s.</p></li>
+</ul>
+<h3 id="my-development-experience">My Development Experience</h3>
+<ul>
+<li><p>I mocked the API that my Elm program would call with simple Ruby’s Sinatra servers.</p></li>
+<li><p>I wrote RSpec specs which would compile the Elm program before running Selenium tests against the Elm program.</p></li>
+<li><p>My program wasn’t sophisticated enough to need much development work on components individually. But I did find it easy enough to use “elm reactor” (compiles + serves the Elm source) to focus on one component at a time.</p></li>
+<li>I developed my Elm program using Emacs. The most popular elm-mode gave me syntax highlighting. I didn’t feel the need to make use of elm-mode’s other IDE features.
+<ul>
+<li>For code completion: I developed my Elm program on Windows. There’s an Elm language server. Unfortunately, I think because Windows is slow at launching processes, I found it was too slow for me to use with Emacs on Windows.</li>
+</ul></li>
+<li><p>I didn’t make good use of it, but there is support in universal-ctags.</p></li>
+</ul>
+<h3 id="would-i-use-it">Would I Use It?</h3>
+<p>After having used it for a side-project, without the burden of needing to ship something reliable by some deadline:</p>
+<p>Yes, I’m quite happy with the experience.</p>
+<p>Obivously I’m interested in liking it, though; and this wasn’t a high-risk project, so:<br />
+What situations/cases would I not recommend using it for?<br />
+- Projects which benefit from a rapid prototyping/delivery (e.g. code maintainability/quality can be traded off) by an experienced team which lacks any experience Elm. - Projects which already show evidence of some kind of a “lava flow” antipattern, or projects where using Elm is likely to lead (or contribute) to an anti-pattern like this. - Projects where Elm is chosen without consideration for <a href="https://mcfunley.com/choose-boring-technology">‘Choose Boring Technology’</a>. - If I were given responsibility to maintain some front-end application code which was poorly written in JavaScript using ReactJS: - While it’s possible to interop Elm and JavaScript, I think the complexity of the same maintainers mixing the code would outweigh benefits of using Elm. - etc.</p>
+<p>I think websites would be better maintained if they were developed with the discipline that Elm does a lot to help.</p>
 
 
 <hr />
 
 <div>
     
-    <a href="../../posts/programming/2020-02-28-early-impression-of-elm-lang.html" style="float:left;">Newer post</a>
     
-    
-    <a href="../../posts/politics/2019-12-14-on-2019-election-results.html" style="float:right; text-align: right;">Older post</a>
+    <a href="../../posts/programming/2020-01-25-on-agile.html" style="float:right; text-align: right;">Older post</a>
     
 </div>
 <br style="clear: both;" />
