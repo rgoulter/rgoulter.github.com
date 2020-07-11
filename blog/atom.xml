@@ -8,8 +8,164 @@
         <name>Richard Goulter</name>
         <email>richard.goulter+blog@gmail.com</email>
     </author>
-    <updated>2020-03-10T00:00:00Z</updated>
+    <updated>2020-07-08T00:00:00Z</updated>
     <entry>
+    <title>My Experience with the Dvorak Keyboard Layout</title>
+    <link href="http://www.rgoulter.com/blog//posts/programming/2020-07-08-my-experience-with-dvorak-keyboard-layout.html" />
+    <id>http://www.rgoulter.com/blog//posts/programming/2020-07-08-my-experience-with-dvorak-keyboard-layout.html</id>
+    <published>2020-07-08T00:00:00Z</published>
+    <updated>2020-07-08T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<div class="info">
+    Posted on July  8, 2020
+    
+        by Richard Goulter
+    <br/>
+    
+    Tags: 
+    
+</div>
+
+<p>One customization that some computer power users make is to use a different keyboard layout.</p>
+<p>Back when I was a student at University I took the time to learn to use Dvorak layout.<br />
+I can’t remember why I stopped using it, but I had reverted to using QWERTY layout since then.</p>
+<p>Recently I started doing my main development work on a new computer. I decided to pick up the Dvorak layout again. (I think this was because I was looking at fancy ergonomic custom keyboards, and was reminded that I could be doing better than what I was using).</p>
+<p>I’ve heard people say that the Dvorak layout is ‘faster’ than QWERTY. This is at least suggested because the layout used by the world record for fastest typing was using a Dvorak layout.<br />
+For myself, my typing speed on the somewhat contrived typing tests is still slower with Dvorak than with QWERTY.<br />
+However, the significant difference is comfort. – I never seriously took the time to do touch-typing drills and use the proper fingers for each key with QWERTY. (e.g. I’ve noticed that I’ll sometimes push the ‘y’ with my left hand index finger; e.g. in “anyone”, “my”, or “really”, but not for “you”). I don’t think this is uncommon. On the one hand, I find typing with QWERTY effortless. On the other hand, whenever I use QWERTY after using Dvorak, my hands feel cramped or choked. My hands must dance their way around the keyboard, not for exotic letters, but just for ordinary flow. With Dvorak, it feels more ‘right’.</p>
+<p>In terms of switching between the two:</p>
+<p>I think during the training period while I was learinig the Dvorak layout, my typing speed was <strong>significantly</strong> slower than normal, especially when I tried Dvorak. Typos were also extremely common. I’d guess this is due to the ‘motor memory’ of the hands being confused as to which finger is supposed to be where to type which letters.<br />
+When I was recently picking up Dvorak as my main layout for work again: I use the Dvorak layout on my work computer, and QWERTY on my home computer. Using different keyboards for different layouts makes this much easier. (Again, my guess is the ‘motor memory’ has an easier time distinguishing the different layouts on different keyboards). Picking up Dvorak again is <em>mostly</em> like riding a bike again. My fingers didn’t quite forget everything. But, while I was still getting back up to speed, I tried using a colleague’s QWERTY keyboard and was very slow.</p>
+<p>Unfortunately, this makes it significantly harder to recommend changing layouts to anyone who needs to type a lot.<br />
+Maybe using a different keyboard to learn the layout would mitigate the effect, since your fingers can always use QWERTY on whatever other keyboard you use.</p>
+<p>It’s also not a very big issue that the letters on the keycaps don’t match the letters you type into the keyboard. (The number keys and function keys will be the same anyway).</p>
+<p>In terms of using software like Vim or Emacs which heavily rely on keybindings: In general, I think my mindset has the added indirection of ‘thinking’ about the letter to invoke the command, rather than the physical motion. - On Dvorak, the common shortcuts Ctrl-C, Ctrl-V, etc.: suck. This is made worse by that usually you’ll want to use these commands in tandem with using a mouse. So you won’t have both hands on the keyboard. - With using Dvorak with Vim: ‘h’ is still to the left of ‘l’; ‘j’ and ‘k’ are right beside each other. I was using Vim for a long time before I noticed that I use pretty much every key on the keyboard. The other keys in Dvorak are still there, just in different places, and I don’t give it much thought. - With using Dvorak with Emacs: C-x sucks. (For me this is somewhat mitigated: I use Evil, and can use the spacebar for things that I use frequently). But similarly, ‘p’ is still above ‘n’.</p>
+<p>I’m not especially keen to try out other keyboard layouts after having gone through the effort to train with the Dvorak layout. If I were to pick up another layout today, though, I’d love to look at the Workman layout.</p>
+]]></summary>
+</entry>
+<entry>
+    <title>Re-reading High Fidelity</title>
+    <link href="http://www.rgoulter.com/blog//posts/narrative/2020-05-29-rereading-high-fidelity.html" />
+    <id>http://www.rgoulter.com/blog//posts/narrative/2020-05-29-rereading-high-fidelity.html</id>
+    <published>2020-05-29T00:00:00Z</published>
+    <updated>2020-05-29T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<div class="info">
+    Posted on May 29, 2020
+    
+        by Richard Goulter
+    <br/>
+    
+    Tags: 
+    
+</div>
+
+<p>I recently re-read Nick Hornby’s “High Fidelity”.</p>
+<p>I love this story.<br />
+It’s about a guy who’s a total music geek, and bit of a loser; and it’s a coming-of-age story as he ruminates over his romantic life.</p>
+<p>One of the reasons I find the story fascinating is it’s narrated with the narrator’s stream-of-conscious.<br />
+I love stream-of-conscious narratives. (Or I haven’t read many bad ones, anyway).<br />
+Sometimes the narrator comes up with what sounds like insightful claims (like asking whether people listen to sad pop music because they’re sad, or whether they’re sad because they listen to sad pop music. Or … Or …). I can’t say I caught it the first time, but this is in-line with the main character’s personality.. the narrator’s mind comes up with all sorts of bullshit. – But (since it’s a coming-of-age story) the main character is immature, and never quite carries any of these thoughts through enough to improve himself.</p>
+<p>I don’t often come across stories where the character is realistically miserable, but also charmingly redeemed.<br />
+(And, I guess, it’s also nice to see a character who is not very considerate, but not malicious either).</p>
+<p>Another reason I love this story is the rumination over the previous rejections.<br />
+The narrator thinks <em>way</em> too much about the past, and (as he discovers) the way he thought about these times he got rejected didn’t really represent the reality of what occurred.</p>
+<p>The movie “Definitely, Maybe” has (if you squint) similarities to this.<br />
+In “Definitely, Maybe”, the main character is getting divorced. The main character narrates his history of romantic relationships (to his daughter) to show how things went wrong.<br />
+And in “High Fidelity”, his girlfriend has just broken up with him, etc.<br />
+Albeit, it’s more apparent that “Definitely, Maybe” is a sweet story.</p>
+<p>I didn’t catch it (or didn’t remember it) from the times I’d read the book years ago what his most-recent girlfriend saw in him. Said woman has a high-paying job (where our narrator does not), has many friends (where our narrator does not), etc. But she does explain it to him.</p>
+<p>I’d say what I disliked the most, upon re-reading it, was that the coming-of-age aspect doesn’t come from an internal realisation of the character, but from a huge amount of external aid. (And not even just from reading a book telling him to make his bed).</p>
+]]></summary>
+</entry>
+<entry>
+    <title>Long Tail of Org-Mode Features are Compelling</title>
+    <link href="http://www.rgoulter.com/blog//posts/programming/2020-05-02-long-tail-of-org-mode-features-are-compelling.html" />
+    <id>http://www.rgoulter.com/blog//posts/programming/2020-05-02-long-tail-of-org-mode-features-are-compelling.html</id>
+    <published>2020-05-02T00:00:00Z</published>
+    <updated>2020-05-02T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<div class="info">
+    Posted on May  2, 2020
+    
+        by Richard Goulter
+    <br/>
+    
+    Tags: 
+    
+</div>
+
+<p>One of the things I don’t like so much about proselytising of Emacs’ org-mode is mentioning the vast swarth of features org-mode has.<br />
+Partly I think it’s ‘intimidating’ to see a bit list of features and be told “you have to learn this, it’s great”. (See <a href="https://orgmode.org/manual/">the org mode manual</a> table of contents for an overview).<br />
+Partly because the use of those features strikes me as a “long tail”. I’ve tried most of the org-mode features, but most of the time I’m not using most of them.</p>
+<p>Org mode is good. Other tools are good.<br />
+– If there are things to consider about “what note-taking tool to use”, I’d rather think about limitations.</p>
+<p>But.<br />
+Org Mode has a wonderful synergy with plaintext.<br />
+A lot of the stuff developers work with is good with plaintext.</p>
+<p>That makes org-mode’s babel feature killer.</p>
+<p>org-mode’s babel works with chunks of code snippets.<br />
+Markdown etc. can put prose and code snippets together, but meta-info on code snippets (and keeping the output alongside the code) doesn’t seem to be as common. (I bet 80% of the power of org-babel could be had for 20% of the effort).<br />
+<a href="http://www.howardism.org/Technical/Emacs/literate-devops.html">Literate Devops</a> demonstrates a couple of use cases of: “prose, code and output in a plaintext file”.</p>
+<p>It really ought to have been obvious from the “Literal DevOps” post, but this usage of org-babel has other uses which are very useful.<br />
+e.g. for learning and exploring a codebase, I’ve found it useful as a way for keeping the output of <code>grep</code>s, <code>cloc</code>s and other commands used to explore a repo. Similarly, “keeping the output of CLI programs” naturally makes sense for tools like AWS-CLI.</p>
+]]></summary>
+</entry>
+<entry>
+    <title>Doom Eternal</title>
+    <link href="http://www.rgoulter.com/blog//posts/games/2020-03-22-doom-eternal.html" />
+    <id>http://www.rgoulter.com/blog//posts/games/2020-03-22-doom-eternal.html</id>
+    <published>2020-03-22T00:00:00Z</published>
+    <updated>2020-03-22T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<div class="info">
+    Posted on March 22, 2020
+    
+        by richardgoulter
+    <br/>
+    
+    Tags: 
+    
+</div>
+
+<h2 id="hype">Hype</h2>
+<p>I watched several interviews the Doom Eternal’s game director Hugo Martin on YouTube.</p>
+<p>That he played with a controller on Nightmare difficulty is impressive. That’s legit. (<a href="https://www.youtube.com/watch?v=TzqR04OoTg4">Pax East 2020</a>, from 5:20 onwards).</p>
+<p>The <a href="https://www.youtube.com/watch?v=TzqR04OoTg4">Noclip podcast</a> with him is also excellent.<br />
+I was surprised to see Hugo Martin say things like: - After Doom 2016, they added features to the player’s abilities. This made the gameplay <em>so boring</em> since it was too easy to never die. They fixed this by making the enemies much harder. - People mocked a video of bad gameplay from Polygon. But, this was an example of Doom 2016’s failure. - Doom 2016 is the most fun when you character is moving around the battle arena, and switching between weapons. - He cites <a href="https://www.youtube.com/watch?v=72S2aAxtZOs">clockner’s speedrun of Kadingr Sanctum</a> as a demonstration of the peak of this. - While Doom 2016’s design did allow many gamers to enter this state-of-flow “fun zone”, it was also possible to play the game i) being very good and just using one weapon the whole time ii) being very bad and killing enemies without dynamic gameplay. - Doom Eternal remediates this in its game design. It punishes players who play outside the intended playstyle. (Hugo Martin compares this to sports like basketball, where everyone is restricted to a playstyle, but it’s still fun to play/watch). - Doom Eternal aims to keep its players engaged by having challenging enemies and encounters. Frustrating the player is <em>fine</em>, so long as the player does not blame the game.</p>
+<p>The multiplayer also looked interesting.<br />
+Doom 2016 did have some kind of multiplayer, but it wasn’t popular.<br />
+Doom Eternal’s multiplayer is much closer in spirit to its single player. It’s 1v2. One player is the ‘doom slayer’. The other two play as weaker ‘demon’ units and are supported by weak AI demon units.<br />
+– Asymmetric multiplayer isn’t a new idea. But I’m not aware of popular games which are single player oriented and have multiplayer which tries to feel like single player</p>
+<p>I was hyped for this game, and pre-ordered it.</p>
+<h2 id="what-i-thought-of-the-game">What I Thought of the Game</h2>
+<p>I enjoyed it.</p>
+<p>It’s intense.<br />
+I’m not so good, but I still enjoyed it.</p>
+<p>The gameplay itself is, uh, complicated.<br />
+It builds off of Doom 2016’s gameplay.</p>
+<h4 id="recall-doom-2016s-gameplay">Recall Doom 2016’s Gameplay</h4>
+<p>Doom 2016’s gameplay seemed quite innovative. It certainly rewarded fast-paced gameplay.<br />
+The traditional way of treating a player character’s health in first person shooters was to use health packs. But this can slow down gameplay as a player with low health searches for health pickups if they are low on health. – The ‘modern’ solution to this was to allow regenerating health. This chokes gameplay all over, though. (The game needs to damage the player enough so as to avoid an invincible character. So, the player is constantly waiting to regenerate health).<br />
+Doom 2016’s solution was to: allow the player to ‘glory kill’ an enemy with low health in order to get health pickups. – A good way to get more health is to keep on attacking.</p>
+<p>Doom 2016 also had: - A chainsaw. You’d find units of fuel on the map. Chainsawing a big enemy would need 3 units of fuel, whereas chainsawing a small enemy would take only 1. Chainsawing an enemy instantly kills it, and drops plenty of ammunition for your weapons. - Grenades. Different types of grenades. You could only have one or two. While there would be grenade ammunition on the map, the game also ‘regenerated’ grenades on a timer, so you wouldn’t run out. - Secrets/unlocks, which gave points for things you could upgrade. You could upgrade a lot: - You could add an attachment to your weapon (e.g. adding mini-missiles to your machine-gun). This attachment could then itself have upgrades (e.g. can fire mini-missiles more quickly). A fully-upgraded attachment could then be ‘mastered’ (e.g. kill enough enemies with it) so then it gets better. - Passive player upgrades. e.g. An upgrade point might give more health. - Passive ability upgrades. e.g. pick up items from further away. - ‘Runes’, which provide a passive ability (e.g. player gets a speed boost after glory killing an enemy). The runes can also be ‘mastered’ so that they get better.</p>
+<h4 id="doom-eternals-additions">Doom Eternal’s Additions</h4>
+<p>Doom Eternal is mostly more complicated than <em>that</em>.<br />
+The one simpler thing is: they combine the passive abilities and upgrades for the player.</p>
+<p>It makes sense that the player begins relatively weak, and ends the game with more upgrades. Without that scale, the game would be either too overwhelming or too easy at the start.</p>
+<p>Gameplay-wise, the thing that gets more complicated than Doom 2016 is: - The game puts a strong emphasis on enemy weaknesses. You ‘can’ just shoot the enemies without considering this, but it’s <em>much</em> harder to do so. e.g. the giant fat monster with rockets for arms is much easier kill if you shoot off the rockets-launchers on its arms first. - This makes the game much more strategic/tactical to play. - You need to consider what weapons to use at each time; what you have available and what threats you’re facing. - The game really restricts the ammunition the player can carry. - This ‘encourages’ switching between weapons. - This also encourages using the chainsaw on enemies. (The player regenerates a unit of fuel if they have no fuel for the chainsaw). - The player has an ice grenade which they can use to freeze enemies, - The player has a flamethrower attachment. This also regenerates usages like the grenade does. It burns enemies. The burning enemies drop armour pickups for the player as they burn / are damaged. - …And a ‘blood punch’. Which does a large amount of damage in a small area. (It’s also used to take the armour off the armoured giant fat monster). - The game also added a ‘lives system’, allowing the player to respawn with full health if they’re killed. (Otherwise the player respawns from the latest checkpoint). This eases the fights against the most difficult enemies. (This feature can be disabled).</p>
+<p>There are more enemies of different types. Probably one or two too many. The different strengths/weaknesses really lend to the need to <strong>think</strong> in order to fight well.</p>
+<p>There are also unlocks for ‘cheat codes’ which can be used to replay a mission. (e.g. infinite ammo, semi-‘god mode’, etc.).</p>
+<h4 id="controversial-design-decisions">Controversial Design Decisions</h4>
+<p>The most controversial enemy (judging by the discussion forums) is the ‘marauder’ enemy.<br />
+It’s <em>very</em> tough, even on the easiest difficulty.<br />
+The marauder has a shield which blocks all damage. The marauder instantly raises the shield, except during a small timeframe when the marauder is attacking the player at a ‘good’ distance. (If the player is too close to the marauder, the marauder’s attack doesn’t lower its shield. Ditto if the player is too far away).</p>
+<p>I think the marauder isn’t inherently tough. It’s easier once you learn the right distance to be, and a good rhythm to attack the marauder with.<br />
+But it’s also a significantly harder encounter than other enemies. (It’s the only enemy which presents a threat when you’re using cheats, lol. It’s the only enemy that can’t otherwise just be brute forced even with the super weapons). And it’s a punishing enemy to have to learn how to play.<br />
+– I think the game didn’t do enough to ease its way up to this enemy. But it’s also in the spirit of the game’s “play it our way”.</p>
+<p>Also controversial: Doom Eternal’s addition of platforming.<br />
+I don’t think this was so bad most of the time, but there are a couple of spots where I got stuck not knowing where to go next; even when I’d played the level a few times before.<br />
+– I think it’s ‘fine’, though, since: i) if the game were 100% intense the whole time, the intensity would be less dramatic ii) it encourages the player to get a better feel for their platforming ability, which encourages the player to move around the arenas more.</p>
+<p>I saw some people also disliked: the game added more cutscenes, and more in-your-face tutorial popups. But it’s easy to disable these, so I don’t see the issue.</p>
+]]></summary>
+</entry>
+<entry>
     <title>Developer Training and Knowledge</title>
     <link href="http://www.rgoulter.com/blog//posts/programming/2020-03-10-developer-training-and-knowledge.html" />
     <id>http://www.rgoulter.com/blog//posts/programming/2020-03-10-developer-training-and-knowledge.html</id>
@@ -370,144 +526,6 @@ I’d also recommend: feel free to just ‘reset progress’ of cards you get wr
 <p>org-mode: It’s still my go-to place for organising stuff. - Tasks in org-mode; org-agenda: I’ve been pretty sloppy about this. I like the rules of thumb: “if it’s right, it will work effortlessly”, “tasks need to be well-organised, reference/notes don’t”. (“capture notes/inputs in as few places as possible” is also nice). - Tasks and Agenda: maybe I need to better organise the ‘TODOs’/tasks. Or maybe the right kinds of tasks for the right times/places. But I’m not really making use of it. - Checklists: one nice use of org-mode is it can be easy to copy-paste a checklist. I found this was useful for me for the start of the day, it would control the distraction of things I needed to do. - Reference: I’ve heard “zettelkasten” is to ‘reference’ what “getting things done” is to TODO lists. AFAIU, ‘zettelkasten’ is about keeping atomically-small reference notes, and linking between the different cards. I think one effect of trying things this way is to make it much easier to use/read the zettels when writing a zettel. I’ve started trying this with org-mode.</p>
 <p>A thought which comes to mind is that: this organising is an attempt to save time, hopefully in a way that spending time early saves time later. For a lot of computer / developer stuff, the baseline for how long it takes to find is “google search it”. My experience is: if I’ve googled it before, then I can kinda remember what I searched for and navigate the results better. The best ‘cache hit’ is, from experience, remembering/knowing it.<br />
 Anki tries to facilitate the remembering/knowing it. The best criticisms I’ve seen are that: it’s not that Anki doesn’t work, but is it worth doing? If you would benefit from knowing it, you would encounter the stuff frequently enough anyway. (I think this is why med students and language learners benefit. With languages, you don’t know “You Ain’t Gonna Need It” for low-frequency words).</p>
-]]></summary>
-</entry>
-<entry>
-    <title>The Witcher 3</title>
-    <link href="http://www.rgoulter.com/blog//posts/games/2019-11-03-the-witcher-3.html" />
-    <id>http://www.rgoulter.com/blog//posts/games/2019-11-03-the-witcher-3.html</id>
-    <published>2019-11-03T00:00:00Z</published>
-    <updated>2019-11-03T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<div class="info">
-    Posted on November  3, 2019
-    
-        by Richard Goulter
-    <br/>
-    
-    Tags: 
-    
-</div>
-
-<p>There’s a line from the recent Avengers movie going around: Hero: “You took everything from me!” Villain: “I don’t even know who you are”.</p>
-<p>This reminded me I’d experienced a moment just like that when playing The Witcher 3.<br />
-It’s a moment which I think gives a good summary of what the overall experience of playing The Witcher 3 was like. (Not the ‘best’ moments, but overall anyway).</p>
-<p>Some character ambushes you at some point as you enter some town, saying “there you are you traitor” or whatever.<br />
-But since you’re way over-levelled at this point, the fight lasts about as long as it takes you to notice the person.</p>
-<p>I google searched the ambusher’s name, which led to the wiki page which described the earlier encounter with the character. (The ambusher was angry that I’d told the royal guards where their bandit hideout was, after the bandits let me go after they caught me in a trap when I was investigating some thing or other).</p>
-<p>At best: it’s a neat encounter. It shows the game had some scripted cases where the consequences for the action play out <em>way</em> after you make the decision. (Which makes for a much more immersive role-playing experience). There’s also a rich world-building to the encounter: your actions matter and have consequences; it’s as if the characters exist and act outside of your interactions with them.<br />
-At worst: The Witcher 3’s broad appeal / accessible gameplay lends most of the game to a “follow the quest marker, do the thing” without paying much attention. And the game is so long that you’ll forget details here and there.</p>
-<p>Though, I wouldn’t pick it as an interesting example of an interaction which was an important surprise, or one which made me think. But the Witcher 3 does have moments like.</p>
-]]></summary>
-</entry>
-<entry>
-    <title>Hitman 2 and its Difficulty Curve</title>
-    <link href="http://www.rgoulter.com/blog//posts/games/2019-10-28-hitman-2-difficulty-curve.html" />
-    <id>http://www.rgoulter.com/blog//posts/games/2019-10-28-hitman-2-difficulty-curve.html</id>
-    <published>2019-10-28T00:00:00Z</published>
-    <updated>2019-10-28T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<div class="info">
-    Posted on October 28, 2019
-    
-        by Richard Goulter
-    <br/>
-    
-    Tags: 
-    
-</div>
-
-<p>I’ve been playing the recent Hitman 2 quite a bit.</p>
-<p>I never played the earlier Hitman games, but from comments I’ve seen in YouTube videos, it seems the situation is a bit analogous to the Tomb Raider series: for one, the recent games re-use the same titles as earlier games. (There’s a “Hitman 2” which was released in 2002; which is similar to how there are two games called “Tomb Raider”). But it seems that the recent games in each series are different enough from the earlier games, and you get some people bragging in a kind of “I’m so hardcore I love the early games and the new ones are bad”.</p>
-<p>Well, I enjoy Hitman 2.</p>
-<p>The criticisms I buy are: - Although the game is Single Player only, the game requires you to be online all the time. Presumably this is to support integrity of the scoreboards. (I don’t think anyone cares about the scoreboards). The most pragmatic concern here is: the game isn’t going to be playable in 10 years or so. - An interesting criticism I kinda buy is that the levels in these games all stick to the same formula, whereas levels in the older games had more variety to them. - And, uh, the more embarrassing criticism is just how sloppy the maintenance of the game seems to be. They added a <a href="https://www.youtube.com/watch?v=8ArrPgs7z-Y">‘concealable shotgun’</a> that the player could start the game with; but it was quite buggy. When starting the level, it wasn’t ‘concealed’ at all. (Did they know it didn’t work and release it anyway? Or did they not know? Or does it actually work in some situations, but not others?).</p>
-<p>These problems aside, I think the game is still a fun game. I cannot think of other games which have level designs with the amount of replayability as is inherent to Hitman 2. You start each level overwhelmed by how little freedom you have, and after exploring the level a bit have a sense of domination over the non-playable characters in the game.</p>
-<p>I saw some interesting comments about Hitman 2’s rating system:</p>
-<p>Hitman 2’s rating system is uncreatively ‘binary’:<br />
-Currently the game ‘rates’ a playthrough of the level ‘Silent Assassin’ if the player finishes the level without being spotted doing anything bad, and no bodies are found. (With some exceptions like: it’s okay if the bodies of the level’s targets are found if they were killed in an accident, or by poison).<br />
-There are score points lost for: taking a long time, or for killing non-targets, etc. but no one really cares about the score. The important rating is getting ‘Silent Assassin’.</p>
-<p>I think the levels are designed in an accessible way.<br />
-You can follow game-provided checkpoints that provide a paint-by-numbers style of killing the target. (This is along the lines of: the target wants to meet in private with the chef. Here’s the chef; so, grab his disguise, then meet the target, then kill the target in private).<br />
-Once you follow each of the game-provided walkthroughs, you will have navigated your way around most of the map in various disguises, which helps you get to know the map.<br />
-(Without the game provided walkthroughs, there are still characters who you can overhear e.g. “gee, the boss wants to meet with the chef in private, but the chef is feeling sick over there”).</p>
-<p>This is nice, but the rating of ‘Silent Assassin’ or not is still quite ‘binary’.<br />
-<a href="https://www.youtube.com/watch?v=a3edO5zHDos">TheKotti provides an example</a> of a ratings system for stealth style games which is more adaptive in nature. Rather than punishing the player for a mistake, it would be more interesting to have a ‘threshold’. This would enable dynamics like: if you make a mistake (e.g. get spotted), you can still play and get a good rating; but you have to be more careful.<br />
-A ratings system like this would also measure the difference between “didn’t get spotted, because you knocked-out everyone in the map” and “didn’t get spotted because you skillfully moved around the map”.</p>
-<p>As in, the nice thing about this is: as a beginner player, there’s a clear measurement for an incentive to get incrementally better. The current rating system has ‘cliffs’. (Getting spotted means “not silent assassin”, which is the same rating as run and gun).</p>
-<p>It would also avoid some weird ‘quirks’ about the current rating system.<br />
-e.g. currently you can set of the alarm as many times as you want, knock out as many people as you want, even ‘shoot’ people as many times as you want; so long as you don’t get spotted, it’s ‘silent assassin’. Whereas, if you get spotted even once (because you walked somewhere you weren’t supposed to be), it’s not ‘silent assassin’. Or if you use a sniper rifle and shoot the target from a distance, it’s also not ‘silent assassin’ (if the body gets found).</p>
-<p>This would probably also resolve another problem with Hitman 2’s rating system: that it doesn’t measure skill for highly-skilled play.<br />
-Currently, the hardest thing to achieve which is measured in Hitman 2 is getting a Silent Assassin rating without using any disguises on the Master difficulty. (Master difficulty restricts the player to saving only once, has a few more camera/guards. As I understand it, it essentially means you discover a good route on Professional difficulty, and execute it on Master).<br />
-There are some challenges players in the community will try which are harder than this: e.g. silent assassin without using disguises, killing the targets wtih a loud weapon. But the game doesn’t measure this explicitly.</p>
-<p>Recent changes to the game have made it more accessible to new players (which is great imo).<br />
-One item they added was a James Bond style electrocution phone. An ‘electrocution kill’ counts as an ‘accident’, so it can be used for Silent Assassin. This makes it quite easy to get Silent Assassin. (Experienced players snob this; but I liked the argument that it’s more interesting to have items which are actually useful, rather than everyone using the same loadout for every level because the items are all lousy). Obviously, getting Silent Assassin when using such an overpowered item isn’t super impressive. But the player still needs to be sneaky killing the other targets.</p>
-<p>So: that the game doesn’t ‘measure’ between high-skilled plays, and the game is making it easier to reach the highest-measure of skill in the game is unrewarding to the kinds of players who play Hitman long enough to get very proficient at it.</p>
-]]></summary>
-</entry>
-<entry>
-    <title>Netflix's Dark is Great</title>
-    <link href="http://www.rgoulter.com/blog//posts/2019-07-13-netflixs-dark-is-great.html" />
-    <id>http://www.rgoulter.com/blog//posts/2019-07-13-netflixs-dark-is-great.html</id>
-    <published>2019-07-13T00:00:00Z</published>
-    <updated>2019-07-13T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<div class="info">
-    Posted on July 13, 2019
-    
-        by Richard Goulter
-    <br/>
-    
-    Tags: 
-    
-</div>
-
-<p>Most of my blob-around time goes to YouTube rather than to Netflix. Before I had Netflix, I was worried that it would suck up all my spare time.</p>
-<p>Like how Netflix’s “Dark” sucked up all my time.</p>
-<p>“Dark” is a show which was written for the kind of people who love modelling things with graphs, and KT45 modal logic. I mean, I didn’t go to the effort of doing that, but it’d be kinda fun.<br />
-I <em>did</em> often have to pause and rewind 30s a few times to catch what was being said. The show has many characters and a dense network of interactions.</p>
-<p>The show has some light sci-fi, with elements of mystery and a bit of suspense.<br />
-The sci-fi aspect is a bit of <em>time travel</em>; and the show has different cases of “Grandfather Paradox”es going on. – This gets combined with a love of dualities, repetitions and reflections. It’s fun.</p>
-<p>The second season just released. I think the first few episodes of each season were a bit slow to build things up. (This is at the same time as having so many characters!). And the ending of each season is a bit ‘meh’. And a couple of the character actions come across as irrationally convenient for the plot.<br />
-But I really loved the stuff in the middle.</p>
-<hr />
-<p>Just some rapid-fire thoughts on other shows I’ve watched:</p>
-<ul>
-<li><p>“Murder Mystery”. Eh. It’s okay. I kinda wondered if it’d have different endings like “Clue” did.</p></li>
-<li><p>“The Nice Guys”. Eh. There’s one joke which managed to land quite well.<br />
-The plot is a sortof neo-noir where the titular nice guys try to find a young woman who’s made an adult film which exposes corruption in government.<br />
-– I’ve seen films like “Die Hard” described as power-fantasies for middle-aged guys. I think plots like this are the same kind of power-fantasy: rather than market-forces or complex systems, it’d be nice if the damaging effects of socially/environmentally-bad policies could be blamed on a secret cabal that can be beaten.</p></li>
-<li><p>“Always Be My Maybe”. The guy is cute/charming. It features a scene where the in-vogue Keanu Reeves acts like an asshole.<br />
-The rest of the film? Eh.<br />
-There’s a romance plot between the two characters, but the story kindof relies on an archetypal plot and doesn’t really manage to land enough of the points well enough.<br />
-– I enjoyed “The Accountant” even though I can see it’s a crap film. I could see people liking “Always Be My Maybe” as kindof a “representation matters” film, but it’s not very good.</p></li>
-<li><p>“John Wick 3”. My girlfriend enjoyed it more than I did. John Wick has <em>way</em> too much plot armour. Especially towards the end. – Though there is a segment of the movie which is closer to the dumb-cool-action spirit of the first movie: Halle Berry’s character and John shoot there way out of some compound.<br />
-I’d pass on the rest, though.</p></li>
-<li><p>“Narcos: Mexico”. Outstandingly good. I dunno in terms of accuracy or Americo-centrism or whatever. But the Narcos writers are great at writing tense episodes.</p></li>
-</ul>
-]]></summary>
-</entry>
-<entry>
-    <title>You Might Like \"Anne with an E\" If...</title>
-    <link href="http://www.rgoulter.com/blog//posts/2019-02-06-you-might-like-anne-with-an-e-if.html" />
-    <id>http://www.rgoulter.com/blog//posts/2019-02-06-you-might-like-anne-with-an-e-if.html</id>
-    <published>2019-02-06T00:00:00Z</published>
-    <updated>2019-02-06T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<div class="info">
-    Posted on February  6, 2019
-    
-        by Richard Goulter
-    <br/>
-    
-    Tags: 
-    
-</div>
-
-<p>You might like Netflix’s “Anne with an E” if: - You value current-year progressive ideals, unlike the stupid, ignorant and bad people who hold values you find gross. - You hate close-minded people. - You can’t understand why late 19th century rural farmers don’t hold modern urban bourgeois moral values. - You watched the 10-hour YouTube video of “Gillette commercial”. Three times. Because of how great it is. - etc.</p>
-<p>Bonus points if you think the 1985 mini-series was boring and needed more flavour like “Anne has PTSD”.</p>
-<p>I guess it’s a bit weird, but I don’t think anyone who <em>loves</em> the 1985 version would like the Netflix version. And vice-versa.<br />
-The Netflix version is just a bit too “and everybody clapped”/“I’m so proud of this community”.</p>
-<p>The characters are almost all flat, almost all the time; but entirely follow the tropes necessary for the misery porn.<br />
-The characters in the plots tend to be one of: “good character with good morals”, “good character doesn’t agree with good morals but then has good morals by the end of the episode”, or “bad character with bad morals”.</p>
-<p>I did quite like the penultimate episode of the second season where the characters being to face consequences for their actions. (The son of a poor family who have been making sacrifices for him to attend school gets caught for having been skipping school to pursue a life of art. This trouble was caused by an unconventional and unintegrated teacher who thought she knew the solution presuming she knew how to fix things. The class bully suffers injury in retribution for the pain he caused others).<br />
-But apparently the final episode decided these were bad things. (e.g. the final episode has the bully have a change of heart with warm and fuzzy feelings, as he decides to not shoot the cute little fox which has been pillaging the neighbouring chickens).</p>
-<p>The show is very pretty, though. So I can understand the idea of “tell whatever story you want just because you like the setting”.</p>
 ]]></summary>
 </entry>
 

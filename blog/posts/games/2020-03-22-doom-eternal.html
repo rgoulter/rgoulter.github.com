@@ -1,0 +1,301 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Doom Eternal - Richard Goulter's Blog</title>
+
+        <!-- My (Old) CSS theme -->
+        <link rel="stylesheet" type="text/css" href="../../css/default.css" />
+
+        <!--
+            jQuery & jQueryUI
+        -->
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css" />
+
+        <!--
+            Pandoc Style CSS
+            (for syntax highlighted snippets)
+        -->
+        <link rel="stylesheet" type="text/css" href="../../css/syntax.css" />
+
+        <!--
+            Bootstrap
+        -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+        <style>
+            /*
+             * Bootstrap defines blockquote as 17px,
+             * so it looks stupidly large in my blogposts. */
+            blockquote {
+                font-size: 14px;
+            }
+        </style>
+
+        <!--
+            Waypoints, and Waypoints-Sticky,
+            so we can do this:
+            http://imakewebthings.com/waypoints/shortcuts/sticky-elements/
+        -->
+        <script src="../../js/jquery.waypoints.min.js"></script>
+        <script src="../../js/sticky.min.js"></script>
+
+        <!-- My analytics stuff -->
+        <script src="../../js/my_analytics.js"></script>
+        <script src="../../js/my_analytics_debug.js"></script>
+
+        <!--
+            TOCify
+        -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js"></script>
+        <!--
+            Patched TOCify css file.
+            (Don't want fixed `.tocify`).
+        -->
+        <link rel="stylesheet" type="text/css" href="../../css/jquery.tocify.css" />
+
+        <style>
+        .navbar {
+            margin-bottom: 0px;
+        }
+
+        .banner-image {
+            width:100%;
+        }
+
+        .banner {
+            margin-left: 0px;
+            margin-right: 0px;
+        }
+
+        body {
+            background-color: #e2e2e2;
+        }
+
+        #page {
+            padding-left:0;
+            padding-right:0;
+            background-color: #ffffff;
+        }
+        </style>
+
+        <!-- Google Analytics -->
+        <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+          ga('create', 'UA-73116015-1', 'auto');
+          ga('send', 'pageview');
+        </script>
+    </head>
+    <body>
+        <div id="page" class="container">
+            <!-- This, with no padding on left/right -->
+            <div class="banner">
+                <nav class="navbar navbar-default">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+
+            <!-- The Hamburger -->
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../../">Richard Goulter's Blog</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="../../">Home</a></li>
+            <li><a href="../../yi.html">Yi</a></li>
+            <li><a href="../../emacs.html">Emacs</a></li>
+            <li><a href="../../archive.html">Archive</a></li>
+        </ul>
+    </div>
+</nav>
+
+            </div>
+
+            <hr style="margin: 0px; border-top: 5px solid black;" />
+
+            <div id="content" class="container">
+                <h1>Doom Eternal</h1>
+                <div class="info">
+    Posted on March 22, 2020
+    
+        by richardgoulter
+    <br />
+    
+    Tags: 
+    
+</div>
+
+<h2 id="hype">Hype</h2>
+<p>I watched several interviews the Doom Eternal’s game director Hugo Martin on YouTube.</p>
+<p>That he played with a controller on Nightmare difficulty is impressive. That’s legit. (<a href="https://www.youtube.com/watch?v=TzqR04OoTg4">Pax East 2020</a>, from 5:20 onwards).</p>
+<p>The <a href="https://www.youtube.com/watch?v=TzqR04OoTg4">Noclip podcast</a> with him is also excellent.<br />
+I was surprised to see Hugo Martin say things like: - After Doom 2016, they added features to the player’s abilities. This made the gameplay <em>so boring</em> since it was too easy to never die. They fixed this by making the enemies much harder. - People mocked a video of bad gameplay from Polygon. But, this was an example of Doom 2016’s failure. - Doom 2016 is the most fun when you character is moving around the battle arena, and switching between weapons. - He cites <a href="https://www.youtube.com/watch?v=72S2aAxtZOs">clockner’s speedrun of Kadingr Sanctum</a> as a demonstration of the peak of this. - While Doom 2016’s design did allow many gamers to enter this state-of-flow “fun zone”, it was also possible to play the game i) being very good and just using one weapon the whole time ii) being very bad and killing enemies without dynamic gameplay. - Doom Eternal remediates this in its game design. It punishes players who play outside the intended playstyle. (Hugo Martin compares this to sports like basketball, where everyone is restricted to a playstyle, but it’s still fun to play/watch). - Doom Eternal aims to keep its players engaged by having challenging enemies and encounters. Frustrating the player is <em>fine</em>, so long as the player does not blame the game.</p>
+<p>The multiplayer also looked interesting.<br />
+Doom 2016 did have some kind of multiplayer, but it wasn’t popular.<br />
+Doom Eternal’s multiplayer is much closer in spirit to its single player. It’s 1v2. One player is the ‘doom slayer’. The other two play as weaker ‘demon’ units and are supported by weak AI demon units.<br />
+– Asymmetric multiplayer isn’t a new idea. But I’m not aware of popular games which are single player oriented and have multiplayer which tries to feel like single player</p>
+<p>I was hyped for this game, and pre-ordered it.</p>
+<h2 id="what-i-thought-of-the-game">What I Thought of the Game</h2>
+<p>I enjoyed it.</p>
+<p>It’s intense.<br />
+I’m not so good, but I still enjoyed it.</p>
+<p>The gameplay itself is, uh, complicated.<br />
+It builds off of Doom 2016’s gameplay.</p>
+<h4 id="recall-doom-2016s-gameplay">Recall Doom 2016’s Gameplay</h4>
+<p>Doom 2016’s gameplay seemed quite innovative. It certainly rewarded fast-paced gameplay.<br />
+The traditional way of treating a player character’s health in first person shooters was to use health packs. But this can slow down gameplay as a player with low health searches for health pickups if they are low on health. – The ‘modern’ solution to this was to allow regenerating health. This chokes gameplay all over, though. (The game needs to damage the player enough so as to avoid an invincible character. So, the player is constantly waiting to regenerate health).<br />
+Doom 2016’s solution was to: allow the player to ‘glory kill’ an enemy with low health in order to get health pickups. – A good way to get more health is to keep on attacking.</p>
+<p>Doom 2016 also had: - A chainsaw. You’d find units of fuel on the map. Chainsawing a big enemy would need 3 units of fuel, whereas chainsawing a small enemy would take only 1. Chainsawing an enemy instantly kills it, and drops plenty of ammunition for your weapons. - Grenades. Different types of grenades. You could only have one or two. While there would be grenade ammunition on the map, the game also ‘regenerated’ grenades on a timer, so you wouldn’t run out. - Secrets/unlocks, which gave points for things you could upgrade. You could upgrade a lot: - You could add an attachment to your weapon (e.g. adding mini-missiles to your machine-gun). This attachment could then itself have upgrades (e.g. can fire mini-missiles more quickly). A fully-upgraded attachment could then be ‘mastered’ (e.g. kill enough enemies with it) so then it gets better. - Passive player upgrades. e.g. An upgrade point might give more health. - Passive ability upgrades. e.g. pick up items from further away. - ‘Runes’, which provide a passive ability (e.g. player gets a speed boost after glory killing an enemy). The runes can also be ‘mastered’ so that they get better.</p>
+<h4 id="doom-eternals-additions">Doom Eternal’s Additions</h4>
+<p>Doom Eternal is mostly more complicated than <em>that</em>.<br />
+The one simpler thing is: they combine the passive abilities and upgrades for the player.</p>
+<p>It makes sense that the player begins relatively weak, and ends the game with more upgrades. Without that scale, the game would be either too overwhelming or too easy at the start.</p>
+<p>Gameplay-wise, the thing that gets more complicated than Doom 2016 is: - The game puts a strong emphasis on enemy weaknesses. You ‘can’ just shoot the enemies without considering this, but it’s <em>much</em> harder to do so. e.g. the giant fat monster with rockets for arms is much easier kill if you shoot off the rockets-launchers on its arms first. - This makes the game much more strategic/tactical to play. - You need to consider what weapons to use at each time; what you have available and what threats you’re facing. - The game really restricts the ammunition the player can carry. - This ‘encourages’ switching between weapons. - This also encourages using the chainsaw on enemies. (The player regenerates a unit of fuel if they have no fuel for the chainsaw). - The player has an ice grenade which they can use to freeze enemies, - The player has a flamethrower attachment. This also regenerates usages like the grenade does. It burns enemies. The burning enemies drop armour pickups for the player as they burn / are damaged. - …And a ‘blood punch’. Which does a large amount of damage in a small area. (It’s also used to take the armour off the armoured giant fat monster). - The game also added a ‘lives system’, allowing the player to respawn with full health if they’re killed. (Otherwise the player respawns from the latest checkpoint). This eases the fights against the most difficult enemies. (This feature can be disabled).</p>
+<p>There are more enemies of different types. Probably one or two too many. The different strengths/weaknesses really lend to the need to <strong>think</strong> in order to fight well.</p>
+<p>There are also unlocks for ‘cheat codes’ which can be used to replay a mission. (e.g. infinite ammo, semi-‘god mode’, etc.).</p>
+<h4 id="controversial-design-decisions">Controversial Design Decisions</h4>
+<p>The most controversial enemy (judging by the discussion forums) is the ‘marauder’ enemy.<br />
+It’s <em>very</em> tough, even on the easiest difficulty.<br />
+The marauder has a shield which blocks all damage. The marauder instantly raises the shield, except during a small timeframe when the marauder is attacking the player at a ‘good’ distance. (If the player is too close to the marauder, the marauder’s attack doesn’t lower its shield. Ditto if the player is too far away).</p>
+<p>I think the marauder isn’t inherently tough. It’s easier once you learn the right distance to be, and a good rhythm to attack the marauder with.<br />
+But it’s also a significantly harder encounter than other enemies. (It’s the only enemy which presents a threat when you’re using cheats, lol. It’s the only enemy that can’t otherwise just be brute forced even with the super weapons). And it’s a punishing enemy to have to learn how to play.<br />
+– I think the game didn’t do enough to ease its way up to this enemy. But it’s also in the spirit of the game’s “play it our way”.</p>
+<p>Also controversial: Doom Eternal’s addition of platforming.<br />
+I don’t think this was so bad most of the time, but there are a couple of spots where I got stuck not knowing where to go next; even when I’d played the level a few times before.<br />
+– I think it’s ‘fine’, though, since: i) if the game were 100% intense the whole time, the intensity would be less dramatic ii) it encourages the player to get a better feel for their platforming ability, which encourages the player to move around the arenas more.</p>
+<p>I saw some people also disliked: the game added more cutscenes, and more in-your-face tutorial popups. But it’s easy to disable these, so I don’t see the issue.</p>
+
+
+<hr />
+
+<div>
+    
+    <a href="../../posts/programming/2020-05-02-long-tail-of-org-mode-features-are-compelling.html" style="float:left;">Newer post</a>
+    
+    
+    <a href="../../posts/programming/2020-03-10-developer-training-and-knowledge.html" style="float:right; text-align: right;">Older post</a>
+    
+</div>
+<br style="clear: both;" />
+
+<hr />
+
+<!-- Load highlight.js for Syntax Highlighting. -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/solarized_light.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+            </div>
+
+            <hr style="margin-bottom: 0px; border-top: 2px solid black;" />
+
+            <div id="footer" class="pull-right" style="padding-right: 10px;">
+                Site proudly generated by
+                <a href="http://jaspervdj.be/hakyll">Hakyll</a>
+            </div>
+        </div>
+
+        <script>
+            // The callbacks we wanna use
+            // Phone-home, telling Google Analytics various metrics/dimensions
+
+            // Use custom dimensions & metrics
+            var AnalyticDimensionReaderKind = 'dimension1';
+            var AnalyticMetricActiveTime      = 'metric1';
+            var AnalyticMetricLongestIdleTime = 'metric2';
+            var AnalyticMetricReadCount       = 'metric3';
+
+            var gaCallbacks = {
+                "scrollPercent": function(ms, perc) {
+                    if (perc > 85) {
+                        // EVENT: Page read
+                        ga('send', {
+                            hitType:       'event',
+                            eventCategory: 'Scrolling',
+                            eventAction:   'atBottom',
+                            eventValue:    String(ms)
+                        });
+                    }
+                },
+                "read": function(ms, ct, timeToReach) {
+                    // Use this to set DIMENSION
+                    // timeToReach < 5s ==> Skim (default = Visitor)
+                    if (timeToReach < 5 * 1000) {
+                        // dimension1 = ReaderKind
+                        ga('set', AnalyticDimensionReaderKind, "skimmer");
+                    }
+
+                    // timeToReach > 30s ==> Reader
+                    if (timeToReach > 30 * 1000) {
+                        // dimension1 = ReaderKind
+                        ga('set', AnalyticDimensionReaderKind, "reader");
+                    }
+
+                    // EVENT: Page read
+                    ga('send', {
+                        hitType:       'event',
+                        eventCategory: 'Reading',
+                        eventAction:   'read',
+                        eventValue:    String(timeToReach)
+                    });
+
+                    // METRIC
+                    ga('set', AnalyticMetricReadCount, String(ct));
+                },
+                "initialIdle": function(ms) {
+                    // EVENT: Started Reading
+                    ga('send', {
+                        hitType:       'event',
+                        eventCategory: 'Scrolling',
+                        eventAction:   'begun',
+                        eventValue:    String(ms)
+                    });
+                },
+                "timeSpent": function(total, active, curIdle, initIdle, longestIdle) {
+                    // Update METRIC(S)?
+                    ga('set', AnalyticMetricActiveTime, String(active));
+                    ga('set', AnalyticMetricLongestIdleTime, String(longestIdle));
+                },
+                "idle": function(ms) {
+                },
+                "longestIdle": function(ms) {
+                }
+            }
+
+            window.onload = function() {
+                myAnalyticsInit(gaCallbacks);
+
+                //
+                // Initial dimensions & metrics
+                //
+
+                ga('set', AnalyticMetricReadCount, String(0));
+
+                // EVENT: Page load
+                ga('send', {
+                    hitType:       'event',
+                    eventCategory: 'pageLoad',
+                    eventAction:   'begun',
+                    eventValue:    String(ms)
+                });
+
+                // DIMENSION: visitor
+                ga('set', AnalyticDimensionReaderKind, "visitor");
+            }
+        </script>
+    </body>
+</html>
