@@ -8,8 +8,111 @@
         <name>Richard Goulter</name>
         <email>richard.goulter+blog@gmail.com</email>
     </author>
-    <updated>2020-07-26T00:00:00Z</updated>
+    <updated>2020-08-22T00:00:00Z</updated>
     <entry>
+    <title>Early Impressions of BM40RGB Ortholinear Keyboard</title>
+    <link href="http://www.rgoulter.com/blog//posts/programming/2020-08-22-early-impressions-of-bm40rgb-ortholinear-keyboard.html" />
+    <id>http://www.rgoulter.com/blog//posts/programming/2020-08-22-early-impressions-of-bm40rgb-ortholinear-keyboard.html</id>
+    <published>2020-08-22T00:00:00Z</published>
+    <updated>2020-08-22T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<div class="info">
+    Posted on August 22, 2020
+    
+        by Richard Goulter
+    <br/>
+    
+    Tags: 
+    
+</div>
+
+<p>I finally received my BM40RGB keyboard that I’d ordered from <a href="https://www.aliexpress.com/item/4001147779116.html">KPRepublic on AliExpress</a>.</p>
+<p><img src="http://rgoulter.com/images/keyboards/bm40rgb/bm40rgb.jpg" style="width:70.0%" /></p>
+<h2 id="keyboard-overview">Keyboard Overview</h2>
+<p>In case “self-assembled hot-swappable 40% ortholinear mechanical keyboard” is all opaque jargon.</p>
+<h4 id="a-what-now">A What Now?</h4>
+<p>The keyboard is a “40% ortholinear mechanical keyboard”.</p>
+<p>The “mechanical” part refers to the key switches. They’re nicer to type with than more typical keyboard switches. (There’s a variety of mechanical key switches; loud/clicky is the most fun).</p>
+<p>The “ortholinear” refers to the keys being aligned in a grid. Whereas typical keyboards are “row-staggered”. (Keyboards are now “row-staggered” because typewriters had to be, and that’s what everyone is used to, I guess).<br />
+An iteration further is “columnar staggered” where the columns are staggered to better suit how fingers are staggered.</p>
+<p>The “40%” refers to approximately how many keys are on the keyboard compared to a full-sized 104-key keyboard. Keyboards with less keys isn’t limited to ortholinear boards. e.g. Razer recently released a 60% keyboard. – But, the most prominent ortholinear keyboards come from &lt;olkb.com&gt;. (With sizes: a “50%” named the Preonic, and a “40%” named the Planck).</p>
+<p>Well. Cleary “custom mechanical keyboards” is a rabbit-hole of a hobby topic. But I’d still recommend looking into it for people who work with a keyboard all day. The main benefit to aim for would be a more ergonomic experience.</p>
+<p>With my keyboard: The BM40RGB is the keyboard PCB.<br />
+To complete the keyboard, the PCB is mounted in a case, key switches are connected to the PCB, and key caps are put on the key switches.</p>
+<p>In the picture above, the case is a <a href="https://www.aliexpress.com/item/32832624442.html">nice anodized aluminium case</a>. The keycaps are the “big bang” <a href="https://www.melgeek.com/collections/keycaps-1">key cap set from melgeek.com</a>. The key switches are Gateron Brown.</p>
+<h4 id="assembly">Assembly</h4>
+<p>In terms of putting it together: Typically with assembling a keyboard from a PCB, case, and switches, the switches require soldering to be connected to the PCB. (In my limited experience: soldering itself isn’t too hard. Desoldering can be harder. A cheap soldering iron will get the job done, but is harder to use than nicer soldering irons for inexperienced hobbyists).<br />
+The BM40RGB switches don’t require soldering, because the PCB has been assembled with Kailh “hot swap” sockets. – I’ve seen comments that these switches can be fragile, and that Mill-Max sockets are nicer. But these still do the job of making keyboard assembly accessible.</p>
+<p>Moreover, the BM40RGB is pretty blinged-out. Assembled on the PCB are RGB LEDs underneath each switch, as well as underglow.<br />
+Necessary to have? No. Fun? Yes.</p>
+<p>So. It was pretty easy to put together. A bit more difficult than putting Lego together, but not by that much.</p>
+<h4 id="firmware">Firmware</h4>
+<p>One other good thing about this BM40RGB PCB is that <a href="https://qmk.fm/">QMK</a> can be used as the keyboard’s firmware.<br />
+This is useful because QMK can be used to customise not only the layout of the keys, but also the functionality of the keyboard. Examples of features I’ve found useful:</p>
+<ul>
+<li><p>Support different “layers” for the keyboard. This almost goes without saying, since otherwise it really would be infeasible to use a keyboard with so few keys. Similar in usage to how pressing shift + ‘5’ result in a ‘%’, the different layers allow pressing the same physical key to output different key codes. e.g. the letter ‘t’, ‘5’, and ‘%’ can be produced from the same key.</p></li>
+<li><p>Being able to switch the “capslock” key to “Escape key if tapped, Ctrl key if held”; and the “enter key” to “Enter key if tapped, Ctrl key if held”. (I’ve tried this with software like AutoHotKey, but the result from QMK is more reliable, and easier to customise like that).</p></li>
+<li><p>Being able to switch the keyboard itself between QWERTY and Dvorak keyboard layouts. (QMK itself assumes that the OS is using a US keyboard layout).</p></li>
+<li><p>Fancy RGB lighting effects. e.g. making a splash of colours as each key is pressed.</p></li>
+</ul>
+<p>There are other features that sound neat, but that I haven’t tried yet. e.g. <a href="https://docs.qmk.fm/#/feature_leader_key">using a vim-style “leader key”</a>, <a href="https://docs.qmk.fm/#/feature_space_cadet">space-cadet style shift keys</a>.</p>
+<h2 id="my-experience-so-far-with-the-keyboard">My Experience So Far With the Keyboard</h2>
+<p>In a sentence: I prefer using this keyboard for use cases where I don’t need to be using a mouse. That is, in cases where I can have both hands on the keyboard.</p>
+<h4 id="my-contextbackground">My Context/Background</h4>
+<p>That preference might need to be further qualified. With my typical usage and workflows, I can do a lot <em>without having to use the mouse</em>.</p>
+<p>I’m happiest when in working in Emacs or tmux, and editing with vi keybindings.</p>
+<p>As with many programmers, I never bothered learning ‘finger discipline’ for the QWERTY layout. i.e. each finger sticks to its own columns. On the other hand, I’m not sure anyone learns the Dvorak layout without using this ‘finger discipline’.</p>
+<h4 id="things-i-like-about-it">Things I Like About It</h4>
+<p>This keyboard saves so much on desk space compared to a full-sized keyboard.</p>
+<p>It saves more than you’d think just by looking at the picture. Here’s the keyboard laid overtop of the full-sized Razer BlackWidow Ultimate 2016 keyboard:</p>
+<p><img src="http://rgoulter.com/images/keyboards/bm40rgb/comparison_razer-bw-2016.jpg" style="width:70.0%" /></p>
+<p>I haven’t yet tried using it with a laptop on a small table. e.g. at a cafe. But, if I wanted to use a keyboard with a laptop like that, I’d rather have a small keyboard like this.<br />
+– And the size does mean it’s convenient to carry in a bag.</p>
+<p>In terms of typing speed:<br />
+- Using the ‘simple words’ test on 10fastfingers.com, <a href="https://10fastfingers.com/user/2133712/">using the Dvorak layout with a row-staggered laptop keyboard</a>, my average was <strong>83 WPM</strong>. Personal Best was around 90 WPM. - That’s about what <a href="https://10fastfingers.com/user/2179576/">I get with the BM40RGB</a>. (Although when I tried just now, I managed to score 100 WPM. So, it’s likely that it’s easier to type Dvorak layout on an ortholinear keyboard). - For the sake of transparency: <a href="https://10fastfingers.com/user/2155355/">using QWERTY layout with my Razer BlackWidow</a>, I could average around 100 WPM, and my Personal Best was <strong>around 108 WPM</strong>. - For a laugh I tried with QWERTY. – I got about <strong>70 WPM</strong>. That’s partly from not using QWERTY layout with this keyboard very much. But also because with QWERTY my fingers physically know where the keys are supposed to be; whereas with Dvorak my hands know which fingers to use for each key.</p>
+<p>So.<br />
+Typing speed for typing words isn’t really sacrificed if you drilled with touch-typing exercises. (Typing speed for symbols is discussed later).<br />
+The bigger benefit to ortholinear is it’s much more comfortable than a row-staggered layout. I’m willing to sacrifice some typing speed for that. – I can still type on a normal row-staggered QWERTY keyboard; but it feels so awkward to.</p>
+<p>The symmetry of the ortholinear keyboard is so good.<br />
+The ortholinear layout makes it much easier to make use of the modifier keys (alt, ctrl, shift, etc.) on the right hand side of the keyboard. It’s not that I couldn’t make use of right-shift or right-ctrl etc. when using a full-sized row-staggered keyboard.<br />
+– Row-staggered layouts have all sorts of different distances between keys. (e.g. distance the pinky finger travels from home row to ctrl key is different between left hand and right hand; distance from ‘f’ to ‘t’ is different than from ‘j’ to ‘y’. etc.).</p>
+<p>The RGB lighting effects are fun.<br />
+If you’re using this keyboard, you’re probably not looking down at the keyboard when you type. That’s why the ‘ambient’ animation effects are cool.</p>
+<h4 id="downsides-and-things-i-dont-like">Downsides, and things I don’t like:</h4>
+<p>Most of this applies to the 40% size, and some specifically to the BM40RGB PCB.</p>
+<p>The downsides to ortholinear?<br />
+As noted above, if your fingers are used to row-staggered and haven’t trained ‘finger discipline’, then it will be a clumsy transition.<br />
+For custom keycaps, most keycap sets are for standard layouts of keyboards. Ortholinear layouts like this all use “1 unit” keys. Finding matching keycap sets is somewhat harder.</p>
+<p>Downsides to the 40% size?<br />
+Yes, it is more difficult. (This also comes with a ‘bragging factor’, though).<br />
+Whereas the alphabetical characters are quick to pick up, the symbols take much more time. After a week and a half of usage (and some minor layout changes to improve consistency), I’m much quicker than I was; but I still make more errors than I’d like.</p>
+<p>If a keyboard should disappear, and be a transparent instrument between the user’s mind and what’s on the page: then, unfortunately, it takes quite a bit of time to get there with such a small keyboard.</p>
+<p>I don’t think the reduced number of keys of a 4x12 ortholinear provides more than a marginal ergonomic benefit compared to a 5x12 ortholinear layout. And not enough of a benefit for the added difficulty.</p>
+<p>A 40% layout is much harder to play PC games that make full use of the number keys. (e.g. for tool belts like in Minecraft or control groups like in Age of Empires).<br />
+I tried with Halo, and it seems ok at that, after rebinding the controls. (Subject-to aforementioned clumsiness at being used to row-staggered layouts for QWERTY).<br />
+My Razer Naga has long since broken on me, so I can’t say for sure if that would mitigate it. This is literally the use case for that mouse, though.</p>
+<p>There’s definitely a time-sink aspect to this, as with any hobby. I don’t find myself constantly re-customizing my keyboard layout. (I think some people do; but I don’t know if that’s because they use a wider range of software than I do, or because they use a narrower range of software).</p>
+<h2 id="further-down-the-rabbit-hole-of-this-hobby">Further Down the Rabbit Hole of this Hobby</h2>
+<h4 id="alternatives-and-other-considerations">Alternatives and Other Considerations</h4>
+<p>I love this keyboard. Other keyboards are nice, too.</p>
+<p>What are the differences between this and the Planck PCB?</p>
+<p>For one, the BM40RGB is available from KPRepublic. This makes it more accessible for me than the mainly US/EU websites.<br />
+With such a niche hobby, often websites which sell custom keyboard parts will be out of stock on certain parts. e.g. <a href="https://olkb.com/products/planck-pcb">the Planck PCB on olkb.com</a> is out of stock at the time of writing.<br />
+There are <a href="https://drop.com/buy/planck-mechanical-keyboard">Planck PCBs plus cases available on drop.com</a>. (Drop grew its brand as massdrop).<br />
+Also, ZSA Labs (who make the Ergodox EZ) also offer the <a href="https://ergodox-ez.com/pages/planck">Planck EZ</a>.</p>
+<p>Other than availability, the Planck has other advantages e.g. it’s much more customizable. e.g. BM40RGB only supports one arrangement of keys, whereas the Planck PCB doesn’t require the small spacebar, and could have a full 48 keys. etc.</p>
+<p>The BM40RGB PCB also didn’t require any soldering.<br />
+But if you’re fine with <a href="http://www.40percent.club/2017/03/ordering-pcb.html">ordering a PCB</a> and doing soldering yourself, here are some projects I came across:</p>
+<ul>
+<li><a href="https://github.com/ai03-2725/Contra">ai03-2725’s Contra</a> is a PCB which aims to be low cost to make.</li>
+<li><a href="https://github.com/AcheronProject/SharkPCB">AcheronProject’s Shark PCB</a> is a PCB which was designed because the cost to buy a Planck from drop.com would’ve been infeasibly high.</li>
+<li>Skip the PCB, and <a href="https://docs.qmk.fm/#/hand_wire">hand-wire the switches together in a plate</a>.</li>
+<li>Or design <a href="http://blakesmith.me/2019/01/16/making-my-own-usb-keyboard-from-scratch.html">the PCB yourself</a> (whoa!).</li>
+<li>And <a href="https://github.com/BenRoe/awesome-mechanical-keyboard/blob/master/docs/README.md">BenRoe/awesome-mechanical-keyboard</a> is a pretty long list of all sorts of fancy mechanical keyboards.</li>
+</ul>
+<p>If ortholinear sounds good, but the 40% form-factor sounds to small, there are larger ortholinear keyboards. As far as I understand, several 75-key ortholinear keyboards will fit into most GH60-compatible cases. e.g. <a href="https://www.aliexpress.com/item/32818745981.html">KPRepublic’s XD75</a></p>
+]]></summary>
+</entry>
+<entry>
     <title>Repairing my Razer Keyboard</title>
     <link href="http://www.rgoulter.com/blog//posts/programming/2020-07-26-repairing-my-razer-keyboard.html" />
     <id>http://www.rgoulter.com/blog//posts/programming/2020-07-26-repairing-my-razer-keyboard.html</id>
@@ -508,34 +611,6 @@ What situations/cases would I not recommend using it for?<br />
 <p>I think, then, the hype over ‘agile’ is a bit misplaced.<br />
 Not because the ideas around it are worthless so much as the heavy-lifting of effective teams seems to be the psychological safety aspect.<br />
 From there, I think the ‘agile’ ideas make sense for a reasonably wide variety of work. (I imagine obstacles like: e.g. a focus on small improvements may obscure long-term strategic mistakes).</p>
-]]></summary>
-</entry>
-<entry>
-    <title>On the 2019 UK Election Results</title>
-    <link href="http://www.rgoulter.com/blog//posts/politics/2019-12-14-on-2019-election-results.html" />
-    <id>http://www.rgoulter.com/blog//posts/politics/2019-12-14-on-2019-election-results.html</id>
-    <published>2019-12-14T00:00:00Z</published>
-    <updated>2019-12-14T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<div class="info">
-    Posted on December 14, 2019
-    
-        by Richard Goulter
-    <br/>
-    
-    Tags: 
-    
-</div>
-
-<p>I found these two comments interesting: 1. Twitter Thread https://twitter.com/LukePagarani/status/1205487970897342464?s=20 What I get from this is: The perspective is a leftist voter discussing that people he met didn’t value the same things that Labour/Corbyn did. Such voters valued their national identity, and so really didn’t like Corbyn. 2. Quillette post https://quillette.com/2019/12/13/britains-labour-party-got-woke-and-now-its-broke/</p>
-<p>I find it interesting that these two comments more/less agree on many things. – I think they look at “people don’t like Corbyn because they love their country” differently, but that makes how much narrative they share that much more interesting to me.<br />
-(Bonus: compare the above Tweeter’s RT of this with the quotes from the article: https://twitter.com/SoysalOzlu/status/1205526147288707074?s=20)</p>
-<p>I think the two comments also highlight the way the different moral foundations (of Moral Foundation Theory) are emphasised. “Britain should take care of British people first/foremost” vs “all people are equal” rings true for loyalty and fairness moral foundations respectively.</p>
-<p>I remember seeing a comment I saw discussing that the Brexit vote is best justified in terms of a question of identity. (If it were about immigration or economics or whatever, then there would be other more effective measures to reach these ends).</p>
-<p>It reminds me of <a href="https://www.youtube.com/watch?v=LJKXJNM3W-c">Stephen Fry at the Munk Debates</a> (at around 4:30) saying that he’s concerned “the greatest human failings is to prefer to be right, than to be effective”. – I don’t interpret this to mean that he’d prefer to be effective at what’s not-right. I interpret this as saying that it’s wrong to focus on symbolic value over more effective results.</p>
-<p><a href="https://meaningness.com/metablog/virtue-court">Meaningness’ Court of Values and Bureau of Boringness</a> is a fun play on the problem this can present. The problem is, much of politics today is performance towards showing the right virtues; this distracts or counteracts ‘boring’ solutions to problems. – One (dumb, but fun) suggestion is to allow people one vote towards either a ‘boring’ serious court, or towards a mostly-powerless court which decides what values people should be rewarded/punished for showing.</p>
-<p>I see concerns on Twitter about how awful the implications of this result are. (My impression is that these come from the same group as “it’s racist to vote for the options I don’t like”, which isn’t persuasive). I’m also under the impression that these worries still wouldn’t be enough to sway voters! As in, the symbolic value of “our national identity” apparently matters a lot!<br />
-– I think the flipside is the same point, though. My understanding is Labour’s absymal result in these elections is the best they could do in the situation. But: if it is the case that the winners won the vote because of a symbolic policy: surely it would be reasonable to appeal to the voters’ symbolic values to support your cause?</p>
-<p>It’s probably a bit too much of a simplification, but it’s still tempting to match “voted for Brexit, despite probable material harm” and “won’t say ‘my country is great’, despite likely losing for that” as matching “would rather be right than effective”.</p>
 ]]></summary>
 </entry>
 
