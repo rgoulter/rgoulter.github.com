@@ -8,8 +8,174 @@
         <name>Richard Goulter</name>
         <email>richard.goulter+blog@gmail.com</email>
     </author>
-    <updated>2020-08-22T00:00:00Z</updated>
+    <updated>2021-10-22T00:00:00Z</updated>
     <entry>
+    <title>Follow-up Review of the BM40 Ortholinear Keyboard</title>
+    <link href="http://www.rgoulter.com/blog//posts/programming/2021-10-22-follow-up-review-of-the-bm40-ortholinear-keyboard.html" />
+    <id>http://www.rgoulter.com/blog//posts/programming/2021-10-22-follow-up-review-of-the-bm40-ortholinear-keyboard.html</id>
+    <published>2021-10-22T00:00:00Z</published>
+    <updated>2021-10-22T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<div class="info">
+    Posted on October 22, 2021
+    
+        by Richard Goulter
+    <br/>
+    
+    Tags: 
+    
+</div>
+
+<p>So I’ve had my BM40 for over a year now.</p>
+<p>My <a href="../programming/2020-08-22-early-impressions-of-bm40rgb-ortholinear-keyboard.markdown">initial impressions</a> after getting the keyboard were:</p>
+<ul>
+<li><p>that it was a <em>relatively</em> cheap, easy to assemble fancy keyboard,</p></li>
+<li><p>that was nicer to use compared to a typical keyboard for cases where you could use the computer with both hands on the keyboard,</p></li>
+<li><p>that it took a bit of time to get used to. (The alphabetical keys were easy to get used to, since I had trained with ‘touch typing’ discipline to learn the Dvorak; but the symbols took some time to get used to).</p></li>
+</ul>
+<p>Now that I’ve had more experience with the keyboard, I think those points still pretty much hit the mark.</p>
+<p>Perhaps the most important point to add is that I’m still able to use a stock-standard row-staggered keyboard. I don’t lose that ability by using a small/weird keyboard.</p>
+<p>Here are some more points for my updated impression:</p>
+<h3 id="big-increase-in-comfort">Big Increase in Comfort</h3>
+<p>The biggest difference in usage between a BM40 and a standard row-staggered keyboard is the comfort.</p>
+<p>I’d point out that the thumb is much stronger than the pinky.</p>
+<p>On a standard keyboard, the thumb will press spacebar, and sometimes the left alt key.</p>
+<p>On a standard keyboard, the pinkies will press the outermost letters (q, a, z), as well as ctrl, shift, the capslock key, tab, tilde, escape, and on the righthand side, the pinkies are responsible for the extra symbol keys ([], _, +, ), as well as the backspace, and enter keys. – Albeit.. you end up accessing many of these by moving your hand over, and using ring + pinky fingers; and these keys generally don’t need to be pressed very frequently. But this still leaves the pinky doing more work than the thumb.</p>
+<p>By comparison, the BM40 does a much better job at utilising the thumbs (and reducing usage of the pinky).</p>
+<p>Many layouts on the BM40 keep the two hands together on the inner 10 columns, leaving the outer columns for the pinkies. With the hands on home row, the thumb can reach the spacebar and each thumb can reach the key to the side.</p>
+<p>– I think this leaves the lowermost, outer 4 keys in an awkward spot. You have to move your hands in an awkward way to use them. (Albeit, this is no worse than the Ctrl, Win, Alt, etc. of standard keyboards).</p>
+<p>In general, better thumb/pinky usage would be to use the thumb more, and pinky even less. I also took a go at designing <a href="https://github.com/rgoulter/keyboard-labs">my own split keyboard</a> (using a small development board to take care of the difficult parts of PCB design), and found this to be relatively comfortable.</p>
+<p>With the BM40, you could also try and ‘split’ the hands; the left hand rests on the leftmost 5 columns, the right hand resting on the rightmost 5 columns, leaving a ‘gap’ of two columns in the middle. – I’ve been trying this layout out. I found it a bit difficult to adjust to, but otherwise appreciate it.</p>
+<p><img src="https://raw.githubusercontent.com/rgoulter/rgoulter.github.com/master/images/keyboards/bm40rgb/bm40rgb_split.JPG" /></p>
+<h3 id="customisable-firmware">Customisable Firmware</h3>
+<p>The BM40 supports customising its keyboard firmware.</p>
+<p>The <a href="https://docs.qmk.fm/">QMK firmware documentation</a> boasts a large number of features.</p>
+<p>The features I’ve found most useful:</p>
+<ul>
+<li><p>Layers. The idea is a key can behave differently if a “Fn” key is held down. Many laptops will do this in order to provide more functionality without needing to add extra keys. QMK’s layering allows customising what the definitions of each of these layers are, and how they get activated.</p></li>
+<li>Tap-Hold keys. A key behaves differently depending on whether you tap it, or hold it down. e.g. a bit like having a button which skips to the next track if tapped, but fast-forwards if held down. (Or treating the CapsLock key as Ctrl key when it’s held, but CapsLock key when tapped).
+<ul>
+<li>One useful layout this allows is putting the Shift/Ctrl/Windows/Alt key underneath the index/middle/ring/pinky fingers. So you’ll get “jkl;” if tapping, but the modifiers if holding these keys down. Putting these modifier keys on the home row is surprisingly useful.</li>
+</ul></li>
+<li><p>Combo keys. Invoke some action when tapping multiple keys at once. I don’t make extensive use of this, but my favourite use of it has been to put combos on the two keys “cv” and “m,” to move to the workspace to the left/right. This makes switching between workspaces about as natural as using the gestures on a Macbook trackpad.</p></li>
+</ul>
+<p>Pretty much all of this customisable functionality is accessible to regular keyboards using software like <a href="https://github.com/kmonad/kmonad">kmonad</a>. – Although having it on the keyboard means you don’t need to fiddle with the OS settings for every computer you make use of.</p>
+<h3 id="alternate-recommendation">Alternate Recommendation</h3>
+<p>I would also add a recommendation: Consider the BM40 is an ortholinear keyboard with a 4x12 grid of keys (with a 2-key wide spacebar in the middle), the lack of a number row limits its usablility for e.g. gaming.</p>
+<p>Keyboards like the XD75 seem like they retain most of the advantages of the BM40, with fewer downsides. e.g. it’s a 5x15 grid of keys (so would be easier to use with gaming?), but also fits into a standard GH60-sized keyboard case. Since the size of the keyboard case is standard, this means there are more options.</p>
+<p>Or taking another route: I’ve also seen a bunch of other interesting designs for “split”, two-handed keyboards. The ergodox was the first I saw. The ergodox’s key cluster for thumbs isn’t very good, though. The ergodox also needs a custom case 3D-printed, IIRC.</p>
+<p>More recent designs often have a “sandwich style” case where the keyboard’s PCB is ‘sandwiched’ between two laser-cut metal plates. I think it’s easier to find places which will do lasercutting compared to getting access to a 3D printer.</p>
+<p>Popular sandwich-style keyboard designs include the corne, the kyria or the lily58 or the sofle keyboard. These involve some very simple soldering. These are often sold in kits at various online stores. If the PCB design files are available, there’s also the option of getting the PCB fabricated &amp; sourcing the other parts yourself.</p>
+<h3 id="keyboard-shouldnt-get-in-the-way">Keyboard shouldn’t get in the way</h3>
+<p>– In my initial impressions post, I commented that you want a keyboard to be transparent between you and your computer, and not something you have to think about.</p>
+<p>While getting used to it, the BM40 does indeed get in the way. And it also gets in the way if you make a significant change to your layout.</p>
+<p>But once I got used to the BM40, the “not moving from home row” is wonderful.</p>
+<p>In contrast, when I use a standard row-staggered keyboard now it feels like playing the piano. My fingers have to move all over the place, with all sorts of stretching or weird movements.</p>
+<h3 id="downside-its-your-keyboard-others-cant-use-it">Downside: It’s <em>your</em> keyboard, others can’t use it</h3>
+<p>This will be familiar to those who use customisable text editors like Vim or Emacs. – Once your editor has been customised enough, others can’t use it. (And vice versa).</p>
+<p>With small, customisable keyboards it’s the same.</p>
+<p>Since the BM40 has fewer keys than the regular keyboard, there’s no obvious convention for where the keys can be expected to go.</p>
+<p>If all you’ve got is this small keyboard and you’re ill-equiped to handle situations where someone else might need to type things in.</p>
+<h3 id="downside-external-keyboards-are-difficult-to-use-with-laptops">Downside: External Keyboards are Difficult to use with Laptops</h3>
+<p>Using a small keyboard is great when you’ve got a desktop setup. It means that much more desk space.</p>
+<p>But if you’re using a laptop.. using an external keyboard means more desk space is used up by the keyboard.</p>
+<p>One workaround I’ve seen people come up with involve disabling their laptop’s keyboard if using an external keyboard. The keyboard can then be placed on top of the laptop’s keyboard.</p>
+<p>Another workaround I saw involved using a small tray that could be placed on top of the laptop keyboard.</p>
+<p>This isn’t a downside of the BM40 itself. But, laptop keyboards aren’t ortholinear.</p>
+<h3 id="downside-mechanical-keyboards-are-expensive-or-difficult-to-assemble">Downside: Mechanical Keyboards are expensive, or difficult to assemble</h3>
+<p>The BM40 is straightforward to assemble. And while it’s cheap relative to other non-standard mechanical keyboards, it’s also quite expensive.</p>
+<p>(Standard mechanical keyboards themselves can end up being much cheaper than the BM40 keyboard. e.g. looks like an Anne Pro 2, which is a Bluetooth keyboard, is roughly about half the price of a BM40).</p>
+<p>There are cheaper ways to try and assemble a small mechanical keyboard. <a href="https://github.com/rgoulter/keyboard-labs/blob/master/docs/buildguide_rev2021.4_budget.md">I tried designing one which is relatively cheap to build</a>. But custom keyboards which involve fabricating PCBs and doing some soldering work could be described as “difficult to assemble”.</p>
+<p>This doesn’t really detract from how much I value having this keyboard, but it does make it harder to recommend to others.</p>
+<h3 id="downside-mechanical-keyboards-are-loud">Downside: Mechanical Keyboards are loud</h3>
+<p>All these weird/niche keyboards typically use mechanical key switches, since this makes the keyboard cheap enough to produce in low volumes.</p>
+<p>In my own space, I consider loud clicky keys an upside. For work spaces, fortunately mechanical key switches don’t need to be clicky. However, I think they’re still louder than standard keyboards.</p>
+<p>I worked beside someone who had a mechanical keyboard. His keyboard wasn’t a loud keyboard. I don’t remember being annoyed by the sound.</p>
+<p>Though, even more typical keyboards can still be distracting. I once had a colleague who could type very quickly on his Bluetooth Mac keyboard. He said that when he visited one of the satellite offices, the colleagues he sat beside asked him to move away from them since his impressive typing speed was distracting.</p>
+]]></summary>
+</entry>
+<entry>
+    <title>Dreamy Eyes is Very Sweet</title>
+    <link href="http://www.rgoulter.com/blog//posts/narrative/2021-07-29-dreamy-eyes-is-very-sweet.html" />
+    <id>http://www.rgoulter.com/blog//posts/narrative/2021-07-29-dreamy-eyes-is-very-sweet.html</id>
+    <published>2021-07-29T00:00:00Z</published>
+    <updated>2021-07-29T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<div class="info">
+    Posted on July 29, 2021
+    
+        by Richard Goulter
+    <br/>
+    
+    Tags: 
+    
+</div>
+
+<p>I watched “Dreamy Eyes” on Netflix.<br />
+I recommend it. It’s (at times) intensely romantically sweet. Although it doesn’t have a happy ending.<br />
+(Well, without a happy ending I suppose “angsty” is more apt than “sweet”).</p>
+<p>It’s a drama set in Vietnam during the 1960s - 1970s. The main character has an unrequited love for his childhood friend.</p>
+<p>In a sense, the “unrequited love interest over decades” reminds me of “Gone with the Wind”.<br />
+In another sense, it’s very similar to Jenny’s story in “Forrest Gump”. (I think “Dreamy Eyes” does a better job. I think “Forrest Gump”’s tone misses “life can be funny and tragic”, and in doing so dampens the heft to what ought to have been some very impactful scenes).</p>
+<p>On the other hand, I don’t think you’re really supposed to behave in the same manner as any of the characters in the story. The way they all behave is understandable; but at the same time, the story is so dramatic that it’s all a bit silly. (For example, the main character’s love remains unrequited for decades. Maybe this can be called sweet; but another girl has a completely unreciprocated admiration for the main character that persists for decades too. That’s just silly).</p>
+<p>Silliness aside.. I think the situations and characters presented and the actions taken are interesting.</p>
+<p>e.g. The story features tones of rural vs urban/modern culture. The main character and the girl he loves grew up together in the same village; but she grows more interested in the attractions of the city.<br />
+What I found enhances this tension was the status symbolism of American products. e.g. When the main character reunites with his sweetheart after she has moved to the city, his sweetheart’s mother offers a tin of butter cookies (announcing that these can’t be found in the village), before she drives her car to the disco.</p>
+<p>I’ve also found myself thinking about the drama in the film, too. I know <strong>having</strong> to analyse as story is the easiest way to take the fun out of hearing it.. but I also don’t find it so clear where I’d draw the line each of the characters cross from “yeah, that seems fine” to “no, that’s not the good life”.<br />
+e.g. I don’t think it spoils too much to reveal that the main character’s love interest gets pregnant out of wedlock. Nothing wicked about that. But e.g. later on in the story, there’s an incident where the love interest walks with a charming date into her store, and doesn’t acknowledge her daughter who had been waiting for her for hours.<br />
+The love interest isn’t an easy character to like. (Or as I saw it put once, “you’re not supposed to like the character the same way you like hotdogs”).</p>
+<p>But really, what I like about this is the intense romantic angst of the story. We see a sweet romance the main character has as he grows in the village, and we see him return to the same village as an adult and walk the same paths and it just has such an impressive impact.</p>
+]]></summary>
+</entry>
+<entry>
+    <title>Thoughts on  Netflix's Bridgerton S1</title>
+    <link href="http://www.rgoulter.com/blog//posts/romance/2021-02-06-thoughts-on-netflix-bridgerton.html" />
+    <id>http://www.rgoulter.com/blog//posts/romance/2021-02-06-thoughts-on-netflix-bridgerton.html</id>
+    <published>2021-02-06T00:00:00Z</published>
+    <updated>2021-02-06T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<div class="info">
+    Posted on February  6, 2021
+    
+        by Richard Goulter
+    <br/>
+    
+    Tags: 
+    
+</div>
+
+<p>I just finished watching Netflix’s “Bridgerton” series. I’d enjoyed reading the book series some time ago. The third book in the Bridgeron series was the first book I ever stayed up the whole night to read.</p>
+<p>The Bridgerton series is a famous and well-loved series of romance novels by Julia Quinn, featuring the Bridgerton family. The author has a charming voice. Since the stories always end with a happy ending, they’re quite fun to read. I hope the popularity of the Netflix series (and the book series consisting of eight books) means more people get to share in on the fun of reading it.</p>
+<p>I enjoyed watching through this first season on Netflix with my girlfriend. Yet.. I can’t quite enthusiastically recommend the show.</p>
+<p>I’m not sure who the show was made for. The show has an ambivalent tone to it. Half of the content is sweet and romantic and silly and reliably steers towards a happy ending. The other half is dramatic and somewhat serious and bitter and grim and unromantic and doesn’t even land a happy ending. (This part is original, not coming from the books).<br />
+– I can understand people liking both of these things. I can’t understand why a story would be both at once.</p>
+<p>The source story is quite sweet. I think the show would be better if it were just this part.<br />
+The heroine of this romance is Daphne Bridgerton, and the hero is a proud duke. They get together after complaining how awful it is to be so handsome and desired by everyone else. (This, uh, wasn’t my favourite book of the series). They fight because he really doesn’t want to have children (for proud, manly reasons), she is able to convince him that’s silly, and they live happily ever after.<br />
+– The adaptation of this is nice. The duke is played by Regé-Jean Page, who is very handsome.</p>
+<p>This part was fun to watch with my girlfriend. At one point, the heroine is mad at the hero and doesn’t want to spent time with him. The heroine is later grumpy at the hero because he never spends time with her. When I pointed out this was a no-win situation for the guy, my girlfriend laughed and said that’s how girls are. (Another fun thing was to play nipple-spotting. We get to see the duke’s nipples all the time during sex scenes; but the duchess’ nipples are hidden even as she rides on top in the nude, thanks to some well placed hair).</p>
+<p>The show features pop songs with classical arrangements. Like Taylor Swift’s “Wildest Dreams” or Billie Eilish’s “Bad Guy”. These are much more fun when you’re familiar with the covered music. It’s fitting with the overall presentation. (It’s entertainment which isn’t aiming to faithfully reproduce history; but feel-good pop entertainment dressed up in old-timey clothes).</p>
+<p>But the other half?</p>
+<p>Well. I was curious to see how the adaptation would be handled.<br />
+It seems to be that recently, several popular entertainment series have been overbearingly progressive. Maybe the values isn’t so much of a problem; but the characters tend to be lame and unsophisticated, the writers’ intent bludgeoned into an audience not trusted to appreciate complexity.<br />
+– Here, Bridgerton avoids any of that in its romantic half. It’s dramatic half isn’t obnoxious in this way, either.</p>
+<p>But I think this dramatic half drags the romantic half down, and mostly just pads out the runtime.</p>
+<p>I think part of the problem is its ambivalent tone.<br />
+Half the time there’s this romance where the conflict is the guy doesn’t want to marry the woman he loves because of a vow he made against his long dead dad;<br />
+and the other half you have e.g. a proud boxer who’s wondering whether he should sacrifice his integrity and throw a match for a great sum of money, or whether he’ll be able to keep providing for his family with his boxing exhibitions in the long term, going from match to match as he grows old.</p>
+<p>Other dramatic subplots involve, e.g.: - A side-character’s cousin is pregnant and unmarried; her lover is a solder who hasn’t replied to her letters. She must secure a marriage before her pre-marital pregnancy becomes clear, or else ruin the reputation of the family hosting her. - Daphne’s older brother Anthony has a lower-class opera singer as his mistress. He’s infatuated with this mistress (promising to protect her forever), but his mother chides him for maintaining the relationship. He breaks it off, but still is attracted to her. - etc.</p>
+<p>None of these subplots end with a happy ending.</p>
+<p>Which is dreary enough.<br />
+What exacerbates this is that it feels the writers like this lame dramatic half more than they like the sweet romantic half. – Frequently, characters in this dramatic half will speak their mind sincerely, without cliche. The viewer doesn’t need to suspend disbelief at all to sympathise with these characters.</p>
+<p>One example moment in this part I didn’t like was with a subplot where Daphne’s sister Eloise is sleuthing out the identity of the anonymous Lady Whistledown. (Lady Whistledown is like the more recent Gossip Girl of the Gossip Girl series).<br />
+Eloise asks the head servant whether she’s the Gossip-Girl, and the servant replies impetuously with “I wouldn’t be working for <em>you</em> if I was earning that kind of money”.<br />
+– This feels like the writers want to complain about the rich and priviledged the main characters are; how there’s this huge inequality where servants miserably do work they’d otherwise not choose.<br />
+We’re supposed to <em>like</em> the main characters.</p>
+<p>It may be that there’s no outright overbearing, lazy progressive preaching.<br />
+But.. some shows, if you look for it in the show, and compare the character’s identity (skin colour, sex, etc.), you won’t find significant correlation between what a character looks like and how capable the character is. Characters will be equally capable of good and bad deeds, of being helpful or antagonistic. The characters are all written respectfully.<br />
+Bridgerton … just isn’t one of those shows. But there’s nothing really stopping it from doing that.</p>
+<p>That said. I was surprised the show included a part where the newly wed duchess unintentionally offends the townspeople. She was asked which of the three pigs at a festival should be slaughtered. Aghast at the thought of violence, she says none of them are to be killed. This effectively denies any of the townspeople the right to make money from their pigs.<br />
+It’s a nice example of Chesterton’s fence.</p>
+<p>The Bridgerton series features eight books, and various other series in the same setting. If it remains one book per season, that’d be eight seasons. Eight seasons is a lot. Moreso because the show creates its own subplots which diverge from the much better source material. I don’t think this dramatic half is good enough to last that long. I’m curious to see what they do with it.</p>
+]]></summary>
+</entry>
+<entry>
     <title>Early Impressions of BM40RGB Ortholinear Keyboard</title>
     <link href="http://www.rgoulter.com/blog//posts/programming/2020-08-22-early-impressions-of-bm40rgb-ortholinear-keyboard.html" />
     <id>http://www.rgoulter.com/blog//posts/programming/2020-08-22-early-impressions-of-bm40rgb-ortholinear-keyboard.html</id>
@@ -27,15 +193,25 @@
 
 <p>I finally received my BM40RGB keyboard that I’d ordered from <a href="https://www.aliexpress.com/item/4001147779116.html">KPRepublic on AliExpress</a>.</p>
 <p><img src="http://rgoulter.com/images/keyboards/bm40rgb/bm40rgb.jpg" style="width:70.0%" /></p>
+<h2 id="quick-summary">Quick Summary</h2>
+<ul>
+<li><p>it’s a <em>relatively</em> cheap, easy to assemble fancy keyboard,</p></li>
+<li><p>it’s nicer to use compared to a typical keyboard for usecases where you could use the computer with both hands on the keyboard,</p></li>
+<li>it took a bit of time to get used to.
+<ul>
+<li>(The alphabetical keys were easy to get used to, since I had trained with ‘touch typing’ discipline to learn the Dvorak; but the symbols took some time to get used to).</li>
+</ul></li>
+</ul>
+<p>Recommendation: - Nifty if you’re comfortable spending most of your time in tmux/vim or emacs, and would prefer a keyboard-focused experience. The reduced number of keys isn’t a hinderance. - If the grid-like arrangement of keys is still appealing, but you’d prefer to use it for mouse+keyboard activities like First Person Shooter games, then a larger ortholinear keyboard like an XD75 would be better.</p>
 <h2 id="keyboard-overview">Keyboard Overview</h2>
-<p>In case “self-assembled hot-swappable 40% ortholinear mechanical keyboard” is all opaque jargon.</p>
+<p>In case “self-assembled hot-swappable 40% ortholinear mechanical keyboard” is all opaque jargon:</p>
 <h4 id="a-what-now">A What Now?</h4>
 <p>The keyboard is a “40% ortholinear mechanical keyboard”.</p>
 <p>The “mechanical” part refers to the key switches. They’re nicer to type with than more typical keyboard switches. (There’s a variety of mechanical key switches; loud/clicky is the most fun).</p>
 <p>The “ortholinear” refers to the keys being aligned in a grid. Whereas typical keyboards are “row-staggered”. (Keyboards are now “row-staggered” because typewriters had to be, and that’s what everyone is used to, I guess).<br />
 An iteration further is “columnar staggered” where the columns are staggered to better suit how fingers are staggered.</p>
 <p>The “40%” refers to approximately how many keys are on the keyboard compared to a full-sized 104-key keyboard. Keyboards with less keys isn’t limited to ortholinear boards. e.g. Razer recently released a 60% keyboard. – But, the most prominent ortholinear keyboards come from &lt;olkb.com&gt;. (With sizes: a “50%” named the Preonic, and a “40%” named the Planck).</p>
-<p>Well. Cleary “custom mechanical keyboards” is a rabbit-hole of a hobby topic. But I’d still recommend looking into it for people who work with a keyboard all day. The main benefit to aim for would be a more ergonomic experience.</p>
+<p>Well. Clearly “custom mechanical keyboards” is a rabbit-hole of a hobby topic. But I’d still recommend looking into it for people who work with a keyboard all day. The main benefit to aim for would be a more ergonomic experience.</p>
 <p>With my keyboard: The BM40RGB is the keyboard PCB.<br />
 To complete the keyboard, the PCB is mounted in a case, key switches are connected to the PCB, and key caps are put on the key switches.</p>
 <p>In the picture above, the case is a <a href="https://www.aliexpress.com/item/32832624442.html">nice anodized aluminium case</a>. The keycaps are the “big bang” <a href="https://www.melgeek.com/collections/keycaps-1">key cap set from melgeek.com</a>. The key switches are Gateron Brown.</p>
@@ -363,254 +539,6 @@ But it’s also a significantly harder encounter than other enemies. (It’s the
 I don’t think this was so bad most of the time, but there are a couple of spots where I got stuck not knowing where to go next; even when I’d played the level a few times before.<br />
 – I think it’s ‘fine’, though, since: i) if the game were 100% intense the whole time, the intensity would be less dramatic ii) it encourages the player to get a better feel for their platforming ability, which encourages the player to move around the arenas more.</p>
 <p>I saw some people also disliked: the game added more cutscenes, and more in-your-face tutorial popups. But it’s easy to disable these, so I don’t see the issue.</p>
-]]></summary>
-</entry>
-<entry>
-    <title>Developer Training and Knowledge</title>
-    <link href="http://www.rgoulter.com/blog//posts/programming/2020-03-10-developer-training-and-knowledge.html" />
-    <id>http://www.rgoulter.com/blog//posts/programming/2020-03-10-developer-training-and-knowledge.html</id>
-    <published>2020-03-10T00:00:00Z</published>
-    <updated>2020-03-10T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<div class="info">
-    Posted on March 10, 2020
-    
-        by Richard Goulter
-    <br/>
-    
-    Tags: 
-    
-</div>
-
-<p>“What are the costs?” ought to be a natural question provided alongside “what are the benefits?”. This doesn’t get asked often enough in the discussions of new tools/technologies.<br />
-The costs/benefits implicitly impact discussions since the trade-offs will be different in different situations.<br />
-As a developer, I ought to have this in mind when consuming discussions.</p>
-<p>To get better as a developer, I ought to increase my experience and skills:<br />
-Experience is what I gain from recovering from mistakes.<br />
-Skills I have are what I get from learning.<br />
-So, online discussions about new tools/technolgies are relevant because they ask: “what skills should programmers have?”, and this is implicitly subject to “how much time/effort should be spent learning?”.</p>
-<h3 id="costs-and-benefits">Costs and Benefits</h3>
-<p>The universal answer to questions in computing is “it depends”.</p>
-<p>Different groups/contexts consider costs and benefits differently.</p>
-<p>There are innumerably many factors which can be better or worse between different tools. e.g. speed of development, ease of maintenance, ease of writing, ease of reading, ease of learning, similarity to other tools, compilation/runtime speeds, verbosity, implicit vs explicit, etc.<br />
-– These will have different levels if importance to different people.</p>
-<p>e.g. Steve Yegge’s <a href="https://steve-yegge.blogspot.com/2008/02/portrait-of-n00b.html">Portrait of a n00b</a> discusses that “experts” prefer code to be terse, whereas “n00bs” prefer lots of supporting information around the code itself.<br />
-For the n00bs, code has a high cost to read, and so this cost is lowered with comments, metadata, and having less code on the screen. For experts, dense code has a higher signal-to-noise ratio.<br />
-In its takeaways, the article suggests that paying the cost of metadata doesn’t necessarily give any benefit; but that e.g. surely the benefit of documentation for public-facing APIs is always worth paying for.<br />
-– In <a href="http://archive.is/RalDb">this archive.is snapshot of a Google+ post</a>, Yegge further builds on this idea, with different preferences for ‘liberal’ vs ‘conservative’ programmers. The split is seen as different levels of comfort with the risk of breaking code in production. (“just fix it” vs “high level of confidence in correctness”).</p>
-<h5 id="why-learn-and-what-to-learn">Why Learn and What to Learn</h5>
-<p>This would be irrelavent if you just stuck with the tools/skills you’ve got and never bother to learn anything new.</p>
-<p>The main external reasons to need to learn things are because you need to for school, or because the tools are used where you work.<br />
-<em>Maybe</em> you’ll want to study more in the hopes of being more efficient in those roles.</p>
-<p>As far as I can tell, though, the main reason to learn outside of that is ‘for fun’.<br />
-Geeks argue about all this shit because it’s interesting to.</p>
-<p>If you’re not learning some skill because you explicitly have to, or not just because you’re naturally interested in it, then at-best you’re making a bet on getting a higher reward (at some point in the future) than the cost you’re paying to learn.</p>
-<p>Though, maybe even then there can be some benefit to that.<br />
-e.g. <a href="http://www.paulgraham.com/pypar.html">Python Paradox</a> suggests that it’s lower-risk to try and hire developers who use “comparatively esoteric” programming languages like Python. (This was written in 2004), since the only people who would bother to learn Python are people who find it interesting. (Since you’re not going to get a job writing in Python).</p>
-<p>This is also another way of describing <a href="https://mcfunley.com/choose-boring-technology">‘Choose Boring Technology’</a>. (It’s less risky to choose technology with known costs; as a rule of thumb, only use a few ‘new technologies’). The perjoratives “Hype-Driven Development” and “Resume Driven Development” also try and push back against choosing technologies for the benefit without understanding the cost.</p>
-<h3 id="forever-learning-and-forever-forgetting">Forever Learning and Forever Forgetting</h3>
-<p>Developers tend to take a ‘just in time’ approach to learning for work; taking advantage of ‘monkey-see monkey-do’.<br />
-This somewhat changes the interpretation of “forever learning” from “there’s always more to learn, so I’ll be forever learning” to “I’m always working with different software development tools, so I’ll be forever learning”.</p>
-<p>Either interpretation of “forever learning” would be fine,<br />
-but I’m not sure there’s much adjustment for “forever forgetting”:<br />
-In The Atlantic’s <a href="https://www.theatlantic.com/science/archive/2018/01/what-was-this-article-about-again/551603/">Why We Forget Most of the Books We Read</a>, the author mentions a <a href="https://en.wikipedia.org/wiki/Forgetting_curve">“forgetting curve”</a>. The article discusses that tools like the internet provide an ‘external memory’, allow us to get information without having to remember it ourselves. The result is that ‘recall memory’ (“ability to spontaneously call information up in your mind”) is less important than ‘recognition memory’ (remembering where the information is, and how to access it).</p>
-<p>This feels like a pretty good model to me.</p>
-<p>Maybe this means incremental reading isn’t such a bad idea. (Though it’s certainly not a <em>common</em> idea).</p>
-<h5 id="boost-recall-with-spaced-repetition">Boost Recall with Spaced Repetition</h5>
-<p>Programmers are familiar the idea of external memory. Search engines lead us to StackOverflow, or GitHub issues.<br />
-Often documentation is pretty good, and editors with LSP support can even show this as you type out the code.<br />
-Things like compiler errors, editor discoverability, and auto-complete help too.</p>
-<p>Recall memory seems a bit more dull.<br />
-For the tools/languages which I’m familiar with, there’ll be a lot which I don’t need to lookup. e.g. I can remember how to output text to STDOUT, how to import a package, how to define a function.</p>
-<p>I think recall-misses where I need to stop to look things up don’t necessarily interrupt a state of flow.<br />
-I think “having to look up documentation for stuff unrelated to the problem domain” is less of a problem than not being able to type. I think effective use of a text editor (like with vi or emacs or kakoune keybindings) is more important than either.<br />
-– But, still: Surely it’d be great if I could recall things without spending time time to use a search engine to look for an answer.</p>
-<p>To improve recall retention, what you want to recall would either need to be something you frequently use, or something you study.</p>
-<p>Anki is ‘Spaced Repetition Software’ (SRS).<br />
-It’s a flashcard program, but the intervals between when it tests you on a flashcard increase for each correct recall of that card.<br />
-– Most of its users (as far as I can tell) use it for vocabulary studies, or for medical studies. As <a href="https://en.wikipedia.org/wiki/Spaced_repetition">Wikipedia’s page on Spaced Repetition</a> puts it: “spaced repetition is commonly applied in contexts in which a learner must acquire many items and retain them indefinitely in memory”.</p>
-<p>This post <a href="http://augmentingcognition.com/ltm.html">“Augmenting Long Term Memory”</a> discusses use of Anki. e.g. to assist in digesting technical papers. (e.g. start with being able to recall surface level facts, then incrementally aim to recall facts which build upon those).<br />
-The article also points out some drawbacks. It’s difficult to use Anki to improve recall for things you don’t actually care about. Adding flashcards isn’t (and probably shouldn’t be) low-effort. The article’s rule of thumb is it takes about 7 minutes of study per card per 20 years for a good flashcard (if each review of the card is 8 seconds).<br />
-– The article also generally suggests against using Anki to remember APIs in the hope that this would one day be useful. It’s better to first know an API before trying to Ankify things about it. But it’s also a bad idea to keep Anki flashcards that you don’t care about around, e.g. if you aren’t likely to use the API again.</p>
-<p>For myself, I’ve used Anki for a year and a half. Studied ~80% of those days. Added around 3900 cards. The vast majority of these cards are for vocabulary.<br />
-– I do feel Anki does have a great benefit for the cost put into it. But it’s a bit more effort than “recall for free”.</p>
-<h5 id="personal-knowledge-base">Personal Knowledge Base</h5>
-<p>I’m beginning to like the idea of using a zettelkasten approach to storing reference.<br />
-This seems a more suitable approach between “ankify everything” and “go to the effort of recalling exactly what you came across”.</p>
-<p>The important part of zettelkasten notes, as I understand it, is that each note in the system is small, the note hyperlinks to other notes, and the use of tagging helps with random lookup/search of the notes.</p>
-<p>In particular, there’s not necessarily a hierarchical structure to the notes. The benefit of this is you don’t have to try to remember where a note was put.</p>
-<h3 id="examples">Examples</h3>
-<p>Some examples in my mind make a bit more sense with “cost vs benefit”.</p>
-<ul>
-<li><p>I’m hopeful for elm-lang. It strikes me as (relatively) low-cost to learn to use, and I think this cost is far outweighed by the benefits gained.</p></li>
-<li><p>I’m pessimistic about the value of Rust for general purpose software development. In constrast to elm-lang (where elm-lang’s syntax was weird, but the logic was easy to follow): Rust’s syntax is kinda sorta weird, writing something you’ve not done before in Rust can be hard even with some familiarity with the language, and Rust’s USP isn’t a big win in common cases.<br />
-Using Rust is surely high-reward in some use cases; but I’m not sure it ever becomes low-cost in most cases.</p></li>
-<li>I was fascinated by <a href="https://twitter.com/Jonathan_Blow/status/781597528047230976">the argument in favour of the array-processing programming language K</a> and <a href="https://news.ycombinator.com/item?id=22504106">the HN discussion</a>.
-<ul>
-<li>What strikes me the most as “using a concise sequence of operators” is to using “FP-ish methods like sum” as those are to “explicit for loop”.
-<ul>
-<li>The best I can make of it is: you’d have to go and learn what each of the symbols does. There aren’t <em>that</em> many and there’s a big benefit to learning them. And without experience(?) you should’t have the expectation to be able to quickly read K programs.</li>
-<li>Which is enough to convince me that the idea of a language like that isn’t completely crazy.</li>
-<li>But also that: I don’t think using “FP-ish methods” isn’t too far from developers are used to, or able to read. Whereas seeing <code>q::n 9'a</code> doesn’t really bring <a href="https://kparc.com/edit.k">“syntax coloring”</a> to mind.<br />
-(So I could believe taking the time to learn K would be worthwhile, I don’t think anyone should be surprised that not everyone sees the benefits when the costs are so apparent).</li>
-</ul></li>
-<li>I also found the post’s response to the idea of readability interesting. A symbol operator isn’t necessarily harder to read than a full word. With the word you might think you can guess what it means, but you might be wrong. An operator is going to be precise.
-<ul>
-<li>There are languages which I’m more familiar with which somewhat take this approach.<br />
-e.g. Scala’s <a href="https://www.scala-lang.org/api/current/scala/collection/immutable/List.html">List</a> keeps <code>+:</code> (for ‘prepend’) and <code>:+</code> (guess what for?), but deprecates <code>/:</code> and <code>:\</code>.<br />
-e.g. Haskell has a few (e.g. see <a href="https://hackage.haskell.org/package/base-4.12.0.0/docs/doc-index-All.html">the start and end of base’s index</a>).</li>
-<li>Overall, I don’t think it’s absolute that terms are ambiguous or that using only operators would give a more accurate understanding of the program ‘for free’.</li>
-</ul></li>
-</ul></li>
-<li>Category Theory. As I understand it, Category Theory is simple, but not easy. So the cost to studying it isn’t so low. But it’s also kinda hard to see the benefits beyond it being inherently interesting.<br />
-It’s neat to see <a href="https://blog.ploeh.dk/2019/12/30/semigroup-resonance-fizzbuzz/">unusual solutions to fizzbuzz like ploeh.dk’s</a>; but the code itself can be understood without category theory. (Well, readable if you can recall what <code>&lt;$&gt;</code> and <code>&lt;&gt;</code> do).
-<ul>
-<li>FWIW, “simple but not easy” seems like a reasonably fine fit for Anki flashcards.</li>
-</ul></li>
-<li>Haskell.
-<ul>
-<li><a href="http://learnyouahaskell.com/chapters">Learn You a Haskell</a> is really cute. And straightforward.
-<ul>
-<li>With that I can make simple-ish toy projects and then wish other languages had ADTs and pattern matching and type safety like that.</li>
-</ul></li>
-<li>e.g. <a href="http://degoes.net/articles/modern-fp">This post using free monads</a> is very cool to read. But I’d also want to go and read about what/how a lens <code>Prism</code> is.</li>
-<li>I get the impression that ‘real’ Haskell relies on several more complicated concepts like that. Maybe they’re “simple but not easy” too.
-<ul>
-<li>e.g. the posts linked from https://www.simplehaskell.org/ are very in-line with what I’m trying to get at.
-<ul>
-<li>It’s not that using ‘fancy types’ or the academic bleeding edge of what’s possible in Haskell is bad, or impractical. But for many non-Haskell developers, the costs to that kind of style look heavy and it’s not apparent that it’d be better than just writing working code in JavaScript.</li>
-</ul></li>
-</ul></li>
-</ul></li>
-<li><p>I think the reason we end up with <a href="https://adamdrake.com/command-line-tools-can-be-235x-faster-than-your-hadoop-cluster.html">“Command Line Tools can be Faster than your Hadoop Cluster”</a> or <a href="https://stackoverflow.com/questions/1218390/what-is-your-most-productive-shortcut-with-vim">“Your problem with vim is that you don’t grok vi”</a> is because of a lack of consideration of cost/benefit, which led to mistakenly not taking the time to learn things which would have been better.</p></li>
-<li><p><a href="https://pythonspeed.com/articles/dont-need-kubernetes/">pythonspeed’s discussion of kubernetes drawbacks</a> makes it clear that the costs of running kubernetes for a small team outweigh the benefits. I think if the complexity had been communicated alongside the hype, it’s not a technical decision anyone would make.</p></li>
-</ul>
-]]></summary>
-</entry>
-<entry>
-    <title>Early Impression of Elm</title>
-    <link href="http://www.rgoulter.com/blog//posts/programming/2020-02-28-early-impression-of-elm-lang.html" />
-    <id>http://www.rgoulter.com/blog//posts/programming/2020-02-28-early-impression-of-elm-lang.html</id>
-    <published>2020-02-28T00:00:00Z</published>
-    <updated>2020-02-28T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<div class="info">
-    Posted on February 28, 2020
-    
-        by Richard Goulter
-    <br/>
-    
-    Tags: 
-    
-</div>
-
-<p>Recently I wrote some Elm-lang code as part of a casual side-project.</p>
-<p>The Elm program was simple, though non-trivial.<br />
-The program was a UI for making notes from emails. The Elm program presented a list of emails for the user to select, and let the user CRUD a note for the selected email.</p>
-<p>Some changesets: - https://github.com/rgoulter/simple-email-data-tool/pull/1/files Initially adding the Elm program with Travis-CI config, RSpec spec with Capybara, and the Elm program. - https://github.com/rgoulter/simple-email-data-tool/pull/5 Changing from a <code>&lt;select/&gt;</code> to a <code>&lt;table&gt;</code> for one of the widgets. (I was surprised by how easy this change was). - https://github.com/rgoulter/simple-email-data-tool/pull/6/files Adding keybindings to the input. - https://github.com/rgoulter/simple-email-data-tool/pull/8/files Adding date filtering, using a third-party pure-Elm library.</p>
-<h3 id="where-im-coming-from">Where I’m Coming From</h3>
-<ul>
-<li><p>I’d be lying if I said I was very experienced with front-end code. e.g. I can’t think of any big mistakes I’ve made and things I’ve learned from said mistakes. The basics are straightforward; and a deep understanding of front-end web development requires an appreciation for all aspects of how a web browser works, which isn’t easy.</p></li>
-<li>On the continuum of ‘liberal programmer’ (“if it breaks, just fix it”; likes Python, Ruby) to ‘conservative programmer’ (wants to know if it works at compile time; likes Haskell) I’m towards the ‘conservative’ end.
-<ul>
-<li>I’m inclined to like Elm.</li>
-</ul></li>
-</ul>
-<h3 id="what-i-didnt-like-about-elm">What I Didn’t Like About Elm</h3>
-<ul>
-<li>I was surprised that some things in Elm were (much) harder than they would be in JavaScript.
-<ul>
-<li>I wasn’t able to figure out how to nicely access the query parameters of the URI. (I ended up getting something which could access the query parameters at a specific path; but I couldn’t figure it out for any arbitrary path). This is an example of “easy in JavaScript, hard in Elm”.
-<ul>
-<li>While I found this frustrating, I think the Elm-lang documentation makes it clear <em>why</em> it makes this kind of thing ‘hard’.
-<ul>
-<li>Elm is all about removing footguns. In this case, easy access to the window’s URI query params would introduce impurity; so, to access window’s URI your Elm program also need to ‘manage’ the URI.</li>
-</ul></li>
-<li>But I would anticipate further “of <em>course</em> that wouldn’t be straightforward in Elm” when considering Elm as a language.</li>
-</ul></li>
-</ul></li>
-<li><p>e.g. I wouldn’t wanna write this blog website’s page with Elm, since the Elm runtime is JavaScript; so if I used Elm then it wouldn’t be accessible to users with JavaScript disabled.</p></li>
-<li><p>I still have to look into idioms or idiosyncracies about combining modules together. I’m not sure I ‘get’ it, or if the approach I took was stupid or fine.</p></li>
-</ul>
-<h3 id="what-i-found-interesting-about-elm">What I Found Interesting About Elm</h3>
-<ul>
-<li>The Elm Architecture. The restricted nature of Elm’s code means that, while code still doesn’t magically end up well designed, it still ends up being somewhat (or close to) idiomatic.
-<ul>
-<li>My experience with GUIs other than Elm has been with languages that allow you to more/less update the code’s state from anywhere.</li>
-<li>With Elm, you have a ‘model’ Algebraic type, a ‘message’ Algebraic type.
-<ul>
-<li>Anything the Elm program needs to care about goes in its model.</li>
-<li>Any ‘action’ that might happen in the Elm program is represented by a message.</li>
-<li>The only place the model gets changes is in its update function.</li>
-<li>The only way effects happen is through messages.</li>
-</ul></li>
-<li>The question becomes “what nouns, what verbs do I want in this system? What is each noun? What does each verb do?”.</li>
-</ul></li>
-<li>Because of that explicitness and lack of mutation, edge cases (and race conditions) are surfaced.</li>
-</ul>
-<h3 id="what-i-liked-about-elm">What I Liked About Elm</h3>
-<ul>
-<li><p>It’s not JavaScript. Programming in JavaScript is .. fine. But I don’t particularly like JavaScript. It feels very blobbish.</p></li>
-<li><p>95% of the time it’s a joy to write in Elm. (Most of the time it’s not a joy to write in are the times when you’re trying to do something which would be easy to do in JavaScript. Or with impurity like time/randomness).</p></li>
-<li><p>Elm mostly has the “if it compiles it works” aspect to it.</p></li>
-<li>Elm programs/modules are self contained and small.
-<ul>
-<li>Everything you need in a module must be explicitly imported.</li>
-<li>The lack of mutation means things are much more explicit.</li>
-</ul></li>
-<li><p>Elm’s record syntax is nicer than Haskell’s.</p></li>
-</ul>
-<h3 id="my-development-experience">My Development Experience</h3>
-<ul>
-<li><p>I mocked the API that my Elm program would call with simple Ruby’s Sinatra servers.</p></li>
-<li><p>I wrote RSpec specs which would compile the Elm program before running Selenium tests against the Elm program.</p></li>
-<li><p>My program wasn’t sophisticated enough to need much development work on components individually. But I did find it easy enough to use “elm reactor” (compiles + serves the Elm source) to focus on one component at a time.</p></li>
-<li>I developed my Elm program using Emacs. The most popular elm-mode gave me syntax highlighting. I didn’t feel the need to make use of elm-mode’s other IDE features.
-<ul>
-<li>For code completion: I developed my Elm program on Windows. There’s an Elm language server. Unfortunately, I think because Windows is slow at launching processes, I found it was too slow for me to use with Emacs on Windows.</li>
-</ul></li>
-<li><p>I didn’t make good use of it, but there is support in universal-ctags.</p></li>
-</ul>
-<h3 id="would-i-use-it">Would I Use It?</h3>
-<p>After having used it for a side-project, without the burden of needing to ship something reliable by some deadline:</p>
-<p>Yes, I’m quite happy with the experience.</p>
-<p>Obivously I’m interested in liking it, though; and this wasn’t a high-risk project, so:<br />
-What situations/cases would I not recommend using it for?<br />
-- Projects which benefit from a rapid prototyping/delivery (e.g. code maintainability/quality can be traded off) by an experienced team which lacks any experience Elm. - Projects which already show evidence of some kind of a “lava flow” antipattern, or projects where using Elm is likely to lead (or contribute) to an anti-pattern like this. - Projects where Elm is chosen without consideration for <a href="https://mcfunley.com/choose-boring-technology">‘Choose Boring Technology’</a>. - If I were given responsibility to maintain some front-end application code which was poorly written in JavaScript using ReactJS: - While it’s possible to interop Elm and JavaScript, I think the complexity of the same maintainers mixing the code would outweigh benefits of using Elm. - etc.</p>
-<p>I think websites would be better maintained if they were developed with the discipline that Elm does a lot to help.</p>
-]]></summary>
-</entry>
-<entry>
-    <title>On Agile</title>
-    <link href="http://www.rgoulter.com/blog//posts/programming/2020-01-25-on-agile.html" />
-    <id>http://www.rgoulter.com/blog//posts/programming/2020-01-25-on-agile.html</id>
-    <published>2020-01-25T00:00:00Z</published>
-    <updated>2020-01-25T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<div class="info">
-    Posted on January 25, 2020
-    
-        by Richard Goulter
-    <br/>
-    
-    Tags: 
-    
-</div>
-
-<p>“Agile”, “Scrum” and “Kanban” all get a rather bad reputation among developers on the internet. They seem to work well for <em>some</em> teams, but for others these are <a href="https://media.defense.gov/2018/Oct/09/2002049591/-1/-1/0/DIB_DETECTING_AGILE_BS_2018.10.05.PDF">“waterfall or spiral development in agile clothing”</a>.</p>
-<p>At worst, teams take tasks off a todo list however they would anyway and call it ‘agile’.</p>
-<p>At best, maybe the differences can be explained as “‘agile’ works well for some kinds of development work; but not well for others” (I’m not convinced by this as-such) or “‘agile’ works well for good teams. For good teams, anything would work well”. (Which wouldn’t mean ‘agile’ is useless; so much as, it’s not a silver bullet).</p>
-<p>But <em>part</em> of the disagreement, I think, comes from the ol’ “people using the same words to refer to different things”. Especially people with different understandings, let alone experiences.</p>
-<p>I’d come across the terms ‘kanban’ and ‘kanban board’ for years before I picked up a book which discussed kanban. I was surprised to see the idea of a kanban board was related to principles: visualize the workflow, limit work in progress.<br />
-“Either a worker is idle or a task is idle”. The idea is to maximise ‘flow’ of tasks. Limiting work in progress and visualizing it on a board ought to help identify bottlenecks, which can be addressed.</p>
-<p>Beyond that, there are all sorts of details as to tactics and techniques for implementing this. But the basic idea sounds ‘obvious’ and intuitive and, for some workflows, a good idea.</p>
-<p>I, uh, don’t know if a ‘kanban board’ can properly be called a ‘kanban board’ if these principles aren’t followed. I suspect places which just use the column-of-tasks aren’t likely to follow “limit WIP”. But I suspect most places which don’t follow “limit WIP” are still happy to say they “do kanban” and are agile.</p>
-<p>In any case, it seems unprofessional that so many development teams would be using ‘kanban’ or ‘scrum’ but without following (or knowing) the key ideas. I think this is because agile <em>sounds</em> hip.</p>
-<hr />
-<p>Being surprised about ‘kanban’, I’ve decided to read up on ‘scrum’. (The one with ‘sprints’ and stuff).</p>
-<p>At a glance, it seems to have the same “oh <em>that</em> makes sense” as kanban, as <em>well</em> as “…because of these underlying values”.</p>
-<p>But the book I was reading pointed out: <em>of course</em> if the team doesn’t have psychological safety / trust / respect for each other, then ‘scrum’ isn’t going to work.</p>
-<p>I’d guess there’s still value in following a process in order to try and surface problems. But surely a political and unsafe team isn’t going to identify or address problems easily.</p>
-<p>I think, then, the hype over ‘agile’ is a bit misplaced.<br />
-Not because the ideas around it are worthless so much as the heavy-lifting of effective teams seems to be the psychological safety aspect.<br />
-From there, I think the ‘agile’ ideas make sense for a reasonably wide variety of work. (I imagine obstacles like: e.g. a focus on small improvements may obscure long-term strategic mistakes).</p>
 ]]></summary>
 </entry>
 
