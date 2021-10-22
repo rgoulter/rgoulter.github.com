@@ -168,10 +168,10 @@ You might be aware of other such tools around:</p>
 <p>Hopefully, (esp. if you play around with it yourself), you’ll think that’s kinda cool.<br />
 I’ll know if I did a good job with my talk if you walk out thinking “that’s it, huh? I was expecting something complicated.” / “<em>I</em> could do that, chump.”. (I’ll’ve done an even better job if some of you go out and try and make this kindof stuff).</p>
 <p>It’s kinda lame, for me, to say “hey, what I did for my FYP is quite simple”. (“If you can’t explain it simply, you don’t understand” / “it’s only simple if we simplify out the details” aside). The fortunate thing for this is that C has relatively few features. (e.g. No closures / functions within functions). But it’s not a sit-down-and-finish-it-in-an-hour kindof project. It is a <em>lot</em> of fun. (How many kids continue working on their FYP after they’ve presented in their free time?). You’ll also get <em>very</em> good at the language; I got somewhat familiar with the C99 language standard, and certainly stumbled upon the more esoteric aspects of (simple) C99, my favourite being:</p>
-<pre><code>int isWhitespace[256] = { [' '] = 1, ['\t'] = 1, ['\n'] = 1 };
-isWhitespace['a'];  //&gt; 0
-isWhitespace[' '];  //&gt; 1
-isWhitespace['\t']; //&gt; 1</code></pre>
+<div class="sourceCode" id="cb1"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="dt">int</span> isWhitespace[<span class="dv">256</span>] = { [<span class="ch">' '</span>] = <span class="dv">1</span>, [<span class="ch">'\t'</span>] = <span class="dv">1</span>, [<span class="ch">'\n'</span>] = <span class="dv">1</span> };</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">isWhitespace[<span class="ch">'a'</span>];  <span class="co">//&gt; 0</span></a>
+<a class="sourceLine" id="cb1-3" data-line-number="3">isWhitespace[<span class="ch">' '</span>];  <span class="co">//&gt; 1</span></a>
+<a class="sourceLine" id="cb1-4" data-line-number="4">isWhitespace[<span class="ch">'\t'</span>]; <span class="co">//&gt; 1</span></a></code></pre></div>
 <h2 id="whats-in-it-for-you-motivation-for-caring-about-the-presentation">“What’s In It For You” / Motivation For Caring About the Presentation</h2>
 <p>Something like ‘Example of a cool Programming-Language Application project you can make, once you have knowledge of how to make a parser &amp; roughly you could implement it’, esp. if the inspiration is ‘I want that for <em>my favourite language</em>’.</p>
 <p>On the other hand, PL applications needn’t be like this, and can be more modest, like, ‘organise imports’ or ‘indent properly’ or so.</p>
@@ -210,16 +210,16 @@ One approach might be to just pass the code of to some C interpreter anyway. (Cl
 i.e. insert statements into the C program so that I can run the program to get the output.</p>
 <p><img src="http://i.imgur.com/P3KHZzK.png" /></p>
 <p>Roughly like:</p>
-<pre><code>int main() {
-  int x;
-  x = 3;
-}</code></pre>
+<div class="sourceCode" id="cb2"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="dt">int</span> main() {</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2">  <span class="dt">int</span> x;</a>
+<a class="sourceLine" id="cb2-3" data-line-number="3">  x = <span class="dv">3</span>;</a>
+<a class="sourceLine" id="cb2-4" data-line-number="4">}</a></code></pre></div>
 <p>becomes</p>
-<pre><code>int main() {
-  int x;
-  x = 3;
-  OUTPUT(x, STRING_OF(3))
-}</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="dt">int</span> main() {</a>
+<a class="sourceLine" id="cb3-2" data-line-number="2">  <span class="dt">int</span> x;</a>
+<a class="sourceLine" id="cb3-3" data-line-number="3">  x = <span class="dv">3</span>;</a>
+<a class="sourceLine" id="cb3-4" data-line-number="4">  OUTPUT(x, STRING_OF(<span class="dv">3</span>))</a>
+<a class="sourceLine" id="cb3-5" data-line-number="5">}</a></code></pre></div>
 <p>and as-if compiled with a pre-processor which handles <code>OUTPUT</code>, <code>STRING_OF</code>. <code>OUTPUT</code> outputs in a format my Scala program intercepts. (I just use <code>STDOUT</code>; it could also be done using, say, sockets, or using something like Apache Thrift / or some other IPC/RPC framework – With C, this is a bit annoying, e.g. becomes more difficult to compile on Windows. [My tool, &amp; the Vim plugin, work on Windows, btw]).</p>
 <p>The pseudocode for the instrumentor is more/less:</p>
 <pre><code>def instrument(source):
@@ -245,12 +245,12 @@ i.e. insert statements into the C program so that I can run the program to get 
            | Struct    of String * String * ((String, CType) List)
            | Function  of String * CType * ((String, CType) List)</code></pre>
 <p>In Scala, the code (simplified) is something like:</p>
-<pre><code>sealed trait CType;
-case class PrimitiveType(id: String, type: String) extends CType;
-case class PointerType(id: String, to: CType) extends CType;
-case class ArrayType(id: String, of: CType) extends CType;
-case class StructType(id: String, tag: String, members: List[(String, CType)]) extends CType;
-case class FunctionType(id: String, rtnType: CType, params: List[(String, CType)]) extends CType;</code></pre>
+<div class="sourceCode" id="cb6"><pre class="sourceCode scala"><code class="sourceCode scala"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw">sealed</span> <span class="kw">trait</span> CType;</a>
+<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="kw">case</span> <span class="kw">class</span> <span class="fu">PrimitiveType</span>(id: String, <span class="kw">type</span>: String) <span class="kw">extends</span> CType;</a>
+<a class="sourceLine" id="cb6-3" data-line-number="3"><span class="kw">case</span> <span class="kw">class</span> <span class="fu">PointerType</span>(id: String, to: CType) <span class="kw">extends</span> CType;</a>
+<a class="sourceLine" id="cb6-4" data-line-number="4"><span class="kw">case</span> <span class="kw">class</span> ArrayType(id: String, of: CType) <span class="kw">extends</span> CType;</a>
+<a class="sourceLine" id="cb6-5" data-line-number="5"><span class="kw">case</span> <span class="kw">class</span> <span class="fu">StructType</span>(id: String, tag: String, members: List[(String, CType)]) <span class="kw">extends</span> CType;</a>
+<a class="sourceLine" id="cb6-6" data-line-number="6"><span class="kw">case</span> <span class="kw">class</span> <span class="fu">FunctionType</span>(id: String, rtnType: CType, params: List[(String, CType)]) <span class="kw">extends</span> CType;</a></code></pre></div>
 <p>(See <a href="https://github.com/rgoulter/c-worksheet-instrumentor/blob/master/src/main/scala/edu/nus/worksheet/instrumentor/CType.scala">CType.scala</a>).</p>
 <p>In Java … ha ha ha, just kidding. (Just because you <em>can</em>, doesn’t mean you <em>should</em>.).</p>
 <h4 id="making-use-of-this-adt">Making use of this ADT</h4>
@@ -279,9 +279,9 @@ Figuring it out takes the same kindof logic as figuring out how to do AST -&gt; 
 <p>I don’t reconstruct the AST directly, but just inject the instrumenting C code into a TokenStreamRewriter (one of ANTLR’s things, for a stream of the lexed tokens).</p>
 <h2 id="cool-stuff-segfault-handling">Cool stuff: Segfault Handling</h2>
 <p>That’s all ‘nice’, but something I’m quite proud of (&amp; in terms of ‘useful for a C beginner’) is it catches <code>SEGFAULT</code>s, and marks the output there:</p>
-<pre><code>  int *px;     //&gt; px is pointer to int
-  px = 0;      //&gt; px = (nil)
-  *px = 5;     //&gt; SEGFAULT</code></pre>
+<div class="sourceCode" id="cb7"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb7-1" data-line-number="1">  <span class="dt">int</span> *px;     <span class="co">//&gt; px is pointer to int</span></a>
+<a class="sourceLine" id="cb7-2" data-line-number="2">  px = <span class="dv">0</span>;      <span class="co">//&gt; px = (nil)</span></a>
+<a class="sourceLine" id="cb7-3" data-line-number="3">  *px = <span class="dv">5</span>;     <span class="co">//&gt; SEGFAULT</span></a></code></pre></div>
 <p>‘How’ involves a bit of knowledge about C99:</p>
 <ul>
 <li><p><code>setjmp</code>/<code>longjmp</code> are kinda like a <code>GOTO</code> statement, can be used to simulate exception handling in C.</p></li>
@@ -342,12 +342,6 @@ Overall, I keep a ‘programming journal’. I’ve heard “if you’re not wri
 <br style="clear: both;" />
 
 <hr />
-
-<!-- Load highlight.js for Syntax Highlighting. -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/solarized_light.min.css">
-<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
-<script>hljs.initHighlightingOnLoad();</script>
-
 
             </div>
 

@@ -194,7 +194,7 @@ The GIF perhaps explains the concept best:</p>
 <li><p>Technical implementation: It’s different to what most text editors have done, and isn’t widely available. This limits adoption.</p></li>
 <li><p>Who cares?: Developers have done well enough as-is for the last however many years; people can set aside subjective disagreements if they <em>really</em> need to, anyway.</p></li>
 <li><p>Impact: Compare the quote above; using leading tabs for indentation is pretty much the same behaviour as elastic tabstops; and the other adjustments aren’t all worth the novelty.</p></li>
-<li><p>Corner cases: Considering the Python snippet: <code>def foo( bar,            xyzzy ):       wibble()</code> it’s probably something elastic tabstops will mess up, without code intelligence.</p></li>
+<li><p>Corner cases: Considering the Python snippet: <code>python   def foo( bar,            xyzzy ):       wibble()</code> it’s probably something elastic tabstops will mess up, without code intelligence.</p></li>
 </ul>
 <p>– For what it’s worth, I still don’t see this as inherently more natural than the “mixed” solution.</p>
 <p>Even so, it appears that elastic tabstops are the kind of thing which could be adopted into codebases iteratively. (I imagine this would look ugly for tools which don’t support elastic tabstops; but the same is true if a programmer assumes tabwidth to be a certain value anyway, so it’s not like the issue would be new.).</p>
@@ -213,12 +213,6 @@ The GIF perhaps explains the concept best:</p>
 <br style="clear: both;" />
 
 <hr />
-
-<!-- Load highlight.js for Syntax Highlighting. -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/solarized_light.min.css">
-<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
-<script>hljs.initHighlightingOnLoad();</script>
-
 
             </div>
 

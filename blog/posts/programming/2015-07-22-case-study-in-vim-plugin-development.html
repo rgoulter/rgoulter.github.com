@@ -146,7 +146,7 @@ Vim doesn’t offer this behaviour out of the box.<br />
 The fella on IRC was using <a href="https://github.com/nelstrom/vim-visual-star-search">nelstrom/vim-visual-star-search</a>. The readme for this somewhat helpfully links to <a href="https://github.com/thinca/vim-visualstar">thinca/vim-visualstar</a>. – Neither of these repos is outstandingly popular.</p>
 <p>Nelstrom remarks “Looks like it uses a lot more code to do pretty much the same thing. Is it better?”.</p>
 <p>Nelstrom’s plugin is simple enough to show here:</p>
-<pre><code>&quot; From http://got-ravings.blogspot.com/2008/07/vim-pr0n-visual-search-mappings.html
+<pre class="vim"><code>&quot; From http://got-ravings.blogspot.com/2008/07/vim-pr0n-visual-search-mappings.html
 
 &quot; makes * and # work on visual mode too.
 function! s:VSetSearch(cmdtype)
@@ -163,7 +163,7 @@ xnoremap # :&lt;C-u&gt;call &lt;SID&gt;VSetSearch('?')&lt;CR&gt;?&lt;C-R&gt;=@/&
 nmap &lt;leader&gt;* :execute 'noautocmd vimgrep /\V' . substitute(escape(expand(&quot;&lt;cword&gt;&quot;), '\'), '\n', '\\n', 'g') . '/ **'&lt;CR&gt;
 vmap &lt;leader&gt;* :&lt;C-u&gt;call &lt;SID&gt;VSetSearch()&lt;CR&gt;:execute 'noautocmd vimgrep /' . @/ . '/ **'&lt;CR&gt;</code></pre>
 <p>Thinca’s is <a href="https://raw.githubusercontent.com/thinca/vim-visualstar/master/plugin/visualstar.vim">certainly longer</a>:</p>
-<pre><code>function! s:search(type, g)
+<pre class="vim"><code>function! s:search(type, g)
   let s:count = v:count1 . a:type
   let reg = '&quot;'
   let [save_reg, save_type] = [getreg(reg), getregtype(reg)]
@@ -205,12 +205,6 @@ endfunction</code></pre>
 <br style="clear: both;" />
 
 <hr />
-
-<!-- Load highlight.js for Syntax Highlighting. -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/solarized_light.min.css">
-<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
-<script>hljs.initHighlightingOnLoad();</script>
-
 
             </div>
 

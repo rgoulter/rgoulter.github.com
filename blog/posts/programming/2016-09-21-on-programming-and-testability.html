@@ -147,13 +147,13 @@
 <li><p>cf. <a href="http://c2.com/cgi/wiki?PortsAndAdaptersArchitecture">“Ports and Adapters”</a>, which sometimes is mentioned in terms of making a system testable. (In “Working Effectively with Legacy Systems”, the idea of a ‘contact point’ is brought up; i.e. a point wherein you can change/inject a dependency without having to modify the code using it). – “Ports and Adapters” somewhat suggests for ‘large’ components, but these ideas all seem the same to me.</p></li>
 </ul>
 <p>My fresh, recent understanding of this last point is that in order to be able to inject things, constructing/initialising objects (using “new”) within methods is bad.</p>
-<pre><code>class SomeInterestingClass {
-  // ...
-  public function computeSomething($x) {
-    $service = new ServiceFromOtherModule(); // Can't be changed in here
-    return $service-&gt;compute($this-&gt;val, $x);
-  }
-}</code></pre>
+<div class="sourceCode" id="cb1"><pre class="sourceCode php"><code class="sourceCode php"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">class</span> SomeInterestingClass {</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">  <span class="co">// ...</span></a>
+<a class="sourceLine" id="cb1-3" data-line-number="3">  <span class="kw">public</span> <span class="kw">function</span> computeSomething<span class="ot">(</span><span class="kw">$x</span><span class="ot">)</span> {</a>
+<a class="sourceLine" id="cb1-4" data-line-number="4">    <span class="kw">$service</span> = <span class="kw">new</span> ServiceFromOtherModule<span class="ot">();</span> <span class="co">// Can't be changed in here</span></a>
+<a class="sourceLine" id="cb1-5" data-line-number="5">    <span class="kw">return</span> <span class="kw">$service</span>-&gt;compute<span class="ot">(</span><span class="kw">$this</span>-&gt;val<span class="ot">,</span> <span class="kw">$x</span><span class="ot">);</span></a>
+<a class="sourceLine" id="cb1-6" data-line-number="6">  }</a>
+<a class="sourceLine" id="cb1-7" data-line-number="7">}</a></code></pre></div>
 <p>The way to replace this, then, would be to store <code>$service</code> as a property, initialised in constructor instead of “where it’s used”, which can be <code>set</code>. And maybe some more complicated variation for if this class we depend on needs to be initialised with variables the constructor.<br />
 – The same more/less applies if the ‘dependency’ is a function call, etc.</p>
 <p>My understanding is, then, that for non-trivial computations, “testing behaviour” comes down to assertions on how mocked-up classes/functions are used. Some white-box understanding of how behaviour is implemented is needed to know what can be stubbed. – This somewhat makes unit tests a ‘declarative’ companion to the code: “In this circumstance, this should happen”.</p>
@@ -174,12 +174,6 @@
 <br style="clear: both;" />
 
 <hr />
-
-<!-- Load highlight.js for Syntax Highlighting. -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/solarized_light.min.css">
-<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
-<script>hljs.initHighlightingOnLoad();</script>
-
 
             </div>
 

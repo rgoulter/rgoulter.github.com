@@ -153,14 +153,14 @@ The high-level overview wasn’t obvious for me, so I’d complement that blogpo
 </ul>
 <hr />
 <p>Looking at snippets from the code:</p>
-<pre><code>int main (void) {
- DDRB |= _BV(DDB5); /* set Port B bit-5 to output */
-
- while(1) {
-  PORTB |= _BV(PORTB5); /* turn on LED */
-  ....
- }
-}</code></pre>
+<div class="sourceCode" id="cb1"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="dt">int</span> main (<span class="dt">void</span>) {</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"> DDRB |= _BV(DDB5); <span class="co">/* set Port B bit-5 to output */</span></a>
+<a class="sourceLine" id="cb1-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb1-4" data-line-number="4"> <span class="cf">while</span>(<span class="dv">1</span>) {</a>
+<a class="sourceLine" id="cb1-5" data-line-number="5">  PORTB |= _BV(PORTB5); <span class="co">/* turn on LED */</span></a>
+<a class="sourceLine" id="cb1-6" data-line-number="6">  ....</a>
+<a class="sourceLine" id="cb1-7" data-line-number="7"> }</a>
+<a class="sourceLine" id="cb1-8" data-line-number="8">}</a></code></pre></div>
 <p>This left a novice like me with questions:<br />
 Where do these constants come from? What’s <code>DDRB</code>? How does <code>DDB5</code> refer to PB5? Why <code>PORTB = ...</code> to change the LED? What’s the difference between <code>DDB5</code> and <code>PORTB5</code>?<br />
 (At least I understood the <code>magicVar |= 1 &lt;&lt; 5</code> &amp; <code>magicVar &amp;= ~(1 &lt;&lt; 5)</code> bitmasking. – my <a href="https://github.com/rgoulter/c-worksheet.vim">C-Worksheet</a> is useful for playing around with this, also, btw).</p>
@@ -177,9 +177,9 @@ The DDxn bit in the DDRx Register selects the direction of this pin. If DDxn is 
 <p>DDR = Data Direction Register. Ohhh.[1]<br />
 <code>DDRB</code> is the byte (of the data direction of Port B), <code>DDB5</code> for referring to Port B (x = B), and its 5th bit (n = 5). (The register summary in Section 35, p615 shows this).</p>
 <p>So, when the Arduino code has:</p>
-<pre><code>pinMode(13, OUTPUT);</code></pre>
+<div class="sourceCode" id="cb2"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb2-1" data-line-number="1">pinMode(<span class="dv">13</span>, OUTPUT);</a></code></pre></div>
 <p>it is <strong>essentially</strong> equivalent to:</p>
-<pre><code>DDRB |= _BV(DDB5);</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb3-1" data-line-number="1">DDRB |= _BV(DDB5);</a></code></pre></div>
 <p>….Obviously.[2]</p></li>
 <li><p><strong>How does <code>DDB5</code> refer to PB5?</strong><br />
 It just does?<br />
@@ -226,12 +226,6 @@ From the schematic, this corresponds to PD2 .. PD5. (<code>%s/B/D/</code> is evi
 <br style="clear: both;" />
 
 <hr />
-
-<!-- Load highlight.js for Syntax Highlighting. -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/solarized_light.min.css">
-<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
-<script>hljs.initHighlightingOnLoad();</script>
-
 
             </div>
 

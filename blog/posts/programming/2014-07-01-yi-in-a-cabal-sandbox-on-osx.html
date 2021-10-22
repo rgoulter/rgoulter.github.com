@@ -142,7 +142,7 @@
 <p>Despite that, I ran into a difficulty or two when I tried this.<br />
 <a href="https://gist.github.com/rgoulter/8fde851e20fc913d1ed8">Like these errors</a> One error which complained was trying to use <code>aeson-0.7.0.3</code>. Installing a newer version of <code>aeson</code> into the sandbox resolved this. (For some reason, changing the <code>yi.cabal</code> so that it had version 4.2 of the <code>lens</code> library [which requires <code>aeson &gt;= 0.7.0.5</code>] didn’t resolve this. I don’t suppose I understand how Cabal works).</p>
 <p>Having forgotten <a href="http://www.haskell.org/haskellwiki/Gtk2Hs/Mac">how to install gtk2hs on OSX</a>, naturally I ran into difficulties with <code>cabal install -fpango</code>. (For some reason, I had issues with GTK; <code>gtk-demo</code> failed to load. <a href="http://stackoverflow.com/questions/22631026/dyld-library-not-loaded-usr-local-lib-libpng16-16-dylib-with-anything-php-rel">Similar to this</a>). Word to the wise,</p>
-<pre><code>cabal install --with-gcc=gcc-4.8 -fvty -fpango</code></pre>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="ex">cabal</span> install --with-gcc=gcc-4.8 -fvty -fpango</a></code></pre></div>
 <p>would be how to install it. (Alas, I’m <a href="https://gist.github.com/rgoulter/d1e94a05dd93abaa078d">plagued by errors</a> when I try to install the Pango frontend. I was able to install it earlier..).</p>
 
 
@@ -159,12 +159,6 @@
 <br style="clear: both;" />
 
 <hr />
-
-<!-- Load highlight.js for Syntax Highlighting. -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/solarized_light.min.css">
-<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
-<script>hljs.initHighlightingOnLoad();</script>
-
 
             </div>
 

@@ -154,14 +154,14 @@ The syntactic difference is, every time you have an <code>Optional[Value]</code>
 <p>There are other ways to deal with errors.<br />
 One kinda-stupid approach would be for the dictionary to loop indefinitely (until it has a value for the given key). In a concurrent/parallel program, this isn’t completely stupid, &amp; blocking-until-result <em>may</em> be desirable. But still.</p>
 <p>Throwing an exception is another approach. Python does this. It seems to me this is kindof-sortof morally equivalent to <code>Optional[Value]</code> also; the benefit being that a value isn’t going to be <code>null</code>, the drawback being it’s difficult to tell what the program is doing:</p>
-<pre><code>try {
-  x = dict.get(keyX);
-  doTask1(x);
-  y = dict.get(keyY);
-  doTask2(x, y);
-} catch KeyNotPresent ex {
-  //...
-}</code></pre>
+<div class="sourceCode" id="cb1"><pre class="sourceCode scala"><code class="sourceCode scala"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">try</span> {</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">  x = dict.<span class="fu">get</span>(keyX);</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3">  <span class="fu">doTask1</span>(x);</a>
+<a class="sourceLine" id="cb1-4" data-line-number="4">  y = dict.<span class="fu">get</span>(keyY);</a>
+<a class="sourceLine" id="cb1-5" data-line-number="5">  <span class="fu">doTask2</span>(x, y);</a>
+<a class="sourceLine" id="cb1-6" data-line-number="6">} <span class="kw">catch</span> KeyNotPresent ex {</a>
+<a class="sourceLine" id="cb1-7" data-line-number="7">  <span class="co">//...</span></a>
+<a class="sourceLine" id="cb1-8" data-line-number="8">}</a></code></pre></div>
 <p>– Obviously if an exception is thrown above, it’s not clear whether it came before or after <code>doTask1(x)</code>; perhaps less clear is that <code>y = dict.get</code> onwards ‘needs’ its own <code>try-catch</code> block. It doesn’t make sense to have <code>KeyNotPresent</code> exception cover both <code>x = dict.get</code> and <code>y = dict.get</code>; not if you want to be sure that you’re handling each alternative.</p>
 <p>Error Codes, similarly, seem kinda-sorta equivalent if your program follows discipline to handle all alternatives. Somehow <a href="http://nedbatchelder.com/text/exceptions-vs-status.html">Exceptions are seen as good</a> for allowing you to “leave error handling code out of much of your code”. (If you don’t write half your program logic, you don’t have to write half your program logic). – Though, much of the advantages of Exceptions over Error Codes here also apply to <code>Optional</code> and friends.</p>
 <p>– The advantages that Exceptions and Error Codes have over <code>Optional[Value]</code> is that the latter just says “not everything went well”, the former can describe what went wrong. (IOError, DivisionByZero, StackUnderflow, UnsupportedOperation, etc.). This can be quickly remedied by using <code>Either</code>, i.e. keeping information about what kind of error occurred.</p>
@@ -169,20 +169,20 @@ One kinda-stupid approach would be for the dictionary to loop indefinitely (unti
 <p>That’s all fine &amp; well.<br />
 <code>Optional</code> works well to model where computations may fail; <code>Either</code> for when you want to know why things went wrong (or perhaps maybe to recover depending on what went wrong). These are more explicit than nullable values or Error Codes.</p>
 <p>The bigger challenge is how well functions-which-may-fail compose with other functions-which-may-fail.</p>
-<pre><code>fun importantComputation() {
-  x = mayFailX()
-  stmt1;
-  y = mayFailY()
-  stmt2;
-  return g(x, y);
-}</code></pre>
+<div class="sourceCode" id="cb2"><pre class="sourceCode scala"><code class="sourceCode scala"><a class="sourceLine" id="cb2-1" data-line-number="1">fun <span class="fu">importantComputation</span>() {</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2">  x = <span class="fu">mayFailX</span>()</a>
+<a class="sourceLine" id="cb2-3" data-line-number="3">  stmt1;</a>
+<a class="sourceLine" id="cb2-4" data-line-number="4">  y = <span class="fu">mayFailY</span>()</a>
+<a class="sourceLine" id="cb2-5" data-line-number="5">  stmt2;</a>
+<a class="sourceLine" id="cb2-6" data-line-number="6">  <span class="kw">return</span> <span class="fu">g</span>(x, y);</a>
+<a class="sourceLine" id="cb2-7" data-line-number="7">}</a></code></pre></div>
 <p>With stateful code, one needs to be careful about assumptions about what <code>stmt1</code>, <code>mayFailY</code> mutate. – <em>Implicitly</em>, you also mustn’t assume <code>stmt2</code>, <code>g</code> are executed (&amp; so must consider state when they are executed, aren’t executed).<br />
 – While it’s true that Exceptions defer the error-handling; there’s surely more cognitive-load required to keep the above in mind while scrolling through code.</p>
 <p>Functional code also isn’t necessarily so cumbersome. <code>Optional.map</code> allows:</p>
-<pre><code>optional match {
-  Some(x) =&gt; doSomething(x)
-  None =&gt; None
-}</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode scala"><code class="sourceCode scala"><a class="sourceLine" id="cb3-1" data-line-number="1">optional <span class="kw">match</span> {</a>
+<a class="sourceLine" id="cb3-2" data-line-number="2">  Some(x) =&gt; <span class="fu">doSomething</span>(x)</a>
+<a class="sourceLine" id="cb3-3" data-line-number="3">  None =&gt; None</a>
+<a class="sourceLine" id="cb3-4" data-line-number="4">}</a></code></pre></div>
 <p>to be written as <code>optional.map({ x =&gt; doSomething(x) })</code> (or <code>.map(doSomething)</code> if you literally have a function).</p>
 <hr />
 <p>Programmers tend to make mistakes when they forget to take care of cases when things go wrong.<br />
@@ -203,12 +203,6 @@ Functional Programming-ish code tends to be very explicit; and potentially more 
 <br style="clear: both;" />
 
 <hr />
-
-<!-- Load highlight.js for Syntax Highlighting. -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/solarized_light.min.css">
-<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
-<script>hljs.initHighlightingOnLoad();</script>
-
 
             </div>
 

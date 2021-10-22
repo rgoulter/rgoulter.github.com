@@ -139,7 +139,7 @@
 </div>
 
 <p>There’s a somewhat famous styled git log I have in my config. The guy I grabbed it from said it was from <a href="https://github.com/ndbroadbent/scm_breeze">scm-breeze</a>, I think maybe he meant tiimgreen’s <a href="https://github.com/tiimgreen/github-cheat-sheet#styled-git-log">github-cheat-sheet</a>. In any case, The Git one is like:</p>
-<pre><code>alias gl=&quot;git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)&lt;%an&gt;%Creset' --abbrev-commit&quot;</code></pre>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="bu">alias</span> gl=<span class="st">&quot;git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)&lt;%an&gt;%Creset' --abbrev-commit&quot;</span></a></code></pre></div>
 <p>Consulting <a href="http://git-scm.com/docs/pretty-formats">the docs</a>, (who does that, right?), it’s not insane to figure out what this is doing:</p>
 <ul>
 <li><code>%h</code> - abbrev commit hash</li>
@@ -154,7 +154,7 @@ Sources:</p>
 <ul>
 <li><p><a href="http://stackoverflow.com/questions/3575189/mercurial-log-with-one-liners">S/O: “Mercurial Log with One-Liners”</a> Because one-liner logs themselves can be useful.<br />
 This one has:</p>
-<pre><code>alias hl=&quot;hg log --template '{node|short} | {date|isodatesec} | {author|user}: {desc|strip|firstline}\n'&quot;</code></pre></li>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="bu">alias</span> hl=<span class="st">&quot;hg log --template '{node|short} | {date|isodatesec} | {author|user}: {desc|strip|firstline}\n'&quot;</span></a></code></pre></div></li>
 <li><a href="hgbook.red-bean.com/read/customizing-the-output-of-mercurial.html">HG Book: Customizing Output</a></li>
 <li><p><a href="https://www.selenic.com/hg/help/templates">HG Help / Manpages</a></p></li>
 </ul>
@@ -173,14 +173,14 @@ So, note that when building the template, this is the stuff to put within the <c
 <li><code>author|person</code> - Richard from Richard <a href="mailto:richard.goulter@gmail.com">richard.goulter@gmail.com</a></li>
 </ul>
 <p>So, my <code>.hgrc</code> has:</p>
-<pre><code>[color]
-custom.rev = red
-custom.decorate = yellow
-custom.date = green
-custom.author = blue bold</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode ini"><code class="sourceCode ini"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">[color]</span></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="dt">custom.rev </span><span class="ot">=</span><span class="st"> red</span></a>
+<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="dt">custom.decorate </span><span class="ot">=</span><span class="st"> yellow</span></a>
+<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="dt">custom.date </span><span class="ot">=</span><span class="st"> green</span></a>
+<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="dt">custom.author </span><span class="ot">=</span><span class="st"> blue bold</span></a></code></pre></div>
 <p>With the hg alias: <code>alias hl=&quot;hg log --style ~/.hgrc.d/fancy.style&quot;</code>. (Or do this from your shell, whatever).</p>
 <p>And, finally, <code>~/.hgrc.d/fancy.style</code> is:</p>
-<pre><code>changeset = &quot;* {label('custom.rev', node|short)} - ({label('custom.decorate', branch)}) {desc|strip|firstline} ({label('custom.date', date|age)}) &lt;{label('custom.author' , author)}&gt;\n&quot;</code></pre>
+<div class="sourceCode" id="cb4"><pre class="sourceCode ini"><code class="sourceCode ini"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="dt">changeset </span><span class="ot">=</span><span class="st"> &quot;* {label('custom.rev', node|short)} - ({label('custom.decorate', branch)}) {desc|strip|firstline} ({label('custom.date', date|age)}) &lt;{label('custom.author' , author)}&gt;\n&quot;</span></a></code></pre></div>
 <p>Screenshot:<br />
 <img src="http://i.imgur.com/OWImYAS.png" /></p>
 <p>(The repo is old, because I don’t use HG so much, okay?).</p>
@@ -199,12 +199,6 @@ custom.author = blue bold</code></pre>
 <br style="clear: both;" />
 
 <hr />
-
-<!-- Load highlight.js for Syntax Highlighting. -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/solarized_light.min.css">
-<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
-<script>hljs.initHighlightingOnLoad();</script>
-
 
             </div>
 
