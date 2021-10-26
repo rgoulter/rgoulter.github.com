@@ -8,24 +8,32 @@
         <name>Richard Goulter</name>
         <email>richard.goulter+blog@gmail.com</email>
     </author>
-    <updated>2021-10-22T00:00:00Z</updated>
+    <updated>2021-10-24T00:00:00Z</updated>
     <entry>
+    <title>Static Site Generators are Well Suited to Hobbyist Programming</title>
+    <link href="http://www.rgoulter.com/blog//posts/programming/2021-10-24-static-site-generators-are-well-suited-to-hobbyist-programming.html" />
+    <id>http://www.rgoulter.com/blog//posts/programming/2021-10-24-static-site-generators-are-well-suited-to-hobbyist-programming.html</id>
+    <published>2021-10-24T00:00:00Z</published>
+    <updated>2021-10-24T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<p>Static site generators are definitely a “for developers” tool. Or that’s the impression I get from seeing that <a href="https://staticsitegenerators.net/">staticsitegenerators.net</a> has hundreds of projects listed, ranging from a few GitHub stars all the way up to tens of thousands of GitHub stars.</p>
+<p>I’m reminded of a comment I saw on Hacker News talking about Factorio. Factorio is a game with gameplay which feels very similar to programming. This comment I saw explained, though, that the game’s similarity to programming leads to two sets of reactions to it from programmers: 1. the game is similar to what I put my creative energy into, but without the constraints of needing to be reliable or being told what to do: it’s very fun; 2. the game is similar to what I put my creative energy into, but without any tangible benefit from putting in that work: why would anyone want to ‘play’ this?</p>
+<p>My blog is generated with a static site generator, customised using the Haskell programming language.</p>
+<p>I don’t think I’d be able to argue that it’s a practical choice if the goal is to serve a blog. – But it’s as good an excuse as any to write something with Haskell.</p>
+<p>This weekend I spent some time brushing the project up a bit.</p>
+<p>It’s fun.</p>
+<p>I’m not familiar enough with Haskell to know all the right idioms. I think <a href="https://github.com/rgoulter/my-hakyll-blog/blob/6958e2a8399e2d32a041592bb74a527fa8ec36a8/site.hs">the code for the site</a> very much smells in places with indications that I don’t know what I’m doing.</p>
+<p>Still, I feel I rearranged the code into a nicer, more consistent shape than <a href="https://github.com/rgoulter/my-hakyll-blog/blob/1ef0045662aace8e063d69094e31b76e8062cf25/site.hs">it was in before</a>.</p>
+<p>I also tinkered around and updated the Nix files. I think Nix is nice for side projects. It’s often tedious to try and install some old compiler on a system. – With Nix, it’s easier to install from an older version of the package repository.<br />
+So when the project needed to build using an older GHC version (and NixOS didn’t like running the GHC version which <code>stack</code> downloaded, because it didn’t have the shared libraries available), Nix can get an older GHC by using the package definition from an older version of the package repository.<br />
+– Albeit, Nix has quite a steep learning curve. I wasn’t able to figure out how to do that nicely last time I’d tried to write the Nix files for the project.</p>]]></summary>
+</entry>
+<entry>
     <title>Follow-up Review of the BM40 Ortholinear Keyboard</title>
     <link href="http://www.rgoulter.com/blog//posts/programming/2021-10-22-follow-up-review-of-the-bm40-ortholinear-keyboard.html" />
     <id>http://www.rgoulter.com/blog//posts/programming/2021-10-22-follow-up-review-of-the-bm40-ortholinear-keyboard.html</id>
     <published>2021-10-22T00:00:00Z</published>
     <updated>2021-10-22T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<div class="info">
-    Posted on October 22, 2021
-    
-        by Richard Goulter
-    <br/>
-    
-    Tags: 
-    
-</div>
-
-<p>So I’ve had my BM40 for over a year now.</p>
+    <summary type="html"><![CDATA[<p>So I’ve had my BM40 for over a year now.</p>
 <p>My <a href="../programming/2020-08-22-early-impressions-of-bm40rgb-ortholinear-keyboard.markdown">initial impressions</a> after getting the keyboard were:</p>
 <ul>
 <li><p>that it was a <em>relatively</em> cheap, easy to assemble fancy keyboard,</p></li>
@@ -90,8 +98,7 @@
 <p>All these weird/niche keyboards typically use mechanical key switches, since this makes the keyboard cheap enough to produce in low volumes.</p>
 <p>In my own space, I consider loud clicky keys an upside. For work spaces, fortunately mechanical key switches don’t need to be clicky. However, I think they’re still louder than standard keyboards.</p>
 <p>I worked beside someone who had a mechanical keyboard. His keyboard wasn’t a loud keyboard. I don’t remember being annoyed by the sound.</p>
-<p>Though, even more typical keyboards can still be distracting. I once had a colleague who could type very quickly on his Bluetooth Mac keyboard. He said that when he visited one of the satellite offices, the colleagues he sat beside asked him to move away from them since his impressive typing speed was distracting.</p>
-]]></summary>
+<p>Though, even more typical keyboards can still be distracting. I once had a colleague who could type very quickly on his Bluetooth Mac keyboard. He said that when he visited one of the satellite offices, the colleagues he sat beside asked him to move away from them since his impressive typing speed was distracting.</p>]]></summary>
 </entry>
 <entry>
     <title>Dreamy Eyes is Very Sweet</title>
@@ -99,17 +106,7 @@
     <id>http://www.rgoulter.com/blog//posts/narrative/2021-07-29-dreamy-eyes-is-very-sweet.html</id>
     <published>2021-07-29T00:00:00Z</published>
     <updated>2021-07-29T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<div class="info">
-    Posted on July 29, 2021
-    
-        by Richard Goulter
-    <br/>
-    
-    Tags: 
-    
-</div>
-
-<p>I watched “Dreamy Eyes” on Netflix.<br />
+    <summary type="html"><![CDATA[<p>I watched “Dreamy Eyes” on Netflix.<br />
 I recommend it. It’s (at times) intensely romantically sweet. Although it doesn’t have a happy ending.<br />
 (Well, without a happy ending I suppose “angsty” is more apt than “sweet”).</p>
 <p>It’s a drama set in Vietnam during the 1960s - 1970s. The main character has an unrequited love for his childhood friend.</p>
@@ -122,8 +119,7 @@ What I found enhances this tension was the status symbolism of American products
 <p>I’ve also found myself thinking about the drama in the film, too. I know <strong>having</strong> to analyse as story is the easiest way to take the fun out of hearing it.. but I also don’t find it so clear where I’d draw the line each of the characters cross from “yeah, that seems fine” to “no, that’s not the good life”.<br />
 e.g. I don’t think it spoils too much to reveal that the main character’s love interest gets pregnant out of wedlock. Nothing wicked about that. But e.g. later on in the story, there’s an incident where the love interest walks with a charming date into her store, and doesn’t acknowledge her daughter who had been waiting for her for hours.<br />
 The love interest isn’t an easy character to like. (Or as I saw it put once, “you’re not supposed to like the character the same way you like hotdogs”).</p>
-<p>But really, what I like about this is the intense romantic angst of the story. We see a sweet romance the main character has as he grows in the village, and we see him return to the same village as an adult and walk the same paths and it just has such an impressive impact.</p>
-]]></summary>
+<p>But really, what I like about this is the intense romantic angst of the story. We see a sweet romance the main character has as he grows in the village, and we see him return to the same village as an adult and walk the same paths and it just has such an impressive impact.</p>]]></summary>
 </entry>
 <entry>
     <title>Thoughts on  Netflix's Bridgerton S1</title>
@@ -131,17 +127,7 @@ The love interest isn’t an easy character to like. (Or as I saw it put once, �
     <id>http://www.rgoulter.com/blog//posts/romance/2021-02-06-thoughts-on-netflix-bridgerton.html</id>
     <published>2021-02-06T00:00:00Z</published>
     <updated>2021-02-06T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<div class="info">
-    Posted on February  6, 2021
-    
-        by Richard Goulter
-    <br/>
-    
-    Tags: 
-    
-</div>
-
-<p>I just finished watching Netflix’s “Bridgerton” series. I’d enjoyed reading the book series some time ago. The third book in the Bridgeron series was the first book I ever stayed up the whole night to read.</p>
+    <summary type="html"><![CDATA[<p>I just finished watching Netflix’s “Bridgerton” series. I’d enjoyed reading the book series some time ago. The third book in the Bridgeron series was the first book I ever stayed up the whole night to read.</p>
 <p>The Bridgerton series is a famous and well-loved series of romance novels by Julia Quinn, featuring the Bridgerton family. The author has a charming voice. Since the stories always end with a happy ending, they’re quite fun to read. I hope the popularity of the Netflix series (and the book series consisting of eight books) means more people get to share in on the fun of reading it.</p>
 <p>I enjoyed watching through this first season on Netflix with my girlfriend. Yet.. I can’t quite enthusiastically recommend the show.</p>
 <p>I’m not sure who the show was made for. The show has an ambivalent tone to it. Half of the content is sweet and romantic and silly and reliably steers towards a happy ending. The other half is dramatic and somewhat serious and bitter and grim and unromantic and doesn’t even land a happy ending. (This part is original, not coming from the books).<br />
@@ -172,8 +158,7 @@ But.. some shows, if you look for it in the show, and compare the character’s 
 Bridgerton … just isn’t one of those shows. But there’s nothing really stopping it from doing that.</p>
 <p>That said. I was surprised the show included a part where the newly wed duchess unintentionally offends the townspeople. She was asked which of the three pigs at a festival should be slaughtered. Aghast at the thought of violence, she says none of them are to be killed. This effectively denies any of the townspeople the right to make money from their pigs.<br />
 It’s a nice example of Chesterton’s fence.</p>
-<p>The Bridgerton series features eight books, and various other series in the same setting. If it remains one book per season, that’d be eight seasons. Eight seasons is a lot. Moreso because the show creates its own subplots which diverge from the much better source material. I don’t think this dramatic half is good enough to last that long. I’m curious to see what they do with it.</p>
-]]></summary>
+<p>The Bridgerton series features eight books, and various other series in the same setting. If it remains one book per season, that’d be eight seasons. Eight seasons is a lot. Moreso because the show creates its own subplots which diverge from the much better source material. I don’t think this dramatic half is good enough to last that long. I’m curious to see what they do with it.</p>]]></summary>
 </entry>
 <entry>
     <title>Early Impressions of BM40RGB Ortholinear Keyboard</title>
@@ -181,17 +166,7 @@ It’s a nice example of Chesterton’s fence.</p>
     <id>http://www.rgoulter.com/blog//posts/programming/2020-08-22-early-impressions-of-bm40rgb-ortholinear-keyboard.html</id>
     <published>2020-08-22T00:00:00Z</published>
     <updated>2020-08-22T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<div class="info">
-    Posted on August 22, 2020
-    
-        by Richard Goulter
-    <br/>
-    
-    Tags: 
-    
-</div>
-
-<p>I finally received my BM40RGB keyboard that I’d ordered from <a href="https://www.aliexpress.com/item/4001147779116.html">KPRepublic on AliExpress</a>.</p>
+    <summary type="html"><![CDATA[<p>I finally received my BM40RGB keyboard that I’d ordered from <a href="https://www.aliexpress.com/item/4001147779116.html">KPRepublic on AliExpress</a>.</p>
 <p><img src="http://rgoulter.com/images/keyboards/bm40rgb/bm40rgb.jpg" style="width:70.0%" /></p>
 <h2 id="quick-summary">Quick Summary</h2>
 <ul>
@@ -285,8 +260,7 @@ But if you’re fine with <a href="http://www.40percent.club/2017/03/ordering-pc
 <li>Or design <a href="http://blakesmith.me/2019/01/16/making-my-own-usb-keyboard-from-scratch.html">the PCB yourself</a> (whoa!).</li>
 <li>And <a href="https://github.com/BenRoe/awesome-mechanical-keyboard/blob/master/docs/README.md">BenRoe/awesome-mechanical-keyboard</a> is a pretty long list of all sorts of fancy mechanical keyboards.</li>
 </ul>
-<p>If ortholinear sounds good, but the 40% form-factor sounds to small, there are larger ortholinear keyboards. As far as I understand, several 75-key ortholinear keyboards will fit into most GH60-compatible cases. e.g. <a href="https://www.aliexpress.com/item/32818745981.html">KPRepublic’s XD75</a></p>
-]]></summary>
+<p>If ortholinear sounds good, but the 40% form-factor sounds to small, there are larger ortholinear keyboards. As far as I understand, several 75-key ortholinear keyboards will fit into most GH60-compatible cases. e.g. <a href="https://www.aliexpress.com/item/32818745981.html">KPRepublic’s XD75</a></p>]]></summary>
 </entry>
 <entry>
     <title>Repairing my Razer Keyboard</title>
@@ -294,17 +268,7 @@ But if you’re fine with <a href="http://www.40percent.club/2017/03/ordering-pc
     <id>http://www.rgoulter.com/blog//posts/programming/2020-07-26-repairing-my-razer-keyboard.html</id>
     <published>2020-07-26T00:00:00Z</published>
     <updated>2020-07-26T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<div class="info">
-    Posted on July 26, 2020
-    
-        by Richard Goulter
-    <br/>
-    
-    Tags: 
-    
-</div>
-
-<p>I recently repaired my mechanical keyboard. It’s a Razer BlackWidow Ultimate, 2016 Edition that I’d bought on sale a couple of years ago.<br />
+    <summary type="html"><![CDATA[<p>I recently repaired my mechanical keyboard. It’s a Razer BlackWidow Ultimate, 2016 Edition that I’d bought on sale a couple of years ago.<br />
 The result was an imperfect success.</p>
 <p>The successful part: my keyboard now works and can be reliably used for typing and gaming. (Before, many of the keys didn’t activate when pressed; or only activated some of the time. Or seemed to work most of the time, but then sometimes would fail to activate).</p>
 <p>The imperfect part: currently, three keys don’t work: numpad 5, numpad 4, and the right Windows key. And I didn’t bother to resolder the per-key LEDs. (And some blemishes on the PCB from some subpar desoldering work).</p>
@@ -340,8 +304,7 @@ Most notably, Numpad 5:</p>
 I used a keycap set with cute Totoro keycaps. (I don’t think these keycaps would show off the LEDs anyway).</p>
 <p><img src="https://rgoulter.com/images/keyboards/razer-blackwidow-ultimate-2016/final_result.jpg" style="width:70.0%" /></p>
 <p>I’m pleased enough with the result.<br />
-I probably wouldn’t be so pleased if the keys I broke were keys I use more often than the numpad.</p>
-]]></summary>
+I probably wouldn’t be so pleased if the keys I broke were keys I use more often than the numpad.</p>]]></summary>
 </entry>
 <entry>
     <title>Replaying Halo CE</title>
@@ -349,17 +312,7 @@ I probably wouldn’t be so pleased if the keys I broke were keys I use more oft
     <id>http://www.rgoulter.com/blog//posts/games/2020-07-25-replaying-halo-ce.html</id>
     <published>2020-07-25T00:00:00Z</published>
     <updated>2020-07-25T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<div class="info">
-    Posted on July 25, 2020
-    
-        by richardgoulter
-    <br/>
-    
-    Tags: 
-    
-</div>
-
-<p>Halo recently re-released to Steam as part of the Halo Master Chief Collection. And I finally got around to re-playing it.</p>
+    <summary type="html"><![CDATA[<p>Halo recently re-released to Steam as part of the Halo Master Chief Collection. And I finally got around to re-playing it.</p>
 <p>I’d played the game on PC some time after it was released.<br />
 But I couldn’t remember the game as a whole. I did remember bits and pieces. I remember the first time I got to drive the Warthog vehicle. I remember parts of the game which introduce the zombie-like Flood monsters. – I didn’t remember the ending parts of the game.</p>
 <p>More recently, I wasn’t super impressed with my first playthrough of “Halo: Reach”.<br />
@@ -382,8 +335,7 @@ Some parts of the game, especially near the end, had infinitely-spawning enemies
 Compared to Doom Eternal:<br />
 When you run out of shields, you have to duck out of combat. When you run out of shields/health in Doom Eternal, you have to aggressively attack weaker enemies.<br />
 When you need to use different weapons to fight different enemies: Halo you have to strategically choose two weapons. In Doom Eternal, your only limit is the ammunition for the weapons you have. And if you run out, you get more ammunition by chainsawing your enemies.</p>
-<p>Halo does at least have vehicles which was quite fun.</p>
-]]></summary>
+<p>Halo does at least have vehicles which was quite fun.</p>]]></summary>
 </entry>
 <entry>
     <title>My Experience with the Dvorak Keyboard Layout</title>
@@ -391,17 +343,7 @@ When you need to use different weapons to fight different enemies: Halo you have
     <id>http://www.rgoulter.com/blog//posts/programming/2020-07-08-my-experience-with-dvorak-keyboard-layout.html</id>
     <published>2020-07-08T00:00:00Z</published>
     <updated>2020-07-08T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<div class="info">
-    Posted on July  8, 2020
-    
-        by Richard Goulter
-    <br/>
-    
-    Tags: 
-    
-</div>
-
-<p>One customization that some computer power users make is to use a different keyboard layout.</p>
+    <summary type="html"><![CDATA[<p>One customization that some computer power users make is to use a different keyboard layout.</p>
 <p>Back when I was a student at University I took the time to learn to use Dvorak layout.<br />
 I can’t remember why I stopped using it, but I had reverted to using QWERTY layout since then.</p>
 <p>Recently I started doing my main development work on a new computer. I decided to pick up the Dvorak layout again. (I think this was because I was looking at fancy ergonomic custom keyboards, and was reminded that I could be doing better than what I was using).</p>
@@ -415,8 +357,7 @@ When I was recently picking up Dvorak as my main layout for work again: I use th
 Maybe using a different keyboard to learn the layout would mitigate the effect, since your fingers can always use QWERTY on whatever other keyboard you use.</p>
 <p>It’s also not a very big issue that the letters on the keycaps don’t match the letters you type into the keyboard. (The number keys and function keys will be the same anyway).</p>
 <p>In terms of using software like Vim or Emacs which heavily rely on keybindings: In general, I think my mindset has the added indirection of ‘thinking’ about the letter to invoke the command, rather than the physical motion. - On Dvorak, the common shortcuts Ctrl-C, Ctrl-V, etc.: suck. This is made worse by that usually you’ll want to use these commands in tandem with using a mouse. So you won’t have both hands on the keyboard. - With using Dvorak with Vim: ‘h’ is still to the left of ‘l’; ‘j’ and ‘k’ are right beside each other. I was using Vim for a long time before I noticed that I use pretty much every key on the keyboard. The other keys in Dvorak are still there, just in different places, and I don’t give it much thought. - With using Dvorak with Emacs: C-x sucks. (For me this is somewhat mitigated: I use Evil, and can use the spacebar for things that I use frequently). But similarly, ‘p’ is still above ‘n’.</p>
-<p>I’m not especially keen to try out other keyboard layouts after having gone through the effort to train with the Dvorak layout. If I were to pick up another layout today, though, I’d love to look at the Workman layout.</p>
-]]></summary>
+<p>I’m not especially keen to try out other keyboard layouts after having gone through the effort to train with the Dvorak layout. If I were to pick up another layout today, though, I’d love to look at the Workman layout.</p>]]></summary>
 </entry>
 <entry>
     <title>Re-reading High Fidelity</title>
@@ -424,17 +365,7 @@ Maybe using a different keyboard to learn the layout would mitigate the effect, 
     <id>http://www.rgoulter.com/blog//posts/narrative/2020-05-29-rereading-high-fidelity.html</id>
     <published>2020-05-29T00:00:00Z</published>
     <updated>2020-05-29T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<div class="info">
-    Posted on May 29, 2020
-    
-        by Richard Goulter
-    <br/>
-    
-    Tags: 
-    
-</div>
-
-<p>I recently re-read Nick Hornby’s “High Fidelity”.</p>
+    <summary type="html"><![CDATA[<p>I recently re-read Nick Hornby’s “High Fidelity”.</p>
 <p>I love this story.<br />
 It’s about a guy who’s a total music geek, and bit of a loser; and it’s a coming-of-age story as he ruminates over his romantic life.</p>
 <p>One of the reasons I find the story fascinating is it’s narrated with the narrator’s stream-of-conscious.<br />
@@ -449,8 +380,7 @@ In “Definitely, Maybe”, the main character is getting divorced. The main cha
 And in “High Fidelity”, his girlfriend has just broken up with him, etc.<br />
 Albeit, it’s more apparent that “Definitely, Maybe” is a sweet story.</p>
 <p>I didn’t catch it (or didn’t remember it) from the times I’d read the book years ago what his most-recent girlfriend saw in him. Said woman has a high-paying job (where our narrator does not), has many friends (where our narrator does not), etc. But she does explain it to him.</p>
-<p>I’d say what I disliked the most, upon re-reading it, was that the coming-of-age aspect doesn’t come from an internal realisation of the character, but from a huge amount of external aid. (And not even just from reading a book telling him to make his bed).</p>
-]]></summary>
+<p>I’d say what I disliked the most, upon re-reading it, was that the coming-of-age aspect doesn’t come from an internal realisation of the character, but from a huge amount of external aid. (And not even just from reading a book telling him to make his bed).</p>]]></summary>
 </entry>
 <entry>
     <title>Long Tail of Org-Mode Features are Compelling</title>
@@ -458,17 +388,7 @@ Albeit, it’s more apparent that “Definitely, Maybe” is a sweet story.</p>
     <id>http://www.rgoulter.com/blog//posts/programming/2020-05-02-long-tail-of-org-mode-features-are-compelling.html</id>
     <published>2020-05-02T00:00:00Z</published>
     <updated>2020-05-02T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<div class="info">
-    Posted on May  2, 2020
-    
-        by Richard Goulter
-    <br/>
-    
-    Tags: 
-    
-</div>
-
-<p>One of the things I don’t like so much about proselytising of Emacs’ org-mode is mentioning the vast swarth of features org-mode has.<br />
+    <summary type="html"><![CDATA[<p>One of the things I don’t like so much about proselytising of Emacs’ org-mode is mentioning the vast swarth of features org-mode has.<br />
 Partly I think it’s ‘intimidating’ to see a bit list of features and be told “you have to learn this, it’s great”. (See <a href="https://orgmode.org/manual/">the org mode manual</a> table of contents for an overview).<br />
 Partly because the use of those features strikes me as a “long tail”. I’ve tried most of the org-mode features, but most of the time I’m not using most of them.</p>
 <p>Org mode is good. Other tools are good.<br />
@@ -481,65 +401,7 @@ A lot of the stuff developers work with is good with plaintext.</p>
 Markdown etc. can put prose and code snippets together, but meta-info on code snippets (and keeping the output alongside the code) doesn’t seem to be as common. (I bet 80% of the power of org-babel could be had for 20% of the effort).<br />
 <a href="http://www.howardism.org/Technical/Emacs/literate-devops.html">Literate Devops</a> demonstrates a couple of use cases of: “prose, code and output in a plaintext file”.</p>
 <p>It really ought to have been obvious from the “Literal DevOps” post, but this usage of org-babel has other uses which are very useful.<br />
-e.g. for learning and exploring a codebase, I’ve found it useful as a way for keeping the output of <code>grep</code>s, <code>cloc</code>s and other commands used to explore a repo. Similarly, “keeping the output of CLI programs” naturally makes sense for tools like AWS-CLI.</p>
-]]></summary>
-</entry>
-<entry>
-    <title>Doom Eternal</title>
-    <link href="http://www.rgoulter.com/blog//posts/games/2020-03-22-doom-eternal.html" />
-    <id>http://www.rgoulter.com/blog//posts/games/2020-03-22-doom-eternal.html</id>
-    <published>2020-03-22T00:00:00Z</published>
-    <updated>2020-03-22T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<div class="info">
-    Posted on March 22, 2020
-    
-        by richardgoulter
-    <br/>
-    
-    Tags: 
-    
-</div>
-
-<h2 id="hype">Hype</h2>
-<p>I watched several interviews the Doom Eternal’s game director Hugo Martin on YouTube.</p>
-<p>That he played with a controller on Nightmare difficulty is impressive. That’s legit. (<a href="https://www.youtube.com/watch?v=TzqR04OoTg4">Pax East 2020</a>, from 5:20 onwards).</p>
-<p>The <a href="https://www.youtube.com/watch?v=TzqR04OoTg4">Noclip podcast</a> with him is also excellent.<br />
-I was surprised to see Hugo Martin say things like: - After Doom 2016, they added features to the player’s abilities. This made the gameplay <em>so boring</em> since it was too easy to never die. They fixed this by making the enemies much harder. - People mocked a video of bad gameplay from Polygon. But, this was an example of Doom 2016’s failure. - Doom 2016 is the most fun when you character is moving around the battle arena, and switching between weapons. - He cites <a href="https://www.youtube.com/watch?v=72S2aAxtZOs">clockner’s speedrun of Kadingr Sanctum</a> as a demonstration of the peak of this. - While Doom 2016’s design did allow many gamers to enter this state-of-flow “fun zone”, it was also possible to play the game i) being very good and just using one weapon the whole time ii) being very bad and killing enemies without dynamic gameplay. - Doom Eternal remediates this in its game design. It punishes players who play outside the intended playstyle. (Hugo Martin compares this to sports like basketball, where everyone is restricted to a playstyle, but it’s still fun to play/watch). - Doom Eternal aims to keep its players engaged by having challenging enemies and encounters. Frustrating the player is <em>fine</em>, so long as the player does not blame the game.</p>
-<p>The multiplayer also looked interesting.<br />
-Doom 2016 did have some kind of multiplayer, but it wasn’t popular.<br />
-Doom Eternal’s multiplayer is much closer in spirit to its single player. It’s 1v2. One player is the ‘doom slayer’. The other two play as weaker ‘demon’ units and are supported by weak AI demon units.<br />
-– Asymmetric multiplayer isn’t a new idea. But I’m not aware of popular games which are single player oriented and have multiplayer which tries to feel like single player</p>
-<p>I was hyped for this game, and pre-ordered it.</p>
-<h2 id="what-i-thought-of-the-game">What I Thought of the Game</h2>
-<p>I enjoyed it.</p>
-<p>It’s intense.<br />
-I’m not so good, but I still enjoyed it.</p>
-<p>The gameplay itself is, uh, complicated.<br />
-It builds off of Doom 2016’s gameplay.</p>
-<h4 id="recall-doom-2016s-gameplay">Recall Doom 2016’s Gameplay</h4>
-<p>Doom 2016’s gameplay seemed quite innovative. It certainly rewarded fast-paced gameplay.<br />
-The traditional way of treating a player character’s health in first person shooters was to use health packs. But this can slow down gameplay as a player with low health searches for health pickups if they are low on health. – The ‘modern’ solution to this was to allow regenerating health. This chokes gameplay all over, though. (The game needs to damage the player enough so as to avoid an invincible character. So, the player is constantly waiting to regenerate health).<br />
-Doom 2016’s solution was to: allow the player to ‘glory kill’ an enemy with low health in order to get health pickups. – A good way to get more health is to keep on attacking.</p>
-<p>Doom 2016 also had: - A chainsaw. You’d find units of fuel on the map. Chainsawing a big enemy would need 3 units of fuel, whereas chainsawing a small enemy would take only 1. Chainsawing an enemy instantly kills it, and drops plenty of ammunition for your weapons. - Grenades. Different types of grenades. You could only have one or two. While there would be grenade ammunition on the map, the game also ‘regenerated’ grenades on a timer, so you wouldn’t run out. - Secrets/unlocks, which gave points for things you could upgrade. You could upgrade a lot: - You could add an attachment to your weapon (e.g. adding mini-missiles to your machine-gun). This attachment could then itself have upgrades (e.g. can fire mini-missiles more quickly). A fully-upgraded attachment could then be ‘mastered’ (e.g. kill enough enemies with it) so then it gets better. - Passive player upgrades. e.g. An upgrade point might give more health. - Passive ability upgrades. e.g. pick up items from further away. - ‘Runes’, which provide a passive ability (e.g. player gets a speed boost after glory killing an enemy). The runes can also be ‘mastered’ so that they get better.</p>
-<h4 id="doom-eternals-additions">Doom Eternal’s Additions</h4>
-<p>Doom Eternal is mostly more complicated than <em>that</em>.<br />
-The one simpler thing is: they combine the passive abilities and upgrades for the player.</p>
-<p>It makes sense that the player begins relatively weak, and ends the game with more upgrades. Without that scale, the game would be either too overwhelming or too easy at the start.</p>
-<p>Gameplay-wise, the thing that gets more complicated than Doom 2016 is: - The game puts a strong emphasis on enemy weaknesses. You ‘can’ just shoot the enemies without considering this, but it’s <em>much</em> harder to do so. e.g. the giant fat monster with rockets for arms is much easier kill if you shoot off the rockets-launchers on its arms first. - This makes the game much more strategic/tactical to play. - You need to consider what weapons to use at each time; what you have available and what threats you’re facing. - The game really restricts the ammunition the player can carry. - This ‘encourages’ switching between weapons. - This also encourages using the chainsaw on enemies. (The player regenerates a unit of fuel if they have no fuel for the chainsaw). - The player has an ice grenade which they can use to freeze enemies, - The player has a flamethrower attachment. This also regenerates usages like the grenade does. It burns enemies. The burning enemies drop armour pickups for the player as they burn / are damaged. - …And a ‘blood punch’. Which does a large amount of damage in a small area. (It’s also used to take the armour off the armoured giant fat monster). - The game also added a ‘lives system’, allowing the player to respawn with full health if they’re killed. (Otherwise the player respawns from the latest checkpoint). This eases the fights against the most difficult enemies. (This feature can be disabled).</p>
-<p>There are more enemies of different types. Probably one or two too many. The different strengths/weaknesses really lend to the need to <strong>think</strong> in order to fight well.</p>
-<p>There are also unlocks for ‘cheat codes’ which can be used to replay a mission. (e.g. infinite ammo, semi-‘god mode’, etc.).</p>
-<h4 id="controversial-design-decisions">Controversial Design Decisions</h4>
-<p>The most controversial enemy (judging by the discussion forums) is the ‘marauder’ enemy.<br />
-It’s <em>very</em> tough, even on the easiest difficulty.<br />
-The marauder has a shield which blocks all damage. The marauder instantly raises the shield, except during a small timeframe when the marauder is attacking the player at a ‘good’ distance. (If the player is too close to the marauder, the marauder’s attack doesn’t lower its shield. Ditto if the player is too far away).</p>
-<p>I think the marauder isn’t inherently tough. It’s easier once you learn the right distance to be, and a good rhythm to attack the marauder with.<br />
-But it’s also a significantly harder encounter than other enemies. (It’s the only enemy which presents a threat when you’re using cheats, lol. It’s the only enemy that can’t otherwise just be brute forced even with the super weapons). And it’s a punishing enemy to have to learn how to play.<br />
-– I think the game didn’t do enough to ease its way up to this enemy. But it’s also in the spirit of the game’s “play it our way”.</p>
-<p>Also controversial: Doom Eternal’s addition of platforming.<br />
-I don’t think this was so bad most of the time, but there are a couple of spots where I got stuck not knowing where to go next; even when I’d played the level a few times before.<br />
-– I think it’s ‘fine’, though, since: i) if the game were 100% intense the whole time, the intensity would be less dramatic ii) it encourages the player to get a better feel for their platforming ability, which encourages the player to move around the arenas more.</p>
-<p>I saw some people also disliked: the game added more cutscenes, and more in-your-face tutorial popups. But it’s easy to disable these, so I don’t see the issue.</p>
-]]></summary>
+e.g. for learning and exploring a codebase, I’ve found it useful as a way for keeping the output of <code>grep</code>s, <code>cloc</code>s and other commands used to explore a repo. Similarly, “keeping the output of CLI programs” naturally makes sense for tools like AWS-CLI.</p>]]></summary>
 </entry>
 
 </feed>

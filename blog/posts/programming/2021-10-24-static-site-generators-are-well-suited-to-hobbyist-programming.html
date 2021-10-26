@@ -3,10 +3,10 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Posts tagged "internet.facebook" - Richard Goulter's Blog</title>
+        <title>Static Site Generators are Well Suited to Hobbyist Programming - Richard Goulter's Blog</title>
 
         <!-- My (Old) CSS theme -->
-        <link rel="stylesheet" type="text/css" href="../css/default.css" />
+        <link rel="stylesheet" type="text/css" href="../../css/default.css" />
 
         <!--
             jQuery & jQueryUI
@@ -19,7 +19,7 @@
             Pandoc Style CSS
             (for syntax highlighted snippets)
         -->
-        <link rel="stylesheet" type="text/css" href="../css/syntax.css" />
+        <link rel="stylesheet" type="text/css" href="../../css/syntax.css" />
 
         <!--
             Bootstrap
@@ -42,12 +42,12 @@
             so we can do this:
             http://imakewebthings.com/waypoints/shortcuts/sticky-elements/
         -->
-        <script src="../js/jquery.waypoints.min.js"></script>
-        <script src="../js/sticky.min.js"></script>
+        <script src="../../js/jquery.waypoints.min.js"></script>
+        <script src="../../js/sticky.min.js"></script>
 
         <!-- My analytics stuff -->
-        <script src="../js/my_analytics.js"></script>
-        <script src="../js/my_analytics_debug.js"></script>
+        <script src="../../js/my_analytics.js"></script>
+        <script src="../../js/my_analytics_debug.js"></script>
 
         <!--
             TOCify
@@ -57,7 +57,7 @@
             Patched TOCify css file.
             (Don't want fixed `.tocify`).
         -->
-        <link rel="stylesheet" type="text/css" href="../css/jquery.tocify.css" />
+        <link rel="stylesheet" type="text/css" href="../../css/jquery.tocify.css" />
 
         <style>
         .navbar {
@@ -109,15 +109,15 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="../">Richard Goulter's Blog</a>
+        <a class="navbar-brand" href="../../">Richard Goulter's Blog</a>
     </div>
 
     <div class="collapse navbar-collapse" id="navbar-collapse-1">
         <ul class="nav navbar-nav navbar-right">
-            <li><a href="../">Home</a></li>
-            <li><a href="../yi.html">Yi</a></li>
-            <li><a href="../emacs.html">Emacs</a></li>
-            <li><a href="../archive.html">Archive</a></li>
+            <li><a href="../../">Home</a></li>
+            <li><a href="../../yi.html">Yi</a></li>
+            <li><a href="../../emacs.html">Emacs</a></li>
+            <li><a href="../../archive.html">Archive</a></li>
         </ul>
     </div>
 </nav>
@@ -127,14 +127,40 @@
             <hr style="margin: 0px; border-top: 5px solid black;" />
 
             <div id="content" class="container">
-                <h1>Posts tagged "internet.facebook"</h1>
-                <ul>
+                <h1>Static Site Generators are Well Suited to Hobbyist Programming</h1>
+                <div class="info">
+    Posted on October 24, 2021
     
-        <li>
-            <a href="../posts/argument/2015-09-17-thoughts-on-facebook-dislike-button.html">Thoughts on Facebook Dislike Button</a> - September 17, 2015
-        </li>
+        by Richard Goulter
+    <br />
     
-</ul>
+    Tags: 
+    
+</div>
+
+<p>Static site generators are definitely a “for developers” tool. Or that’s the impression I get from seeing that <a href="https://staticsitegenerators.net/">staticsitegenerators.net</a> has hundreds of projects listed, ranging from a few GitHub stars all the way up to tens of thousands of GitHub stars.</p>
+<p>I’m reminded of a comment I saw on Hacker News talking about Factorio. Factorio is a game with gameplay which feels very similar to programming. This comment I saw explained, though, that the game’s similarity to programming leads to two sets of reactions to it from programmers: 1. the game is similar to what I put my creative energy into, but without the constraints of needing to be reliable or being told what to do: it’s very fun; 2. the game is similar to what I put my creative energy into, but without any tangible benefit from putting in that work: why would anyone want to ‘play’ this?</p>
+<p>My blog is generated with a static site generator, customised using the Haskell programming language.</p>
+<p>I don’t think I’d be able to argue that it’s a practical choice if the goal is to serve a blog. – But it’s as good an excuse as any to write something with Haskell.</p>
+<p>This weekend I spent some time brushing the project up a bit.</p>
+<p>It’s fun.</p>
+<p>I’m not familiar enough with Haskell to know all the right idioms. I think <a href="https://github.com/rgoulter/my-hakyll-blog/blob/6958e2a8399e2d32a041592bb74a527fa8ec36a8/site.hs">the code for the site</a> very much smells in places with indications that I don’t know what I’m doing.</p>
+<p>Still, I feel I rearranged the code into a nicer, more consistent shape than <a href="https://github.com/rgoulter/my-hakyll-blog/blob/1ef0045662aace8e063d69094e31b76e8062cf25/site.hs">it was in before</a>.</p>
+<p>I also tinkered around and updated the Nix files. I think Nix is nice for side projects. It’s often tedious to try and install some old compiler on a system. – With Nix, it’s easier to install from an older version of the package repository.<br />
+So when the project needed to build using an older GHC version (and NixOS didn’t like running the GHC version which <code>stack</code> downloaded, because it didn’t have the shared libraries available), Nix can get an older GHC by using the package definition from an older version of the package repository.<br />
+– Albeit, Nix has quite a steep learning curve. I wasn’t able to figure out how to do that nicely last time I’d tried to write the Nix files for the project.</p>
+
+<hr />
+
+<div>
+    
+    
+    <a href="../../posts/programming/2021-10-22-follow-up-review-of-the-bm40-ortholinear-keyboard.html" style="float:right; text-align: right;">Older post</a>
+    
+</div>
+<br style="clear: both;" />
+
+<hr />
 
             </div>
 

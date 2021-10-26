@@ -169,7 +169,6 @@ Yet, Emacs just doesn’t feel as ‘polished’ as these.</p>
 – The culprit? The <a href="https://github.com/bbatsov/solarized-emacs">solarized mode</a> I was using. I looked at the code; <strong>there’s no mention of tab anywhere!</strong><br />
 But also interesting (or horrifying) to note in the <code>solarized.el</code> file (about 2k LoC) features many lines of code dedicated to setting the colour for each face, for a multitude of different modes. It seems to me if you want to write a mode which looks good with this theme, then the theme would have to know about your mode, and be customized to that. – I’m thinking this is an example of a downside of Emacs’ flexibility. Or perhaps colour schemes are just hard to do properly, and this kind of upstream coupling is the best way.</p>
 
-
 <hr />
 
 <div>
