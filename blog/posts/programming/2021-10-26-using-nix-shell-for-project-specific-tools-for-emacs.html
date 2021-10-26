@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Static Site Generators are Well Suited to Hobbyist Programming - Richard Goulter's Blog</title>
+        <title>Using Nix-Shell for Project-Specific Tools for Emacs - Richard Goulter's Blog</title>
 
         <!-- My (Old) CSS theme -->
         <link rel="stylesheet" type="text/css" href="../../css/default.css" />
@@ -127,9 +127,9 @@
             <hr style="margin: 0px; border-top: 5px solid black;" />
 
             <div id="content" class="container">
-                <h1>Static Site Generators are Well Suited to Hobbyist Programming</h1>
+                <h1>Using Nix-Shell for Project-Specific Tools for Emacs</h1>
                 <div class="info">
-    Posted on October 24, 2021
+    Posted on October 26, 2021
     
         by Richard Goulter
     <br />
@@ -138,26 +138,117 @@
     
 </div>
 
-<p>Static site generators are definitely a “for developers” tool. Or that’s the impression I get from seeing that <a href="https://staticsitegenerators.net/">staticsitegenerators.net</a> has hundreds of projects listed, ranging from a few GitHub stars all the way up to tens of thousands of GitHub stars.</p>
-<p>I’m reminded of a comment I saw on Hacker News talking about Factorio. Factorio is a game with gameplay which feels very similar to programming. This comment I saw explained, though, that the game’s similarity to programming leads to two sets of reactions to it from programmers: 1. the game is similar to what I put my creative energy into, but without the constraints of needing to be reliable or being told what to do: it’s very fun; 2. the game is similar to what I put my creative energy into, but without any tangible benefit from putting in that work: why would anyone want to ‘play’ this?</p>
-<p>My blog is generated with a static site generator, customised using the Haskell programming language.</p>
-<p>I don’t think I’d be able to argue that it’s a practical choice if the goal is to serve a blog. – But it’s as good an excuse as any to write something with Haskell.</p>
-<p>This weekend I spent some time brushing the project up a bit.</p>
-<p>It’s fun.</p>
-<p>I’m not familiar enough with Haskell to know all the right idioms. I think <a href="https://github.com/rgoulter/my-hakyll-blog/blob/6958e2a8399e2d32a041592bb74a527fa8ec36a8/site.hs">the code for the site</a> very much smells in places with indications that I don’t know what I’m doing.</p>
-<p>Still, I feel I rearranged the code into a nicer, more consistent shape than <a href="https://github.com/rgoulter/my-hakyll-blog/blob/1ef0045662aace8e063d69094e31b76e8062cf25/site.hs">it was in before</a>.</p>
-<p>I also tinkered around and updated the Nix files. I think Nix is nice for side projects. It’s often tedious to try and install some old compiler on a system. – With Nix, it’s easier to install from an older version of the package repository.<br />
-So when the project needed to build using an older GHC version (and NixOS didn’t like running the GHC version which <code>stack</code> downloaded, because it didn’t have the shared libraries available), Nix can get an older GHC by using the package definition from an older version of the package repository.<br />
-– Albeit, Nix has quite a steep learning curve. I wasn’t able to figure out how to do that nicely last time I’d tried to write the Nix files for the project.</p>
+<p>One feature VSCode has is its <a href="https://code.visualstudio.com/docs/remote/containers">“Remote - Containers” extension</a> which allows for developing inside a container.</p>
+<p>I found this strange when I first heard it; since every time I’ve <code>docker exec -it</code>’d into a container, I’ve had to then further install tools like vim or a better grep. – Instead, I understand the idea is actually to use the container image as a way of distributing a set of tools to use with the editor.</p>
+<p>I liked the idea of project-specific tooling more once I made some use of <a href="https://direnv.net/"><code>direnv</code></a>. <code>direnv</code> enables automatically setting environment variables for the directories you <code>cd</code> through, by sourcing any <code>.envrc</code> files it encounters.</p>
+<p>That allows e.g. having a separate directory structure for <code>dev</code> and <code>staging</code> deployments, where the <code>dev/.envrc</code> sets the <code>AWS_PROFILE</code> (or <code>CLOUDSDK_ACTIVE_CONFIG_NAME</code>, etc.) environment variable accordingly. – This reduces the risk of mis-matching commands intended for dev in production. But also increases the convenience of not needing to explicitly change between profiles.</p>
+<p><code>direnv</code> has also has some integration with <code>nix-shell</code>. e.g. https://hardselius.github.io/2020/nix-shell-and-direnv/ – Although Nix is weird, using dotfiles to enable using different versions of tools depending on the directory is a solution as implemented with tools like <a href="https://github.com/rbenv/rbenv">rbenv</a> (or the more general <a href="https://asdf-vm.com/">asdf-vm</a>).</p>
+<p>The <code>direnv</code> + <code>nix-shell</code> combo works for command-line shells, and VSCode can have its Docker containers.</p>
+<p>Here’s an example of trying the same trick with Emacs.</p>
+<p>e.g. for a Terraform file like <code>main.tf</code>:</p>
+<pre class="terraform"><code>terraform {
+  required_providers {
+    aws = {
+      source  = &quot;hashicorp/aws&quot;
+      version = &quot;~&gt; 3.0&quot;
+    }
+  }
+}
+
+provider &quot;aws&quot; {
+}
+
+variable &quot;ssh_authorized_key&quot; {
+  type = string
+}
+
+resource &quot;aws_key_pair&quot; &quot;key&quot; {
+  key_name_prefix = &quot;ubuntu-vm&quot;
+  public_key      = var.ssh_authorized_key
+}
+
+resource &quot;aws_security_group&quot; &quot;allow_ssh&quot; {
+  name        = &quot;allow_ssh&quot;
+  description = &quot;Allow SSH inbound traffic&quot;
+
+  ingress {
+    from_port   = 22
+    to_port     = 22
+    protocol    = &quot;tcp&quot;
+    cidr_blocks = [&quot;0.0.0.0/0&quot;]
+  }
+}
+
+data &quot;aws_ami&quot; &quot;ubuntu&quot; {
+  most_recent = true
+
+  filter {
+    name   = &quot;name&quot;
+    values = [&quot;ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-*&quot;]
+  }
+
+  filter {
+    name   = &quot;virtualization-type&quot;
+    values = [&quot;hvm&quot;]
+  }
+
+  owners = [&quot;099720109477&quot;] # Canonical
+}
+
+resource &quot;aws_instance&quot; &quot;ubuntu&quot; {
+  ami           = data.aws_ami.ubuntu.id
+  instance_type = &quot;t3.small&quot;
+
+  key_name = aws_key_pair.key.key_name
+
+  vpc_security_group_ids = [aws_security_group.allow_ssh.id]
+
+  associate_public_ip_address = true
+
+  root_block_device {
+    volume_size = 20
+  }
+}
+
+output &quot;vm_public_ip&quot; {
+  value = aws_instance.ubuntu.public_ip
+}</code></pre>
+<p>and a <code>shell.nix</code> with contents:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode nix"><code class="sourceCode bash"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">{</span> <span class="ex">pkgs</span> ? import <span class="op">&lt;</span>nixpkgs<span class="op">&gt;</span> <span class="dt">{}</span> <span class="kw">}</span>:</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="ex">with</span> pkgs<span class="kw">;</span></a>
+<a class="sourceLine" id="cb2-4" data-line-number="4"><span class="ex">mkShell</span> {</a>
+<a class="sourceLine" id="cb2-5" data-line-number="5">  <span class="ex">buildInputs</span> = [</a>
+<a class="sourceLine" id="cb2-6" data-line-number="6">    <span class="ex">terraform</span></a>
+<a class="sourceLine" id="cb2-7" data-line-number="7">    <span class="ex">terraform-ls</span></a>
+<a class="sourceLine" id="cb2-8" data-line-number="8">    <span class="ex">tflint</span></a>
+<a class="sourceLine" id="cb2-9" data-line-number="9">  ];</a>
+<a class="sourceLine" id="cb2-10" data-line-number="10">}</a></code></pre></div>
+<p>(In this case, the shell includes the packages: <code>terraform</code> which is what interprets/runs the <code>main.tf</code>, <code>terraform-ls</code> as the Language Server for LSP, and <code>tflint</code> as the linting tool).</p>
+<p>An <code>.envrc</code> can be used to set <code>AWS_PROFILE</code>, <code>AWS_REGION</code>, and <code>TF_VAR_ssh_authorized_key</code>.</p>
+<p>To integrate this with Emacs:</p>
+<p>Using <a href="https://github.com/travisbhartwell/nix-emacs/"><code>nix-sandbox</code></a> for convenience, we can set some variables in a <code>.dir-locals.el</code> file, e.g.:</p>
+<pre class="elisp"><code>((terraform-mode . ((eval . (progn
+                              (setq-local lsp-terraform-server
+                                          `(&quot;nix-shell&quot;
+                                            &quot;--command&quot;
+                                            &quot;terraform-ls serve&quot;
+                                            ,(nix-current-sandbox)))))))
+ (prog-mode . ((flycheck-command-wrapper-function
+                . (lambda (command) (apply 'nix-shell-command (nix-current-sandbox) command)))
+               (flycheck-executable-find
+                . (lambda (cmd) (nix-executable-find (nix-current-sandbox) cmd))))))</code></pre>
+<p>The <code>lsp-terraform-server</code> variable is used by <a href="https://emacs-lsp.github.io/lsp-mode/page/lsp-terraform/">lsp-mode</a>, and the <code>flycheck-command-wrapper-function</code> is for <a href="https://github.com/flycheck/flycheck">flycheck</a>.</p>
+<p>With this, e.g. the <code>terraform-ls</code> from the <code>nix-shell</code> environment can be used for LSP code intelligence, and <code>tflint</code> by flycheck.</p>
+<p>I’ve been pretty lazy about figuring out how to setup LSP servers for whatever programming language I’ve been using. Nix doesn’t promise to make that easier. – But what Nix does support is making it easier for someone to make use of a development setup written in Nix (e.g. just running a single “nix-shell” command, rather than following several steps in a blogpost).</p>
+<p>I don’t know if project-specific tooling will catch on. I think project-specific tooling looks like it goes well with web applications like replit, gitpod, or GitHub’s codespaces.</p>
 
 <hr />
 
 <div>
     
-    <a href="../../posts/programming/2021-10-26-using-nix-shell-for-project-specific-tools-for-emacs.html" style="float:left;">Newer post</a>
     
-    
-    <a href="../../posts/programming/2021-10-22-follow-up-review-of-the-bm40-ortholinear-keyboard.html" style="float:right; text-align: right;">Older post</a>
+    <a href="../../posts/programming/2021-10-24-static-site-generators-are-well-suited-to-hobbyist-programming.html" style="float:right; text-align: right;">Older post</a>
     
 </div>
 <br style="clear: both;" />
