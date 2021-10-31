@@ -63,7 +63,8 @@ freecad.override {
 <p>That said, I don’t know whether anyone would write code like that without having written similar code previously.</p>
 <p>I arrived at the above code through refactoring. The naive approach is to copy and paste the Nix files from the nixpkgs code, and make adjustments as necessary. This works, but isn’t very elegant.<br />
 – One nice thing about refactoring Nix code, though, is that packages which are built with the same set of inputs don’t require rebuilding. e.g. after building either of the code snippets, the building the other wouldn’t require any further code to be compiled.</p>
-<p>I reckon that even that effort is still less tedious than the suggested solution above.</p>
+<p>I reckon that even that effort is still less tedious than the suggested solution above.<br />
+– Or perhaps I’m thinking of this from a yak-shaving perspective: e.g. with the good ol’ just clone and install dependencies and configure and build, you’ll have to repeat this understandable but awkward process on every computer you want to use FreeCAD with glTF export. With the Nix approach, at worst you’d just copy the snippet and rebuild on your computer.</p>
 <p>Since rebuilding GUI programs like this can take quite a beefy computer or quite a long time, another nice aspect of Nix is <a href="https://nixos.org/manual/nix/stable/#chap-distributed-builds">the ability to build with other computers</a>. – I’ll have to try that at some point.</p>]]></summary>
 </entry>
 <entry>
