@@ -8,8 +8,65 @@
         <name>Richard Goulter</name>
         <email>richard.goulter+blog@gmail.com</email>
     </author>
-    <updated>2021-10-26T00:00:00Z</updated>
+    <updated>2021-10-31T00:00:00Z</updated>
     <entry>
+    <title>Example of Using Nix to Run Software Using Different Build Flags</title>
+    <link href="http://www.rgoulter.com/blog//posts/programming/2021-10-31-example-of-using-nix-to-run-software-using-different-build-flags.html" />
+    <id>http://www.rgoulter.com/blog//posts/programming/2021-10-31-example-of-using-nix-to-run-software-using-different-build-flags.html</id>
+    <published>2021-10-31T00:00:00Z</published>
+    <updated>2021-10-31T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<p>I recently wanted to use FreeCAD to export a glTF file from a STEP file.</p>
+<p>Unfortunately, I found that <a href="https://forum.freecadweb.org/viewtopic.php?f=8&amp;t=31680&amp;p=450917&amp;#p450658">FreeCad needed to be built with OCC built with rapidjson</a>.</p>
+<p>The <a href="https://forum.freecadweb.org/viewtopic.php?t=56487&amp;p=486635">suggested solution</a> isn’t <em>hard</em>, as such; but it is more tedious than just installing a package:</p>
+<blockquote>
+<p>Building from OCC from scratch: 1. get the source code from (https://gitlab.com/blobfish/occt ) –&gt; fillet fix included 2. setup your machine with cmake 3. get freetype2 and tcl/tk 4. setup cmake 5. build occ</p>
+</blockquote>
+<p>Per <a href="https://dev.opencascade.org/doc/overview/html/build_upgrade__building_occt.html#build_cmake_conf">the opencascade documentation</a> (or e.g. <a href="https://dev.opencascade.org/content/rebuilding-occt-rapidjson">this forum post</a>), this means building opencascade, but with cmake flags: <code>-D USE_RAPIDJSON:BOOL=&quot;ON&quot;</code>.</p>
+<p>It turns out Nixpkgs allows for doing this in a concise way:</p>
+<p>e.g. with a file <code>freecad.nix</code>:</p>
+<pre><code># By convention: this file declares function
+# which takes in a set of arguments;
+# &#39;pkgs&#39; has a default value of &#39;import &lt;nixpkgs&gt; {}&#39;
+{ pkgs ? import &lt;nixpkgs&gt; {} }:
+
+let
+  # declare a package opencascade-occt, but with rapidjson support
+  opencascade-occt-with-rapidjson =
+    pkgs.opencascade-occt.overrideAttrs(oldAttrs: {
+      # opencascade-occt depends on rapidjson if built with USE_RAPIDJSON
+      nativeBuildInputs = oldAttrs.nativeBuildInputs ++ [ pkgs.rapidjson ];
+      # and change which extra cmakeFlags are passed to the configuration.
+      cmakeFlags = &#39;&#39;-D USE_RAPIDJSON:bool=&quot;ON&quot;&#39;&#39;;
+    });
+in
+# The result of the function is the freecad package,
+# but using the opencascade package we declared above.
+pkgs.freecad.override {
+  opencascade-occt = opencascade-occt-with-rapidjson;
+}</code></pre>
+<p>The syntax may look esoteric, but it’s hardly more intimidating than the fancy parts of ECMAScript syntax.</p>
+<p>The code declares a function for building a package for freecad. The code is a function as a way of injecting dependencies. The code uses <code>nixpkgs</code> as a whole for our dependency. The code makes use of the <code>pkgs.freecad</code> and <code>pkgs.opencascade-occt</code>, so it doesn’t need to duplicate the effort needed to write those packages. The opencascade here is built with <code>-D USERAPIDJSON:BOOL=&quot;ON&quot;</code> as a flag to CMake; and <code>rapidjson</code> is also given as a dependency. Then this is version of opencascade is given to the <code>pkgs.freecad</code> package.</p>
+<p>The <a href="https://nixos.org/manual/nixpkgs/unstable/#chap-overrides">Overriding</a> section of the nix manual explains <code>&lt;pkg&gt;.override</code> vs <code>&lt;pkg&gt;.overrideAttrs</code>. Roughly: <code>&lt;pkg&gt;.overrideAttrs</code> changes things about the way <code>&lt;pkg&gt;</code> is built; e.g. the code above changes the CMake flags. Whereas, <code>&lt;pkg&gt;.override</code> changes what versions of dependencies are used to build a package; e.g. the code above changes the <code>opencascade-occt</code> dependency of freecad to one which was built with rapidjson.</p>
+<p>Stuff like this is what makes Nix both very powerful, but also very hard to get used to.</p>
+<p>How to use some Nix file like <code>freecad.nix</code> might also be unclear. There are several different ways: e.g. running <code>nix-build freecad.nix</code> then running the <code>./result/bin/freecad</code> which results.. or using the footgun that is <code>nix-env --install</code> and running <code>nix-env --install --file freecad.nix</code>, among others.</p>
+<p>The code is more concise without the comments; or without the <code>let</code>:</p>
+<pre><code>{ pkgs ? import &lt;nixpkgs&gt; {} }:
+
+with pkgs;
+freecad.override {
+  opencascade-occt =
+    opencascade-occt.overrideAttrs(oldAttrs: {
+      nativeBuildInputs = oldAttrs.nativeBuildInputs ++ [ rapidjson ];
+      cmakeFlags = &#39;&#39;-D USE_RAPIDJSON:bool=&quot;ON&quot;&#39;&#39;;
+    });
+}</code></pre>
+<p>That said, I don’t know whether anyone would write code like that without having written similar code previously.</p>
+<p>I arrived at the above code through refactoring. The naive approach is to copy and paste the Nix files from the nixpkgs code, and make adjustments as necessary. This works, but isn’t very elegant.<br />
+– One nice thing about refactoring Nix code, though, is that packages which are built with the same set of inputs don’t require rebuilding. e.g. after building either of the code snippets, the building the other wouldn’t require any further code to be compiled.</p>
+<p>I reckon that even that effort is still less tedious than the suggested solution above.</p>
+<p>Since rebuilding GUI programs like this can take quite a beefy computer or quite a long time, another nice aspect of Nix is <a href="https://nixos.org/manual/nix/stable/#chap-distributed-builds">the ability to build with other computers</a>. – I’ll have to try that at some point.</p>]]></summary>
+</entry>
+<entry>
     <title>Using Nix-Shell for Project-Specific Tools for Emacs</title>
     <link href="http://www.rgoulter.com/blog//posts/programming/2021-10-26-using-nix-shell-for-project-specific-tools-for-emacs.html" />
     <id>http://www.rgoulter.com/blog//posts/programming/2021-10-26-using-nix-shell-for-project-specific-tools-for-emacs.html</id>
@@ -469,29 +526,6 @@ Maybe using a different keyboard to learn the layout would mitigate the effect, 
 <p>It’s also not a very big issue that the letters on the keycaps don’t match the letters you type into the keyboard. (The number keys and function keys will be the same anyway).</p>
 <p>In terms of using software like Vim or Emacs which heavily rely on keybindings: In general, I think my mindset has the added indirection of ‘thinking’ about the letter to invoke the command, rather than the physical motion. - On Dvorak, the common shortcuts Ctrl-C, Ctrl-V, etc.: suck. This is made worse by that usually you’ll want to use these commands in tandem with using a mouse. So you won’t have both hands on the keyboard. - With using Dvorak with Vim: ‘h’ is still to the left of ‘l’; ‘j’ and ‘k’ are right beside each other. I was using Vim for a long time before I noticed that I use pretty much every key on the keyboard. The other keys in Dvorak are still there, just in different places, and I don’t give it much thought. - With using Dvorak with Emacs: C-x sucks. (For me this is somewhat mitigated: I use Evil, and can use the spacebar for things that I use frequently). But similarly, ‘p’ is still above ‘n’.</p>
 <p>I’m not especially keen to try out other keyboard layouts after having gone through the effort to train with the Dvorak layout. If I were to pick up another layout today, though, I’d love to look at the Workman layout.</p>]]></summary>
-</entry>
-<entry>
-    <title>Re-reading High Fidelity</title>
-    <link href="http://www.rgoulter.com/blog//posts/narrative/2020-05-29-rereading-high-fidelity.html" />
-    <id>http://www.rgoulter.com/blog//posts/narrative/2020-05-29-rereading-high-fidelity.html</id>
-    <published>2020-05-29T00:00:00Z</published>
-    <updated>2020-05-29T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<p>I recently re-read Nick Hornby’s “High Fidelity”.</p>
-<p>I love this story.<br />
-It’s about a guy who’s a total music geek, and bit of a loser; and it’s a coming-of-age story as he ruminates over his romantic life.</p>
-<p>One of the reasons I find the story fascinating is it’s narrated with the narrator’s stream-of-conscious.<br />
-I love stream-of-conscious narratives. (Or I haven’t read many bad ones, anyway).<br />
-Sometimes the narrator comes up with what sounds like insightful claims (like asking whether people listen to sad pop music because they’re sad, or whether they’re sad because they listen to sad pop music. Or … Or …). I can’t say I caught it the first time, but this is in-line with the main character’s personality.. the narrator’s mind comes up with all sorts of bullshit. – But (since it’s a coming-of-age story) the main character is immature, and never quite carries any of these thoughts through enough to improve himself.</p>
-<p>I don’t often come across stories where the character is realistically miserable, but also charmingly redeemed.<br />
-(And, I guess, it’s also nice to see a character who is not very considerate, but not malicious either).</p>
-<p>Another reason I love this story is the rumination over the previous rejections.<br />
-The narrator thinks <em>way</em> too much about the past, and (as he discovers) the way he thought about these times he got rejected didn’t really represent the reality of what occurred.</p>
-<p>The movie “Definitely, Maybe” has (if you squint) similarities to this.<br />
-In “Definitely, Maybe”, the main character is getting divorced. The main character narrates his history of romantic relationships (to his daughter) to show how things went wrong.<br />
-And in “High Fidelity”, his girlfriend has just broken up with him, etc.<br />
-Albeit, it’s more apparent that “Definitely, Maybe” is a sweet story.</p>
-<p>I didn’t catch it (or didn’t remember it) from the times I’d read the book years ago what his most-recent girlfriend saw in him. Said woman has a high-paying job (where our narrator does not), has many friends (where our narrator does not), etc. But she does explain it to him.</p>
-<p>I’d say what I disliked the most, upon re-reading it, was that the coming-of-age aspect doesn’t come from an internal realisation of the character, but from a huge amount of external aid. (And not even just from reading a book telling him to make his bed).</p>]]></summary>
 </entry>
 
 </feed>
