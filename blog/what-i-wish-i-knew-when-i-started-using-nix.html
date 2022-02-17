@@ -1,0 +1,559 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>what-i-wish-i-knew-when-i-started-using-nix - Richard Goulter's Blog</title>
+
+        <!-- My (Old) CSS theme -->
+        <link rel="stylesheet" type="text/css" href="./css/default.css" />
+
+        <!--
+            jQuery & jQueryUI
+        -->
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css" />
+
+        <!--
+            Pandoc Style CSS
+            (for syntax highlighted snippets)
+        -->
+        <link rel="stylesheet" type="text/css" href="./css/syntax.css" />
+
+        <!--
+            Bootstrap
+        -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+        <style>
+            /*
+             * Bootstrap defines blockquote as 17px,
+             * so it looks stupidly large in my blogposts. */
+            blockquote {
+                font-size: 14px;
+            }
+        </style>
+
+        <!--
+            Waypoints, and Waypoints-Sticky,
+            so we can do this:
+            http://imakewebthings.com/waypoints/shortcuts/sticky-elements/
+        -->
+        <script src="./js/jquery.waypoints.min.js"></script>
+        <script src="./js/sticky.min.js"></script>
+
+        <!-- My analytics stuff -->
+        <script src="./js/my_analytics.js"></script>
+        <script src="./js/my_analytics_debug.js"></script>
+
+        <!--
+            TOCify
+        -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js"></script>
+        <!--
+            Patched TOCify css file.
+            (Don't want fixed `.tocify`).
+        -->
+        <link rel="stylesheet" type="text/css" href="./css/jquery.tocify.css" />
+
+        <style>
+        .navbar {
+            margin-bottom: 0px;
+        }
+
+        .banner-image {
+            width:100%;
+        }
+
+        .banner {
+            margin-left: 0px;
+            margin-right: 0px;
+        }
+
+        body {
+            background-color: #e2e2e2;
+        }
+
+        #page {
+            padding-left:0;
+            padding-right:0;
+            background-color: #ffffff;
+        }
+        </style>
+
+        <!-- Google Analytics -->
+        <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+          ga('create', 'UA-73116015-1', 'auto');
+          ga('send', 'pageview');
+        </script>
+    </head>
+    <body>
+        <div id="page" class="container">
+            <!-- This, with no padding on left/right -->
+            <div class="banner">
+                <nav class="navbar navbar-default">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+
+            <!-- The Hamburger -->
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="./">Richard Goulter's Blog</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="./">Home</a></li>
+            <li><a href="./yi.html">Yi</a></li>
+            <li><a href="./emacs.html">Emacs</a></li>
+            <li><a href="./archive.html">Archive</a></li>
+        </ul>
+    </div>
+</nav>
+
+            </div>
+
+            <hr style="margin: 0px; border-top: 5px solid black;" />
+
+            <div id="content" class="container">
+                <h1>what-i-wish-i-knew-when-i-started-using-nix</h1>
+                <!--
+contentpage.html, for content-specific pages, like emacs.html/yi.html.
+-->
+
+<div class="row">
+    <div class="col-md-8" id="page-content">
+        <p>This page is for me to share notes of things I was confused by as I’ve used Nix.</p>
+<h1 id="you-should-explain-what-nix-is">You Should Explain What Nix is</h1>
+<p>Nix is to managing packages what lisp is to adding numbers together.</p>
+<p>More concretely, “Nix” refers to a package manager, the language those packages are written in; and usually referring to “Nix” also includes the main repository of packages (nixpkgs) and the OS (NixOS).</p>
+<p>Nix is cool (both in terms of several practical benefits that are <em>difficult</em> to get elsewhere, and in terms of just being elegant), but can be hard to use.</p>
+<p>If you think what you read about Nix (elsewhere) sounds interesting, try it out passively bit by bit over months.</p>
+<h1 id="what-confused-me-for-a-long-time-stuff-about-derivations">What Confused Me for a Long Time: Stuff about Derivations</h1>
+<p>If you go through the widely recommended Nix Pills, prob’ly the first surprising Nix Pill is <a href="https://nixos.org/guides/nix-pills/our-first-derivation.html">pill 7, its intro to “derivations”</a>.</p>
+<p>“Derivation” is a foundational concept in Nix.<br />
+As you can see in the blogpost, in one way, it’s like a JSON object.</p>
+<p>I met someone who explained that he had been confused for some time about how immutable structures in functional programming could be used in programs which would manipulate the list. (How can something be immutable, but also change?).</p>
+<p>With Nix, I felt a similar confusion for a long time. (How can something be a hashmap, but also be a package installed on a filesystem?).</p>
+<p>The above pill compares building a <code>.nix</code> file to building a <code>.c</code> program.<br />
+This is fair, but didn’t click with me.</p>
+<p>I’d rather phrase it: that the derivation is the Nix’s “how to build a package” in its pure, consistent way.<br />
+The Nix programs in <code>.nix</code> files contain programmatic abstractions built on top of that.</p>
+<p>Or a bit more vaguely: a “nix derivation” is more/less like nix’s flavour of a software package.</p>
+<p>Other important words: “Instantiate” is “generate the .drv from the high-level <code>.nix</code>”, and “realise” is the package actually being built (or copied) to the store.</p>
+<p>The Nix pills take a very bottom-up approach to understanding Nix. I find it hard to appreciate without some familiarity with Nix stuff. But, Nix is much harder to understand without an intuition for what a derivation is.</p>
+<h1 id="what-also-confused-me-for-a-long-time-nix-expressions-and-realised-derivations">What Also Confused Me for a Long Time: Nix Expressions and Realised Derivations</h1>
+<p>What also confused me is a <code>.nix</code> file might contain many derivations.<br />
+Which doesn’t sound all that confusing.<br />
+But.<br />
+In Python, each Python file is a module, and runs with a main function.<br />
+In Haskell, each file is its own module, and runs with a main function.<br />
+In Nix, each file is a Nix expression, and files don’t have a specific format.</p>
+<p>A derivation (“nix package”) is declared.<br />
+Which itself is maybe not confusing. Terraform code involves declaring code and letting Terraform determine what resources to create/delete/update.<br />
+And the Nix language is all pure expressions (since it doesn’t have statements).</p>
+<p>– But some combination of the above defied my intuitions.<br />
+Packages get built (which you’d expect to be an impure side-effect) from these declarative Nix expressions in source files, but not necessarily as simply/explicitly as “<code>package { src = ... }</code>”.</p>
+<h1 id="nix-flakes-and-b.f.e.-before-flakes-era.">Nix: Flakes and B.F.E. (Before Flakes Era).</h1>
+<p>Flakes are a recent edition to Nix.<br />
+People who understand flakes say flakes are cool.</p>
+<p>Flakes are kinda like “nix squared”.</p>
+<p>With Nix, you pay an upfront cost; where complexity is managed explicitly.<br />
+The implicit, imperative mutation of the global filesystem that programmers are used to when driving their workstations is verboten.</p>
+<p>The typical way of using nixpkgs was using channels. This still leaved some room for inconsistency when installing the same packages across different machines (e.g. due to differences in how up-to-date the channels are in each machine), and leaves some things implicit/mutable. (e.g. what channels are available on the machine).</p>
+<p>Nix flakes do away with using channels, and provide a consistent way for a repository to declare its inputs, and what outputs it provides.</p>
+<p>Serokell’s <a href="https://serokell.io/blog/practical-nix-flakes">“Practical Nix Flakes”</a> blogpost is a good introduction.</p>
+<p>With Nix flakes, there’s more complexity upfront, but some pretty neat benefits from paying that cost. (The CLI UX with flakes is nicer; and it’s easier to make use of flakes than non-flakes Nix expressions).</p>
+<p>The new Nix commands make use of flakes.<br />
+e.g. the old-style command to install a package might be <code>nix-env --install --attr nixpkgs.neovim</code> (install <code>neovim</code> from the <code>nixpkgs</code> channel), but the new-style command is <code>nix profile install nixpkgs#neovim</code> (install <code>neovim</code> package from the <code>nixpkgs</code> flake).</p>
+<p>I wrote a flake for <a href="https://github.com/rgoulter/my-hakyll-blog">my hakyll blog</a>. I can build &amp; run the static site generator with just <code>nix run github:rgoulter/my-hakyll-blog</code>, and it will work the same way on any computer that runs this.</p>
+<h1 id="nix-env-is-easiest-to-start-with-but-also-discouraged-for-being-footgun-prone"><code>nix-env</code> is Easiest to Start With but also Discouraged for Being Footgun-Prone</h1>
+<p>The easiest way to get started with using Nix is as a almost drop-in replacement for how you might otherwise use a package manager.</p>
+<p>Instead of <code>sudo apt-update</code> and <code>sudo apt install vim</code>, you’d run <code>nix-channel --update</code> and <code>nix-env --install --attr nixpkgs.vim</code>. (Perhaps unexpectedly, not using <code>sudo</code>).</p>
+<p>There’s only a marginal benefit to Nix compared to the system package manager. (You get the same versions of software on each system, rather than e.g. CentOS’ version being much older than Ubuntu’s; and nixpkgs tend to have very up-to-date packages).</p>
+<p>I’ve seen this described as an anti-pattern, and that its use is discouraged. – I’ll say it’s prone to problems of “I forgot I did that” or “I didn’t know I did that” and ending up with problems that are hard to understand.</p>
+<p>e.g. when I first installed NixOS, I logged in as the root user and installed firefox using <code># nix-env --install --attr nixpkgs.firefox</code>, so I could continue reading the manual etc.<br />
+Months later, on my normal user account, I was confused why my Firefox was stuck on such an old version. I was especially confused since Firefox wasn’t installed to my user profile anywhere.<br />
+“I forgot I’d done that. It ended up with a hard to understand problem.”</p>
+<p>I think it’s discouraged due to being the cause of a disproportionate amount of requests for help in the community. It’s most likely to be used by beginners, who are likely to not know all the details of what they’re doing, or likely to not be able to figure out why an issue is occuring.</p>
+<h1 id="declarative-package-management-is-the-easiest-non-trivial-thing-to-do-with-nix">“Declarative Package Management” is the Easiest Non-Trivial Thing to do with Nix</h1>
+<p>The Nixpkgs manual has a section describing <a href="https://nixos.org/manual/nixpkgs/stable/#sec-declarative-package-management">“declarative package management”</a>.</p>
+<p>This at least should be appealing to yak-shavers.</p>
+<p>It gives an example using the expression:</p>
+<pre><code>pkgs.buildEnv {
+    name = &quot;my-packages&quot;;
+    paths = [
+      bc
+      coreutils
+      jq
+      silver-searcher
+    ];
+  };
+}</code></pre>
+<p>(If you’re persuaded against using <code>nix-env</code>, nix.dev’s tutorial on <a href="https://nix.dev/tutorials/ad-hoc-developer-environments">ad hoc developer environments</a> is at about the same level).</p>
+<p>The first tricky taste of Nix is that there are several different ways to install this package.</p>
+<p>Non-exhaustively:</p>
+<h2 id="option-a-packageoverrides">Option A: <code>packageOverrides</code></h2>
+<p>At the time of writing, the manual suggests the way to use this expression is to override the list of packages in nixpkgs and add <code>myPackages</code>, by using <code>~/.config/nixpkgs/config.nix</code> with contents:</p>
+<pre><code>{
+  packageOverrides = pkgs: with pkgs; {
+    myPackages = pkgs.buildEnv {
+      name = &quot;my-packages&quot;;
+      paths = [
+        bc
+        coreutils
+        jq
+        silver-searcher
+      ];
+    };
+  };
+}</code></pre>
+<p>And then installing this by running <code>nix-env --install --attr nixpkgs.myPackages</code>.</p>
+<h2 id="option-b-overlays">Option B: Overlays</h2>
+<p>The chapter immediately following the Declarative Package Management in the nixpkgs manual is about overlays. https://nixos.org/manual/nixpkgs/stable/#chap-overlays</p>
+<p>Which seems like a nicer solution than the <code>packageOverrides</code> in <code>config.nix</code>.</p>
+<p>I used this approach for a long time.</p>
+<p>I did this by having <code>~/.config/nixpkgs/overlays/myOverlays.nix</code> with:</p>
+<pre><code>self: super:
+
+{
+  myPackages = self.buildEnv {
+    name = &quot;my-packages&quot;;
+    paths = with self; [
+      bc
+      coreutils
+      jq
+      silver-searcher
+    ];
+  };
+}</code></pre>
+<p>And then installing this by running <code>nix-env --install --attr nixpkgs.myPackages</code>. (And just re-running that each time I changed <code>myPackages</code>).</p>
+<p>e.g. here’s <a href="https://github.com/rgoulter/dotfiles/blob/1edb8db8345fe6eb11ebc401f20587499d30c086/nixpkgs/overlays/myPackages.nix">the overlay I was using</a>.</p>
+<h2 id="option-c-flakes">Option C: Flakes</h2>
+<p>Making use of <a href="https://github.com/nix-community/nur-packages-template">nix-community’s nix-user-repository template</a>:</p>
+<p>Although maybe not the nicest way of doing it, I’d have <code>default.nix</code> with:</p>
+<pre><code>{ pkgs ? import &lt;nixpkgs&gt; { } }:
+
+{
+  myPackages = import ./pkgs/myPackages { pkgs = pkgs; };
+}</code></pre>
+<p>And I have <code>pkgs/myPackages/default.nix</code> with:</p>
+<pre><code>{ pkgs }:
+
+pkgs.buildEnv {
+    name = &quot;my-packages&quot;;
+    paths = with pkgs; [
+      bc
+      coreutils
+      jq
+      silver-searcher
+    ];
+  };
+}</code></pre>
+<p>And then this can be installed with <code>nix profile .#myPackages</code>, or <code>nix profile install github:&lt;username&gt;/&lt;repo&gt;#myPackages</code> or whatever URL. (The files have to be checked into a <code>git</code> repository).</p>
+<p>e.g. my <a href="https://github.com/rgoulter/nix-user-repository">nix user repository</a>.</p>
+<h1 id="nix-shell---ephemeral-development-environments"><code>nix-shell</code> - Ephemeral Development Environments</h1>
+<p>A nix shell is a shell which leverages Nix to make packages available when using that shell. (i.e. not installing the program to the user’s system).<br />
+In a way, this is like a cousin to the virtual environments which various programming environments provide.<br />
+It’s also comparable to how Docker images are sometimes used as an easy way to distribute a toolchain or some CLI program,<br />
+or to various “X version managers” like Ruby Version Manager or Node Version Manager or <a href="https://asdf-vm.com/">asdf</a>.</p>
+<p>Running the command <code>nix-shell</code> will make use of a <code>shell.nix</code> file in the current directory. A simple <code>shell.nix</code> file is:</p>
+<pre><code>{ pkgs ? import &lt;nixpkgs&gt; {} }:
+
+with pkgs;
+mkShell {
+  packages = [
+    neovim
+  ];
+}</code></pre>
+<h1 id="and-the-nix-flakes-equivalent">And the Nix Flakes Equivalent</h1>
+<p>“But <code>nix-shell</code> with a <code>shell.nix</code> like the above uses nix channels, not the fancy new flakes”.</p>
+<p>The new flake-aware Nix approach to get an ephemeral development environment in the shell is to integrate with <a href="direnv.net"><code>direnv</code></a>. e.g. to use <a href="https://github.com/nix-community/nix-direnv"><code>nix-direnv</code></a>.</p>
+<p>The equivalent of <code>shell.nix</code>, with flakes? Well…</p>
+<p>The nix-direnv project links to the <a href="https://github.com/nix-community/nix-direnv/blob/master/template/flake.nix">following template flake.nix</a>:</p>
+<pre><code>{
+  description = &quot;A basic flake with a shell&quot;;
+  inputs.nixpkgs.url = &quot;github:NixOS/nixpkgs/nixpkgs-unstable&quot;;
+  inputs.flake-utils.url = &quot;github:numtide/flake-utils&quot;;
+
+  outputs = { self, nixpkgs, flake-utils }:
+    flake-utils.lib.eachDefaultSystem (system:
+      let
+        pkgs = nixpkgs.legacyPackages.${system};
+      in {
+        devShell = pkgs.mkShell {
+          packages = [ pkgs.neovim ];
+        };
+      });
+}</code></pre>
+<p>which can be generated (along with a <code>.envrc</code> which makes use of the flake’s devShell) by running:</p>
+<pre><code>nix flake new -t github:nix-community/nix-direnv .</code></pre>
+<p>With the <code>.envrc</code> generated from this template, the flake’s devshell is automatically built, and its packages made available to the current shell.</p>
+<h1 id="so-how-to-write-a-package-with-nix">So How to Write a Package with Nix</h1>
+<p>The <a href="https://nixos.org/manual/nix/stable/expressions/simple-expression.html">Nix manual has a tutorial for a simple expression</a>; how to write a Nix package for gnu <code>hello</code>.</p>
+<p>This guides us with a <code>default.nix</code>:</p>
+<pre><code>{ stdenv, fetchurl, perl }:
+
+stdenv.mkDerivation {
+  name = &quot;hello-2.1.1&quot;;
+  builder = ./builder.sh;
+  src = fetchurl {
+    url = &quot;ftp://ftp.nluug.nl/pub/gnu/hello/hello-2.1.1.tar.gz&quot;;
+    sha256 = &quot;1md7jsfd8pa45z73bz1kszpp01yw6x5ljkjk2hx7wl800any6465&quot;;
+  };
+  inherit perl;
+}</code></pre>
+<p>and a <code>builder.sh</code>:</p>
+<pre><code>source $stdenv/setup
+
+PATH=$perl/bin:$PATH
+
+tar xvfz $src
+cd hello-*
+./configure --prefix=$out
+make
+make install</code></pre>
+<p>The tutorial apparently suggests to this within the <code>nixpkgs</code> repository itself, which seems a little impractical, and quite unintuitive to me.</p>
+<p>“How am I supposed to build this?” otherwise brought me to the GitHub issue <a href="https://github.com/NixOS/nix/issues/2259">NixOS/nix#2259</a>, with people wondering the same thing.<br />
+Because you’ll try running <code>nix-build</code> and it won’t “just work” with the above <code>default.nix</code>.</p>
+<p>The easiest “well, this works” <code>default.nix</code> to stumble across is suggested as:</p>
+<pre><code>let
+  pkgs = import &lt;nixpkgs&gt; {};
+in
+pkgs.stdenv.mkDerivation {
+  name = &quot;hello-2.1.1&quot;;
+  builder = ./builder.sh;
+  src = pkgs.fetchurl {
+    url = ftp://ftp.nluug.nl/pub/gnu/hello/hello-2.1.1.tar.gz;
+    sha256 = &quot;1md7jsfd8pa45z73bz1kszpp01yw6x5ljkjk2hx7wl800any6465&quot;;
+  };
+  perl = pkgs.perl;
+}</code></pre>
+<p>though now I’d suggest a closer “well, this works” <code>default.nix</code> file would instead be:</p>
+<pre><code>{ pkgs ? import &lt;nixpkgs&gt; {} }:
+
+with pkgs;
+stdenv.mkDerivation {
+  name = &quot;hello-2.1.1&quot;;
+  builder = ./builder.sh;
+  src = fetchurl {
+    url = &quot;ftp://ftp.nluug.nl/pub/gnu/hello/hello-2.1.1.tar.gz&quot;;
+    sha256 = &quot;1md7jsfd8pa45z73bz1kszpp01yw6x5ljkjk2hx7wl800any6465&quot;;
+  };
+  inherit perl;
+}</code></pre>
+<p>A helpful commenter in the GitHub issue above links to <a href="https://stackoverflow.com/questions/44088192/when-and-how-should-default-nix-shell-nix-and-release-nix-be-used">a StackOverflow answer</a> which helps explain the above.<br />
+It explains that there’s no single required nor conventional format for <code>default.nix</code>. It explains, though, that packages in nixpkgs are typically in a format for a “callPackage derivation”.</p>
+<p>It suggests the rather unwieldy command:</p>
+<pre><code>nix-build -E 'with import &lt;nixpkgs&gt; { }; callPackage ./path/to/default.nix { }'</code></pre>
+<p>Or perhaps another way of putting it: if we instead renamed the <code>default.nix</code> from the tutorial as <code>hello.nix</code>, a <code>default.nix</code> file which could be built with just <code>nix-build</code> would be:</p>
+<pre><code>{ pkgs ? import &lt;nixpkgs&gt; {} }:
+
+pkgs.callPackage ./hello.nix {}</code></pre>
+<p>or in a more explicit way:</p>
+<pre><code>let
+  pkgs = import &lt;nixpkgs&gt; {};
+in
+import ./hello.nix {
+  stdenv   = pkgs.stdenv;
+  fetchurl = pkgs.fetchurl;
+  perl     = pkgs.perl;
+}</code></pre>
+<p>This … is clearly a bit more involved than you’d expect for “hello world”.</p>
+<p>But at this point, the nix pills explain the rationale and the mechanisms: <a href="https://nixos.org/guides/nix-pills/inputs-design-pattern.html">pill 12 explains the input design pattern</a> (in this case, why <code>{ stdenv, fetchurl, perl }:</code> instead of <code>let pkgs = import &lt;nixpkgs&gt; {}; in ...</code>), and <a href="https://nixos.org/guides/nix-pills/callpackage-design-pattern.html">pill 13 the callPackage design pattern</a> (which explains the magic of what <code>callPackage</code> is doing).</p>
+<p>But it’s also at this point your knowledge of nix is dangerous enough that you can start to make use of the language-support section of <a href="https://nixos.org/manual/nixpkgs/stable/#chap-language-support">the nixpkgs manual</a>, or the <a href="https://nixos.wiki/">NixOS Wiki</a>.</p>
+<h1 id="using-nix-on-non-nixos-risks-trouble-with-impure-environments-e.g.compilers-and-native-libraries.">Using Nix on Non-NixOS Risks Trouble with ‘Impure’ Environments; e.g. Compilers and Native Libraries.</h1>
+<p>Using Nix on operating systems that aren’t NixOS (macOS, or some other Linux) is the easiest way to get a taste of the Nix package manager.</p>
+<p>But it’s also prone to problems you won’t face on NixOS.</p>
+<p>e.g. On macOS, I faced confusing errors when mixing Haskell’s stack with nixpkgs. It ended up in such a way that it was trying to use the GHC which stack downloaded, and the C compiler and Haskell packages that Nix had downloaded, and these didn’t mix well for some reason. (The Nix solution was to get haskell stack to use GHC provided by nix, too).</p>
+<p>Errors like this end up being quite confusing to work through. Running the compiler from a pure nix shell is one way to mitigate it.</p>
+<p>I think most people who use Nix eventually find there way to using NixOS.</p>
+<h1 id="you-can-expect-nixos-is-not-brutally-difficult-to-use-for-most-things">You Can <em>Expect</em> NixOS is not Brutally Difficult to Use for Most Things</h1>
+<p>In terms of using NixOS on as the OS on your workstation:</p>
+<p>Put in the most optimistic pessimistic way: the main difference between NixOS and a Linux like Arch Linux is that instead of modifying various files under the <code>/etc/</code>, the system configuration is all managed starting from a single <code>configuration.nix</code> file. – I mean, using firefox on NixOS is no different than using firefox on Arch Linux; but changing system configuration files is entirely different.</p>
+<p>Rather, I was worried about using NixOS, I was under the impression that even its happy path was difficult to use.<br />
+These days, NixOS is what I drive daily.</p>
+<p>I gotta be ambivalent, here.<br />
+When stuff goes wrong, in NixOS you have to be able to understand what’s going on in order to fix it. NixOS is a layer of tooling to understand above Linux.</p>
+<p>There are absolutely people who try NixOS, are able to use it for a bit, and then decide they’re better off with a different OS. And I think at least some of such people have some understanding of Nix.</p>
+<p>I think once you grok Nix, then NixOS is wonderful and well worth trying.<br />
+But I’d recommend trying nix on macOS or Linux first to get a taste of what the advantages and difficulties will be.</p>
+<h1 id="misc-notes">Misc Notes</h1>
+<h2 id="how-to-retain-nix-shell-so-it-doesnt-get-garbage-collected">How to Retain <code>nix-shell</code> so it Doesn’t Get Garbage Collected</h2>
+<p>https://github.com/NixOS/nix/issues/2208</p>
+<h2 id="the-sha256-hash-is-used-to-identify-the-source-for-fetchfromgithub-etc.">The <code>sha256</code> Hash is Used to <em>Identify the Source</em> for fetchFromGitHub, etc.</h2>
+<p>e.g. in the Nix expression:</p>
+<pre><code>fetchFromGitHub {
+  owner = &quot;istio&quot;;
+  repo = &quot;istio&quot;;
+  rev = &quot;1.8.5&quot;;
+  sha256 = &quot;1mmhiasq2brzhrnklxzxykmannv84wgzpbnqwz40sb8c1n67qzb0&quot;;
+}</code></pre>
+<p>The <code>sha256</code> value is used by Nix to identify the source. Which means if you copy paste this, and change the <code>owner</code> and <code>repo</code>:</p>
+<pre><code>fetchFromGitHub {
+  owner = &quot;rgoulter&quot;;
+  repo = &quot;my-hakyll-blog&quot;;
+  rev = &quot;v1.0&quot;;
+  sha256 = &quot;1mmhiasq2brzhrnklxzxykmannv84wgzpbnqwz40sb8c1n67qzb0&quot;;
+}</code></pre>
+<p>then nix will see the <code>sha256</code> is already the same as <code>istio/istio</code> rev <code>1.8.5</code> and use that repository instead.</p>
+<p>Instead, the laziest thing to do is just replace the <code>sha256</code> with an incorrect value:</p>
+<pre><code>fetchFromGitHub {
+  owner = &quot;rgoulter&quot;;
+  repo = &quot;my-hakyll-blog&quot;;
+  rev = &quot;v1.0&quot;;
+  sha256 = &quot;0000000000000000000000000000000000000000000000000000&quot;;
+}</code></pre>
+<p>And then replace the <code>sha256</code> with whatever the value is expected to be. (<code>lib.fakeSha256</code> can be used instead of however many <code>0</code>s that is).</p>
+<p>Another way to find the <code>sha256</code> value is to use a program like <a href="https://github.com/msteen/nix-prefetch/">nix-prefetch</a>.</p>
+<p>e.g. running:</p>
+<pre><code>nix-prefetch fetchFromGitHub --owner istio --repo istio --rev 1.8.5</code></pre>
+<p>will give the correct <code>sha256</code> value to use.</p>
+    </div>
+    <div class="col-md-4">
+        Contents<br />
+        <div id="toc"></div>
+    </div>
+</div>
+
+<script>
+  //Executes your code when the DOM is ready.  Acts the same as (document).ready().
+  $(function() {
+      //Calls the tocify method on your HTML div.
+      $("#toc").tocify({context: "#page-content", selectors: "h1, h2, h3"});
+  });
+
+  // See http://imakewebthings.com/waypoints/shortcuts/sticky-elements/
+  var sticky = new Waypoint.Sticky({
+      element: $("#toc")
+  });
+</script>
+
+<style>
+  .stuck {
+      position:fixed;
+      top:0;
+  }
+</style>
+
+<!-- TOCify script seems to be using an earlier version of bootstrap. -->
+<style>
+.nav-list > li.active > a,
+.nav-list > li.active > a:hover,
+.nav-list > li.active > a:focus {
+  color: #fff;
+  background-color: #337ab7;
+}
+</style>
+
+            </div>
+
+            <hr style="margin-bottom: 0px; border-top: 2px solid black;" />
+
+            <div id="footer" class="pull-right" style="padding-right: 10px;">
+                Site proudly generated by
+                <a href="http://jaspervdj.be/hakyll">Hakyll</a>
+            </div>
+        </div>
+
+        <script>
+            // The callbacks we wanna use
+            // Phone-home, telling Google Analytics various metrics/dimensions
+
+            // Use custom dimensions & metrics
+            var AnalyticDimensionReaderKind = 'dimension1';
+            var AnalyticMetricActiveTime      = 'metric1';
+            var AnalyticMetricLongestIdleTime = 'metric2';
+            var AnalyticMetricReadCount       = 'metric3';
+
+            var gaCallbacks = {
+                "scrollPercent": function(ms, perc) {
+                    if (perc > 85) {
+                        // EVENT: Page read
+                        ga('send', {
+                            hitType:       'event',
+                            eventCategory: 'Scrolling',
+                            eventAction:   'atBottom',
+                            eventValue:    String(ms)
+                        });
+                    }
+                },
+                "read": function(ms, ct, timeToReach) {
+                    // Use this to set DIMENSION
+                    // timeToReach < 5s ==> Skim (default = Visitor)
+                    if (timeToReach < 5 * 1000) {
+                        // dimension1 = ReaderKind
+                        ga('set', AnalyticDimensionReaderKind, "skimmer");
+                    }
+
+                    // timeToReach > 30s ==> Reader
+                    if (timeToReach > 30 * 1000) {
+                        // dimension1 = ReaderKind
+                        ga('set', AnalyticDimensionReaderKind, "reader");
+                    }
+
+                    // EVENT: Page read
+                    ga('send', {
+                        hitType:       'event',
+                        eventCategory: 'Reading',
+                        eventAction:   'read',
+                        eventValue:    String(timeToReach)
+                    });
+
+                    // METRIC
+                    ga('set', AnalyticMetricReadCount, String(ct));
+                },
+                "initialIdle": function(ms) {
+                    // EVENT: Started Reading
+                    ga('send', {
+                        hitType:       'event',
+                        eventCategory: 'Scrolling',
+                        eventAction:   'begun',
+                        eventValue:    String(ms)
+                    });
+                },
+                "timeSpent": function(total, active, curIdle, initIdle, longestIdle) {
+                    // Update METRIC(S)?
+                    ga('set', AnalyticMetricActiveTime, String(active));
+                    ga('set', AnalyticMetricLongestIdleTime, String(longestIdle));
+                },
+                "idle": function(ms) {
+                },
+                "longestIdle": function(ms) {
+                }
+            }
+
+            window.onload = function() {
+                myAnalyticsInit(gaCallbacks);
+
+                //
+                // Initial dimensions & metrics
+                //
+
+                ga('set', AnalyticMetricReadCount, String(0));
+
+                // EVENT: Page load
+                ga('send', {
+                    hitType:       'event',
+                    eventCategory: 'pageLoad',
+                    eventAction:   'begun',
+                    eventValue:    String(ms)
+                });
+
+                // DIMENSION: visitor
+                ga('set', AnalyticDimensionReaderKind, "visitor");
+            }
+        </script>
+    </body>
+</html>
