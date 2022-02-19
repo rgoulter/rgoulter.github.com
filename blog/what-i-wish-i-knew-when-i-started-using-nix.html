@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>what-i-wish-i-knew-when-i-started-using-nix - Richard Goulter's Blog</title>
+        <title>What I Wish I knew when I Started Using Nix - Richard Goulter's Blog</title>
 
         <!-- My (Old) CSS theme -->
         <link rel="stylesheet" type="text/css" href="./css/default.css" />
@@ -128,7 +128,7 @@
             <hr style="margin: 0px; border-top: 5px solid black;" />
 
             <div id="content" class="container">
-                <h1>what-i-wish-i-knew-when-i-started-using-nix</h1>
+                <h1>What I Wish I knew when I Started Using Nix</h1>
                 <!--
 contentpage.html, for content-specific pages, like emacs.html/yi.html.
 -->
@@ -222,7 +222,7 @@ Months later, on my normal user account, I was confused why my Firefox was stuck
 }</code></pre>
 <p>And then installing this by running <code>nix-env --install --attr nixpkgs.myPackages</code>.</p>
 <h2 id="option-b-overlays">Option B: Overlays</h2>
-<p>The chapter immediately following the Declarative Package Management in the nixpkgs manual is about overlays. https://nixos.org/manual/nixpkgs/stable/#chap-overlays</p>
+<p>The chapter immediately following the Declarative Package Management in the nixpkgs manual is <a href="https://nixos.org/manual/nixpkgs/stable/#chap-overlays">about overlays</a>.</p>
 <p>Which seems like a nicer solution than the <code>packageOverrides</code> in <code>config.nix</code>.</p>
 <p>I used this approach for a long time.</p>
 <p>I did this by having <code>~/.config/nixpkgs/overlays/myOverlays.nix</code> with:</p>
@@ -264,6 +264,12 @@ pkgs.buildEnv {
 }</code></pre>
 <p>And then this can be installed with <code>nix profile .#myPackages</code>, or <code>nix profile install github:&lt;username&gt;/&lt;repo&gt;#myPackages</code> or whatever URL. (The files have to be checked into a <code>git</code> repository).</p>
 <p>e.g. my <a href="https://github.com/rgoulter/nix-user-repository">nix user repository</a>.</p>
+<h2 id="option-d-home-manager">Option D: Home Manager</h2>
+<p><a href="https://github.com/nix-community/home-manager/">Home Manager</a> is to a user’s dotfiles what NixOS is to a Linux system.</p>
+<p>It’s widely used, and widely recommended. And presumably any scheme you come up with will be an ad-hoc, half-baked imitation of what home manager does.</p>
+<p>Home Manager can be used to manage what packages you have installed in your user profile. (Since home manager’s configuration is plaintext and can list packages to install, you wouldn’t need <code>buildEnv</code> that the above examples have).</p>
+<p>I haven’t used it, so I can’t provide an example.</p>
+<p>Seems like it’s worth trying if you’re comfortable copy-pasting now and understanding later, or once you’ve gained more familiarity with Nix.</p>
 <h1 id="nix-shell---ephemeral-development-environments"><code>nix-shell</code> - Ephemeral Development Environments</h1>
 <p>A nix shell is a shell which leverages Nix to make packages available when using that shell. (i.e. not installing the program to the user’s system).<br />
 In a way, this is like a cousin to the virtual environments which various programming environments provide.<br />
