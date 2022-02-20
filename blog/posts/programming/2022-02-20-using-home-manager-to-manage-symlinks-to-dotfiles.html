@@ -1,0 +1,503 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Using Home Manager to Manage Symlinks to Dotfiles - Richard Goulter's Blog</title>
+
+        <!-- My (Old) CSS theme -->
+        <link rel="stylesheet" type="text/css" href="../../css/default.css" />
+
+        <!--
+            jQuery & jQueryUI
+        -->
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css" />
+
+        <!--
+            Pandoc Style CSS
+            (for syntax highlighted snippets)
+        -->
+        <link rel="stylesheet" type="text/css" href="../../css/syntax.css" />
+
+        <!--
+            Bootstrap
+        -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+        <style>
+            /*
+             * Bootstrap defines blockquote as 17px,
+             * so it looks stupidly large in my blogposts. */
+            blockquote {
+                font-size: 14px;
+            }
+        </style>
+
+        <!--
+            Waypoints, and Waypoints-Sticky,
+            so we can do this:
+            http://imakewebthings.com/waypoints/shortcuts/sticky-elements/
+        -->
+        <script src="../../js/jquery.waypoints.min.js"></script>
+        <script src="../../js/sticky.min.js"></script>
+
+        <!-- My analytics stuff -->
+        <script src="../../js/my_analytics.js"></script>
+        <script src="../../js/my_analytics_debug.js"></script>
+
+        <!--
+            TOCify
+        -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js"></script>
+        <!--
+            Patched TOCify css file.
+            (Don't want fixed `.tocify`).
+        -->
+        <link rel="stylesheet" type="text/css" href="../../css/jquery.tocify.css" />
+
+        <style>
+        .navbar {
+            margin-bottom: 0px;
+        }
+
+        .banner-image {
+            width:100%;
+        }
+
+        .banner {
+            margin-left: 0px;
+            margin-right: 0px;
+        }
+
+        body {
+            background-color: #e2e2e2;
+        }
+
+        #page {
+            padding-left:0;
+            padding-right:0;
+            background-color: #ffffff;
+        }
+        </style>
+
+        <!-- Google Analytics -->
+        <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+          ga('create', 'UA-73116015-1', 'auto');
+          ga('send', 'pageview');
+        </script>
+    </head>
+    <body>
+        <div id="page" class="container">
+            <!-- This, with no padding on left/right -->
+            <div class="banner">
+                <nav class="navbar navbar-default">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+
+            <!-- The Hamburger -->
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../../">Richard Goulter's Blog</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="../../">Home</a></li>
+            <li><a href="../../yi.html">Yi</a></li>
+            <li><a href="../../emacs.html">Emacs</a></li>
+            <li><a href="../../what-i-wish-i-knew-when-i-started-using-nix.html">Nixpkgs</a></li>
+            <li><a href="../../archive.html">Archive</a></li>
+        </ul>
+    </div>
+</nav>
+
+            </div>
+
+            <hr style="margin: 0px; border-top: 5px solid black;" />
+
+            <div id="content" class="container">
+                <h1>Using Home Manager to Manage Symlinks to Dotfiles</h1>
+                <div class="info">
+    Posted on February 20, 2022
+    
+        by Richard Goulter
+    <br />
+    
+    Tags: 
+    
+</div>
+
+<p><a href="https://github.com/anishathalye/dotbot">dotbot</a> is a popular way of managing symlinks to dotfiles, and I used it for some time.</p>
+<p>I’ve gradually been becoming more comfortable with <a href="https://nixos.org/">Nix</a>.</p>
+<p>Nix remains relatively niche, so: Nix allows programmatic management of packages installed to a computer. Nix refers to the expression language that describes these packages, the tool which evaluates these expressions. It’s also pretty closely tied to Nixpkgs (a large repository of packages), and NixOS (a Linux distribution which is configured using Nix expressions).</p>
+<p>Nix tooling is friendly towards words like “declarative” and “X-as-Code”.</p>
+<p><a href="https://github.com/nix-community/home-manager">Home Manager</a> is a popular tool which uses Nix configurations to manage a user’s environment, in a similar manner to how NixOS’s system is configured from a Nix file.<br />
+It complements NixOS, but I’ve been happy to use NixOS (or nix on macOS) without having tried home manager.</p>
+<p>I was hesitant to try Home Manager, since I didn’t wanna have “vendor lock-in” and be unable to make use of my dotfiles elsewhere.</p>
+<p>To be honest: whenever Nix pops up, I often see people say they don’t like the Nix language, and that its error messages are hard to understand. My experience with Nix before this was using it to describe Python packages, or Go applications, or describe a declarative set of packages to use, and using NixOS.<br />
+– If people’s first experience with Nix is with home manager, I can see why Nix might seem more trouble than it’s worth.</p>
+<p>Here are my notes on the steps I took, following the <a href="https://nix-community.github.io/home-manager/">home manager manual</a> and <a href="https://nixos.wiki/wiki/Home_Manager">the NixOS wiki page on Home Manager</a>.</p>
+<h1 id="installing-home-manager">Installing Home Manager</h1>
+<p>I’d recently started using Nix flakes. Nix flakes are cool.</p>
+<p>So, following the <a href="https://nix-community.github.io/home-manager/index.html#ch-nix-flakes">standalone setup with Nix Flakes</a> chapter of the manual..</p>
+<p>The ‘trouble’ is, per discussion in <a href="https://github.com/nix-community/home-manager/pull/2461">nix-community/home-manager#2461</a>, Home Manager doesn’t support the new “nix command” style of profile management.<br />
+i.e. Installing a package in nix classic would be <code>nix-env -iA nixpkgs.neovim</code>, but with the new nix command style it’s <code>nix profile install nixpkgs#neovim</code>.<br />
+And the old style of command is incompatible with the new style, so you can’t use the old <code>nix-env</code> commands once you’ve used <code>nix profile</code>.</p>
+<p>The PR provides people with forks which fix the issue. Worked for me.</p>
+<p>Here’s <a href="https://github.com/rgoulter/dotfiles/commit/01238a1421b7cf48d92451bd63505b5c1c721e79">the commit</a> with the simple <code>home.nix</code> and <code>flake.nix</code> that I started with:</p>
+<p><code>flake.nix</code> (which is pretty much boilerplate):</p>
+<pre><code>{
+  description = &quot;rgoulter's Home Manager configuration&quot;;
+
+  inputs = {
+    nixpkgs.url = &quot;github:NixOS/nixpkgs/nixpkgs-unstable&quot;;
+    home-manager = {
+      # https://github.com/nix-community/home-manager/pull/2461
+      inputs.nixpkgs.follows = &quot;nixpkgs&quot;;
+      # Fork which allows using `nix profile` instead of `nix-env`
+      # https://github.com/FlorianFranzen/home-manager/commit/4e97b01b2737bb0f39c18a65d87dd98659391b97
+      # url = {
+      type  = &quot;github&quot;;
+      owner = &quot;FlorianFranzen&quot;;
+      repo  = &quot;home-manager&quot;;
+      rev   = &quot;4e97b01b2737bb0f39c18a65d87dd98659391b97&quot;;
+    };
+  };
+
+  outputs = { home-manager, ... }:
+    let
+      system = &quot;x86_64-linux&quot;;
+      username = &quot;rgoulter&quot;;
+    in {
+      homeConfigurations.&quot;${username}-${system}&quot; = home-manager.lib.homeManagerConfiguration {
+        inherit system username;
+
+        configuration = import ./home.nix;
+
+        homeDirectory = &quot;/home/${username}&quot;;
+
+        # Update the state version as needed.
+        # See the changelog here:
+        # https://nix-community.github.io/home-manager/release-notes.html
+        stateVersion = &quot;22.05&quot;;
+      };
+    };
+}</code></pre>
+<p>(I went with <code>rgoulter-x86_64-linux</code> as the profile name since I’m not sure how home manager configurations interact with flake outputs. Presumably <code>rgoulter</code> would work just as well instead).</p>
+<p>and the <code>home.nix</code>:</p>
+<pre><code>{ config, pkgs, ... }:
+
+{
+  home.stateVersion = &quot;22.05&quot;;
+
+  programs.home-manager.enable = true;
+}</code></pre>
+<p>And following the commands given in the manual. Since I was running this from a git repository on my machine:</p>
+<pre><code>nix build --no-link .#homeConfigurations.rgoulter-x86_64-linux.activationPackage
+&quot;$(nix path-info .#homeConfigurations.rgoulter-x86_64-linux.activationPackage)&quot;/activate</code></pre>
+<h1 id="symlinking-to-existing-dotfiles">Symlinking to Existing Dotfiles</h1>
+<p>Or “using home manager instead of dotbot”.</p>
+<p>Dotbot takes an <a href="https://github.com/rgoulter/dotfiles/blob/aa026733cf7c2bcdebc59a4a527257479549694f/install.conf.yaml">install.conf.yaml</a> to configure what files to link where.</p>
+<p>Home Manager <em>can</em> use nix to write various config files. But it can also just symlink given some source files.</p>
+<p><a href="https://github.com/rgoulter/dotfiles/commit/aa026733cf7c2bcdebc59a4a527257479549694f">Commit</a>.</p>
+<p>Updated <a href="https://github.com/rgoulter/dotfiles/blob/aa026733cf7c2bcdebc59a4a527257479549694f/home.nix"><code>home.nix</code></a>:</p>
+<pre><code>{ config, pkgs, ... }:
+
+{
+  home.stateVersion = &quot;22.05&quot;;
+
+  programs.home-manager.enable = true;
+
+  # files in ~/.config/
+  xdg.configFile.&quot;alacritty/alacritty.yml&quot;.source = ./alacritty.yml;
+  xdg.configFile.&quot;emacs-rgoulter/init.el&quot;.source  = ./emacs.el;
+  # etc.
+
+  # files in ~/
+  home.file.&quot;.emacs-profiles.el&quot;.source = ./emacs-profiles.el;
+  home.file.&quot;.gvimrc&quot;.source = ./gvimrc;
+  # etc.
+
+  # Using the submodule in this dotfiles repo would make
+  # require a more awkward flake URI.
+  home.file.&quot;.nvim/bundle/Vundle.vim&quot;.source = pkgs.fetchFromGitHub {
+    owner = &quot;VundleVim&quot;;
+    repo = &quot;Vundle.vim&quot;;
+    rev = &quot;cfd3b2d388a8c2e9903d7a9d80a65539aabfe933&quot;;
+    sha256 = &quot;sha256-OCCXgMVWj/aBWLGaZmMr+cD546+QgynmEN/ECp1r08Q=&quot;;
+  };
+}</code></pre>
+<p>The <code>xdg.configFile.&lt;name&gt;.source</code> (and <code>home.file.&lt;name&gt;.source</code>) are given as examples on the <a href="https://nixos.wiki/wiki/Home_Manager#Managing_your_dotfiles">Home Manager page in the NixOS wiki</a>, and documented in <a href="https://nix-community.github.io/home-manager/options.html">Appendix A of the Home Manager manual</a>.</p>
+<p>I can then apply the <code>home.nix</code> with, as the <a href="https://nix-community.github.io/home-manager/options.html">Home Manager manual</a> explains:</p>
+<pre><code>home-manager switch --flake '.#rgoulter-x86_64-linux'</code></pre>
+<h1 id="first-steps-in-refactoring">First Steps in Refactoring</h1>
+<p>As can be seen in the above commit, it’s … not pretty.</p>
+<p>Look. Complain about or be aware of <a href="https://mikehadlow.blogspot.com/2012/05/configuration-complexity-clock.html">the Configuration Complexity Clock</a>. But we’re at DSL o’clock here:</p>
+<p>First step is to extract the attribute set out to <code>let ... in</code> bindings.</p>
+<p><a href="https://github.com/rgoulter/dotfiles/commit/0663950cc3e564c35a0df9bf65c06fd66b8a83e6">Commit</a></p>
+<p>Updated <a href="https://github.com/rgoulter/dotfiles/blob/0663950cc3e564c35a0df9bf65c06fd66b8a83e6/home.nix"><code>home.nix</code></a>:</p>
+<pre><code>{ config, pkgs, ... }:
+
+let
+  # Attribute set for dotfiles in this repo to link into ~/.config.
+  # The attribute name is for ~/.config/$attrSetName,
+  #  e.g. &quot;alacritty/alacritty.yml&quot; for ~/.config/alacritty/alacritty.yml
+  # The attribute value is the path to the dotfile in this repo.
+  configFilesToLink = {
+    &quot;alacritty/alacritty.yml&quot; = ./alacritty.yml;
+    &quot;emacs-rgoulter/init.el&quot;  = ./emacs.el;
+    &quot;emacs-rgoulter/straight/versions/default.el&quot;  = ./emacs.d/straight/versions/default.el;
+    # etc.
+  };
+
+  # Attribute set for dotfiles in this repo to link into home directory.
+  # The attribute name is for ~/$attrSetName,
+  #  e.g. &quot;.hgrc&quot; for ~/.hgrc.
+  # The attribute value is the path to the dotfile in this repo.
+  homeFilesToLink = {
+    &quot;.emacs-profiles.el&quot; = ./emacs-profiles.el;
+    &quot;.gvimrc&quot; = ./gvimrc;
+    # etc.
+  };
+
+  # Function to help map attrs for symlinking home.file, xdg.configFile
+  # e.g. from { &quot;.hgrc&quot; = ./hgrc; } to { &quot;.hgrc&quot;.source = ./hgrc; }
+  toSource = configDirName: dotfilesPath: { source = dotfilesPath; };
+in
+{
+  # Symlink files under ~, e.g. ~/.hgrc
+  home.file = pkgs.lib.attrsets.mapAttrs toSource homeFilesToLink;
+
+  # Symlink files under ~/.config, e.g. ~/.config/alacritty/alacritty.yml
+  xdg.configFile = pkgs.lib.attrsets.mapAttrs toSource configFilesToLink;
+
+  # ...
+}</code></pre>
+<p>I figured out to use <code>lib.attrsets.mapAttrs</code> by looking at this <a href="https://teu5us.github.io/nix-lib.html">helpful community-provided documentation page</a>. But otherwise, the Nix manual has a chapter on <a href="https://nixos.org/manual/nix/stable/expressions/builtins.html">its builtin functions</a>, and the <a href="https://nixos.org/manual/nixpkgs/stable/#chap-functions">Nixpkgs manual has a chapter on its library functions</a>.</p>
+<p>To help read the above code, the example given for <code>mapAttrs</code> is:</p>
+<pre><code>lib.attrsets.mapAttrs
+  (name: value: name + &quot;-&quot; + value)
+  { x = &quot;foo&quot;; y = &quot;bar&quot;; }
+=&gt; { x = &quot;x-foo&quot;; y = &quot;y-bar&quot;; }</code></pre>
+<p>I think this level of functional programming is relatively accessible.</p>
+<h1 id="refactoring-a-bit-further">Refactoring a bit Further</h1>
+<p>I mean, the above is okay, but it’s just nagging seeing code like <code>.gvimrc&quot; = ./gvimrc;</code>.</p>
+<p>People have different tastes as how how implicit vs explicit they’d prefer things. It’s hardly a burden to be explicit if you’re unfamiliar with the domain.</p>
+<p>But I had to try. <a href="https://github.com/rgoulter/dotfiles/commit/6375425ed54d63b807a43c77acdee5acf4680a23">Commit</a>.</p>
+<p>Updated <a href="https://github.com/rgoulter/dotfiles/blob/6375425ed54d63b807a43c77acdee5acf4680a23/home.nix"><code>home.nix</code></a>:</p>
+<pre><code>{ config, pkgs, ... }:
+
+let
+  # e.g. given &quot;alacritty/alacritty.yml&quot;,
+  # return the attrset { &quot;alacritty/alacritty.yml&quot; = ./alacritty/alacritty.yml; }.
+  genAttrsForSimpleLink = fileName: ./. + (&quot;/&quot; + fileName);
+
+  # e.g. given &quot;hgrc&quot;
+  # return the attrset { &quot;.hgrc&quot; = ./hgrc; }.
+  genAttrsForSimpleDotLink = fileName: { &quot;.${fileName}&quot; = ./. + (&quot;/&quot; + fileName); };
+
+  # ...
+
+  # List of dotfiles where the path to link under
+  # ~/.config/ matches the path in the dotfiles repo.
+  # e.g. ~/.config/alacritty/alacritty.yml matches ./alacritty/alacritty.yml.
+  simpleConfigFilesToLinkList = [
+    &quot;fish/config.fish&quot;
+    &quot;kitty/kitty.conf&quot;
+    &quot;starship.toml&quot;
+    # etc.
+  ];
+
+  # Files where the symlinks aren't following a nice convention.
+  unconventionalConfigFilesToLink = {
+    &quot;emacs-rgoulter/init.el&quot;  = ./emacs.el;
+    &quot;nvim/init.vim&quot; = ./vimrc;
+    # etc.
+  };
+
+  # e.g. &quot;gvimrc&quot; to link &quot;~/.gvimrc&quot; to ./gvimrc
+  simpleHomeFilesToLinkList = [
+    &quot;gvimrc&quot;
+    &quot;hgrc&quot;
+    &quot;tmux.conf&quot;
+    &quot;vimrc&quot;
+    # etc.
+  ];
+
+  unconventionalHomeFilesToLink = {
+    &quot;.nvim/after/ftplugin/org.vim&quot; = ./vim/after/ftplugin/org.vim;
+    &quot;.nvim/bundle/Vundle.vim&quot; = vundleRepoSrc;
+    &quot;.vim/bundle/Vundle.vim&quot; = vundleRepoSrc;
+  };
+
+  # Attribute set for dotfiles in this repo to link into ~/.config.
+  # The attribute name is for ~/.config/$attrSetName,
+  #  e.g. &quot;alacritty/alacritty.yml&quot; for ~/.config/alacritty/alacritty.yml
+  # The attribute value is the path to the dotfile in this repo.
+  configFilesToLink =
+    (pkgs.lib.attrsets.genAttrs simpleConfigFilesToLinkList genAttrsForSimpleLink) //
+    unconventionalConfigFilesToLink;
+
+  # Attribute set for dotfiles in this repo to link into home directory.
+  # The attribute name is for ~/$attrSetName,
+  #  e.g. &quot;.hgrc&quot; for ~/.hgrc.
+  # The attribute value is the path to the dotfile in this repo.
+  homeFilesToLink =
+    (pkgs.lib.lists.foldr (a: b: a // b) {} (map genAttrsForSimpleDotLink simpleHomeFilesToLinkList)) //
+    unconventionalHomeFilesToLink;
+in
+{
+  # Symlink files under ~, e.g. ~/.hgrc
+  home.file = pkgs.lib.attrsets.mapAttrs toSource homeFilesToLink;
+
+  # Symlink files under ~/.config, e.g. ~/.config/alacritty/alacritty.yml
+  xdg.configFile = pkgs.lib.attrsets.mapAttrs toSource configFilesToLink;
+
+  # ...
+}</code></pre>
+<p>This one takes a bit more explaining.</p>
+<p>In order to get from <code>[ &quot;fish/config.fish&quot; ]</code> to <code>{ &quot;fish/config.fish&quot; = ./fish/config.fish; }</code>, <code>genAttrs</code> can be used.</p>
+<pre><code>lib.attrsets.genAttrs [ &quot;foo&quot; &quot;bar&quot; ] (name: &quot;x_${name}&quot;)
+=&gt; { foo = &quot;x_foo&quot;; bar = &quot;x_bar&quot;; }</code></pre>
+<p>Hence, we can factor out the files which follow a nice convention to just a list, and construct <code>configFilesToLink</code> with:</p>
+<pre><code># e.g. given &quot;alacritty/alacritty.yml&quot;,
+# return the attrset { &quot;alacritty/alacritty.yml&quot; = ./alacritty/alacritty.yml; }.
+genAttrsForSimpleLink = fileName: ./. + (&quot;/&quot; + fileName);
+
+configFilesToLink =
+  (pkgs.lib.attrsets.genAttrs simpleConfigFilesToLinkList genAttrsForSimpleLink) //
+  unconventionalConfigFilesToLink;</code></pre>
+<p>Unfortunately, to get <code>[ &quot;vimrc&quot; ]</code> into <code>{ &quot;.vimrc&quot; = ./vimrc }</code>, this involves transforming “vimrc” to “.vimrc”, it’s a bit more involved:</p>
+<pre><code># e.g. given &quot;hgrc&quot;
+# return the attrset { &quot;.hgrc&quot; = ./hgrc; }.
+genAttrsForSimpleDotLink = fileName: { &quot;.${fileName}&quot; = ./. + (&quot;/&quot; + fileName); };
+
+homeFilesToLink =
+  (pkgs.lib.lists.foldr (a: b: a // b) {} (map genAttrsForSimpleDotLink simpleHomeFilesToLinkList)) //
+  unconventionalHomeFilesToLink;</code></pre>
+<p>(where <code>pkgs.lib.lists.foldr (a: b: a // b) {}</code> is essentially <code>listToAttrs</code>, but my version of Nix didn’t have this. In nix, <code>{ a = 3; } // { b = 4; }</code> evaluates to <code>{ a = 3; b = 4; }</code>).</p>
+
+<hr />
+
+<div>
+    
+    
+    <a href="../../posts/argument/2022-01-11-deborah-tannens-you-just-dont-understand-is-wonderful.html" style="float:right; text-align: right;">Older post</a>
+    
+</div>
+<br style="clear: both;" />
+
+<hr />
+
+            </div>
+
+            <hr style="margin-bottom: 0px; border-top: 2px solid black;" />
+
+            <div id="footer" class="pull-right" style="padding-right: 10px;">
+                Site proudly generated by
+                <a href="http://jaspervdj.be/hakyll">Hakyll</a>
+            </div>
+        </div>
+
+        <script>
+            // The callbacks we wanna use
+            // Phone-home, telling Google Analytics various metrics/dimensions
+
+            // Use custom dimensions & metrics
+            var AnalyticDimensionReaderKind = 'dimension1';
+            var AnalyticMetricActiveTime      = 'metric1';
+            var AnalyticMetricLongestIdleTime = 'metric2';
+            var AnalyticMetricReadCount       = 'metric3';
+
+            var gaCallbacks = {
+                "scrollPercent": function(ms, perc) {
+                    if (perc > 85) {
+                        // EVENT: Page read
+                        ga('send', {
+                            hitType:       'event',
+                            eventCategory: 'Scrolling',
+                            eventAction:   'atBottom',
+                            eventValue:    String(ms)
+                        });
+                    }
+                },
+                "read": function(ms, ct, timeToReach) {
+                    // Use this to set DIMENSION
+                    // timeToReach < 5s ==> Skim (default = Visitor)
+                    if (timeToReach < 5 * 1000) {
+                        // dimension1 = ReaderKind
+                        ga('set', AnalyticDimensionReaderKind, "skimmer");
+                    }
+
+                    // timeToReach > 30s ==> Reader
+                    if (timeToReach > 30 * 1000) {
+                        // dimension1 = ReaderKind
+                        ga('set', AnalyticDimensionReaderKind, "reader");
+                    }
+
+                    // EVENT: Page read
+                    ga('send', {
+                        hitType:       'event',
+                        eventCategory: 'Reading',
+                        eventAction:   'read',
+                        eventValue:    String(timeToReach)
+                    });
+
+                    // METRIC
+                    ga('set', AnalyticMetricReadCount, String(ct));
+                },
+                "initialIdle": function(ms) {
+                    // EVENT: Started Reading
+                    ga('send', {
+                        hitType:       'event',
+                        eventCategory: 'Scrolling',
+                        eventAction:   'begun',
+                        eventValue:    String(ms)
+                    });
+                },
+                "timeSpent": function(total, active, curIdle, initIdle, longestIdle) {
+                    // Update METRIC(S)?
+                    ga('set', AnalyticMetricActiveTime, String(active));
+                    ga('set', AnalyticMetricLongestIdleTime, String(longestIdle));
+                },
+                "idle": function(ms) {
+                },
+                "longestIdle": function(ms) {
+                }
+            }
+
+            window.onload = function() {
+                myAnalyticsInit(gaCallbacks);
+
+                //
+                // Initial dimensions & metrics
+                //
+
+                ga('set', AnalyticMetricReadCount, String(0));
+
+                // EVENT: Page load
+                ga('send', {
+                    hitType:       'event',
+                    eventCategory: 'pageLoad',
+                    eventAction:   'begun',
+                    eventValue:    String(ms)
+                });
+
+                // DIMENSION: visitor
+                ga('set', AnalyticDimensionReaderKind, "visitor");
+            }
+        </script>
+    </body>
+</html>

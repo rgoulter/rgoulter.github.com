@@ -268,7 +268,7 @@ pkgs.buildEnv {
 <p><a href="https://github.com/nix-community/home-manager/">Home Manager</a> is to a user’s dotfiles what NixOS is to a Linux system.</p>
 <p>It’s widely used, and widely recommended. And presumably any scheme you come up with will be an ad-hoc, half-baked imitation of what home manager does.</p>
 <p>Home Manager can be used to manage what packages you have installed in your user profile. (Since home manager’s configuration is plaintext and can list packages to install, you wouldn’t need <code>buildEnv</code> that the above examples have).</p>
-<p>I haven’t used it, so I can’t provide an example.</p>
+<p>I haven’t used it, so I can’t provide an example. The NixOS wiki’s page about <a href="https://nixos.wiki/wiki/Home_Manager">Home Manager</a> has an example of using Home Manager for declarative management of nix-env.</p>
 <p>Seems like it’s worth trying if you’re comfortable copy-pasting now and understanding later, or once you’ve gained more familiarity with Nix.</p>
 <h1 id="nix-shell---ephemeral-development-environments"><code>nix-shell</code> - Ephemeral Development Environments</h1>
 <p>A nix shell is a shell which leverages Nix to make packages available when using that shell. (i.e. not installing the program to the user’s system).<br />
