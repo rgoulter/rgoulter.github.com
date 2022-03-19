@@ -25,6 +25,12 @@ It complements NixOS, but I’ve been happy to use NixOS (or nix on macOS) witho
 <p>To be honest: whenever Nix pops up, I often see people say they don’t like the Nix language, and that its error messages are hard to understand. My experience with Nix before this was using it to describe Python packages, or Go applications, or describe a declarative set of packages to use, and using NixOS.<br />
 – If people’s first experience with Nix is with home manager, I can see why Nix might seem more trouble than it’s worth.</p>
 <p>Here are my notes on the steps I took, following the <a href="https://nix-community.github.io/home-manager/">home manager manual</a> and <a href="https://nixos.wiki/wiki/Home_Manager">the NixOS wiki page on Home Manager</a>.</p>
+<h1 id="a-taste-of-nixos-but-for-your-home-directory">A Taste of NixOS, but for Your Home Directory</h1>
+<p>EDIT: Having tried this a bit.. one significant difference from the dotbot approach: dotbot manages symlinks so that e.g. <code>~/.vimrc</code> links to the repository where the dotbot was run from. The home-manager approach first constructs a Nix package with the configuration files, then symlinks to these files.</p>
+<p>This demands a change in mindset, since this means the file which <code>~/.vimrc</code> symlinks to is read-only.<br />
+This makes more sense if describing the configuration files using Nix, compared to the approach described below (which attempts to model dotbot).</p>
+<p>I don’t mind “can’t edit the (generated) configuration files” when it comes to OS files. I find it slightly more awkward with configuration files for Vim or Emacs.</p>
+<p>It’s often possible for configuration files to <code>include</code> other configuration files. This is one way to “work around” the above restriction.</p>
 <h1 id="installing-home-manager">Installing Home Manager</h1>
 <p>I’d recently started using Nix flakes. Nix flakes are cool.</p>
 <p>So, following the <a href="https://nix-community.github.io/home-manager/index.html#ch-nix-flakes">standalone setup with Nix Flakes</a> chapter of the manual..</p>
@@ -557,7 +563,7 @@ So when the project needed to build using an older GHC version (and NixOS didn�
     <published>2021-10-22T00:00:00Z</published>
     <updated>2021-10-22T00:00:00Z</updated>
     <summary type="html"><![CDATA[<p>So I’ve had my BM40 for over a year now.</p>
-<p>My <a href="../programming/2020-08-22-early-impressions-of-bm40rgb-ortholinear-keyboard.markdown">initial impressions</a> after getting the keyboard were:</p>
+<p>My <a href="../programming/2020-08-22-early-impressions-of-bm40rgb-ortholinear-keyboard.html">initial impressions</a> after getting the keyboard were:</p>
 <ul>
 <li><p>that it was a <em>relatively</em> cheap, easy to assemble fancy keyboard,</p></li>
 <li><p>that was nicer to use compared to a typical keyboard for cases where you could use the computer with both hands on the keyboard,</p></li>
