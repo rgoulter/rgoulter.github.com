@@ -139,6 +139,8 @@
     
 </div>
 
+<p>UPDATE: <a href="../programming/2022-03-21-project-specific-tooling-in-emacs-with-nix-flakes-and-direnv.html">“Project Specific Tooling in Emacs with Nix Flakes and Direnv”</a> discusses an approach with works with the <code>devShell</code> of <code>flake.nix</code> by making use of <code>direnv</code>.</p>
+<hr />
 <p>One feature VSCode has is its <a href="https://code.visualstudio.com/docs/remote/containers">“Remote - Containers” extension</a> which allows for developing inside a container.</p>
 <p>I found this strange when I first heard it; since every time I’ve <code>docker exec -it</code>’d into a container, I’ve had to then further install tools like vim or a better grep. – Instead, I understand the idea is actually to use the container image as a way of distributing a set of tools to use with the editor.</p>
 <p>I liked the idea of project-specific tooling more once I made some use of <a href="https://direnv.net/"><code>direnv</code></a>. <code>direnv</code> enables automatically setting environment variables for the directories you <code>cd</code> through, by sourcing any <code>.envrc</code> files it encounters.</p>
