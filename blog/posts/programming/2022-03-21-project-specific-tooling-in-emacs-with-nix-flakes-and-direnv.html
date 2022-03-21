@@ -1,0 +1,303 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Project Specific Tooling in Emacs with Nix Flakes and Direnv - Richard Goulter's Blog</title>
+
+        <!-- My (Old) CSS theme -->
+        <link rel="stylesheet" type="text/css" href="../../css/default.css" />
+
+        <!--
+            jQuery & jQueryUI
+        -->
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css" />
+
+        <!--
+            Pandoc Style CSS
+            (for syntax highlighted snippets)
+        -->
+        <link rel="stylesheet" type="text/css" href="../../css/syntax.css" />
+
+        <!--
+            Bootstrap
+        -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+        <style>
+            /*
+             * Bootstrap defines blockquote as 17px,
+             * so it looks stupidly large in my blogposts. */
+            blockquote {
+                font-size: 14px;
+            }
+        </style>
+
+        <!--
+            Waypoints, and Waypoints-Sticky,
+            so we can do this:
+            http://imakewebthings.com/waypoints/shortcuts/sticky-elements/
+        -->
+        <script src="../../js/jquery.waypoints.min.js"></script>
+        <script src="../../js/sticky.min.js"></script>
+
+        <!-- My analytics stuff -->
+        <script src="../../js/my_analytics.js"></script>
+        <script src="../../js/my_analytics_debug.js"></script>
+
+        <!--
+            TOCify
+        -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js"></script>
+        <!--
+            Patched TOCify css file.
+            (Don't want fixed `.tocify`).
+        -->
+        <link rel="stylesheet" type="text/css" href="../../css/jquery.tocify.css" />
+
+        <style>
+        .navbar {
+            margin-bottom: 0px;
+        }
+
+        .banner-image {
+            width:100%;
+        }
+
+        .banner {
+            margin-left: 0px;
+            margin-right: 0px;
+        }
+
+        body {
+            background-color: #e2e2e2;
+        }
+
+        #page {
+            padding-left:0;
+            padding-right:0;
+            background-color: #ffffff;
+        }
+        </style>
+
+        <!-- Google Analytics -->
+        <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+          ga('create', 'UA-73116015-1', 'auto');
+          ga('send', 'pageview');
+        </script>
+    </head>
+    <body>
+        <div id="page" class="container">
+            <!-- This, with no padding on left/right -->
+            <div class="banner">
+                <nav class="navbar navbar-default">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+
+            <!-- The Hamburger -->
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../../">Richard Goulter's Blog</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="../../">Home</a></li>
+            <li><a href="../../yi.html">Yi</a></li>
+            <li><a href="../../emacs.html">Emacs</a></li>
+            <li><a href="../../what-i-wish-i-knew-when-i-started-using-nix.html">Nixpkgs</a></li>
+            <li><a href="../../archive.html">Archive</a></li>
+        </ul>
+    </div>
+</nav>
+
+            </div>
+
+            <hr style="margin: 0px; border-top: 5px solid black;" />
+
+            <div id="content" class="container">
+                <h1>Project Specific Tooling in Emacs with Nix Flakes and Direnv</h1>
+                <div class="info">
+    Posted on March 21, 2022
+    
+        by Richard Goulter
+    <br />
+    
+    Tags: 
+    
+</div>
+
+<p>One use-case for <a href="https://nixos.org/">nix</a> is to describe the tools/dependencies used on a per-project basis. – This is similar to <a href="https://code.visualstudio.com/docs/remote/containers">VSCode’s Remote Containers</a>, but without the containers.</p>
+<p>We can achieve this in Emacs by leveraging direnv, nix-direnv, and emacs-direnv.</p>
+<p><a href="https://direnv.net/">direnv</a> provides a neat way of specifying environment variables in a per-directory basis.</p>
+<p>Since direnv runs arbitrary bash code in the <code>.envrc</code> files, it’s possible to use direnv to automatically load programs specified in a nix file into the enviroment.</p>
+<p>With the new flake-aware <code>nix</code> cli commands, a <code>flake.nix</code> file is preferred over <code>shell.nix</code> or <code>default.nix</code>. The <a href="https://github.com/nix-community/nix-direnv/">nix-direnv</a> project integrates direnv with nix flakes.</p>
+<p>Example <code>.envrc</code> and <code>flake.nix</code> files are given in <a href="https://github.com/nix-community/nix-direnv/tree/master/template">nix-direnv’s template/ directory</a>. These can also be generated by running:</p>
+<pre><code>nix flake new -t github:nix-community/nix-direnv .</code></pre>
+<p>(and <code>direnv allow</code> to grant direnv permission to run the file).</p>
+<p>But for the sake of saving a click, it’s something like:</p>
+<pre><code>if ! has nix_direnv_version || ! nix_direnv_version 1.6.0; then
+    source_url &quot;https://raw.githubusercontent.com/nix-community/nix-direnv/1.6.0/direnvrc&quot; &quot;sha256-FqqbUyxL8MZdXe5LkMgtNo95raZFbegFpl5k2+PrCow=&quot;
+fi
+use flake</code></pre>
+<pre><code>{
+  description = &quot;A basic flake with a shell&quot;;
+  inputs.nixpkgs.url = &quot;github:NixOS/nixpkgs/nixpkgs-unstable&quot;;
+  inputs.flake-utils.url = &quot;github:numtide/flake-utils&quot;;
+
+  outputs = { self, nixpkgs, flake-utils }:
+    flake-utils.lib.eachDefaultSystem (system: let
+      pkgs = nixpkgs.legacyPackages.${system};
+    in {
+      devShell = pkgs.mkShell {
+        nativeBuildInputs = [ pkgs.bashInteractive ];
+        buildInputs = [ ];
+      };
+    });
+}</code></pre>
+<p><a href="https://github.com/wbolster/emacs-direnv">emacs-direnv</a> is a package which will load the environment from direnv <code>.envrc</code> files.</p>
+<p>Since <code>emacs-direnv</code> loads the <code>.envrc</code> file, and the <code>.envrc</code> file loads the environment with the <code>devShell</code> from the <code>flake.nix</code>, Emacs will use the programs from the <code>devShell</code>. (As can be verified by evaluating <code>(getenv &quot;PATH&quot;)</code> or <code>(executable-find &quot;bash&quot;)</code>, or whatever).</p>
+<p>e.g. for Go-lang, we want <code>go</code> and <code>gopls</code>, so our <code>devShell</code> is defined in the <code>flake.nix</code> as:</p>
+<pre><code>devShell = pkgs.mkShell {
+  packages = with pkgs; [
+    go
+    gopls
+  ];
+};</code></pre>
+<p>e.g. for Terraform:</p>
+<pre><code>devShell = pkgs.mkShell {
+  packages = with pkgs; [
+    terraform
+    terraform-ls
+    tflint
+  ];
+};</code></pre>
+<p>But, using <code>terraform-ls</code> instead of <code>terraform-lsp</code> is a bit more involved. I needed to fill <code>.dir-locals.el</code> with:</p>
+<pre><code>((terraform-mode . ((eval . (progn
+                              (direnv-update-environment)
+                              (setq-local lsp-terraform-server `(&quot;terraform-ls&quot; &quot;serve&quot;)))))))</code></pre>
+
+<hr />
+
+<div>
+    
+    
+    <a href="../../posts/programming/2022-02-20-using-home-manager-to-manage-symlinks-to-dotfiles.html" style="float:right; text-align: right;">Older post</a>
+    
+</div>
+<br style="clear: both;" />
+
+<hr />
+
+            </div>
+
+            <hr style="margin-bottom: 0px; border-top: 2px solid black;" />
+
+            <div id="footer" class="pull-right" style="padding-right: 10px;">
+                Site proudly generated by
+                <a href="http://jaspervdj.be/hakyll">Hakyll</a>
+            </div>
+        </div>
+
+        <script>
+            // The callbacks we wanna use
+            // Phone-home, telling Google Analytics various metrics/dimensions
+
+            // Use custom dimensions & metrics
+            var AnalyticDimensionReaderKind = 'dimension1';
+            var AnalyticMetricActiveTime      = 'metric1';
+            var AnalyticMetricLongestIdleTime = 'metric2';
+            var AnalyticMetricReadCount       = 'metric3';
+
+            var gaCallbacks = {
+                "scrollPercent": function(ms, perc) {
+                    if (perc > 85) {
+                        // EVENT: Page read
+                        ga('send', {
+                            hitType:       'event',
+                            eventCategory: 'Scrolling',
+                            eventAction:   'atBottom',
+                            eventValue:    String(ms)
+                        });
+                    }
+                },
+                "read": function(ms, ct, timeToReach) {
+                    // Use this to set DIMENSION
+                    // timeToReach < 5s ==> Skim (default = Visitor)
+                    if (timeToReach < 5 * 1000) {
+                        // dimension1 = ReaderKind
+                        ga('set', AnalyticDimensionReaderKind, "skimmer");
+                    }
+
+                    // timeToReach > 30s ==> Reader
+                    if (timeToReach > 30 * 1000) {
+                        // dimension1 = ReaderKind
+                        ga('set', AnalyticDimensionReaderKind, "reader");
+                    }
+
+                    // EVENT: Page read
+                    ga('send', {
+                        hitType:       'event',
+                        eventCategory: 'Reading',
+                        eventAction:   'read',
+                        eventValue:    String(timeToReach)
+                    });
+
+                    // METRIC
+                    ga('set', AnalyticMetricReadCount, String(ct));
+                },
+                "initialIdle": function(ms) {
+                    // EVENT: Started Reading
+                    ga('send', {
+                        hitType:       'event',
+                        eventCategory: 'Scrolling',
+                        eventAction:   'begun',
+                        eventValue:    String(ms)
+                    });
+                },
+                "timeSpent": function(total, active, curIdle, initIdle, longestIdle) {
+                    // Update METRIC(S)?
+                    ga('set', AnalyticMetricActiveTime, String(active));
+                    ga('set', AnalyticMetricLongestIdleTime, String(longestIdle));
+                },
+                "idle": function(ms) {
+                },
+                "longestIdle": function(ms) {
+                }
+            }
+
+            window.onload = function() {
+                myAnalyticsInit(gaCallbacks);
+
+                //
+                // Initial dimensions & metrics
+                //
+
+                ga('set', AnalyticMetricReadCount, String(0));
+
+                // EVENT: Page load
+                ga('send', {
+                    hitType:       'event',
+                    eventCategory: 'pageLoad',
+                    eventAction:   'begun',
+                    eventValue:    String(ms)
+                });
+
+                // DIMENSION: visitor
+                ga('set', AnalyticDimensionReaderKind, "visitor");
+            }
+        </script>
+    </body>
+</html>
