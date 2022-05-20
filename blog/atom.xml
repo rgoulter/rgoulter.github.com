@@ -8,8 +8,202 @@
         <name>Richard Goulter</name>
         <email>richard.goulter+blog@gmail.com</email>
     </author>
-    <updated>2022-03-27T00:00:00Z</updated>
+    <updated>2022-05-19T00:00:00Z</updated>
     <entry>
+    <title>Tool Recommendation: Helix Editor</title>
+    <link href="http://www.rgoulter.com/blog//posts/programming/2022-05-19-tool-recommendation-helix-editor.html" />
+    <id>http://www.rgoulter.com/blog//posts/programming/2022-05-19-tool-recommendation-helix-editor.html</id>
+    <published>2022-05-19T00:00:00Z</published>
+    <updated>2022-05-19T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<p>The <a href="https://helix-editor.com/">Helix editor</a> is a fancy new text editor which looks to be a compelling competitor to vim for modern developer environments.</p>
+<p>Currently, my preferred editing environment is Emacs, making use of the Doom Emacs distribution.</p>
+<p>Before that, I was using vim (and its cousin, neovim). And I still use neovim for editing files from the command line.</p>
+<p>But, I’d heard of <a href="http://kakoune.org/">kakoune</a>. Kakoune takes the “verb + text object” text navigation and manipulation of Vim, and flips it into a more user friendly direction: Kakoune opts for “text object + verb”.</p>
+<p>This seems like it would soften the rough edges of the finer parts of vim. It’s often easier to make use of vim’s visual mode, and then copy/delete/replace that selection.</p>
+<p>So. The <a href="https://helix-editor.com/">Helix editor</a>, another text editor, is interesting for a few reasons:</p>
+<ol type="1">
+<li><p>It takes the same user-friendly “text object + verb” approach that kakoune used. (This also allows for powerful multi-cursor text manipulation).</p></li>
+<li><p>It leverages <a href="https://microsoft.github.io/language-server-protocol/">language server protocol (LSP)</a>, which enables editor integration with language compilers, allowing for code completion or quickly bringing up documentation.</p></li>
+<li><p>It leverages <a href="https://tree-sitter.github.io/tree-sitter/">tree sitter</a>. This allows different editors to share parsers for different languages, for syntax highlighting, or perhaps navigation of text objects.</p></li>
+</ol>
+<p>So. It’s got a few fancy features, each are worth being excited about.</p>
+<p>So I’ve given it a try.</p>
+<p>Overall, as a vim user, trying out Helix has the following loop:</p>
+<ol type="1">
+<li><p>Try and use Helix as if it’s vim (but swapping text object and action).</p></li>
+<li><p>Be surprised when something doesn’t work, because Helix isn’t vim, so look up the equivalent action, and remember to use the Helix keybinding.</p></li>
+</ol>
+<p>I’d say the ‘trouble’ here is that with Vim, there’s a long tail of keybindings which you’ll use infrequently.</p>
+<p>e.g. it took me a while to notice that Helix doesn’t open directories in a buffer. (Whereas, vim has netrw, and Emacs has dired).</p>
+<p>Overall, Helix’s keybindings seem consistent and well thought out.</p>
+<p>e.g. my current “rosetta stone” is:</p>
+<table>
+<colgroup>
+<col style="width: 11%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 9%" />
+<col style="width: 51%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>vim mode</th>
+<th>vim</th>
+<th>helix mode</th>
+<th>helix</th>
+<th>note</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td></td>
+<td>0</td>
+<td></td>
+<td>gh</td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td>^</td>
+<td></td>
+<td>gs</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>$</td>
+<td></td>
+<td>gl</td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td>gq</td>
+<td></td>
+<td>=</td>
+<td>format. TBI in helix. Vim’s = is ‘indent’.</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>C-v i</td>
+<td></td>
+<td>C i</td>
+<td>Or Alt-s to split selection on newline.</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>C</td>
+<td></td>
+<td>v gl c</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>x</td>
+<td></td>
+<td>;d</td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td>V</td>
+<td></td>
+<td>X</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>*</td>
+<td></td>
+<td>*n</td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td>G</td>
+<td></td>
+<td>ge</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>:bprev, [b</td>
+<td></td>
+<td>gp</td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td>:bnext, ]b</td>
+<td></td>
+<td>gn</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td><code>.         |            | g.     |                                            | |          | H          |            | gt     |                                            | |          | M          |            | gc     |                                            | |          | L          |            | gb     |                                            | |          | C-r        |            | U      | redo                                       | |          |            |            | ga     | last accessed file                         | |          |            |            | &lt;SPC&gt;R | replace selection with clipboard           | |          | %          |            | mm     |                                            | |          | ggVG       |            | %      | select entire file                         | |          | ,          |            |        |                                            | |          | ;          |            | Alt-.  |                                            | | visual   | o          |            | Alt-;  |                                            | |          | (/)        |            |        | left up to tree-sitter?                    | |          | {/}        |            |        | left up to tree-sitter?                    | |          | gc         |            | Ctrl-c | Evil comment                               | |          | ~          |            | ~      | (same in both) toggle case                 | |          | gu         |            |</code></td>
+<td>to lowerlase</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td>gU</td>
+<td></td>
+<td>Alt+<code>| to uppercase                               | |          | vi&quot;        |            | vmi&quot;   | prefix sequence with</code>m` for things.</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Overall, I like what I’ve tried of Helix. It feels very polished out-of-the-box.</p>]]></summary>
+</entry>
+<entry>
+    <title>Use of Anki for Programming</title>
+    <link href="http://www.rgoulter.com/blog//posts/programming/2022-05-01-use-of-anki-for-programming.html" />
+    <id>http://www.rgoulter.com/blog//posts/programming/2022-05-01-use-of-anki-for-programming.html</id>
+    <published>2022-05-01T00:00:00Z</published>
+    <updated>2022-05-01T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<p>Anki is software which helps you to review flash cards. What’s notable about it is it uses the idea of Spaced Repitition; by getting you to recall something at approximately the time you would otherwise have forgotten it, you’re better able to recall some fact at increasingly long intervals.</p>
+<p>This is useful for foreign language learning (or health science) where you’ll want to recall terms, sometimes with low frequency.</p>
+<p>One serious article I’ve seen about using Anki for non-language stuff was this: <a href="http://augmentingcognition.com/ltm.html" class="uri">http://augmentingcognition.com/ltm.html</a></p>
+<p>One quick take-away I recall is just the emphasis that Anki isn’t a completely magical to help you remember everything.</p>
+<p>For things you use frequently anyway, Anki won’t be of much help. And for things you wish to recall in infrequent contexts, Anki is going to require much more effort than it’s worth. (As in, it’s harder to remember because you won’t have motivation to use it).</p>
+<p>For programming, I’ve only used Anki slightly.</p>
+<p>To give a somewhat specific example of how I’ve used it: e.g. I noticed I wanted to be able to recall the different <code>ServiceType</code>s of a Kubernetes <code>Service</code>. e.g. per https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services-service-types<br />
+I think once you understand the concept, recalling the facts of it is easier.<br />
+Short of that, the easiest flashcard to make is with a brute-force approach which enumerates the types. (Which is not terrible in this case, since there are four types).<br />
+I’d say it would be better to then later create more flash cards about the topic. e.g. in this case, flashcards about what the default service type is, and flashcards in the form “service type which exposes service on a port on each node” or “service type which uses cloud provider’s load balancer”, etc.</p>
+<p>Another example I have been trying recently has been keybindings. e.g. I want to be able to use the fancy Helix editor, or to get more out of Doom Emacs.<br />
+Keybindings which work well in you workflow are easy to remember.<br />
+But.. I think it’s always easier to continue doing something in an known-and-adequate-but-bad way rather than a nice-but-unknown way.<br />
+I think writing up flashcards for anki helps to build the mental model for what the mnemonics for the keybindings are. And I think “I’d like to use this functionality, but can’t recall the keybinding” is close to that margin of “frequent enough to want to recall it, infrequent enough such that you’re not using it all the time”.</p>
+<p>In the worst case, I think Anki flashcards are a useful intermediate artifact to aim for when studying.</p>]]></summary>
+</entry>
+<entry>
+    <title>Prime Video's Invincible is Wonderful</title>
+    <link href="http://www.rgoulter.com/blog//posts/narrative/2022-05-01-prime-videos-invincible-is-wonderful.html" />
+    <id>http://www.rgoulter.com/blog//posts/narrative/2022-05-01-prime-videos-invincible-is-wonderful.html</id>
+    <published>2022-05-01T00:00:00Z</published>
+    <updated>2022-05-01T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<p>Amazon Prime Video’s “Invincible” is probably most well known for <a href="https://knowyourmeme.com/memes/think-mark/">the meme image</a>.</p>
+<p>I saw it <a href="https://www.youtube.com/watch?v=_1Mlm2LLcs0">recommended by the YouTube channel “Critical Drinker”</a>.</p>
+<p>So I watched the show, it’s pretty good!</p>
+<p>In the same way that “Rick and Morty”’s Rick and Morty are kinda bastardised versions of “Back to the Future”’s Doc and Marty, “Invincible” is kindof a bastardised homage to superhero media the same way “The Incredibles” is.</p>
+<p>It’s both a bit dark, at times emphasising cosmic-horror themes that underlie superhero shows, as well as poking fun of superhero motifs.</p>
+<p>I find the show suspenseful and subversive.</p>
+<p>“Subversive” seems almost a joke term with regards to how it was used to describe Star Wars’ “The Last Jedi”. TLJ pretty much shits on the legacy that came before it.. I think to the point where it’s so different from the material it’s ‘subverting’, that it’s not interesting to watch.</p>
+<p>A better example of “subversive”, I think, was in the side quests of the game “The Witcher 3”. In the Witcher 3, you play a fantasy wizard-warrior. The game follows your expectations about 90% of the time. As in, 90% of the time, playing a heroic figure who rescues the people from monsters works out well, but 10% of the time you’ll be punished for being naive or foolish or whatever.</p>
+<p>I think with “Invincible”, it’s similar.<br />
+The show knows what you’re set to expect, and will deliver on that most of the time; but will vary from that <em>just</em> enough to keep you on your toes.<br />
+So you end up with 3 or 4 plots going throughout the story where you’re not sure whether you can trust the characters or not.</p>
+<p>I think the premise of the show is more interesting than the characters or plot of the show, though. – I found “Rick and Morty” less interesting as the show seemed to try to develop its characters.. but the characters are only really interesting as archetypes in the weird situations.<br />
+Invincible’s characters are largely not-Superman, not-the-Justice-League, etc. and I enjoyed them as they played a part in this half-ironic, mature interpretation of superhero stories.</p>
+<p>The show’s worst part is definitely the main character’s love interest.<br />
+The love interest is the kind of person who reads Ta Nehisi Coates.. the character certainly doesn’t seem to get the same edgy interpretation treatment the rest of the show tells its story from. (Unless the love interest’s character is supposed to subvert our expectations that the superhero’s love interest be a likeable character. Which, maybe is the intent).<br />
+– I was fairly annoyed by one plot point: love interest and the main character are visiting a college campus when a villain terrorises the square. The main character runs off to Clarke-Kent-into-Superman, then fights and stops the villain. Afterwards, the love interest chastises the main character for running away and not helping people(?!). – We then find out she had already figured out that her boyfriend was the superhero. – It comes across as holier-than-thou, smarter-than-thou, author’s-daughter-stand-in character.</p>
+<p>So. I dunno if the story’s going to be able to keep up the momentum. But, I think the edgy, humorous interpretation of popular culture is interesting. I think it’d be interesting to see Star Wars or whatever in a similar manner.</p>]]></summary>
+</entry>
+<entry>
     <title>Bridgerton 2</title>
     <link href="http://www.rgoulter.com/blog//posts/romance/2022-03-27-bridgerton-2.html" />
     <id>http://www.rgoulter.com/blog//posts/romance/2022-03-27-bridgerton-2.html</id>
@@ -516,210 +710,6 @@ freecad.override {
 <p>I reckon that even that effort is still less tedious than the suggested solution above.<br />
 – Or perhaps I’m thinking of this from a yak-shaving perspective: e.g. with the good ol’ just clone and install dependencies and configure and build, you’ll have to repeat this understandable but awkward process on every computer you want to use FreeCAD with glTF export. With the Nix approach, at worst you’d just copy the snippet and rebuild on your computer.</p>
 <p>Since rebuilding GUI programs like this can take quite a beefy computer or quite a long time, another nice aspect of Nix is <a href="https://nixos.org/manual/nix/stable/#chap-distributed-builds">the ability to build with other computers</a>. – I’ll have to try that at some point.</p>]]></summary>
-</entry>
-<entry>
-    <title>Using Nix-Shell for Project-Specific Tools for Emacs</title>
-    <link href="http://www.rgoulter.com/blog//posts/programming/2021-10-26-using-nix-shell-for-project-specific-tools-for-emacs.html" />
-    <id>http://www.rgoulter.com/blog//posts/programming/2021-10-26-using-nix-shell-for-project-specific-tools-for-emacs.html</id>
-    <published>2021-10-26T00:00:00Z</published>
-    <updated>2021-10-26T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<p>UPDATE: <a href="../programming/2022-03-21-project-specific-tooling-in-emacs-with-nix-flakes-and-direnv.html">“Project Specific Tooling in Emacs with Nix Flakes and Direnv”</a> discusses an approach with works with the <code>devShell</code> of <code>flake.nix</code> by making use of <code>direnv</code>.</p>
-<hr />
-<p>One feature VSCode has is its <a href="https://code.visualstudio.com/docs/remote/containers">“Remote - Containers” extension</a> which allows for developing inside a container.</p>
-<p>I found this strange when I first heard it; since every time I’ve <code>docker exec -it</code>’d into a container, I’ve had to then further install tools like vim or a better grep. – Instead, I understand the idea is actually to use the container image as a way of distributing a set of tools to use with the editor.</p>
-<p>I liked the idea of project-specific tooling more once I made some use of <a href="https://direnv.net/"><code>direnv</code></a>. <code>direnv</code> enables automatically setting environment variables for the directories you <code>cd</code> through, by sourcing any <code>.envrc</code> files it encounters.</p>
-<p>That allows e.g. having a separate directory structure for <code>dev</code> and <code>staging</code> deployments, where the <code>dev/.envrc</code> sets the <code>AWS_PROFILE</code> (or <code>CLOUDSDK_ACTIVE_CONFIG_NAME</code>, etc.) environment variable accordingly. – This reduces the risk of mis-matching commands intended for dev in production. But also increases the convenience of not needing to explicitly change between profiles.</p>
-<p><code>direnv</code> has also has some integration with <code>nix-shell</code>. e.g. https://hardselius.github.io/2020/nix-shell-and-direnv/ – Although Nix is weird, using dotfiles to enable using different versions of tools depending on the directory is a solution as implemented with tools like <a href="https://github.com/rbenv/rbenv">rbenv</a> (or the more general <a href="https://asdf-vm.com/">asdf-vm</a>).</p>
-<p>The <code>direnv</code> + <code>nix-shell</code> combo works for command-line shells, and VSCode can have its Docker containers.</p>
-<p>Here’s an example of trying the same trick with Emacs.</p>
-<p>e.g. for a Terraform file like <code>main.tf</code>:</p>
-<pre class="terraform"><code>terraform {
-  required_providers {
-    aws = {
-      source  = &quot;hashicorp/aws&quot;
-      version = &quot;~&gt; 3.0&quot;
-    }
-  }
-}
-
-provider &quot;aws&quot; {
-}
-
-variable &quot;ssh_authorized_key&quot; {
-  type = string
-}
-
-resource &quot;aws_key_pair&quot; &quot;key&quot; {
-  key_name_prefix = &quot;ubuntu-vm&quot;
-  public_key      = var.ssh_authorized_key
-}
-
-resource &quot;aws_security_group&quot; &quot;allow_ssh&quot; {
-  name        = &quot;allow_ssh&quot;
-  description = &quot;Allow SSH inbound traffic&quot;
-
-  ingress {
-    from_port   = 22
-    to_port     = 22
-    protocol    = &quot;tcp&quot;
-    cidr_blocks = [&quot;0.0.0.0/0&quot;]
-  }
-}
-
-data &quot;aws_ami&quot; &quot;ubuntu&quot; {
-  most_recent = true
-
-  filter {
-    name   = &quot;name&quot;
-    values = [&quot;ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-*&quot;]
-  }
-
-  filter {
-    name   = &quot;virtualization-type&quot;
-    values = [&quot;hvm&quot;]
-  }
-
-  owners = [&quot;099720109477&quot;] # Canonical
-}
-
-resource &quot;aws_instance&quot; &quot;ubuntu&quot; {
-  ami           = data.aws_ami.ubuntu.id
-  instance_type = &quot;t3.small&quot;
-
-  key_name = aws_key_pair.key.key_name
-
-  vpc_security_group_ids = [aws_security_group.allow_ssh.id]
-
-  associate_public_ip_address = true
-
-  root_block_device {
-    volume_size = 20
-  }
-}
-
-output &quot;vm_public_ip&quot; {
-  value = aws_instance.ubuntu.public_ip
-}</code></pre>
-<p>and a <code>shell.nix</code> with contents:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode nix"><code class="sourceCode bash"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">{</span> <span class="ex">pkgs</span> ? import <span class="op">&lt;</span>nixpkgs<span class="op">&gt;</span> <span class="dt">{}</span> <span class="kw">}</span>:</a>
-<a class="sourceLine" id="cb2-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="ex">with</span> pkgs<span class="kw">;</span></a>
-<a class="sourceLine" id="cb2-4" data-line-number="4"><span class="ex">mkShell</span> {</a>
-<a class="sourceLine" id="cb2-5" data-line-number="5">  <span class="ex">buildInputs</span> = [</a>
-<a class="sourceLine" id="cb2-6" data-line-number="6">    <span class="ex">terraform</span></a>
-<a class="sourceLine" id="cb2-7" data-line-number="7">    <span class="ex">terraform-ls</span></a>
-<a class="sourceLine" id="cb2-8" data-line-number="8">    <span class="ex">tflint</span></a>
-<a class="sourceLine" id="cb2-9" data-line-number="9">  ];</a>
-<a class="sourceLine" id="cb2-10" data-line-number="10">}</a></code></pre></div>
-<p>(In this case, the shell includes the packages: <code>terraform</code> which is what interprets/runs the <code>main.tf</code>, <code>terraform-ls</code> as the Language Server for LSP, and <code>tflint</code> as the linting tool).</p>
-<p>An <code>.envrc</code> can be used to set <code>AWS_PROFILE</code>, <code>AWS_REGION</code>, and <code>TF_VAR_ssh_authorized_key</code>.</p>
-<p>To integrate this with Emacs:</p>
-<p>Using <a href="https://github.com/travisbhartwell/nix-emacs/"><code>nix-sandbox</code></a> for convenience, we can set some variables in a <code>.dir-locals.el</code> file, e.g.:</p>
-<pre class="elisp"><code>((terraform-mode . ((eval . (progn
-                              (setq-local lsp-terraform-server
-                                          `(&quot;nix-shell&quot;
-                                            &quot;--command&quot;
-                                            &quot;terraform-ls serve&quot;
-                                            ,(nix-current-sandbox)))))))
- (prog-mode . ((flycheck-command-wrapper-function
-                . (lambda (command) (apply &#39;nix-shell-command (nix-current-sandbox) command)))
-               (flycheck-executable-find
-                . (lambda (cmd) (nix-executable-find (nix-current-sandbox) cmd))))))</code></pre>
-<p>The <code>lsp-terraform-server</code> variable is used by <a href="https://emacs-lsp.github.io/lsp-mode/page/lsp-terraform/">lsp-mode</a>, and the <code>flycheck-command-wrapper-function</code> is for <a href="https://github.com/flycheck/flycheck">flycheck</a>.</p>
-<p>With this, e.g. the <code>terraform-ls</code> from the <code>nix-shell</code> environment can be used for LSP code intelligence, and <code>tflint</code> by flycheck.</p>
-<p>I’ve been pretty lazy about figuring out how to setup LSP servers for whatever programming language I’ve been using. Nix doesn’t promise to make that easier. – But what Nix does support is making it easier for someone to make use of a development setup written in Nix (e.g. just running a single “nix-shell” command, rather than following several steps in a blogpost).</p>
-<p>I don’t know if project-specific tooling will catch on. I think project-specific tooling looks like it goes well with web applications like replit, gitpod, or GitHub’s codespaces.</p>]]></summary>
-</entry>
-<entry>
-    <title>Static Site Generators are Well Suited to Hobbyist Programming</title>
-    <link href="http://www.rgoulter.com/blog//posts/programming/2021-10-24-static-site-generators-are-well-suited-to-hobbyist-programming.html" />
-    <id>http://www.rgoulter.com/blog//posts/programming/2021-10-24-static-site-generators-are-well-suited-to-hobbyist-programming.html</id>
-    <published>2021-10-24T00:00:00Z</published>
-    <updated>2021-10-24T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<p>Static site generators are definitely a “for developers” tool. Or that’s the impression I get from seeing that <a href="https://staticsitegenerators.net/">staticsitegenerators.net</a> has hundreds of projects listed, ranging from a few GitHub stars all the way up to tens of thousands of GitHub stars.</p>
-<p>I’m reminded of a comment I saw on Hacker News talking about Factorio. Factorio is a game with gameplay which feels very similar to programming. This comment I saw explained, though, that the game’s similarity to programming leads to two sets of reactions to it from programmers: 1. the game is similar to what I put my creative energy into, but without the constraints of needing to be reliable or being told what to do: it’s very fun; 2. the game is similar to what I put my creative energy into, but without any tangible benefit from putting in that work: why would anyone want to ‘play’ this?</p>
-<p>My blog is generated with a static site generator, customised using the Haskell programming language.</p>
-<p>I don’t think I’d be able to argue that it’s a practical choice if the goal is to serve a blog. – But it’s as good an excuse as any to write something with Haskell.</p>
-<p>This weekend I spent some time brushing the project up a bit.</p>
-<p>It’s fun.</p>
-<p>I’m not familiar enough with Haskell to know all the right idioms. I think <a href="https://github.com/rgoulter/my-hakyll-blog/blob/6958e2a8399e2d32a041592bb74a527fa8ec36a8/site.hs">the code for the site</a> very much smells in places with indications that I don’t know what I’m doing.</p>
-<p>Still, I feel I rearranged the code into a nicer, more consistent shape than <a href="https://github.com/rgoulter/my-hakyll-blog/blob/1ef0045662aace8e063d69094e31b76e8062cf25/site.hs">it was in before</a>.</p>
-<p>I also tinkered around and updated the Nix files. I think Nix is nice for side projects. It’s often tedious to try and install some old compiler on a system. – With Nix, it’s easier to install from an older version of the package repository.<br />
-So when the project needed to build using an older GHC version (and NixOS didn’t like running the GHC version which <code>stack</code> downloaded, because it didn’t have the shared libraries available), Nix can get an older GHC by using the package definition from an older version of the package repository.<br />
-– Albeit, Nix has quite a steep learning curve. I wasn’t able to figure out how to do that nicely last time I’d tried to write the Nix files for the project.</p>]]></summary>
-</entry>
-<entry>
-    <title>Follow-up Review of the BM40 Ortholinear Keyboard</title>
-    <link href="http://www.rgoulter.com/blog//posts/programming/2021-10-22-follow-up-review-of-the-bm40-ortholinear-keyboard.html" />
-    <id>http://www.rgoulter.com/blog//posts/programming/2021-10-22-follow-up-review-of-the-bm40-ortholinear-keyboard.html</id>
-    <published>2021-10-22T00:00:00Z</published>
-    <updated>2021-10-22T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<p>So I’ve had my BM40 for over a year now.</p>
-<p>My <a href="../programming/2020-08-22-early-impressions-of-bm40rgb-ortholinear-keyboard.html">initial impressions</a> after getting the keyboard were:</p>
-<ul>
-<li><p>that it was a <em>relatively</em> cheap, easy to assemble fancy keyboard,</p></li>
-<li><p>that was nicer to use compared to a typical keyboard for cases where you could use the computer with both hands on the keyboard,</p></li>
-<li><p>that it took a bit of time to get used to. (The alphabetical keys were easy to get used to, since I had trained with ‘touch typing’ discipline to learn the Dvorak; but the symbols took some time to get used to).</p></li>
-</ul>
-<p>Now that I’ve had more experience with the keyboard, I think those points still pretty much hit the mark.</p>
-<p>Perhaps the most important point to add is that I’m still able to use a stock-standard row-staggered keyboard. I don’t lose that ability by using a small/weird keyboard.</p>
-<p>Here are some more points for my updated impression:</p>
-<h3 id="big-increase-in-comfort">Big Increase in Comfort</h3>
-<p>The biggest difference in usage between a BM40 and a standard row-staggered keyboard is the comfort.</p>
-<p>I’d point out that the thumb is much stronger than the pinky.</p>
-<p>On a standard keyboard, the thumb will press spacebar, and sometimes the left alt key.</p>
-<p>On a standard keyboard, the pinkies will press the outermost letters (q, a, z), as well as ctrl, shift, the capslock key, tab, tilde, escape, and on the righthand side, the pinkies are responsible for the extra symbol keys ([], _, +, ), as well as the backspace, and enter keys. – Albeit.. you end up accessing many of these by moving your hand over, and using ring + pinky fingers; and these keys generally don’t need to be pressed very frequently. But this still leaves the pinky doing more work than the thumb.</p>
-<p>By comparison, the BM40 does a much better job at utilising the thumbs (and reducing usage of the pinky).</p>
-<p>Many layouts on the BM40 keep the two hands together on the inner 10 columns, leaving the outer columns for the pinkies. With the hands on home row, the thumb can reach the spacebar and each thumb can reach the key to the side.</p>
-<p>– I think this leaves the lowermost, outer 4 keys in an awkward spot. You have to move your hands in an awkward way to use them. (Albeit, this is no worse than the Ctrl, Win, Alt, etc. of standard keyboards).</p>
-<p>In general, better thumb/pinky usage would be to use the thumb more, and pinky even less. I also took a go at designing <a href="https://github.com/rgoulter/keyboard-labs">my own split keyboard</a> (using a small development board to take care of the difficult parts of PCB design), and found this to be relatively comfortable.</p>
-<p>With the BM40, you could also try and ‘split’ the hands; the left hand rests on the leftmost 5 columns, the right hand resting on the rightmost 5 columns, leaving a ‘gap’ of two columns in the middle. – I’ve been trying this layout out. I found it a bit difficult to adjust to, but otherwise appreciate it.</p>
-<p><img src="https://raw.githubusercontent.com/rgoulter/rgoulter.github.com/master/images/keyboards/bm40rgb/bm40rgb_split.JPG" /></p>
-<h3 id="customisable-firmware">Customisable Firmware</h3>
-<p>The BM40 supports customising its keyboard firmware.</p>
-<p>The <a href="https://docs.qmk.fm/">QMK firmware documentation</a> boasts a large number of features.</p>
-<p>The features I’ve found most useful:</p>
-<ul>
-<li><p>Layers. The idea is a key can behave differently if a “Fn” key is held down. Many laptops will do this in order to provide more functionality without needing to add extra keys. QMK’s layering allows customising what the definitions of each of these layers are, and how they get activated.</p></li>
-<li>Tap-Hold keys. A key behaves differently depending on whether you tap it, or hold it down. e.g. a bit like having a button which skips to the next track if tapped, but fast-forwards if held down. (Or treating the CapsLock key as Ctrl key when it’s held, but CapsLock key when tapped).
-<ul>
-<li>One useful layout this allows is putting the Shift/Ctrl/Windows/Alt key underneath the index/middle/ring/pinky fingers. So you’ll get “jkl;” if tapping, but the modifiers if holding these keys down. Putting these modifier keys on the home row is surprisingly useful.</li>
-</ul></li>
-<li><p>Combo keys. Invoke some action when tapping multiple keys at once. I don’t make extensive use of this, but my favourite use of it has been to put combos on the two keys “cv” and “m,” to move to the workspace to the left/right. This makes switching between workspaces about as natural as using the gestures on a Macbook trackpad.</p></li>
-</ul>
-<p>Pretty much all of this customisable functionality is accessible to regular keyboards using software like <a href="https://github.com/kmonad/kmonad">kmonad</a>. – Although having it on the keyboard means you don’t need to fiddle with the OS settings for every computer you make use of.</p>
-<h3 id="alternate-recommendation">Alternate Recommendation</h3>
-<p>I would also add a recommendation: Consider the BM40 is an ortholinear keyboard with a 4x12 grid of keys (with a 2-key wide spacebar in the middle), the lack of a number row limits its usablility for e.g. gaming.</p>
-<p>Keyboards like the XD75 seem like they retain most of the advantages of the BM40, with fewer downsides. e.g. it’s a 5x15 grid of keys (so would be easier to use with gaming?), but also fits into a standard GH60-sized keyboard case. Since the size of the keyboard case is standard, this means there are more options.</p>
-<p>Or taking another route: I’ve also seen a bunch of other interesting designs for “split”, two-handed keyboards. The ergodox was the first I saw. The ergodox’s key cluster for thumbs isn’t very good, though. The ergodox also needs a custom case 3D-printed, IIRC.</p>
-<p>More recent designs often have a “sandwich style” case where the keyboard’s PCB is ‘sandwiched’ between two laser-cut metal plates. I think it’s easier to find places which will do lasercutting compared to getting access to a 3D printer.</p>
-<p>Popular sandwich-style keyboard designs include the corne, the kyria or the lily58 or the sofle keyboard. These involve some very simple soldering. These are often sold in kits at various online stores. If the PCB design files are available, there’s also the option of getting the PCB fabricated &amp; sourcing the other parts yourself.</p>
-<h3 id="keyboard-shouldnt-get-in-the-way">Keyboard shouldn’t get in the way</h3>
-<p>– In my initial impressions post, I commented that you want a keyboard to be transparent between you and your computer, and not something you have to think about.</p>
-<p>While getting used to it, the BM40 does indeed get in the way. And it also gets in the way if you make a significant change to your layout.</p>
-<p>But once I got used to the BM40, the “not moving from home row” is wonderful.</p>
-<p>In contrast, when I use a standard row-staggered keyboard now it feels like playing the piano. My fingers have to move all over the place, with all sorts of stretching or weird movements.</p>
-<h3 id="downside-its-your-keyboard-others-cant-use-it">Downside: It’s <em>your</em> keyboard, others can’t use it</h3>
-<p>This will be familiar to those who use customisable text editors like Vim or Emacs. – Once your editor has been customised enough, others can’t use it. (And vice versa).</p>
-<p>With small, customisable keyboards it’s the same.</p>
-<p>Since the BM40 has fewer keys than the regular keyboard, there’s no obvious convention for where the keys can be expected to go.</p>
-<p>If all you’ve got is this small keyboard and you’re ill-equiped to handle situations where someone else might need to type things in.</p>
-<h3 id="downside-external-keyboards-are-difficult-to-use-with-laptops">Downside: External Keyboards are Difficult to use with Laptops</h3>
-<p>Using a small keyboard is great when you’ve got a desktop setup. It means that much more desk space.</p>
-<p>But if you’re using a laptop.. using an external keyboard means more desk space is used up by the keyboard.</p>
-<p>One workaround I’ve seen people come up with involve disabling their laptop’s keyboard if using an external keyboard. The keyboard can then be placed on top of the laptop’s keyboard.</p>
-<p>Another workaround I saw involved using a small tray that could be placed on top of the laptop keyboard.</p>
-<p>This isn’t a downside of the BM40 itself. But, laptop keyboards aren’t ortholinear.</p>
-<h3 id="downside-mechanical-keyboards-are-expensive-or-difficult-to-assemble">Downside: Mechanical Keyboards are expensive, or difficult to assemble</h3>
-<p>The BM40 is straightforward to assemble. And while it’s cheap relative to other non-standard mechanical keyboards, it’s also quite expensive.</p>
-<p>(Standard mechanical keyboards themselves can end up being much cheaper than the BM40 keyboard. e.g. looks like an Anne Pro 2, which is a Bluetooth keyboard, is roughly about half the price of a BM40).</p>
-<p>There are cheaper ways to try and assemble a small mechanical keyboard. <a href="https://github.com/rgoulter/keyboard-labs/blob/master/docs/buildguide_rev2021.4_budget.md">I tried designing one which is relatively cheap to build</a>. But custom keyboards which involve fabricating PCBs and doing some soldering work could be described as “difficult to assemble”.</p>
-<p>This doesn’t really detract from how much I value having this keyboard, but it does make it harder to recommend to others.</p>
-<h3 id="downside-mechanical-keyboards-are-loud">Downside: Mechanical Keyboards are loud</h3>
-<p>All these weird/niche keyboards typically use mechanical key switches, since this makes the keyboard cheap enough to produce in low volumes.</p>
-<p>In my own space, I consider loud clicky keys an upside. For work spaces, fortunately mechanical key switches don’t need to be clicky. However, I think they’re still louder than standard keyboards.</p>
-<p>I worked beside someone who had a mechanical keyboard. His keyboard wasn’t a loud keyboard. I don’t remember being annoyed by the sound.</p>
-<p>Though, even more typical keyboards can still be distracting. I once had a colleague who could type very quickly on his Bluetooth Mac keyboard. He said that when he visited one of the satellite offices, the colleagues he sat beside asked him to move away from them since his impressive typing speed was distracting.</p>]]></summary>
 </entry>
 
 </feed>

@@ -3,10 +3,10 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Posts in category "narrative" - Richard Goulter's Blog</title>
+        <title>Use of Anki for Programming - Richard Goulter's Blog</title>
 
         <!-- My (Old) CSS theme -->
-        <link rel="stylesheet" type="text/css" href="../css/default.css" />
+        <link rel="stylesheet" type="text/css" href="../../css/default.css" />
 
         <!--
             jQuery & jQueryUI
@@ -19,7 +19,7 @@
             Pandoc Style CSS
             (for syntax highlighted snippets)
         -->
-        <link rel="stylesheet" type="text/css" href="../css/syntax.css" />
+        <link rel="stylesheet" type="text/css" href="../../css/syntax.css" />
 
         <!--
             Bootstrap
@@ -42,12 +42,12 @@
             so we can do this:
             http://imakewebthings.com/waypoints/shortcuts/sticky-elements/
         -->
-        <script src="../js/jquery.waypoints.min.js"></script>
-        <script src="../js/sticky.min.js"></script>
+        <script src="../../js/jquery.waypoints.min.js"></script>
+        <script src="../../js/sticky.min.js"></script>
 
         <!-- My analytics stuff -->
-        <script src="../js/my_analytics.js"></script>
-        <script src="../js/my_analytics_debug.js"></script>
+        <script src="../../js/my_analytics.js"></script>
+        <script src="../../js/my_analytics_debug.js"></script>
 
         <!--
             TOCify
@@ -57,7 +57,7 @@
             Patched TOCify css file.
             (Don't want fixed `.tocify`).
         -->
-        <link rel="stylesheet" type="text/css" href="../css/jquery.tocify.css" />
+        <link rel="stylesheet" type="text/css" href="../../css/jquery.tocify.css" />
 
         <style>
         .navbar {
@@ -109,16 +109,16 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="../">Richard Goulter's Blog</a>
+        <a class="navbar-brand" href="../../">Richard Goulter's Blog</a>
     </div>
 
     <div class="collapse navbar-collapse" id="navbar-collapse-1">
         <ul class="nav navbar-nav navbar-right">
-            <li><a href="../">Home</a></li>
-            <li><a href="../yi.html">Yi</a></li>
-            <li><a href="../emacs.html">Emacs</a></li>
-            <li><a href="../what-i-wish-i-knew-when-i-started-using-nix.html">Nixpkgs</a></li>
-            <li><a href="../archive.html">Archive</a></li>
+            <li><a href="../../">Home</a></li>
+            <li><a href="../../yi.html">Yi</a></li>
+            <li><a href="../../emacs.html">Emacs</a></li>
+            <li><a href="../../what-i-wish-i-knew-when-i-started-using-nix.html">Nixpkgs</a></li>
+            <li><a href="../../archive.html">Archive</a></li>
         </ul>
     </div>
 </nav>
@@ -128,70 +128,46 @@
             <hr style="margin: 0px; border-top: 5px solid black;" />
 
             <div id="content" class="container">
-                <h1>Posts in category "narrative"</h1>
-                <ul>
+                <h1>Use of Anki for Programming</h1>
+                <div class="info">
+    Posted on May  1, 2022
     
-        <li>
-            <a href="../posts/narrative/2022-05-01-prime-videos-invincible-is-wonderful.html">Prime Video's Invincible is Wonderful</a> - May  1, 2022
-        </li>
+        by Richard Goulter
+    <br />
     
-        <li>
-            <a href="../posts/narrative/2021-11-07-netflixs-narcos-mexico-season-3-is-a-let-down.html">Netflix's Narcos Mexico Season 3 is a Let Down</a> - November  7, 2021
-        </li>
+    Tags: 
     
-        <li>
-            <a href="../posts/narrative/2021-07-29-dreamy-eyes-is-very-sweet.html">Dreamy Eyes is Very Sweet</a> - July 29, 2021
-        </li>
+</div>
+
+<p>Anki is software which helps you to review flash cards. What’s notable about it is it uses the idea of Spaced Repitition; by getting you to recall something at approximately the time you would otherwise have forgotten it, you’re better able to recall some fact at increasingly long intervals.</p>
+<p>This is useful for foreign language learning (or health science) where you’ll want to recall terms, sometimes with low frequency.</p>
+<p>One serious article I’ve seen about using Anki for non-language stuff was this: <a href="http://augmentingcognition.com/ltm.html" class="uri">http://augmentingcognition.com/ltm.html</a></p>
+<p>One quick take-away I recall is just the emphasis that Anki isn’t a completely magical to help you remember everything.</p>
+<p>For things you use frequently anyway, Anki won’t be of much help. And for things you wish to recall in infrequent contexts, Anki is going to require much more effort than it’s worth. (As in, it’s harder to remember because you won’t have motivation to use it).</p>
+<p>For programming, I’ve only used Anki slightly.</p>
+<p>To give a somewhat specific example of how I’ve used it: e.g. I noticed I wanted to be able to recall the different <code>ServiceType</code>s of a Kubernetes <code>Service</code>. e.g. per https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services-service-types<br />
+I think once you understand the concept, recalling the facts of it is easier.<br />
+Short of that, the easiest flashcard to make is with a brute-force approach which enumerates the types. (Which is not terrible in this case, since there are four types).<br />
+I’d say it would be better to then later create more flash cards about the topic. e.g. in this case, flashcards about what the default service type is, and flashcards in the form “service type which exposes service on a port on each node” or “service type which uses cloud provider’s load balancer”, etc.</p>
+<p>Another example I have been trying recently has been keybindings. e.g. I want to be able to use the fancy Helix editor, or to get more out of Doom Emacs.<br />
+Keybindings which work well in you workflow are easy to remember.<br />
+But.. I think it’s always easier to continue doing something in an known-and-adequate-but-bad way rather than a nice-but-unknown way.<br />
+I think writing up flashcards for anki helps to build the mental model for what the mnemonics for the keybindings are. And I think “I’d like to use this functionality, but can’t recall the keybinding” is close to that margin of “frequent enough to want to recall it, infrequent enough such that you’re not using it all the time”.</p>
+<p>In the worst case, I think Anki flashcards are a useful intermediate artifact to aim for when studying.</p>
+
+<hr />
+
+<div>
     
-        <li>
-            <a href="../posts/narrative/2020-05-29-rereading-high-fidelity.html">Re-reading High Fidelity</a> - May 29, 2020
-        </li>
+    <a href="../../posts/narrative/2022-05-01-prime-videos-invincible-is-wonderful.html" style="float:left;">Newer post</a>
     
-        <li>
-            <a href="../posts/narrative/2016-06-12-recommendation-rick-and-morty.html">Recommendation: Rick and Morty</a> - June 12, 2016
-        </li>
     
-        <li>
-            <a href="../posts/narrative/2016-05-15-review-of-the-righteous-mind.html">Review of The Righteous Mind</a> - May 15, 2016
-        </li>
+    <a href="../../posts/romance/2022-03-27-bridgerton-2.html" style="float:right; text-align: right;">Older post</a>
     
-        <li>
-            <a href="../posts/narrative/2016-05-04-zootopia-and-its-edge-cases.html">Zootopia and its Edge Cases</a> - May  4, 2016
-        </li>
-    
-        <li>
-            <a href="../posts/narrative/2016-04-19-yes-the-wire-is-good.html">Yes, The Wire is Good</a> - April 19, 2016
-        </li>
-    
-        <li>
-            <a href="../posts/narrative/2015-08-28-watching-videogames.html">Watching Videogames</a> - August 28, 2015
-        </li>
-    
-        <li>
-            <a href="../posts/narrative/2015-04-28-i-could-solve-this-in-five-minutes.html">I Could Solve This in Five Minutes</a> - April 28, 2015
-        </li>
-    
-        <li>
-            <a href="../posts/narrative/2015-03-28-case-study-of-conflict-in-narrative.html">Case Study of Conflict in Narrative</a> - March 28, 2015
-        </li>
-    
-        <li>
-            <a href="../posts/narrative/2015-03-22-conflict-in-narrative-re-genre.html">Conflict in Narrative, RE: Genre</a> - March 22, 2015
-        </li>
-    
-        <li>
-            <a href="../posts/narrative/2015-02-25-rambling-on-genres-romance-and-action.html">Rambling on Genres, Romance and Action</a> - February 25, 2015
-        </li>
-    
-        <li>
-            <a href="../posts/narrative/2014-01-18-questions-about-things-which-im-vaguely-curious-about.html">Questions About Things Which I'm Vaguely Curious About</a> - January 18, 2014
-        </li>
-    
-        <li>
-            <a href="../posts/narrative/2013-12-26-frozen.html">Frozen</a> - December 26, 2013
-        </li>
-    
-</ul>
+</div>
+<br style="clear: both;" />
+
+<hr />
 
             </div>
 
