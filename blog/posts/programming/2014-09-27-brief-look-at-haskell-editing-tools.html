@@ -53,6 +53,7 @@
             TOCify
         -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js"></script>
+
         <!--
             Patched TOCify css file.
             (Don't want fixed `.tocify`).
@@ -135,31 +136,72 @@
         by Richard Goulter
     <br />
     
-    Tags: <a href="../../tags/programming.haskell.html">programming.haskell</a>, <a href="../../tags/programming.editors.html">programming.editors</a>
+    Tags: <a title="All pages tagged 'programming.haskell'." href="../../tags/programming.haskell.html">programming.haskell</a>, <a title="All pages tagged 'programming.editors'." href="../../tags/programming.editors.html">programming.editors</a>
     
 </div>
 
-<p>Recently I used Haskell in a school project. It was unclear to me whether there’s a “killer” Haskell editor. (e.g. Leksah looks damn cool, but also looks quite old now). <a href="http://www.haskell.org/haskellwiki/IDEs">The Haskell Wiki</a> does list a bunch, and some time I’d like to go through and do a better examination of these. My current understanding is as follows:</p>
+<p>Recently I used Haskell in a school project. It was unclear to me whether
+there’s a “killer” Haskell editor. (e.g. Leksah looks damn cool, but also looks
+quite old now). <a href="http://www.haskell.org/haskellwiki/IDEs">The Haskell Wiki</a>
+does list a bunch, and some time I’d like to go through and do a better
+examination of these. My current understanding is as follows:</p>
 <h3 id="eclipsefp">EclipseFP</h3>
-<p>The excellent Haskell editing plugin for Eclipse. I used this quite well with Eclipse Kepler some time ago when I was playing around with Haskell; though, I think I ran into some issues when I was trying this with Eclipse Luna.</p>
-<p>The easiest way to get this plugin is from a standard Eclipse installation, and using the update-site to download the plugin. Now that Cabal supports cabal sandboxes, EclipseFP is able to download its dependencies without messing up your cabal setup.</p>
-<p>For some reason I didn’t opt for EclipseFP, but wanted to try out Haskell support for various editors.</p>
+<p>The excellent Haskell editing plugin for Eclipse. I used this quite well with
+Eclipse Kepler some time ago when I was playing around with Haskell; though, I
+think I ran into some issues when I was trying this with Eclipse Luna.</p>
+<p>The easiest way to get this plugin is from a standard Eclipse installation, and
+using the update-site to download the plugin. Now that Cabal supports cabal
+sandboxes, EclipseFP is able to download its dependencies without messing up
+your cabal setup.</p>
+<p>For some reason I didn’t opt for EclipseFP, but wanted to try out Haskell
+support for various editors.</p>
 <h3 id="atom-ide-haskell">Atom + IDE-Haskell</h3>
-<p>Atom (or, the free equivalent to Sublime Text) + <a href="https://atom.io/packages/ide-haskell">IDE-Haskell</a> is reasonably easy to install; though there are some dependencies which IDE-Haskell requires. I liked this setup quite a lot, although I never bothered to customise or adjust Atom very much. (By default, it gave me an awful variable-width font, so that had to change).</p>
-<p>I think this is what I would recommend in general; it’s inferior to EclipseFP in that the latter has a nice interface for editing Cabal project files, but it’s nice for by-default having a UI which emphasised text editing. (On the downside to Atom, though, is sometimes I encountered the Chrome dev-tools bar, which completely threw-off the look &amp; feel of Atom).<br />
-- Maybe it’s possible to customise Eclipse to be nice to use like this (beyond just double-clicking on the edit window), but Eclipse is a beast.</p>
+<p>Atom (or, the free equivalent to Sublime Text) +
+<a href="https://atom.io/packages/ide-haskell">IDE-Haskell</a> is reasonably easy to
+install; though there are some dependencies which IDE-Haskell requires. I
+liked this setup quite a lot, although I never bothered to customise or adjust
+Atom very much. (By default, it gave me an awful variable-width font, so that
+had to change).</p>
+<p>I think this is what I would recommend in general; it’s inferior to EclipseFP
+in that the latter has a nice interface for editing Cabal project files, but
+it’s nice for by-default having a UI which emphasised text editing. (On the
+downside to Atom, though, is sometimes I encountered the Chrome dev-tools bar,
+which completely threw-off the look &amp; feel of Atom).<br />
+- Maybe it’s possible to customise Eclipse to be nice to use like this (beyond
+just double-clicking on the edit window), but Eclipse is a beast.</p>
 <h3 id="vim">Vim + …?</h3>
-<p>I’m a big Vim fan. Certainly the text motions, as well as a bunch of plugins (like fuzzy-finding autocompletion in YCM) are features I really want in a text editor. (If your editor has things like that, great!).</p>
-<p>But previously I wasn’t able to get Vim + Haskell working well together. It’s not due to a lack of support, but rather, a fragmentation in what support there is, and so it’s unclear what option to go with.</p>
-<p>I was fortunate to stumble upon the StackOverflow question <a href="http://stackoverflow.com/questions/20622390/is-haskellmode-vim-dead">Is haskellmode-vim dead?</a>, where the author adds:</p>
+<p>I’m a big Vim fan. Certainly the text motions, as well as a bunch of plugins
+(like fuzzy-finding autocompletion in YCM) are features I really want in a text
+editor. (If your editor has things like that, great!).</p>
+<p>But previously I wasn’t able to get Vim + Haskell working well together. It’s
+not due to a lack of support, but rather, a fragmentation in what support there
+is, and so it’s unclear what option to go with.</p>
+<p>I was fortunate to stumble upon the StackOverflow question <a href="http://stackoverflow.com/questions/20622390/is-haskellmode-vim-dead">Is haskellmode-vim
+dead?</a>,
+where the author adds:</p>
 <blockquote>
-<p>Just in case someone stumbles over this question in the future. My current (haskell specific) vim configuration contains these plugins: ghcmod-vim (type exploring), neco-ghc (auto completion), syntactic <em>[sic]</em> (error highlighting), vim2hs (misc utils)</p>
+<p>Just in case someone stumbles over this question in the future. My current
+(haskell specific) vim configuration contains these plugins: ghcmod-vim
+(type exploring), neco-ghc (auto completion), syntactic <em>[sic]</em> (error
+highlighting), vim2hs (misc utils)</p>
 </blockquote>
-<p>Thank you, Florian. :-) Indeed, this setup is fantastic. Slightly difficult to install if you’re using Vundle to manage plugin dependencies (I’ve heard NeoBundle takes care of these things), since ghcmod-vim requires vimproc, which needs to be natively-compiled.</p>
-<p>The one downside to this setup is that the “checking” done by syntastic(?) (and/or ghcmod-vim?) would be slow whenever I saved the file. My understanding is this is due to Vim’s single-threaded, synchronous nature of dealing with computations. One hopes that NeoVim, in addition to being well tested, will come with a community to make use of its nifty new features.</p>
+<p>Thank you, Florian. :-) Indeed, this setup is fantastic. Slightly difficult to
+install if you’re using Vundle to manage plugin dependencies (I’ve heard
+NeoBundle takes care of these things), since ghcmod-vim requires vimproc, which
+needs to be natively-compiled.</p>
+<p>The one downside to this setup is that the “checking” done by syntastic(?)
+(and/or ghcmod-vim?) would be slow whenever I saved the file. My understanding
+is this is due to Vim’s single-threaded, synchronous nature of dealing with
+computations. One hopes that NeoVim, in addition to being well tested, will
+come with a community to make use of its nifty new features.</p>
 <h3 id="summary">Summary</h3>
-<p>Off the top of my head (and from what I used), I can’t recall all the features each of these had. That’s why it would be nice to have a round-up and summary/analysis of the current state of Haskell editing tools.</p>
-<p>I know the Vim one had both TagBar support (at least with lushtags, maybe?), and some level of auto-completion; errors from :GhcModCheck were linked with quickfix, and :GhcModType was able to give me the type of the current item. (Things which would be nicer with proper key bindings).</p>
+<p>Off the top of my head (and from what I used), I can’t recall all the features
+each of these had. That’s why it would be nice to have a round-up and
+summary/analysis of the current state of Haskell editing tools.</p>
+<p>I know the Vim one had both TagBar support (at least with lushtags, maybe?),
+and some level of auto-completion; errors from :GhcModCheck were linked with
+quickfix, and :GhcModType was able to give me the type of the current item.
+(Things which would be nicer with proper key bindings).</p>
 
 <hr />
 
@@ -174,6 +216,19 @@
 <br style="clear: both;" />
 
 <hr />
+
+<!-- Load highlight.js for Syntax Highlighting. -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/bash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/c.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/gherkin.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/haskell.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/lisp.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/nix.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js"></script>
+<script>hljs.highlightAll();</script>
 
             </div>
 

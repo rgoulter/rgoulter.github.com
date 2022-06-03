@@ -53,6 +53,7 @@
             TOCify
         -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js"></script>
+
         <!--
             Patched TOCify css file.
             (Don't want fixed `.tocify`).
@@ -135,49 +136,92 @@
         by Richard Goulter
     <br />
     
-    Tags: <a href="../../tags/fyp.html">fyp</a>, <a href="../../tags/programming.scala.html">programming.scala</a>, <a href="../../tags/programming.c.html">programming.c</a>, <a href="../../tags/programming.vim.html">programming.vim</a>, <a href="../../tags/presentation.html">presentation</a>
+    Tags: <a title="All pages tagged 'fyp'." href="../../tags/fyp.html">fyp</a>, <a title="All pages tagged 'programming.scala'." href="../../tags/programming.scala.html">programming.scala</a>, <a title="All pages tagged 'programming.c'." href="../../tags/programming.c.html">programming.c</a>, <a title="All pages tagged 'programming.vim'." href="../../tags/programming.vim.html">programming.vim</a>, <a title="All pages tagged 'presentation'." href="../../tags/presentation.html">presentation</a>
     
 </div>
 
-<p>I’ve been invited to talk at NUSHackers Friday Hacks on October 9th, about my FYP of building a ‘worksheet’/‘live coding’ environment for C.<br />
-This post is to note down anything pertinent / thinking-out-loud as to what to say.</p>
-<p>This is a draft. <a href="https://onedrive.live.com/redir?resid=D8B6217BE240272D!94399&amp;authkey=!AH692L5mL_TVLeo&amp;ithint=file%2cpptx">Here is a link to the presentation draft</a>.<br />
+<p>I’ve been invited to talk at NUSHackers Friday Hacks on October 9th, about my
+FYP of building a ‘worksheet’/‘live coding’ environment for C.<br />
+This post is to note down anything pertinent / thinking-out-loud as to what to
+say.</p>
+<p>This is a draft. <a href="https://onedrive.live.com/redir?resid=D8B6217BE240272D!94399&amp;authkey=!AH692L5mL_TVLeo&amp;ithint=file%2cpptx">Here is a link to the presentation
+draft</a>.<br />
 (Obviously, the colours need to change.).</p>
 <h1 id="what-is-my-fyp">What is my FYP?</h1>
 <p>Let’s have a GIF explain that:</p>
 <figure>
-<img src="https://github.com/rgoulter/c-worksheet.vim/raw/master/demo.gif" alt="demo" /><figcaption>demo</figcaption>
+<img src="https://github.com/rgoulter/c-worksheet.vim/raw/master/demo.gif" alt="demo" />
+<figcaption aria-hidden="true">demo</figcaption>
 </figure>
-<p><a href="https://github.com/rgoulter/c-worksheet.vim/raw/master/demo-slow.gif">(Here is the same gif, slower speed).</a></p>
-<p>i.e. show the results of the computation directly beside the C program itself, inside the editor. (This saves having to quit the editor, type <code>gcc &lt;whatever&gt;.c</code>, <code>./a.out</code>, then try and figure out what’s going on).<br />
+<p><a href="https://github.com/rgoulter/c-worksheet.vim/raw/master/demo-slow.gif">(Here is the same gif, slower
+speed).</a></p>
+<p>i.e. show the results of the computation directly beside the C program itself,
+inside the editor. (This saves having to quit the editor, type <code>gcc &lt;whatever&gt;.c</code>, <code>./a.out</code>, then try and figure out what’s going on).<br />
 Another way to describe this as a ‘REPL on steroids’.<br />
 You might be aware of other such tools around:</p>
 <ul>
-<li>Scala IDE’s “worksheets” were the ‘inspiration’ for this. (EclipseFP copies this idea with what it calls a ‘worksheet’).</li>
+<li>Scala IDE’s “worksheets” were the ‘inspiration’ for this. (EclipseFP copies
+this idea with what it calls a ‘worksheet’).</li>
 <li>Apple’s Playground does a similar kindof thing for Objective-C and Swift.</li>
-<li>LightTable (whose demo was very impressive, but the $300k KickStarter hasn’t given us the complete thing yet) is big on doing this for Clojure, and to a limited extent Python.</li>
+<li>LightTable (whose demo was very impressive, but the $300k KickStarter hasn’t
+given us the complete thing yet) is big on doing this for Clojure, and to a
+limited extent Python.</li>
 <li>IPython notebooks are kinda-sorta similar.</li>
-<li><a href="https://comealive.io/">‘Alive’</a> is bringing the same thing for C# in Visual Studio.</li>
-<li><a href="https://github.com/jcartledge/sublime-worksheet">jcartledge/sublime-worksheet</a> is an example of an editor plugin which provides a ‘worksheet’ interface for any REPL language. (Easy to see ‘REPL on steroids’ here).</li>
-<li>Apparently <a href="http://stackoverflow.com/questions/13059700/can-sublimetext2-execude-ruby-code-and-show-the-results-within-the-document-like">TextMate</a> can show results for Ruby.</li>
-<li>TMux + Vim, with something like <a href="https://github.com/epeli/slimux">slimux</a> (‘send output to TMux shell’) kinda-sorta helps out with this, too. (‘slimux’ being inspired by Emacs’ SLIME).</li>
+<li><a href="https://comealive.io/">‘Alive’</a> is bringing the same thing for C# in Visual
+Studio.</li>
+<li><a href="https://github.com/jcartledge/sublime-worksheet">jcartledge/sublime-worksheet</a>
+is an example of an editor plugin which provides a ‘worksheet’ interface for
+any REPL language. (Easy to see ‘REPL on steroids’ here).</li>
+<li>Apparently
+<a href="http://stackoverflow.com/questions/13059700/can-sublimetext2-execude-ruby-code-and-show-the-results-within-the-document-like">TextMate</a>
+can show results for Ruby.</li>
+<li>TMux + Vim, with something like <a href="https://github.com/epeli/slimux">slimux</a>
+(‘send output to TMux shell’) kinda-sorta helps out with this, too. (‘slimux’
+being inspired by Emacs’ SLIME).</li>
 </ul>
-<p>Loosely related is also, e.g. GDB/LLDB. A more sober way to describe my plugin is “auto-generated printf debugging”. – GDB/debuggers provide ‘inspect the value at some point in execution’ and ‘can easily evaluate expressions’ functionality. (GDB is known to be easy-to-use, widely used by the CS1010 kids, etc.).</p>
-<p>My project on GitHub: <a href="https://github.com/rgoulter/c-worksheet-instrumentor">rgoulter/c-worksheet-instrumentor</a> (the main logic), and <a href="https://github.com/rgoulter/c-worksheet.vim">rgoulter/c-worksheet.vim</a> (a plugin for Vim).<br />
-(It’s got a handful of stars on GitHub. You just know I’m amazing at publicity.).</p>
+<p>Loosely related is also, e.g. GDB/LLDB. A more sober way to describe my plugin
+is “auto-generated printf debugging”. – GDB/debuggers provide ‘inspect the
+value at some point in execution’ and ‘can easily evaluate expressions’
+functionality. (GDB is known to be easy-to-use, widely used by the CS1010 kids,
+etc.).</p>
+<p>My project on GitHub:
+<a href="https://github.com/rgoulter/c-worksheet-instrumentor">rgoulter/c-worksheet-instrumentor</a>
+(the main logic), and
+<a href="https://github.com/rgoulter/c-worksheet.vim">rgoulter/c-worksheet.vim</a> (a
+plugin for Vim).<br />
+(It’s got a handful of stars on GitHub. You just know I’m amazing at
+publicity.).</p>
 <h1 id="goals-for-presentation-meta">Goals for Presentation (Meta)</h1>
-<p>Hopefully, (esp. if you play around with it yourself), you’ll think that’s kinda cool.<br />
-I’ll know if I did a good job with my talk if you walk out thinking “that’s it, huh? I was expecting something complicated.” / “<em>I</em> could do that, chump.”. (I’ll’ve done an even better job if some of you go out and try and make this kindof stuff).</p>
-<p>It’s kinda lame, for me, to say “hey, what I did for my FYP is quite simple”. (“If you can’t explain it simply, you don’t understand” / “it’s only simple if we simplify out the details” aside). The fortunate thing for this is that C has relatively few features. (e.g. No closures / functions within functions). But it’s not a sit-down-and-finish-it-in-an-hour kindof project. It is a <em>lot</em> of fun. (How many kids continue working on their FYP after they’ve presented in their free time?). You’ll also get <em>very</em> good at the language; I got somewhat familiar with the C99 language standard, and certainly stumbled upon the more esoteric aspects of (simple) C99, my favourite being:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="dt">int</span> isWhitespace[<span class="dv">256</span>] = { [<span class="ch">' '</span>] = <span class="dv">1</span>, [<span class="ch">'\t'</span>] = <span class="dv">1</span>, [<span class="ch">'\n'</span>] = <span class="dv">1</span> };</a>
-<a class="sourceLine" id="cb1-2" data-line-number="2">isWhitespace[<span class="ch">'a'</span>];  <span class="co">//&gt; 0</span></a>
-<a class="sourceLine" id="cb1-3" data-line-number="3">isWhitespace[<span class="ch">' '</span>];  <span class="co">//&gt; 1</span></a>
-<a class="sourceLine" id="cb1-4" data-line-number="4">isWhitespace[<span class="ch">'\t'</span>]; <span class="co">//&gt; 1</span></a></code></pre></div>
+<p>Hopefully, (esp. if you play around with it yourself), you’ll think that’s
+kinda cool.<br />
+I’ll know if I did a good job with my talk if you walk out thinking “that’s it,
+huh? I was expecting something complicated.” / “<em>I</em> could do that, chump.”.
+(I’ll’ve done an even better job if some of you go out and try and make this
+kindof stuff).</p>
+<p>It’s kinda lame, for me, to say “hey, what I did for my FYP is quite simple”.
+(“If you can’t explain it simply, you don’t understand” / “it’s only simple if
+we simplify out the details” aside). The fortunate thing for this is that C has
+relatively few features. (e.g. No closures / functions within functions). But
+it’s not a sit-down-and-finish-it-in-an-hour kindof project. It is a <em>lot</em> of
+fun. (How many kids continue working on their FYP after they’ve presented in
+their free time?). You’ll also get <em>very</em> good at the language; I got somewhat
+familiar with the C99 language standard, and certainly stumbled upon the more
+esoteric aspects of (simple) C99, my favourite being:</p>
+<pre class="c"><code>int isWhitespace[256] = { [' '] = 1, ['\t'] = 1, ['\n'] = 1 };
+isWhitespace['a'];  //&gt; 0
+isWhitespace[' '];  //&gt; 1
+isWhitespace['\t']; //&gt; 1</code></pre>
 <h2 id="whats-in-it-for-you-motivation-for-caring-about-the-presentation">“What’s In It For You” / Motivation For Caring About the Presentation</h2>
-<p>Something like ‘Example of a cool Programming-Language Application project you can make, once you have knowledge of how to make a parser &amp; roughly you could implement it’, esp. if the inspiration is ‘I want that for <em>my favourite language</em>’.</p>
-<p>On the other hand, PL applications needn’t be like this, and can be more modest, like, ‘organise imports’ or ‘indent properly’ or so.</p>
+<p>Something like ‘Example of a cool Programming-Language Application project you
+can make, once you have knowledge of how to make a parser &amp; roughly you could
+implement it’, esp. if the inspiration is ‘I want that for <em>my favourite
+language</em>’.</p>
+<p>On the other hand, PL applications needn’t be like this, and can be more
+modest, like, ‘organise imports’ or ‘indent properly’ or so.</p>
 <h1 id="parsers-and-pl-applications">Parsers and PL Applications</h1>
-<p>– It can become clear by the terminology, the way someone talks, how much they know or don’t know about a subject. “Parsers” is one of these areas I don’t know all that much about. (I never took the compilers/parser course.).</p>
+<p>– It can become clear by the terminology, the way someone talks, how much they
+know or don’t know about a subject. “Parsers” is one of these areas I don’t
+know all that much about. (I never took the compilers/parser course.).</p>
 <p>But in terms of “writing a worksheetify program”, roughly formula for this is:</p>
 <ol type="1">
 <li>Parse the source code.</li>
@@ -185,43 +229,91 @@ I’ll know if I did a good job with my talk if you walk out thinking “that’
 <li>Profit.</li>
 </ol>
 <p>(Which applies to writing any PL application in general.).<br />
-There are different ways to do it. (And of course, there are trade-offs for different approaches.).</p>
-<p>But a key point I learned is, if you want to show results within functions / nested scopes / control structures, it’s not enough to just pass it off to a REPL. You must be able to parse the source code.</p>
+There are different ways to do it. (And of course, there are trade-offs for
+different approaches.).</p>
+<p>But a key point I learned is, if you want to show results within functions /
+nested scopes / control structures, it’s not enough to just pass it off to a
+REPL. You must be able to parse the source code.</p>
 <h2 id="making-use-of-the-ast">Making Use of the AST</h2>
-<p>In situations where you’re writing programs whose data is other programs, you’re going to want to make use of techniques a level abstracted from directly traversing the AST.</p>
+<p>In situations where you’re writing programs whose data is other programs,
+you’re going to want to make use of techniques a level abstracted from directly
+traversing the AST.</p>
 <figure>
-<img src="http://i.imgur.com/12f7qEm.png" alt="AST" /><figcaption>AST</figcaption>
+<img src="http://i.imgur.com/12f7qEm.png" alt="AST" />
+<figcaption aria-hidden="true">AST</figcaption>
 </figure>
-<p>ANTLR (see below) provides two ways to handle this: Tree Listeners, Tree Visitors.<br />
-With Tree Listeners, you implement listener methods which get called as the AST is walked.<br />
-With Tree Visitors, you implement methods which then control which parts of the tree are ‘visited’; the intent is to evaluate the AST to some value. ( e.g. Numeric expression to a number, like in the simple math expression grammar example).</p>
-<p>– The Tree Visitor is kindof more FP-ish, except having to explicitly call ‘visit’ on the children nodes of the AST is also a bit tedious. - This can be abstracted another level, where you have e.g. <code>AST -&gt; Option[T]</code>, and some <code>combine :: [T] -&gt; T</code>, then it’s possible to write a general <code>fold_ast :: AST -&gt; (AST -&gt; Option[T]) -&gt; ([T] -&gt; T) -&gt; T</code> function for the AST. (The <code>AST -&gt; Option[T]</code> means “maybe extract value from this AST node; if this node returns Some thing, use that, otherwise keep looking.”.). - Manipulation of AST could be done in a similar way.</p>
-<p>Anyway. The dynamic (in ANTLR) is usually that the Tree Listeners can be used to ‘grab what you want’ out of the AST, Tree Visitor is better at ‘evaluating’ some part of the AST to a value.</p>
+<p>ANTLR (see below) provides two ways to handle this: Tree Listeners, Tree
+Visitors.<br />
+With Tree Listeners, you implement listener methods which get called as the AST
+is walked.<br />
+With Tree Visitors, you implement methods which then control which parts of the
+tree are ‘visited’; the intent is to evaluate the AST to some value. (e.g.
+Numeric expression to a number, like in the simple math expression grammar
+example).</p>
+<p>– The Tree Visitor is kindof more FP-ish, except having to explicitly call
+‘visit’ on the children nodes of the AST is also a bit tedious. - This can be
+abstracted another level, where you have e.g. <code>AST -&gt; Option[T]</code>, and some
+<code>combine :: [T] -&gt; T</code>, then it’s possible to write a general <code>fold_ast :: AST -&gt; (AST -&gt; Option[T]) -&gt; ([T] -&gt; T) -&gt; T</code> function for the AST. (The <code>AST -&gt; Option[T]</code> means “maybe extract value from this AST node; if this node returns
+Some thing, use that, otherwise keep looking.”.). - Manipulation of AST could
+be done in a similar way.</p>
+<p>Anyway. The dynamic (in ANTLR) is usually that the Tree Listeners can be used
+to ‘grab what you want’ out of the AST, Tree Visitor is better at ‘evaluating’
+some part of the AST to a value.</p>
 <h2 id="my-choice-of-parser-technique">My Choice of Parser / Technique</h2>
-<p>For the ‘parser’, I made use of ANTLR parser-generator (like flex/yacc; just give it a BNF-esque grammar, and it generates the lexer/parser for you). Mostly because this can generate a parser in Java, and I was using Scala for the project (as specified by FYP description – Though I think since FP/‘strongly-typed’ languages are kinda nicer to write parsers in, I think the hope was I’d hand-write the parser..)</p>
-<p>(See my adapted <a href="https://github.com/rgoulter/c-worksheet-instrumentor/blob/master/src/main/antlr4/edu/nus/worksheet/instrumentor/C.g4">C.g4</a>).</p>
-<p>Making use of gccxml, or an LLVM/Clang pass might’ve also had it’s advantages, ‘but’, then I’d have to write in C++ (for the latter), it makes the executable size for my program <em>much</em> larger (which is fine if your plugin is like YouCompleteMe), and I more/less wanted to keep the approach ‘general’, rather than tied to a specific language.<br />
-[Note: a disadvantage of not using gcc/clang is that there may be divergence between what <em>they</em> parse and what <em>I</em> parse; I mitigate this in my project by first compiling the given input C file. i.e. anything I can parse, they can parse (better?)].</p>
+<p>For the ‘parser’, I made use of ANTLR parser-generator (like flex/yacc; just
+give it a BNF-esque grammar, and it generates the lexer/parser for you). Mostly
+because this can generate a parser in Java, and I was using Scala for the
+project (as specified by FYP description – Though I think since
+FP/‘strongly-typed’ languages are kinda nicer to write parsers in, I think the
+hope was I’d hand-write the parser..)</p>
+<p>(See my adapted
+<a href="https://github.com/rgoulter/c-worksheet-instrumentor/blob/master/src/main/antlr4/edu/nus/worksheet/instrumentor/C.g4">C.g4</a>).</p>
+<p>Making use of gccxml, or an LLVM/Clang pass might’ve also had it’s advantages,
+‘but’, then I’d have to write in C++ (for the latter), it makes the executable
+size for my program <em>much</em> larger (which is fine if your plugin is like
+YouCompleteMe), and I more/less wanted to keep the approach ‘general’, rather
+than tied to a specific language.<br />
+[Note: a disadvantage of not using gcc/clang is that there may be divergence
+between what <em>they</em> parse and what <em>I</em> parse; I mitigate this in my project by
+first compiling the given input C file. i.e. anything I can parse, they can
+parse (better?)].</p>
 <p>In terms of “in my case”:<br />
-One approach might be to just pass the code of to some C interpreter anyway. (Cling is a C++ interpreter developed by the folk at CERN, a successor of an older CInt (C Interpreter) project of theirs. ‘Cling’ because it’s built upon LLVM/Clang.). This’d require potentially renaming variables so that everything is unique, and ‘unfolding’ control structures (like loops, etc.). – Quite a messy way of doing things.</p>
-<p>Another approach (which I never investigated) would be to generate a sequence of commands to give to GDB/LLDB so as to get the information (i.e. values of variables at some point in execution). (I did investigate using GDB/LLDB insofar as ‘will this let me avoid having to learn about the PL stuff?’; it’s not suffice because you still need to know for a statement e.g. <code>x = y = 4</code> <em>what</em> information you’d like to get from GDB/LLDB). – This isn’t necessarily a bad approach.</p>
+One approach might be to just pass the code of to some C interpreter anyway.
+(Cling is a C++ interpreter developed by the folk at CERN, a successor of an
+older CInt (C Interpreter) project of theirs. ‘Cling’ because it’s built upon
+LLVM/Clang.). This’d require potentially renaming variables so that everything
+is unique, and ‘unfolding’ control structures (like loops, etc.). – Quite a
+messy way of doing things.</p>
+<p>Another approach (which I never investigated) would be to generate a sequence
+of commands to give to GDB/LLDB so as to get the information (i.e. values of
+variables at some point in execution). (I did investigate using GDB/LLDB
+insofar as ‘will this let me avoid having to learn about the PL stuff?’; it’s
+not suffice because you still need to know for a statement e.g. <code>x = y = 4</code>
+<em>what</em> information you’d like to get from GDB/LLDB). – This isn’t necessarily
+a bad approach.</p>
 <p><img src="http://i.imgur.com/i2WKSkH.png" /></p>
 <h3 id="instrumenting">Instrumenting</h3>
 <p>The approach I <em>did</em> take was to ‘instrument’ (or ‘augment’) the code.<br />
-i.e. insert statements into the C program so that I can run the program to get the output.</p>
+i.e. insert statements into the C program so that I can run the program to get
+the output.</p>
 <p><img src="http://i.imgur.com/P3KHZzK.png" /></p>
 <p>Roughly like:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="dt">int</span> main() {</a>
-<a class="sourceLine" id="cb2-2" data-line-number="2">  <span class="dt">int</span> x;</a>
-<a class="sourceLine" id="cb2-3" data-line-number="3">  x = <span class="dv">3</span>;</a>
-<a class="sourceLine" id="cb2-4" data-line-number="4">}</a></code></pre></div>
+<pre class="c"><code>int main() {
+  int x;
+  x = 3;
+}</code></pre>
 <p>becomes</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="dt">int</span> main() {</a>
-<a class="sourceLine" id="cb3-2" data-line-number="2">  <span class="dt">int</span> x;</a>
-<a class="sourceLine" id="cb3-3" data-line-number="3">  x = <span class="dv">3</span>;</a>
-<a class="sourceLine" id="cb3-4" data-line-number="4">  OUTPUT(x, STRING_OF(<span class="dv">3</span>))</a>
-<a class="sourceLine" id="cb3-5" data-line-number="5">}</a></code></pre></div>
-<p>and as-if compiled with a pre-processor which handles <code>OUTPUT</code>, <code>STRING_OF</code>. <code>OUTPUT</code> outputs in a format my Scala program intercepts. (I just use <code>STDOUT</code>; it could also be done using, say, sockets, or using something like Apache Thrift / or some other IPC/RPC framework – With C, this is a bit annoying, e.g. becomes more difficult to compile on Windows. [My tool, &amp; the Vim plugin, work on Windows, btw]).</p>
+<pre class="c"><code>int main() {
+  int x;
+  x = 3;
+  OUTPUT(x, STRING_OF(3))
+}</code></pre>
+<p>and as-if compiled with a pre-processor which handles <code>OUTPUT</code>, <code>STRING_OF</code>.
+<code>OUTPUT</code> outputs in a format my Scala program intercepts. (I just use <code>STDOUT</code>;
+it could also be done using, say, sockets, or using something like Apache
+Thrift / or some other IPC/RPC framework – With C, this is a bit annoying,
+e.g. becomes more difficult to compile on Windows. [My tool, &amp; the Vim plugin,
+work on Windows, btw]).</p>
 <p>The pseudocode for the instrumentor is more/less:</p>
 <pre><code>def instrument(source):
   ast &lt;- parse source
@@ -233,12 +325,25 @@ i.e. insert statements into the C program so that I can run the program to get 
   for each expression statement:
     // n.b. assignments are expressions
     insert(output declaration.toString)</code></pre>
-<p>Aside from ANTLR-specific stuff (e.g. ‘inserting’ into a token stream), the key challenge here is getting the ctype from a declaration. Furthermore, you need to be able to get the ctype of an expression, and from the ctype be able to generate ‘toString’ output for it.</p>
+<p>Aside from ANTLR-specific stuff (e.g. ‘inserting’ into a token stream), the key
+challenge here is getting the ctype from a declaration. Furthermore, you need
+to be able to get the ctype of an expression, and from the ctype be able to
+generate ‘toString’ output for it.</p>
 <h1 id="considerations-made-when-doing-this-for-c">Considerations Made When Doing This For C</h1>
-<p>Specifically for C, my program basically outputs for declarations (like cdecl), and outputs values for expression statements.</p>
+<p>Specifically for C, my program basically outputs for declarations (like cdecl),
+and outputs values for expression statements.</p>
 <h3 id="representing-c-kinds">Representing C Kinds</h3>
-<p>A C variable/expression will be of some type: * a primitive type (e.g. int, float, char), * a pointer to some C type, * an array of some C type, * a struct/union (consisting of a sequence of identifiers, each of some C type) type, * an enum type, * a function (consisting of a return value of some C type, and a sequence of parameters each of some C type).</p>
-<p>If you can see how the above might be represented as an ‘Algebraic Data Type’, congratulations. (If not, you probably haven’t heard of ADTs.).</p>
+<p>A C variable/expression will be of some type:
+* a primitive type (e.g. int, float, char),
+* a pointer to some C type,
+* an array of some C type,
+* a struct/union (consisting of a sequence of identifiers, each of some C type)
+type,
+* an enum type,
+* a function (consisting of a return value of some C type, and a sequence of
+parameters each of some C type).</p>
+<p>If you can see how the above might be represented as an ‘Algebraic Data Type’,
+congratulations. (If not, you probably haven’t heard of ADTs.).</p>
 <p>e.g. in ML languages like OCaml/Haskell, you might write it something like:</p>
 <pre><code>type CType = Primitive of String * String
            | Pointer   of String * CType
@@ -246,88 +351,171 @@ i.e. insert statements into the C program so that I can run the program to get 
            | Struct    of String * String * ((String, CType) List)
            | Function  of String * CType * ((String, CType) List)</code></pre>
 <p>In Scala, the code (simplified) is something like:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode scala"><code class="sourceCode scala"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw">sealed</span> <span class="kw">trait</span> CType;</a>
-<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="kw">case</span> <span class="kw">class</span> <span class="fu">PrimitiveType</span>(id: String, <span class="kw">type</span>: String) <span class="kw">extends</span> CType;</a>
-<a class="sourceLine" id="cb6-3" data-line-number="3"><span class="kw">case</span> <span class="kw">class</span> <span class="fu">PointerType</span>(id: String, to: CType) <span class="kw">extends</span> CType;</a>
-<a class="sourceLine" id="cb6-4" data-line-number="4"><span class="kw">case</span> <span class="kw">class</span> ArrayType(id: String, of: CType) <span class="kw">extends</span> CType;</a>
-<a class="sourceLine" id="cb6-5" data-line-number="5"><span class="kw">case</span> <span class="kw">class</span> <span class="fu">StructType</span>(id: String, tag: String, members: List[(String, CType)]) <span class="kw">extends</span> CType;</a>
-<a class="sourceLine" id="cb6-6" data-line-number="6"><span class="kw">case</span> <span class="kw">class</span> <span class="fu">FunctionType</span>(id: String, rtnType: CType, params: List[(String, CType)]) <span class="kw">extends</span> CType;</a></code></pre></div>
+<pre class="scala"><code>sealed trait CType;
+case class PrimitiveType(id: String, type: String) extends CType;
+case class PointerType(id: String, to: CType) extends CType;
+case class ArrayType(id: String, of: CType) extends CType;
+case class StructType(id: String, tag: String, members: List[(String, CType)]) extends CType;
+case class FunctionType(id: String, rtnType: CType, params: List[(String, CType)]) extends CType;</code></pre>
 <p>(See <a href="https://github.com/rgoulter/c-worksheet-instrumentor/blob/master/src/main/scala/edu/nus/worksheet/instrumentor/CType.scala">CType.scala</a>).</p>
-<p>In Java … ha ha ha, just kidding. (Just because you <em>can</em>, doesn’t mean you <em>should</em>.).</p>
+<p>In Java … ha ha ha, just kidding. (Just because you <em>can</em>, doesn’t mean you
+<em>should</em>.).</p>
 <h4 id="making-use-of-this-adt">Making use of this ADT</h4>
-<p>Again, often in FP programming, once you have the types, the rest is fairly straight-forward. In my case: * I want this ‘CType’ from the AST. (kinda because C99 doesn’t have <code>typeof(x)</code>). * I want to output e.g. string-of some ‘CType’. (because C99 doesn’t have <code>stringof(x)</code>).</p>
+<p>Again, often in FP programming, once you have the types, the rest is fairly
+straight-forward. In my case:
+* I want this ‘CType’ from the AST. (kinda because C99 doesn’t have
+<code>typeof(x)</code>).
+* I want to output e.g. string-of some ‘CType’. (because C99 doesn’t have
+<code>stringof(x)</code>).</p>
 <h2 id="declarations">Declarations</h2>
 <p><img src="http://i.imgur.com/93zni61.png" /></p>
-<p>The devil is in the detail, but (in terms of ANTLR): * You can use a TreeVisitor to evaluate a declaration statement to a list of CType(s). * You can then use a TreeListener to traverse the AST and pick up the declarations.</p>
+<p>The devil is in the detail, but (in terms of ANTLR):
+* You can use a TreeVisitor to evaluate a declaration statement to a list of
+CType(s).
+* You can then use a TreeListener to traverse the AST and pick up the
+declarations.</p>
 <p>The main complication here is that the listener has to care about scope.<br />
-There’s also things like forward declarations, types declared in header files, &amp; typedefs.</p>
-<p>It can be a bit tedious to figure this out, since you have to care about <em>all</em> occurrences of whatever AST node you’re working with. e.g. <code>declaration</code> can appear in the global scope, outside of functions; the identifiers of a struct’s members will look the same as a ‘normal’ declaration, etc.<br />
-– What helps here is comparing the ASTs of declarations which are quite similar. <code>int *(*a)[5];</code>, <code>int **b[5];</code>, <code>int (**c)[5]</code> have similar-ish trees, but very different semantics.</p>
+There’s also things like forward declarations, types declared in header files,
+&amp; typedefs.</p>
+<p>It can be a bit tedious to figure this out, since you have to care about <em>all</em>
+occurrences of whatever AST node you’re working with. e.g. <code>declaration</code> can
+appear in the global scope, outside of functions; the identifiers of a struct’s
+members will look the same as a ‘normal’ declaration, etc.<br />
+– What helps here is comparing the ASTs of declarations which are quite
+similar. <code>int *(*a)[5];</code>, <code>int **b[5];</code>, <code>int (**c)[5]</code> have similar-ish trees,
+but very different semantics.</p>
 <h3 id="the-adts-make-it-easier">The ADTs make it easier</h3>
-<p>In case the above diagram doesn’t make that obvious, then it’s roughly &quot;collect the type specifiers and any point-to-(type-specifier) info; this is passed to the declarator as the AST is traversed. Something something recursion, and that’s how simple it is.<br />
-Again, roughly, since each alternative for the declarator corresponds to some alternative of the above ADT, it does help write the program logic.</p>
+<p>In case the above diagram doesn’t make that obvious, then it’s roughly “collect
+the type specifiers and any point-to-(type-specifier) info; this is passed to
+the declarator as the AST is traversed. Something something recursion, and
+that’s how simple it is.<br />
+Again, roughly, since each alternative for the declarator corresponds to some
+alternative of the above ADT, it does help write the program logic.</p>
 <h3 id="cdecl">CDecl</h3>
-<p>The actual cdecl (e.g. at cdecl.org, or as a programming exercise in the “Expert C Programming” book) is more/less a heuristic, doesn’t actually take care of all C declarations.<br />
-But going from (String -&gt;) AST -&gt; CType, it’s not so hard to go CType -&gt; String to ‘explain’ what a C declaration is.<br />
-Figuring it out takes the same kindof logic as figuring out how to do AST -&gt; CType stuff.</p>
+<p>The actual cdecl (e.g. at cdecl.org, or as a programming exercise in the
+“Expert C Programming” book) is more/less a heuristic, doesn’t actually take
+care of all C declarations.<br />
+But going from (String -&gt;) AST -&gt; CType, it’s not so hard to go CType -&gt; String
+to ‘explain’ what a C declaration is.<br />
+Figuring it out takes the same kindof logic as figuring out how to do AST -&gt;
+CType stuff.</p>
 <h2 id="expressions">Expressions</h2>
 <p>This is more/less straightforward, following the CType ADT.</p>
-<p>In particular, I use StringTemplate as a template rendering engine. (Like Python’s Jinja). So you have a <code>string_of_primitive</code>, <code>string_of_pointer</code>, <code>string_of_array</code>, etc. etc. and pass values to StringTemplate such that it can recursively generate the C code for you.</p>
+<p>In particular, I use StringTemplate as a template rendering engine. (Like
+Python’s Jinja). So you have a <code>string_of_primitive</code>, <code>string_of_pointer</code>,
+<code>string_of_array</code>, etc. etc. and pass values to StringTemplate such that it can
+recursively generate the C code for you.</p>
 <h3 id="the-adts-make-it-easier-1">The ADTs make it easier</h3>
-<p>Since what’s instrumented is C code, the goal is to come up with C code which constructs a String for some ctype. Again, since it’s recursive, then the code to generate this C code is going to involve recursion. So it’s just a matter of writing code to construct a string for a primitive type, and array of ctype, etc.</p>
-<p>See <a href="https://github.com/rgoulter/c-worksheet-instrumentor/blob/master/src/main/resources/edu/nus/worksheet/instrumentor/templates/constructs.stg">constructs.stg</a> See</p>
+<p>Since what’s instrumented is C code, the goal is to come up with C code which
+constructs a String for some ctype. Again, since it’s recursive, then the code
+to generate this C code is going to involve recursion. So it’s just a matter of
+writing code to construct a string for a primitive type, and array of ctype,
+etc.</p>
+<p>See
+<a href="https://github.com/rgoulter/c-worksheet-instrumentor/blob/master/src/main/resources/edu/nus/worksheet/instrumentor/templates/constructs.stg">constructs.stg</a>
+See</p>
 <h3 id="instrumenting-putting-it-all-together">Instrumenting: Putting it All Together</h3>
-<p>I don’t reconstruct the AST directly, but just inject the instrumenting C code into a TokenStreamRewriter (one of ANTLR’s things, for a stream of the lexed tokens).</p>
+<p>I don’t reconstruct the AST directly, but just inject the instrumenting C code
+into a TokenStreamRewriter (one of ANTLR’s things, for a stream of the lexed
+tokens).</p>
 <h2 id="cool-stuff-segfault-handling">Cool stuff: Segfault Handling</h2>
-<p>That’s all ‘nice’, but something I’m quite proud of (&amp; in terms of ‘useful for a C beginner’) is it catches <code>SEGFAULT</code>s, and marks the output there:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb7-1" data-line-number="1">  <span class="dt">int</span> *px;     <span class="co">//&gt; px is pointer to int</span></a>
-<a class="sourceLine" id="cb7-2" data-line-number="2">  px = <span class="dv">0</span>;      <span class="co">//&gt; px = (nil)</span></a>
-<a class="sourceLine" id="cb7-3" data-line-number="3">  *px = <span class="dv">5</span>;     <span class="co">//&gt; SEGFAULT</span></a></code></pre></div>
+<p>That’s all ‘nice’, but something I’m quite proud of (&amp; in terms of ‘useful for
+a C beginner’) is it catches <code>SEGFAULT</code>s, and marks the output there:</p>
+<pre class="c"><code>  int *px;     //&gt; px is pointer to int
+  px = 0;      //&gt; px = (nil)
+  *px = 5;     //&gt; SEGFAULT</code></pre>
 <p>‘How’ involves a bit of knowledge about C99:</p>
 <ul>
-<li><p><code>setjmp</code>/<code>longjmp</code> are kinda like a <code>GOTO</code> statement, can be used to simulate exception handling in C.</p></li>
+<li><p><code>setjmp</code>/<code>longjmp</code> are kinda like a <code>GOTO</code> statement, can be used to simulate
+exception handling in C.</p></li>
 <li><p><code>signal</code> let’s you ‘catch’ thrown signals.</p></li>
 </ul>
-<p>So, to catch a segfault, you instrument each expression-statement (includes assignments &amp; function calls, excludes declaration statements) with the <code>setjmp</code> (like <code>try { }</code>); if a <code>SEGFAULT</code> signal is thrown, catch that in <code>signal</code>, and then use <code>longjmp</code> (like <code>throw ..</code>); in the place you jump to (like <code>catch { }</code>), output <code>SEGFAULT</code> to STDOUT, then exit.<br />
-– Of course, the instrumented C code then becomes something no sane human would ever write.</p>
+<p>So, to catch a segfault, you instrument each expression-statement (includes
+assignments &amp; function calls, excludes declaration statements) with the
+<code>setjmp</code> (like <code>try { }</code>); if a <code>SEGFAULT</code> signal is thrown, catch that in
+<code>signal</code>, and then use <code>longjmp</code> (like <code>throw ..</code>); in the place you jump to
+(like <code>catch { }</code>), output <code>SEGFAULT</code> to STDOUT, then exit.<br />
+– Of course, the instrumented C code then becomes something no sane human
+would ever write.</p>
 <h2 id="cool-stuff-type-inference-on-arbitrary-c-expressions">Cool stuff: Type Inference on Arbitrary C Expressions</h2>
-<p>Being able to infer the type of arbitrary expressions e.g. <code>4*12</code> or <code>p[q]</code> enhances the usability of the tool/plugin; the use case becomes “want to show the value of an expression at some point? Simply write that expression.”.</p>
-<p>The Type Inference takes a bit of thought, e.g. in <code>p[q]</code>, it can either be an array lookup, or a pointer offset.<br />
-But, again, while the logic is somewhat tedious, the code to do this inference straightforwardly follows the grammar/AST for expressions; and I’m not sure how you’d do that without an ADT like the one above.</p>
+<p>Being able to infer the type of arbitrary expressions e.g. <code>4*12</code> or <code>p[q]</code>
+enhances the usability of the tool/plugin; the use case becomes “want to show
+the value of an expression at some point? Simply write that expression.”.</p>
+<p>The Type Inference takes a bit of thought, e.g. in <code>p[q]</code>, it can either be an
+array lookup, or a pointer offset.<br />
+But, again, while the logic is somewhat tedious, the code to do this inference
+straightforwardly follows the grammar/AST for expressions; and I’m not sure how
+you’d do that without an ADT like the one above.</p>
 <h1 id="limitations">Limitations</h1>
 <p>As discussed on the repository:</p>
 <ul>
-<li><p>No I don’t do squat with regards to <code>malloc</code>, etc. (Particularly since there’re other ways to allocate memory, e.g. <code>calloc</code>, <code>alloca</code>, not to mention custom ones like <code>xalloc</code>.).</p></li>
+<li><p>No I don’t do squat with regards to <code>malloc</code>, etc. (Particularly since
+there’re other ways to allocate memory, e.g. <code>calloc</code>, <code>alloca</code>, not to
+mention custom ones like <code>xalloc</code>.).</p></li>
 <li><p>Obviously I don’t do squat with regards to concurrency, threads, etc.</p></li>
 <li><p>The tool doesn’t necessarily play nicely with C PreProcessor stuff.<br />
-It’s easy to come up with examples which show how tricky it could be to deal with that.</p></li>
+It’s easy to come up with examples which show how tricky it could be to deal
+with that.</p></li>
 </ul>
 <h1 id="contributors-wanted">‘Contributors Wanted’</h1>
 <p>If you find any bugs, I’d be delighted for you to file an issue.<br />
-– Keep in mind, though, that the Scala Worksheets tool doesn’t work when the program uses semicolons to delimit statements. - So I think I’ve not done a bad job.</p>
-<p>– For selfish reasons, of course I’d love to see plugins for other editors like Emacs, Sublime Text, Atom, LightTable, etc. (and it’s a bit brutal to try and learn the APIs if you don’t use the editors).<br />
-The vim plugin is fairly lightweight, since all it needs to do is communicate over a socket to the Scala server.<br />
-– Certainly it’d be interesting to see, in terms of UX, how the tool / plugin could be improved.</p>
+– Keep in mind, though, that the Scala Worksheets tool doesn’t work when the
+program uses semicolons to delimit statements. - So I think I’ve not done a bad
+job.</p>
+<p>– For selfish reasons, of course I’d love to see plugins for other editors
+like Emacs, Sublime Text, Atom, LightTable, etc. (and it’s a bit brutal to try
+and learn the APIs if you don’t use the editors).<br />
+The vim plugin is fairly lightweight, since all it needs to do is communicate
+over a socket to the Scala server.<br />
+– Certainly it’d be interesting to see, in terms of UX, how the tool / plugin
+could be improved.</p>
 <p>– Originally it was supposed to be an Eclipse plugin.<br />
-I scrapped that since dealing with dependency-jars within OSGi is not straight-forward to the uninitiated. - Particularly frustrating is that the plugin would work in the dev environment, but wouldn’t work when exported (due to e.g. classpath issues.).<br />
-– Either dealing with OSGi stuff, or just imitating the ‘lightweight’ approach of tool-as-external-dependency would fix that.</p>
-<p>But of course, I’d be much happier to see people try and do some PL project with the language of their choice. (Doesn’t have to be a worksheet.).</p>
+I scrapped that since dealing with dependency-jars within OSGi is not
+straight-forward to the uninitiated. - Particularly frustrating is that the
+plugin would work in the dev environment, but wouldn’t work when exported (due
+to e.g. classpath issues.).<br />
+– Either dealing with OSGi stuff, or just imitating the ‘lightweight’ approach
+of tool-as-external-dependency would fix that.</p>
+<p>But of course, I’d be much happier to see people try and do some PL project
+with the language of their choice. (Doesn’t have to be a worksheet.).</p>
 <h1 id="now-that-i-have-your-attention---project-note-taking">Now That I Have Your Attention - Project Note Taking</h1>
-<p>I think it’s fair to say no particular bit there is all that ‘hard’, but I can see that altogether it’s not exactly trivial.<br />
-FWIW, I had like half a year to make it. (Half, because who does most of their work in the first half of their FYP?, and because I didn’t know squat about PL in the first half..).</p>
-<p>I really like tools. (This doesn’t really sound like a ‘cool’ FYP to do unless you’ve at least some love for tools.). – e.g. Not ‘vim vs emacs’ so much as ‘your editor should be able to do these things’.</p>
+<p>I think it’s fair to say no particular bit there is all that ‘hard’, but I can
+see that altogether it’s not exactly trivial.<br />
+FWIW, I had like half a year to make it. (Half, because who does most of their
+work in the first half of their FYP?, and because I didn’t know squat about PL
+in the first half..).</p>
+<p>I really like tools. (This doesn’t really sound like a ‘cool’ FYP to do unless
+you’ve at least some love for tools.). – e.g. Not ‘vim vs emacs’ so much as
+‘your editor should be able to do these things’.</p>
 <p>For note-taking, I kinda-sorta made use of OneNote.<br />
-Briefly, OneNote is nice for collecting details/links on a topic (it has a nice hierarchy of sections -&gt; pages -&gt; bullet points). [These days, if I’m thinking hierarchically with a keyboard, I kinda-sorta make use of Emacs’ Org-Mode. – In the hands of a power user, Org-Mode is something to behold. I am not such a user.].</p>
+Briefly, OneNote is nice for collecting details/links on a topic (it has a nice
+hierarchy of sections -&gt; pages -&gt; bullet points). [These days, if I’m thinking
+hierarchically with a keyboard, I kinda-sorta make use of Emacs’ Org-Mode. –
+In the hands of a power user, Org-Mode is something to behold. I am not such a
+user.].</p>
 <p>Physical pen &amp; paper is king, though. (or queen, whatever).<br />
-Pens, use colours: e.g. black for thoughts, green for questions, red for “wtf, shit’s not working”, blue for facts (&amp; purple for ‘todo’, if you’ve a purple pen). YMMV, but I find this useful. (esp. if you’re using one of those Bic 4-in-one); compared to monocolour, I reckon 1. helps thinking (like de Bono’s thinking hats?) 2. quicker to ‘parse’ the page 3. can write <em>much</em> more densely on the paper.<br />
-Overall, I keep a ‘programming journal’. I’ve heard “if you’re not writing, you’re not thinking”. – “how many pages I filled” makes for quite a nice metric for “how much work you’ve done”. (e.g. -if- when you encounter bugs, or other problems, you’re going to write down that you had this trouble, and alternatives as to how to overcome it.). – As an example, the “CType from arbitrary expression” system was 10 double-sided refill pages worth of work; the loop visualisation was 4 double-sided refill pages.</p>
+Pens, use colours: e.g. black for thoughts, green for questions, red for “wtf,
+shit’s not working”, blue for facts (&amp; purple for ‘todo’, if you’ve a purple
+pen). YMMV, but I find this useful. (esp. if you’re using one of those Bic
+4-in-one); compared to monocolour, I reckon 1. helps thinking (like de Bono’s
+thinking hats?) 2. quicker to ‘parse’ the page 3. can write <em>much</em> more densely
+on the paper.<br />
+Overall, I keep a ‘programming journal’. I’ve heard “if you’re not writing,
+you’re not thinking”. – “how many pages I filled” makes for quite a nice
+metric for “how much work you’ve done”. (e.g. -if- when you encounter bugs, or
+other problems, you’re going to write down that you had this trouble, and
+alternatives as to how to overcome it.). – As an example, the “CType from
+arbitrary expression” system was 10 double-sided refill pages worth of work;
+the loop visualisation was 4 double-sided refill pages.</p>
 <p>For this project, I kept a folder full of notes. It’d have things like:</p>
 <ul>
-<li>Example C program printouts (so, e.g. figuring out what kindof instrumenting would be needed),</li>
+<li>Example C program printouts (so, e.g. figuring out what kindof instrumenting
+would be needed),</li>
 <li>Printout of the C BNF, (both ANTLR’s file, and from the C99 standard).</li>
 <li>Reference sheets for GDB/LLDB, Thrift, etc.</li>
 </ul>
-<p>– Point is, printed out, you can write on these, highlight things and in the <em>margins</em> ask questions. (“marginal notes” or “marginal questions”, as such).</p>
+<p>– Point is, printed out, you can write on these, highlight things and in the
+<em>margins</em> ask questions. (“marginal notes” or “marginal questions”, as such).</p>
 
 <hr />
 
@@ -342,6 +530,19 @@ Overall, I keep a ‘programming journal’. I’ve heard “if you’re not wri
 <br style="clear: both;" />
 
 <hr />
+
+<!-- Load highlight.js for Syntax Highlighting. -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/bash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/c.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/gherkin.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/haskell.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/lisp.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/nix.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js"></script>
+<script>hljs.highlightAll();</script>
 
             </div>
 

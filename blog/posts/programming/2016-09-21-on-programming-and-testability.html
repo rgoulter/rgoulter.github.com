@@ -53,6 +53,7 @@
             TOCify
         -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js"></script>
+
         <!--
             Patched TOCify css file.
             (Don't want fixed `.tocify`).
@@ -141,24 +142,66 @@
 
 <p>I’ve been reading some interesting blogposts recently:</p>
 <ul>
-<li><p>This summary of <a href="https://blog.acolyer.org/2016/09/14/why-functional-programming-matters/">“Why Functional Programming Matters”</a>, (I’ve not read the piece it summarizes, would probably be interesting) argues roughly that the usual pitch of FP is its purity (“no side effects, no having to reason about side effects”), &amp; that this is a bad pitch. Rather, the benefits FP brings are that it offers a better way to write programs modularly (just as control structures allow for modularity where GOTO doesn’t).</p></li>
-<li><p><a href="https://www.youtube.com/watch?v=dawFyaWvFg4">“Beyond Design Patterns”</a> talk at PHP Conference Barcelona is a fascinating view on the GoF Design Patterns (which I’ve not read up on – this talk provides a context which might make them more bearable to look at).<br />
-<a href="https://pinboard.in/u:rgoulter/b:f41d9c055c12">My notes here</a>, but the key point he makes is that the GoF Design Patterns come down to patterns of information flow. This relates to Alan Kay’s emphasis that ‘OOP’ really ought to be more about the <em>messages</em> between objects.</p></li>
-<li><p>The <a href="http://fabiopereira.me/blog/2010/05/27/ttdd-tautological-test-driven-development-anti-pattern/">Tautological Unit Test</a> <em><em>anti-pattern</em></em>. (Because SDLC dipshits can’t communicate whether a concept is good or bad without using the word “pattern”). The post emphasises that tests ought to make assertions about a code’s behaviour, rather than the code’s implementation. It somewhat defeats the point of a “ensure nothing broke” test if you have to update it as you update the program under test. – Tests are more likely to become tautological, the post suggests, through over-use of mocking. (A small example is provided, to try to illustrate the point).</p></li>
-<li><p>cf. <a href="http://c2.com/cgi/wiki?PortsAndAdaptersArchitecture">“Ports and Adapters”</a>, which sometimes is mentioned in terms of making a system testable. (In “Working Effectively with Legacy Systems”, the idea of a ‘contact point’ is brought up; i.e. a point wherein you can change/inject a dependency without having to modify the code using it). – “Ports and Adapters” somewhat suggests for ‘large’ components, but these ideas all seem the same to me.</p></li>
+<li><p>This summary of <a href="https://blog.acolyer.org/2016/09/14/why-functional-programming-matters/">“Why Functional Programming
+Matters”</a>,
+(I’ve not read the piece it summarizes, would probably be interesting) argues
+roughly that the usual pitch of FP is its purity (“no side effects, no having
+to reason about side effects”), &amp; that this is a bad pitch. Rather, the
+benefits FP brings are that it offers a better way to write programs
+modularly (just as control structures allow for modularity where GOTO
+doesn’t).</p></li>
+<li><p><a href="https://www.youtube.com/watch?v=dawFyaWvFg4">“Beyond Design Patterns”</a> talk
+at PHP Conference Barcelona is a fascinating view on the GoF Design Patterns
+(which I’ve not read up on – this talk provides a context which might make
+them more bearable to look at).<br />
+<a href="https://pinboard.in/u:rgoulter/b:f41d9c055c12">My notes here</a>, but the key
+point he makes is that the GoF Design Patterns come down to patterns of
+information flow. This relates to Alan Kay’s emphasis that ‘OOP’ really
+ought to be more about the <em>messages</em> between objects.</p></li>
+<li><p>The <a href="http://fabiopereira.me/blog/2010/05/27/ttdd-tautological-test-driven-development-anti-pattern/">Tautological Unit
+Test</a>
+<em><em>anti-pattern</em></em>. (Because SDLC dipshits can’t communicate whether a concept
+is good or bad without using the word “pattern”). The post emphasises that
+tests ought to make assertions about a code’s behaviour, rather than the
+code’s implementation. It somewhat defeats the point of a “ensure nothing
+broke” test if you have to update it as you update the program under test.
+– Tests are more likely to become tautological, the post suggests, through
+over-use of mocking. (A small example is provided, to try to illustrate the
+point).</p></li>
+<li><p>cf. <a href="http://c2.com/cgi/wiki?PortsAndAdaptersArchitecture">“Ports and
+Adapters”</a>, which
+sometimes is mentioned in terms of making a system testable. (In
+“Working Effectively with Legacy Systems”, the idea of a ‘contact point’ is
+brought up; i.e. a point wherein you can change/inject a dependency without
+having to modify the code using it). – “Ports and Adapters” somewhat
+suggests for ‘large’ components, but these ideas all seem the same to me.</p></li>
 </ul>
-<p>My fresh, recent understanding of this last point is that in order to be able to inject things, constructing/initialising objects (using “new”) within methods is bad.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode php"><code class="sourceCode php"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">class</span> SomeInterestingClass {</a>
-<a class="sourceLine" id="cb1-2" data-line-number="2">  <span class="co">// ...</span></a>
-<a class="sourceLine" id="cb1-3" data-line-number="3">  <span class="kw">public</span> <span class="kw">function</span> computeSomething<span class="ot">(</span><span class="kw">$x</span><span class="ot">)</span> {</a>
-<a class="sourceLine" id="cb1-4" data-line-number="4">    <span class="kw">$service</span> = <span class="kw">new</span> ServiceFromOtherModule<span class="ot">();</span> <span class="co">// Can't be changed in here</span></a>
-<a class="sourceLine" id="cb1-5" data-line-number="5">    <span class="kw">return</span> <span class="kw">$service</span>-&gt;compute<span class="ot">(</span><span class="kw">$this</span>-&gt;val<span class="ot">,</span> <span class="kw">$x</span><span class="ot">);</span></a>
-<a class="sourceLine" id="cb1-6" data-line-number="6">  }</a>
-<a class="sourceLine" id="cb1-7" data-line-number="7">}</a></code></pre></div>
-<p>The way to replace this, then, would be to store <code>$service</code> as a property, initialised in constructor instead of “where it’s used”, which can be <code>set</code>. And maybe some more complicated variation for if this class we depend on needs to be initialised with variables the constructor.<br />
+<p>My fresh, recent understanding of this last point is that in order to be able
+to inject things, constructing/initialising objects (using “new”) within
+methods is bad.</p>
+<pre class="php"><code>class SomeInterestingClass {
+  // ...
+  public function computeSomething($x) {
+    $service = new ServiceFromOtherModule(); // Can't be changed in here
+    return $service-&gt;compute($this-&gt;val, $x);
+  }
+}</code></pre>
+<p>The way to replace this, then, would be to store <code>$service</code> as a property,
+initialised in constructor instead of “where it’s used”, which can be <code>set</code>.
+And maybe some more complicated variation for if this class we depend on needs
+to be initialised with variables the constructor.<br />
 – The same more/less applies if the ‘dependency’ is a function call, etc.</p>
-<p>My understanding is, then, that for non-trivial computations, “testing behaviour” comes down to assertions on how mocked-up classes/functions are used. Some white-box understanding of how behaviour is implemented is needed to know what can be stubbed. – This somewhat makes unit tests a ‘declarative’ companion to the code: “In this circumstance, this should happen”.</p>
-<p>Rephrasing the above in roughly terms of ‘information-flow’: I’m guessing that at least some white-box knowledge of what kinds of messages are received (from what kind of sender), what kinds of messages are sent (to what kind of recipient) is an inevitability; perhaps it’s that it becomes a tautology when the mocking explicitly (albeit limitedly) declares the same messages/relations which the SUT code does.</p>
+<p>My understanding is, then, that for non-trivial computations, “testing
+behaviour” comes down to assertions on how mocked-up classes/functions are
+used. Some white-box understanding of how behaviour is implemented is needed
+to know what can be stubbed. – This somewhat makes unit tests a ‘declarative’
+companion to the code: “In this circumstance, this should happen”.</p>
+<p>Rephrasing the above in roughly terms of ‘information-flow’: I’m guessing that
+at least some white-box knowledge of what kinds of messages are received
+(from what kind of sender), what kinds of messages are sent (to what kind of
+recipient) is an inevitability; perhaps it’s that it becomes a tautology when
+the mocking explicitly (albeit limitedly) declares the same messages/relations
+which the SUT code does.</p>
 <p>– But I don’t know. It’s something I’d like to think about some more.</p>
 
 <hr />
@@ -174,6 +217,19 @@
 <br style="clear: both;" />
 
 <hr />
+
+<!-- Load highlight.js for Syntax Highlighting. -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/bash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/c.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/gherkin.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/haskell.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/lisp.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/nix.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js"></script>
+<script>hljs.highlightAll();</script>
 
             </div>
 

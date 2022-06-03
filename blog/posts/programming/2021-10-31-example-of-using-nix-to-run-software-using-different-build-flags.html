@@ -53,6 +53,7 @@
             TOCify
         -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js"></script>
+
         <!--
             Patched TOCify css file.
             (Don't want fixed `.tocify`).
@@ -140,15 +141,25 @@
 </div>
 
 <p>I recently wanted to use FreeCAD to export a glTF file from a STEP file.</p>
-<p>Unfortunately, I found that <a href="https://forum.freecadweb.org/viewtopic.php?f=8&amp;t=31680&amp;p=450917&amp;#p450658">FreeCad needed to be built with OCC built with rapidjson</a>.</p>
-<p>The <a href="https://forum.freecadweb.org/viewtopic.php?t=56487&amp;p=486635">suggested solution</a> isn’t <em>hard</em>, as such; but it is more tedious than just installing a package:</p>
+<p>Unfortunately, I found that <a href="https://forum.freecadweb.org/viewtopic.php?f=8&amp;t=31680&amp;p=450917&amp;#p450658">FreeCad needed to be built with OCC built
+with rapidjson</a>.</p>
+<p>The <a href="https://forum.freecadweb.org/viewtopic.php?t=56487&amp;p=486635">suggested
+solution</a> isn’t
+<em>hard</em>, as such; but it is more tedious than just installing a package:</p>
 <blockquote>
-<p>Building from OCC from scratch: 1. get the source code from (https://gitlab.com/blobfish/occt ) –&gt; fillet fix included 2. setup your machine with cmake 3. get freetype2 and tcl/tk 4. setup cmake 5. build occ</p>
+<p>Building from OCC from scratch:
+1. get the source code from (https://gitlab.com/blobfish/occt ) –&gt; fillet fix included
+2. setup your machine with cmake
+3. get freetype2 and tcl/tk
+4. setup cmake
+5. build occ</p>
 </blockquote>
-<p>Per <a href="https://dev.opencascade.org/doc/overview/html/build_upgrade__building_occt.html#build_cmake_conf">the opencascade documentation</a> (or e.g. <a href="https://dev.opencascade.org/content/rebuilding-occt-rapidjson">this forum post</a>), this means building opencascade, but with cmake flags: <code>-D USE_RAPIDJSON:BOOL=&quot;ON&quot;</code>.</p>
+<p>Per <a href="https://dev.opencascade.org/doc/overview/html/build_upgrade__building_occt.html#build_cmake_conf">the opencascade documentation</a>
+(or e.g. <a href="https://dev.opencascade.org/content/rebuilding-occt-rapidjson">this forum post</a>),
+this means building opencascade, but with cmake flags: <code>-D USE_RAPIDJSON:BOOL="ON"</code>.</p>
 <p>It turns out Nixpkgs allows for doing this in a concise way:</p>
 <p>e.g. with a file <code>freecad.nix</code>:</p>
-<pre><code># By convention: this file declares function
+<pre class="nix"><code># By convention: this file declares function
 # which takes in a set of arguments;
 # 'pkgs' has a default value of 'import &lt;nixpkgs&gt; {}'
 { pkgs ? import &lt;nixpkgs&gt; {} }:
@@ -168,13 +179,32 @@ in
 pkgs.freecad.override {
   opencascade-occt = opencascade-occt-with-rapidjson;
 }</code></pre>
-<p>The syntax may look esoteric, but it’s hardly more intimidating than the fancy parts of ECMAScript syntax.</p>
-<p>The code declares a function for building a package for freecad. The code is a function as a way of injecting dependencies. The code uses <code>nixpkgs</code> as a whole for our dependency. The code makes use of the <code>pkgs.freecad</code> and <code>pkgs.opencascade-occt</code>, so it doesn’t need to duplicate the effort needed to write those packages. The opencascade here is built with <code>-D USERAPIDJSON:BOOL=&quot;ON&quot;</code> as a flag to CMake; and <code>rapidjson</code> is also given as a dependency. Then this is version of opencascade is given to the <code>pkgs.freecad</code> package.</p>
-<p>The <a href="https://nixos.org/manual/nixpkgs/unstable/#chap-overrides">Overriding</a> section of the nix manual explains <code>&lt;pkg&gt;.override</code> vs <code>&lt;pkg&gt;.overrideAttrs</code>. Roughly: <code>&lt;pkg&gt;.overrideAttrs</code> changes things about the way <code>&lt;pkg&gt;</code> is built; e.g. the code above changes the CMake flags. Whereas, <code>&lt;pkg&gt;.override</code> changes what versions of dependencies are used to build a package; e.g. the code above changes the <code>opencascade-occt</code> dependency of freecad to one which was built with rapidjson.</p>
-<p>Stuff like this is what makes Nix both very powerful, but also very hard to get used to.</p>
-<p>How to use some Nix file like <code>freecad.nix</code> might also be unclear. There are several different ways: e.g. running <code>nix-build freecad.nix</code> then running the <code>./result/bin/freecad</code> which results.. or using the footgun that is <code>nix-env --install</code> and running <code>nix-env --install --file freecad.nix</code>, among others.</p>
+<p>The syntax may look esoteric, but it’s hardly more intimidating
+than the fancy parts of ECMAScript syntax.</p>
+<p>The code declares a function for building a package for freecad.
+The code is a function as a way of injecting dependencies.
+The code uses <code>nixpkgs</code> as a whole for our dependency. The code makes use of
+the <code>pkgs.freecad</code> and <code>pkgs.opencascade-occt</code>, so it doesn’t need to
+duplicate the effort needed to write those packages. The opencascade here
+is built with <code>-D USERAPIDJSON:BOOL="ON"</code> as a flag to CMake; and
+<code>rapidjson</code> is also given as a dependency. Then this is version of
+opencascade is given to the <code>pkgs.freecad</code> package.</p>
+<p>The <a href="https://nixos.org/manual/nixpkgs/unstable/#chap-overrides">Overriding</a> section
+of the nix manual explains <code>&lt;pkg&gt;.override</code> vs <code>&lt;pkg&gt;.overrideAttrs</code>.
+Roughly: <code>&lt;pkg&gt;.overrideAttrs</code> changes things about the way <code>&lt;pkg&gt;</code> is built; e.g. the
+code above changes the CMake flags. Whereas, <code>&lt;pkg&gt;.override</code> changes what
+versions of dependencies are used to build a package; e.g. the code above
+changes the <code>opencascade-occt</code> dependency of freecad to one which was built
+with rapidjson.</p>
+<p>Stuff like this is what makes Nix both very powerful, but also very hard to
+get used to.</p>
+<p>How to use some Nix file like <code>freecad.nix</code> might also be unclear.
+There are several different ways:
+e.g. running <code>nix-build freecad.nix</code> then running the <code>./result/bin/freecad</code>
+which results.. or using the footgun that is <code>nix-env --install</code> and running
+<code>nix-env --install --file freecad.nix</code>, among others.</p>
 <p>The code is more concise without the comments; or without the <code>let</code>:</p>
-<pre><code>{ pkgs ? import &lt;nixpkgs&gt; {} }:
+<pre class="nix"><code>{ pkgs ? import &lt;nixpkgs&gt; {} }:
 
 with pkgs;
 freecad.override {
@@ -184,12 +214,27 @@ freecad.override {
       cmakeFlags = ''-D USE_RAPIDJSON:bool=&quot;ON&quot;'';
     });
 }</code></pre>
-<p>That said, I don’t know whether anyone would write code like that without having written similar code previously.</p>
-<p>I arrived at the above code through refactoring. The naive approach is to copy and paste the Nix files from the nixpkgs code, and make adjustments as necessary. This works, but isn’t very elegant.<br />
-– One nice thing about refactoring Nix code, though, is that packages which are built with the same set of inputs don’t require rebuilding. e.g. after building either of the code snippets, the building the other wouldn’t require any further code to be compiled.</p>
-<p>I reckon that even that effort is still less tedious than the suggested solution above.<br />
-– Or perhaps I’m thinking of this from a yak-shaving perspective: e.g. with the good ol’ just clone and install dependencies and configure and build, you’ll have to repeat this understandable but awkward process on every computer you want to use FreeCAD with glTF export. With the Nix approach, at worst you’d just copy the snippet and rebuild on your computer.</p>
-<p>Since rebuilding GUI programs like this can take quite a beefy computer or quite a long time, another nice aspect of Nix is <a href="https://nixos.org/manual/nix/stable/#chap-distributed-builds">the ability to build with other computers</a>. – I’ll have to try that at some point.</p>
+<p>That said, I don’t know whether anyone would write code like that
+without having written similar code previously.</p>
+<p>I arrived at the above code through refactoring. The naive approach is to
+copy and paste the Nix files from the nixpkgs code, and make adjustments as
+necessary. This works, but isn’t very elegant.<br />
+– One nice thing about refactoring Nix code, though, is that packages which
+are built with the same set of inputs don’t require rebuilding. e.g. after
+building either of the code snippets, the building the other wouldn’t require
+any further code to be compiled.</p>
+<p>I reckon that even that effort is still less tedious than the suggested
+solution above.<br />
+– Or perhaps I’m thinking of this from a yak-shaving perspective: e.g. with
+the good ol’ just clone and install dependencies and configure and build,
+you’ll have to repeat this understandable but awkward process on every computer
+you want to use FreeCAD with glTF export. With the Nix approach, at worst you’d
+just copy the snippet and rebuild on your computer.</p>
+<p>Since rebuilding GUI programs like this can take quite a beefy computer or
+quite a long time, another nice aspect of Nix is <a href="https://nixos.org/manual/nix/stable/#chap-distributed-builds">the ability to build with
+other
+computers</a>. –
+I’ll have to try that at some point.</p>
 
 <hr />
 
@@ -204,6 +249,19 @@ freecad.override {
 <br style="clear: both;" />
 
 <hr />
+
+<!-- Load highlight.js for Syntax Highlighting. -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/bash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/c.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/gherkin.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/haskell.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/lisp.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/nix.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js"></script>
+<script>hljs.highlightAll();</script>
 
             </div>
 

@@ -53,6 +53,7 @@
             TOCify
         -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js"></script>
+
         <!--
             Patched TOCify css file.
             (Don't want fixed `.tocify`).
@@ -135,19 +136,32 @@
         by Richard Goulter
     <br />
     
-    Tags: <a href="../../tags/programming.hakyll.html">programming.hakyll</a>
+    Tags: <a title="All pages tagged 'programming.hakyll'." href="../../tags/programming.hakyll.html">programming.hakyll</a>
     
 </div>
 
 <p>I’ve finally gotten around to improving the code syntax highlighting in my blogposts.<br />
-Previously, it wasn’t exactly heinous; but where my programs were too long, the code listing didn’t include a scrollbar to limit the width of the listing. e.g. <a href="../../posts/programming/2014-07-03-novice-struggles-with-haskell-syntax.html">This post</a> was a bad offender.<br />
+Previously, it wasn’t exactly heinous; but where my programs were too long, the
+code listing didn’t include a scrollbar to limit the width of the listing. e.g.
+<a href="../../posts/programming/2014-07-03-novice-struggles-with-haskell-syntax.html">This
+post</a>
+was a bad offender.<br />
 Turns out the big difference is just having the CSS attribute <code>overflow-x: auto;</code> on the <code>&lt;code&gt;</code> tag. (Or the <code>&lt;pre&gt;</code> tag).</p>
-<p>As far as I understood, previously Hakyll was highlighting my code listings using Pandoc, and so I needed to include the Pandoc-generated CSS for my blogposts.</p>
+<p>As far as I understood, previously Hakyll was highlighting my code listings
+using Pandoc, and so I needed to include the Pandoc-generated CSS for my
+blogposts.</p>
 <p>I’ve just changed it to make use of highlight.js.<br />
-<a href="http://blogs.visoftinc.com/2013/01/03/moving-to-highlight-js/">This</a> post (one of the early ones in a search for “highlight.js vs syntaxhighlighter.js”) suggested highlight.js since it could handle <code>&lt;pre&gt;&lt;code&gt;&lt;/code&gt;&lt;/code&gt;</code> which Hakyll/Pandoc generates; the <a href="http://softwaremaniacs.org/blog/2011/05/22/highlighters-comparison/">comparison blogpost</a> linked to says this is the HTML5 recommended way of listing code. So.</p>
+<a href="http://blogs.visoftinc.com/2013/01/03/moving-to-highlight-js/">This</a> post (one
+of the early ones in a search for “highlight.js vs syntaxhighlighter.js”)
+suggested highlight.js since it could handle <code>&lt;pre&gt;&lt;code&gt;&lt;/code&gt;&lt;/code&gt;</code> which
+Hakyll/Pandoc generates; the <a href="http://softwaremaniacs.org/blog/2011/05/22/highlighters-comparison/">comparison
+blogpost</a>
+linked to says this is the HTML5 recommended way of listing code. So.</p>
 <p>As far as I can tell from playing around with it, it’s still not ideal.<br />
-At the moment I’m using both at-the-same-time. (My Haskell code looked a little bland without Pandoc’s generation).<br />
-Perhaps I could’ve tried just using a different CSS style to feed to Pandoc, or perhaps I’ll get sensible and figure out The Right Way to do this kindof thing.</p>
+At the moment I’m using both at-the-same-time. (My Haskell code looked a little
+bland without Pandoc’s generation).<br />
+Perhaps I could’ve tried just using a different CSS style to feed to Pandoc, or
+perhaps I’ll get sensible and figure out The Right Way to do this kindof thing.</p>
 
 <hr />
 
@@ -162,6 +176,19 @@ Perhaps I could’ve tried just using a different CSS style to feed to Pandoc, o
 <br style="clear: both;" />
 
 <hr />
+
+<!-- Load highlight.js for Syntax Highlighting. -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/bash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/c.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/gherkin.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/haskell.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/lisp.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/nix.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js"></script>
+<script>hljs.highlightAll();</script>
 
             </div>
 

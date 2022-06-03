@@ -53,6 +53,7 @@
             TOCify
         -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js"></script>
+
         <!--
             Patched TOCify css file.
             (Don't want fixed `.tocify`).
@@ -135,20 +136,30 @@
         by richardgoulter
     <br />
     
-    Tags: <a href="../../tags/programming.editors.html">programming.editors</a>, <a href="../../tags/programming.vim.html">programming.vim</a>, <a href="../../tags/programming.ios.html">programming.ios</a>, <a href="../../tags/programming.linkdump.html">programming.linkdump</a>
+    Tags: <a title="All pages tagged 'programming.editors'." href="../../tags/programming.editors.html">programming.editors</a>, <a title="All pages tagged 'programming.vim'." href="../../tags/programming.vim.html">programming.vim</a>, <a title="All pages tagged 'programming.ios'." href="../../tags/programming.ios.html">programming.ios</a>, <a title="All pages tagged 'programming.linkdump'." href="../../tags/programming.linkdump.html">programming.linkdump</a>
     
 </div>
 
 <p>This last semester I’ve been having to do iOS programming.</p>
 <p>I’m not an expert Vim user, but I use Vim enough such that, without being overzealous, I found I really missed the motion keys and other such things.</p>
 <p>Others have gone before me on this topic. <a href="http://ap4y.github.io/2013/11/10/vim-for-ios-developers.html">Here</a>, <a href="http://appventure.me/2013/01/29/use-vim-as-xcode-alternative-ios-mac-cocoa/">here</a>, <a href="http://blog.patspam.com/2014/vim-objc-code-completion">here</a>; (and the <em>other</em> text editor has some stuff like <a href="http://roupam.github.io/">here</a>).</p>
-<p>Fortunately for at least that much, the <a href="https://github.com/JugglerShu/XVim">XVim plugin</a> for XCode works reasonably well for emulating the core Vim features for manipulating text, while still allowing for XCode’s other features like autocompletion and debugging. (Every now and then these would slightly collide, but the convenience of motion commands outweighs the inconveniences you’ll run into if not too careful. - The biggest problem I encountered was the conflict between XCode’s parameter-filling in with like <em>&lt;# int #&gt;</em> or so).</p>
-<p>- But, honestly, while Vim emulation is much more powerful than having to make the expense of using a mouse, what I really missed from Vim was fuzzy autocompletion (with <a href="https://github.com/Valloric/YouCompleteMe">YouCompleteMe</a>). “fuzzy autocompletion” is great. The “autocompletion” part I’m sure we all understand. XCode has that. It’s a big advantage in using IDEs. The “fuzzy” bit may be less common; to the layman it you could describe it as “matching by taking some of the letters, in order”. Well. It’s a subsequence, anyway. So rather than matching <strong>getL</strong>ength as <strong>getL</strong>, you could match with <strong>glth</strong> (<strong>g</strong>et<strong>L</strong>eng<strong>th</strong>) instead. Well. Just look at the gif on the link above. It’s super-cool, by way of being super useful. [EDIT: If I do want fuzzy autocomplete in XCode, this looks like a plugin/patch which can achieve that].</p>
+<p>Fortunately for at least that much, the <a href="https://github.com/JugglerShu/XVim">XVim plugin</a> for XCode works reasonably well for emulating the core Vim features for manipulating text, while still allowing for XCode’s other features like autocompletion and debugging.
+(Every now and then these would slightly collide, but the convenience of motion commands outweighs the inconveniences you’ll run into if not too careful. - The biggest problem I encountered was the conflict between XCode’s parameter-filling in with like <em>&lt;# int #&gt;</em> or so).</p>
+<p>- But, honestly, while Vim emulation is much more powerful than having to make the expense of using a mouse, what I really missed from Vim was fuzzy autocompletion (with <a href="https://github.com/Valloric/YouCompleteMe">YouCompleteMe</a>).
+“fuzzy autocompletion” is great. The “autocompletion” part I’m sure we all understand. XCode has that. It’s a big advantage in using IDEs. The “fuzzy” bit may be less common; to the layman it you could describe it as “matching by taking some of the letters, in order”. Well. It’s a subsequence, anyway. So rather than matching <strong>getL</strong>ength as <strong>getL</strong>, you could match with <strong>glth</strong> (<strong>g</strong>et<strong>L</strong>eng<strong>th</strong>) instead.
+Well. Just look at the gif on the link above. It’s super-cool, by way of being super useful.
+[EDIT: If I do want fuzzy autocomplete in XCode, this looks like a plugin/patch which can achieve that].</p>
 <p>(To play devil’s advocate; if you remember the name of the method, you should probably be able to type it out quicker than if you’re using autocomplete; with autocomplete, it takes time to stop and look at a list of candidate options; then time to figure out whether it’d be quicker to type more letters to narrow down candidates, or scroll through the list to what you want).</p>
-<p>When I say to my peers I want to use Vim, it’s only half-right for them to point to Vim emulation. More than the core Vim stuff, I want my Vim plugins; the Vim I’ve spent time configuring to be <em>my</em> editor. (It’s said of pens with nibs, that after enough use the nib has worn down to match your writing style, so in a way it’s uniquely your pen and not anyone else’s).</p>
-<p>The biggest trouble right now for setting up Vim with XCode is the autocompletion. Interface Development is not something Vim will easily be able to handle. In theory the hardcore could just edit the Storyboard xml raw, I suppose. Debugging also deserves some consideration. (ap4y’s writeup mentions this, in particular the vim-lldb plugin). But it’s easier to just consider to do it in XCode. (or from the command-line’s lldb using <a href="https://github.com/phonegap/ios-deploy">ios-deploy</a>, say).</p>
-<p>Autocompletion. Vim’s YCM can do autocompletion if given a compile_commands.json. The easiest way to generate this file is using the oclint-xcodebuild tool. (<a href="http://blog.patspam.com/2014/vim-objc-code-completion">Here is a writeup</a> with a detailed discussion on how to do this).</p>
-<p>But, as ap4y discusses <a href="https://github.com/Valloric/YouCompleteMe/issues/84#issuecomment-29862144">here</a>, Vim’s YCM at the moment isn’t very good at Objective-C completion. It seems to me the biggest thing YCM lacks is described by <a href="https://github.com/Valloric/YouCompleteMe/issues/234">YCM/Issue#234</a>, “better argument completion”. – The user who reported that issue <a href="https://github.com/oblitum/YouCompleteMe/tree/clang_complete-params">forked YCM and has a branch</a> wherein the hack a solution together to get “argument completion” for the Clang things. (C/C++/Objective-C/etc.). - I’ve not given it a good try, but this seems, at the moment, the best option for what I’m after here.</p>
+<p>When I say to my peers I want to use Vim, it’s only half-right for them to point to Vim emulation.
+More than the core Vim stuff, I want my Vim plugins; the Vim I’ve spent time configuring to be <em>my</em> editor. (It’s said of pens with nibs, that after enough use the nib has worn down to match your writing style, so in a way it’s uniquely your pen and not anyone else’s).</p>
+<p>The biggest trouble right now for setting up Vim with XCode is the autocompletion.
+Interface Development is not something Vim will easily be able to handle. In theory the hardcore could just edit the Storyboard xml raw, I suppose.
+Debugging also deserves some consideration. (ap4y’s writeup mentions this, in particular the vim-lldb plugin). But it’s easier to just consider to do it in XCode. (or from the command-line’s lldb using <a href="https://github.com/phonegap/ios-deploy">ios-deploy</a>, say).</p>
+<p>Autocompletion. Vim’s YCM can do autocompletion if given a compile_commands.json.
+The easiest way to generate this file is using the oclint-xcodebuild tool. (<a href="http://blog.patspam.com/2014/vim-objc-code-completion">Here is a writeup</a> with a detailed discussion on how to do this).</p>
+<p>But, as ap4y discusses <a href="https://github.com/Valloric/YouCompleteMe/issues/84#issuecomment-29862144">here</a>, Vim’s YCM at the moment isn’t very good at Objective-C completion.
+It seems to me the biggest thing YCM lacks is described by <a href="https://github.com/Valloric/YouCompleteMe/issues/234">YCM/Issue#234</a>, “better argument completion”.
+– The user who reported that issue <a href="https://github.com/oblitum/YouCompleteMe/tree/clang_complete-params">forked YCM and has a branch</a> wherein the hack a solution together to get “argument completion” for the Clang things. (C/C++/Objective-C/etc.). - I’ve not given it a good try, but this seems, at the moment, the best option for what I’m after here.</p>
 <p>Aside from Vim’s YCM, the best way to get autocompletion for Objective-C appears to be <a href="https://github.com/Rip-Rip/clang_complete">the clang_complete plugin</a>. I wasn’t able to get this working as for how I was hoping for (pressing Ctrl-X Ctrl-O is too much for autocomplete!); but might also be worth a try.</p>
 <p>In conclusion, I think until YCM’s Objective-C improves then XCode + XVim seems the safest bet. It appears that with some difficulty it is possible to get Vim working with an XCode/iOS project.</p>
 
@@ -165,6 +176,19 @@
 <br style="clear: both;" />
 
 <hr />
+
+<!-- Load highlight.js for Syntax Highlighting. -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/bash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/c.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/gherkin.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/haskell.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/lisp.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/nix.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js"></script>
+<script>hljs.highlightAll();</script>
 
             </div>
 

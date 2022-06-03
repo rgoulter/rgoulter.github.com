@@ -53,6 +53,7 @@
             TOCify
         -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js"></script>
+
         <!--
             Patched TOCify css file.
             (Don't want fixed `.tocify`).
@@ -135,36 +136,79 @@
         by Richard Goulter
     <br />
     
-    Tags: <a href="../../tags/programming.html">programming</a>
+    Tags: <a title="All pages tagged 'programming'." href="../../tags/programming.html">programming</a>
     
 </div>
 
-<p>In Steve Yegge’s hauntingly interesting <a href="http://steve-yegge.blogspot.sg/2008/02/portrait-of-n00b.html">“Portrait of a n00b”</a> article, he argues that:</p>
+<p>In Steve Yegge’s hauntingly interesting
+<a href="http://steve-yegge.blogspot.sg/2008/02/portrait-of-n00b.html">“Portrait of a
+n00b”</a> article, he argues that:</p>
 <ol type="1">
 <li>all meta-data is unnecessary for programs to run.</li>
-<li>n00b programmers can’t handle the complexity of code, and so prefer as much whitespacing as possible (so that there’s less code on the screen). – Expert programmers on the other hand prefer as much code on the screen as possible.</li>
-<li>So it’s unsurprising that n00b programmers will write bad code which is over-commented, with a strong preference for meta-data. (While Expert programmers will write bad code which is uncommented, and will avoid use of meta-data).</li>
+<li>n00b programmers can’t handle the complexity of code, and so prefer as much
+whitespacing as possible (so that there’s less code on the screen). –
+Expert programmers on the other hand prefer as much code on the screen as
+possible.</li>
+<li>So it’s unsurprising that n00b programmers will write bad code which is
+over-commented, with a strong preference for meta-data. (While Expert
+programmers will write bad code which is uncommented, and will avoid use of
+meta-data).</li>
 </ol>
-<p>– The article also portrays the kind of person who loves modelling how situations; who just loves meta-data. Either programmers who pickup Database Administration, or who come across an ML-language like OCaml or Haskell. – Yegge points out “you can’t force people to provide meta-data for everything, they’ll hate you”.</p>
+<p>– The article also portrays the kind of person who loves modelling how
+situations; who just loves meta-data. Either programmers who pickup Database
+Administration, or who come across an ML-language like OCaml or Haskell. –
+Yegge points out “you can’t force people to provide meta-data for everything,
+they’ll hate you”.</p>
 <hr />
-<p>The generally-accepted rule-of-thumb for function length is “fits on a screen” or “less than 50/30/20 lines”, etc. (I’ve heard the “Pragmatic Object-Oriented Design in Ruby” argues for even stricter guidelines).</p>
+<p>The generally-accepted rule-of-thumb for function length is “fits on a screen”
+or “less than 50/30/20 lines”, etc. (I’ve heard the “Pragmatic Object-Oriented
+Design in Ruby” argues for even stricter guidelines).</p>
 <hr />
-<p>Not long ago, a post about <a href="http://number-none.com/blow/john_carmack_on_inlined_code.html">an email from John Carmack about inlining code</a> got quite popular.<br />
-Briefly: while small functions are fine for ‘pure’ functions, it’s impractical to have all functions be ‘pure’. For impure functions, there are often implicit assumptions made about state: e.g. it’s expected certain methods are called in a particular order. It’s more straightforward to ‘inline’ the ‘methods’ all in one larger method. This guarantees these ‘methods’ can’t be called elsewhere.</p>
+<p>Not long ago, a post about <a href="http://number-none.com/blow/john_carmack_on_inlined_code.html">an email from John Carmack about inlining
+code</a> got quite
+popular.<br />
+Briefly: while small functions are fine for ‘pure’ functions, it’s impractical
+to have all functions be ‘pure’. For impure functions, there are often implicit
+assumptions made about state: e.g. it’s expected certain methods are called in
+a particular order. It’s more straightforward to ‘inline’ the ‘methods’ all in
+one larger method. This guarantees these ‘methods’ can’t be called elsewhere.</p>
 <hr />
-<p>I also recently came across this interesting post from <a href="http://martinfowler.com/bliki/FunctionLength.html">Martin Fowler, about ‘function length’</a>.<br />
-The first observation he makes is that “how long should a function be” is asked in lieu of “what should be contained in its own function?”.<br />
-The second observation is the astute distinction between a program’s intention and it’s implementation. – He gives the example from an old system where ‘highlighting’ text was the same as ‘reverse-image of display’; but because the intention (‘highlight’) was significantly different from the implementation (‘reverse’), there was value in a method which just deferred the work to another method.</p>
+<p>I also recently came across this interesting post from <a href="http://martinfowler.com/bliki/FunctionLength.html">Martin Fowler, about
+‘function length’</a>.<br />
+The first observation he makes is that “how long should a function be” is asked
+in lieu of “what should be contained in its own function?”.<br />
+The second observation is the astute distinction between a program’s intention
+and it’s implementation. – He gives the example from an old system where
+‘highlighting’ text was the same as ‘reverse-image of display’; but because the
+intention (‘highlight’) was significantly different from the implementation
+(‘reverse’), there was value in a method which just deferred the work to
+another method.</p>
 <hr />
-<p><a href="http://degoes.net/articles/insufficiently-polymorphic">“Descriptive Names are a Code Smell”</a> is an interesting post in this regard.<br />
-To paraphrase, “long/descriptive names violate the notion of ‘keep your type-declarations as vague as they need to be’”.<br />
-– I think this only applies to ‘implementation’ of a computation. (“I want to get a result in this form, from an input in this form”). Because “descriptive names are bad” flies in the face of “keep intention clear”. – I don’t see this advice as contradictory to e.g. Fowler’s. (Implementation code occurs at a lower level of abstraction than the intention’s code).</p>
+<p><a href="http://degoes.net/articles/insufficiently-polymorphic">“Descriptive Names are a Code
+Smell”</a> is an
+interesting post in this regard.<br />
+To paraphrase, “long/descriptive names violate the notion of ‘keep your
+type-declarations as vague as they need to be’”.<br />
+– I think this only applies to ‘implementation’ of a computation. (“I want to
+get a result in this form, from an input in this form”). Because “descriptive
+names are bad” flies in the face of “keep intention clear”. – I don’t see this
+advice as contradictory to e.g. Fowler’s. (Implementation code occurs at a
+lower level of abstraction than the intention’s code).</p>
 <p>But. On the other hand.<br />
-“Keep things generic”, ‘polymorphic’ rather than ‘monomorphic’.. it’s easier to see how to do this with generic data structures like lists/arrays/dictionaries. For, say, Java, I suppose you get this polymorphims by Interfaces. (Though I guess with e.g. Python/Ruby, you could be ‘generic’ without needing to provide the meta-data).<br />
-– But I imagine this is where (mainstream) languages aren’t so expressive. It’s not so easy to provide abstractions over functions, classes, or at least modules/packages. – It’s not so hard to write a common-enough computation for any array; but not so easy to supply functionality over a module. – Though I can’t think of an example off the top of my head why that’d be necessary.</p>
+“Keep things generic”, ‘polymorphic’ rather than ‘monomorphic’.. it’s easier to
+see how to do this with generic data structures like lists/arrays/dictionaries.
+For, say, Java, I suppose you get this polymorphims by Interfaces. (Though I
+guess with e.g. Python/Ruby, you could be ‘generic’ without needing to provide
+the meta-data).<br />
+– But I imagine this is where (mainstream) languages aren’t so expressive.
+It’s not so easy to provide abstractions over functions, classes, or at least
+modules/packages. – It’s not so hard to write a common-enough computation for
+any array; but not so easy to supply functionality over a module. – Though I
+can’t think of an example off the top of my head why that’d be necessary.</p>
 <hr />
 <p>There’s something else to be cautious of with “be as generic as possible”.<br />
-People love to over-engineer; to solve problems they used to have (or think they’ll have) rather than problems they currently have.<br />
+People love to over-engineer; to solve problems they used to have (or think
+they’ll have) rather than problems they currently have.<br />
 There may be different ways to make a program ‘more generic’.</p>
 
 <hr />
@@ -180,6 +224,19 @@ There may be different ways to make a program ‘more generic’.</p>
 <br style="clear: both;" />
 
 <hr />
+
+<!-- Load highlight.js for Syntax Highlighting. -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/bash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/c.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/gherkin.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/haskell.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/lisp.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/nix.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js"></script>
+<script>hljs.highlightAll();</script>
 
             </div>
 

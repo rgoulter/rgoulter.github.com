@@ -53,6 +53,7 @@
             TOCify
         -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js"></script>
+
         <!--
             Patched TOCify css file.
             (Don't want fixed `.tocify`).
@@ -135,60 +136,114 @@
         by Richard Goulter
     <br />
     
-    Tags: <a href="../../tags/programming.python.html">programming.python</a>, <a href="../../tags/programming.scala.html">programming.scala</a>, <a href="../../tags/programming.exceptions.html">programming.exceptions</a>
+    Tags: <a title="All pages tagged 'programming.python'." href="../../tags/programming.python.html">programming.python</a>, <a title="All pages tagged 'programming.scala'." href="../../tags/programming.scala.html">programming.scala</a>, <a title="All pages tagged 'programming.exceptions'." href="../../tags/programming.exceptions.html">programming.exceptions</a>
     
 </div>
 
-<p>I was asked in an interview “what advantages are there to coding in a functional style?”.<br />
-I’d use ‘functional’ a bit more loosely than “everything pure, monads, etc.”; I’m happy with modern language idioms like pattern matching.<br />
-– I’d say the best reason is it makes explicit dangerous things which are implicit in procedural, blub language code.</p>
+<p>I was asked in an interview “what advantages are there to coding in a
+functional style?”.<br />
+I’d use ‘functional’ a bit more loosely than “everything pure, monads, etc.”;
+I’m happy with modern language idioms like pattern matching.<br />
+– I’d say the best reason is it makes explicit dangerous things which are
+implicit in procedural, blub language code.</p>
 <hr />
 <p>Consider a typical <code>dictionary.get(key)</code>:<br />
-If the key is in the dictionary, get the value, the world is at peace and all is well.<br />
-But writing code where things go well is easy. Here, it’s more interesting to consider how to model “what to do when things go wrong”. – To me, returning <code>Optional[Value]</code> (as any “functional” language will do) seems the most elegant:</p>
-<p>Mainstream languages (like Java, Python) tend to return <code>null</code>/<code>None</code> for this case.<br />
-Mainstream languages also tend to throw errors when trying to use a <code>null</code>-value as if it’s not a <code>null</code>-value. So what happens is you’ll write code assuming the value is non-<code>null</code>; at some point this (implicit) assumption will be wrong. (Let he who’s never had a NullPointerException throw the first stone).</p>
-<p><code>Optional[Value]</code> is kinda morally equivalent. A dictionary returns <code>Some[Value]</code>, which contains a non-<code>null</code> value if the dictionary has the key, <code>None</code> if the key wasn’t present in the dictionary. (Well, technically it could be a <code>Some(null)</code>; but by the same argument, this’d be better as <code>Some(None)</code>).<br />
-The syntactic difference is, every time you have an <code>Optional[Value]</code> you MUST have <code>optional match { Some(x) =&gt; ...; None =&gt; ...; }</code> (or an acknowledgement of ‘danger’, like <code>optional.getValue()</code>). – With nullable variables, it’s up to the programmer’s discipline to have <code>if (x != null) { ... } else { ... }</code>; I’d be willing to bet the <code>else</code> clause is almost-always missing in code.<br />
-– Or, rather, looking at code where values are never null, you know you can’t get NPEs. With nullable-values, you’ve to rely on (implicit) assumptions, and maybe-probably the code is fine.</p>
+If the key is in the dictionary, get the value, the world is at peace and all
+is well.<br />
+But writing code where things go well is easy. Here, it’s more interesting to
+consider how to model “what to do when things go wrong”. – To me, returning
+<code>Optional[Value]</code> (as any “functional” language will do) seems the most
+elegant:</p>
+<p>Mainstream languages (like Java, Python) tend to return <code>null</code>/<code>None</code> for this
+case.<br />
+Mainstream languages also tend to throw errors when trying to use a
+<code>null</code>-value as if it’s not a <code>null</code>-value. So what happens is you’ll write
+code assuming the value is non-<code>null</code>; at some point this (implicit) assumption
+will be wrong. (Let he who’s never had a NullPointerException throw the first
+stone).</p>
+<p><code>Optional[Value]</code> is kinda morally equivalent. A dictionary returns
+<code>Some[Value]</code>, which contains a non-<code>null</code> value if the dictionary has the key,
+<code>None</code> if the key wasn’t present in the dictionary. (Well, technically it could
+be a <code>Some(null)</code>; but by the same argument, this’d be better as <code>Some(None)</code>).<br />
+The syntactic difference is, every time you have an <code>Optional[Value]</code> you MUST
+have <code>optional match { Some(x) =&gt; ...; None =&gt; ...; }</code> (or an acknowledgement
+of ‘danger’, like <code>optional.getValue()</code>). – With nullable variables, it’s up
+to the programmer’s discipline to have <code>if (x != null) { ... } else { ... }</code>;
+I’d be willing to bet the <code>else</code> clause is almost-always missing in code.<br />
+– Or, rather, looking at code where values are never null, you know you can’t
+get NPEs. With nullable-values, you’ve to rely on (implicit) assumptions, and
+maybe-probably the code is fine.</p>
 <hr />
 <p>There are other ways to deal with errors.<br />
-One kinda-stupid approach would be for the dictionary to loop indefinitely (until it has a value for the given key). In a concurrent/parallel program, this isn’t completely stupid, &amp; blocking-until-result <em>may</em> be desirable. But still.</p>
-<p>Throwing an exception is another approach. Python does this. It seems to me this is kindof-sortof morally equivalent to <code>Optional[Value]</code> also; the benefit being that a value isn’t going to be <code>null</code>, the drawback being it’s difficult to tell what the program is doing:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode scala"><code class="sourceCode scala"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">try</span> {</a>
-<a class="sourceLine" id="cb1-2" data-line-number="2">  x = dict.<span class="fu">get</span>(keyX);</a>
-<a class="sourceLine" id="cb1-3" data-line-number="3">  <span class="fu">doTask1</span>(x);</a>
-<a class="sourceLine" id="cb1-4" data-line-number="4">  y = dict.<span class="fu">get</span>(keyY);</a>
-<a class="sourceLine" id="cb1-5" data-line-number="5">  <span class="fu">doTask2</span>(x, y);</a>
-<a class="sourceLine" id="cb1-6" data-line-number="6">} <span class="kw">catch</span> KeyNotPresent ex {</a>
-<a class="sourceLine" id="cb1-7" data-line-number="7">  <span class="co">//...</span></a>
-<a class="sourceLine" id="cb1-8" data-line-number="8">}</a></code></pre></div>
-<p>– Obviously if an exception is thrown above, it’s not clear whether it came before or after <code>doTask1(x)</code>; perhaps less clear is that <code>y = dict.get</code> onwards ‘needs’ its own <code>try-catch</code> block. It doesn’t make sense to have <code>KeyNotPresent</code> exception cover both <code>x = dict.get</code> and <code>y = dict.get</code>; not if you want to be sure that you’re handling each alternative.</p>
-<p>Error Codes, similarly, seem kinda-sorta equivalent if your program follows discipline to handle all alternatives. Somehow <a href="http://nedbatchelder.com/text/exceptions-vs-status.html">Exceptions are seen as good</a> for allowing you to “leave error handling code out of much of your code”. (If you don’t write half your program logic, you don’t have to write half your program logic). – Though, much of the advantages of Exceptions over Error Codes here also apply to <code>Optional</code> and friends.</p>
-<p>– The advantages that Exceptions and Error Codes have over <code>Optional[Value]</code> is that the latter just says “not everything went well”, the former can describe what went wrong. (IOError, DivisionByZero, StackUnderflow, UnsupportedOperation, etc.). This can be quickly remedied by using <code>Either</code>, i.e. keeping information about what kind of error occurred.</p>
+One kinda-stupid approach would be for the dictionary to loop indefinitely
+(until it has a value for the given key). In a concurrent/parallel program,
+this isn’t completely stupid, &amp; blocking-until-result <em>may</em> be desirable. But
+still.</p>
+<p>Throwing an exception is another approach. Python does this. It seems to me
+this is kindof-sortof morally equivalent to <code>Optional[Value]</code> also; the benefit
+being that a value isn’t going to be <code>null</code>, the drawback being it’s difficult
+to tell what the program is doing:</p>
+<pre class="scala"><code>try {
+  x = dict.get(keyX);
+  doTask1(x);
+  y = dict.get(keyY);
+  doTask2(x, y);
+} catch KeyNotPresent ex {
+  //...
+}</code></pre>
+<p>– Obviously if an exception is thrown above, it’s not clear whether it came
+before or after <code>doTask1(x)</code>; perhaps less clear is that <code>y = dict.get</code> onwards
+‘needs’ its own <code>try-catch</code> block. It doesn’t make sense to have
+<code>KeyNotPresent</code> exception cover both <code>x = dict.get</code> and <code>y = dict.get</code>; not if
+you want to be sure that you’re handling each alternative.</p>
+<p>Error Codes, similarly, seem kinda-sorta equivalent if your program follows
+discipline to handle all alternatives. Somehow <a href="http://nedbatchelder.com/text/exceptions-vs-status.html">Exceptions are seen as
+good</a> for allowing you
+to “leave error handling code out of much of your code”. (If you don’t write
+half your program logic, you don’t have to write half your program logic). –
+Though, much of the advantages of Exceptions over Error Codes here also apply
+to <code>Optional</code> and friends.</p>
+<p>– The advantages that Exceptions and Error Codes have over <code>Optional[Value]</code>
+is that the latter just says “not everything went well”, the former can
+describe what went wrong. (IOError, DivisionByZero, StackUnderflow,
+UnsupportedOperation, etc.). This can be quickly remedied by using <code>Either</code>,
+i.e. keeping information about what kind of error occurred.</p>
 <hr />
 <p>That’s all fine &amp; well.<br />
-<code>Optional</code> works well to model where computations may fail; <code>Either</code> for when you want to know why things went wrong (or perhaps maybe to recover depending on what went wrong). These are more explicit than nullable values or Error Codes.</p>
-<p>The bigger challenge is how well functions-which-may-fail compose with other functions-which-may-fail.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode scala"><code class="sourceCode scala"><a class="sourceLine" id="cb2-1" data-line-number="1">fun <span class="fu">importantComputation</span>() {</a>
-<a class="sourceLine" id="cb2-2" data-line-number="2">  x = <span class="fu">mayFailX</span>()</a>
-<a class="sourceLine" id="cb2-3" data-line-number="3">  stmt1;</a>
-<a class="sourceLine" id="cb2-4" data-line-number="4">  y = <span class="fu">mayFailY</span>()</a>
-<a class="sourceLine" id="cb2-5" data-line-number="5">  stmt2;</a>
-<a class="sourceLine" id="cb2-6" data-line-number="6">  <span class="kw">return</span> <span class="fu">g</span>(x, y);</a>
-<a class="sourceLine" id="cb2-7" data-line-number="7">}</a></code></pre></div>
-<p>With stateful code, one needs to be careful about assumptions about what <code>stmt1</code>, <code>mayFailY</code> mutate. – <em>Implicitly</em>, you also mustn’t assume <code>stmt2</code>, <code>g</code> are executed (&amp; so must consider state when they are executed, aren’t executed).<br />
-– While it’s true that Exceptions defer the error-handling; there’s surely more cognitive-load required to keep the above in mind while scrolling through code.</p>
+<code>Optional</code> works well to model where computations may fail; <code>Either</code> for when
+you want to know why things went wrong (or perhaps maybe to recover depending
+on what went wrong). These are more explicit than nullable values or Error
+Codes.</p>
+<p>The bigger challenge is how well functions-which-may-fail compose with other
+functions-which-may-fail.</p>
+<pre class="scala"><code>fun importantComputation() {
+  x = mayFailX()
+  stmt1;
+  y = mayFailY()
+  stmt2;
+  return g(x, y);
+}</code></pre>
+<p>With stateful code, one needs to be careful about assumptions about what
+<code>stmt1</code>, <code>mayFailY</code> mutate. – <em>Implicitly</em>, you also mustn’t assume <code>stmt2</code>,
+<code>g</code> are executed (&amp; so must consider state when they are executed, aren’t
+executed).<br />
+– While it’s true that Exceptions defer the error-handling; there’s surely
+more cognitive-load required to keep the above in mind while scrolling through
+code.</p>
 <p>Functional code also isn’t necessarily so cumbersome. <code>Optional.map</code> allows:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode scala"><code class="sourceCode scala"><a class="sourceLine" id="cb3-1" data-line-number="1">optional <span class="kw">match</span> {</a>
-<a class="sourceLine" id="cb3-2" data-line-number="2">  Some(x) =&gt; <span class="fu">doSomething</span>(x)</a>
-<a class="sourceLine" id="cb3-3" data-line-number="3">  None =&gt; None</a>
-<a class="sourceLine" id="cb3-4" data-line-number="4">}</a></code></pre></div>
-<p>to be written as <code>optional.map({ x =&gt; doSomething(x) })</code> (or <code>.map(doSomething)</code> if you literally have a function).</p>
+<pre class="scala"><code>optional match {
+  Some(x) =&gt; doSomething(x)
+  None =&gt; None
+}</code></pre>
+<p>to be written as <code>optional.map({ x =&gt; doSomething(x) })</code> (or
+<code>.map(doSomething)</code> if you literally have a function).</p>
 <hr />
-<p>Programmers tend to make mistakes when they forget to take care of cases when things go wrong.<br />
+<p>Programmers tend to make mistakes when they forget to take care of cases when
+things go wrong.<br />
 It’s easier to make mistakes when “something went wrong” is implicitly handled.<br />
-Functional Programming-ish code tends to be very explicit; and potentially more concise. For writing correct, complete, safe code, this is clearly an advantage.</p>
+Functional Programming-ish code tends to be very explicit; and potentially more
+concise. For writing correct, complete, safe code, this is clearly an
+advantage.</p>
 
 <hr />
 
@@ -203,6 +258,19 @@ Functional Programming-ish code tends to be very explicit; and potentially more 
 <br style="clear: both;" />
 
 <hr />
+
+<!-- Load highlight.js for Syntax Highlighting. -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/bash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/c.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/gherkin.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/haskell.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/lisp.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/nix.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js"></script>
+<script>hljs.highlightAll();</script>
 
             </div>
 

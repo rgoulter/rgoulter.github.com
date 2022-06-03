@@ -53,6 +53,7 @@
             TOCify
         -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js"></script>
+
         <!--
             Patched TOCify css file.
             (Don't want fixed `.tocify`).
@@ -134,77 +135,151 @@ contentpage.html, for content-specific pages, like emacs.html/yi.html.
 -->
 
 <div class="row">
-    <div class="col-md-8" id="page-content">
-        <p>This page is for me to share notes of things I was confused by as I’ve used Nix.</p>
-<h1 id="you-should-explain-what-nix-is">You Should Explain What Nix is</h1>
+    <div class="col-md-9" id="page-content">
+        <p>This page is for me to share notes of things I was confused by as I’ve
+used Nix.</p>
+<h1 id="concepts">Concepts</h1>
+<p>Nix is different enough from other programming tools
+that it’s necessary to have some discussion of concepts.</p>
+<h2 id="what-is-nix">What is Nix</h2>
 <p>Nix is to managing packages what lisp is to adding numbers together.</p>
-<p>More concretely, “Nix” refers to a package manager, the language those packages are written in; and usually referring to “Nix” also includes the main repository of packages (nixpkgs) and the OS (NixOS).</p>
-<p>Nix is cool (both in terms of several practical benefits that are <em>difficult</em> to get elsewhere, and in terms of just being elegant), but can be hard to use.</p>
-<p>If you think what you read about Nix (elsewhere) sounds interesting, try it out passively bit by bit over months.</p>
-<h1 id="what-confused-me-for-a-long-time-stuff-about-derivations">What Confused Me for a Long Time: Stuff about Derivations</h1>
-<p>If you go through the widely recommended Nix Pills, prob’ly the first surprising Nix Pill is <a href="https://nixos.org/guides/nix-pills/our-first-derivation.html">pill 7, its intro to “derivations”</a>.</p>
+<p>More concretely, “Nix” refers to a package manager, the language those
+packages are written in; and usually referring to “Nix” also includes
+the main repository of packages (nixpkgs) and the OS (NixOS).</p>
+<p>Nix is cool (both in terms of several practical benefits that are
+<em>difficult</em> to get elsewhere, and in terms of just being elegant), but
+can be hard to use. – It’s 95% wonderful, 5% pain in the arse.</p>
+<p>Perhaps the quickest way to illustrate the benefits: Nix’s UX
+is like Docker, without dealing with containers.</p>
+<p>If you think what you read about Nix (elsewhere) sounds interesting,
+try it out passively bit by bit over months.</p>
+<h2 id="derivations">Derivations</h2>
+<p>“Derivations” confused be for a long time.</p>
+<p>If you go through the widely recommended Nix Pills, prob’ly the first
+surprising Nix Pill is <a href="https://nixos.org/guides/nix-pills/our-first-derivation.html">pill 7, its intro to
+“derivations”</a>.</p>
 <p>“Derivation” is a foundational concept in Nix.<br />
 As you can see in the blogpost, in one way, it’s like a JSON object.</p>
-<p>I met someone who explained that he had been confused for some time about how immutable structures in functional programming could be used in programs which would manipulate the list. (How can something be immutable, but also change?).</p>
-<p>With Nix, I felt a similar confusion for a long time. (How can something be a hashmap, but also be a package installed on a filesystem?).</p>
-<p>The above pill compares building a <code>.nix</code> file to building a <code>.c</code> program.<br />
+<p>I met someone who explained that he had been confused for some time
+about how immutable structures in functional programming could be used
+in programs which would manipulate the list. (How can something be
+immutable, but also change?).</p>
+<p>With Nix, I felt a similar confusion for a long time. (How can
+something be a hashmap, but also be a package installed on a
+filesystem?).</p>
+<p>The above pill compares building a <code>.nix</code> file to building a <code>.c</code>
+program.<br />
 This is fair, but didn’t click with me.</p>
-<p>I’d rather phrase it: that the derivation is the Nix’s “how to build a package” in its pure, consistent way.<br />
-The Nix programs in <code>.nix</code> files contain programmatic abstractions built on top of that.</p>
-<p>Or a bit more vaguely: a “nix derivation” is more/less like nix’s flavour of a software package.</p>
-<p>Other important words: “Instantiate” is “generate the .drv from the high-level <code>.nix</code>”, and “realise” is the package actually being built (or copied) to the store.</p>
-<p>The Nix pills take a very bottom-up approach to understanding Nix. I find it hard to appreciate without some familiarity with Nix stuff. But, Nix is much harder to understand without an intuition for what a derivation is.</p>
-<h1 id="what-also-confused-me-for-a-long-time-nix-expressions-and-realised-derivations">What Also Confused Me for a Long Time: Nix Expressions and Realised Derivations</h1>
+<p>I’d rather phrase it: that the derivation is the Nix’s “how to build a
+package” in its pure, consistent way.<br />
+The Nix programs in <code>.nix</code> files contain programmatic abstractions
+built on top of that.</p>
+<p>Or a bit more vaguely: a “nix derivation” is more/less like nix’s
+flavour of a software package.</p>
+<p>Other important words: “Instantiate” is “generate the .drv from the
+high-level <code>.nix</code>”, and “realise” is the package actually being built
+(or copied) to the store.</p>
+<p>The Nix pills take a very bottom-up approach to understanding Nix. I
+find it hard to appreciate without some familiarity with Nix stuff.
+But, Nix is much harder to understand without an intuition for what a
+derivation is.</p>
+<h2 id="realising-derivations">Realising Derivations</h2>
+<p>This also confused me for a long time: the relationship between
+Nix expressions and realised derivations.</p>
 <p>What also confused me is a <code>.nix</code> file might contain many derivations.<br />
 Which doesn’t sound all that confusing.<br />
 But.<br />
 In Python, each Python file is a module, and runs with a main function.<br />
 In Haskell, each file is its own module, and runs with a main function.<br />
-In Nix, each file is a Nix expression, and files don’t have a specific format.</p>
+In Nix, each file is a Nix expression, and files don’t have a specific
+format.</p>
 <p>A derivation (“nix package”) is declared.<br />
-Which itself is maybe not confusing. Terraform code involves declaring code and letting Terraform determine what resources to create/delete/update.<br />
-And the Nix language is all pure expressions (since it doesn’t have statements).</p>
+Which itself is maybe not confusing. Terraform code involves declaring
+code and letting Terraform determine what resources to
+create/delete/update.<br />
+And the Nix language is all pure expressions (since it doesn’t have
+statements).</p>
 <p>– But some combination of the above defied my intuitions.<br />
-Packages get built (which you’d expect to be an impure side-effect) from these declarative Nix expressions in source files, but not necessarily as simply/explicitly as “<code>package { src = ... }</code>”.</p>
-<h1 id="nix-flakes-and-b.f.e.-before-flakes-era.">Nix: Flakes and B.F.E. (Before Flakes Era).</h1>
-<p>Flakes are a recent edition to Nix.<br />
-People who understand flakes say flakes are cool.</p>
+Packages get built (which you’d expect to be an impure side-effect)
+from these declarative Nix expressions in source files, but not
+necessarily as simply/explicitly as “<code>package { src = ... }</code>”.</p>
+<h2 id="flakes">Flakes</h2>
+<p>Flakes are a recent addition to Nix.<br />
+People who understand flakes say flakes are cool.<br />
+(And now that I understand flakes a bit better: yeah, they’re cool).</p>
 <p>Flakes are kinda like “nix squared”.</p>
 <p>With Nix, you pay an upfront cost; where complexity is managed explicitly.<br />
-The implicit, imperative mutation of the global filesystem that programmers are used to when driving their workstations is verboten.</p>
-<p>The typical way of using nixpkgs was using channels. This still leaved some room for inconsistency when installing the same packages across different machines (e.g. due to differences in how up-to-date the channels are in each machine), and leaves some things implicit/mutable. (e.g. what channels are available on the machine).</p>
-<p>Nix flakes do away with using channels, and provide a consistent way for a repository to declare its inputs, and what outputs it provides.</p>
-<p>Serokell’s <a href="https://serokell.io/blog/practical-nix-flakes">“Practical Nix Flakes”</a> blogpost is a good introduction.</p>
-<p>With Nix flakes, there’s more complexity upfront, but some pretty neat benefits from paying that cost. (The CLI UX with flakes is nicer; and it’s easier to make use of flakes than non-flakes Nix expressions).</p>
+The implicit, imperative mutation of the global filesystem that
+programmers are used to when driving their workstations is verboten.</p>
+<p>The typical way of using nixpkgs was using channels. This still leaved
+some room for inconsistency when installing the same packages across
+different machines (e.g. due to differences in how up-to-date the
+channels are in each machine), and leaves some things
+implicit/mutable. (e.g. what channels are available on the machine).</p>
+<p>Nix flakes do away with using channels, and provide a consistent way
+for a repository to declare its inputs, and what outputs it provides.</p>
+<p>Serokell’s <a href="https://serokell.io/blog/practical-nix-flakes">“Practical Nix
+Flakes”</a> blogpost is a good
+introduction.</p>
+<p>With Nix flakes, there’s more complexity upfront, but some pretty neat
+benefits from paying that cost. (The CLI UX with flakes is nicer; and
+it’s easier to make use of flakes than non-flakes Nix expressions).</p>
 <p>The new Nix commands make use of flakes.<br />
-e.g. the old-style command to install a package might be <code>nix-env --install --attr nixpkgs.neovim</code> (install <code>neovim</code> from the <code>nixpkgs</code> channel), but the new-style command is <code>nix profile install nixpkgs#neovim</code> (install <code>neovim</code> package from the <code>nixpkgs</code> flake).</p>
-<p>I wrote a flake for <a href="https://github.com/rgoulter/my-hakyll-blog">my hakyll blog</a>. I can build &amp; run the static site generator with just <code>nix run github:rgoulter/my-hakyll-blog</code>, and it will work the same way on any computer that runs this.</p>
-<h1 id="nix-env-is-easiest-to-start-with-but-also-discouraged-for-being-footgun-prone"><code>nix-env</code> is Easiest to Start With but also Discouraged for Being Footgun-Prone</h1>
-<p>The easiest way to get started with using Nix is as a almost drop-in replacement for how you might otherwise use a package manager.</p>
+e.g. the old-style command to install a package might be:</p>
+<pre><code>nix-env --install --attr nixpkgs.neovim</code></pre>
+<p>(install <code>neovim</code> from the <code>nixpkgs</code> channel),
+but the new-style command is:</p>
+<pre><code>nix profile install nixpkgs#neovim</code></pre>
+<p>(install <code>neovim</code> package from the <code>nixpkgs</code> flake).</p>
+<p>e.g. I wrote a flake for <a href="https://github.com/rgoulter/my-hakyll-blog">my hakyll
+blog</a>. I can build &amp; run the static
+site generator with just <code>nix run github:rgoulter/my-hakyll-blog</code>.</p>
+<h1 id="how-to">How To</h1>
+<h2 id="nix-env"><code>nix-env</code></h2>
+<p><code>nix-env</code> is easiest to start with, but also discouraged for being
+footgun-prone.</p>
+<p>Using <code>nix-env</code> can almost be a drop-in replacement for how you might otherwise
+use a package manager.</p>
 <p>Instead of:</p>
-<pre><code>sudo apt-update
+<pre class="bash"><code>sudo apt-update
 sudo apt install vim</code></pre>
 <p>you’d run:</p>
-<pre><code>nix-channel --update
+<pre class="bash"><code>nix-channel --update
 nix-env --install --attr nixpkgs.vim</code></pre>
-<p>(Perhaps unexpectedly, not using <code>sudo</code>).</p>
-<p>There’s only a marginal benefit to Nix compared to the system package manager. (You get the same versions of software on each system, rather than e.g. CentOS’ version being much older than Ubuntu’s; and nixpkgs tend to have very up-to-date packages).</p>
-<p>I’ve seen this described as an anti-pattern, and that its use is discouraged. – I’ll say it’s prone to problems of <em>“I forgot I did that”</em> or <em>“I didn’t know I did that”</em> and ending up with problems that are hard to understand.</p>
-<p>e.g. when I first installed NixOS, I logged in as the root user and installed firefox using <code># nix-env --install --attr nixpkgs.firefox</code>, so I could continue reading the manual etc.<br />
-Months later, on my normal user account, I was confused why my Firefox was stuck on such an old version. I was especially confused since Firefox wasn’t installed to my user profile anywhere.<br />
+<p>(Perhaps unexpectedly: <em>not</em> using <code>sudo</code>).</p>
+<p>There’s only a marginal benefit to Nix compared to the system package
+manager. (You get the same versions of software on each system, rather
+than e.g. CentOS’ version being much older than Ubuntu’s; and nixpkgs
+tend to have very up-to-date packages).</p>
+<p>I’ve seen this described as an anti-pattern, and that its use is
+discouraged. – I’ll say it’s prone to problems of <em>“I forgot I did
+that”</em> or <em>“I didn’t know I did that”</em> and ending up with problems
+that are hard to understand.</p>
+<p>e.g. when I first installed NixOS, I logged in as the root user and
+installed firefox using <code># nix-env --install --attr nixpkgs.firefox</code>,
+so I could continue reading the manual etc.<br />
+Months later, on my normal user account, I was confused why my Firefox
+was stuck on such an old version. I was especially confused since
+Firefox wasn’t installed to my user profile anywhere.<br />
 “I forgot I’d done that. It ended up with a hard to understand problem.”</p>
-<p>I think it’s discouraged due to being the cause of a disproportionate amount of requests for help in the community. It’s most likely to be used by beginners, who are likely to not know all the details of what they’re doing, or likely to not be able to figure out why an issue is occuring.</p>
-<h1 id="how-to-find-these-packages">How to Find these Packages</h1>
+<p>I think it’s discouraged due to being the cause of a disproportionate
+amount of requests for help in the community. It’s most likely to be
+used by beginners, who are likely to not know all the details of what
+they’re doing, or likely to not be able to figure out why an issue is
+occuring.</p>
+<h2 id="finding-packages">Finding Packages</h2>
 <ol type="1">
-<li><p>https://search.nixos.org/packages</p></li>
+<li><p><a href="https://search.nixos.org/packages" class="uri">https://search.nixos.org/packages</a></p></li>
 <li><p>To search the <code>nixpkgs</code>:</p></li>
 </ol>
-<pre><code>nix search nixpkgs &lt;search term&gt;</code></pre>
-<h1 id="declarative-package-management-is-the-easiest-non-trivial-thing-to-do-with-nix">“Declarative Package Management” is the Easiest Non-Trivial Thing to do with Nix</h1>
-<p>The Nixpkgs manual has a section describing <a href="https://nixos.org/manual/nixpkgs/stable/#sec-declarative-package-management">“declarative package management”</a>.</p>
+<pre class="bash"><code>nix search nixpkgs &lt;search term&gt;</code></pre>
+<h2 id="declarative-package-management">Declarative Package Management</h2>
+<p>“Declarative Package Management” is the easiest non-trivial thing to do with Nix.</p>
+<p>The Nixpkgs manual has a section describing <a href="https://nixos.org/manual/nixpkgs/stable/#sec-declarative-package-management">“declarative package
+management”</a>.</p>
 <p>This at least should be appealing to yak-shavers.</p>
 <p>It gives an example using the expression:</p>
-<pre><code>pkgs.buildEnv {
+<pre class="nix"><code>pkgs.buildEnv {
     name = &quot;my-packages&quot;;
     paths = [
       bc
@@ -214,12 +289,18 @@ Months later, on my normal user account, I was confused why my Firefox was stuck
     ];
   };
 }</code></pre>
-<p>(If you’re persuaded against using <code>nix-env</code>, nix.dev’s tutorial on <a href="https://nix.dev/tutorials/ad-hoc-developer-environments">ad hoc developer environments</a> is at about the same level).</p>
-<p>The first tricky taste of Nix is that there are several different ways to install this package.</p>
+<p>(If you’re persuaded against using <code>nix-env</code>, nix.dev’s tutorial on
+<a href="https://nix.dev/tutorials/ad-hoc-developer-environments">ad hoc developer
+environments</a>
+is at about the same level).</p>
+<p>The first tricky taste of Nix is that there are several different ways
+to install this package.</p>
 <p>Non-exhaustively:</p>
-<h2 id="installing-your-declaratively-managed-packages-option-a-packageoverrides">Installing your Declaratively Managed Packages, Option A: <code>packageOverrides</code></h2>
-<p>At the time of writing, the manual suggests the way to use this expression is to override the list of packages in nixpkgs and add <code>myPackages</code>, by using <code>~/.config/nixpkgs/config.nix</code> with contents:</p>
-<pre><code>{
+<h3 id="installing-with-packageoverrides">Installing with <code>packageOverrides</code></h3>
+<p>At the time of writing, the manual suggests the way to use this
+expression is to override the list of packages in nixpkgs and add
+<code>myPackages</code>, by using <code>~/.config/nixpkgs/config.nix</code> with contents:</p>
+<pre class="nix"><code>{
   packageOverrides = pkgs: with pkgs; {
     myPackages = pkgs.buildEnv {
       name = &quot;my-packages&quot;;
@@ -233,13 +314,14 @@ Months later, on my normal user account, I was confused why my Firefox was stuck
   };
 }</code></pre>
 <p>And then installing this by running:</p>
-<pre><code>nix-env --install --attr nixpkgs.myPackages</code></pre>
-<h2 id="installing-your-declaratively-managed-packages-option-b-overlays">Installing your Declaratively Managed Packages, Option B: Overlays</h2>
-<p>The chapter immediately following the Declarative Package Management in the nixpkgs manual is <a href="https://nixos.org/manual/nixpkgs/stable/#chap-overlays">about overlays</a>.</p>
+<pre class="bash"><code>nix-env --install --attr nixpkgs.myPackages</code></pre>
+<h3 id="installing-with-an-overlay">Installing with an Overlay</h3>
+<p>The chapter immediately following the Declarative Package Management
+in the nixpkgs manual is <a href="https://nixos.org/manual/nixpkgs/stable/#chap-overlays">about overlays</a>.</p>
 <p>Which seems like a nicer solution than the <code>packageOverrides</code> in <code>config.nix</code>.</p>
 <p>I used this approach for a long time.</p>
 <p>I did this by having <code>~/.config/nixpkgs/overlays/myOverlays.nix</code> with:</p>
-<pre><code>self: super:
+<pre class="nix"><code>self: super:
 
 {
   myPackages = self.buildEnv {
@@ -253,12 +335,12 @@ Months later, on my normal user account, I was confused why my Firefox was stuck
   };
 }</code></pre>
 <p>And then installing this by running:</p>
-<pre><code>nix-env --install --attr nixpkgs.myPackages</code></pre>
+<pre class="bash"><code>nix-env --install --attr nixpkgs.myPackages</code></pre>
 <p>And just re-running that each time <code>myPackages</code> is changed.</p>
 <p>e.g. here’s <a href="https://github.com/rgoulter/dotfiles/blob/1edb8db8345fe6eb11ebc401f20587499d30c086/nixpkgs/overlays/myPackages.nix">the overlay I was using</a>.</p>
-<h2 id="installing-your-declaratively-managed-packages-option-c-boilerplate-full-self-contained-flake.nix">Installing your Declaratively Managed Packages, Option C: Boilerplate-full self-contained <code>flake.nix</code></h2>
+<h3 id="installing-with-vanilla-flake.nix">Installing with Vanilla <code>flake.nix</code></h3>
 <p>For x86-64 Linux, with the following <code>flake.nix</code>:</p>
-<pre><code>{
+<pre class="nix"><code>{
   description = &quot;A basic flake with declaratively managed packages&quot;;
 
   inputs.nixpkgs.url = &quot;github:NixOS/nixpkgs/nixpkgs-unstable&quot;;
@@ -279,11 +361,14 @@ Months later, on my normal user account, I was confused why my Firefox was stuck
     };
   };
 }</code></pre>
-<p>(If you put this in a git repository, the file will need to be checked into the repository).</p>
-<p>Then, you can install this by running (in the same directory as the <code>flake.nix</code>):</p>
-<pre><code>nix profile install .#myPackages</code></pre>
-<p>A more complex <code>flake.nix</code>, but with <code>&quot;x86_64-linux&quot;</code> factored out:</p>
-<pre><code>  description = &quot;A basic flake with declaratively managed packages&quot;;
+<p>(If you put this in a git repository, the file will need to be checked
+into the repository).</p>
+<p>Then, you can install this by running (in the same directory as the
+<code>flake.nix</code>):</p>
+<pre class="bash"><code>nix profile install .#myPackages</code></pre>
+<p>A more complex <code>flake.nix</code>, but with <code>"x86_64-linux"</code> factored out:</p>
+<pre class="nix"><code>{
+  description = &quot;A basic flake with declaratively managed packages&quot;;
 
   inputs.nixpkgs.url = &quot;github:NixOS/nixpkgs/nixpkgs-unstable&quot;;
 
@@ -309,17 +394,21 @@ Months later, on my normal user account, I was confused why my Firefox was stuck
     });
   };
 }</code></pre>
-<h2 id="installing-your-declaratively-managed-packages-option-d-flakes-nix-user-repository">Installing your Declaratively Managed Packages, Option D: Flakes (Nix User Repository)</h2>
-<p>Probably the tidiest way in the long term may be to organise your Nix code into its own repository.</p>
-<p>Making use of <a href="https://github.com/nix-community/nur-packages-template">nix-community’s nix-user-repository template</a> (i.e. cloning it and pushing to your own fork/repository):</p>
-<p>Although maybe not the nicest way of doing it, I’d change <code>default.nix</code> to have:</p>
-<pre><code>{ pkgs ? import &lt;nixpkgs&gt; { } }:
+<h3 id="installing-with-flakes-nix-user-repository">Installing with Flakes (Nix User Repository)</h3>
+<p>Probably the tidiest way in the long term may be to organise your Nix code into
+its own repository.</p>
+<p>Making use of <a href="https://github.com/nix-community/nur-packages-template">nix-community’s nix-user-repository
+template</a>
+(i.e. cloning it and pushing to your own fork/repository):</p>
+<p>Although maybe not the nicest way of doing it, I’d change <code>default.nix</code>
+to have:</p>
+<pre class="nix"><code>{ pkgs ? import &lt;nixpkgs&gt; { } }:
 
 {
   myPackages = import ./pkgs/myPackages { pkgs = pkgs; };
 }</code></pre>
 <p>And I add a file <code>pkgs/myPackages/default.nix</code> with:</p>
-<pre><code>{ pkgs }:
+<pre class="nix"><code>{ pkgs }:
 
 pkgs.buildEnv {
     name = &quot;my-packages&quot;;
@@ -331,21 +420,39 @@ pkgs.buildEnv {
     ];
   };
 }</code></pre>
-<p>And then this can be installed with <code>nix profile .#myPackages</code>, or <code>nix profile install github:&lt;username&gt;/&lt;repo&gt;#myPackages</code> or whatever URL. (The files have to be checked into a <code>git</code> repository).</p>
+<p>And then this can be installed with <code>nix profile .#myPackages</code>, or
+<code>nix profile install github:&lt;username&gt;/&lt;repo&gt;#myPackages</code> or whatever
+URL. (The files have to be checked into a <code>git</code> repository).</p>
 <p>e.g. my <a href="https://github.com/rgoulter/nix-user-repository">nix user repository</a>.</p>
-<h2 id="option-e-home-manager">Option E: Home Manager</h2>
-<p><a href="https://github.com/nix-community/home-manager/">Home Manager</a> is to a user’s dotfiles what NixOS is to a Linux system.</p>
-<p>It’s widely used, and widely recommended. And presumably any scheme you come up with will be an ad-hoc, half-baked imitation of what home manager does.</p>
-<p>Home Manager can be used to manage what packages you have installed in your user profile. (Since home manager’s configuration is plaintext and can list packages to install, you wouldn’t need <code>buildEnv</code> that the above examples have).</p>
-<p>I haven’t used it, so I can’t provide an example. The NixOS wiki’s page about <a href="https://nixos.wiki/wiki/Home_Manager">Home Manager</a> has an example of using Home Manager for declarative management of <code>nix-env</code>.</p>
-<p>Seems like it’s worth trying if you’re comfortable copy-pasting now and understanding later, or once you’ve gained more familiarity with Nix.</p>
-<h1 id="nix-shell---ephemeral-development-environments"><code>nix-shell</code> - Ephemeral Development Environments</h1>
-<p>A nix shell is a shell which leverages Nix to make packages available when using that shell. (i.e. not installing the program to the user’s system).<br />
-In a way, this is like a cousin to the virtual environments which various programming environments provide.<br />
-It’s also comparable to how Docker images are sometimes used as an easy way to distribute a toolchain or some CLI program,<br />
-or to various “X version managers” like Ruby Version Manager or Node Version Manager or <a href="https://asdf-vm.com/">asdf</a>.</p>
-<p>Running the command <code>nix-shell</code> will make use of a <code>shell.nix</code> file in the current directory. A simple <code>shell.nix</code> file is:</p>
-<pre><code>{ pkgs ? import &lt;nixpkgs&gt; {} }:
+<h3 id="installing-with-home-manager">Installing with Home Manager</h3>
+<p><a href="https://github.com/nix-community/home-manager/">Home Manager</a> is to a
+user’s dotfiles what NixOS is to a Linux system.</p>
+<p>It’s widely used, and widely recommended. And presumably any scheme
+you come up with will be an ad-hoc, half-baked imitation of what
+home manager does.</p>
+<p>Home Manager can be used to manage what packages you have installed in
+your user profile. (Since home manager’s configuration is plaintext and can
+list packages to install, you wouldn’t need <code>buildEnv</code> that the above
+examples have).</p>
+<p>I’ve used it, but only for managing my dotfiles, and in my experience, I can’t
+recommend it to beginners. The NixOS wiki’s page about <a href="https://nixos.wiki/wiki/Home_Manager">Home
+Manager</a> has an example of using Home
+Manager for declarative management of <code>nix-env</code>.</p>
+<p>Seems like it’s worth trying if you’re comfortable copy-pasting now and
+understanding later, or once you’ve gained more familiarity with Nix.</p>
+<h2 id="nix-shell"><code>nix-shell</code></h2>
+<p>A nix shell is a shell which leverages Nix to make packages available
+when using that shell. (i.e. not installing the program to the user’s
+system).<br />
+In a way, this is like a cousin to the virtual environments which
+various programming environments provide.<br />
+It’s also comparable to how Docker images are sometimes used as an
+easy way to distribute a toolchain or some CLI program,<br />
+or to various “X version managers” like Ruby Version Manager or Node
+Version Manager or <a href="https://asdf-vm.com/">asdf</a>.</p>
+<p>Running the command <code>nix-shell</code> will make use of a <code>shell.nix</code> file in
+the current directory. A simple <code>shell.nix</code> file is:</p>
+<pre class="nix"><code>{ pkgs ? import &lt;nixpkgs&gt; {} }:
 
 with pkgs;
 mkShell {
@@ -353,12 +460,16 @@ mkShell {
     neovim
   ];
 }</code></pre>
-<h1 id="ephemeral-shells-with-nix-flakes">Ephemeral Shells with Nix Flakes</h1>
-<p>“But <code>nix-shell</code> with a <code>shell.nix</code> like the above uses nix channels, not the fancy new flakes”.</p>
-<p>The new flake-aware Nix approach to get an ephemeral development environment in the shell is to integrate with <a href="direnv.net"><code>direnv</code></a>. e.g. to use <a href="https://github.com/nix-community/nix-direnv"><code>nix-direnv</code></a>.</p>
+<h2 id="shells-with-nix-flakes">Shells with Nix Flakes</h2>
+<p>“But <code>nix-shell</code> with a <code>shell.nix</code> like the above uses nix channels,
+not the fancy new flakes”.</p>
+<p>The new flake-aware Nix approach to get an ephemeral development
+environment in the shell is to integrate with <a href="direnv.net"><code>direnv</code></a>.
+e.g. to use <a href="https://github.com/nix-community/nix-direnv"><code>nix-direnv</code></a>.</p>
 <p>The equivalent of <code>shell.nix</code>, with flakes? Well…</p>
-<p>The nix-direnv project links to the <a href="https://github.com/nix-community/nix-direnv/blob/master/template/flake.nix">following template flake.nix</a>:</p>
-<pre><code>{
+<p>The nix-direnv project links to the <a href="https://github.com/nix-community/nix-direnv/blob/master/template/flake.nix">following template
+flake.nix</a>:</p>
+<pre class="nix"><code>{
   description = &quot;A basic flake with a shell&quot;;
   inputs.nixpkgs.url = &quot;github:NixOS/nixpkgs/nixpkgs-unstable&quot;;
   inputs.flake-utils.url = &quot;github:numtide/flake-utils&quot;;
@@ -373,13 +484,18 @@ mkShell {
         };
       });
 }</code></pre>
-<p>which can be generated (along with a <code>.envrc</code> which makes use of the flake’s devShell) by running:</p>
-<pre><code>nix flake new -t github:nix-community/nix-direnv .</code></pre>
-<p>With the <code>.envrc</code> generated from this template, the flake’s devshell is automatically built, and its packages made available to the current shell.</p>
-<h1 id="how-to-write-a-package-with-nix-different-ways-of-building-hello-world-outside-of-nixpkgs">How to Write a Package with Nix: Different Ways of Building Hello-World Outside of Nixpkgs</h1>
-<p>The <a href="https://nixos.org/manual/nix/stable/expressions/simple-expression.html">Nix manual has a tutorial for a simple expression</a>; how to write a Nix package for gnu <code>hello</code>.</p>
+<p>which can be generated (along with a <code>.envrc</code> which makes use of the
+flake’s devShell) by running:</p>
+<pre class="bash"><code>nix flake new -t github:nix-community/nix-direnv .</code></pre>
+<p>With the <code>.envrc</code> generated from this template, the flake’s devshell
+is automatically built, and its packages made available to the current
+shell.</p>
+<h2 id="discussion-about-hello-world-tutorial">Discussion about Hello World Tutorial</h2>
+<p>The <a href="https://nixos.org/manual/nix/stable/expressions/simple-expression.html">Nix manual has a tutorial for a simple
+expression</a>;
+how to write a Nix package for gnu <code>hello</code>.</p>
 <p>This guides us with a <code>default.nix</code>:</p>
-<pre><code>{ stdenv, fetchurl, perl }:
+<pre class="nix"><code>{ stdenv, fetchurl, perl }:
 
 stdenv.mkDerivation {
   name = &quot;hello-2.1.1&quot;;
@@ -391,7 +507,7 @@ stdenv.mkDerivation {
   inherit perl;
 }</code></pre>
 <p>and a <code>builder.sh</code>:</p>
-<pre><code>source $stdenv/setup
+<pre class="bash"><code>source $stdenv/setup
 
 PATH=$perl/bin:$PATH
 
@@ -400,11 +516,16 @@ cd hello-*
 ./configure --prefix=$out
 make
 make install</code></pre>
-<p>The tutorial apparently suggests to this within the <code>nixpkgs</code> repository itself, which seems a little impractical, and quite unintuitive to me.</p>
-<p>“How am I supposed to build this?” otherwise brought me to the GitHub issue <a href="https://github.com/NixOS/nix/issues/2259">NixOS/nix#2259</a>, with people wondering the same thing.<br />
-Because you’ll try running <code>nix-build</code> and it won’t “just work” with the above <code>default.nix</code>.</p>
+<p>The tutorial apparently suggests to this within the <code>nixpkgs</code>
+repository itself, which seems a little impractical, and quite
+unintuitive to me.</p>
+<p>“How am I supposed to build this?” otherwise brought me to the GitHub
+issue <a href="https://github.com/NixOS/nix/issues/2259">NixOS/nix#2259</a>, with
+people wondering the same thing.<br />
+Because you’ll try running <code>nix-build</code> and it won’t “just work” with
+the above <code>default.nix</code>.</p>
 <p>The easiest “well, this works” <code>default.nix</code> to stumble across is suggested as:</p>
-<pre><code>let
+<pre class="nix"><code>let
   pkgs = import &lt;nixpkgs&gt; {};
 in
 pkgs.stdenv.mkDerivation {
@@ -417,7 +538,7 @@ pkgs.stdenv.mkDerivation {
   perl = pkgs.perl;
 }</code></pre>
 <p>though now I’d suggest a closer “well, this works” <code>default.nix</code> file would instead be:</p>
-<pre><code>{ pkgs ? import &lt;nixpkgs&gt; {} }:
+<pre class="nix"><code>{ pkgs ? import &lt;nixpkgs&gt; {} }:
 
 with pkgs;
 stdenv.mkDerivation {
@@ -429,16 +550,23 @@ stdenv.mkDerivation {
   };
   inherit perl;
 }</code></pre>
-<p>A helpful commenter in the GitHub issue above links to <a href="https://stackoverflow.com/questions/44088192/when-and-how-should-default-nix-shell-nix-and-release-nix-be-used">a StackOverflow answer</a> which helps explain the above.<br />
-It explains that there’s no single required nor conventional format for <code>default.nix</code>. It explains, though, that packages in nixpkgs are typically in a format for a “callPackage derivation”.</p>
+<p>A helpful commenter in the GitHub issue above links to <a href="https://stackoverflow.com/questions/44088192/when-and-how-should-default-nix-shell-nix-and-release-nix-be-used">a
+StackOverflow
+answer</a>
+which helps explain the above.<br />
+It explains that there’s no single required nor conventional format
+for <code>default.nix</code>. It explains, though, that packages in nixpkgs are
+typically in a format for a “callPackage derivation”.</p>
 <p>It suggests the rather unwieldy command:</p>
 <pre><code>nix-build -E 'with import &lt;nixpkgs&gt; { }; callPackage ./path/to/default.nix { }'</code></pre>
-<p>Or perhaps another way of putting it: if we instead renamed the <code>default.nix</code> from the tutorial as <code>hello.nix</code>, a <code>default.nix</code> file which could be built with just <code>nix-build</code> would be:</p>
-<pre><code>{ pkgs ? import &lt;nixpkgs&gt; {} }:
+<p>Or perhaps another way of putting it: if we instead renamed the
+<code>default.nix</code> from the tutorial as <code>hello.nix</code>, a <code>default.nix</code> file
+which could be built with just <code>nix-build</code> would be:</p>
+<pre class="nix"><code>{ pkgs ? import &lt;nixpkgs&gt; {} }:
 
 pkgs.callPackage ./hello.nix {}</code></pre>
 <p>or in a more explicit way:</p>
-<pre><code>let
+<pre class="nix"><code>let
   pkgs = import &lt;nixpkgs&gt; {};
 in
 import ./hello.nix {
@@ -447,67 +575,108 @@ import ./hello.nix {
   perl     = pkgs.perl;
 }</code></pre>
 <p>This … is clearly a bit more involved than you’d expect for “hello world”.</p>
-<p>But at this point, the nix pills explain the rationale and the mechanisms: <a href="https://nixos.org/guides/nix-pills/inputs-design-pattern.html">pill 12 explains the input design pattern</a> (in this case, why <code>{ stdenv, fetchurl, perl }:</code> instead of <code>let pkgs = import &lt;nixpkgs&gt; {}; in ...</code>), and <a href="https://nixos.org/guides/nix-pills/callpackage-design-pattern.html">pill 13 the callPackage design pattern</a> (which explains the magic of what <code>callPackage</code> is doing).</p>
-<p>But it’s also at this point your knowledge of nix is dangerous enough that you can start to make use of the language-support section of <a href="https://nixos.org/manual/nixpkgs/stable/#chap-language-support">the nixpkgs manual</a>, or the <a href="https://nixos.wiki/">NixOS Wiki</a>.</p>
-<h1 id="using-nix-on-non-nixos-risks-trouble-with-impure-environments-e.g.compilers-and-native-libraries.">Using Nix on Non-NixOS Risks Trouble with ‘Impure’ Environments; e.g. Compilers and Native Libraries.</h1>
-<p>Using Nix on operating systems that aren’t NixOS (macOS, or some other Linux) is the easiest way to get a taste of the Nix package manager.</p>
+<p>But at this point, the nix pills explain the rationale and the
+mechanisms: <a href="https://nixos.org/guides/nix-pills/inputs-design-pattern.html">pill 12 explains the input design
+pattern</a>
+(in this case, why <code>{ stdenv, fetchurl, perl }:</code> instead of <code>let pkgs = import &lt;nixpkgs&gt; {}; in ...</code>), and <a href="https://nixos.org/guides/nix-pills/callpackage-design-pattern.html">pill 13 the callPackage design
+pattern</a>
+(which explains the magic of what <code>callPackage</code> is doing).</p>
+<p>But it’s also at this point your knowledge of nix is dangerous enough
+that you can start to make use of the language-support section of <a href="https://nixos.org/manual/nixpkgs/stable/#chap-language-support">the
+nixpkgs
+manual</a>,
+or the <a href="https://nixos.wiki/">NixOS Wiki</a>.</p>
+<h1 id="opinions">Opinions</h1>
+<h2 id="risks-of-nix-on-non-nixos">Risks of Nix on non-NixOS</h2>
+<p>Using Nix on operating systems that aren’t NixOS (macOS, or some other
+Linux) is the easiest way to get a taste of the Nix package manager.</p>
 <p>But it’s also prone to problems you won’t face on NixOS.</p>
-<p>e.g. On macOS, I faced confusing errors when mixing Haskell’s stack with nixpkgs. It ended up in such a way that it was trying to use the GHC which stack downloaded, and the C compiler and Haskell packages that Nix had downloaded, and these didn’t mix well for some reason. (The Nix solution was to get haskell stack to use GHC provided by nix, too).</p>
-<p>Errors like this end up being quite confusing to work through. Running the compiler from a pure nix shell is one way to mitigate it.</p>
-<p>I think most people who use Nix eventually find there way to using NixOS.</p>
-<h1 id="you-can-expect-nixos-is-not-brutally-difficult-to-use-for-most-things">You Can <em>Expect</em> NixOS is not Brutally Difficult to Use for Most Things</h1>
+<p>e.g. On macOS, I faced confusing errors when mixing Haskell’s stack
+with nixpkgs. It ended up in such a way that it was trying to use the
+GHC which stack downloaded, and the C compiler and Haskell packages
+that Nix had downloaded, and these didn’t mix well for some reason.
+(The Nix solution was to get haskell stack to use GHC provided by nix,
+too).</p>
+<p>Errors like this end up being quite confusing to work through. Running
+the compiler from a pure nix shell is one way to mitigate it.</p>
+<p>I think most people who use Nix eventually find there way to using
+NixOS.</p>
+<h2 id="nixos-is-easier-than-youd-anticipate">NixOS is Easier Than You’d Anticipate</h2>
+<p>You can <em>expect</em> NixOS is not brutally difficult to use for most things.</p>
 <p>In terms of using NixOS on as the OS on your workstation:</p>
-<p>Put in the most optimistic pessimistic way: the main difference between NixOS and a Linux like Arch Linux is that instead of modifying various files under the <code>/etc/</code>, the system configuration is all managed starting from a single <code>configuration.nix</code> file. – I mean, using firefox on NixOS is no different than using firefox on Arch Linux; but changing system configuration files is entirely different.</p>
-<p>Rather, I was worried about using NixOS, I was under the impression that even its happy path was difficult to use.<br />
+<p>Put in the most optimistic pessimistic way: the main difference
+between NixOS and a Linux like Arch Linux is that instead of modifying
+various files under the <code>/etc/</code>, the system configuration is all
+managed starting from a single <code>configuration.nix</code> file. – I mean,
+using firefox on NixOS is no different than using firefox on Arch
+Linux; but changing system configuration files is entirely different.</p>
+<p>Rather, I was worried about using NixOS, I was under the impression
+that even its happy path was difficult to use.<br />
 These days, NixOS is what I drive daily.</p>
-<p>I gotta be ambivalent, here.<br />
-When stuff goes wrong, in NixOS you have to be able to understand what’s going on in order to fix it. NixOS is a layer of tooling to understand above Linux.</p>
-<p>There are absolutely people who try NixOS, are able to use it for a bit, and then decide they’re better off with a different OS. And I think at least some of such people have some understanding of Nix.</p>
-<p>I think once you grok Nix, then NixOS is wonderful and well worth trying.<br />
-But I’d recommend trying nix on macOS or Linux first to get a taste of what the advantages and difficulties will be.</p>
-<h1 id="misc-notes">Misc Notes</h1>
+<p>I gotta be ambivalent, here:<br />
+When stuff goes wrong, in NixOS you may have to understand what’s going on in
+order to fix it. (understand what the program you’re running is doing,
+understand how its dependencies do what they do, understand how NixOS deals with
+those dependencies). NixOS is a layer of tooling to understand above Linux.</p>
+<p>There are absolutely people who try NixOS, are able to use it for a
+bit, and then decide they’re better off with a different OS. I like
+to think that most people who try NixOS and don’t stick with it stopped
+using it before they gained a good understanding of Nix.</p>
+<p>I think once you grok Nix, then NixOS is wonderful and well worth
+trying.<br />
+But I’d recommend trying nix on Linux or macOS first to get a taste of
+what the advantages and difficulties will be.</p>
+<h1 id="tips">Tips</h1>
 <h2 id="how-to-retain-nix-shell-so-it-doesnt-get-garbage-collected">How to Retain <code>nix-shell</code> so it Doesn’t Get Garbage Collected</h2>
 <p><a href="https://github.com/NixOS/nix/issues/2208" class="uri">https://github.com/NixOS/nix/issues/2208</a></p>
 <h2 id="the-sha256-hash-is-used-to-identify-the-source-for-fetchfromgithub-etc.">The <code>sha256</code> Hash is Used to <em>Identify the Source</em> for fetchFromGitHub, etc.</h2>
 <p>e.g. in the Nix expression:</p>
-<pre><code>fetchFromGitHub {
+<pre class="nix"><code>fetchFromGitHub {
   owner = &quot;istio&quot;;
   repo = &quot;istio&quot;;
   rev = &quot;1.8.5&quot;;
   sha256 = &quot;1mmhiasq2brzhrnklxzxykmannv84wgzpbnqwz40sb8c1n67qzb0&quot;;
 }</code></pre>
-<p>The <code>sha256</code> value is used by Nix to identify the source. Which means if you copy paste this, and change the <code>owner</code> and <code>repo</code>:</p>
-<pre><code>fetchFromGitHub {
+<p>The <code>sha256</code> value is used by Nix to identify the source. Which means
+if you copy paste this, and change the <code>owner</code> and <code>repo</code>:</p>
+<pre class="nix"><code>fetchFromGitHub {
   owner = &quot;rgoulter&quot;;
   repo = &quot;my-hakyll-blog&quot;;
   rev = &quot;v1.0&quot;;
   sha256 = &quot;1mmhiasq2brzhrnklxzxykmannv84wgzpbnqwz40sb8c1n67qzb0&quot;;
 }</code></pre>
-<p>then nix will see the <code>sha256</code> is already the same as <code>istio/istio</code> rev <code>1.8.5</code> and use that repository instead.</p>
-<p>Instead, the laziest thing to do is just replace the <code>sha256</code> with an incorrect value:</p>
-<pre><code>fetchFromGitHub {
+<p>then nix will see the <code>sha256</code> is already the same as <code>istio/istio</code>
+rev <code>1.8.5</code> and use that repository instead.</p>
+<p>Instead, the laziest thing to do is just replace the <code>sha256</code> with an
+incorrect value:</p>
+<pre class="nix"><code>fetchFromGitHub {
   owner = &quot;rgoulter&quot;;
   repo = &quot;my-hakyll-blog&quot;;
   rev = &quot;v1.0&quot;;
   sha256 = &quot;0000000000000000000000000000000000000000000000000000&quot;;
 }</code></pre>
-<p>And then replace the <code>sha256</code> with whatever the value is expected to be. (<code>lib.fakeSha256</code> can be used instead of however many <code>0</code>s that is).</p>
-<p>Another way to find the <code>sha256</code> value is to use a program like <a href="https://github.com/msteen/nix-prefetch/">nix-prefetch</a>.</p>
+<p>And then replace the <code>sha256</code> with whatever the value is expected to
+be. (<code>lib.fakeSha256</code> can be used instead of however many <code>0</code>s that
+is).</p>
+<p>Another way to find the <code>sha256</code> value is to use a program like
+<a href="https://github.com/msteen/nix-prefetch/">nix-prefetch</a>.</p>
 <p>e.g. running:</p>
-<pre><code>nix-prefetch fetchFromGitHub --owner istio --repo istio --rev 1.8.5</code></pre>
+<pre class="bash"><code>nix-prefetch fetchFromGitHub --owner istio --repo istio --rev 1.8.5</code></pre>
 <p>will give the correct <code>sha256</code> value to use.</p>
     </div>
-    <div class="col-md-4">
-        Contents<br />
+    <div class="col-md-3">
         <div id="toc"></div>
     </div>
 </div>
 
 <script>
-  //Executes your code when the DOM is ready.  Acts the same as (document).ready().
+  // Executes your code when the DOM is ready.  Acts the same as (document).ready().
   $(function() {
-      //Calls the tocify method on your HTML div.
-      $("#toc").tocify({context: "#page-content", selectors: "h1, h2, h3"});
+      // Calls the tocify method on your HTML div.
+      $("#toc").tocify({
+          context: "#page-content",
+          selectors: "h1, h2, h3"
+      });
   });
 
   // See http://imakewebthings.com/waypoints/shortcuts/sticky-elements/
@@ -528,10 +697,23 @@ But I’d recommend trying nix on macOS or Linux first to get a taste of what th
 .nav-list > li.active > a,
 .nav-list > li.active > a:hover,
 .nav-list > li.active > a:focus {
-  color: #fff;
-  background-color: #337ab7;
+  border-left: 2px solid #563d7c;
 }
 </style>
+
+<!-- Load highlight.js for Syntax Highlighting. -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/bash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/c.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/gherkin.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/haskell.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/lisp.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/nix.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js"></script>
+<script>hljs.highlightAll();</script>
+
 
             </div>
 

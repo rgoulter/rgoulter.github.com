@@ -53,6 +53,7 @@
             TOCify
         -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js"></script>
+
         <!--
             Patched TOCify css file.
             (Don't want fixed `.tocify`).
@@ -135,31 +136,56 @@
         by Richard Goulter
     <br />
     
-    Tags: <a href="../../tags/windows.html">windows</a>, <a href="../../tags/programming.chocolatey.html">programming.chocolatey</a>, <a href="../../tags/programming.powershell.html">programming.powershell</a>
+    Tags: <a title="All pages tagged 'windows'." href="../../tags/windows.html">windows</a>, <a title="All pages tagged 'programming.chocolatey'." href="../../tags/programming.chocolatey.html">programming.chocolatey</a>, <a title="All pages tagged 'programming.powershell'." href="../../tags/programming.powershell.html">programming.powershell</a>
     
 </div>
 
 <p>Windows 10 has been pretty great so far.</p>
 <p>WHY HAS NO ONE MENTIONED WORKSPACES?<br />
-I always heard Windows 10 hyped up as a marriage of Windows 8 and Windows 7. Sure, I heard that Win 10 was going to have a ‘package manager’, just-like-Linux, but no one mentioned the workspaces.<br />
-Sure, I still don’t know the shortcut keys. <a href="http://blogs.windows.com/bloggingwindows/2014/10/03/keyboard-shortcuts-in-the-windows-10-technical-preview/">Apparently</a> it’s <code>Win + Ctrl + Left/Right</code> to switch desktop. – Other keyboard shortcuts I wish I knew were “Move window to left/right desktop”, and for when I’m lucky enough to have multiple monitors, “Move window to left/right display”.<br />
-Scott Hansleman <a href="http://www.hanselman.com/blog/Windows10GetsAFreshCommandPromptAndLotsOfHotkeys.aspx">goes over command prompt hotkeys</a>, also, which is nice.</p>
-<p>Upgrade process? Well, for me, I did a fresh install of Win 8.1 Pro, then directly upgraded to Win 10 via the Windows Update.. doing that works really well. (“fresh install”, though.). And on my lab machine, I did a fresh install of Win 10 Education edition. (Which I blame for breaking my Linux installation, though I did play a bit with EasyBCD, so might be PEBKAC).</p>
+I always heard Windows 10 hyped up as a marriage of Windows 8 and Windows 7.
+Sure, I heard that Win 10 was going to have a ‘package manager’,
+just-like-Linux, but no one mentioned the workspaces.<br />
+Sure, I still don’t know the shortcut keys.
+<a href="http://blogs.windows.com/bloggingwindows/2014/10/03/keyboard-shortcuts-in-the-windows-10-technical-preview/">Apparently</a>
+it’s <code>Win + Ctrl + Left/Right</code> to switch desktop. – Other keyboard shortcuts I
+wish I knew were “Move window to left/right desktop”, and for when I’m lucky
+enough to have multiple monitors, “Move window to left/right display”.<br />
+Scott Hansleman <a href="http://www.hanselman.com/blog/Windows10GetsAFreshCommandPromptAndLotsOfHotkeys.aspx">goes over command prompt
+hotkeys</a>,
+also, which is nice.</p>
+<p>Upgrade process? Well, for me, I did a fresh install of Win 8.1 Pro, then
+directly upgraded to Win 10 via the Windows Update.. doing that works really
+well. (“fresh install”, though.). And on my lab machine, I did a fresh install
+of Win 10 Education edition. (Which I blame for breaking my Linux installation,
+though I did play a bit with EasyBCD, so might be PEBKAC).</p>
 <p>But the things that annoyed me most:</p>
 <h2 id="family-settings">Family Settings</h2>
 <p>With Family Settings installed, I couldn’t use the internet.<br />
-On Internet Explorer (“Edge”), it wouldn’t show comments on some YouTube videos, and wouldn’t show some YouTube videos altogether. – I was left bemused as to why some videos were ‘taken down’ from my favourite channels.<br />
-Firefox was completely unusable with Win 10’s Family Settings enabled – It refused to acknowledge validity of the HTTPS certificates.</p>
-<p><a href="http://windows.microsoft.com/en-us/windows-10/turn-off-microsoft-family-settings">Instructions to turn off Microsoft Family settings</a>, i.e. go to https://account.microsoft.com/family and you can remove yourself.</p>
-<p>– On a side note, I faced issues like this when I first got a Windows Phone; it wouldn’t let me install Facebook or WhatsApp.</p>
+On Internet Explorer (“Edge”), it wouldn’t show comments on some YouTube
+videos, and wouldn’t show some YouTube videos altogether. – I was left bemused
+as to why some videos were ‘taken down’ from my favourite channels.<br />
+Firefox was completely unusable with Win 10’s Family Settings enabled – It
+refused to acknowledge validity of the HTTPS certificates.</p>
+<p><a href="http://windows.microsoft.com/en-us/windows-10/turn-off-microsoft-family-settings">Instructions to turn off Microsoft Family
+settings</a>,
+i.e. go to https://account.microsoft.com/family and you can remove yourself.</p>
+<p>– On a side note, I faced issues like this when I first got a Windows Phone;
+it wouldn’t let me install Facebook or WhatsApp.</p>
 <h2 id="chocolatey-oneget">Chocolatey / OneGet</h2>
 <p>It’s hard to find resources for this.<br />
-Some are outdated, or incorrect. <a href="http://www.hanselman.com/blog/AptGetForWindowsOneGetAndChocolateyOnWindows10.aspx">Scott Hanselman’s post</a> is good, with the proviso:</p>
+Some are outdated, or incorrect.
+<a href="http://www.hanselman.com/blog/AptGetForWindowsOneGetAndChocolateyOnWindows10.aspx">Scott Hanselman’s
+post</a>
+is good, with the proviso:</p>
 <ul>
-<li><p>As Kerry’s comment says, <code>Set-ExecutionPolicy Bypass</code> needs to be set to enable the scripts to execute.</p></li>
-<li><p>As various commenters indicate, PoSh should be run as Administrator to get the scripts to install correctly.</p></li>
+<li><p>As Kerry’s comment says, <code>Set-ExecutionPolicy Bypass</code> needs to be set to
+enable the scripts to execute.</p></li>
+<li><p>As various commenters indicate, PoSh should be run as Administrator to get
+the scripts to install correctly.</p></li>
 </ul>
-<p>Instructions to install are in the post, but roughly all you need is then, e.g. <code>install-package consolez</code> or <code>install-package -name consolez</code> if the name is ambiguous. (Btw, yeah, use ConsoleZ or ConEmu rather than PoSh directly.).</p>
+<p>Instructions to install are in the post, but roughly all you need is then, e.g.
+<code>install-package consolez</code> or <code>install-package -name consolez</code> if the name is
+ambiguous. (Btw, yeah, use ConsoleZ or ConEmu rather than PoSh directly.).</p>
 
 <hr />
 
@@ -174,6 +200,19 @@ Some are outdated, or incorrect. <a href="http://www.hanselman.com/blog/AptGetFo
 <br style="clear: both;" />
 
 <hr />
+
+<!-- Load highlight.js for Syntax Highlighting. -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/bash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/c.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/gherkin.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/haskell.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/lisp.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/nix.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js"></script>
+<script>hljs.highlightAll();</script>
 
             </div>
 

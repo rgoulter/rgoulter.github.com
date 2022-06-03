@@ -53,6 +53,7 @@
             TOCify
         -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js"></script>
+
         <!--
             Patched TOCify css file.
             (Don't want fixed `.tocify`).
@@ -139,20 +140,36 @@
     
 </div>
 
-<p>One of the things I don’t like so much about proselytising of Emacs’ org-mode is mentioning the vast swarth of features org-mode has.<br />
-Partly I think it’s ‘intimidating’ to see a bit list of features and be told “you have to learn this, it’s great”. (See <a href="https://orgmode.org/manual/">the org mode manual</a> table of contents for an overview).<br />
-Partly because the use of those features strikes me as a “long tail”. I’ve tried most of the org-mode features, but most of the time I’m not using most of them.</p>
-<p>Org mode is good. Other tools are good.<br />
-– If there are things to consider about “what note-taking tool to use”, I’d rather think about limitations.</p>
+<p>One of the things I don’t like so much about proselytising of Emacs’ org-mode
+is mentioning the vast swarth of features org-mode has.<br />
+Partly I think it’s ‘intimidating’ to see a bit list of features and be told
+“you have to learn this, it’s great”. (See <a href="https://orgmode.org/manual/">the org mode
+manual</a> table of contents for an overview).<br />
+Partly because the use of those features strikes me as a “long tail”.
+I’ve tried most of the org-mode features, but most of the time I’m not using
+most of them.</p>
+<p>Org mode is good.
+Other tools are good.<br />
+– If there are things to consider about “what note-taking tool to use”,
+I’d rather think about limitations.</p>
 <p>But.<br />
 Org Mode has a wonderful synergy with plaintext.<br />
 A lot of the stuff developers work with is good with plaintext.</p>
 <p>That makes org-mode’s babel feature killer.</p>
 <p>org-mode’s babel works with chunks of code snippets.<br />
-Markdown etc. can put prose and code snippets together, but meta-info on code snippets (and keeping the output alongside the code) doesn’t seem to be as common. (I bet 80% of the power of org-babel could be had for 20% of the effort).<br />
-<a href="http://www.howardism.org/Technical/Emacs/literate-devops.html">Literate Devops</a> demonstrates a couple of use cases of: “prose, code and output in a plaintext file”.</p>
-<p>It really ought to have been obvious from the “Literal DevOps” post, but this usage of org-babel has other uses which are very useful.<br />
-e.g. for learning and exploring a codebase, I’ve found it useful as a way for keeping the output of <code>grep</code>s, <code>cloc</code>s and other commands used to explore a repo. Similarly, “keeping the output of CLI programs” naturally makes sense for tools like AWS-CLI.</p>
+Markdown etc. can put prose and code snippets together,
+but meta-info on code snippets (and keeping the output alongside the code)
+doesn’t seem to be as common. (I bet 80% of the power of org-babel could
+be had for 20% of the effort).<br />
+<a href="http://www.howardism.org/Technical/Emacs/literate-devops.html">Literate Devops</a>
+demonstrates a couple of use cases of:
+“prose, code and output in a plaintext file”.</p>
+<p>It really ought to have been obvious from the “Literal DevOps” post,
+but this usage of org-babel has other uses which are very useful.<br />
+e.g. for learning and exploring a codebase, I’ve found it useful as a way for
+keeping the output of <code>grep</code>s, <code>cloc</code>s and other commands used to explore a
+repo. Similarly, “keeping the output of CLI programs” naturally makes sense
+for tools like AWS-CLI.</p>
 
 <hr />
 
@@ -167,6 +184,19 @@ e.g. for learning and exploring a codebase, I’ve found it useful as a way for
 <br style="clear: both;" />
 
 <hr />
+
+<!-- Load highlight.js for Syntax Highlighting. -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/bash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/c.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/gherkin.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/haskell.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/lisp.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/nix.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js"></script>
+<script>hljs.highlightAll();</script>
 
             </div>
 

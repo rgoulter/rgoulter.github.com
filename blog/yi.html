@@ -53,6 +53,7 @@
             TOCify
         -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js"></script>
+
         <!--
             Patched TOCify css file.
             (Don't want fixed `.tocify`).
@@ -134,133 +135,240 @@ contentpage.html, for content-specific pages, like emacs.html/yi.html.
 -->
 
 <div class="row">
-    <div class="col-md-8" id="page-content">
-        <p>I thought it might make sense to have a page where I can dump all my Yi related findings, rather than making tidbit posts about Yi.<br />
+    <div class="col-md-9" id="page-content">
+        <p>I thought it might make sense to have a page where I can dump all my Yi
+related findings, rather than making tidbit posts about Yi.<br />
 See <a href="./tags/programming.yi.html">posts tagged ‘Yi’</a>.<br />
-(NOTE: 22/09/14: I haven’t taken the time to really look into Yi as intensely as I have been earlier. Some of the info below may be out of date. Feel free to email me, richard.goulter@gmail.com).</p>
-<p>My impression of Yi <a href="./posts/programming/2014-06-01-yi.html">hasn’t altered much</a>, and I think maybe Yi isn’t as Emacs as Emacs, or as Vim as Vim, and perhaps the code is limited by that.</p>
-<p>It also seems that to work on Yi, one would need to get familiar with its eDSL, as well as having familiarity with the lens library.</p>
+(NOTE: 22/09/14: I haven’t taken the time to really look into Yi as intensely
+as I have been earlier. Some of the info below may be out of date. Feel free
+to email me, richard.goulter@gmail.com).</p>
+<p>My impression of Yi <a href="./posts/programming/2014-06-01-yi.html">hasn’t altered much</a>,
+and I think maybe Yi isn’t as Emacs as Emacs, or as Vim as Vim, and perhaps the code
+is limited by that.</p>
+<p>It also seems that to work on Yi, one would need to get familiar with its eDSL,
+as well as having familiarity with the lens library.</p>
 <h1 id="from-a-vim-perspective">From a Vim Perspective</h1>
-<p>Using the name “Vim” can either refer to the Vim program itself, or maybe even to the family of vim-emulators which try to emulate Vim behaviour.<br />
+<p>Using the name “Vim” can either refer to the Vim program itself, or maybe even
+to the family of vim-emulators which try to emulate Vim behaviour.<br />
 Often the latter are very second class.</p>
-<p>Also inevitable is the vim emulators will miss out on some features of Vim. Vim also has the quality of having many cool mechanics which many of its users mightn’t have heard about.</p>
-<p>I suppose if Yi is easy enough to extend, these things shouldn’t be hard to include.<br />
-Some things which are missing in Yi from Vim are posted in the Yi repo’s <a href="https://github.com/yi-editor/yi/search?q=vim&amp;ref=cmdform&amp;type=Issues">issues</a>, although many of these may refer to the now removed Vim keymap, rather than ethercrow/Dmitry Ivanov’s Vim2 keymap. <a href="https://github.com/yi-editor/yi/pull/554">See here</a>.</p>
+<p>Also inevitable is the vim emulators will miss out on some features of Vim.
+Vim also has the quality of having many cool mechanics which many of its
+users mightn’t have heard about.</p>
+<p>I suppose if Yi is easy enough to extend, these things shouldn’t be hard to
+include.<br />
+Some things which are missing in Yi from Vim are posted in the Yi repo’s
+<a href="https://github.com/yi-editor/yi/search?q=vim&amp;ref=cmdform&amp;type=Issues">issues</a>,
+although many of these may refer to the now removed Vim keymap, rather than
+ethercrow/Dmitry Ivanov’s Vim2 keymap.
+<a href="https://github.com/yi-editor/yi/pull/554">See here</a>.</p>
 <h3 id="editing-more-than-one-file">Editing More Than One File</h3>
-<p><code>:ls</code> will show a list of currently open buffers, and <code>:buffer #</code> will go to that buffer number.</p>
+<p><code>:ls</code> will show a list of currently open buffers, and
+<code>:buffer #</code> will go to that buffer number.</p>
 <p>But there isn’t a <code>:bnext</code>, <code>:bprev</code> which my muscle memory uses.<br />
 (One could add this, right, but I wouldn’t know how [See below], as of 2014-07-02).</p>
-<p>I’ve not used <a href="http://vimdoc.sourceforge.net/htmldoc/editing.html#arglist">arglist</a> much, but as a mutable subset of buffers list, I’ve heard it’s an improvement over aforementioned commands. (That, and some more).<br />
+<p>I’ve not used
+<a href="http://vimdoc.sourceforge.net/htmldoc/editing.html#arglist">arglist</a> much,
+but as a mutable subset of buffers list, I’ve heard it’s an improvement over
+aforementioned commands. (That, and some more).<br />
 There’s a <a href="http://vimcasts.org/episodes/meet-the-arglist/">VimCast</a> on it.<br />
-Not that I can complain (since I haven’t used it in Vim), but also not in the keymap.</p>
+Not that I can complain (since I haven’t used it in Vim),
+but also not in the keymap.</p>
 <h3 id="line-numbers">Line Numbers</h3>
-<p>By default Vim doesn’t have line numbers on, and to get line numbers on Emacs is kindof hackish, I hear.<br />
-Maybe it’s because of the Emacs crowd, but it’s not clear to me how to get line numbers on Yi. (as of 2014-07-02).</p>
+<p>By default Vim doesn’t have line numbers on, and to get line numbers on Emacs
+is kindof hackish, I hear.<br />
+Maybe it’s because of the Emacs crowd, but it’s
+not clear to me how to get line numbers on Yi. (as of 2014-07-02).</p>
 <p>I haven’t seen any screenshot of Yi with line numbers.</p>
 <h3 id="visual-mode">Visual Mode</h3>
 <p>One of the cool things about Visual mode is the insertion/appending on multiple lines.<br />
-See <a href="http://vimdoc.sourceforge.net/htmldoc/visual.html#v_b_I">the vim docs</a>. The vim wiki <a href="http://vim.wikia.com/wiki/Inserting_text_in_multiple_lines">has some examples</a>.<br />
-Yi now does this better than Vim (as far as I can tell); where Vim only has this multi-line insert for block mode, Yi supports the feature for linewise visual mode as well. And, Yi’s multi-cursor insert writes things “live”, whereas Vim’s is delayed. <a href="https://github.com/yi-editor/yi/commit/caa06cadbdbd140dc837e042c89a972323386671">Brag</a>. (The caveat is that Yi’s block mode is slightly different. In theory it ought to work for standard visual mode, I suppose; examine the diff of that commit to see how, but like, visual mode seems to be for other things).</p>
-<p>That Yi’s Vim keymap supports multiple cursors like this implies a multiple cursors feature are supported out-of-the-box (which doesn’t appear to be the case with a grok at the source), or that it should be reasonably straightforward to add a plugin like <a href="https://github.com/terryma/vim-multiple-cursors">terryma/vim-multiple-cursors</a> (in the style of Sublime Text).</p>
-<p>I took a screenshot of Vim and of Yi for comparison about what their Visual Lines modes look like:</p>
+See <a href="http://vimdoc.sourceforge.net/htmldoc/visual.html#v_b_I">the vim docs</a>.
+The vim wiki
+<a href="http://vim.wikia.com/wiki/Inserting_text_in_multiple_lines">has some examples</a>.<br />
+Yi now does this better than Vim (as far as I can tell); where Vim only has
+this multi-line insert for block mode, Yi supports the feature for linewise
+visual mode as well. And, Yi’s multi-cursor insert writes things “live”,
+whereas Vim’s is delayed.
+<a href="https://github.com/yi-editor/yi/commit/caa06cadbdbd140dc837e042c89a972323386671">Brag</a>.
+(The caveat is that Yi’s block mode is slightly different. In theory it ought
+to work for standard visual mode, I suppose; examine the diff of that commit to
+see how, but like, visual mode seems to be for other things).</p>
+<p>That Yi’s Vim keymap supports multiple cursors like this implies a multiple
+cursors feature are supported out-of-the-box (which doesn’t appear to be the
+case with a grok at the source), or that it should be reasonably
+straightforward to add a plugin like
+<a href="https://github.com/terryma/vim-multiple-cursors">terryma/vim-multiple-cursors</a>
+(in the style of Sublime Text).</p>
+<p>I took a screenshot of Vim and of Yi for comparison about what their Visual
+Lines modes look like:</p>
 <p><strong>Vim</strong><br />
 <img src="http://i.imgur.com/POtRl7m.png" /></p>
 <p><strong>Yi</strong><br />
 <img src="http://i.imgur.com/0h2erqm.png" /><br />
-Using <a href="https://github.com/rgoulter/dotfiles/blob/28b9712fc66c84121eed82113ab61c66b7d699f3/yi.hs">this Yi.hs</a> with Vty frontend (terminal), in a terminal with Solarized colors theme.</p>
+Using <a href="https://github.com/rgoulter/dotfiles/blob/28b9712fc66c84121eed82113ab61c66b7d699f3/yi.hs">this Yi.hs</a>
+with Vty frontend (terminal), in a terminal with Solarized colors theme.</p>
 <h3 id="command-line-window">Command-line Window</h3>
-<p>This really shoots at “obscure Vim things”, but I’m making a list of differences I’ve noticed. This is the <code>q:</code>, <code>q/</code>, <code>q?</code> window which shows up. <a href="http://vimdoc.sourceforge.net/htmldoc/cmdline.html#cmdline-window">Vimdoc:cmdline-window</a>.</p>
+<p>This really shoots at “obscure Vim things”, but I’m making a list of
+differences I’ve noticed. This is the <code>q:</code>, <code>q/</code>, <code>q?</code> window which shows up.
+<a href="http://vimdoc.sourceforge.net/htmldoc/cmdline.html#cmdline-window">Vimdoc:cmdline-window</a>.</p>
 <p>(But I’m not sure how commonly this feature is used by Vim folk).</p>
 <h3 id="quickfix-window">Quickfix Window</h3>
-<p>Quickfix is not an obscure feature of Vim. (Though I don’t use it as often as I should). I’m not sure what Yi’s support for Quickfix, or equivalent, is; but I haven’t looked. (as of 2014-07-02). <a href="http://vimdoc.sourceforge.net/htmldoc/quickfix.html">Vimdoc:quickfix</a>.</p>
+<p>Quickfix is not an obscure feature of Vim. (Though I don’t use it as often as
+I should). I’m not sure what Yi’s support for Quickfix, or equivalent, is;
+but I haven’t looked. (as of 2014-07-02).
+<a href="http://vimdoc.sourceforge.net/htmldoc/quickfix.html">Vimdoc:quickfix</a>.</p>
 <h3 id="tags">Tags</h3>
-<p>Yi appears to have some support for tags, which I need to look into. (as of 2014-07-02).</p>
+<p>Yi appears to have some support for tags, which I need to look into.
+(as of 2014-07-02).</p>
 <h2 id="searching">Searching</h2>
-<p>Yi does have Incremental Searching, and it does this the way Emacs does, which is better than Vim.<br />
-That is, while typing the search, all things which match are highlighted, rather than just one entry.</p>
+<p>Yi does have Incremental Searching, and it does this the way Emacs does, which
+is better than Vim.<br />
+That is, while typing the search, all things which match are highlighted,
+rather than just one entry.</p>
 <p><img src="http://i.imgur.com/QE5fNXu.png" /></p>
 <h2 id="jumplist">Jumplist</h2>
 <p>Yi does appear to have <code>C-I</code>, <code>C-O</code> for navigating between cursor jumps.<br />
 The <code>:ju</code> Ex command to show the jumplist isn’t there.<br />
-The changelist (<code>g;</code>, <code>g,</code>) also doesn’t appear to be implemented. <a href="http://vimdoc.sourceforge.net/htmldoc/motion.html#jump-motions">Vimdoc:jump-motions</a></p>
+The changelist (<code>g;</code>, <code>g,</code>) also doesn’t appear to be implemented.
+<a href="http://vimdoc.sourceforge.net/htmldoc/motion.html#jump-motions">Vimdoc:jump-motions</a></p>
 <p>I’ve also seen <code>'.</code> used for “jump to last edit”. Yi doesn’t have this.<br />
 <a href="http://vimdoc.sourceforge.net/htmldoc/motion.html#'.">Vimdoc:’.</a></p>
 <h1 id="questions-about-yi">Questions About Yi</h1>
 <ul>
 <li><p><em>How to write in some extra function and bind it with a keymap?</em></p>
-<p>The sample user configs have an example of this. e.g. <a href="https://github.com/yi-editor/yi/blob/master/yi-contrib/src/Yi/Config/Users/Amy.hs">yi-contrib’s Amy.hs</a>,</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb1-1" data-line-number="1">myConfig <span class="fu">=</span> defaultCuaConfig {</a>
-<a class="sourceLine" id="cb1-2" data-line-number="2">    <span class="co">-- Keymap Configuration</span></a>
-<a class="sourceLine" id="cb1-3" data-line-number="3">    defaultKm <span class="fu">=</span> extendedCuaKeymapSet,</a>
-<a class="sourceLine" id="cb1-4" data-line-number="4">    <span class="fu">....</span></a>
-<a class="sourceLine" id="cb1-5" data-line-number="5">}</a>
-<a class="sourceLine" id="cb1-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb1-7" data-line-number="7"><span class="co">-- Add M-x (which is probably Alt-x on your system) to the default</span></a>
-<a class="sourceLine" id="cb1-8" data-line-number="8"><span class="co">-- keyset, and have it launch our custom macro.</span></a>
-<a class="sourceLine" id="cb1-9" data-line-number="9">extendedCuaKeymapSet <span class="fu">=</span> customizedCuaKeymapSet <span class="fu">$</span></a>
-<a class="sourceLine" id="cb1-10" data-line-number="10">    choice [</a>
-<a class="sourceLine" id="cb1-11" data-line-number="11">        metaCh <span class="ch">'x'</span> <span class="fu">?&gt;&gt;!</span> helloWorld</a>
-<a class="sourceLine" id="cb1-12" data-line-number="12">    ]</a>
-<a class="sourceLine" id="cb1-13" data-line-number="13"></a>
-<a class="sourceLine" id="cb1-14" data-line-number="14"><span class="co">-- A custom macro</span></a>
-<a class="sourceLine" id="cb1-15" data-line-number="15"><span class="ot">helloWorld ::</span> <span class="dt">YiM</span> ()</a>
-<a class="sourceLine" id="cb1-16" data-line-number="16">helloWorld <span class="fu">=</span> withBuffer <span class="fu">$</span> insertN <span class="st">&quot;Hello, world!&quot;</span></a></code></pre></div>
-<p>Unfortunately, this is specifically for the CUA bindings. (Emacs, Vim don’t get the equivalent of <code>customizedCuaKeymapSet</code>).<br />
-Fortunately, there are multiple ways to customize bindings for Vim. See <a href="./posts/programming/2014-07-07-notes-from-some-examination-of-some-yi-configs.html">some notes</a> on this.</p></li>
-<li><p><em>How to add in some extra function and bind it to an Ex expression? (e.g. <code>:helloWorld</code>).</em></p>
-<p>For this example, <code>:yi helloWorld</code> will execute <code>helloWorld :: YiM()</code>. See <a href="https://github.com/yi-editor/yi/blob/master/yi/src/library/Yi/Keymap/Vim/Ex/Commands/Yi.hs">Yi Ex command</a>. Well. This worked for me when using a Simple config, and when <code>publishAction</code> is used. (<code>publishAction &quot;helloWorld&quot; helloWorld</code> was enough).<br />
-For non-Simple configs, it’s not clear how to ‘publish’ an Action, and trying the same doesn’t work. What happens instead is Yi complains about <code>helloWorld</code> not being in scope. <a href="https://github.com/yi-editor/yi/blob/master/yi/src/library/Yi/Eval.hs">Yi.Eval</a> mentions <code>$HOME/.config/yi/local/Env.hs</code>. Trying to put my <code>helloWorld</code> in here didn’t work for me.</p>
-<p>It appears that this only works for functions of type <code>Yim()</code>, as opposed to <code>Int -&gt; Yim()</code> or so. (Or, if possible, it’s not as trivial as I’d hope). (as of 2014-07-08).</p>
-<p>If you really want to have an Ex command <code>:helloWorld</code>, then you need to implement an Ex command parser, and your code would look like:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb2-1" data-line-number="1">        defaultKM <span class="fu">=</span> mkKeymapSet <span class="fu">$</span> defVimConfig <span class="ot">`override`</span> \ super self <span class="ot">-&gt;</span> super</a>
-<a class="sourceLine" id="cb2-2" data-line-number="2">            { vimExCommandParsers <span class="fu">=</span> myExCmdParsers <span class="fu">++</span> vimExCommandParsers super }</a></code></pre></div>
-<p>where <code>myExCmdParsers</code> is of type <code>[String -&gt; Maybe ExCommand]</code>, something like <code>[helloWorldEC.parser, ...]</code>. While none of the samples have a custom Ex command, <a href="https://gist.github.com/rgoulter/5b291e7d00945661aa71/49bac9d873b885ee54ace67f99a99be53401f588">here’s</a> a simple Hello World example.</p></li>
+<p>The sample user configs have an example of this. e.g.
+<a href="https://github.com/yi-editor/yi/blob/master/yi-contrib/src/Yi/Config/Users/Amy.hs">yi-contrib’s Amy.hs</a>,</p>
+<pre class="haskell"><code>myConfig = defaultCuaConfig {
+    -- Keymap Configuration
+    defaultKm = extendedCuaKeymapSet,
+    ....
+}
+
+-- Add M-x (which is probably Alt-x on your system) to the default
+-- keyset, and have it launch our custom macro.
+extendedCuaKeymapSet = customizedCuaKeymapSet $
+    choice [
+        metaCh 'x' ?&gt;&gt;! helloWorld
+    ]
+
+-- A custom macro
+helloWorld :: YiM ()
+helloWorld = withBuffer $ insertN &quot;Hello, world!&quot;</code></pre>
+<p>Unfortunately, this is specifically for the CUA bindings. (Emacs, Vim don’t
+get the equivalent of <code>customizedCuaKeymapSet</code>).<br />
+Fortunately, there are multiple ways to customize bindings for Vim. See
+<a href="./posts/programming/2014-07-07-notes-from-some-examination-of-some-yi-configs.html">some notes</a>
+on this.</p></li>
+<li><p><em>How to add in some extra function and bind it to an Ex expression? (e.g. <code>:helloWorld</code>).</em></p>
+<p>For this example, <code>:yi helloWorld</code> will execute <code>helloWorld :: YiM()</code>. See
+<a href="https://github.com/yi-editor/yi/blob/master/yi/src/library/Yi/Keymap/Vim/Ex/Commands/Yi.hs">Yi Ex command</a>.
+Well. This worked for me when using a Simple config, and when <code>publishAction</code>
+is used. (<code>publishAction "helloWorld" helloWorld</code> was enough).<br />
+For non-Simple configs, it’s not clear how to ‘publish’ an Action, and trying
+the same doesn’t work. What happens instead is Yi complains about
+<code>helloWorld</code> not being in scope.
+<a href="https://github.com/yi-editor/yi/blob/master/yi/src/library/Yi/Eval.hs">Yi.Eval</a>
+mentions <code>$HOME/.config/yi/local/Env.hs</code>. Trying to put my
+<code>helloWorld</code> in here didn’t work for me.</p>
+<p>It appears that this only works for functions of type <code>Yim()</code>, as opposed to
+<code>Int -&gt; Yim()</code> or so. (Or, if possible, it’s not as trivial as I’d hope).
+(as of 2014-07-08).</p>
+<p>If you really want to have an Ex command <code>:helloWorld</code>, then you need to
+implement an Ex command parser, and your code would look like:</p>
+<pre class="haskell"><code>        defaultKM = mkKeymapSet $ defVimConfig `override` \ super self -&gt; super
+            { vimExCommandParsers = myExCmdParsers ++ vimExCommandParsers super }</code></pre>
+<p>where <code>myExCmdParsers</code> is of type <code>[String -&gt; Maybe ExCommand]</code>, something
+like <code>[helloWorldEC.parser, ...]</code>. While none of the samples have a custom
+Ex command,
+<a href="https://gist.github.com/rgoulter/5b291e7d00945661aa71/49bac9d873b885ee54ace67f99a99be53401f588">here’s</a>
+a simple Hello World example.</p></li>
 <li><p><em>How can I modularise code I write to customize Yi? e.g. like “source extra-stuff.vim”</em></p>
-<p>The answer is <em>not</em> to just put it in <code>~/.config/yi</code>, alongside <code>yi.hs</code>. Bummer. I asked about this on <a href="https://groups.google.com/forum/#!topic/yi-devel/hYvT2Sz4M3w">the Google group</a>.</p>
-<p>UPDATE: (22/09/14): I recently got an email from a Siddhanathan Shanmugam who suggsted to me that dependencies could be put into <code>~/.config/yi/lib</code> folder. This works very well. e.g. if we adapt the HelloWorld example above, we can put <code>HelloWorld.hs</code> in <code>~/.config/yi/lib/</code> and can import it from <code>yi.hs</code>. <a href="https://gist.github.com/rgoulter/5b291e7d00945661aa71/d1a503b756a2abb7a1835c310f58f98863b4fd94">(Gist)</a>.<br />
-I guess that’s a <a href="https://github.com/willdonnelly/dyre/blob/9d4ab20cdfea10735b7cc47e917214b60d0ee87c/Config/Dyre/Paths.hs">Dyre thing</a>. Cool.</p>
-<p>Before learning that, the workaround was to try and cabalize some portion of the config, and add treat that like some other dependency..</p>
+<p>The answer is <em>not</em> to just put it in <code>~/.config/yi</code>, alongside <code>yi.hs</code>.
+Bummer. I asked about this on
+<a href="https://groups.google.com/forum/#!topic/yi-devel/hYvT2Sz4M3w">the Google group</a>.</p>
+<p>UPDATE: (22/09/14): I recently got an email from a Siddhanathan Shanmugam
+who suggsted to me that dependencies could be put into <code>~/.config/yi/lib</code>
+folder. This works very well. e.g. if we adapt the HelloWorld example
+above, we can put <code>HelloWorld.hs</code> in <code>~/.config/yi/lib/</code> and can import it
+from <code>yi.hs</code>.
+<a href="https://gist.github.com/rgoulter/5b291e7d00945661aa71/d1a503b756a2abb7a1835c310f58f98863b4fd94">(Gist)</a>.<br />
+I guess that’s a
+<a href="https://github.com/willdonnelly/dyre/blob/9d4ab20cdfea10735b7cc47e917214b60d0ee87c/Config/Dyre/Paths.hs">Dyre thing</a>.
+Cool.</p>
+<p>Before learning that, the workaround was to try and cabalize some portion
+of the config, and add treat that like some other dependency..</p>
 <p>I was able to get my <code>yi.hs</code> to depend on a cabal project by doing:</p>
 <pre><code>    ~/github/yi/yi$ cabal sandbox add-source /path/to/dependency
     ~/github/yi/yi$ cabal install dependency-name</code></pre>
-<p>where <code>~/github/yi/yi</code> is the location of my Yi sandbox. (Well, I’ve opted to use a Cabal sandbox for my Yi to avoid Cabal Hell).<br />
+<p>where <code>~/github/yi/yi</code> is the location of my Yi sandbox. (Well, I’ve opted
+to use a Cabal sandbox for my Yi to avoid Cabal Hell).<br />
 When the dependency is updated, to register this with Yi I’d need to</p>
 <pre><code>    ~/github/yi/yi$ cabal build
     ~/github/yi/yi$ touch ~/.config/yi.hs</code></pre>
-<p>i.e. get Cabal to rebuild its dependencies, and then ‘modify’ the yi.hs file so that Yi will re-compile (and thus know about the updated dependency). “dependency” here, btw, could mean things like plugin, or aspects of a <code>yi.hs</code> which you’d rather have split up into different <code>.hs</code> files.</p>
-<p>If there are many such dependencies for your <code>yi.hs</code>, it may make sense to have a cabal package like <code>yi-config-rgoulter</code>; if this acts as the ‘root’ of your yi dependencies, then it means you’d only need to deal with installing this package. (Well, and adding the sources for the other dependencies, but a package typically updates more often than it’s moved).</p>
+<p>i.e. get Cabal to rebuild its dependencies, and then ‘modify’
+the yi.hs file so that Yi will re-compile (and thus know about the updated
+dependency). “dependency” here, btw, could mean things like plugin, or
+aspects of a <code>yi.hs</code> which you’d rather have split up into different <code>.hs</code>
+files.</p>
+<p>If there are many such dependencies for your <code>yi.hs</code>, it may make sense
+to have a cabal package like <code>yi-config-rgoulter</code>; if this acts as the
+‘root’ of your yi dependencies, then it means you’d only need to deal with
+installing this package. (Well, and adding the sources for the other
+dependencies, but a package typically updates more often than it’s moved).</p>
 <p>At the extreme, you could have a one-liner <code>yi.hs</code> like:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb5-1" data-line-number="1">    <span class="kw">import</span> <span class="dt">Yi.Config.Rgoulter</span></a></code></pre></div>
-<p>because of how Haskell’s packages work; the disadvantage of <em>that</em> is the need to constantly <code>cabal build</code> as it updates, in contrast to just having Yi recompile a modified <code>yi.hs</code>.</p>
-<p>I still need to investigate some more about development in such a dependency, especially with (say) a shared Cabal Sandbox.</p></li>
+<pre class="haskell"><code>    import Yi.Config.Rgoulter</code></pre>
+<p>because of how Haskell’s packages work; the disadvantage of <em>that</em> is the
+need to constantly <code>cabal build</code> as it updates, in contrast
+to just having Yi recompile a modified <code>yi.hs</code>.</p>
+<p>I still need to investigate some more about development in such a
+dependency, especially with (say) a shared Cabal Sandbox.</p></li>
 <li><p><em>How to show a list of keybindings, or something else which can show me what Yi can do?</em></p>
 <p>Haven’t figured that out yet. (as of 2014-07-02).<br />
-<a href="https://github.com/yi-editor/yi/issues/504">yi-editor/yi#504</a> touches upon this issue, with the suggestion of documenting the keybindings (since these don’t change at a pace as to make this too awful).<br />
-Those with the programming bug, though, would rather have this done ‘automatically’.</p></li>
+<a href="https://github.com/yi-editor/yi/issues/504">yi-editor/yi#504</a> touches upon
+this issue, with the suggestion of documenting the keybindings (since these
+don’t change at a pace as to make this too awful).<br />
+Those with the programming bug, though, would rather have this done
+‘automatically’.</p></li>
 </ul>
 <h1 id="troubles-with-yi">Troubles with Yi</h1>
 <ul>
-<li><p><s>For some reason, with <a href="https://github.com/rgoulter/dotfiles/blob/28b9712fc66c84121eed82113ab61c66b7d699f3/yi.hs">this config</a>, when I tried playing around with Vim macros, it didn’t go well.<br />
-e.g. if I tried recording a macro by <code>qt^x$xq</code>, then print out this register <code>t</code>, what I get is <code>t^xx$xx</code>. (i.e. the keys appear to have been pressed twice). Something to look into.</s> <a href="https://github.com/yi-editor/yi/issues/566">Not any more!</a>.<br />
+<li><p><s>For some reason, with
+<a href="https://github.com/rgoulter/dotfiles/blob/28b9712fc66c84121eed82113ab61c66b7d699f3/yi.hs">this config</a>,
+when I tried playing around with Vim macros, it didn’t go well.<br />
+e.g. if I tried recording a macro by <code>qt^x$xq</code>, then print out this register
+<code>t</code>, what I get is <code>t^xx$xx</code>. (i.e. the keys appear to have been pressed twice).
+Something to look into.</s>
+<a href="https://github.com/yi-editor/yi/issues/566">Not any more!</a>.<br />
 (By “look into”, I clearly meant, “try tests and report as a bug”..).</p></li>
-<li><p>Not particularly a bug, but: since Yi is Emacs-like, <code>&lt;Esc&gt;</code> is treated as the Meta key, and when (using a Vim keymap) in Insert mode, one presses Escape quickly followed by another letter (e.g. Escape, then j), it gets handled as <code>&lt;M-j&gt;</code> rather than <code>&lt;Esc&gt;j</code>.<br />
-I imagine some people might take advantage of this to allow for different insert-mode inputs. (Probably using <code>&lt;Alt&gt;</code> as meta).<br />
+<li><p>Not particularly a bug, but: since Yi is Emacs-like, <code>&lt;Esc&gt;</code> is treated as
+the Meta key, and when (using a Vim keymap) in Insert mode, one presses
+Escape quickly followed by another letter (e.g. Escape, then j), it
+gets handled as <code>&lt;M-j&gt;</code> rather than <code>&lt;Esc&gt;j</code>.<br />
+I imagine some people might take advantage of this to allow for different
+insert-mode inputs. (Probably using <code>&lt;Alt&gt;</code> as meta).<br />
 I also imagine it’s possible to configure this behaviour in a <code>yi.hs</code>.</p></li>
 </ul>
 <hr />
-<p><a rel="license" href="http://creativecommons.org/licenses/by/4.0/"> <img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /> </a><br /> This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"> Creative Commons Attribution 4.0 International License </a>.</p>
+<p><a rel="license" href="http://creativecommons.org/licenses/by/4.0/">
+<img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" />
+</a><br />
+This work is licensed under a
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/">
+Creative Commons Attribution 4.0 International License
+</a>.</p>
     </div>
-    <div class="col-md-4">
-        Contents<br />
+    <div class="col-md-3">
         <div id="toc"></div>
     </div>
 </div>
 
 <script>
-  //Executes your code when the DOM is ready.  Acts the same as (document).ready().
+  // Executes your code when the DOM is ready.  Acts the same as (document).ready().
   $(function() {
-      //Calls the tocify method on your HTML div.
-      $("#toc").tocify({context: "#page-content", selectors: "h1, h2, h3"});
+      // Calls the tocify method on your HTML div.
+      $("#toc").tocify({
+          context: "#page-content",
+          selectors: "h1, h2, h3"
+      });
   });
 
   // See http://imakewebthings.com/waypoints/shortcuts/sticky-elements/
@@ -281,10 +389,23 @@ I also imagine it’s possible to configure this behaviour in a <code>yi.hs</cod
 .nav-list > li.active > a,
 .nav-list > li.active > a:hover,
 .nav-list > li.active > a:focus {
-  color: #fff;
-  background-color: #337ab7;
+  border-left: 2px solid #563d7c;
 }
 </style>
+
+<!-- Load highlight.js for Syntax Highlighting. -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/bash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/c.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/gherkin.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/haskell.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/lisp.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/nix.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js"></script>
+<script>hljs.highlightAll();</script>
+
 
             </div>
 

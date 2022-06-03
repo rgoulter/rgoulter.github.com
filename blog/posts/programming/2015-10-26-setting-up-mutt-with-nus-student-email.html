@@ -53,6 +53,7 @@
             TOCify
         -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js"></script>
+
         <!--
             Patched TOCify css file.
             (Don't want fixed `.tocify`).
@@ -135,16 +136,25 @@
         by Richard Goulter
     <br />
     
-    Tags: <a href="../../tags/programming.mutt.html">programming.mutt</a>, <a href="../../tags/email.html">email</a>, <a href="../../tags/office365.html">office365</a>
+    Tags: <a title="All pages tagged 'programming.mutt'." href="../../tags/programming.mutt.html">programming.mutt</a>, <a title="All pages tagged 'email'." href="../../tags/email.html">email</a>, <a title="All pages tagged 'office365'." href="../../tags/office365.html">office365</a>
     
 </div>
 
-<p>This is for setting up NUS student email (hosted with Office 365) for the Mutt Mail User Agent; particularly, using IMAP, and alongside other email accounts.</p>
-<p>Why you’d want to use Mutt, I’m not entirely sure. Probably Thunderbird will serve your needs as well as need be.<br />
-But if you’re wanting to learn something productive while procrastinating, then Mutt is a sensible choice as any.</p>
-<p>I find the Arch Wiki’s <a href="https://wiki.archlinux.org/index.php/Mutt">Mutt page</a> indispensable when setting up Mutt. - If you’ve googled your way to this page without a prior guide, I recommend this.</p>
-<p>As for setting up an account with Office 365, a <a href="http://www.blog.alexanderdbrown.com/office-365-in-the-command-line/">blogpost from Alexander Brown</a> (which comes up from a search for “mutt office365”) has a useful codedump.</p>
-<p>I’m not sure what the <em>minimal</em> set of options would be, but the example I have <a href="https://github.com/rgoulter/dotfiles/blob/4e1fb3c04d9f4c372125468a0c3bb0df165d004b/mutt/nusstu">in my dotfiles</a> (as per Arch Wiki’s “Multiple Accounts” advice):</p>
+<p>This is for setting up NUS student email (hosted with Office 365) for the Mutt
+Mail User Agent; particularly, using IMAP, and alongside other email accounts.</p>
+<p>Why you’d want to use Mutt, I’m not entirely sure. Probably Thunderbird will
+serve your needs as well as need be.<br />
+But if you’re wanting to learn something productive while procrastinating, then
+Mutt is a sensible choice as any.</p>
+<p>I find the Arch Wiki’s <a href="https://wiki.archlinux.org/index.php/Mutt">Mutt page</a>
+indispensable when setting up Mutt. - If you’ve googled your way to this page
+without a prior guide, I recommend this.</p>
+<p>As for setting up an account with Office 365, a <a href="http://www.blog.alexanderdbrown.com/office-365-in-the-command-line/">blogpost from Alexander
+Brown</a>
+(which comes up from a search for “mutt office365”) has a useful codedump.</p>
+<p>I’m not sure what the <em>minimal</em> set of options would be, but the example I have
+<a href="https://github.com/rgoulter/dotfiles/blob/4e1fb3c04d9f4c372125468a0c3bb0df165d004b/mutt/nusstu">in my dotfiles</a>
+(as per Arch Wiki’s “Multiple Accounts” advice):</p>
 <pre class="mutt"><code># Connection
 set ssl_starttls=yes
 set ssl_force_tls=yes
@@ -171,8 +181,10 @@ unset hostname
 
 ## Hook -- IMPORTANT!
 account-hook $folder &quot;set imap_user=$imap_user imap_pass=$imap_pass&quot;</code></pre>
-<p>Disclaimer: WFM, YMMV. This is just what I have, and clearly I’m not a well-versed Mutt user.<br />
-My Mutt configuration, in general, may be useful for other NUS students keep their NUS Office 365 account separate from their GMail account.</p>
+<p>Disclaimer: WFM, YMMV. This is just what I have, and clearly I’m not a
+well-versed Mutt user.<br />
+My Mutt configuration, in general, may be useful for other NUS students keep
+their NUS Office 365 account separate from their GMail account.</p>
 
 <hr />
 
@@ -187,6 +199,19 @@ My Mutt configuration, in general, may be useful for other NUS students keep the
 <br style="clear: both;" />
 
 <hr />
+
+<!-- Load highlight.js for Syntax Highlighting. -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/bash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/c.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/gherkin.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/haskell.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/lisp.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/nix.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js"></script>
+<script>hljs.highlightAll();</script>
 
             </div>
 

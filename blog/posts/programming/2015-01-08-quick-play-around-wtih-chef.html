@@ -53,6 +53,7 @@
             TOCify
         -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js"></script>
+
         <!--
             Patched TOCify css file.
             (Don't want fixed `.tocify`).
@@ -135,40 +136,98 @@
         by Richard Goulter
     <br />
     
-    Tags: <a href="../../tags/programming.chef.html">programming.chef</a>, <a href="../../tags/programming.provisioning.html">programming.provisioning</a>
+    Tags: <a title="All pages tagged 'programming.chef'." href="../../tags/programming.chef.html">programming.chef</a>, <a title="All pages tagged 'programming.provisioning'." href="../../tags/programming.provisioning.html">programming.provisioning</a>
     
 </div>
 
-<p>This isn’t a post intended as a guide. It’s a rough description of the experience I had playing around with Chef.</p>
+<p>This isn’t a post intended as a guide. It’s a rough description of the
+experience I had playing around with Chef.</p>
 <p>The first thing to note is that Chef can be tedious to Google for.<br />
-Programmers have a hilarious sense of humour. (I say this as a programmer, though, so..).<br />
-Maybe the Go language is the most notorious example of “difficult to Google for”. (Hence “Golang” et al). But just like how HomeBrew makes use of a family of terminology (keg, bottle, tap, etc.), Chef does this as well. So, early on you’ll often find yourself searching “chef kitchen” or “chef recipe”. (This isn’t fatal, usually adding “provisioning” to the query fixes things).</p>
-<p>I looked not-very-far into provisioning because I was taking a class where we were making web applications, and so working with servers (like on EC2 or Digital Ocean).<br />
-While provisioning is really intended for preparing server setup at some scale (like, for web applications across more than one server), and our projects were naturally small scale projects, I still wanted to take the time to look into it. (Okay, it was a kind of procrastination. But I think getting good in computing involves a lot of this procrastinative curiousity).<br />
-– But to an extent I still thought it’d be useful. I keep a “programming journal”, mostly so I can physically write down questions and notes. Often if I try to do some obscure task a few months after I did it before, having a journal to refer back to is invaluable. Having an automated provisioning setup, similarly, would be a way of documenting how the server was setup. (Not my original thought, btw). And, after all, why write by hand in a few hours what you can spend a week trying to automate?</p>
-<p>“Why not just use a bash script?” is probably the first ‘solution’ to this problem.<br />
-While it’s not a bad solution, if I’m honest it just doesn’t seem as ‘elegant’ a solution as these provision-specific tools.<br />
-A much more salient point would be that the provisioning tools are better able to be ‘idempotent’. (or, roughly, you can run the command multiple times / without negative side-effects).<br />
-There’re no doubt other benefits, even for just a single server, such as (hopefully) not being locked to a specific OS.</p>
-<p>Somehow without knowing too much about provisioning, one hears about Chef, Puppet, Ansible, and some others.<br />
-I’d read the remark that Puppet looked simple, but was more difficult than Chef to get going in practice.<br />
-A tweet from the author of a free online book about Chef described his experience of Chef &amp; Ansible as Chef is provisioning by coding, Ansible is provisioning by scripts/commands.</p>
-<p>There’re lots of nouns to get familiar with starting with Chef; particularly the notion of a kitchen and recipes.</p>
-<p>In terms of just-for-one-server, it was easier to get started with Chef-Solo. Which is slightly different than ‘proper’ Chef.<br />
-It wasn’t as intuitive as I was hoping; I don’t recall that I was ever successful at provisioning the same machine I was writing recipes on. (But the ‘production’ server was a different OS than I was working on; and using Vagrant + Chef is easy, so this wasn’t a big problem).</p>
-<p>These days, Chef would encourage just-for-one-server to make use of Chef Zero. Which is more/less ‘proper’ Chef.<br />
-Somehow I wasn’t able to get this running; it wasn’t as easy to pick up and use as Chef-Solo was. (Not when I tried it, anyway).</p>
-<p>And I found that, while in general I would say any skill I have in programming above others has been gained through pain, it’d been too long since I last ran into this much pain. (Self-driven learning can be painful like that).</p>
-<p>The most pain I ran into was trying to use some MariaDB recipe, and getting this to install things on an Ubuntu server.<br />
+Programmers have a hilarious sense of humour. (I say this as a programmer,
+though, so..).<br />
+Maybe the Go language is the most notorious example of “difficult to Google
+for”. (Hence “Golang” et al). But just like how HomeBrew makes use of a family
+of terminology (keg, bottle, tap, etc.), Chef does this as well. So, early on
+you’ll often find yourself searching “chef kitchen” or “chef recipe”. (This
+isn’t fatal, usually adding “provisioning” to the query fixes things).</p>
+<p>I looked not-very-far into provisioning because I was taking a class where we
+were making web applications, and so working with servers (like on EC2 or
+Digital Ocean).<br />
+While provisioning is really intended for preparing server setup at some scale
+(like, for web applications across more than one server), and our projects were
+naturally small scale projects, I still wanted to take the time to look into
+it. (Okay, it was a kind of procrastination. But I think getting good in
+computing involves a lot of this procrastinative curiousity).<br />
+– But to an extent I still thought it’d be useful. I keep a “programming
+journal”, mostly so I can physically write down questions and notes. Often if I
+try to do some obscure task a few months after I did it before, having a
+journal to refer back to is invaluable. Having an automated provisioning setup,
+similarly, would be a way of documenting how the server was setup. (Not my
+original thought, btw). And, after all, why write by hand in a few hours what
+you can spend a week trying to automate?</p>
+<p>“Why not just use a bash script?” is probably the first ‘solution’ to this
+problem.<br />
+While it’s not a bad solution, if I’m honest it just doesn’t seem as ‘elegant’
+a solution as these provision-specific tools.<br />
+A much more salient point would be that the provisioning tools are better able
+to be ‘idempotent’. (or, roughly, you can run the command multiple times /
+without negative side-effects).<br />
+There’re no doubt other benefits, even for just a single server, such as
+(hopefully) not being locked to a specific OS.</p>
+<p>Somehow without knowing too much about provisioning, one hears about Chef,
+Puppet, Ansible, and some others.<br />
+I’d read the remark that Puppet looked simple, but was more difficult than Chef
+to get going in practice.<br />
+A tweet from the author of a free online book about Chef described his
+experience of Chef &amp; Ansible as Chef is provisioning by coding, Ansible is
+provisioning by scripts/commands.</p>
+<p>There’re lots of nouns to get familiar with starting with Chef; particularly
+the notion of a kitchen and recipes.</p>
+<p>In terms of just-for-one-server, it was easier to get started with Chef-Solo.
+Which is slightly different than ‘proper’ Chef.<br />
+It wasn’t as intuitive as I was hoping; I don’t recall that I was ever
+successful at provisioning the same machine I was writing recipes on. (But the
+‘production’ server was a different OS than I was working on; and using Vagrant
++ Chef is easy, so this wasn’t a big problem).</p>
+<p>These days, Chef would encourage just-for-one-server to make use of Chef Zero.
+Which is more/less ‘proper’ Chef.<br />
+Somehow I wasn’t able to get this running; it wasn’t as easy to pick up and use
+as Chef-Solo was. (Not when I tried it, anyway).</p>
+<p>And I found that, while in general I would say any skill I have in programming
+above others has been gained through pain, it’d been too long since I last ran
+into this much pain. (Self-driven learning can be painful like that).</p>
+<p>The most pain I ran into was trying to use some MariaDB recipe, and getting
+this to install things on an Ubuntu server.<br />
 Within my recipe, first it required that apt-get be updated/upgraded.<br />
-Among other difficulties, in the end for some reason this MariaDB package wouldn’t install for me, and so I had to workaround it. – Perhaps it’d be unfair to blame this on Chef, and not Ubuntu/apt-get/MariaDB.</p>
-<p>I was less-than-impressed at the way folder permissions were handled, such-that I felt, for my recipe, creating anything but a flat hierarchy of folders wasn’t as ‘elegant’ as I might’ve wished. (There’s probably a good reason for this, though, so “oh well”). – My discrepency was along the lines of, since Chef was being run as root user, if I created a folder with Chef, I wasn’t able to then clone a Git repo into it due to Unix permission issues. (Thus, the recipe ‘breaks’ when running, and so you get to experience what it’s like to debug Chef recipes).</p>
-<p>Moreover, what I found particularly painful/inelegant was that, since my Chef recipe featured some MySQL commands (e.g. setup the server so it has a certain database setup), Chef itself needed to have certain Ruby GEMs installed on the provisioned-machine <em>before the recipe could be run</em>. Thatis, at ‘compile time’ rather than ‘run time’, as such. Argh.<br />
-The way to ‘work around’ (or, seemingly, ‘work’) this was to install these particular GEMs in a “special” way in the recipe. Yes, I’m sure that I didn’t stumble onto the wrong solution; though I could be wrong.</p>
-<p>It may be worth adding that I’m not a Rubyist. Although Chef recipes etc. are written in Ruby, not knowing Ruby isn’t a significant obstacle. (Though it’s common to come across “Gemfile” and other Ruby-specific tools in repos).</p>
-<p>I can’t conclude that Chef is awful. My usecase of just-for-one-server isn’t exactly what Chef mainly aims to solve.<br />
-And while documentation wasn’t too bare for writing recipes and such, I might’ve had an easier time if I could’ve found examples of people doing what I couldn’t do above. (e.g. more just-for-one-server).<br />
-Maybe the grass is always greener on the other side, but for next time I’d be more interested in trying other tools.</p>
+Among other difficulties, in the end for some reason this MariaDB package
+wouldn’t install for me, and so I had to workaround it. – Perhaps it’d be
+unfair to blame this on Chef, and not Ubuntu/apt-get/MariaDB.</p>
+<p>I was less-than-impressed at the way folder permissions were handled, such-that
+I felt, for my recipe, creating anything but a flat hierarchy of folders wasn’t
+as ‘elegant’ as I might’ve wished. (There’s probably a good reason for this,
+though, so “oh well”). – My discrepency was along the lines of, since Chef was
+being run as root user, if I created a folder with Chef, I wasn’t able to then
+clone a Git repo into it due to Unix permission issues. (Thus, the recipe
+‘breaks’ when running, and so you get to experience what it’s like to debug
+Chef recipes).</p>
+<p>Moreover, what I found particularly painful/inelegant was that, since my Chef
+recipe featured some MySQL commands (e.g. setup the server so it has a certain
+database setup), Chef itself needed to have certain Ruby GEMs installed on the
+provisioned-machine <em>before the recipe could be run</em>. Thatis, at ‘compile time’
+rather than ‘run time’, as such. Argh.<br />
+The way to ‘work around’ (or, seemingly, ‘work’) this was to install these
+particular GEMs in a “special” way in the recipe. Yes, I’m sure that I didn’t
+stumble onto the wrong solution; though I could be wrong.</p>
+<p>It may be worth adding that I’m not a Rubyist. Although Chef recipes etc. are
+written in Ruby, not knowing Ruby isn’t a significant obstacle. (Though it’s
+common to come across “Gemfile” and other Ruby-specific tools in repos).</p>
+<p>I can’t conclude that Chef is awful. My usecase of just-for-one-server isn’t
+exactly what Chef mainly aims to solve.<br />
+And while documentation wasn’t too bare for writing recipes and such, I
+might’ve had an easier time if I could’ve found examples of people doing what I
+couldn’t do above. (e.g. more just-for-one-server).<br />
+Maybe the grass is always greener on the other side, but for next time I’d be
+more interested in trying other tools.</p>
 
 <hr />
 
@@ -183,6 +242,19 @@ Maybe the grass is always greener on the other side, but for next time I’d be 
 <br style="clear: both;" />
 
 <hr />
+
+<!-- Load highlight.js for Syntax Highlighting. -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/bash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/c.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/gherkin.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/haskell.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/lisp.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/nix.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js"></script>
+<script>hljs.highlightAll();</script>
 
             </div>
 

@@ -53,6 +53,7 @@
             TOCify
         -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js"></script>
+
         <!--
             Patched TOCify css file.
             (Don't want fixed `.tocify`).
@@ -135,41 +136,89 @@
         by Richard Goulter
     <br />
     
-    Tags: <a href="../../tags/programming.vim.html">programming.vim</a>, <a href="../../tags/programming.eclipse.html">programming.eclipse</a>, <a href="../../tags/programming.scala.html">programming.scala</a>
+    Tags: <a title="All pages tagged 'programming.vim'." href="../../tags/programming.vim.html">programming.vim</a>, <a title="All pages tagged 'programming.eclipse'." href="../../tags/programming.eclipse.html">programming.eclipse</a>, <a title="All pages tagged 'programming.scala'." href="../../tags/programming.scala.html">programming.scala</a>
     
 </div>
 
 <p>So, I’ve blogged a bit about <a href="../../tags/programming.vim.html">Vim</a>.<br />
-Again, no, it’s not about “vim vs emacs”, so much as about “which features your text editing has”; and the vi-like modal editing fantastic for manipulating text.</p>
+Again, no, it’s not about “vim vs emacs”, so much as about “which features your
+text editing has”; and the vi-like modal editing fantastic for manipulating
+text.</p>
 <p>Recently I’ve had the fortune of programming in Scala.<br />
-The joke is that some programmers are happy to work in Scala because it’s not Java, the rest are sad to work in Scala because it’s not Haskell.<br />
-Scala is by no means an excellent language. (Again, there are two kinds of languages; those people use, and those people complain about). But I like it well enough.</p>
-<p>For the most part, I’ve done my Scala editing in Scala IDE, which is a plugin built upon the much-maligned Eclipse.<br />
-– Overall, the biggest complaint to be had about Scala IDE, from my experience, is that ScalaTest can be a bit finicky, and will often refuse to “run all tests in package” or so.</p>
+The joke is that some programmers are happy to work in Scala because it’s not
+Java, the rest are sad to work in Scala because it’s not Haskell.<br />
+Scala is by no means an excellent language. (Again, there are two kinds of
+languages; those people use, and those people complain about). But I like it
+well enough.</p>
+<p>For the most part, I’ve done my Scala editing in Scala IDE, which is a plugin
+built upon the much-maligned Eclipse.<br />
+– Overall, the biggest complaint to be had about Scala IDE, from my
+experience, is that ScalaTest can be a bit finicky, and will often refuse to
+“run all tests in package” or so.</p>
 <p>– If I’m harping on about the benefits of Vim, why make use of Eclipse?<br />
-Well, for one, I have the Vrapper plugin installed. This is a great stop-gap measure; it doesn’t have every binding (by default, at least), and occasionally messes up, but mostly does the job. (When I had to use XCode, XVim was also a nice plugin to have).<br />
+Well, for one, I have the Vrapper plugin installed. This is a great stop-gap
+measure; it doesn’t have every binding (by default, at least), and occasionally
+messes up, but mostly does the job. (When I had to use XCode, XVim was also a
+nice plugin to have).<br />
 Using Eclipse was the <em>pragmatic</em> best-of-what’s-available.</p>
 <p>I’ve recently tried out making use of Vim proper for Scala editing:<br />
-I love autocomplete; to get autocompletion for Scala in Vim, the easiest way is using some omnicomplete front-end (like YouCompleteMe), and plugging Eclim as a ‘back-end’ to it. – Eclim can communicate with Eclipse, and provide the autocompletion. – The <em>downside</em> to this is Vim becomes <em>heavy-weight</em>. Like, really heavy. I’m fairly sure you have to disable automatic project-building, also, otherwise there’s a huge lag every time you save. <em>That</em> isn’t great. (As it was for me, without the automatic building, there’s still noticeable/significant lag when saving, if using Eclim).</p>
+I love autocomplete; to get autocompletion for Scala in Vim, the easiest way is
+using some omnicomplete front-end (like YouCompleteMe), and plugging Eclim as a
+‘back-end’ to it. – Eclim can communicate with Eclipse, and provide the
+autocompletion. – The <em>downside</em> to this is Vim becomes <em>heavy-weight</em>. Like,
+really heavy. I’m fairly sure you have to disable automatic project-building,
+also, otherwise there’s a huge lag every time you save. <em>That</em> isn’t great. (As
+it was for me, without the automatic building, there’s still
+noticeable/significant lag when saving, if using Eclim).</p>
 <p>The benefit is you get to use all the customisations/plugins Vim proper has.<br />
 e.g. vim-surround is quite useful for editing Scala.</p>
 <p>My workstation setup in my lab has two monitors.<br />
-For the most part, unless you’re using a keyboard-based window-manager like XMonad, I’m inclined to believe that two monitors isn’t all that enhancing to productivity: If you can, with your keyboard, switch between workspaces; within a terminal, use tmux to switch between tabs/panes, then your keyboard becomes your second monitor. The benefit of added screen real-estate is countered by the cost of moving your mouse to the other window (unless you’re using a keyboard-based window manager, where you can easily/quickly switch focus without use of mouse. Alt-Tab doesn’t suffice).<br />
+For the most part, unless you’re using a keyboard-based window-manager like
+XMonad, I’m inclined to believe that two monitors isn’t all that enhancing to
+productivity: If you can, with your keyboard, switch between workspaces; within
+a terminal, use tmux to switch between tabs/panes, then your keyboard becomes
+your second monitor. The benefit of added screen real-estate is countered by
+the cost of moving your mouse to the other window (unless you’re using a
+keyboard-based window manager, where you can easily/quickly switch focus
+without use of mouse. Alt-Tab doesn’t suffice).<br />
 – I’ve found a use for my second monitor:<br />
-SBT has a feature (which can surely be scripted for other tools/environments) that will run a command any time the source-files change. I’ve found it useful to set up two panes on my alternate monitor: one pane will run this loop with the “not slow”-tests, the other pane will run whatever program I’m working on. – Benefits/drawbacks of the latter are, of course, “your mileage may vary”.</p>
-<p>Also, make sure if you’re building a binary-search function, you don’t leave out the base case.</p>
-<p>– Anyway, the benefit of setting up this is it’s, again, a stop-gap measure for “vim not showing me syntax errors”.<br />
-Yes, vim <em>does</em> have that feature. Syntastic is nice enough; though (due to Vim’s age), doesn’t just-work as well as in Eclipse, and doesn’t do the red-squiggly-lines thing.<br />
-Quickfix is the more ‘legacy’ equivalent. And Quickfix is really nice (I’ve used it for an OCaml project). But the equivalent “sbt compile” takes a <em>long</em> time to run. SBT itself compensates for this by providing a REPL/shell, which is quicker, but doesn’t fit the vim/makeprg model. – <a href="https://notes.pinboard.in/u:rgoulter/47e14b69d902db1e0146">There seem to be some Vim/SBT integrations</a>, but I’ve not tried any of them. (The general theme is <em>they</em> will integrate with quickfix).<br />
-– If it’s not too distracting, it certainly is useful to have an at-a-glance view of “did I break anything?”, though, so it’s not strictly inferior in and of itself.</p>
+SBT has a feature (which can surely be scripted for other tools/environments)
+that will run a command any time the source-files change. I’ve found it useful
+to set up two panes on my alternate monitor: one pane will run this loop with
+the “not slow”-tests, the other pane will run whatever program I’m working on.
+– Benefits/drawbacks of the latter are, of course, “your mileage may vary”.</p>
+<p>Also, make sure if you’re building a binary-search function, you don’t leave
+out the base case.</p>
+<p>– Anyway, the benefit of setting up this is it’s, again, a stop-gap measure
+for “vim not showing me syntax errors”.<br />
+Yes, vim <em>does</em> have that feature. Syntastic is nice enough; though (due to
+Vim’s age), doesn’t just-work as well as in Eclipse, and doesn’t do the
+red-squiggly-lines thing.<br />
+Quickfix is the more ‘legacy’ equivalent. And Quickfix is really nice (I’ve
+used it for an OCaml project). But the equivalent “sbt compile” takes a <em>long</em>
+time to run. SBT itself compensates for this by providing a REPL/shell, which
+is quicker, but doesn’t fit the vim/makeprg model. – <a href="https://notes.pinboard.in/u:rgoulter/47e14b69d902db1e0146">There seem to be some
+Vim/SBT
+integrations</a>, but
+I’ve not tried any of them. (The general theme is <em>they</em> will integrate with
+quickfix).<br />
+– If it’s not too distracting, it certainly is useful to have an at-a-glance
+view of “did I break anything?”, though, so it’s not strictly inferior in and
+of itself.</p>
 <p>There are other things I more/less miss from Eclipse.<br />
-e.g. Eclipse’s editing just has a more “solid” feel to it, like you’re editing building blocks. This is probably the whole press-enter-to-select-option.<br />
-No doubt Vim can be customised to match this, but some of the auto-insertions are nice. (And, yes, provide nice inspirations for what an editor should have).<br />
-Convenience features like automatically-import-a-class which wasn’t otherwise in scope is useful.<br />
-– Particularly, though, and an example of “how good is your tooling” is “show type under cursor”. (These strongly typed languages, with type inference, like Scala, Haskell and OCaml, more/less demand editors with this feature).</p>
+e.g. Eclipse’s editing just has a more “solid” feel to it, like you’re editing
+building blocks. This is probably the whole press-enter-to-select-option.<br />
+No doubt Vim can be customised to match this, but some of the auto-insertions
+are nice. (And, yes, provide nice inspirations for what an editor should have).<br />
+Convenience features like automatically-import-a-class which wasn’t otherwise
+in scope is useful.<br />
+– Particularly, though, and an example of “how good is your tooling” is “show
+type under cursor”. (These strongly typed languages, with type inference, like
+Scala, Haskell and OCaml, more/less demand editors with this feature).</p>
 <p>– But another big difference between these is this:<br />
 When I’m using Eclipse, I put up with any inefficiency.<br />
-When I’m using Vim, I’m imagining what I could have to improve my tooling, what features would be nice to have to make things nicer.</p>
+When I’m using Vim, I’m imagining what I could have to improve my tooling, what
+features would be nice to have to make things nicer.</p>
 
 <hr />
 
@@ -184,6 +233,19 @@ When I’m using Vim, I’m imagining what I could have to improve my tooling, w
 <br style="clear: both;" />
 
 <hr />
+
+<!-- Load highlight.js for Syntax Highlighting. -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/bash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/c.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/gherkin.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/haskell.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/lisp.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/nix.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js"></script>
+<script>hljs.highlightAll();</script>
 
             </div>
 

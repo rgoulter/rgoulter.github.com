@@ -53,6 +53,7 @@
             TOCify
         -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js"></script>
+
         <!--
             Patched TOCify css file.
             (Don't want fixed `.tocify`).
@@ -139,26 +140,135 @@
     
 </div>
 
-<p>A couple of years ago I added a couple of Cucumber specs to a side-project of mine.<br />
-I did this because I was learning to use Cucumber since I was being hired as a Software Engineer in Test. (Their existing automated acceptance tests used Cucumber).</p>
-<p>I recently picked the project up again to do some maintenance on it, and I chose to migrate from using Cucumber to using all-in-code ScalaTest for implementing the same specifications.</p>
-<p>When using Cucumber, you must ask “why use Cucumber over an all-in-code tool like RSpec (or ScalaTest)”. So, here are some considerations about the trade-offs between using Cucumber and using all-in-language tests:</p>
+<p>A couple of years ago I added a couple of Cucumber specs
+to a side-project of mine.<br />
+I did this because I was learning to use Cucumber since
+I was being hired as a Software Engineer in Test.
+(Their existing automated acceptance tests used Cucumber).</p>
+<p>I recently picked the project up again to do some maintenance on it,
+and I chose to migrate from using Cucumber to using
+all-in-code ScalaTest for implementing the same specifications.</p>
+<p>When using Cucumber, you must ask “why use Cucumber over an
+all-in-code tool like RSpec (or ScalaTest)”.
+So, here are some considerations about the trade-offs between
+using Cucumber and using all-in-language tests:</p>
 <h1 id="recap-cucumber-and-bdd">Recap: Cucumber and BDD</h1>
-<p>Cucumber is a tool which enables structuring tests in a certain way. This structure particularly supports a “Behaviour Driven Development” (BDD) workflow.<br />
-BDD is the idea of specifying behaviours (after having refined what these behaviours should be from examples).<br />
-That is: a specification is an artifact from the project-management side; and Cucumber is a tool which executes specifications of behaviours.<br />
-BDD’s selling point is “build the right product”. And executable specifications aim to provide “living documentation” about what the code actually does.</p>
-<p>Well, that’s my understanding of it from Gojko Adzic’s fantastic “Specification By Example”.</p>
-<p>Specifications and Cucumber, from a developers perspective: - Any automated test involves 3 things: - Set up some System Under Test (SUT) - Get the SUT to perform some action - Check that the SUT did what it was supposed to do. - Technically, automated tests may also need to clean up the environment they run in; but this is a technical detail about running the tests, not a detail about checking the SUT. - I’ve seen these three steps described with the mnemonic “Assemble, Act, Assert” which I quite like. - Typically, documentation about what a program does is hand-written. (Although there are interesting tools which try and address this, like <a href="https://stackoverflow.com/questions/50332885/how-do-i-install-and-use-gpg-agent-on-windows/50412924#50412924">Java’s Spring’s REST Docs</a>). - Cucumber’s file format involves describing a “feature” which is a sequence of “scenarios”. (Roughly corresponding to “suite” and “test” in xUnit terms). Each scenario consists of steps. - For example. from <a href="https://relishapp.com/rspec/rspec-expectations/v/3-8/docs/built-in-matchers/equality-matchers">rspec-expectations</a>: <code>cucumber     Given a file named &quot;compare_using_eq.rb&quot; with:       .... Ruby code using RSpec Expectations ....     When I run rspec compare_using_eq.rb     Then the output should contain &quot;3 examples, 0 failures&quot;</code> - it’s a good convention to write the scenario’s steps in a “Given/When/Then” sequence; and this corresponds to “Assemble, Act, Assert”. - Cucumber’s differentiating feature is that the executable specification is separate from the code which runs it. - i.e. a Cucumber test suite has its executable specification in a <code>.feature</code> file, written in Gherkin syntax. This is then executed using test code in “step definitions”. - My impression is that there are different styles of writing Given/When/Then steps: - steps as a convenient way to arrange test code/examples. e.g. for libraries (or APIs) like RSpec. This seems to be the easiest kind of product to write executable specifications for. - steps as “pseudo code”. This seems a compromise for getting documentation which is tested, with less emphasis on readability. - steps as declared descriptions. This is what I think is best for high-level end to end specifications. (Although this ends up with steps which are too vague if they are too high level and don’t mention any details).</p>
+<p>Cucumber is a tool which enables structuring tests in a
+certain way. This structure particularly supports
+a “Behaviour Driven Development” (BDD) workflow.<br />
+BDD is the idea of specifying behaviours (after having refined
+what these behaviours should be from examples).<br />
+That is: a specification is an artifact from the project-management side;
+and Cucumber is a tool which executes specifications of behaviours.<br />
+BDD’s selling point is “build the right product”.
+And executable specifications aim to provide
+“living documentation” about what the code
+actually does.</p>
+<p>Well, that’s my understanding of it from Gojko Adzic’s fantastic
+“Specification By Example”.</p>
+<p>Specifications and Cucumber, from a developers perspective:
+- Any automated test involves 3 things:
+- Set up some System Under Test (SUT)
+- Get the SUT to perform some action
+- Check that the SUT did what it was supposed to do.
+- Technically, automated tests may also need to clean up
+the environment they run in; but this is a technical detail about
+running the tests, not a detail about checking the SUT.
+- I’ve seen these three steps described with the mnemonic
+“Assemble, Act, Assert” which I quite like.
+- Typically, documentation about what a program does
+is hand-written. (Although there are interesting
+tools which try and address this, like
+<a href="https://stackoverflow.com/questions/50332885/how-do-i-install-and-use-gpg-agent-on-windows/50412924#50412924">Java’s Spring’s REST Docs</a>).
+- Cucumber’s file format involves describing a “feature”
+which is a sequence of “scenarios”. (Roughly corresponding
+to “suite” and “test” in xUnit terms). Each scenario
+consists of steps.
+- For example. from
+<a href="https://relishapp.com/rspec/rspec-expectations/v/3-8/docs/built-in-matchers/equality-matchers">rspec-expectations</a>:
+<code>cucumber     Given a file named "compare_using_eq.rb" with:       .... Ruby code using RSpec Expectations ....     When I run rspec compare_using_eq.rb     Then the output should contain "3 examples, 0 failures"</code>
+- it’s a good convention to write the scenario’s steps
+in a “Given/When/Then” sequence;
+and this corresponds to “Assemble, Act, Assert”.
+- Cucumber’s differentiating feature is that the
+executable specification is separate from the code
+which runs it.
+- i.e. a Cucumber test suite has its executable specification
+in a <code>.feature</code> file, written in Gherkin syntax.
+This is then executed using test code in “step definitions”.
+- My impression is that there are different styles of
+writing Given/When/Then steps:
+- steps as a convenient way to arrange test code/examples.
+e.g. for libraries (or APIs) like RSpec.
+This seems to be the easiest kind of product to
+write executable specifications for.
+- steps as “pseudo code”.
+This seems a compromise for getting documentation
+which is tested, with less emphasis on readability.
+- steps as declared descriptions. This is what I think
+is best for high-level end to end specifications.
+(Although this ends up with steps which are too vague if they
+are too high level and don’t mention any details).</p>
 <h1 id="advantages-and-disadvantages-of-each-approach">Advantages and Disadvantages of Each Approach</h1>
-<p>Relevant advantages/disadvantages for Cucumber vs all-in-code specs: (As opposed to inherent difficulties with end-to-end or out-of-process acceptance tests).</p>
-<p>Advantages of Cucumber: - Cucumber specification features are English-readable in plaintext files. This is useful if you want to see “what are the specifications? what does the software do?” at a glance. - It’s much harder to access the “executable specification” from in-code specs (like RSpec or ScalaTest’s FeatureSpec). The “Given/When/Then” are mixed in with the step-execution code. - Cucumber makes it easier to adhere to an “executable specification discipline”. Because scenarios in the Feature file are idiomatically written with “Given/When/Then” steps, writing test code outside that convention naturally <em>smells</em>. - Similarly, if the step-definition code doesn’t “obviously agree” with the step it’s defining, this is another clear smell. - It “smells” if the executable specifications aren’t used anywhere. My experience is that tests tend to be ignored (beyond whether they pass and maybe coverage metrics); but I think tests could be leveraged to provide more value than this. - With all-in-code specs, it’s much easier to be sloppy and have poorly written specs or poorly engineered code which tests the code. - It “smells” if the Feature files aren’t used anywhere. (IME, It’s typical to ignore tests anyway. But I think this is a smell). - It’s easier to produce “living documentation” from a tool like Cucumber than a tool like RSpec.</p>
-<p>Disadvantages of Cucumber: - Cucumber step-definitions code has a weird “interface”. “interface” in <a href="https://www.youtube.com/watch?v=bmSAYlu0NcY">John Ousterhaut’s use of the word</a>: “interface” is the stuff you need to be aware of in order to use code.<br />
-- With normal imperative code: each statement is essentially adjacent to each statement in the program, or is embedded in some structure like a function or a class.<br />
-It’s typically straightforward that the ‘interface’ is all the code in the function, any incoming parameters; and if unlucky, access to “global” state. - With step definitions: It’s possible that some steps will need to store information for later steps or make use of information from previous steps. Steps need to be written in a way that makes the assumed interface as obvious as possible, at the same time as being an idiomatic way to describe some step in a test scenario. - It’s really hard to write good specifications.</p>
-<p>Disadvantage of all-in-code specs: - With code, it’s really tempting to “Dont Repeat Yourself” (DRY) so that there’s less code to read.<br />
-Whereas, tests should “tell a story”. (They should use “Descriptive and Meaningful Phrases” rather than be ‘DRY’).<br />
-With all-in-code specs, if a test step is re-used, then either subsequent steps are nested (which may be hard to read) or copy-pasted elsewhere in the test code. - Cucumber’s approach is to organise test code by step definitions. So, to see the full code listing for a test scenario, you have to view each step definition.<br />
+<p>Relevant advantages/disadvantages for Cucumber vs all-in-code specs:
+(As opposed to inherent difficulties with end-to-end
+or out-of-process acceptance tests).</p>
+<p>Advantages of Cucumber:
+- Cucumber specification features are English-readable in plaintext files.
+This is useful if you want to see “what are the specifications?
+what does the software do?” at a glance.
+- It’s much harder to access the “executable specification”
+from in-code specs (like RSpec or ScalaTest’s FeatureSpec).
+The “Given/When/Then” are mixed in with the step-execution code.
+- Cucumber makes it easier to adhere to an “executable specification
+discipline”.
+Because scenarios in the Feature file are
+idiomatically written with “Given/When/Then” steps,
+writing test code outside that convention naturally <em>smells</em>.
+- Similarly, if the step-definition code doesn’t “obviously agree”
+with the step it’s defining, this is another clear smell.
+- It “smells” if the executable specifications aren’t used anywhere.
+My experience is that tests tend to be ignored (beyond whether they pass
+and maybe coverage metrics); but I think tests could be leveraged
+to provide more value than this.
+- With all-in-code specs, it’s much easier to be sloppy
+and have poorly written specs or poorly engineered code
+which tests the code.
+- It “smells” if the Feature files aren’t used anywhere.
+(IME, It’s typical to ignore tests anyway.
+But I think this is a smell).
+- It’s easier to produce “living documentation” from a tool like Cucumber
+than a tool like RSpec.</p>
+<p>Disadvantages of Cucumber:
+- Cucumber step-definitions code has a weird “interface”.
+“interface” in
+<a href="https://www.youtube.com/watch?v=bmSAYlu0NcY">John Ousterhaut’s use of the word</a>:
+“interface” is the stuff you need to be aware of in order to use
+code.<br />
+- With normal imperative code:
+each statement is essentially adjacent to each statement in the program,
+or is embedded in some structure like a function or a class.<br />
+It’s typically straightforward that the ‘interface’ is all the code
+in the function, any incoming parameters; and if unlucky,
+access to “global” state.
+- With step definitions:
+It’s possible that some steps will need to store information for
+later steps or make use of information from previous steps.
+Steps need to be written in a way that makes the assumed interface
+as obvious as possible, at the same time as being an
+idiomatic way to describe some step in a test scenario.
+- It’s really hard to write good specifications.</p>
+<p>Disadvantage of all-in-code specs:
+- With code, it’s really tempting to “Dont Repeat Yourself” (DRY)
+so that there’s less code to read.<br />
+Whereas, tests should “tell a story”. (They should use
+“Descriptive and Meaningful Phrases” rather than be ‘DRY’).<br />
+With all-in-code specs, if a test step is re-used,
+then either subsequent steps are nested (which may be hard to read)
+or copy-pasted elsewhere in the test code.
+- Cucumber’s approach is to organise test code by step definitions.
+So, to see the full code listing for a test scenario,
+you have to view each step definition.<br />
 Each step may be “DAMP”, but not the whole scenario.</p>
 
 <hr />
@@ -174,6 +284,19 @@ Each step may be “DAMP”, but not the whole scenario.</p>
 <br style="clear: both;" />
 
 <hr />
+
+<!-- Load highlight.js for Syntax Highlighting. -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/bash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/c.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/gherkin.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/haskell.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/lisp.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/nix.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js"></script>
+<script>hljs.highlightAll();</script>
 
             </div>
 

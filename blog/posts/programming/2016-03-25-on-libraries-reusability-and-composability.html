@@ -53,6 +53,7 @@
             TOCify
         -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js"></script>
+
         <!--
             Patched TOCify css file.
             (Don't want fixed `.tocify`).
@@ -135,38 +136,82 @@
         by Richard Goulter
     <br />
     
-    Tags: <a href="../../tags/programming.nodejs.html">programming.nodejs</a>
+    Tags: <a title="All pages tagged 'programming.nodejs'." href="../../tags/programming.nodejs.html">programming.nodejs</a>
     
 </div>
 
-<p>There’s been a lot of brouhaha and schadenfreude regarding the recent failures in the NodeJS/NPM community.</p>
+<p>There’s been a lot of brouhaha and schadenfreude regarding the recent failures
+in the NodeJS/NPM community.</p>
 <p>Essentially the problem / schadenfreude focuses on two aspects:</p>
 <ul>
-<li><p>A mutable package repository, allowing un-publishing of packages; this creates a number of practical &amp; security problems.</p></li>
-<li><p>NodeJS’s ethos of “micropackages”; the package at the focal point of the issue was an 11-line package, to left-pad a string.</p></li>
+<li><p>A mutable package repository, allowing un-publishing of packages; this
+creates a number of practical &amp; security problems.</p></li>
+<li><p>NodeJS’s ethos of “micropackages”; the package at the focal point of the
+issue was an 11-line package, to left-pad a string.</p></li>
 </ul>
-<p>Here’s a prominent post, <a href="http://www.haneycodes.net/npm-left-pad-have-we-forgotten-how-to-program/">Haney Codes’ “Have We Forgotten How to Program?”</a>, which criticises NodeJS/NPM for having packages such as “isArray” or “isPositiveInteger”; along with many other examples any non-Node programmer will find absurd, horrifying, and hilarious.<br />
+<p>Here’s a prominent post, <a href="http://www.haneycodes.net/npm-left-pad-have-we-forgotten-how-to-program/">Haney Codes’ “Have We Forgotten How to
+Program?”</a>,
+which criticises NodeJS/NPM for having packages such as “isArray” or
+“isPositiveInteger”; along with many other examples any non-Node programmer
+will find absurd, horrifying, and hilarious.<br />
 My favourite bit:</p>
 <blockquote>
-<p>if you cannot write a left-pad, is-positive-integer, or isArray function in 5 minutes flat (including the time you spend Googling), then you don’t actually know how to code. Hell, any of these would make a great code screening interview question to determine whether or not a candidate can code.</p>
+<p>if you cannot write a left-pad, is-positive-integer, or isArray function in 5
+minutes flat (including the time you spend Googling), then you don’t actually
+know how to code. Hell, any of these would make a great code screening
+interview question to determine whether or not a candidate can code.</p>
 </blockquote>
 <p>(Of course, some applicants [and self-described programmers!] fail Fizz-Buzz, so).</p>
-<p>The NodeJS/NPM crowd in response point to <a href="https://github.com/sindresorhus/ama/issues/10#issuecomment-117766328">this</a> comment from sindresorhus (who, apparently, curates the very popular awesome-nodejs list), defending one-line packages. – The defense, essentially, is that these are versioned ‘snippets’, which provide a reusable abstraction.</p>
+<p>The NodeJS/NPM crowd in response point to
+<a href="https://github.com/sindresorhus/ama/issues/10#issuecomment-117766328">this</a>
+comment from sindresorhus (who, apparently, curates the very popular
+awesome-nodejs list), defending one-line packages. – The defense, essentially,
+is that these are versioned ‘snippets’, which provide a reusable abstraction.</p>
 <h3 id="composition">Composition</h3>
-<p>A fun thing is. Haskell kids take this idea, and do kindof the opposite thing. Where NodeJS says “here’s a snippet we can use everywhere”, Haskell is more like “here’s a typeclass which is used everywhere”; e.g. semi-group or monoid or any of that.</p>
-<p>– From the Category-Theory side of things, computation/programming is much more <a href="https://www.youtube.com/watch?v=ZhuHCtR3xq8">about composition</a> (than simply naming/abstracting complexity, per se). e.g. FRP as a ‘fundamental’ solution to the problems of event-handling callbacks; FRP is basically composing streams.<br />
-(“A monad is a monoid in the category of” blah blah blah – Monads are a way of composing things).</p>
-<p>I understand Haskell in particular runs into ‘cabal-hell’, ’cause of poor handling of transitive dependencies (it can’t have two copies of the same-package/same-version/different-dependency-version); and so when code is re-used so often, conflicts arise fairly often. (Moreover, since it’s compiled, it’s the ABIs conflicting, rather than a more forgiving dynamic-language interpretation like in Ruby or Python).</p>
-<p>– So I wonder how “use a good type system” allows composition; &amp; how that compares/contrasts to Node’s.<br />
-Haskell’s typeclasses allow a benefit which you can’t really get easily in the more mainstream languages.</p>
+<p>A fun thing is. Haskell kids take this idea, and do kindof the opposite thing.
+Where NodeJS says “here’s a snippet we can use everywhere”, Haskell is more
+like “here’s a typeclass which is used everywhere”; e.g. semi-group or monoid
+or any of that.</p>
+<p>– From the Category-Theory side of things, computation/programming is much
+more <a href="https://www.youtube.com/watch?v=ZhuHCtR3xq8">about composition</a> (than
+simply naming/abstracting complexity, per se). e.g. FRP as a ‘fundamental’
+solution to the problems of event-handling callbacks; FRP is basically
+composing streams.<br />
+(“A monad is a monoid in the category of” blah blah blah – Monads are a way of
+composing things).</p>
+<p>I understand Haskell in particular runs into ‘cabal-hell’, ’cause of poor
+handling of transitive dependencies (it can’t have two copies of the
+same-package/same-version/different-dependency-version); and so when code is
+re-used so often, conflicts arise fairly often. (Moreover, since it’s compiled,
+it’s the ABIs conflicting, rather than a more forgiving dynamic-language
+interpretation like in Ruby or Python).</p>
+<p>– So I wonder how “use a good type system” allows composition; &amp; how that
+compares/contrasts to Node’s.<br />
+Haskell’s typeclasses allow a benefit which you can’t really get easily in the
+more mainstream languages.</p>
 <h3 id="purpose-of-libraries">Purpose of Libraries</h3>
-<p>Here’s a post from Benjamin Sandofsky, <a href="https://sandofsky.com/blog/third-party-libraries.html">“When to Avoid Libraries”</a>, arguing for prudence as to when to use external libraries; that programs should build their own abstractions unless they shouldn’t. (Ah, the ol’ “it depends” really is the answer to all topics in programming).<br />
-In comparison to the above, Sandofsky agrees that functions shouldn’t be packages. Sandofsky argues (interestingly) that frameworks make a good starting point, but that programmers should iterate towards proper abstractions/models for fitting the problem domain they’re trying to solve. Sandofsky concedes that a library should be used if a complicated task needs to be done, and you’re not interested in the details.</p>
-<p>Aside from saying “iterate towards a domain”, the other cute insights are “DRY code/libraries are quite difficult to debug”, and “if an abstraction leaks, no one cares which package is at fault in your program”.</p>
+<p>Here’s a post from Benjamin Sandofsky, <a href="https://sandofsky.com/blog/third-party-libraries.html">“When to Avoid
+Libraries”</a>, arguing for
+prudence as to when to use external libraries; that programs should build their
+own abstractions unless they shouldn’t. (Ah, the ol’ “it depends” really is the
+answer to all topics in programming).<br />
+In comparison to the above, Sandofsky agrees that functions shouldn’t be
+packages. Sandofsky argues (interestingly) that frameworks make a good starting
+point, but that programmers should iterate towards proper abstractions/models
+for fitting the problem domain they’re trying to solve. Sandofsky concedes that
+a library should be used if a complicated task needs to be done, and you’re not
+interested in the details.</p>
+<p>Aside from saying “iterate towards a domain”, the other cute insights are “DRY
+code/libraries are quite difficult to debug”, and “if an abstraction leaks, no
+one cares which package is at fault in your program”.</p>
 <h3 id="other-thoughts">Other Thoughts</h3>
-<p>I can kindof agree with the idea of “reusable snippets of code” being a good thing. Usually the collections of snippets get called “Utils”. It’s common enough on various Java answers to see answers of “Oh, just use Apache Commons for that string encoding task”.<br />
+<p>I can kindof agree with the idea of “reusable snippets of code” being a good
+thing. Usually the collections of snippets get called “Utils”. It’s common
+enough on various Java answers to see answers of “Oh, just use Apache Commons
+for that string encoding task”.<br />
 OCaml’s core library is infamously lacking in features.<br />
-– But since packaging systems aren’t more granular than ‘packages’/projects, I don’t see that the above ethoses can reconcile.</p>
+– But since packaging systems aren’t more granular than ‘packages’/projects, I
+don’t see that the above ethoses can reconcile.</p>
 
 <hr />
 
@@ -181,6 +226,19 @@ OCaml’s core library is infamously lacking in features.<br />
 <br style="clear: both;" />
 
 <hr />
+
+<!-- Load highlight.js for Syntax Highlighting. -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/bash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/c.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/gherkin.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/haskell.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/lisp.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/nix.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js"></script>
+<script>hljs.highlightAll();</script>
 
             </div>
 

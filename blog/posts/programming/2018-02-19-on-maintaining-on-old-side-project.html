@@ -53,6 +53,7 @@
             TOCify
         -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js"></script>
+
         <!--
             Patched TOCify css file.
             (Don't want fixed `.tocify`).
@@ -142,80 +143,169 @@
 <p>Recently I’ve had the motivation to try and maintain one of my side-projects.<br />
 Or at least, brush it up from being “completely awful” to “not terrible”.</p>
 <p>This is mostly just for fun.<br />
-But in a way, it’s valuable in that I learn the lessons of what it’s like to maintain a project which isn’t freshly-written. That’s the kindof learning which fresh programmers can’t easily get.</p>
-<p>Partly this also comes from wanting to be able to display a ‘portfolio’ of ‘look, I can program’.<br />
-Albeit, it’s hard to justify it from this perspective, since: - The <a href="http://www.daedtech.com/hiring-is-broken/">original post mentioned here</a> essentially says “I had a great personal brand, but didn’t get hired anyway”. - On the one hand, this is great in terms of ‘equal opportunity’, in that what supposedly matters is ‘ability to pass a tech interview’, not ‘ability to present yourself well’. And <em>in theory</em> the former ought to be better than the latter at predicting ‘will do a good job’. - I saw a post on LinkedIn where a guy pointed out that, although he had applied via LinkedIn to over 900 job listings, the only times he got a job was through networking. - On the other hand, this is concerning in terms of ‘equal opportunity’, in that effects of networking aren’t going to be as fair as a more ‘systematic’ process of finding a candidate. (Or so you’d think!).</p>
-<p>So. While I think it makes sense that ‘polished side project’ means ‘good portfolio’ and a step towards ‘good personal brand’; it seems like tech doesn’t particularly respect ‘good personal brand’.<br />
+But in a way, it’s valuable in that I learn the lessons of what it’s like to
+maintain a project which isn’t freshly-written. That’s the kindof learning which
+fresh programmers can’t easily get.</p>
+<p>Partly this also comes from wanting to be able to display a ‘portfolio’ of
+‘look, I can program’.<br />
+Albeit, it’s hard to justify it from this perspective, since:
+- The <a href="http://www.daedtech.com/hiring-is-broken/">original post mentioned here</a>
+essentially says “I had a great personal brand, but didn’t get hired anyway”.
+- On the one hand, this is great in terms of ‘equal opportunity’, in that
+what supposedly matters is ‘ability to pass a tech interview’, not
+‘ability to present yourself well’. And <em>in theory</em> the former ought to be
+better than the latter at predicting ‘will do a good job’.
+- I saw a post on LinkedIn where a guy pointed out that, although he had applied
+via LinkedIn to over 900 job listings, the only times he got a job was through
+networking.
+- On the other hand, this is concerning in terms of ‘equal opportunity’, in
+that effects of networking aren’t going to be as fair as a more ‘systematic’
+process of finding a candidate. (Or so you’d think!).</p>
+<p>So. While I think it makes sense that ‘polished side project’ means ‘good
+portfolio’ and a step towards ‘good personal brand’; it seems like tech doesn’t
+particularly respect ‘good personal brand’.<br />
 So, side projects are just for fun. :-)</p>
 <h2 id="things-i-didnt-dounderstand-in-c-as-an-undergraduate">Things I Didn’t Do/Understand in C++ as an Undergraduate</h2>
 <h3 id="properly-setting-up-the-windows-build">Properly Setting Up the Windows Build</h3>
-<p>The project is an old C++ project which was initially done for a computational geometry course. Generally, as an undergraduate, the process for such projects is “here’s how to manually install any dependency, here’s how to configure the project”.</p>
-<p>My experience of not-C++ projects is “here’s the project dependencies file, and here’s the command to install the dependencies”.<br />
-I don’t know which language did this first, but this is my experience with e.g. Ruby, Python, Haskell, even Java/Scala.</p>
-<p>This recent iteration of maintaining the side-project was aimed at getting the project to work on Windows. Previous refactoring efforts (e.g. to use CMake, adding a <code>.travis.yml</code> file to the repository) improved the project for Linux/macOS, but broke the Windows build.<br />
+<p>The project is an old C++ project which was initially done for a computational
+geometry course. Generally, as an undergraduate, the process for such projects
+is “here’s how to manually install any dependency, here’s how to configure the
+project”.</p>
+<p>My experience of not-C++ projects is “here’s the project dependencies file,
+and here’s the command to install the dependencies”.<br />
+I don’t know which language did this first, but this is my experience with
+e.g. Ruby, Python, Haskell, even Java/Scala.</p>
+<p>This recent iteration of maintaining the side-project was aimed at getting the
+project to work on Windows. Previous refactoring efforts (e.g. to use CMake,
+adding a <code>.travis.yml</code> file to the repository) improved the project for
+Linux/macOS, but broke the Windows build.<br />
 Joy.</p>
 <p>I ran into a couple of problems getting the project working on Windows.<br />
-One was getting the compiler to find the dependencies. (On Linux, this is more/less a process of “use system package manager to install dependencies).<br />
-The other was that, I’d refactored the code to use a class called”Polygon&quot;, and one of my files included <code>&lt;windows.h&gt;</code>, which has a function called <code>Polygon</code> which pollutes the global namespace and etc.<br />
+One was getting the compiler to find the dependencies. (On Linux, this is
+more/less a process of “use system package manager to install dependencies).<br />
+The other was that, I’d refactored the code to use a class called”Polygon”,
+and one of my files included <code>&lt;windows.h&gt;</code>, which has a function called
+<code>Polygon</code> which pollutes the global namespace and etc.<br />
 Fun to figure out.</p>
-<p>Windows C++ development is made a bit more confusing in that there are different compilers / environments. e.g. MSYS2/MinGW, and MSVC (Visual Studio’s C/C++ compiler).<br />
-– It took me way too long to figure out fundamental things about these. In the end, I figured out the easiest thing to do was write a <code>.bat</code> script which adds the relevant compiler to <code>PATH</code>.</p>
-<p>As an example of how ‘weird’ this is, CMake’s “MinGW Makefiles” didn’t work if MSYS2’s <code>sh.exe</code> was on <code>PATH</code>. With <code>MSYS2</code> and <code>MinGW</code> on the <code>PATH</code>, the correct generator to use would be <code>MSYS Makefiles</code>.</p>
+<p>Windows C++ development is made a bit more confusing in that there are different
+compilers / environments. e.g. MSYS2/MinGW, and MSVC (Visual Studio’s C/C++
+compiler).<br />
+– It took me way too long to figure out fundamental things about these. In the
+end, I figured out the easiest thing to do was write a <code>.bat</code> script which adds
+the relevant compiler to <code>PATH</code>.</p>
+<p>As an example of how ‘weird’ this is, CMake’s “MinGW Makefiles” didn’t work if
+MSYS2’s <code>sh.exe</code> was on <code>PATH</code>. With <code>MSYS2</code> and <code>MinGW</code> on the <code>PATH</code>, the
+correct generator to use would be <code>MSYS Makefiles</code>.</p>
 <h3 id="getting-the-thing-to-run-maybe-deploy">Getting the Thing to Run (&amp; Maybe Deploy)</h3>
 <p>My experience with programming in other languages:<br />
 If you can build the project, you can run the project.<br />
 My experience with C++:<br />
 Just because the project built, doesn’t mean that the project would run.</p>
-<p>The reason for this is fairly straightforward: C++ builds the executable, and the dependencies in other libraries will get ‘linked’ dynamically when the program runs. (On Windows, from Dynamically-Linked Libraries. On unix, from shared libraries). And so these need to be on the <code>PATH</code> when running the program. But not when building the program.<br />
-– Perhaps you’ll forgive me if this wasn’t immediately obvious to me (given the ‘can build the thing =&gt; can run the thing’ expectation).</p>
-<p>I’m aware that one way to get around this is to ‘statically link’ the dependencies into the built executable.<br />
-– But I’m not aware of a trivial/easy way to do this on Windows. (Especially not if there’re complicated transitive dependencies!).</p>
-<p>Unfortunately, I’m <em>still</em> not aware of an easy way to <em>find</em> all these requisite DLLs for running the executable.<br />
-– It occurs to me that for “other languages”, I never really dealt with “how to deploy the program; how to share it with someone else”. This is one BIG advantage to JavaScript / web browser programs. (Or web applications).</p>
+<p>The reason for this is fairly straightforward: C++ builds the executable,
+and the dependencies in other libraries will get ‘linked’ dynamically when the
+program runs. (On Windows, from Dynamically-Linked Libraries. On unix, from
+shared libraries). And so these need to be on the <code>PATH</code> when running the
+program. But not when building the program.<br />
+– Perhaps you’ll forgive me if this wasn’t immediately obvious to me (given the
+‘can build the thing =&gt; can run the thing’ expectation).</p>
+<p>I’m aware that one way to get around this is to ‘statically link’ the
+dependencies into the built executable.<br />
+– But I’m not aware of a trivial/easy way to do this on Windows. (Especially
+not if there’re complicated transitive dependencies!).</p>
+<p>Unfortunately, I’m <em>still</em> not aware of an easy way to <em>find</em> all these
+requisite DLLs for running the executable.<br />
+– It occurs to me that for “other languages”, I never really dealt with “how to
+deploy the program; how to share it with someone else”. This is one BIG
+advantage to JavaScript / web browser programs. (Or web applications).</p>
 <h3 id="vcpkg-is-great">VCPKG is Great</h3>
-<p>I am vaguely aware that conan.io is one piece of software trying to bring the concept of ‘modern language dependency installer’ to C++.</p>
+<p>I am vaguely aware that conan.io is one piece of software trying to bring the
+concept of ‘modern language dependency installer’ to C++.</p>
 <p>I saw that an example of competing software is vcpkg.<br />
 I tried it, it’s <em>amazing</em>.</p>
-<p>It’s only for the Visual Studio compiler, and is analogous to pacman for MSYS2’s MinGW-w64 compiler.</p>
+<p>It’s only for the Visual Studio compiler, and is analogous to pacman for MSYS2’s
+MinGW-w64 compiler.</p>
 <p>It Just Works.<br />
-– You use it to install certain packages (e.g. OpenCV, Qt5) and it downloads the source, builds the project.</p>
-<p>When using vcpkg to build a project, it copies the DLLs to the build directory which makes the program easier to deploy/share. Whoa!</p>
-<p>As far as I can tell, static-linking with vcpkg would be easy, too, since vcpkg builds the packages from source.</p>
-<p>One downside is that not all projects support all generators. (e.g. I couldn’t use ninja with OpenCV on Windows for MSVC. But this is upstream, and not vcpkg’s fault).</p>
+– You use it to install certain packages (e.g. OpenCV, Qt5) and it downloads
+the source, builds the project.</p>
+<p>When using vcpkg to build a project, it copies the DLLs to the build directory
+which makes the program easier to deploy/share. Whoa!</p>
+<p>As far as I can tell, static-linking with vcpkg would be easy, too, since
+vcpkg builds the packages from source.</p>
+<p>One downside is that not all projects support all generators. (e.g. I couldn’t
+use ninja with OpenCV on Windows for MSVC. But this is upstream, and not vcpkg’s
+fault).</p>
 <p>Compared to conan.io?<br />
-The vcpkg FAQ argues that vcpkg targets only Windows/MSVC, so doesn’t have to solve the problems which conan.io is trying to solve (and which are solved by distribution package managers like brew, pacman).<br />
-And that since vcpkgs is a privately-maintained repository of packages, rather than a ‘public federation’ of packages, there’s less effort required to find the dependencies which work for your project.</p>
+The vcpkg FAQ argues that vcpkg targets only Windows/MSVC, so doesn’t
+have to solve the problems which conan.io is trying to solve (and which are
+solved by distribution package managers like brew, pacman).<br />
+And that since vcpkgs is a privately-maintained repository of packages, rather
+than a ‘public federation’ of packages, there’s less effort required to find the
+dependencies which work for your project.</p>
 <h3 id="setting-up-appveyor">Setting Up AppVeyor</h3>
-<p>One of the cool things about open-source projects these days is the fancy badges they have saying “hey the project is working”.</p>
-<p>Travis-CI is one such CI service which offers free builds for “open source” projects. (i.e. free stuff for public repositories).<br />
+<p>One of the cool things about open-source projects these days is the fancy badges
+they have saying “hey the project is working”.</p>
+<p>Travis-CI is one such CI service which offers free builds for “open source”
+projects. (i.e. free stuff for public repositories).<br />
 But Travis-CI only supports Linux/macOS. The equivalent for Windows is AppVeyor.</p>
-<p>Despite my newfound knowledge of how to build the project reliably on Windows, I found this not-so-easy.</p>
-<p>Using vcpkg for the build is a nice idea. But vcpkg doesn’t use binaries for its packages. So although vcpkg makes it super easy to get a development environment going, … it takes too long for an AppVeyor build, if using sufficiently heavy dependencies. (AppVeyor builds time out after an hour).</p>
-<p>Fortunately, the machine does have common heavy dependencies like Qt5 installed already.<br />
+<p>Despite my newfound knowledge of how to build the project reliably on Windows,
+I found this not-so-easy.</p>
+<p>Using vcpkg for the build is a nice idea. But vcpkg doesn’t use binaries for
+its packages. So although vcpkg makes it super easy to get a development
+environment going, … it takes too long for an AppVeyor build, if using
+sufficiently heavy dependencies. (AppVeyor builds time out after an hour).</p>
+<p>Fortunately, the machine does have common heavy dependencies like Qt5 installed
+already.<br />
 But it didn’t have OpenCV.</p>
-<p>It may be that using chocolatey (Windows’ answer to macOS’ homebrew) to install OpenCV is probably ‘best’.<br />
+<p>It may be that using chocolatey (Windows’ answer to macOS’ homebrew) to install
+OpenCV is probably ‘best’.<br />
 But I wanted to keep with vcpkg.</p>
-<p>The main difficult I had was to cache the vcpkg directory. It took me some time to realise that I was the caching didn’t affect the <code>init</code> section of the AppVeyor build. (i.e. the cache only gets loaded for the <code>build</code> step, and cache gets saved after the <code>build</code> step).<br />
+<p>The main difficult I had was to cache the vcpkg directory. It took me some
+time to realise that I was the caching didn’t affect the <code>init</code> section of the
+AppVeyor build. (i.e. the cache only gets loaded for the <code>build</code> step, and
+cache gets saved after the <code>build</code> step).<br />
 Oops.</p>
 <h3 id="thoughts-on-the-c-language">Thoughts on the C++ Language</h3>
-<p>The above remarks (e.g. about not knowing how to find DLLs, &amp; that it’s hard to install dependencies) are more about the environment C++ runs in, and the developer ecosystem.<br />
+<p>The above remarks (e.g. about not knowing how to find DLLs, &amp; that it’s hard
+to install dependencies) are more about the environment C++ runs in, and the
+developer ecosystem.<br />
 But considering C++ as a language:</p>
-<p>Okay to be fair, I don’t think anyone really defends C++ as a “good” language (aside from maybe the pragmatic case that “it’s what people use”, and that having an imperfect which works is better than not having anything, etc.).</p>
-<p>C++ is monstrously complex. (e.g. a C++ parser is something which has to be hand-written, since the language is so complex). “Effective C++” describes C++ as a ‘federation of four languages’. (If I recall correctly: C, C with classes, standard-template library, and template meta-programming).<br />
-– There are competing languages for “better C” replacement: Go, Rust, and then more obscure languages like D (which I’ve heard is really nice, but seems to lack the community which e.g. Rust has gunned for).</p>
-<p>What I’ve come to realise maintaining this C++ project is that there’s a lot of C++ stuff which I’d consider ‘fundamental’ in other languages, where with C++ “I just don’t know it”.<br />
+<p>Okay to be fair, I don’t think anyone really defends C++ as a “good” language
+(aside from maybe the pragmatic case that “it’s what people use”, and that
+having an imperfect which works is better than not having anything, etc.).</p>
+<p>C++ is monstrously complex. (e.g. a C++ parser is something which has to be
+hand-written, since the language is so complex). “Effective C++” describes C++
+as a ‘federation of four languages’. (If I recall correctly: C, C with classes,
+standard-template library, and template meta-programming).<br />
+– There are competing languages for “better C” replacement: Go, Rust, and then
+more obscure languages like D (which I’ve heard is really nice, but seems to
+lack the community which e.g. Rust has gunned for).</p>
+<p>What I’ve come to realise maintaining this C++ project is that there’s a lot of
+C++ stuff which I’d consider ‘fundamental’ in other languages, where with C++
+“I just don’t know it”.<br />
 And I don’t think other languages suffer this problem as easily.</p>
 <p>The details sound fairly easy, but it’s not necessarily clear how they combine.<br />
-For example: individually the words <code>const</code>, <code>pointer</code>, <code>reference</code> are individually easy to understand, but very quickly difficult to understand when combined.<br />
+For example: individually the words <code>const</code>, <code>pointer</code>, <code>reference</code> are individually
+easy to understand, but very quickly difficult to understand when combined.<br />
 <em>Especially</em> for someone who hasn’t maintained a C++ project in a long time.</p>
-<p>e.g. Coming from other languages, it may not be clear that there’s a difference between ‘direct initialization’ and ‘copy initialization’. cf. <a href="http://en.cppreference.com/w/cpp/language/initialization">CPP Reference</a>.</p>
-<p>Every language inevitably has a ‘long tail’ of obscure details that an experienced programmer will run into. I don’t even know what kindof weird stuff that’d involve for C++!<br />
-But with C++, I feel it’s more like the ‘lowest common denominator’ of being able to write simple C++ programs (e.g. “Undergrad C++”) doesn’t cover very much.</p>
+<p>e.g. Coming from other languages, it may not be clear that there’s a difference
+between ‘direct initialization’ and ‘copy initialization’. cf. <a href="http://en.cppreference.com/w/cpp/language/initialization">CPP
+Reference</a>.</p>
+<p>Every language inevitably has a ‘long tail’ of obscure details that an
+experienced programmer will run into. I don’t even know what kindof weird stuff
+that’d involve for C++!<br />
+But with C++, I feel it’s more like the ‘lowest common denominator’ of being
+able to write simple C++ programs (e.g. “Undergrad C++”) doesn’t cover very much.</p>
 <h2 id="concluding-thoughts">Concluding Thoughts</h2>
-<p>One way to summarize the above is I’ve gone from ‘I wrote a project in C++ while not knowing much about C++’ to ‘I had to learn a bit more about how C++ stuff works for polishing the project’.<br />
-– I kindof have mixed thoughts about these things. It’s .. nice that with programming, it’s ‘easy’ to do a lot of cool stuff without having a good understanding of what’s really going on.<br />
-But it also seems a bit uncraftsmanlike to make stuff with such a poor understanding.</p>
-<p>I think polishing this side-project a bit has been a good project for understanding what to avoid in a project, and what’s good to have.</p>
+<p>One way to summarize the above is I’ve gone from ‘I wrote a project in C++ while
+not knowing much about C++’ to ‘I had to learn a bit more about how C++ stuff
+works for polishing the project’.<br />
+– I kindof have mixed thoughts about these things. It’s .. nice that with
+programming, it’s ‘easy’ to do a lot of cool stuff without having a good
+understanding of what’s really going on.<br />
+But it also seems a bit uncraftsmanlike to make stuff with such a poor
+understanding.</p>
+<p>I think polishing this side-project a bit has been a good project for
+understanding what to avoid in a project, and what’s good to have.</p>
 
 <hr />
 
@@ -230,6 +320,19 @@ But it also seems a bit uncraftsmanlike to make stuff with such a poor understan
 <br style="clear: both;" />
 
 <hr />
+
+<!-- Load highlight.js for Syntax Highlighting. -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/bash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/c.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/gherkin.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/haskell.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/lisp.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/nix.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js"></script>
+<script>hljs.highlightAll();</script>
 
             </div>
 

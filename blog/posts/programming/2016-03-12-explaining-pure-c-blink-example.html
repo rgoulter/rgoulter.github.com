@@ -53,6 +53,7 @@
             TOCify
         -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js"></script>
+
         <!--
             Patched TOCify css file.
             (Don't want fixed `.tocify`).
@@ -135,83 +136,148 @@
         by Richard Goulter
     <br />
     
-    Tags: <a href="../../tags/programming.c.html">programming.c</a>, <a href="../../tags/programming.arduino.html">programming.arduino</a>
+    Tags: <a title="All pages tagged 'programming.c'." href="../../tags/programming.c.html">programming.c</a>, <a title="All pages tagged 'programming.arduino'." href="../../tags/programming.arduino.html">programming.arduino</a>
     
 </div>
 
 <p>I’ve been playing around with an Arduino Uno this past week.</p>
-<p>I came across <a href="https://balau82.wordpress.com/2011/03/29/programming-arduino-uno-in-pure-c/">this post from balau82</a>: it gives a basic “blink” example program in C, and a high-level overview of how to come up with such a program.<br />
-The high-level overview wasn’t obvious for me, so I’d complement that blogpost with this, to explain in further detail.</p>
+<p>I came across <a href="https://balau82.wordpress.com/2011/03/29/programming-arduino-uno-in-pure-c/">this post from
+balau82</a>:
+it gives a basic “blink” example program in C, and a high-level overview of how
+to come up with such a program.<br />
+The high-level overview wasn’t obvious for me, so I’d complement that blogpost
+with this, to explain in further detail.</p>
 <p>e.g. When the post says:</p>
 <blockquote>
-<p>from the <a href="https://www.arduino.cc/en/uploads/Main/arduino-uno-schematic.pdf">Arduino Uno schematics</a> we can find out where the pins are connected, for example we can find that the LED is connected to the PB5 pin of the Atmega328p chip</p>
+<p>from the <a href="https://www.arduino.cc/en/uploads/Main/arduino-uno-schematic.pdf">Arduino Uno
+schematics</a>
+we can find out where the pins are connected, for example we can find that
+the LED is connected to the PB5 pin of the Atmega328p chip</p>
 </blockquote>
 <p>These are the pertinent details of the schematic:</p>
 <p><img src="http://i.imgur.com/8oNoyZL.png" /></p>
 <ul>
-<li>The Arduino board also has an ‘L’ beside the LED.. and the in-built LED is <a href="https://www.arduino.cc/en/Tutorial/Blink?from=Tutorial.BlinkingLED">on ‘Pin 13’</a> (thus the green 13, I guess).</li>
-<li>PB5 is the name of the pin on the ATmega328P controller. (<a href="http://www.atmel.com/images/Atmel-8271-8-bit-AVR-Microcontroller-ATmega48A-48PA-88A-88PA-168A-168PA-328-328P_datasheet_Complete.pdf">Datasheet here</a>).</li>
+<li>The Arduino board also has an ‘L’ beside the LED.. and the in-built LED is
+<a href="https://www.arduino.cc/en/Tutorial/Blink?from=Tutorial.BlinkingLED">on ‘Pin
+13’</a>
+(thus the green 13, I guess).</li>
+<li>PB5 is the name of the pin on the ATmega328P controller. (<a href="http://www.atmel.com/images/Atmel-8271-8-bit-AVR-Microcontroller-ATmega48A-48PA-88A-88PA-168A-168PA-328-328P_datasheet_Complete.pdf">Datasheet
+here</a>).</li>
 </ul>
 <hr />
 <p>Looking at snippets from the code:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="dt">int</span> main (<span class="dt">void</span>) {</a>
-<a class="sourceLine" id="cb1-2" data-line-number="2"> DDRB |= _BV(DDB5); <span class="co">/* set Port B bit-5 to output */</span></a>
-<a class="sourceLine" id="cb1-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb1-4" data-line-number="4"> <span class="cf">while</span>(<span class="dv">1</span>) {</a>
-<a class="sourceLine" id="cb1-5" data-line-number="5">  PORTB |= _BV(PORTB5); <span class="co">/* turn on LED */</span></a>
-<a class="sourceLine" id="cb1-6" data-line-number="6">  ....</a>
-<a class="sourceLine" id="cb1-7" data-line-number="7"> }</a>
-<a class="sourceLine" id="cb1-8" data-line-number="8">}</a></code></pre></div>
+<pre class="c"><code>int main (void) {
+ DDRB |= _BV(DDB5); /* set Port B bit-5 to output */
+
+ while(1) {
+  PORTB |= _BV(PORTB5); /* turn on LED */
+  ....
+ }
+}</code></pre>
 <p>This left a novice like me with questions:<br />
-Where do these constants come from? What’s <code>DDRB</code>? How does <code>DDB5</code> refer to PB5? Why <code>PORTB = ...</code> to change the LED? What’s the difference between <code>DDB5</code> and <code>PORTB5</code>?<br />
-(At least I understood the <code>magicVar |= 1 &lt;&lt; 5</code> &amp; <code>magicVar &amp;= ~(1 &lt;&lt; 5)</code> bitmasking. – my <a href="https://github.com/rgoulter/c-worksheet.vim">C-Worksheet</a> is useful for playing around with this, also, btw).</p>
+Where do these constants come from? What’s <code>DDRB</code>? How does <code>DDB5</code> refer to
+PB5? Why <code>PORTB = ...</code> to change the LED? What’s the difference between <code>DDB5</code>
+and <code>PORTB5</code>?<br />
+(At least I understood the <code>magicVar |= 1 &lt;&lt; 5</code> &amp; <code>magicVar &amp;= ~(1 &lt;&lt; 5)</code>
+bitmasking. – my <a href="https://github.com/rgoulter/c-worksheet.vim">C-Worksheet</a> is
+useful for playing around with this, also, btw).</p>
 <ul>
 <li><p><strong>Where do these (macro) constants come from?</strong><br />
-Well, look at the <code>#include &lt;avr/io.h&gt;</code>. (Probably found in <code>/usr/lib/avr/include</code>), and the <a href="http://www.nongnu.org/avr-libc/user-manual/group__avr__io.html">online reference</a>:<br />
-it includes <a href="http://www.nongnu.org/avr-libc/user-manual/group__avr__sfr.html">avr/sfr_defs.h</a> (SFR = Special Function Registers), which has the <code>_BV</code> macro as well as explaining the <code>sfr |= _BV(bit)</code> replacing some <code>sbi (sfr, bit)</code> instruction. – The specific file (in this case, <code>avr/iom328p.h</code>) defines the <code>DDB5</code>, etc. macros.</p></li>
+Well, look at the <code>#include &lt;avr/io.h&gt;</code>. (Probably found in
+<code>/usr/lib/avr/include</code>), and the <a href="http://www.nongnu.org/avr-libc/user-manual/group__avr__io.html">online
+reference</a>:<br />
+it includes
+<a href="http://www.nongnu.org/avr-libc/user-manual/group__avr__sfr.html">avr/sfr_defs.h</a>
+(SFR = Special Function Registers), which has the <code>_BV</code> macro as well as
+explaining the <code>sfr |= _BV(bit)</code> replacing some <code>sbi (sfr, bit)</code>
+instruction. – The specific file (in this case, <code>avr/iom328p.h</code>) defines
+the <code>DDB5</code>, etc. macros.</p></li>
 <li><p><strong>What’s <code>DDRB</code>?</strong><br />
-Reading the datasheet, Ctrl-F for <code>DDR</code> leads us to Section 14.2 “Ports as General Digital I/O”.</p>
+Reading the datasheet, Ctrl-F for <code>DDR</code> leads us to Section 14.2 “Ports as
+General Digital I/O”.</p>
 <blockquote>
-<p>Each port pin consists of three register bits: DDxn, PORTxn, and PINxn. As shown in ”Register Description”, the DDxn bits are accessed at the DDRx I/O address, the PORTxn bits at the PORTx I/O address, and the PINxn bits at the PINx I/O address.<br />
-The DDxn bit in the DDRx Register selects the direction of this pin. If DDxn is written logic one, Pxn is configured as an output pin. If DDxn is written logic zero, Pxn is configured as an input pin.</p>
+<p>Each port pin consists of three register bits: DDxn, PORTxn, and PINxn.
+As shown in ”Register Description”, the DDxn bits are accessed at the
+DDRx I/O address, the PORTxn bits at the PORTx I/O address, and the PINxn
+bits at the PINx I/O address.<br />
+The DDxn bit in the DDRx Register selects the direction of this pin. If
+DDxn is written logic one, Pxn is configured as an output pin. If DDxn is
+written logic zero, Pxn is configured as an input pin.</p>
 </blockquote>
 <p>DDR = Data Direction Register. Ohhh.[1]<br />
-<code>DDRB</code> is the byte (of the data direction of Port B), <code>DDB5</code> for referring to Port B (x = B), and its 5th bit (n = 5). (The register summary in Section 35, p615 shows this).</p>
+<code>DDRB</code> is the byte (of the data direction of Port B), <code>DDB5</code> for referring
+to Port B (x = B), and its 5th bit (n = 5). (The register summary in
+Section 35, p615 shows this).</p>
 <p>So, when the Arduino code has:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb2-1" data-line-number="1">pinMode(<span class="dv">13</span>, OUTPUT);</a></code></pre></div>
+<pre class="c"><code>pinMode(13, OUTPUT);</code></pre>
 <p>it is <strong>essentially</strong> equivalent to:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb3-1" data-line-number="1">DDRB |= _BV(DDB5);</a></code></pre></div>
+<pre class="c"><code>DDRB |= _BV(DDB5);</code></pre>
 <p>….Obviously.[2]</p></li>
 <li><p><strong>How does <code>DDB5</code> refer to PB5?</strong><br />
 It just does?<br />
 PB5 is the 5th bit of Port B. (Section 1.1.3).<br />
 Section 14 also has this to say:</p>
 <blockquote>
-<p>Three I/O memory address locations are allocated for each port, one each for the Data Register – <code>PORTx</code>, Data Direction Register – <code>DDRx</code>, and the Port Input Pins – <code>PINx</code>. The Port Input Pins I/O location is read only, while the Data Register and the Data Direction Register are read/write. However, writing a logic one to a bit in the PINx Register, will result in a toggle in the corresponding bit in the Data Register.</p>
+<p>Three I/O memory address locations are allocated for each port, one each
+for the Data Register – <code>PORTx</code>, Data Direction Register – <code>DDRx</code>, and
+the Port Input Pins – <code>PINx</code>. The Port Input Pins I/O location is read
+only, while the Data Register and the Data Direction Register are
+read/write. However, writing a logic one to a bit in the PINx Register,
+will result in a toggle in the corresponding bit in the Data Register.</p>
 </blockquote></li>
 <li><p><strong>Why <code>PORTB = ...</code> to change the LED?</strong><br />
-Because it’s the data register. Aforementioned sections of the datasheet should have made this clear by now.[3]<br />
-There’s also compiler magic translating from <code>sfr |= _BV(bit)</code> to <code>sbi</code>/<code>cbi</code> etc. as explained in the avr-libc documentation. – Section 37 of the datasheet mentions <code>sbi</code> = “set bit in I/O register”, <code>cbi</code> = “clear bit …”.</p></li>
+Because it’s the data register. Aforementioned sections of the datasheet
+should have made this clear by now.[3]<br />
+There’s also compiler magic translating from <code>sfr |= _BV(bit)</code> to <code>sbi</code>/<code>cbi</code>
+etc. as explained in the avr-libc documentation. – Section 37 of the
+datasheet mentions <code>sbi</code> = “set bit in I/O register”, <code>cbi</code> = “clear bit
+…”.</p></li>
 <li><p>What’s the difference between <code>DDB5</code> and <code>PORTB5</code>?<br />
-This should be evident from above; one is for referring to the bit of a Data-Direction register, the other for the bit of Port B.<br />
-– I think they both evaluate to <code>5</code>; so unless the compiler does any magic with them, I’m guessing one could incorrectly interchange them and the program would still work. – It’s kinda tempting to just write the number <code>5</code>, since the identifier has a <code>5</code> in it anyway..</p></li>
+This should be evident from above; one is for referring to the bit of a
+Data-Direction register, the other for the bit of Port B.<br />
+– I think they both evaluate to <code>5</code>; so unless the compiler does any magic
+with them, I’m guessing one could incorrectly interchange them and the
+program would still work. – It’s kinda tempting to just write the number
+<code>5</code>, since the identifier has a <code>5</code> in it anyway..</p></li>
 </ul>
 <hr />
-<p>The commands to compile and upload it I take on faith as “just work”. (Or, rather, I didn’t need to mess with them).</p>
-<p><a href="https://raw.githubusercontent.com/rgoulter/arduino-atom-examples/059aa93be42f4f523aa4802a69fbdb7ec95f9d33/blink/c/Makefile">Here’s a Makefile</a> adapted from these commands, which will probably be useful. (<code>make upload</code> will build &amp; upload the program to an Arduino).</p>
+<p>The commands to compile and upload it I take on faith as “just work”. (Or,
+rather, I didn’t need to mess with them).</p>
+<p><a href="https://raw.githubusercontent.com/rgoulter/arduino-atom-examples/059aa93be42f4f523aa4802a69fbdb7ec95f9d33/blink/c/Makefile">Here’s a
+Makefile</a>
+adapted from these commands, which will probably be useful. (<code>make upload</code> will
+build &amp; upload the program to an Arduino).</p>
 <hr />
-<p>I wanted to translate the <a href="https://www.arduino.cc/en/ArduinoStarterKit/Prj02">Spaceship Interface</a> (Project 02 of the book which comes with the Arduino Starter Kit) to C, also.<br />
-The only difference from the Blink example is that the Spaceship Interface example reads input from a pin.</p>
-<p>Following the aforementioned tutorial, the switch is in (Arduino) pin 2, and the LEDs in pins 3, 4, 5.<br />
-From the schematic, this corresponds to PD2 .. PD5. (<code>%s/B/D/</code> is evident, even without the above understanding).</p>
-<p>Reading from a pin should also be ‘easy’ from the above understanding.[4] – And, again, the <code>avr/sfr_defs.h</code> documentation mentions that <code>PORTx = 0x33; unsigned char i = PINx</code> will magically get translated to the correct instructions.</p>
-<p>I was able to come up with <a href="https://gist.githubusercontent.com/rgoulter/9fcc09c6524ad882f477/raw/4c826aa5ee8ac5bd57baa2bad12d8fa7a2cb2b19/spaceship.c">this</a>. And it worked and I was so happy.</p>
-<p>Then I translated the example to the <a href="https://hackage.haskell.org/package/atom-1.0.13">Atom EDSL</a>. Read about the fun in my <a href="../../posts/programming/2016-03-13-arduino-spaceship-interface-in-the-atom-dsl.html">next blog post</a>.</p>
+<p>I wanted to translate the <a href="https://www.arduino.cc/en/ArduinoStarterKit/Prj02">Spaceship
+Interface</a> (Project 02 of
+the book which comes with the Arduino Starter Kit) to C, also.<br />
+The only difference from the Blink example is that the Spaceship Interface
+example reads input from a pin.</p>
+<p>Following the aforementioned tutorial, the switch is in (Arduino) pin 2, and
+the LEDs in pins 3, 4, 5.<br />
+From the schematic, this corresponds to PD2 .. PD5. (<code>%s/B/D/</code> is evident, even
+without the above understanding).</p>
+<p>Reading from a pin should also be ‘easy’ from the above understanding.[4] –
+And, again, the <code>avr/sfr_defs.h</code> documentation mentions that <code>PORTx = 0x33; unsigned char i = PINx</code> will magically get translated to the correct
+instructions.</p>
+<p>I was able to come up with
+<a href="https://gist.githubusercontent.com/rgoulter/9fcc09c6524ad882f477/raw/4c826aa5ee8ac5bd57baa2bad12d8fa7a2cb2b19/spaceship.c">this</a>.
+And it worked and I was so happy.</p>
+<p>Then I translated the example to the <a href="https://hackage.haskell.org/package/atom-1.0.13">Atom
+EDSL</a>. Read about the fun in
+my <a href="../../posts/programming/2016-03-13-arduino-spaceship-interface-in-the-atom-dsl.html">next blog
+post</a>.</p>
 <hr />
-<p>[1] Reading is useful. But, on the other hand, the datasheet is like 600 pages long.</p>
-<p>[2] Is it fair to call this ‘hard’ (for non-engineers), in the sense that all that isn’t obvious by looking at the C code &amp; blog? OTOH, math is hard, and that’s kindof a problem with the user, not the content.</p>
-<p>[3] But writing lots of stupid questions is still useful for clarifying to yourself what you don’t know! – Indeed, asking questions in a programming journal is valuable even if you never get back to answering them, I’d say.</p>
-<p>[4] Or from getting lucky by finding the example in Section 14 reading from <code>PINB</code>.</p>
+<p>[1] Reading is useful. But, on the other hand, the datasheet is like 600 pages
+long.</p>
+<p>[2] Is it fair to call this ‘hard’ (for non-engineers), in the sense that all
+that isn’t obvious by looking at the C code &amp; blog? OTOH, math is hard, and
+that’s kindof a problem with the user, not the content.</p>
+<p>[3] But writing lots of stupid questions is still useful for clarifying to
+yourself what you don’t know! – Indeed, asking questions in a programming
+journal is valuable even if you never get back to answering them, I’d say.</p>
+<p>[4] Or from getting lucky by finding the example in Section 14 reading from
+<code>PINB</code>.</p>
 
 <hr />
 
@@ -226,6 +292,19 @@ From the schematic, this corresponds to PD2 .. PD5. (<code>%s/B/D/</code> is evi
 <br style="clear: both;" />
 
 <hr />
+
+<!-- Load highlight.js for Syntax Highlighting. -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/bash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/c.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/gherkin.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/haskell.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/lisp.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/nix.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js"></script>
+<script>hljs.highlightAll();</script>
 
             </div>
 

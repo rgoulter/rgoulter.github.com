@@ -53,6 +53,7 @@
             TOCify
         -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js"></script>
+
         <!--
             Patched TOCify css file.
             (Don't want fixed `.tocify`).
@@ -135,40 +136,86 @@
         by Richard Goulter
     <br />
     
-    Tags: <a href="../../tags/programming.emacs.html">programming.emacs</a>, <a href="../../tags/programming.org-mode.html">programming.org-mode</a>, <a href="../../tags/programming.vim.html">programming.vim</a>
+    Tags: <a title="All pages tagged 'programming.emacs'." href="../../tags/programming.emacs.html">programming.emacs</a>, <a title="All pages tagged 'programming.org-mode'." href="../../tags/programming.org-mode.html">programming.org-mode</a>, <a title="All pages tagged 'programming.vim'." href="../../tags/programming.vim.html">programming.vim</a>
     
 </div>
 
 <p>I’m a moderately capable Vim user.<br />
-I’ve not quite gained the habit of trying to <em>constantly</em> improve using Vim; but at the same time, I’m not exactly using it as something only slightly better than Notepad++.</p>
+I’ve not quite gained the habit of trying to <em>constantly</em> improve using Vim;
+but at the same time, I’m not exactly using it as something only slightly
+better than Notepad++.</p>
 <p>Lately I’ve been taking quick glances at Emacs.<br />
-I was impressed by <a href="http://bling.github.io/blog/2013/10/27/emacs-as-my-leader-vim-survival-guide/">this post from GitHub user bling</a>, who suggests that Vim is the better <strong>editor</strong>, with a much larger/better plugin-writing community; but suggests that Emacs makes for a better Development Environment.<br />
+I was impressed by <a href="http://bling.github.io/blog/2013/10/27/emacs-as-my-leader-vim-survival-guide/">this post from GitHub user
+bling</a>,
+who suggests that Vim is the better <strong>editor</strong>, with a much larger/better
+plugin-writing community; but suggests that Emacs makes for a better
+Development Environment.<br />
 – Org mode makes sense as a ‘gateway drug’ to Emacs..</p>
 <h2 id="org-mode">Org Mode</h2>
-<p>The testimonials you see of Org Mode compel interest. In terms of a comprehensive note-taking/task-managing format, I’m not aware of any other formats/doctrines which are anywhere near as popular.</p>
-<p>There are a couple of ‘implementations’ of a subset of Org mode’s features, for vim: <a href="https://github.com/jceb/vim-orgmode">jceb/vim-orgmode</a>, and <a href="https://github.com/hsitz/VimOrganizer">hsitz/VimOrganizer</a>.<br />
-The latter is somewhat less popular, and doesn’t include even a token README, and hasn’t had updates in a year. – It may still be alright, but I’ve not tried it.<br />
-The former has had commits within the last couple of months, does have a README, and is more popular.</p>
+<p>The testimonials you see of Org Mode compel interest. In terms of a
+comprehensive note-taking/task-managing format, I’m not aware of any other
+formats/doctrines which are anywhere near as popular.</p>
+<p>There are a couple of ‘implementations’ of a subset of Org mode’s features, for
+vim: <a href="https://github.com/jceb/vim-orgmode">jceb/vim-orgmode</a>, and
+<a href="https://github.com/hsitz/VimOrganizer">hsitz/VimOrganizer</a>.<br />
+The latter is somewhat less popular, and doesn’t include even a token README,
+and hasn’t had updates in a year. – It may still be alright, but I’ve not
+tried it.<br />
+The former has had commits within the last couple of months, does have a
+README, and is more popular.</p>
 <p><code>vim-orgmode</code> is mostly alright.<br />
 From when I’ve tried to make use of it, there’re a few annoyances I’ve had:</p>
 <ul>
 <li><p>Plain Lists: It was a battle with the auto-indentation to write unordered-lists.</p></li>
-<li><p>Header Tags Alignment: While I encountered issues with this in Emacs also; the problem with <code>vim-orgmode</code> is that it uses <em>TABS</em> to pad out the tags after a header. Tabstop <a href="https://github.com/jceb/vim-orgmode/blob/master/ftplugin/orgmode/liborgmode/headings.py#L92">is assumed</a> (and set to be!) 6. – This isn’t exactly a problem if you’re only editing org files with <code>vim-orgmode</code>, as such; but I’m not, and it’s just annoying knowing it’s there.</p></li>
+<li><p>Header Tags Alignment: While I encountered issues with this in Emacs also;
+the problem with <code>vim-orgmode</code> is that it uses <em>TABS</em> to pad out the tags
+after a header. Tabstop <a href="https://github.com/jceb/vim-orgmode/blob/master/ftplugin/orgmode/liborgmode/headings.py#L92">is
+assumed</a>
+(and set to be!) 6. – This isn’t exactly a problem if you’re only editing
+org files with <code>vim-orgmode</code>, as such; but I’m not, and it’s just annoying
+knowing it’s there.</p></li>
 </ul>
-<p>It wasn’t a problem for me, with this <code>vim-orgmode</code> plugin, that not every (applicable) part of Org mode was implemented. Org mode seems to have an extensive feature set, and I can’t (at this stage) see myself using most of the features.<br />
-What was kindof interesting is that many of the Org mode things were implemented in Python as a library.</p>
-<p>– While perhaps using Org mode as a poor-man’s-OneNote may not be making the most out of Org mode, I’ve also found it unclear as to the distinction in purpose between headers and unordered lists: I often find myself with an unordered list of things, and then will want to ‘TODO’ these.</p>
+<p>It wasn’t a problem for me, with this <code>vim-orgmode</code> plugin, that not every
+(applicable) part of Org mode was implemented. Org mode seems to have an
+extensive feature set, and I can’t (at this stage) see myself using most of the
+features.<br />
+What was kindof interesting is that many of the Org mode things were
+implemented in Python as a library.</p>
+<p>– While perhaps using Org mode as a poor-man’s-OneNote may not be making the
+most out of Org mode, I’ve also found it unclear as to the distinction in
+purpose between headers and unordered lists: I often find myself with an
+unordered list of things, and then will want to ‘TODO’ these.</p>
 <h2 id="emacs">Emacs</h2>
 <p>So, as it is, Emacs is the tool to use to manipulate Org mode.<br />
 Evil mode certainly mitigates the pain of this.</p>
 <p>Emacs feels like it’s an editor in between worlds:<br />
-Emacs, in some sense, rightly has that “programmer’s editor of choice” feel to it: it can be customised with macros, it can be run in a terminal, a prominent irc channel, etc.; in these ways, it’s <strong>very</strong> similar to Vim.<br />
-But, it also feels like it’s a ‘modern’ editor. It’s start-up time is slow. The text isn’t regular-width, regular-height; you can embed images in the editor. Installing plugins, customising features of the editor can be done through a (somewhat shabby) UI within the editor, which includes rendered buttons, textfields and other widgets.<br />
-– Particularly jarring, for example, when writing in Org mode, the formatting of the text is shown as you edit. If text should be bold, then in Emacs the text is bold. Like how MS Word does it; but different than I’m used to when writing markup.<br />
+Emacs, in some sense, rightly has that “programmer’s editor of choice” feel to
+it: it can be customised with macros, it can be run in a terminal, a prominent
+irc channel, etc.; in these ways, it’s <strong>very</strong> similar to Vim.<br />
+But, it also feels like it’s a ‘modern’ editor. It’s start-up time is slow. The
+text isn’t regular-width, regular-height; you can embed images in the editor.
+Installing plugins, customising features of the editor can be done through a
+(somewhat shabby) UI within the editor, which includes rendered buttons,
+textfields and other widgets.<br />
+– Particularly jarring, for example, when writing in Org mode, the formatting
+of the text is shown as you edit. If text should be bold, then in Emacs the
+text is bold. Like how MS Word does it; but different than I’m used to when
+writing markup.<br />
 Yet, Emacs just doesn’t feel as ‘polished’ as these.</p>
-<p>– I ran into a problem: my Org mode looked bad. The tags were being aligned making use of tags. Org mode assumed a tab width of 8 (which somewhat defeats the point of one of the key advantages to tabs, but okay). The tab width was set to 8, but being rendered as 4-wide.<br />
-– The culprit? The <a href="https://github.com/bbatsov/solarized-emacs">solarized mode</a> I was using. I looked at the code; <strong>there’s no mention of tab anywhere!</strong><br />
-But also interesting (or horrifying) to note in the <code>solarized.el</code> file (about 2k LoC) features many lines of code dedicated to setting the colour for each face, for a multitude of different modes. It seems to me if you want to write a mode which looks good with this theme, then the theme would have to know about your mode, and be customized to that. – I’m thinking this is an example of a downside of Emacs’ flexibility. Or perhaps colour schemes are just hard to do properly, and this kind of upstream coupling is the best way.</p>
+<p>– I ran into a problem: my Org mode looked bad. The tags were being aligned
+making use of tags. Org mode assumed a tab width of 8 (which somewhat defeats
+the point of one of the key advantages to tabs, but okay). The tab width was
+set to 8, but being rendered as 4-wide.<br />
+– The culprit? The <a href="https://github.com/bbatsov/solarized-emacs">solarized
+mode</a> I was using. I looked at the
+code; <strong>there’s no mention of tab anywhere!</strong><br />
+But also interesting (or horrifying) to note in the <code>solarized.el</code> file (about
+2k LoC) features many lines of code dedicated to setting the colour for each
+face, for a multitude of different modes. It seems to me if you want to write a
+mode which looks good with this theme, then the theme would have to know about
+your mode, and be customized to that. – I’m thinking this is an example of a
+downside of Emacs’ flexibility. Or perhaps colour schemes are just hard to do
+properly, and this kind of upstream coupling is the best way.</p>
 
 <hr />
 
@@ -183,6 +230,19 @@ But also interesting (or horrifying) to note in the <code>solarized.el</code> fi
 <br style="clear: both;" />
 
 <hr />
+
+<!-- Load highlight.js for Syntax Highlighting. -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/bash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/c.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/gherkin.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/haskell.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/lisp.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/nix.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js"></script>
+<script>hljs.highlightAll();</script>
 
             </div>
 

@@ -53,6 +53,7 @@
             TOCify
         -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js"></script>
+
         <!--
             Patched TOCify css file.
             (Don't want fixed `.tocify`).
@@ -134,57 +135,95 @@ contentpage.html, for content-specific pages, like emacs.html/yi.html.
 -->
 
 <div class="row">
-    <div class="col-md-8" id="page-content">
+    <div class="col-md-9" id="page-content">
         <p><code>[Updated 2018-11]</code></p>
 <p>I’ve been using Emacs recently, primarily for its org-mode feature.</p>
-<p>Before using emacs, I had spent some time using vim (and vim-bindings in other editing environments).</p>
+<p>Before using emacs, I had spent some time using vim (and vim-bindings
+in other editing environments).</p>
 <h2 id="emacs-and-vim-broadly-are-very-similar">Emacs and Vim, Broadly, Are Very Similar</h2>
 <p>Emacs and vim are mostly driven using the keyboard.<br />
-The big benefit of being keyboard driven is not having to move your hand to move the mouse.<br />
-The downside to this there’s a steeper learning curve to learning the key bindings in either editor.</p>
+The big benefit of being keyboard driven is not having to move
+your hand to move the mouse.<br />
+The downside to this there’s a steeper learning curve to learning the
+key bindings in either editor.</p>
 <p>Emacs and vim take different approaches to keyboard input:</p>
 <p>vim is a modal editor. It behaves differently than “normal” text editors.<br />
 With normal text editors, pressing keys types the letters into the text area.<br />
-With vim, pressing keys will do different things depending on which “mode” vim is in.<br />
+With vim, pressing keys will do different things depending on which “mode” vim
+is in.<br />
 When vim is in “insert” mode, it behaves the same as a regular text editor: pressing keys types the letters.<br />
-The difference from “normal” text editors is other modes. e.g. “normal” mode binds the keys to different actions and movements. (e.g. the “d” key is a “delete” action, and the “<span class="math inline">$&quot; key moves to the end of the line. So, pushing &quot;d$</span>” deletes the rest of the line).</p>
+The difference from “normal” text editors is other modes. e.g. “normal” mode binds the
+keys to different actions and movements. (e.g. the “d” key is a “delete” action,
+and the “<span class="math inline">$" key moves to the end of the line. So, pushing "d$</span>” deletes the rest of the line).</p>
 <p>Vim’s approach to “driven by the keyboard” is to use different modes.</p>
 <p>Emacs’ approach to “driven by the keyboard” is to use modifier keys like “Ctrl” and “Alt”.<br />
 Emacs’ editing environment is much closer to a normal text editor.<br />
-The use of modifier keys is sane enough that macOS input adopts many of the Emacs-style bindings. (e.g. “command-a” will move to the beginning of the line, “command-e” moves to the end).</p>
-<p>This is worth mentioning because “emacs vs vim” is a classic flamewar between programmers. I haven’t lurked in places where these disagreements happen in a while. Using either is fine. But it’s interesting to see the approaches these editors are taking.</p>
+The use of modifier keys is sane enough that macOS input adopts many of the
+Emacs-style bindings. (e.g. “command-a” will move to the beginning of the line,
+“command-e” moves to the end).</p>
+<p>This is worth mentioning because “emacs vs vim” is a classic flamewar
+between programmers. I haven’t lurked in places where these disagreements happen
+in a while. Using either is fine. But it’s interesting to see the approaches
+these editors are taking.</p>
 <h2 id="great-things-about-emacs-hard-to-find-elsewhere">Great Things About Emacs (Hard to Find Elsewhere)</h2>
 <h4 id="org-mode">Org Mode</h4>
 <ul>
-<li>Not without its limitations and downsides. But. org mode deserves its reputation as an excellent tool for organising things in plain text.</li>
+<li>Not without its limitations and downsides. But.
+org mode deserves its reputation as an excellent
+tool for organising things in plain text.</li>
 <li>What I love about org-mode:
 <ul>
-<li>An org mode file is a bunch of headings and sub-headings. The headings can be collapsed/expanded (like code-folding in other editors).</li>
-<li>The headings can have meta-data like key-value properties, tags, a “TODO” state, etc..</li>
+<li>An org mode file is a bunch of headings and sub-headings.
+The headings can be collapsed/expanded (like code-folding in other editors).</li>
+<li>The headings can have meta-data like key-value properties, tags,
+a “TODO” state, etc..</li>
 <li>All of which is nice for writing notes in org-mode.<br />
-But a great aspect of this is org-mode’s “agenda” feature. Org agenda provides ways to search through and display org headings. (It’s an “agenda” because dates can be attached to headings, so this can serve as an “agenda”).
+But a great aspect of this is org-mode’s “agenda” feature.
+Org agenda provides ways to search through and display
+org headings. (It’s an “agenda” because dates can be attached
+to headings, so this can serve as an “agenda”).
 <ul>
-<li>This might sound underwhelming, but it allows you to structure your tasks and notes in org documents in a way which suits you, and to be able to quickly find what you need to see.</li>
-<li>I’ve heard WorkFlowy is an example of software which aims for this expressiveness, with the trade-off of being simpler to use than org-mode.<br />
-But as far as I can tell, the default go-to note taking, task management and calendar tools people use aren’t as flexible.</li>
+<li>This might sound underwhelming,
+but it allows you to structure your tasks and notes in org
+documents in a way which suits you, and to be able to quickly
+find what you need to see.</li>
+<li>I’ve heard WorkFlowy is an example of software which
+aims for this expressiveness, with the trade-off of being
+simpler to use than org-mode.<br />
+But as far as I can tell, the default go-to note taking,
+task management and calendar tools people use aren’t
+as flexible.</li>
 </ul></li>
 </ul></li>
-<li>For what it’s worth, Org mode has various other features I haven’t made use of. e.g. it has support for exporting org files into other formats, it has great table editing features, it can be used to track time (by clocking in and out of headlines).</li>
+<li>For what it’s worth, Org mode has various other features I haven’t
+made use of. e.g. it has support for exporting org files into
+other formats, it has great table editing features, it can be used
+to track time (by clocking in and out of headlines).</li>
 </ul>
 <h4 id="magit">Magit</h4>
 <ul>
-<li>You can find GUIs for git embedded in environments like vim, Visual Studio Code or any IDE.<br />
-But, Magit is an excellent package. It’s good enough to be worth using emacs for, even if you don’t use any other part of it.</li>
+<li>You can find GUIs for git embedded in environments like
+vim, Visual Studio Code or any IDE.<br />
+But, Magit is an excellent package. It’s good enough to be
+worth using emacs for, even if you don’t use any other part of it.</li>
 <li>To be fair, git is still a tough beast to use.</li>
 <li>Magit seems to be a “best of both worlds” situation:<br />
-Power users are at there best when they can stick to their keyboard to get the job done.<br />
-New users need the discoverability that comes along with something like a GUI or dropdown menu.<br />
-AFAICT, Magit’s excellent Developer Experience (DX) caters to both of these.</li>
+Power users are at there best when they can stick to their
+keyboard to get the job done.<br />
+New users need the discoverability that comes along with something
+like a GUI or dropdown menu.<br />
+AFAICT, Magit’s excellent Developer Experience (DX) caters
+to both of these.</li>
 </ul>
 <h4 id="extensibility">Extensibility</h4>
 <ul>
-<li>I know that most programs have plugins/extensions. But it seems that the approach Emacs takes (with a heavy emphasis on “commands”) allows for extending the program that’s hard to find elsewhere.</li>
-<li>“Everything is a command”, seems like a huge win in the interactions with the editors it allows.<br />
+<li>I know that most programs have plugins/extensions.
+But it seems that the approach Emacs takes (with a heavy
+emphasis on “commands”) allows for extending the program
+that’s hard to find elsewhere.</li>
+<li>“Everything is a command”, seems like
+a huge win in the interactions with the editors
+it allows.<br />
 Especially since with the commands in Elisp, you can:
 <ul>
 <li>look at the source code</li>
@@ -195,17 +234,22 @@ Especially since with the commands in Elisp, you can:
 </ul>
 <h4 id="discoverability">Discoverability</h4>
 <ul>
-<li>which-key is fantastic, especially in tandem with Emacs style of executing commands via key sequences.</li>
+<li>which-key is fantastic, especially in tandem with Emacs
+style of executing commands via key sequences.</li>
 <li>magit’s user interface
 <ul>
-<li>magit itself is great; but imo vim’s git plugin is pretty neat too.</li>
+<li>magit itself is great; but imo vim’s git plugin
+is pretty neat too.</li>
 </ul></li>
 <li>the <code>describe-*</code> help commands.
 <ul>
 <li>e.g. C-h w binds to “where-is”, which lists keybindings to a command.</li>
-<li>C-h c binds to describe-key-briefly, which shows the command for a key sequence</li>
-<li>C-h k binds to describe-key, which opens the documentation for a command.</li>
-<li>C-h b binds to describe-bindings, describe mode are also really good for listing the currently available bindings.
+<li>C-h c binds to describe-key-briefly, which shows the command
+for a key sequence</li>
+<li>C-h k binds to describe-key, which opens the documentation
+for a command.</li>
+<li>C-h b binds to describe-bindings, describe mode are also really good
+for listing the currently available bindings.
 <ul>
 <li>helm and ivy/counsel have <code>descbinds</code> makes this really convenient.</li>
 </ul></li>
@@ -215,7 +259,10 @@ Especially since with the commands in Elisp, you can:
 <ul>
 <li>Plugins/Packages
 <ul>
-<li>Vim has some very nice plugins for downloading other plugins. (typically by cloning a git repository, and adding this to the runtime path). As far as I understand, https://www.vim.org/scripts/ was used as a way to distribute vim scripts for others to use.</li>
+<li>Vim has some very nice plugins for downloading other plugins.
+(typically by cloning a git repository, and adding this to the runtime path).
+As far as I understand, https://www.vim.org/scripts/ was used as a way
+to distribute vim scripts for others to use.</li>
 <li>Emacs has “Emacs Lisp Package Archive” (ELPA).</li>
 </ul></li>
 <li>Discoverability
@@ -225,46 +272,71 @@ Especially since with the commands in Elisp, you can:
 </ul>
 <h2 id="useful-guides">Useful Guides</h2>
 <h4 id="sacha-chuas-visual-guide">Sacha Chua’s Visual Guide</h4>
-<p><a href="http://sachachua.com/blog/series/a-visual-guide-to-emacs/" class="uri">http://sachachua.com/blog/series/a-visual-guide-to-emacs/</a><br />
+<p><a href="http://sachachua.com/blog/series/a-visual-guide-to-emacs/">http://sachachua.com/blog/series/a-visual-guide-to-emacs/</a><br />
 This is very cute, utterly fantastic.<br />
-She also links to some <a href="http://sachachua.com/blog/2014/04/emacs-beginner-resources/">Emacs Beginner Resources</a>.</p>
+She also links to some <a href="http://sachachua.com/blog/2014/04/emacs-beginner-resources/">Emacs Beginner
+Resources</a>.</p>
 <h4 id="mastering-emacs-in-one-year">Mastering Emacs in One Year</h4>
-<p>Follow your friends on Twitter and you’ll come across weird shit like this: <a href="https://github.com/redguardtoo/mastering-emacs-in-one-year-guide/blob/master/guide-en.org">reguardtoo’s Mastering Emacs in One Year - Guide</a>.</p>
-<p>I’m not sure if it’s just the phrasing/language, but not sure I can agree with tthis guy vis-a-vis Starter-Kit discussion above:</p>
+<p>Follow your friends on Twitter and you’ll come across weird shit like this:
+<a href="https://github.com/redguardtoo/mastering-emacs-in-one-year-guide/blob/master/guide-en.org">reguardtoo’s Mastering Emacs in One Year - Guide</a>.</p>
+<p>I’m not sure if it’s just the phrasing/language, but not sure I can agree with
+tthis guy vis-a-vis Starter-Kit discussion above:</p>
 <blockquote>
-<p>I learned the lesson the hard way. At the beginning, I regarded Emacs as a toy. I digged around the internet for cool code I can copy.</p>
+<p>I learned the lesson the hard way. At the beginning, I regarded Emacs as a
+toy. I digged around the internet for cool code I can copy.</p>
 <p>That’s totally a waste of time if my goal is to become an Emacs master!</p>
 <p>I should have used Steve Purcell’s setup at the beginning!</p>
 <p>Please don’t repeat my mistake. Just follow Steven Purcell!</p>
-<p>Let me be blunt. You are a newbie, you’d better study top geek’s code. Don’t try to be “creative” at this stage. You won’t create anything when re-inventing the wheel.</p>
-<p>For example, some readers tell me that Emacs has too many hotkeys. They can’t memorize all of them. This is typical in newbies who assume that top geeks can remember more key bindings.</p>
+<p>Let me be blunt. You are a newbie, you’d better study top geek’s code. Don’t
+try to be “creative” at this stage. You won’t create anything when
+re-inventing the wheel.</p>
+<p>For example, some readers tell me that Emacs has too many hotkeys. They can’t
+memorize all of them. This is typical in newbies who assume that top geeks
+can remember more key bindings.</p>
 <p>Wrong!</p>
-<p>If you have studied any master’s setup, you will find that she uses Smex, as it is more efficient than pressing hotkeys.</p>
-<p>Since Steve Purcell loves new technologies and update his setup frequently, it may be a little harder to follow him for beginners.</p>
-<p>That’s actually great. I’m lucky to stick to his setup because pulling from his git branch gets me updated with the latest cool things in community.</p>
-<p>When I say “on the shoulders of giants”, I’m stressing that you need set your standard higher. I’m NOT saying the master’s setup is “newbie friendly”. If it happens to be “friendly”, it’s just the coincidence.</p>
+<p>If you have studied any master’s setup, you will find that she uses Smex, as
+it is more efficient than pressing hotkeys.</p>
+<p>Since Steve Purcell loves new technologies and update his setup frequently,
+it may be a little harder to follow him for beginners.</p>
+<p>That’s actually great. I’m lucky to stick to his setup because pulling from
+his git branch gets me updated with the latest cool things in community.</p>
+<p>When I say “on the shoulders of giants”, I’m stressing that you need set your
+standard higher. I’m NOT saying the master’s setup is “newbie friendly”. If
+it happens to be “friendly”, it’s just the coincidence.</p>
 <p>This section is discussing the best way to be good, not the easiest way.</p>
-<p>There is a difference between best and easiest. For example, a setup using Vim key bindings is NOT easy but definitely best.</p>
+<p>There is a difference between best and easiest. For example, a setup using
+Vim key bindings is NOT easy but definitely best.</p>
 </blockquote>
-<p>(This guide has &gt; 1,000 stars on GitHub; <a href="https://github.com/purcell/emacs.d">purcell/emacs.d</a> which he links to has ~1,900 stars. Some seriously popular stuff – though, honestly, I’d wonder how much this is kids getting excited about starting Emacs and not following through? <strong><em>cough</em></strong>. – <a href="posts/programming/2015-01-20-analysis-of-swkpdotfiles-repo.html">I had some thoughts about superstar swkp/dotfiles, also..</a>.).</p>
+<p>(This guide has &gt; 1,000 stars on GitHub;
+<a href="https://github.com/purcell/emacs.d">purcell/emacs.d</a> which he links to has
+~1,900 stars. Some seriously popular stuff – though, honestly, I’d wonder how
+much this is kids getting excited about starting Emacs and not following
+through? <strong><em>cough</em></strong>. – <a href="posts/programming/2015-01-20-analysis-of-swkpdotfiles-repo.html">I had some thoughts about superstar swkp/dotfiles,
+also..</a>.).</p>
 <h2 id="tuhdos-emacs-tutor">Tuhdo’s Emacs Tutor</h2>
-<p><a href="http://tuhdo.github.io/emacs-tutor.html">tuhdo’s emacs-tutor</a> comes with large, pretty gifs of Emacs doing its thing.<br />
+<p><a href="http://tuhdo.github.io/emacs-tutor.html">tuhdo’s emacs-tutor</a> comes with
+large, pretty gifs of Emacs doing its thing.<br />
 I kindof like that it shows off feature based stuff at the start.</p>
-<p>Somewhat apprehensive at the thought of a community which needs fancy-animated-gifs to get excited about anything, though: – I’m not sure about Emacs, but Vim at least has excellent help documentation.</p>
+<p>Somewhat apprehensive at the thought of a community which needs
+fancy-animated-gifs to get excited about anything, though: – I’m not sure
+about Emacs, but Vim at least has excellent help documentation.</p>
 <h2 id="recommended-list-of-plugins">Recommended List of Plugins</h2>
-<p><a href="https://github.com/emacs-tw/awesome-emacs">awesome-emacs</a> is a pretty good starting point.</p>
+<p><a href="https://github.com/emacs-tw/awesome-emacs">awesome-emacs</a> is a pretty good
+starting point.</p>
     </div>
-    <div class="col-md-4">
-        Contents<br />
+    <div class="col-md-3">
         <div id="toc"></div>
     </div>
 </div>
 
 <script>
-  //Executes your code when the DOM is ready.  Acts the same as (document).ready().
+  // Executes your code when the DOM is ready.  Acts the same as (document).ready().
   $(function() {
-      //Calls the tocify method on your HTML div.
-      $("#toc").tocify({context: "#page-content", selectors: "h1, h2, h3"});
+      // Calls the tocify method on your HTML div.
+      $("#toc").tocify({
+          context: "#page-content",
+          selectors: "h1, h2, h3"
+      });
   });
 
   // See http://imakewebthings.com/waypoints/shortcuts/sticky-elements/
@@ -285,10 +357,23 @@ I kindof like that it shows off feature based stuff at the start.</p>
 .nav-list > li.active > a,
 .nav-list > li.active > a:hover,
 .nav-list > li.active > a:focus {
-  color: #fff;
-  background-color: #337ab7;
+  border-left: 2px solid #563d7c;
 }
 </style>
+
+<!-- Load highlight.js for Syntax Highlighting. -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/bash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/c.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/gherkin.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/haskell.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/lisp.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/nix.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js"></script>
+<script>hljs.highlightAll();</script>
+
 
             </div>
 

@@ -53,6 +53,7 @@
             TOCify
         -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js"></script>
+
         <!--
             Patched TOCify css file.
             (Don't want fixed `.tocify`).
@@ -135,13 +136,19 @@
         by Richard Goulter
     <br />
     
-    Tags: <a href="../../tags/programming.hg.html">programming.hg</a>, <a href="../../tags/programming.mercurial.html">programming.mercurial</a>, <a href="../../tags/programming.git.html">programming.git</a>, <a href="../../tags/programming.terminal.html">programming.terminal</a>, <a href="../../tags/programming.log-style.html">programming.log-style</a>
+    Tags: <a title="All pages tagged 'programming.hg'." href="../../tags/programming.hg.html">programming.hg</a>, <a title="All pages tagged 'programming.mercurial'." href="../../tags/programming.mercurial.html">programming.mercurial</a>, <a title="All pages tagged 'programming.git'." href="../../tags/programming.git.html">programming.git</a>, <a title="All pages tagged 'programming.terminal'." href="../../tags/programming.terminal.html">programming.terminal</a>, <a title="All pages tagged 'programming.log-style'." href="../../tags/programming.log-style.html">programming.log-style</a>
     
 </div>
 
-<p>There’s a somewhat famous styled git log I have in my config. The guy I grabbed it from said it was from <a href="https://github.com/ndbroadbent/scm_breeze">scm-breeze</a>, I think maybe he meant tiimgreen’s <a href="https://github.com/tiimgreen/github-cheat-sheet#styled-git-log">github-cheat-sheet</a>. In any case, The Git one is like:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="bu">alias</span> gl=<span class="st">&quot;git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)&lt;%an&gt;%Creset' --abbrev-commit&quot;</span></a></code></pre></div>
-<p>Consulting <a href="http://git-scm.com/docs/pretty-formats">the docs</a>, (who does that, right?), it’s not insane to figure out what this is doing:</p>
+<p>There’s a somewhat famous styled git log I have in my config. The guy I
+grabbed it from said it was from
+<a href="https://github.com/ndbroadbent/scm_breeze">scm-breeze</a>, I think maybe he meant
+tiimgreen’s
+<a href="https://github.com/tiimgreen/github-cheat-sheet#styled-git-log">github-cheat-sheet</a>.
+In any case, The Git one is like:</p>
+<pre class="bash"><code>alias gl=&quot;git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)&lt;%an&gt;%Creset' --abbrev-commit&quot;</code></pre>
+<p>Consulting <a href="http://git-scm.com/docs/pretty-formats">the docs</a>, (who does that,
+right?), it’s not insane to figure out what this is doing:</p>
 <ul>
 <li><code>%h</code> - abbrev commit hash</li>
 <li><code>%d</code> - ref names (like <code>(origin/master)</code>)</li>
@@ -153,35 +160,39 @@
 But I’ve been using HG. Can Mercurial haz it, too?<br />
 Sources:</p>
 <ul>
-<li><p><a href="http://stackoverflow.com/questions/3575189/mercurial-log-with-one-liners">S/O: “Mercurial Log with One-Liners”</a> Because one-liner logs themselves can be useful.<br />
+<li><p><a href="http://stackoverflow.com/questions/3575189/mercurial-log-with-one-liners">S/O: “Mercurial Log with One-Liners”</a>
+Because one-liner logs themselves can be useful.<br />
 This one has:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="bu">alias</span> hl=<span class="st">&quot;hg log --template '{node|short} | {date|isodatesec} | {author|user}: {desc|strip|firstline}\n'&quot;</span></a></code></pre></div></li>
-<li><a href="hgbook.red-bean.com/read/customizing-the-output-of-mercurial.html">HG Book: Customizing Output</a></li>
+<pre class="bash"><code>alias hl=&quot;hg log --template '{node|short} | {date|isodatesec} | {author|user}: {desc|strip|firstline}\n'&quot;</code></pre></li>
+<li><p><a href="hgbook.red-bean.com/read/customizing-the-output-of-mercurial.html">HG Book: Customizing Output</a></p></li>
 <li><p><a href="https://www.selenic.com/hg/help/templates">HG Help / Manpages</a></p></li>
 </ul>
 <p>This helps us get a plain one-liner</p>
 <ul>
 <li><a href="http://stackoverflow.com/questions/3625725/can-i-add-custom-colors-to-mercurial-command-templates">HG Template Colours</a></li>
 </ul>
-<p>I’m trying for “direct equivalence”. YMMV, since Git/HG don’t exactly share all concepts. (e.g. every commit in HG has the notion of a ‘branch’, etc.).<br />
-So, note that when building the template, this is the stuff to put within the <code>{}</code>:</p>
+<p>I’m trying for “direct equivalence”. YMMV, since Git/HG don’t exactly share all
+concepts. (e.g. every commit in HG has the notion of a ‘branch’, etc.).<br />
+So, note that when building the template, this is the stuff to put within the
+<code>{}</code>:</p>
 <ul>
 <li><code>node|short</code> - commit hash</li>
 <li><code>rev</code> - int, revision number.</li>
 <li><code>branches</code>/<code>branch</code> - branchname.</li>
 <li><code>desc|strip|firstline</code> - ‘subject’</li>
 <li><code>date|age</code> - human-readable difference in time.</li>
-<li><code>author|person</code> - Richard from Richard <a href="mailto:richard.goulter@gmail.com">richard.goulter@gmail.com</a></li>
+<li><code>author|person</code> - Richard from Richard <a href="mailto:richard.goulter@gmail.com" class="email">richard.goulter@gmail.com</a></li>
 </ul>
 <p>So, my <code>.hgrc</code> has:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode ini"><code class="sourceCode ini"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">[color]</span></a>
-<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="dt">custom.rev </span><span class="ot">=</span><span class="st"> red</span></a>
-<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="dt">custom.decorate </span><span class="ot">=</span><span class="st"> yellow</span></a>
-<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="dt">custom.date </span><span class="ot">=</span><span class="st"> green</span></a>
-<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="dt">custom.author </span><span class="ot">=</span><span class="st"> blue bold</span></a></code></pre></div>
-<p>With the hg alias: <code>alias hl=&quot;hg log --style ~/.hgrc.d/fancy.style&quot;</code>. (Or do this from your shell, whatever).</p>
+<pre class="ini"><code>[color]
+custom.rev = red
+custom.decorate = yellow
+custom.date = green
+custom.author = blue bold</code></pre>
+<p>With the hg alias: <code>alias hl="hg log --style ~/.hgrc.d/fancy.style"</code>. (Or do
+this from your shell, whatever).</p>
 <p>And, finally, <code>~/.hgrc.d/fancy.style</code> is:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode ini"><code class="sourceCode ini"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="dt">changeset </span><span class="ot">=</span><span class="st"> &quot;* {label('custom.rev', node|short)} - ({label('custom.decorate', branch)}) {desc|strip|firstline} ({label('custom.date', date|age)}) &lt;{label('custom.author' , author)}&gt;\n&quot;</span></a></code></pre></div>
+<pre class="ini"><code>changeset = &quot;* {label('custom.rev', node|short)} - ({label('custom.decorate', branch)}) {desc|strip|firstline} ({label('custom.date', date|age)}) &lt;{label('custom.author' , author)}&gt;\n&quot;</code></pre>
 <p>Screenshot:<br />
 <img src="http://i.imgur.com/OWImYAS.png" /></p>
 <p>(The repo is old, because I don’t use HG so much, okay?).</p>
@@ -199,6 +210,19 @@ So, note that when building the template, this is the stuff to put within the <c
 <br style="clear: both;" />
 
 <hr />
+
+<!-- Load highlight.js for Syntax Highlighting. -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/bash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/c.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/gherkin.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/haskell.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/lisp.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/nix.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js"></script>
+<script>hljs.highlightAll();</script>
 
             </div>
 

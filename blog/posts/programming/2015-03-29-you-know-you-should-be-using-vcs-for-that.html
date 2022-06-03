@@ -53,6 +53,7 @@
             TOCify
         -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js"></script>
+
         <!--
             Patched TOCify css file.
             (Don't want fixed `.tocify`).
@@ -135,26 +136,62 @@
         by Richard Goulter
     <br />
     
-    Tags: <a href="../../tags/programming.git.html">programming.git</a>, <a href="../../tags/programming.vim.html">programming.vim</a>, <a href="../../tags/programming.fugitive.html">programming.fugitive</a>
+    Tags: <a title="All pages tagged 'programming.git'." href="../../tags/programming.git.html">programming.git</a>, <a title="All pages tagged 'programming.vim'." href="../../tags/programming.vim.html">programming.vim</a>, <a title="All pages tagged 'programming.fugitive'." href="../../tags/programming.fugitive.html">programming.fugitive</a>
     
 </div>
 
-<p>It’s kindof cute that all programmers, if they’ve worked on any project for a long enough time before learning about VCS, surely all take the same approach to novice “version control”. e.g. Keeping folders/copies as snapshots of how the code looked at that time. – We weren’t all born knowing how to use VCS. (Though, maybe those who didn’t bother to play around with programming a lot outside of class never faced this).</p>
-<p>I’d be astounded if anyone with even only a basic grasp of VCS kept to doing things this way. VCS is obviously that much better at keeping versions.</p>
-<p>But, uh. One thing which is still not uncommon to see is, as an answer to the anxiety of “not sure if <em>this function</em> is something I’m going to need later (even though I don’t need it now). I’d better just comment it out.”.<br />
-It’s really quick and easy to use a decent text editor to comment/uncomment out a chunk of code. (Even the kids who don’t learn vim/emacs can do this in the text editors of IDEs).<br />
-This strikes me as a ‘dirty’ solution; it sounds like you’d want some <em>version</em> of the function handy. – And surely with VCS available, there shouldn’t be any doubt as to being able to get a copy of this function back if you delete it.</p>
-<p>I’m not sure I’ve met anyone who can do this well. I don’t think that’s necessarily a reflection on skill in VCS (it’s not as if anyone <strong>really</strong> needs to do somersaults in VCS all the time. … It’s probably not very good if you do have to), but perhaps this is a “common enough” thing which VCS doesn’t make accessible?<br />
-Rephrasing so as to be more precise/specific: if there’s some hunk of text (e.g. a function which we’d otherwise comment out) is removed in a commit, which isn’t necessarily the only modification in a commit, how to ‘recover’ this hunk of text into the current working copy of the file? (Bonus points if the function we want to recover isn’t the only modified hunk in the commit).</p>
-<p>Common enough answer of ‘how to do this’ is to look at the commit, copy-paste the hunk, and maybe remove the +‘s/-’s (the first column of the modified lines in the commit difference).<br />
-This also feels ’dirty’, and a bit wasteful. Especially if there’re many lines in the hunk. (Vim’s visual mode would mitigate this, sortof, but still).</p>
-<p>Checking out a commit/file, and copying the function directly, also feels … tedious.<br />
-I was surprised to learn Vim/Fugitive makes this not insanely brutal to pull off, though: the command <code>Glog</code> on a file in VCS will put the history of the file in a location list, so the different versions of a file can be easily traversed.<br />
-Though, again, it may be tedious to find which function you want to copy. (In principle, anyway, if not in practice!).</p>
+<p>It’s kindof cute that all programmers, if they’ve worked on any project for a
+long enough time before learning about VCS, surely all take the same approach
+to novice “version control”. e.g. Keeping folders/copies as snapshots of how
+the code looked at that time. – We weren’t all born knowing how to use VCS.
+(Though, maybe those who didn’t bother to play around with programming a lot
+outside of class never faced this).</p>
+<p>I’d be astounded if anyone with even only a basic grasp of VCS kept to doing
+things this way. VCS is obviously that much better at keeping versions.</p>
+<p>But, uh. One thing which is still not uncommon to see is, as an answer to the
+anxiety of “not sure if <em>this function</em> is something I’m going to need later
+(even though I don’t need it now). I’d better just comment it out.”.<br />
+It’s really quick and easy to use a decent text editor to comment/uncomment out
+a chunk of code. (Even the kids who don’t learn vim/emacs can do this in the
+text editors of IDEs).<br />
+This strikes me as a ‘dirty’ solution; it sounds like you’d want some <em>version</em>
+of the function handy. – And surely with VCS available, there shouldn’t be any
+doubt as to being able to get a copy of this function back if you delete it.</p>
+<p>I’m not sure I’ve met anyone who can do this well. I don’t think that’s
+necessarily a reflection on skill in VCS (it’s not as if anyone <strong>really</strong>
+needs to do somersaults in VCS all the time. … It’s probably not very good if
+you do have to), but perhaps this is a “common enough” thing which VCS doesn’t
+make accessible?<br />
+Rephrasing so as to be more precise/specific: if there’s some hunk of text
+(e.g. a function which we’d otherwise comment out) is removed in a commit,
+which isn’t necessarily the only modification in a commit, how to ‘recover’
+this hunk of text into the current working copy of the file? (Bonus points if
+the function we want to recover isn’t the only modified hunk in the commit).</p>
+<p>Common enough answer of ‘how to do this’ is to look at the commit, copy-paste
+the hunk, and maybe remove the +‘s/-’s (the first column of the modified lines
+in the commit difference).<br />
+This also feels ’dirty’, and a bit wasteful. Especially if there’re many lines
+in the hunk. (Vim’s visual mode would mitigate this, sortof, but still).</p>
+<p>Checking out a commit/file, and copying the function directly, also feels …
+tedious.<br />
+I was surprised to learn Vim/Fugitive makes this not insanely brutal to pull
+off, though: the command <code>Glog</code> on a file in VCS will put the history of the
+file in a location list, so the different versions of a file can be easily
+traversed.<br />
+Though, again, it may be tedious to find which function you want to copy. (In
+principle, anyway, if not in practice!).</p>
 <p>I <em>think</em> what I’m after is closer to the following:<br />
-<code>git diff R R^ &gt; foo.diff</code> outputs a (“reverse”) of the commit. You can then either edit this <code>foo.diff</code> file, deleting the hunks you don’t want (tedious!, except for the pertinent hunk), which we can then <code>git apply foo.diff</code>. (Assuming the hunk is still relevant!).<br />
-Alternatively, just applying the diff (without editing it), one could then <code>git checkout --patch -- .</code> (assuming the repo was otherwise in a clean state before applying the diff..).<br />
-This is tedious, still, but it’s plausible that a script could perform this (“recover some hunk(s) from a commit [which removed them]”), with that assumption that a hunk could be applied to the working copy. (As far as I understand, if a file has changed so much that Git/VCS can’t figure out how to apply the diff, then this can’t work either).</p>
+<code>git diff R R^ &gt; foo.diff</code> outputs a (“reverse”) of the commit. You can then
+either edit this <code>foo.diff</code> file, deleting the hunks you don’t want (tedious!,
+except for the pertinent hunk), which we can then <code>git apply foo.diff</code>.
+(Assuming the hunk is still relevant!).<br />
+Alternatively, just applying the diff (without editing it), one could then <code>git checkout --patch -- .</code> (assuming the repo was otherwise in a clean state before
+applying the diff..).<br />
+This is tedious, still, but it’s plausible that a script could perform this
+(“recover some hunk(s) from a commit [which removed them]”), with that
+assumption that a hunk could be applied to the working copy. (As far as I
+understand, if a file has changed so much that Git/VCS can’t figure out how to
+apply the diff, then this can’t work either).</p>
 <p>None of this seems a “great” solution to the problem, though.</p>
 
 <hr />
@@ -170,6 +207,19 @@ This is tedious, still, but it’s plausible that a script could perform this (�
 <br style="clear: both;" />
 
 <hr />
+
+<!-- Load highlight.js for Syntax Highlighting. -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/bash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/c.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/gherkin.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/haskell.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/lisp.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/nix.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js"></script>
+<script>hljs.highlightAll();</script>
 
             </div>
 

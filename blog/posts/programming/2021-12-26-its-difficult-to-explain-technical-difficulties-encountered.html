@@ -53,6 +53,7 @@
             TOCify
         -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js"></script>
+
         <!--
             Patched TOCify css file.
             (Don't want fixed `.tocify`).
@@ -139,34 +140,80 @@
     
 </div>
 
-<p>If you’re using a computer, and something doesn’t work, sometimes the best you can come up with when asking for help is: “it doesn’t work”.</p>
-<p>Maybe you can be a bit more specific and say “I’ve plugged in my headphones, and they don’t work”.</p>
-<p>But no one is ever going to say “I’ve got a headset, and I plugged the cable with the microphone icon into the jack with the headphone icon, and vice versa, and I can’t hear audio playing through the headset”.</p>
-<p>Once you understand what’s going on enough to know what facts are significant, you probably know enough to find help on your own.<br />
-But if you don’t understand, then asking for help in a useful way is kindof difficult.</p>
-<p>(From the asker’s side, this just means you can’t find the solution to your problem. But for troubleshooting sites like Reddit forums or StackOverflow, it means most of the questions posted are of low quality).</p>
+<p>If you’re using a computer, and something doesn’t work,
+sometimes the best you can come up with when asking for help is:
+“it doesn’t work”.</p>
+<p>Maybe you can be a bit more specific and say “I’ve plugged in my headphones,
+and they don’t work”.</p>
+<p>But no one is ever going to say “I’ve got a headset, and I plugged the cable
+with the microphone icon into the jack with the headphone icon, and vice versa,
+and I can’t hear audio playing through the headset”.</p>
+<p>Once you understand what’s going on enough to know what facts are significant,
+you probably know enough to find help on your own.<br />
+But if you don’t understand, then asking for help in a useful way is kindof
+difficult.</p>
+<p>(From the asker’s side, this just means you can’t find the solution to your
+problem. But for troubleshooting sites like Reddit forums or StackOverflow,
+it means most of the questions posted are of low quality).</p>
 <hr />
 <p>NixOS can be difficult to use.<br />
 I’d say it’s 95% wonderful, 5% pain in the arse to use.<br />
-The “gotta know what you’re doing” aspect both leads to and exasperates that painful part.</p>
+The “gotta know what you’re doing” aspect both leads to and exasperates that
+painful part.</p>
 <p>Well, Linux in general can be a pain to use.<br />
-Though, there’s an old half-joke that a lot of programming work involves a loop of writing code, compiling, copying the error message into Google and copy-pasting the answer from StackOverflow.<br />
-– If you run into a problem trying to do something on Linux, you’ll probably be able to find some StackOverflow answer which can help you out. You can often get away with not really understanding what’s going on. (Or, rather, “deferring understanding to a later date”).</p>
-<p>With NixOS, there are some factors such that copy-paste-from-StackOverflow doesn’t help out:</p>
+Though, there’s an old half-joke that a lot of programming work
+involves a loop of writing code, compiling, copying the error message into
+Google and copy-pasting the answer from StackOverflow.<br />
+– If you run into a problem trying to do something on Linux, you’ll probably
+be able to find some StackOverflow answer which can help you out. You can often
+get away with not really understanding what’s going on. (Or, rather, “deferring
+understanding to a later date”).</p>
+<p>With NixOS, there are some factors such that copy-paste-from-StackOverflow
+doesn’t help out:</p>
 <ul>
-<li><p>Nix/NixOS’s community is relatively small. So you’re less likely to find someone who’s tried the same thing as you’re trying to do (&amp; asked about it) compared to some other Linux distribution.</p></li>
-<li><p>NixOS is weird. Comparing, say, Ubuntu to Arch to CentOS.. they have different ways of installing packages, and will put configuration files in different places, but more/less if you see how to fix something in one distribution, you’ll be able to apply that to another distribution. – This isn’t necessarily the case with NixOS.</p></li>
-<li><p>Sometimes the problem you run into will be a Linux problem, that you would run into with any Linux distribution. (e.g. setting up Bluetooth). Or it might be because the program is trying to do things which doesn’t work with how Nix arranges its packages. – But you have to understand what’s going on in order to be able to even distinguish.</p></li>
+<li><p>Nix/NixOS’s community is relatively small. So you’re less likely to find
+someone who’s tried the same thing as you’re trying to do (&amp; asked about it)
+compared to some other Linux distribution.</p></li>
+<li><p>NixOS is weird. Comparing, say, Ubuntu to Arch to CentOS.. they have
+different ways of installing packages, and will put configuration files in
+different places, but more/less if you see how to fix something in one distribution,
+you’ll be able to apply that to another distribution. – This isn’t necessarily
+the case with NixOS.</p></li>
+<li><p>Sometimes the problem you run into will be a Linux problem, that you would run
+into with any Linux distribution. (e.g. setting up Bluetooth). Or it might be
+because the program is trying to do things which doesn’t work with how Nix
+arranges its packages. – But you have to understand what’s going on in order
+to be able to even distinguish.</p></li>
 </ul>
-<p>One example I find notorious is the <a href="https://github.com/NixOS/nix/issues/2259">“hello world” in the manual doesn’t build</a>. Rather, I’d expect to be able to take that example, put it in a file named “hello.nix”, and run <code>nix-build hello.nix</code>; but that won’t work. A <a href="https://stackoverflow.com/questions/44088192/when-and-how-should-default-nix-shell-nix-and-release-nix-be-used">StackOverflow answer</a> discusses that the example is a “callPackage derivation”. (And so since it’s supposed to be invoked with <code>callPackage &lt;callPackage derivation&gt; { }</code>, and <code>callPackage</code> comes from nixpkgs, the full command invocation is like <code>nix-build -E '(import &lt;nixpkgs&gt; { }).callPackage ./path/to/default.nix { }'</code>..). – Whereas, usually “Hello World” is a program I’d expect to be able to compile and run without having to understand much about what’s going on.<br />
+<p>One example I find notorious is the <a href="https://github.com/NixOS/nix/issues/2259">“hello world” in the manual doesn’t
+build</a>. Rather, I’d expect to
+be able to take that example, put it in a file named “hello.nix”, and run
+<code>nix-build hello.nix</code>; but that won’t work. A <a href="https://stackoverflow.com/questions/44088192/when-and-how-should-default-nix-shell-nix-and-release-nix-be-used">StackOverflow
+answer</a> discusses that the example is a “callPackage derivation”.
+(And so since it’s supposed to be invoked with <code>callPackage &lt;callPackage derivation&gt; { }</code>, and <code>callPackage</code> comes from nixpkgs, the full command
+invocation is like <code>nix-build -E '(import &lt;nixpkgs&gt; { }).callPackage ./path/to/default.nix { }'</code>..).
+– Whereas, usually “Hello World” is a program I’d expect to be able to compile
+and run without having to understand much about what’s going on.<br />
 – However, it’s imprecise to say “the example is incorrect”.</p>
 <p>I say all this having just run into some technical trouble.<br />
-I was trying to use KiBot to automatically save 3D previews of a circuitboard designed with Kicad. I could achieve this by running the given Docker image. When I tried running the same program on NixOS, <em>it didn’t work</em>.<br />
-Or rather, after some troubleshooting, I found out Kicad wasn’t able to render OpenGL stuff in the Xvfb that was being run; I was able to work-around this by wrapping the Kicad command with virtualgl. – I can’t say I fully understand the issue, or the solution; but it works. Although I feel with NixOS, I had to understand more than if I was using a different Linux distribution.</p>
+I was trying to use KiBot to automatically save 3D previews of a circuitboard
+designed with Kicad. I could achieve this by running the given Docker image.
+When I tried running the same program on NixOS, <em>it didn’t work</em>.<br />
+Or rather, after some troubleshooting, I found out Kicad wasn’t able to render
+OpenGL stuff in the Xvfb that was being run; I was able to work-around this by
+wrapping the Kicad command with virtualgl. – I can’t say I fully understand
+the issue, or the solution; but it works. Although I feel with NixOS, I had to
+understand more than if I was using a different Linux distribution.</p>
 <p>NixOS can be difficult to use.<br />
-I think that’s worth emphasising (with the above in mind) as moderation to a couple of opinions about NixOS I see.<br />
-Some new users walk the 95%-wonderful happy path of NixOS and proclaim that NixOS is really easy to use. (Which <em>way</em> undercounts the pain running into the 5% pain-in-the-arse parts of NixOS).<br />
-Some users tried NixOS but found it too difficult. – While I think this is fair, and I won’t argue that NixOS is practical enough to be worth the effort, what I’d emphasise instead is that NixOS may require understanding a lot more about what’s going on than other distributions would.</p>
+I think that’s worth emphasising (with the above in mind) as moderation to a
+couple of opinions about NixOS I see.<br />
+Some new users walk the 95%-wonderful happy path of NixOS and proclaim that
+NixOS is really easy to use. (Which <em>way</em> undercounts the pain running
+into the 5% pain-in-the-arse parts of NixOS).<br />
+Some users tried NixOS but found it too difficult. – While I think this is fair,
+and I won’t argue that NixOS is practical enough to be worth the effort, what I’d
+emphasise instead is that NixOS may require understanding a lot more about what’s
+going on than other distributions would.</p>
 
 <hr />
 
@@ -181,6 +228,19 @@ Some users tried NixOS but found it too difficult. – While I think this is fai
 <br style="clear: both;" />
 
 <hr />
+
+<!-- Load highlight.js for Syntax Highlighting. -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/bash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/c.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/gherkin.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/haskell.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/lisp.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/nix.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js"></script>
+<script>hljs.highlightAll();</script>
 
             </div>
 

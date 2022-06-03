@@ -53,6 +53,7 @@
             TOCify
         -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js"></script>
+
         <!--
             Patched TOCify css file.
             (Don't want fixed `.tocify`).
@@ -139,108 +140,253 @@
     
 </div>
 
-<p>“What are the costs?” ought to be a natural question provided alongside “what are the benefits?”. This doesn’t get asked often enough in the discussions of new tools/technologies.<br />
-The costs/benefits implicitly impact discussions since the trade-offs will be different in different situations.<br />
+<p>“What are the costs?” ought to be a natural question provided
+alongside “what are the benefits?”. This doesn’t get asked often enough
+in the discussions of new tools/technologies.<br />
+The costs/benefits implicitly impact discussions since the trade-offs
+will be different in different situations.<br />
 As a developer, I ought to have this in mind when consuming discussions.</p>
 <p>To get better as a developer, I ought to increase my experience and skills:<br />
 Experience is what I gain from recovering from mistakes.<br />
 Skills I have are what I get from learning.<br />
-So, online discussions about new tools/technolgies are relevant because they ask: “what skills should programmers have?”, and this is implicitly subject to “how much time/effort should be spent learning?”.</p>
+So, online discussions about new tools/technolgies are relevant because
+they ask: “what skills should programmers have?”,
+and this is implicitly subject to
+“how much time/effort should be spent learning?”.</p>
 <h3 id="costs-and-benefits">Costs and Benefits</h3>
 <p>The universal answer to questions in computing is “it depends”.</p>
 <p>Different groups/contexts consider costs and benefits differently.</p>
-<p>There are innumerably many factors which can be better or worse between different tools. e.g. speed of development, ease of maintenance, ease of writing, ease of reading, ease of learning, similarity to other tools, compilation/runtime speeds, verbosity, implicit vs explicit, etc.<br />
+<p>There are innumerably many factors which can be better or worse
+between different tools. e.g. speed of development, ease of
+maintenance, ease of writing, ease
+of reading, ease of learning, similarity to other tools,
+compilation/runtime speeds, verbosity, implicit vs explicit, etc.<br />
 – These will have different levels if importance to different people.</p>
-<p>e.g. Steve Yegge’s <a href="https://steve-yegge.blogspot.com/2008/02/portrait-of-n00b.html">Portrait of a n00b</a> discusses that “experts” prefer code to be terse, whereas “n00bs” prefer lots of supporting information around the code itself.<br />
-For the n00bs, code has a high cost to read, and so this cost is lowered with comments, metadata, and having less code on the screen. For experts, dense code has a higher signal-to-noise ratio.<br />
-In its takeaways, the article suggests that paying the cost of metadata doesn’t necessarily give any benefit; but that e.g. surely the benefit of documentation for public-facing APIs is always worth paying for.<br />
-– In <a href="http://archive.is/RalDb">this archive.is snapshot of a Google+ post</a>, Yegge further builds on this idea, with different preferences for ‘liberal’ vs ‘conservative’ programmers. The split is seen as different levels of comfort with the risk of breaking code in production. (“just fix it” vs “high level of confidence in correctness”).</p>
+<p>e.g. Steve Yegge’s <a href="https://steve-yegge.blogspot.com/2008/02/portrait-of-n00b.html">Portrait of a
+n00b</a>
+discusses that “experts” prefer code to be terse, whereas
+“n00bs” prefer lots of supporting information around the code itself.<br />
+For the n00bs, code has a high cost to read, and so this cost is lowered
+with comments, metadata, and having less code on the screen. For experts,
+dense code has a higher signal-to-noise ratio.<br />
+In its takeaways, the article suggests that paying the cost of metadata
+doesn’t necessarily give any benefit; but that e.g. surely the benefit of
+documentation for public-facing APIs is always worth paying for.<br />
+– In <a href="http://archive.is/RalDb">this archive.is snapshot of a Google+ post</a>,
+Yegge further builds on this idea, with different preferences for ‘liberal’
+vs ‘conservative’ programmers. The split is seen as different levels of comfort
+with the risk of breaking code in production. (“just fix it” vs
+“high level of confidence in correctness”).</p>
 <h5 id="why-learn-and-what-to-learn">Why Learn and What to Learn</h5>
-<p>This would be irrelavent if you just stuck with the tools/skills you’ve got and never bother to learn anything new.</p>
-<p>The main external reasons to need to learn things are because you need to for school, or because the tools are used where you work.<br />
-<em>Maybe</em> you’ll want to study more in the hopes of being more efficient in those roles.</p>
-<p>As far as I can tell, though, the main reason to learn outside of that is ‘for fun’.<br />
+<p>This would be irrelavent if you just stuck with the tools/skills you’ve
+got and never bother to learn anything new.</p>
+<p>The main external reasons to need to learn things are because you need to
+for school, or because the tools are used where you work.<br />
+<em>Maybe</em> you’ll want to study more in the hopes of being more efficient
+in those roles.</p>
+<p>As far as I can tell, though, the main reason to learn outside of that
+is ‘for fun’.<br />
 Geeks argue about all this shit because it’s interesting to.</p>
-<p>If you’re not learning some skill because you explicitly have to, or not just because you’re naturally interested in it, then at-best you’re making a bet on getting a higher reward (at some point in the future) than the cost you’re paying to learn.</p>
+<p>If you’re not learning some skill because you explicitly have to,
+or not just because you’re naturally interested in it,
+then at-best you’re making a bet on getting a higher reward
+(at some point in the future) than the cost you’re paying to learn.</p>
 <p>Though, maybe even then there can be some benefit to that.<br />
-e.g. <a href="http://www.paulgraham.com/pypar.html">Python Paradox</a> suggests that it’s lower-risk to try and hire developers who use “comparatively esoteric” programming languages like Python. (This was written in 2004), since the only people who would bother to learn Python are people who find it interesting. (Since you’re not going to get a job writing in Python).</p>
-<p>This is also another way of describing <a href="https://mcfunley.com/choose-boring-technology">‘Choose Boring Technology’</a>. (It’s less risky to choose technology with known costs; as a rule of thumb, only use a few ‘new technologies’). The perjoratives “Hype-Driven Development” and “Resume Driven Development” also try and push back against choosing technologies for the benefit without understanding the cost.</p>
+e.g. <a href="http://www.paulgraham.com/pypar.html">Python Paradox</a> suggests that
+it’s lower-risk to try and hire developers who use “comparatively esoteric”
+programming languages like Python. (This was written in 2004), since the only
+people who would bother to learn Python are people who find it interesting.
+(Since you’re not going to get a job writing in Python).</p>
+<p>This is also another way of describing <a href="https://mcfunley.com/choose-boring-technology">‘Choose Boring
+Technology’</a>.
+(It’s less risky to choose technology with known costs; as a rule of thumb,
+only use a few ‘new technologies’). The perjoratives “Hype-Driven Development”
+and “Resume Driven Development” also try and push back against choosing
+technologies for the benefit without understanding the cost.</p>
 <h3 id="forever-learning-and-forever-forgetting">Forever Learning and Forever Forgetting</h3>
-<p>Developers tend to take a ‘just in time’ approach to learning for work; taking advantage of ‘monkey-see monkey-do’.<br />
-This somewhat changes the interpretation of “forever learning” from “there’s always more to learn, so I’ll be forever learning” to “I’m always working with different software development tools, so I’ll be forever learning”.</p>
+<p>Developers tend to take a ‘just in time’ approach to learning for work;
+taking advantage of ‘monkey-see monkey-do’.<br />
+This somewhat changes the interpretation of “forever learning” from
+“there’s always more to learn, so I’ll be forever learning” to
+“I’m always working with different software development tools,
+so I’ll be forever learning”.</p>
 <p>Either interpretation of “forever learning” would be fine,<br />
 but I’m not sure there’s much adjustment for “forever forgetting”:<br />
-In The Atlantic’s <a href="https://www.theatlantic.com/science/archive/2018/01/what-was-this-article-about-again/551603/">Why We Forget Most of the Books We Read</a>, the author mentions a <a href="https://en.wikipedia.org/wiki/Forgetting_curve">“forgetting curve”</a>. The article discusses that tools like the internet provide an ‘external memory’, allow us to get information without having to remember it ourselves. The result is that ‘recall memory’ (“ability to spontaneously call information up in your mind”) is less important than ‘recognition memory’ (remembering where the information is, and how to access it).</p>
+In The Atlantic’s <a href="https://www.theatlantic.com/science/archive/2018/01/what-was-this-article-about-again/551603/">Why We Forget Most of the Books We
+Read</a>,
+the author mentions a <a href="https://en.wikipedia.org/wiki/Forgetting_curve">“forgetting
+curve”</a>.
+The article discusses that tools like the internet provide an ‘external memory’,
+allow us to get information without having to remember it ourselves.
+The result is that ‘recall memory’ (“ability to spontaneously call
+information up in your mind”) is less important than ‘recognition memory’
+(remembering where the information is, and how to access it).</p>
 <p>This feels like a pretty good model to me.</p>
-<p>Maybe this means incremental reading isn’t such a bad idea. (Though it’s certainly not a <em>common</em> idea).</p>
+<p>Maybe this means incremental reading isn’t such a bad idea.
+(Though it’s certainly not a <em>common</em> idea).</p>
 <h5 id="boost-recall-with-spaced-repetition">Boost Recall with Spaced Repetition</h5>
-<p>Programmers are familiar the idea of external memory. Search engines lead us to StackOverflow, or GitHub issues.<br />
-Often documentation is pretty good, and editors with LSP support can even show this as you type out the code.<br />
+<p>Programmers are familiar the idea of external memory.
+Search engines lead us to StackOverflow, or GitHub issues.<br />
+Often documentation is pretty good, and editors with LSP support
+can even show this as you type out the code.<br />
 Things like compiler errors, editor discoverability, and auto-complete help too.</p>
 <p>Recall memory seems a bit more dull.<br />
-For the tools/languages which I’m familiar with, there’ll be a lot which I don’t need to lookup. e.g. I can remember how to output text to STDOUT, how to import a package, how to define a function.</p>
-<p>I think recall-misses where I need to stop to look things up don’t necessarily interrupt a state of flow.<br />
-I think “having to look up documentation for stuff unrelated to the problem domain” is less of a problem than not being able to type. I think effective use of a text editor (like with vi or emacs or kakoune keybindings) is more important than either.<br />
-– But, still: Surely it’d be great if I could recall things without spending time time to use a search engine to look for an answer.</p>
-<p>To improve recall retention, what you want to recall would either need to be something you frequently use, or something you study.</p>
+For the tools/languages which I’m familiar with, there’ll be a lot
+which I don’t need to lookup. e.g. I can remember how to output text to STDOUT,
+how to import a package, how to define a function.</p>
+<p>I think recall-misses where I need to stop to look things up don’t necessarily
+interrupt a state of flow.<br />
+I think “having to look up documentation for stuff unrelated to the
+problem domain” is less of a problem than not being able to type. I think
+effective use of a text editor (like with vi or emacs or kakoune keybindings)
+is more important than either.<br />
+– But, still: Surely it’d be great if I could recall things without spending
+time time to use a search engine to look for an answer.</p>
+<p>To improve recall retention, what you want to recall would either need to be
+something you frequently use, or something you study.</p>
 <p>Anki is ‘Spaced Repetition Software’ (SRS).<br />
-It’s a flashcard program, but the intervals between when it tests you on a flashcard increase for each correct recall of that card.<br />
-– Most of its users (as far as I can tell) use it for vocabulary studies, or for medical studies. As <a href="https://en.wikipedia.org/wiki/Spaced_repetition">Wikipedia’s page on Spaced Repetition</a> puts it: “spaced repetition is commonly applied in contexts in which a learner must acquire many items and retain them indefinitely in memory”.</p>
-<p>This post <a href="http://augmentingcognition.com/ltm.html">“Augmenting Long Term Memory”</a> discusses use of Anki. e.g. to assist in digesting technical papers. (e.g. start with being able to recall surface level facts, then incrementally aim to recall facts which build upon those).<br />
-The article also points out some drawbacks. It’s difficult to use Anki to improve recall for things you don’t actually care about. Adding flashcards isn’t (and probably shouldn’t be) low-effort. The article’s rule of thumb is it takes about 7 minutes of study per card per 20 years for a good flashcard (if each review of the card is 8 seconds).<br />
-– The article also generally suggests against using Anki to remember APIs in the hope that this would one day be useful. It’s better to first know an API before trying to Ankify things about it. But it’s also a bad idea to keep Anki flashcards that you don’t care about around, e.g. if you aren’t likely to use the API again.</p>
-<p>For myself, I’ve used Anki for a year and a half. Studied ~80% of those days. Added around 3900 cards. The vast majority of these cards are for vocabulary.<br />
-– I do feel Anki does have a great benefit for the cost put into it. But it’s a bit more effort than “recall for free”.</p>
+It’s a flashcard program, but the intervals between when it tests you
+on a flashcard increase for each correct recall of that card.<br />
+– Most of its users (as far as I can tell) use it for vocabulary studies,
+or for medical studies. As <a href="https://en.wikipedia.org/wiki/Spaced_repetition">Wikipedia’s page on Spaced
+Repetition</a> puts it:
+“spaced repetition is commonly applied in contexts in which a learner
+must acquire many items and retain them indefinitely in memory”.</p>
+<p>This post <a href="http://augmentingcognition.com/ltm.html">“Augmenting Long Term
+Memory”</a> discusses use of Anki.
+e.g. to assist in digesting technical papers. (e.g. start with being able to
+recall surface level facts, then incrementally aim to recall facts which
+build upon those).<br />
+The article also points out some drawbacks. It’s difficult to use Anki
+to improve recall for things you don’t actually care about. Adding
+flashcards isn’t (and probably shouldn’t be) low-effort. The article’s
+rule of thumb is it takes about 7 minutes of study per card per 20
+years for a good flashcard (if each review of the card is 8 seconds).<br />
+– The article also generally suggests against using Anki to remember APIs
+in the hope that this would one day be useful. It’s better to first
+know an API before trying to Ankify things about it. But it’s also a bad
+idea to keep Anki flashcards that you don’t care about around, e.g. if you
+aren’t likely to use the API again.</p>
+<p>For myself, I’ve used Anki for a year and a half. Studied ~80% of those days.
+Added around 3900 cards. The vast majority of these cards are for vocabulary.<br />
+– I do feel Anki does have a great benefit for the cost put into it.
+But it’s a bit more effort than “recall for free”.</p>
 <h5 id="personal-knowledge-base">Personal Knowledge Base</h5>
-<p>I’m beginning to like the idea of using a zettelkasten approach to storing reference.<br />
-This seems a more suitable approach between “ankify everything” and “go to the effort of recalling exactly what you came across”.</p>
-<p>The important part of zettelkasten notes, as I understand it, is that each note in the system is small, the note hyperlinks to other notes, and the use of tagging helps with random lookup/search of the notes.</p>
-<p>In particular, there’s not necessarily a hierarchical structure to the notes. The benefit of this is you don’t have to try to remember where a note was put.</p>
+<p>I’m beginning to like the idea of using a zettelkasten approach
+to storing reference.<br />
+This seems a more suitable approach between “ankify everything” and
+“go to the effort of recalling exactly what you came across”.</p>
+<p>The important part of zettelkasten notes, as I understand it,
+is that each note in the system is small, the note hyperlinks
+to other notes, and the use of tagging helps with random
+lookup/search of the notes.</p>
+<p>In particular, there’s not necessarily a hierarchical structure
+to the notes. The benefit of this is you don’t have to try to
+remember where a note was put.</p>
 <h3 id="examples">Examples</h3>
 <p>Some examples in my mind make a bit more sense with “cost vs benefit”.</p>
 <ul>
-<li><p>I’m hopeful for elm-lang. It strikes me as (relatively) low-cost to learn to use, and I think this cost is far outweighed by the benefits gained.</p></li>
-<li><p>I’m pessimistic about the value of Rust for general purpose software development. In constrast to elm-lang (where elm-lang’s syntax was weird, but the logic was easy to follow): Rust’s syntax is kinda sorta weird, writing something you’ve not done before in Rust can be hard even with some familiarity with the language, and Rust’s USP isn’t a big win in common cases.<br />
-Using Rust is surely high-reward in some use cases; but I’m not sure it ever becomes low-cost in most cases.</p></li>
-<li>I was fascinated by <a href="https://twitter.com/Jonathan_Blow/status/781597528047230976">the argument in favour of the array-processing programming language K</a> and <a href="https://news.ycombinator.com/item?id=22504106">the HN discussion</a>.
+<li><p>I’m hopeful for elm-lang.
+It strikes me as (relatively) low-cost to learn to use,
+and I think this cost is far outweighed by the benefits gained.</p></li>
+<li><p>I’m pessimistic about the value of Rust for general purpose
+software development. In constrast to elm-lang (where elm-lang’s syntax
+was weird, but the logic was easy to follow): Rust’s syntax is
+kinda sorta weird, writing something you’ve not done before in Rust
+can be hard even with some familiarity with the language,
+and Rust’s USP isn’t a big win in common cases.<br />
+Using Rust is surely high-reward in some use cases; but I’m not sure it
+ever becomes low-cost in most cases.</p></li>
+<li><p>I was fascinated by <a href="https://twitter.com/Jonathan_Blow/status/781597528047230976">the argument in favour of the array-processing
+programming language
+K</a> and
+<a href="https://news.ycombinator.com/item?id=22504106">the HN discussion</a>.</p>
 <ul>
-<li>What strikes me the most as “using a concise sequence of operators” is to using “FP-ish methods like sum” as those are to “explicit for loop”.
+<li>What strikes me the most as “using a concise sequence of operators”
+is to using “FP-ish methods like sum” as those are to “explicit for loop”.
 <ul>
-<li>The best I can make of it is: you’d have to go and learn what each of the symbols does. There aren’t <em>that</em> many and there’s a big benefit to learning them. And without experience(?) you should’t have the expectation to be able to quickly read K programs.</li>
-<li>Which is enough to convince me that the idea of a language like that isn’t completely crazy.</li>
-<li>But also that: I don’t think using “FP-ish methods” isn’t too far from developers are used to, or able to read. Whereas seeing <code>q::n 9'a</code> doesn’t really bring <a href="https://kparc.com/edit.k">“syntax coloring”</a> to mind.<br />
-(So I could believe taking the time to learn K would be worthwhile, I don’t think anyone should be surprised that not everyone sees the benefits when the costs are so apparent).</li>
+<li>The best I can make of it is: you’d have to go and learn what each of
+the symbols does. There aren’t <em>that</em> many and there’s a big benefit to
+learning them. And without experience(?) you should’t have the
+expectation to be able to quickly read K programs.</li>
+<li>Which is enough to convince me that the idea of a language like that
+isn’t completely crazy.</li>
+<li>But also that: I don’t think using “FP-ish methods” isn’t too far from
+developers are used to, or able to read.
+Whereas seeing <code>q::n 9'a</code> doesn’t really bring <a href="https://kparc.com/edit.k">“syntax
+coloring”</a> to mind.<br />
+(So I could believe taking the time to learn K would be worthwhile,
+I don’t think anyone should be surprised that not everyone
+sees the benefits when the costs are so apparent).</li>
 </ul></li>
-<li>I also found the post’s response to the idea of readability interesting. A symbol operator isn’t necessarily harder to read than a full word. With the word you might think you can guess what it means, but you might be wrong. An operator is going to be precise.
+<li>I also found the post’s response to the idea of readability interesting.
+A symbol operator isn’t necessarily harder to read than a full word.
+With the word you might think you can guess what it means,
+but you might be wrong. An operator is going to be precise.
 <ul>
-<li>There are languages which I’m more familiar with which somewhat take this approach.<br />
-e.g. Scala’s <a href="https://www.scala-lang.org/api/current/scala/collection/immutable/List.html">List</a> keeps <code>+:</code> (for ‘prepend’) and <code>:+</code> (guess what for?), but deprecates <code>/:</code> and <code>:\</code>.<br />
-e.g. Haskell has a few (e.g. see <a href="https://hackage.haskell.org/package/base-4.12.0.0/docs/doc-index-All.html">the start and end of base’s index</a>).</li>
-<li>Overall, I don’t think it’s absolute that terms are ambiguous or that using only operators would give a more accurate understanding of the program ‘for free’.</li>
+<li>There are languages which I’m more familiar with which somewhat
+take this approach.<br />
+e.g. Scala’s
+<a href="https://www.scala-lang.org/api/current/scala/collection/immutable/List.html">List</a>
+keeps <code>+:</code> (for ‘prepend’) and <code>:+</code> (guess what for?),
+but deprecates <code>/:</code> and <code>:\</code>.<br />
+e.g. Haskell has a few (e.g. see <a href="https://hackage.haskell.org/package/base-4.12.0.0/docs/doc-index-All.html">the start and end of base’s
+index</a>).</li>
+<li>Overall, I don’t think it’s absolute that terms
+are ambiguous or that using only operators would give
+a more accurate understanding of the program ‘for free’.</li>
 </ul></li>
 </ul></li>
-<li>Category Theory. As I understand it, Category Theory is simple, but not easy. So the cost to studying it isn’t so low. But it’s also kinda hard to see the benefits beyond it being inherently interesting.<br />
-It’s neat to see <a href="https://blog.ploeh.dk/2019/12/30/semigroup-resonance-fizzbuzz/">unusual solutions to fizzbuzz like ploeh.dk’s</a>; but the code itself can be understood without category theory. (Well, readable if you can recall what <code>&lt;$&gt;</code> and <code>&lt;&gt;</code> do).
+<li><p>Category Theory. As I understand it, Category Theory is simple, but not easy.
+So the cost to studying it isn’t so low. But it’s also kinda hard to
+see the benefits beyond it being inherently interesting.<br />
+It’s neat to see <a href="https://blog.ploeh.dk/2019/12/30/semigroup-resonance-fizzbuzz/">unusual solutions to fizzbuzz like
+ploeh.dk’s</a>;
+but the code itself can be understood without category theory.
+(Well, readable if you can recall what <code>&lt;$&gt;</code> and <code>&lt;&gt;</code> do).</p>
 <ul>
-<li>FWIW, “simple but not easy” seems like a reasonably fine fit for Anki flashcards.</li>
+<li>FWIW, “simple but not easy” seems like a reasonably fine fit for
+Anki flashcards.</li>
 </ul></li>
-<li>Haskell.
+<li><p>Haskell.</p>
 <ul>
-<li><a href="http://learnyouahaskell.com/chapters">Learn You a Haskell</a> is really cute. And straightforward.
+<li><a href="http://learnyouahaskell.com/chapters">Learn You a Haskell</a> is really cute.
+And straightforward.
 <ul>
-<li>With that I can make simple-ish toy projects and then wish other languages had ADTs and pattern matching and type safety like that.</li>
+<li>With that I can make simple-ish toy projects and
+then wish other languages had ADTs and pattern matching and
+type safety like that.</li>
 </ul></li>
-<li>e.g. <a href="http://degoes.net/articles/modern-fp">This post using free monads</a> is very cool to read. But I’d also want to go and read about what/how a lens <code>Prism</code> is.</li>
-<li>I get the impression that ‘real’ Haskell relies on several more complicated concepts like that. Maybe they’re “simple but not easy” too.
+<li>e.g. <a href="http://degoes.net/articles/modern-fp">This post using free monads</a>
+is very cool to read. But I’d also want to go and read about what/how
+a lens <code>Prism</code> is.</li>
+<li>I get the impression that ‘real’ Haskell relies on several more
+complicated concepts like that. Maybe they’re “simple but not easy”
+too.
 <ul>
-<li>e.g. the posts linked from https://www.simplehaskell.org/ are very in-line with what I’m trying to get at.
+<li>e.g. the posts linked from https://www.simplehaskell.org/
+are very in-line with what I’m trying to get at.
 <ul>
-<li>It’s not that using ‘fancy types’ or the academic bleeding edge of what’s possible in Haskell is bad, or impractical. But for many non-Haskell developers, the costs to that kind of style look heavy and it’s not apparent that it’d be better than just writing working code in JavaScript.</li>
+<li>It’s not that using ‘fancy types’ or the academic bleeding edge
+of what’s possible in Haskell is bad, or impractical.
+But for many non-Haskell developers, the costs to that kind of
+style look heavy and it’s not apparent that it’d be better
+than just writing working code in JavaScript.</li>
 </ul></li>
 </ul></li>
 </ul></li>
-<li><p>I think the reason we end up with <a href="https://adamdrake.com/command-line-tools-can-be-235x-faster-than-your-hadoop-cluster.html">“Command Line Tools can be Faster than your Hadoop Cluster”</a> or <a href="https://stackoverflow.com/questions/1218390/what-is-your-most-productive-shortcut-with-vim">“Your problem with vim is that you don’t grok vi”</a> is because of a lack of consideration of cost/benefit, which led to mistakenly not taking the time to learn things which would have been better.</p></li>
-<li><p><a href="https://pythonspeed.com/articles/dont-need-kubernetes/">pythonspeed’s discussion of kubernetes drawbacks</a> makes it clear that the costs of running kubernetes for a small team outweigh the benefits. I think if the complexity had been communicated alongside the hype, it’s not a technical decision anyone would make.</p></li>
+<li><p>I think the reason we end up with <a href="https://adamdrake.com/command-line-tools-can-be-235x-faster-than-your-hadoop-cluster.html">“Command Line Tools can be Faster
+than your Hadoop
+Cluster”</a>
+or <a href="https://stackoverflow.com/questions/1218390/what-is-your-most-productive-shortcut-with-vim">“Your problem with vim is that you don’t grok
+vi”</a>
+is because of a lack of consideration of cost/benefit, which led to mistakenly
+not taking the time to learn things which would have been better.</p></li>
+<li><p><a href="https://pythonspeed.com/articles/dont-need-kubernetes/">pythonspeed’s discussion of kubernetes
+drawbacks</a> makes it
+clear that the costs of running kubernetes for a small team outweigh the
+benefits. I think if the complexity had been communicated alongside the hype,
+it’s not a technical decision anyone would make.</p></li>
 </ul>
 
 <hr />
@@ -256,6 +402,19 @@ It’s neat to see <a href="https://blog.ploeh.dk/2019/12/30/semigroup-resonance
 <br style="clear: both;" />
 
 <hr />
+
+<!-- Load highlight.js for Syntax Highlighting. -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/bash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/c.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/gherkin.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/haskell.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/lisp.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/nix.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js"></script>
+<script>hljs.highlightAll();</script>
 
             </div>
 

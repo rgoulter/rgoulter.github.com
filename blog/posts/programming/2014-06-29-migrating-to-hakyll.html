@@ -53,6 +53,7 @@
             TOCify
         -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js"></script>
+
         <!--
             Patched TOCify css file.
             (Don't want fixed `.tocify`).
@@ -135,15 +136,20 @@
         by Richard Goulter
     <br />
     
-    Tags: <a href="../../tags/programming.haskell.html">programming.haskell</a>, <a href="../../tags/programming.hakyll.html">programming.hakyll</a>
+    Tags: <a title="All pages tagged 'programming.haskell'." href="../../tags/programming.haskell.html">programming.haskell</a>, <a title="All pages tagged 'programming.hakyll'." href="../../tags/programming.hakyll.html">programming.hakyll</a>
     
 </div>
 
-<p>So. I’ve taken the plunge and have started migrating to Hakyll. Hakyll is a static site generator, written in Haskell. Hakyll is like Jekyll, but not Ruby. (Well, I’ve not used Jekyll, so I can’t easily, validly compare them).</p>
+<p>So. I’ve taken the plunge and have started migrating to Hakyll.
+Hakyll is a static site generator, written in Haskell.
+Hakyll is like Jekyll, but not Ruby. (Well, I’ve not used Jekyll, so I can’t easily, validly compare them).</p>
 <p>Why Hakyll? Because Haskell. (Well, Hakyll as opposed to Jekyll).</p>
-<p>Why a static site generator? ’cause it’s cool. I like the idea of writing blogposts only in a markdown format, and having that translated into a HTML markup.</p>
-<p>This personal blog of mine is migrating from WordPress; I’ve made changes to the default Hakyll project to make it look more WordPress-y. “Adapting” from various places: tags, categories, pagination and post “teasers”.</p>
-<p>It’s still a bit rough at the edges. I’m not a great CSS / web designer. Clearly. And some of the blogposts from WordPress didn’t quite translate across correctly.</p>
+<p>Why a static site generator? ’cause it’s cool. I like the idea of writing blogposts only in a markdown format, and
+having that translated into a HTML markup.</p>
+<p>This personal blog of mine is migrating from WordPress; I’ve made changes to the default Hakyll project to make it look more WordPress-y.
+“Adapting” from various places: tags, categories, pagination and post “teasers”.</p>
+<p>It’s still a bit rough at the edges. I’m not a great CSS / web designer. Clearly. And some of the blogposts from WordPress didn’t quite
+translate across correctly.</p>
 
 <hr />
 
@@ -158,6 +164,19 @@
 <br style="clear: both;" />
 
 <hr />
+
+<!-- Load highlight.js for Syntax Highlighting. -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/bash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/c.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/gherkin.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/haskell.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/lisp.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/nix.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js"></script>
+<script>hljs.highlightAll();</script>
 
             </div>
 

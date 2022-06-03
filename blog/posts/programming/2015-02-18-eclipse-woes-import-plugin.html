@@ -53,6 +53,7 @@
             TOCify
         -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js"></script>
+
         <!--
             Patched TOCify css file.
             (Don't want fixed `.tocify`).
@@ -135,41 +136,78 @@
         by Richard Goulter
     <br />
     
-    Tags: <a href="../../tags/programming.eclipse.html">programming.eclipse</a>, <a href="../../tags/programming.pde.html">programming.pde</a>, <a href="../../tags/programming.sbt.html">programming.sbt</a>, <a href="../../tags/programming.osgi.html">programming.osgi</a>
+    Tags: <a title="All pages tagged 'programming.eclipse'." href="../../tags/programming.eclipse.html">programming.eclipse</a>, <a title="All pages tagged 'programming.pde'." href="../../tags/programming.pde.html">programming.pde</a>, <a title="All pages tagged 'programming.sbt'." href="../../tags/programming.sbt.html">programming.sbt</a>, <a title="All pages tagged 'programming.osgi'." href="../../tags/programming.osgi.html">programming.osgi</a>
     
 </div>
 
-<p>Eclipse Plugin Development, I’ve found, has been fraught with with “learning experiences”.</p>
+<p>Eclipse Plugin Development, I’ve found, has been fraught with with “learning
+experiences”.</p>
 <p>They say it’s easy to create Feature projects &amp; Update Sites for Eclipse.<br />
-Turns out when the exporter gives an error saying “I can’t find Installable Unit for your plugin”, something is wrong with your plugin project’s build!<br />
-– It’s possible for a PDE project to have a plugin which is valid when running an “Eclipse Application” to test the plugin; but still can’t be exported due to invalid settings.</p>
-<p>Rather. It’s possible for Eclipse PDE to know about your plugin and not know about your plugin at the same time.<br />
+Turns out when the exporter gives an error saying “I can’t find Installable
+Unit for your plugin”, something is wrong with your plugin project’s build!<br />
+– It’s possible for a PDE project to have a plugin which is valid when running
+an “Eclipse Application” to test the plugin; but still can’t be exported due to
+invalid settings.</p>
+<p>Rather. It’s possible for Eclipse PDE to know about your plugin and not know
+about your plugin at the same time.<br />
 Argh!</p>
-<p>For a PDE project created in Eclipse, my problem was a bad <code>build.properties</code> file. (Which tells Eclipse what order to build/export things, or so).<br />
+<p>For a PDE project created in Eclipse, my problem was a bad <code>build.properties</code>
+file. (Which tells Eclipse what order to build/export things, or so).<br />
 Sure. Fine.</p>
 <p>I also had an OSGi-bundle generated from an SBT project:<br />
-Because Eclipse’s classpath &amp; OSGi classpath don’t get on together at all, it’s necessary to have not just the standard Eclipse project, but a separate project with an OSGi-enabled <code>MANIFEST.MF</code>.</p>
-<p>– Eclipse plugin dependencies must be OSGi Bundles. An OSGi bundle is a <code>.jar</code> whose <code>MANIFEST.MF</code> has some additional properties, detailing what the bundle exports &amp; which bundles it needs. Eclipse needs to know about a ‘target platform’ of bundles for its plugins to work.<br />
-– This can be achieved by either installing the plugins to where Eclipse will load them when you run it; or, with Eclipse PDE (Plugin Development Environment), PDE can launch an Eclipse instance loading projects in the workspace as plugins. When developing plugins, it’s surely easier to not have to re-export &amp; re-install plugins each time something changes.<br />
+Because Eclipse’s classpath &amp; OSGi classpath don’t get on together at all, it’s
+necessary to have not just the standard Eclipse project, but a separate project
+with an OSGi-enabled <code>MANIFEST.MF</code>.</p>
+<p>– Eclipse plugin dependencies must be OSGi Bundles. An OSGi bundle is a <code>.jar</code>
+whose <code>MANIFEST.MF</code> has some additional properties, detailing what the bundle
+exports &amp; which bundles it needs. Eclipse needs to know about a ‘target
+platform’ of bundles for its plugins to work.<br />
+– This can be achieved by either installing the plugins to where Eclipse will
+load them when you run it; or, with Eclipse PDE (Plugin Development
+Environment), PDE can launch an Eclipse instance loading projects in the
+workspace as plugins. When developing plugins, it’s surely easier to not have
+to re-export &amp; re-install plugins each time something changes.<br />
 At least, I’m pretty sure that’s how it works.<br />
 Simple, right? Such is Eclipse.</p>
-<p>So. I need a project which has the OSGi bundle for some tool I’m working on, (a tool I might want to use outside of OSGi, because testing OSGi bundles can only be done within an OSGi environment. Working with some OSGi environment is the difficulty I’m having here, see).<br />
-One way to do this is PDE’s “New Plugin from Existing JAR…” project, which wraps a project around a JAR..<br />
-Another approach is to import a bundle and wrap a project around this JAR. (“Import Plugin…”).<br />
+<p>So. I need a project which has the OSGi bundle for some tool I’m working on, (a
+tool I might want to use outside of OSGi, because testing OSGi bundles can only
+be done within an OSGi environment. Working with some OSGi environment is the
+difficulty I’m having here, see).<br />
+One way to do this is PDE’s “New Plugin from Existing JAR…” project, which
+wraps a project around a JAR..<br />
+Another approach is to import a bundle and wrap a project around this JAR.
+(“Import Plugin…”).<br />
 <strong>These do not do the same thing</strong><br />
 One works, the other doesn’t.<br />
 Wut.<br />
 Rather, with one, “Export Plugin…” works fine, but not for the other.</p>
 <p>I mean, obviously, right?</p>
-<p>If one wanted to investigate why one works, the other doesn’t, one might look at the differences in project settings between the two; and incrementally copy the changes across until both ‘work’.<br />
-– Turns out copying / replacing <em>all</em> the files from the working one to the not-working one, so that they’re identical, doesn’t solve this.<br />
-Unless, after making such changes to the project, the project is removed from the workspace and added back to the workspace. (Clearly this updates/refreshes some setting which “Refresh Project”, Closing/Opening the project don’t update. I don’t know what).<br />
+<p>If one wanted to investigate why one works, the other doesn’t, one might look
+at the differences in project settings between the two; and incrementally copy
+the changes across until both ‘work’.<br />
+– Turns out copying / replacing <em>all</em> the files from the working one to the
+not-working one, so that they’re identical, doesn’t solve this.<br />
+Unless, after making such changes to the project, the project is removed from
+the workspace and added back to the workspace. (Clearly this updates/refreshes
+some setting which “Refresh Project”, Closing/Opening the project don’t update.
+I don’t know what).<br />
 Clearly, right?</p>
-<p>– Eventually I figured out that the manifest generated from an <code>sbt-osgi</code> plugin wasn’t in the format Eclipse liked it when importing it (though for running the plugin with PDE it’s okay); and a <code>build.properties</code> file wasn’t automatically generated when using “Import Plugin…”. That’s not so bad.<br />
-It amounts to a small amount of manual effort to setup a project with PDE. (No more ‘manual effort’ than typicap PDE things like exporting Plugins / Features / Update Sites).</p>
-<p>Finally I could export the Plugin! (or a Feature using it, or an Update Site with that feature). Again, just using the plugin with PDE itself wasn’t as bad.</p>
-<p>On a side note, it seems support for Tycho / building Features / Update-Sites for Eclipse isn’t so great for SBT compared to what support there seems to be for Gradle. - That matters in terms of automating the process of building an Update Site (particularly outside of Eclipse PDE GUI), though isn’t as pertinent to getting a PDE project of an OSGi Bundle.<br />
-(With an automatically generated Update Site, it’d be easier to install said plugin to the Eclipse environment you’re using, though, so..).</p>
+<p>– Eventually I figured out that the manifest generated from an <code>sbt-osgi</code>
+plugin wasn’t in the format Eclipse liked it when importing it (though for
+running the plugin with PDE it’s okay); and a <code>build.properties</code> file wasn’t
+automatically generated when using “Import Plugin…”. That’s not so bad.<br />
+It amounts to a small amount of manual effort to setup a project with PDE. (No
+more ‘manual effort’ than typicap PDE things like exporting Plugins / Features
+/ Update Sites).</p>
+<p>Finally I could export the Plugin! (or a Feature using it, or an Update Site
+with that feature). Again, just using the plugin with PDE itself wasn’t as bad.</p>
+<p>On a side note, it seems support for Tycho / building Features / Update-Sites
+for Eclipse isn’t so great for SBT compared to what support there seems to be
+for Gradle. - That matters in terms of automating the process of building an
+Update Site (particularly outside of Eclipse PDE GUI), though isn’t as
+pertinent to getting a PDE project of an OSGi Bundle.<br />
+(With an automatically generated Update Site, it’d be easier to install said
+plugin to the Eclipse environment you’re using, though, so..).</p>
 
 <hr />
 
@@ -184,6 +222,19 @@ It amounts to a small amount of manual effort to setup a project with PDE. (No m
 <br style="clear: both;" />
 
 <hr />
+
+<!-- Load highlight.js for Syntax Highlighting. -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/bash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/c.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/gherkin.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/haskell.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/lisp.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/nix.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js"></script>
+<script>hljs.highlightAll();</script>
 
             </div>
 

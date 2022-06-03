@@ -53,6 +53,7 @@
             TOCify
         -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js"></script>
+
         <!--
             Patched TOCify css file.
             (Don't want fixed `.tocify`).
@@ -135,24 +136,53 @@
         by Richard Goulter
     <br />
     
-    Tags: <a href="../../tags/programming.hakyll.html">programming.hakyll</a>, <a href="../../tags/programming.haskell.html">programming.haskell</a>
+    Tags: <a title="All pages tagged 'programming.hakyll'." href="../../tags/programming.hakyll.html">programming.hakyll</a>, <a title="All pages tagged 'programming.haskell'." href="../../tags/programming.haskell.html">programming.haskell</a>
     
 </div>
 
-<p>The basic Hakyll site is (thankfully) not too glamorous. Some features I wanted to keep from WordPress include the tags, categories, pagination of posts, and ‘teaser’ text for each post.</p>
-<p>The repository for this site is at <a href="https://github.com/rgoulter/my-hakyll-blog">rgoulter/my-hakyll-blog</a> if you want to see the actual commits.</p>
+<p>The basic Hakyll site is (thankfully) not too glamorous. Some features I wanted
+to keep from WordPress include the tags, categories, pagination of posts,
+and ‘teaser’ text for each post.</p>
+<p>The repository for this site is at
+<a href="https://github.com/rgoulter/my-hakyll-blog">rgoulter/my-hakyll-blog</a>
+if you want to see the actual commits.</p>
 <h3 id="tags">Tags</h3>
-<p>Doing a Google search for “hakyll tags” probably will lead you to the same tutorial I found. But you found yourself here, so I’ll point out I used <a href="http://javran.github.io/posts/2014-03-01-add-tags-to-your-hakyll-blog.html">this tutorial</a></p>
+<p>Doing a Google search for “hakyll tags” probably will lead you to the same
+tutorial I found. But you found yourself here, so I’ll point out I used
+<a href="http://javran.github.io/posts/2014-03-01-add-tags-to-your-hakyll-blog.html">this tutorial</a></p>
 <h3 id="categories">Categories</h3>
-<p>The haddock documention for <a href="http://jaspervdj.be/hakyll/reference/Hakyll-Web-Tags.html">Hakyll.Web.Tags</a> describes that i. “Categories” are a special kind of “tag”; the only difference being a post can only belong to one category, but can have any number of tags. ii. Hakyll determines a category for a post (by default) using the directory structure. e.g.: <code>posts/&lt;category&gt;/1970-01-01-a-post.markdown</code> has the category <code>&lt;category&gt;</code>.</p>
-<p>If you’ve a reasonable idea of how you get from the tags, to the context, to the produced HTML, then it should be fairly clear how to add categories.<br />
-<a href="https://github.com/rgoulter/my-hakyll-blog/commit/336e3aee488fee2bb9f63eee34c848e9e8f1ad41">Here’s the commit where I make the changes</a>. The trickiest part was that the <a href="http://jaspervdj.be/hakyll/reference/Hakyll-Core-Identifier-Pattern.html">Glob</a> needed to be “posts/**.markdown” to match posts.</p>
+<p>The haddock documention for
+<a href="http://jaspervdj.be/hakyll/reference/Hakyll-Web-Tags.html">Hakyll.Web.Tags</a>
+describes that
+i. “Categories” are a special kind of “tag”; the only difference being a post
+can only belong to one category, but can have any number of tags.
+ii. Hakyll determines a category for a post (by default) using the directory
+structure. e.g.:
+<code>posts/&lt;category&gt;/1970-01-01-a-post.markdown</code>
+has the category <code>&lt;category&gt;</code>.</p>
+<p>If you’ve a reasonable idea of how you get from the tags, to the
+context, to the produced HTML, then it should be fairly clear how to
+add categories.<br />
+<a href="https://github.com/rgoulter/my-hakyll-blog/commit/336e3aee488fee2bb9f63eee34c848e9e8f1ad41">Here’s the commit where I make the changes</a>.
+The trickiest part was that the <a href="http://jaspervdj.be/hakyll/reference/Hakyll-Core-Identifier-Pattern.html">Glob</a>
+needed to be “posts/**.markdown” to match posts.</p>
 <h3 id="pagination-and-teasers">Pagination and Teasers</h3>
 <p>These come hand in hand if you “adapt” from the same sites I did.<br />
-The literate-haskell of <a href="http://www.eanalytica.com/site/">EAnalytica’s site</a> has pretty candid comments discussing the Haskell it uses. In turn, EAnalytica also borrows from <a href="https://github.com/dannysu/hakyll-blog">Danny Su’s site</a>, which is also useful for this.<br />
-The easiest way to ‘adapt’ from these was to look first at EAnalytica’s, then at Danny Su’s. (The limitation of Danny Su’s site is the site’s pagination is only 2 posts per page, and the rule for pagination relies on that, unfortunately). The more tedious part (unless you’ve got good control over your Haskell editor) is getting the imports for the necessary utility functions.</p>
-<p>One thing which tripped me up was that the code from these sites has magic strings for the Posts pattern, and for the pagination URL. (<a href="https://github.com/rgoulter/my-hakyll-blog/commit/968b1c0f4e7c586532865ae99b02e08e63c8dc47">c.f.</a>).</p>
-<p>For a more direct indication of the code to incorporate, <a href="https://github.com/rgoulter/my-hakyll-blog/commit/990fe87776c5926321d723f938364719036943c5">this is the commit</a> where my blog adds pagination and teasers.</p>
+The literate-haskell of <a href="http://www.eanalytica.com/site/">EAnalytica’s site</a>
+has pretty candid comments discussing the Haskell it uses. In turn, EAnalytica
+also borrows from <a href="https://github.com/dannysu/hakyll-blog">Danny Su’s site</a>,
+which is also useful for this.<br />
+The easiest way to ‘adapt’ from these was to look first at EAnalytica’s,
+then at Danny Su’s. (The limitation of Danny Su’s site is the site’s pagination
+is only 2 posts per page, and the rule for pagination relies on that, unfortunately).
+The more tedious part (unless you’ve got good control over your Haskell editor)
+is getting the imports for the necessary utility functions.</p>
+<p>One thing which tripped me up was that the code from these sites has
+magic strings for the Posts pattern, and for the pagination URL.
+(<a href="https://github.com/rgoulter/my-hakyll-blog/commit/968b1c0f4e7c586532865ae99b02e08e63c8dc47">c.f.</a>).</p>
+<p>For a more direct indication of the code to incorporate,
+<a href="https://github.com/rgoulter/my-hakyll-blog/commit/990fe87776c5926321d723f938364719036943c5">this is the commit</a>
+where my blog adds pagination and teasers.</p>
 
 <hr />
 
@@ -167,6 +197,19 @@ The easiest way to ‘adapt’ from these was to look first at EAnalytica’s, t
 <br style="clear: both;" />
 
 <hr />
+
+<!-- Load highlight.js for Syntax Highlighting. -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/bash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/c.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/gherkin.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/haskell.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/lisp.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/nix.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js"></script>
+<script>hljs.highlightAll();</script>
 
             </div>
 

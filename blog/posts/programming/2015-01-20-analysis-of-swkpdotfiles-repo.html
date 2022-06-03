@@ -53,6 +53,7 @@
             TOCify
         -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js"></script>
+
         <!--
             Patched TOCify css file.
             (Don't want fixed `.tocify`).
@@ -135,46 +136,103 @@
         by Richard Goulter
     <br />
     
-    Tags: <a href="../../tags/programming.linux.html">programming.linux</a>, <a href="../../tags/programming.dotfiles.html">programming.dotfiles</a>, <a href="../../tags/programming.vim.html">programming.vim</a>
+    Tags: <a title="All pages tagged 'programming.linux'." href="../../tags/programming.linux.html">programming.linux</a>, <a title="All pages tagged 'programming.dotfiles'." href="../../tags/programming.dotfiles.html">programming.dotfiles</a>, <a title="All pages tagged 'programming.vim'." href="../../tags/programming.vim.html">programming.vim</a>
     
 </div>
 
 <p>I did not notice that this repo had about 3,000 stars. That is A LOT.</p>
-<p>Anyway, I came across <a href="https://github.com/anishathalye/dotbot">dotbot</a> by looking at GitHub’s <a href="dotfiles.github.io" class="uri">dotfiles.github.io</a> page.<br />
-DotBot, in a sentence, enhances a dotfiles repo by taking care of the “symlinking stuff”. Whether or not this is an accurate summary of DotBot is beside the point, so much as this is the problem you know of which it will solve.<br />
-– More importantly, I’d say, isn’t so much that it automatically sets-up the linking so-much-as that it serves as a convenient way to document what files go where. That is, dotfiles usually fall into the “write once and forget” category of programs. It would be nice to do better than that.</p>
-<p>I came across <a href="https://github.com/skwp/dotfiles">skwp/dotfiles</a> by way of the author’s <a href="http://yanpritzker.com/2012/01/20/the-cleanest-vimrc-youve-ever-seen/">“Cleanest vimrc You’ve Ever Seen”</a> post. Excerpt:</p>
+<p>Anyway, I came across <a href="https://github.com/anishathalye/dotbot">dotbot</a> by looking
+at GitHub’s <a href="dotfiles.github.io">dotfiles.github.io</a> page.<br />
+DotBot, in a sentence, enhances a dotfiles repo by taking care of the “symlinking
+stuff”. Whether or not this is an accurate summary of DotBot is beside the point,
+so much as this is the problem you know of which it will solve.<br />
+– More importantly, I’d say, isn’t so much that it automatically sets-up the
+linking so-much-as that it serves as a convenient way to document what files go
+where. That is, dotfiles usually fall into the “write once and forget” category
+of programs. It would be nice to do better than that.</p>
+<p>I came across <a href="https://github.com/skwp/dotfiles">skwp/dotfiles</a> by way of the
+author’s <a href="http://yanpritzker.com/2012/01/20/the-cleanest-vimrc-youve-ever-seen/">“Cleanest vimrc You’ve Ever Seen”</a>
+post. Excerpt:</p>
 <blockquote>
-<p>After I [split my .vimrc up], I ended up with a vimrc that’s only about 90 lines long including very detailed comments about every section.</p>
-<p>I think this is the cleanest vimrc you’ll see on the web. All my vim plugin settings are broken down into individual files, following a convention of one file per vim plugin that I use, plus some extra ones that are too small to be plugins.</p>
+<p>After I [split my .vimrc up], I ended up with a vimrc that’s only about 90
+lines long including very detailed comments about every section.</p>
+<p>I think this is the cleanest vimrc you’ll see on the web. All my vim plugin
+settings are broken down into individual files, following a convention of one
+file per vim plugin that I use, plus some extra ones that are too small to be
+plugins.</p>
 </blockquote>
-<p>I think the author here is being a bit daft to say his .vimrc is less than 100 lines of code; the .vimrc he split up was presumably longer, and the monolithic .vimrc (which the posts suggests is a problem) is being used to do what <em>could</em> be more modularised.<br />
-– Rather, a truly minimalistic .vimrc would be relying on convention-over-configuration. (Which isn’t necessarily a good idea with Vim, but whatever). – This is all beside the point; the goal is “more readable”.</p>
-<p>At any rate, <code>skwp/dotfiles</code> makes for a good “case study” of how to make a clean dotfiles repo. Here are some notes:</p>
+<p>I think the author here is being a bit daft to say his .vimrc is less than 100
+lines of code; the .vimrc he split up was presumably longer, and the
+monolithic .vimrc (which the posts suggests is a problem) is being used to do
+what <em>could</em> be more modularised.<br />
+– Rather, a truly minimalistic .vimrc would be relying on
+convention-over-configuration. (Which isn’t necessarily a good idea with Vim,
+but whatever). – This is all beside the point; the goal is “more readable”.</p>
+<p>At any rate, <code>skwp/dotfiles</code> makes for a good “case study” of how to make a
+clean dotfiles repo. Here are some notes:</p>
 <ul>
-<li><p>BAD: <a href="https://github.com/skwp/dotfiles/blob/master/Rakefile">Rakefile</a> to manage symlinking. A brief glance shows that there’s a lot of “data” (this file symlinks to this location). This wouldn’t be so bad if the Rakefile were generated by some other means, but just seems The Wrong Way(tm) to go about it.</p></li>
-<li><p>GOOD: Folders for each program; e.g. directory for <code>vim/</code>, separate from <code>tmux/</code>. I’m not 100% sure whether this is wholly good; but if we draw comparison to how we keep programs tidy, this parallels with subfolders for packages/modules.<br />
-– I learned that the “vimify” folder is for readline/editline. It’d be nice if this were more obvious, and not just “vimifying”-that-magic-terminal.</p></li>
-<li><p>BAD: <code>doc/</code> folder. While I’m all for documentation, especially for justifying why which plugins were chosen etc., here the design philosophy of “split up things into different files by topic” is taken too far. e.g. <a href="https://github.com/skwp/dotfiles/blob/master/doc/vim/keymaps.md">A note about keymaps</a> has some useful information, but it’s one file for only a paragraph. – This is the kindof thing a programming journal is good for, but notes like this shouldn’t be so difficult to access as this.<br />
-e.g. <a href="https://github.com/skwp/dotfiles/blob/master/doc/vim/coding.md">Notes about commands for specific plugins</a> is useful, (I’d forget things like this too, writing it down is good), but these comments are too far away from where they are relevant.</p>
+<li><p>BAD: <a href="https://github.com/skwp/dotfiles/blob/master/Rakefile">Rakefile</a> to
+manage symlinking. A brief glance shows that there’s a lot of “data” (this file
+symlinks to this location). This wouldn’t be so bad if the Rakefile were
+generated by some other means, but just seems The Wrong Way(tm) to go about it.</p></li>
+<li><p>GOOD: Folders for each program; e.g. directory for <code>vim/</code>, separate from <code>tmux/</code>.
+I’m not 100% sure whether this is wholly good; but if we draw comparison to
+how we keep programs tidy, this parallels with subfolders for packages/modules.<br />
+– I learned that the “vimify” folder is for readline/editline. It’d be nice
+if this were more obvious, and not just “vimifying”-that-magic-terminal.</p></li>
+<li><p>BAD: <code>doc/</code> folder. While I’m all for documentation, especially for justifying
+why which plugins were chosen etc., here the design philosophy of
+“split up things into different files by topic” is taken too far.
+e.g. <a href="https://github.com/skwp/dotfiles/blob/master/doc/vim/keymaps.md">A note about keymaps</a>
+has some useful information, but it’s one file for only a paragraph. – This
+is the kindof thing a programming journal is good for, but notes like this
+shouldn’t be so difficult to access as this.<br />
+e.g. <a href="https://github.com/skwp/dotfiles/blob/master/doc/vim/coding.md">Notes about commands for specific plugins</a>
+is useful, (I’d forget things like this too, writing it down is good), but
+these comments are too far away from where they are relevant.</p>
 <blockquote>
 <p>tComment - gcc to comment a line, gcp to comment blocks, nuff said</p>
 </blockquote></li>
 <li><p>GOOD: Vim’s Vundle Enhancement<br />
-In <code>vim/vundles/</code> there are a bunch of <code>*.vundle</code> files, which each have the <code>Plugin 'user/repo'</code> lines. These get sourced by <code>vim/vundles.vim</code> (alas, manually; feature or bug, I don’t know. There are advantages/disadvantages each way, I guess, if you want to sometimes disable some collection(s) of plugins).<br />
-Whatsmore, <code>vim/settings/</code> contains a bunch of <code>&lt;topic&gt;.vim</code> files, almost all of which are for plugins. e.g. <a href="https://github.com/skwp/dotfiles/blob/master/vim/settings/ctrlp.vim">ctrlp.vim</a>. The unfortunate thing is some of these files are 1 line long, so this becomes a tradeoff between being able to read everything in a .vimrc, and having a clean, modularised setup.<br />
+In <code>vim/vundles/</code> there are a bunch of <code>*.vundle</code> files, which each have the
+<code>Plugin 'user/repo'</code> lines. These get sourced by <code>vim/vundles.vim</code> (alas,
+manually; feature or bug, I don’t know. There are advantages/disadvantages
+each way, I guess, if you want to sometimes disable some collection(s) of
+plugins).<br />
+Whatsmore, <code>vim/settings/</code> contains a bunch of <code>&lt;topic&gt;.vim</code> files, almost
+all of which are for plugins. e.g. <a href="https://github.com/skwp/dotfiles/blob/master/vim/settings/ctrlp.vim">ctrlp.vim</a>.
+The unfortunate thing is some of these files are 1 line long, so this becomes
+a tradeoff between being able to read everything in a .vimrc, and having
+a clean, modularised setup.<br />
 – One must ask whether a monolithic .vimrc is really so untidy.<br />
-There’re also disadvantages to this approach. e.g. <a href="https://github.com/skwp/dotfiles/blob/master/vim/settings/solarized.vim">vim/settings/solarized.vim</a>, it’s unclear why <code>au VimEnter * so ~/.vim/settings/solarized.vim</code> is needed; just seems “bad” to me.<br />
-<a href="https://github.com/skwp/dotfiles/blob/master/vim/settings.vim">vim/settings.vim</a> is responsible for sourcing these settings files; there’s an interesting example of how one could go about OS-specific sourcing.</p></li>
-<li><p>GOOD: small note, [vim/ftplugin/gitcommit.vim] has <code>setlocal spell</code> ( i.e. enable spellchecking), as well as a Vim-include-guard. The former is probably worth having.</p></li>
+There’re also disadvantages to this approach. e.g.
+<a href="https://github.com/skwp/dotfiles/blob/master/vim/settings/solarized.vim">vim/settings/solarized.vim</a>,
+it’s unclear why <code>au VimEnter * so ~/.vim/settings/solarized.vim</code> is needed;
+just seems “bad” to me.<br />
+<a href="https://github.com/skwp/dotfiles/blob/master/vim/settings.vim">vim/settings.vim</a>
+is responsible for sourcing these settings files; there’s an interesting example
+of how one could go about OS-specific sourcing.</p></li>
+<li><p>GOOD: small note, [vim/ftplugin/gitcommit.vim] has <code>setlocal spell</code> (i.e.
+enable spellchecking), as well as a Vim-include-guard. The former is probably
+worth having.</p></li>
 </ul>
 <hr />
-<p>Ammendment: (27/01): While I’ve not yet tried splitting up my <code>.vimrc</code> yet, I did spare half a thought in trying to split up my fish config, &amp; tmux config.<br />
-I think ideally, I could specify in a <code>.local</code> (or <code>.user</code> file) installation-specific locations, e.g. some <code>$POWERLINE_PATH</code>, etc. and then the “global” config could pick up on this.<br />
-– Unfortunately, I don’t know tmux scripting well enough to know for certain, but my impression was it wasn’t easy to do that; at least not how I expected.</p>
-<p>I quickly ran into “configuration vs convention”; e.g., what is worth putting in a “global” config, if it needs to depend on a variable set in a per-user config?<br />
-Or setting <code>$EDITOR</code> to <code>nvim</code>, but this may not work on OSX? (Override it in OSX.user.config? Explicitly test for presence of nvim in <code>/usr/bin</code>?).<br />
-Rather, I wondered how much really belonged in the global config; and if “not much”, then what convenience is there in having some dotfiles manager like DotBot?</p>
+<p>Ammendment: (27/01): While I’ve not yet tried splitting up my <code>.vimrc</code> yet,
+I did spare half a thought in trying to split up my fish config, &amp; tmux
+config.<br />
+I think ideally, I could specify in a <code>.local</code> (or <code>.user</code> file)
+installation-specific locations, e.g. some <code>$POWERLINE_PATH</code>, etc. and then
+the “global” config could pick up on this.<br />
+– Unfortunately, I don’t know tmux scripting well enough to know for certain,
+but my impression was it wasn’t easy to do that; at least not how I expected.</p>
+<p>I quickly ran into “configuration vs convention”; e.g., what is worth putting
+in a “global” config, if it needs to depend on a variable set in a per-user
+config?<br />
+Or setting <code>$EDITOR</code> to <code>nvim</code>, but this may not work on OSX? (Override it in
+OSX.user.config? Explicitly test for presence of nvim in <code>/usr/bin</code>?).<br />
+Rather, I wondered how much really belonged in the global config; and if “not
+much”, then what convenience is there in having some dotfiles manager like
+DotBot?</p>
 
 <hr />
 
@@ -189,6 +247,19 @@ Rather, I wondered how much really belonged in the global config; and if “not 
 <br style="clear: both;" />
 
 <hr />
+
+<!-- Load highlight.js for Syntax Highlighting. -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/bash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/c.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/gherkin.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/haskell.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/lisp.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/nix.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js"></script>
+<script>hljs.highlightAll();</script>
 
             </div>
 

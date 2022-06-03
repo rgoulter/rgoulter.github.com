@@ -53,6 +53,7 @@
             TOCify
         -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js"></script>
+
         <!--
             Patched TOCify css file.
             (Don't want fixed `.tocify`).
@@ -135,138 +136,171 @@
         by Richard Goulter
     <br />
     
-    Tags: <a href="../../tags/programming.arduino.html">programming.arduino</a>, <a href="../../tags/programming.c.html">programming.c</a>, <a href="../../tags/programming.atomdsl.html">programming.atomdsl</a>
+    Tags: <a title="All pages tagged 'programming.arduino'." href="../../tags/programming.arduino.html">programming.arduino</a>, <a title="All pages tagged 'programming.c'." href="../../tags/programming.c.html">programming.c</a>, <a title="All pages tagged 'programming.atomdsl'." href="../../tags/programming.atomdsl.html">programming.atomdsl</a>
     
 </div>
 
-<p>In my <a href="../../posts/programming/2016-03-12-explaining-pure-c-blink-example.html">previous post</a>, I discussed some of the simple details behind a pure C example programming an Arduino.<br />
-Using that understanding, I was able to implement a pure C implementation of the <a href="https://www.arduino.cc/en/ArduinoStarterKit/Prj02">Spaceship Interface</a> project. (“Spaceship Interface” = “green LED + 2 blinking red LEDs”, btw).</p>
-<p>The <a href="https://hackage.haskell.org/package/atom-1.0.13">Atom EDSL</a> is a DSL embedded in Haskell; and is advantageous in <a href="https://haskellembedded.github.io/posts/2015-02-06-how-i-got-here.html">certain use cases</a>. (That “Haskell Embedded” blog is fascinating – well worth reading; and one of the few places online to have a <a href="https://haskellembedded.github.io/posts/2015-02-17-atom-examples.html">fairly involved</a> example of Atom code).</p>
-<p>Translating the code to Atom wasn’t too hard. (If you’re willing to relax your definition of “translation”; my Atom implementation stops ‘blinking’ <strong>as soon as the switch is released</strong>, whereas the Arduino implementation delays up to 250ms. – My translation captures the essence).<br />
+<p>In my <a href="../../posts/programming/2016-03-12-explaining-pure-c-blink-example.html">previous
+post</a>,
+I discussed some of the simple details behind a pure C example programming an
+Arduino.<br />
+Using that understanding, I was able to implement a pure C implementation of
+the <a href="https://www.arduino.cc/en/ArduinoStarterKit/Prj02">Spaceship Interface</a>
+project. (“Spaceship Interface” = “green LED + 2 blinking red LEDs”, btw).</p>
+<p>The <a href="https://hackage.haskell.org/package/atom-1.0.13">Atom EDSL</a> is a DSL
+embedded in Haskell; and is advantageous in <a href="https://haskellembedded.github.io/posts/2015-02-06-how-i-got-here.html">certain use
+cases</a>.
+(That “Haskell Embedded” blog is fascinating – well worth reading; and one of
+the few places online to have a <a href="https://haskellembedded.github.io/posts/2015-02-17-atom-examples.html">fairly
+involved</a>
+example of Atom code).</p>
+<p>Translating the code to Atom wasn’t too hard. (If you’re willing to relax your
+definition of “translation”; my Atom implementation stops ‘blinking’ <strong>as soon
+as the switch is released</strong>, whereas the Arduino implementation delays up to
+250ms. – My translation captures the essence).<br />
 I thought it’d be an interesting, simple comparison.</p>
-<p>Code examples in Arduino, pure C, and Atom can be found at <a href="https://github.com/rgoulter/arduino-atom-examples">rgoulter/arduino-atom-examples</a>.<br />
-e.g. <a href="https://raw.githubusercontent.com/rgoulter/arduino-atom-examples/059aa93be42f4f523aa4802a69fbdb7ec95f9d33/blink/atom/blink.hs">the Blink example in Atom</a>, for a look at a less-involved Atom example.</p>
-<p>The main snippet from <a href="https://raw.githubusercontent.com/rgoulter/arduino-atom-examples/059aa93be42f4f523aa4802a69fbdb7ec95f9d33/spaceshipinterface/c/spaceship.c">the C code</a>:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="cf">if</span> (switchState == <span class="dv">0</span>) {</a>
-<a class="sourceLine" id="cb1-2" data-line-number="2">    <span class="co">/* enable PortD3 (green), disable PortD4 &amp; PortD5 (red) */</span></a>
-<a class="sourceLine" id="cb1-3" data-line-number="3">    PORTD |= _BV(PORTD3);</a>
-<a class="sourceLine" id="cb1-4" data-line-number="4">    PORTD &amp;= ~(_BV(PORTD4) | _BV(PORTD5));</a>
-<a class="sourceLine" id="cb1-5" data-line-number="5">} <span class="cf">else</span> {</a>
-<a class="sourceLine" id="cb1-6" data-line-number="6">    <span class="co">/* disable PortD3 (green) */</span></a>
-<a class="sourceLine" id="cb1-7" data-line-number="7">    PORTD &amp;= ~_BV(PORTD3);</a>
-<a class="sourceLine" id="cb1-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb1-9" data-line-number="9">    <span class="co">/* disable PortD4, enable PortD5 (red) */</span></a>
-<a class="sourceLine" id="cb1-10" data-line-number="10">    PORTD &amp;= ~_BV(PORTD4);</a>
-<a class="sourceLine" id="cb1-11" data-line-number="11">    PORTD |= _BV(PORTD5);</a>
-<a class="sourceLine" id="cb1-12" data-line-number="12">    _delay_ms(BLINK_DELAY_MS);</a>
-<a class="sourceLine" id="cb1-13" data-line-number="13"></a>
-<a class="sourceLine" id="cb1-14" data-line-number="14">    <span class="co">/* enable PortD4, disable PortD5 (red) */</span></a>
-<a class="sourceLine" id="cb1-15" data-line-number="15">    PORTD |= _BV(PORTD4);</a>
-<a class="sourceLine" id="cb1-16" data-line-number="16">    PORTD &amp;= ~_BV(PORTD5);</a>
-<a class="sourceLine" id="cb1-17" data-line-number="17">    _delay_ms(BLINK_DELAY_MS);</a>
-<a class="sourceLine" id="cb1-18" data-line-number="18">}</a></code></pre></div>
+<p>Code examples in Arduino, pure C, and Atom can be found at
+<a href="https://github.com/rgoulter/arduino-atom-examples">rgoulter/arduino-atom-examples</a>.<br />
+e.g. <a href="https://raw.githubusercontent.com/rgoulter/arduino-atom-examples/059aa93be42f4f523aa4802a69fbdb7ec95f9d33/blink/atom/blink.hs">the Blink example in Atom</a>, for a look at a less-involved Atom example.</p>
+<p>The main snippet from <a href="https://raw.githubusercontent.com/rgoulter/arduino-atom-examples/059aa93be42f4f523aa4802a69fbdb7ec95f9d33/spaceshipinterface/c/spaceship.c">the C
+code</a>:</p>
+<pre class="c"><code>if (switchState == 0) {
+    /* enable PortD3 (green), disable PortD4 &amp; PortD5 (red) */
+    PORTD |= _BV(PORTD3);
+    PORTD &amp;= ~(_BV(PORTD4) | _BV(PORTD5));
+} else {
+    /* disable PortD3 (green) */
+    PORTD &amp;= ~_BV(PORTD3);
+
+    /* disable PortD4, enable PortD5 (red) */
+    PORTD &amp;= ~_BV(PORTD4);
+    PORTD |= _BV(PORTD5);
+    _delay_ms(BLINK_DELAY_MS);
+
+    /* enable PortD4, disable PortD5 (red) */
+    PORTD |= _BV(PORTD4);
+    PORTD &amp;= ~_BV(PORTD5);
+    _delay_ms(BLINK_DELAY_MS);
+}</code></pre>
 <p>The <em>whole</em> Atom code (<a href="https://raw.githubusercontent.com/rgoulter/arduino-atom-examples/059aa93be42f4f523aa4802a69fbdb7ec95f9d33/spaceshipinterface/atom/Spaceship.hs">src</a>):</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="ot">{-# LANGUAGE QuasiQuotes #-}</span></a>
-<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="kw">module</span> <span class="dt">Spaceship</span> (main) <span class="kw">where</span></a>
-<a class="sourceLine" id="cb2-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb2-4" data-line-number="4"><span class="kw">import</span> <span class="dt">Text.Heredoc</span></a>
-<a class="sourceLine" id="cb2-5" data-line-number="5"><span class="kw">import</span> <span class="dt">Language.Atom</span></a>
-<a class="sourceLine" id="cb2-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb2-7" data-line-number="7">greenLED <span class="fu">=</span> <span class="st">&quot;PORTD3&quot;</span></a>
-<a class="sourceLine" id="cb2-8" data-line-number="8">redLED1  <span class="fu">=</span> <span class="st">&quot;PORTD4&quot;</span></a>
-<a class="sourceLine" id="cb2-9" data-line-number="9">redLED2  <span class="fu">=</span> <span class="st">&quot;PORTD5&quot;</span></a>
-<a class="sourceLine" id="cb2-10" data-line-number="10"></a>
-<a class="sourceLine" id="cb2-11" data-line-number="11">ledOn  led <span class="fu">=</span> action (\v <span class="ot">-&gt;</span> <span class="st">&quot;PORTD |= _BV(&quot;</span> <span class="fu">++</span> led <span class="fu">++</span> <span class="st">&quot;)&quot;</span>)  []</a>
-<a class="sourceLine" id="cb2-12" data-line-number="12">ledOff led <span class="fu">=</span> action (\v <span class="ot">-&gt;</span> <span class="st">&quot;PORTD &amp;= ~_BV(&quot;</span> <span class="fu">++</span> led <span class="fu">++</span> <span class="st">&quot;)&quot;</span>) []</a>
-<a class="sourceLine" id="cb2-13" data-line-number="13"></a>
-<a class="sourceLine" id="cb2-14" data-line-number="14"><span class="co">-- | Our main Atom program.</span></a>
-<a class="sourceLine" id="cb2-15" data-line-number="15"><span class="ot">spaceship ::</span> <span class="dt">Atom</span> ()</a>
-<a class="sourceLine" id="cb2-16" data-line-number="16">spaceship <span class="fu">=</span> <span class="kw">do</span></a>
-<a class="sourceLine" id="cb2-17" data-line-number="17">    switchState <span class="ot">&lt;-</span> bool <span class="st">&quot;switchState&quot;</span> <span class="dt">True</span></a>
-<a class="sourceLine" id="cb2-18" data-line-number="18"></a>
-<a class="sourceLine" id="cb2-19" data-line-number="19">    <span class="co">-- read into switchState</span></a>
-<a class="sourceLine" id="cb2-20" data-line-number="20">    call <span class="st">&quot;readButton&quot;</span></a>
-<a class="sourceLine" id="cb2-21" data-line-number="21"></a>
-<a class="sourceLine" id="cb2-22" data-line-number="22">    atom <span class="st">&quot;standBy&quot;</span> <span class="fu">$</span> <span class="kw">do</span></a>
-<a class="sourceLine" id="cb2-23" data-line-number="23">        cond <span class="fu">$</span> not_ (value switchState)</a>
-<a class="sourceLine" id="cb2-24" data-line-number="24">        ledOn greenLED</a>
-<a class="sourceLine" id="cb2-25" data-line-number="25">        ledOff redLED1</a>
-<a class="sourceLine" id="cb2-26" data-line-number="26">        ledOff redLED2</a>
-<a class="sourceLine" id="cb2-27" data-line-number="27"></a>
-<a class="sourceLine" id="cb2-28" data-line-number="28">    atom <span class="st">&quot;blinking&quot;</span> <span class="fu">$</span> <span class="kw">do</span></a>
-<a class="sourceLine" id="cb2-29" data-line-number="29">        cond (value switchState)</a>
-<a class="sourceLine" id="cb2-30" data-line-number="30">        ledOff greenLED</a>
-<a class="sourceLine" id="cb2-31" data-line-number="31"></a>
-<a class="sourceLine" id="cb2-32" data-line-number="32">        <span class="kw">let</span> halfDelay <span class="fu">=</span> <span class="dv">25000</span></a>
-<a class="sourceLine" id="cb2-33" data-line-number="33">        <span class="kw">let</span> blinkPeriod <span class="fu">=</span> <span class="dv">2</span> <span class="fu">*</span> halfDelay</a>
-<a class="sourceLine" id="cb2-34" data-line-number="34"></a>
-<a class="sourceLine" id="cb2-35" data-line-number="35">        period blinkPeriod <span class="fu">$</span> phase <span class="dv">0</span> <span class="fu">$</span> atom <span class="st">&quot;blink1&quot;</span> <span class="fu">$</span> <span class="kw">do</span></a>
-<a class="sourceLine" id="cb2-36" data-line-number="36">            ledOff redLED1</a>
-<a class="sourceLine" id="cb2-37" data-line-number="37">            ledOn  redLED2</a>
-<a class="sourceLine" id="cb2-38" data-line-number="38"></a>
-<a class="sourceLine" id="cb2-39" data-line-number="39">        period blinkPeriod <span class="fu">$</span> phase halfDelay <span class="fu">$</span> atom <span class="st">&quot;blink2&quot;</span> <span class="fu">$</span> <span class="kw">do</span></a>
-<a class="sourceLine" id="cb2-40" data-line-number="40">            ledOn  redLED1</a>
-<a class="sourceLine" id="cb2-41" data-line-number="41">            ledOff redLED2</a>
-<a class="sourceLine" id="cb2-42" data-line-number="42"></a>
-<a class="sourceLine" id="cb2-43" data-line-number="43"><span class="ot">cHeader ::</span> <span class="dt">String</span></a>
-<a class="sourceLine" id="cb2-44" data-line-number="44">cHeader <span class="fu">=</span> [here|</a>
-<a class="sourceLine" id="cb2-45" data-line-number="45">#include &lt;avr/io.h&gt;</a>
-<a class="sourceLine" id="cb2-46" data-line-number="46"></a>
-<a class="sourceLine" id="cb2-47" data-line-number="47">static inline void readButton(void);</a>
-<a class="sourceLine" id="cb2-48" data-line-number="48">|]</a>
-<a class="sourceLine" id="cb2-49" data-line-number="49"></a>
-<a class="sourceLine" id="cb2-50" data-line-number="50"><span class="ot">cFooter ::</span> <span class="dt">String</span></a>
-<a class="sourceLine" id="cb2-51" data-line-number="51">cFooter <span class="fu">=</span> [here|</a>
-<a class="sourceLine" id="cb2-52" data-line-number="52">static inline void readButton() {</a>
-<a class="sourceLine" id="cb2-53" data-line-number="53">    // read switch state into the Atom variable</a>
-<a class="sourceLine" id="cb2-54" data-line-number="54">    state.Spaceship.switchState = (PIND &amp; _BV(PORTD2)) != 0;</a>
-<a class="sourceLine" id="cb2-55" data-line-number="55">}</a>
-<a class="sourceLine" id="cb2-56" data-line-number="56"></a>
-<a class="sourceLine" id="cb2-57" data-line-number="57">int main (void) {</a>
-<a class="sourceLine" id="cb2-58" data-line-number="58">    // Set input PD2,</a>
-<a class="sourceLine" id="cb2-59" data-line-number="59">    // Set output PD3, PD4, PD5</a>
-<a class="sourceLine" id="cb2-60" data-line-number="60">    DDRD &amp;= ~_BV(DDD2);</a>
-<a class="sourceLine" id="cb2-61" data-line-number="61">    DDRD |= _BV(DDD3) | _BV(DDD4) | _BV(DDD5);</a>
-<a class="sourceLine" id="cb2-62" data-line-number="62"></a>
-<a class="sourceLine" id="cb2-63" data-line-number="63">    while(1) {</a>
-<a class="sourceLine" id="cb2-64" data-line-number="64">        Spaceship();</a>
-<a class="sourceLine" id="cb2-65" data-line-number="65">    }</a>
-<a class="sourceLine" id="cb2-66" data-line-number="66"></a>
-<a class="sourceLine" id="cb2-67" data-line-number="67">    return 0; // Never reaches</a>
-<a class="sourceLine" id="cb2-68" data-line-number="68">}</a>
-<a class="sourceLine" id="cb2-69" data-line-number="69">|]</a>
-<a class="sourceLine" id="cb2-70" data-line-number="70"></a>
-<a class="sourceLine" id="cb2-71" data-line-number="71"><span class="ot">main ::</span> <span class="dt">IO</span> ()</a>
-<a class="sourceLine" id="cb2-72" data-line-number="72">main <span class="fu">=</span> <span class="kw">do</span></a>
-<a class="sourceLine" id="cb2-73" data-line-number="73">    <span class="kw">let</span> atomName <span class="fu">=</span> <span class="st">&quot;Spaceship&quot;</span></a>
-<a class="sourceLine" id="cb2-74" data-line-number="74">    <span class="kw">let</span> code _ _ _ <span class="fu">=</span> (cHeader, cFooter)</a>
-<a class="sourceLine" id="cb2-75" data-line-number="75">    <span class="kw">let</span> cfg <span class="fu">=</span> defaults {cCode <span class="fu">=</span> code,</a>
-<a class="sourceLine" id="cb2-76" data-line-number="76">                        cRuleCoverage <span class="fu">=</span> <span class="dt">False</span>,</a>
-<a class="sourceLine" id="cb2-77" data-line-number="77">                        cAssert <span class="fu">=</span> <span class="dt">False</span>}</a>
-<a class="sourceLine" id="cb2-78" data-line-number="78">    (schedule, _, _, _, _) <span class="ot">&lt;-</span> compile atomName cfg spaceship</a>
-<a class="sourceLine" id="cb2-79" data-line-number="79">    putStrLn <span class="fu">$</span> reportSchedule schedule</a></code></pre></div>
+<pre class="haskell"><code>{-# LANGUAGE QuasiQuotes #-}
+module Spaceship (main) where
+
+import Text.Heredoc
+import Language.Atom
+
+greenLED = &quot;PORTD3&quot;
+redLED1  = &quot;PORTD4&quot;
+redLED2  = &quot;PORTD5&quot;
+
+ledOn  led = action (\v -&gt; &quot;PORTD |= _BV(&quot; ++ led ++ &quot;)&quot;)  []
+ledOff led = action (\v -&gt; &quot;PORTD &amp;= ~_BV(&quot; ++ led ++ &quot;)&quot;) []
+
+-- | Our main Atom program.
+spaceship :: Atom ()
+spaceship = do
+    switchState &lt;- bool &quot;switchState&quot; True
+
+    -- read into switchState
+    call &quot;readButton&quot;
+
+    atom &quot;standBy&quot; $ do
+        cond $ not_ (value switchState)
+        ledOn greenLED
+        ledOff redLED1
+        ledOff redLED2
+
+    atom &quot;blinking&quot; $ do
+        cond (value switchState)
+        ledOff greenLED
+
+        let halfDelay = 25000
+        let blinkPeriod = 2 * halfDelay
+
+        period blinkPeriod $ phase 0 $ atom &quot;blink1&quot; $ do
+            ledOff redLED1
+            ledOn  redLED2
+
+        period blinkPeriod $ phase halfDelay $ atom &quot;blink2&quot; $ do
+            ledOn  redLED1
+            ledOff redLED2
+
+cHeader :: String
+cHeader = [here|
+#include &lt;avr/io.h&gt;
+
+static inline void readButton(void);
+|]
+
+cFooter :: String
+cFooter = [here|
+static inline void readButton() {
+    // read switch state into the Atom variable
+    state.Spaceship.switchState = (PIND &amp; _BV(PORTD2)) != 0;
+}
+
+int main (void) {
+    // Set input PD2,
+    // Set output PD3, PD4, PD5
+    DDRD &amp;= ~_BV(DDD2);
+    DDRD |= _BV(DDD3) | _BV(DDD4) | _BV(DDD5);
+
+    while(1) {
+        Spaceship();
+    }
+
+    return 0; // Never reaches
+}
+|]
+
+main :: IO ()
+main = do
+    let atomName = &quot;Spaceship&quot;
+    let code _ _ _ = (cHeader, cFooter)
+    let cfg = defaults {cCode = code,
+                        cRuleCoverage = False,
+                        cAssert = False}
+    (schedule, _, _, _, _) &lt;- compile atomName cfg spaceship
+    putStrLn $ reportSchedule schedule</code></pre>
 <p>Remarks:</p>
 <ul>
-<li><p>There’re obviously other ways of writing the “interface with C” bits in the Haskell code. – There’re other ways to implement the C code, too.</p></li>
+<li><p>There’re obviously other ways of writing the “interface with C” bits in the
+Haskell code. – There’re other ways to implement the C code, too.</p></li>
 <li><p>The Atom code <strong>is</strong> longer.<br />
-<em>But</em>. In a contest between “which is more obvious to read?”, I’d say the Atom code wins hands-down, once you understand that Atom is declarative. (Only 1 comment in the Atom part!).<br />
-– In a contest of “refactorability”/“changeability”, surely Atom wins here, too: the seam-points and abstractions, and thus <em>where</em> and <em>what</em> to change, are evident.<br />
-– The extra length comes from various `atom “ruleName $ do” lines (which build ‘abstractions’ of instructions), as well as the Atom boilerplate, and the C footer/header to do the low-level operations (where the code is basically the same as my C implementation).</p></li>
-<li>If I must explain on the program:<br />
-It’s structured:
+<em>But</em>. In a contest between “which is more obvious to read?”, I’d say the
+Atom code wins hands-down, once you understand that Atom is declarative.
+(Only 1 comment in the Atom part!).<br />
+– In a contest of “refactorability”/“changeability”, surely Atom wins
+here, too: the seam-points and abstractions, and thus <em>where</em> and <em>what</em> to
+change, are evident.<br />
+– The extra length comes from various `atom “ruleName $ do” lines (which
+build ‘abstractions’ of instructions), as well as the Atom boilerplate, and
+the C footer/header to do the low-level operations (where the code is
+basically the same as my C implementation).</p></li>
+<li><p>If I must explain on the program:<br />
+It’s structured:</p>
 <ul>
 <li>Stuff which <code>spaceship :: Atom ()</code> uses,</li>
 <li>The main Atom program (<code>spaceship :: Atom ()</code>),<br />
-– This is further broken down into “declaration (of a variable)”, and the various “rules” of “compute-what, when-what, at what period/phase”.</li>
+– This is further broken down into “declaration (of a variable)”, and
+the various “rules” of “compute-what, when-what, at what period/phase”.</li>
 <li>The C interface &amp; low-level code,</li>
 <li>The Atom boilerplate.</li>
 </ul></li>
-<li><p>Haskell usually has a promise like “if it compiles, it works” (with a footnote of “until you get a memory leak”). – Whether that applies to Atom constructs depends on the Atom compiler.</p></li>
-<li><p>There are implicit couplings between the Atom and the C code in the above program: <code>state.Spaceship.switchState</code> (in the C) depends on variables in Haskell’s <code>main</code>, as well as in the <code>spaceship :: Atom ()</code> construct. – Similarly, <code>ledOn</code>, etc. in Haskell reference <code>PORTD</code>.<br />
+<li><p>Haskell usually has a promise like “if it compiles, it works” (with a
+footnote of “until you get a memory leak”). – Whether that applies to Atom
+constructs depends on the Atom compiler.</p></li>
+<li><p>There are implicit couplings between the Atom and the C code in the above
+program: <code>state.Spaceship.switchState</code> (in the C) depends on variables in
+Haskell’s <code>main</code>, as well as in the <code>spaceship :: Atom ()</code> construct. –
+Similarly, <code>ledOn</code>, etc. in Haskell reference <code>PORTD</code>.<br />
 – I’m not sure how to minimise such couplings.</p></li>
-<li><p>For a contrivedly (or, pedagogically) simple program, the advantage to using Atom is outweighed by the length.</p></li>
-<li><p>The <code>25000</code> seems pretty magic to me. (And I guess if you need precise timing, you’d be more explicit about that in the C code).</p></li>
-<li><p>Wow, Make <a href="https://raw.githubusercontent.com/rgoulter/arduino-atom-examples/059aa93be42f4f523aa4802a69fbdb7ec95f9d33/spaceshipinterface/atom/Makefile">can be useful</a>.</p></li>
+<li><p>For a contrivedly (or, pedagogically) simple program, the advantage to using
+Atom is outweighed by the length.</p></li>
+<li><p>The <code>25000</code> seems pretty magic to me. (And I guess if you need precise
+timing, you’d be more explicit about that in the C code).</p></li>
+<li><p>Wow, Make <a href="https://raw.githubusercontent.com/rgoulter/arduino-atom-examples/059aa93be42f4f523aa4802a69fbdb7ec95f9d33/spaceshipinterface/atom/Makefile">can be
+useful</a>.</p></li>
 </ul>
 
 <hr />
@@ -282,6 +316,19 @@ It’s structured:
 <br style="clear: both;" />
 
 <hr />
+
+<!-- Load highlight.js for Syntax Highlighting. -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/bash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/c.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/gherkin.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/haskell.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/lisp.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/nix.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js"></script>
+<script>hljs.highlightAll();</script>
 
             </div>
 

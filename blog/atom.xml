@@ -15,26 +15,44 @@
     <id>http://www.rgoulter.com/blog//posts/programming/2022-05-19-tool-recommendation-helix-editor.html</id>
     <published>2022-05-19T00:00:00Z</published>
     <updated>2022-05-19T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<p>The <a href="https://helix-editor.com/">Helix editor</a> is a fancy new text editor which looks to be a compelling competitor to vim for modern developer environments.</p>
-<p>Currently, my preferred editing environment is Emacs, making use of the Doom Emacs distribution.</p>
-<p>Before that, I was using vim (and its cousin, neovim). And I still use neovim for editing files from the command line.</p>
-<p>But, I’d heard of <a href="http://kakoune.org/">kakoune</a>. Kakoune takes the “verb + text object” text navigation and manipulation of Vim, and flips it into a more user friendly direction: Kakoune opts for “text object + verb”.</p>
-<p>This seems like it would soften the rough edges of the finer parts of vim. It’s often easier to make use of vim’s visual mode, and then copy/delete/replace that selection.</p>
-<p>So. The <a href="https://helix-editor.com/">Helix editor</a>, another text editor, is interesting for a few reasons:</p>
+    <summary type="html"><![CDATA[<p>The <a href="https://helix-editor.com/">Helix editor</a> is a fancy new text editor which
+looks to be a compelling competitor to vim for modern developer environments.</p>
+<p>Currently, my preferred editing environment is Emacs, making use of the Doom
+Emacs distribution.</p>
+<p>Before that, I was using vim (and its cousin, neovim). And I still use
+neovim for editing files from the command line.</p>
+<p>But, I’d heard of <a href="http://kakoune.org/">kakoune</a>. Kakoune takes the “verb +
+text object” text navigation and manipulation of Vim, and flips it into a more
+user friendly direction: Kakoune opts for “text object + verb”.</p>
+<p>This seems like it would soften the rough edges of the finer parts of vim. It’s
+often easier to make use of vim’s visual mode, and then copy/delete/replace that
+selection.</p>
+<p>So. The <a href="https://helix-editor.com/">Helix editor</a>, another text editor, is
+interesting for a few reasons:</p>
 <ol type="1">
-<li><p>It takes the same user-friendly “text object + verb” approach that kakoune used. (This also allows for powerful multi-cursor text manipulation).</p></li>
-<li><p>It leverages <a href="https://microsoft.github.io/language-server-protocol/">language server protocol (LSP)</a>, which enables editor integration with language compilers, allowing for code completion or quickly bringing up documentation.</p></li>
-<li><p>It leverages <a href="https://tree-sitter.github.io/tree-sitter/">tree sitter</a>. This allows different editors to share parsers for different languages, for syntax highlighting, or perhaps navigation of text objects.</p></li>
+<li><p>It takes the same user-friendly “text object + verb” approach that kakoune
+used. (This also allows for powerful multi-cursor text manipulation).</p></li>
+<li><p>It leverages <a href="https://microsoft.github.io/language-server-protocol/">language server protocol
+(LSP)</a>, which enables
+editor integration with language compilers, allowing for code completion or
+quickly bringing up documentation.</p></li>
+<li><p>It leverages <a href="https://tree-sitter.github.io/tree-sitter/">tree sitter</a>. This
+allows different editors to share parsers for different languages, for syntax
+highlighting, or perhaps navigation of text objects.</p></li>
 </ol>
 <p>So. It’s got a few fancy features, each are worth being excited about.</p>
 <p>So I’ve given it a try.</p>
 <p>Overall, as a vim user, trying out Helix has the following loop:</p>
 <ol type="1">
 <li><p>Try and use Helix as if it’s vim (but swapping text object and action).</p></li>
-<li><p>Be surprised when something doesn’t work, because Helix isn’t vim, so look up the equivalent action, and remember to use the Helix keybinding.</p></li>
+<li><p>Be surprised when something doesn’t work, because Helix isn’t vim,
+so look up the equivalent action, and remember to use the Helix
+keybinding.</p></li>
 </ol>
-<p>I’d say the ‘trouble’ here is that with Vim, there’s a long tail of keybindings which you’ll use infrequently.</p>
-<p>e.g. it took me a while to notice that Helix doesn’t open directories in a buffer. (Whereas, vim has netrw, and Emacs has dired).</p>
+<p>I’d say the ‘trouble’ here is that with Vim, there’s a long tail of keybindings
+which you’ll use infrequently.</p>
+<p>e.g. it took me a while to notice that Helix doesn’t open directories in
+a buffer. (Whereas, vim has netrw, and Emacs has dired).</p>
 <p>Overall, Helix’s keybindings seem consistent and well thought out.</p>
 <p>e.g. my current “rosetta stone” is:</p>
 <table>
@@ -150,7 +168,7 @@
 <td></td>
 <td>gU</td>
 <td></td>
-<td>Alt+<code>| to uppercase                               | |          | vi&quot;        |            | vmi&quot;   | prefix sequence with</code>m` for things.</td>
+<td>Alt+<code>| to uppercase                               | |          | vi"        |            | vmi"   | prefix sequence with</code>m` for things.</td>
 <td></td>
 </tr>
 </tbody>
@@ -163,21 +181,48 @@
     <id>http://www.rgoulter.com/blog//posts/programming/2022-05-01-use-of-anki-for-programming.html</id>
     <published>2022-05-01T00:00:00Z</published>
     <updated>2022-05-01T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<p>Anki is software which helps you to review flash cards. What’s notable about it is it uses the idea of Spaced Repitition; by getting you to recall something at approximately the time you would otherwise have forgotten it, you’re better able to recall some fact at increasingly long intervals.</p>
-<p>This is useful for foreign language learning (or health science) where you’ll want to recall terms, sometimes with low frequency.</p>
-<p>One serious article I’ve seen about using Anki for non-language stuff was this: <a href="http://augmentingcognition.com/ltm.html" class="uri">http://augmentingcognition.com/ltm.html</a></p>
-<p>One quick take-away I recall is just the emphasis that Anki isn’t a completely magical to help you remember everything.</p>
-<p>For things you use frequently anyway, Anki won’t be of much help. And for things you wish to recall in infrequent contexts, Anki is going to require much more effort than it’s worth. (As in, it’s harder to remember because you won’t have motivation to use it).</p>
+    <summary type="html"><![CDATA[<p>Anki is software which helps you to review flash cards.
+What’s notable about it is it uses the idea of Spaced Repitition;
+by getting you to recall something at approximately the time you
+would otherwise have forgotten it, you’re better able to recall
+some fact at increasingly long intervals.</p>
+<p>This is useful for foreign language learning (or health science)
+where you’ll want to recall terms, sometimes with low frequency.</p>
+<p>One serious article I’ve seen about using Anki for non-language stuff
+was this:
+<a href="http://augmentingcognition.com/ltm.html" class="uri">http://augmentingcognition.com/ltm.html</a></p>
+<p>One quick take-away I recall is just the emphasis that Anki isn’t
+a completely magical to help you remember everything.</p>
+<p>For things you use frequently anyway, Anki won’t be of much help.
+And for things you wish to recall in infrequent contexts,
+Anki is going to require much more effort than it’s worth. (As in,
+it’s harder to remember because you won’t have motivation to use it).</p>
 <p>For programming, I’ve only used Anki slightly.</p>
-<p>To give a somewhat specific example of how I’ve used it: e.g. I noticed I wanted to be able to recall the different <code>ServiceType</code>s of a Kubernetes <code>Service</code>. e.g. per https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services-service-types<br />
-I think once you understand the concept, recalling the facts of it is easier.<br />
-Short of that, the easiest flashcard to make is with a brute-force approach which enumerates the types. (Which is not terrible in this case, since there are four types).<br />
-I’d say it would be better to then later create more flash cards about the topic. e.g. in this case, flashcards about what the default service type is, and flashcards in the form “service type which exposes service on a port on each node” or “service type which uses cloud provider’s load balancer”, etc.</p>
-<p>Another example I have been trying recently has been keybindings. e.g. I want to be able to use the fancy Helix editor, or to get more out of Doom Emacs.<br />
+<p>To give a somewhat specific example of how I’ve used it:
+e.g. I noticed I wanted to be able to recall the different <code>ServiceType</code>s
+of a Kubernetes <code>Service</code>. e.g. per https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services-service-types<br />
+I think once you understand the concept, recalling the facts of it
+is easier.<br />
+Short of that, the easiest flashcard to make is with a brute-force
+approach which enumerates the types. (Which is not terrible in this case,
+since there are four types).<br />
+I’d say it would be better to then later create more flash cards about the
+topic. e.g. in this case, flashcards about what the default service type is,
+and flashcards in the form “service type which exposes service on a port on
+each node” or “service type which uses cloud provider’s load balancer”, etc.</p>
+<p>Another example I have been trying recently has been keybindings.
+e.g. I want to be able to use the fancy Helix editor, or to get
+more out of Doom Emacs.<br />
 Keybindings which work well in you workflow are easy to remember.<br />
-But.. I think it’s always easier to continue doing something in an known-and-adequate-but-bad way rather than a nice-but-unknown way.<br />
-I think writing up flashcards for anki helps to build the mental model for what the mnemonics for the keybindings are. And I think “I’d like to use this functionality, but can’t recall the keybinding” is close to that margin of “frequent enough to want to recall it, infrequent enough such that you’re not using it all the time”.</p>
-<p>In the worst case, I think Anki flashcards are a useful intermediate artifact to aim for when studying.</p>]]></summary>
+But.. I think it’s always easier to continue doing something in an
+known-and-adequate-but-bad way rather than a nice-but-unknown way.<br />
+I think writing up flashcards for anki helps to build the mental
+model for what the mnemonics for the keybindings are. And I think
+“I’d like to use this functionality, but can’t recall the keybinding”
+is close to that margin of “frequent enough to want to recall it,
+infrequent enough such that you’re not using it all the time”.</p>
+<p>In the worst case, I think Anki flashcards are a useful intermediate artifact
+to aim for when studying.</p>]]></summary>
 </entry>
 <entry>
     <title>Prime Video's Invincible is Wonderful</title>
@@ -185,23 +230,55 @@ I think writing up flashcards for anki helps to build the mental model for what 
     <id>http://www.rgoulter.com/blog//posts/narrative/2022-05-01-prime-videos-invincible-is-wonderful.html</id>
     <published>2022-05-01T00:00:00Z</published>
     <updated>2022-05-01T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<p>Amazon Prime Video’s “Invincible” is probably most well known for <a href="https://knowyourmeme.com/memes/think-mark/">the meme image</a>.</p>
-<p>I saw it <a href="https://www.youtube.com/watch?v=_1Mlm2LLcs0">recommended by the YouTube channel “Critical Drinker”</a>.</p>
+    <summary type="html"><![CDATA[<p>Amazon Prime Video’s “Invincible” is probably most well known
+for <a href="https://knowyourmeme.com/memes/think-mark/">the meme image</a>.</p>
+<p>I saw it <a href="https://www.youtube.com/watch?v=_1Mlm2LLcs0">recommended by the YouTube channel “Critical
+Drinker”</a>.</p>
 <p>So I watched the show, it’s pretty good!</p>
-<p>In the same way that “Rick and Morty”’s Rick and Morty are kinda bastardised versions of “Back to the Future”’s Doc and Marty, “Invincible” is kindof a bastardised homage to superhero media the same way “The Incredibles” is.</p>
-<p>It’s both a bit dark, at times emphasising cosmic-horror themes that underlie superhero shows, as well as poking fun of superhero motifs.</p>
+<p>In the same way that “Rick and Morty”’s Rick and Morty are kinda bastardised
+versions of “Back to the Future”’s Doc and Marty,
+“Invincible” is kindof a bastardised homage to superhero media the same way
+“The Incredibles” is.</p>
+<p>It’s both a bit dark, at times emphasising cosmic-horror themes that underlie
+superhero shows, as well as poking fun of superhero motifs.</p>
 <p>I find the show suspenseful and subversive.</p>
-<p>“Subversive” seems almost a joke term with regards to how it was used to describe Star Wars’ “The Last Jedi”. TLJ pretty much shits on the legacy that came before it.. I think to the point where it’s so different from the material it’s ‘subverting’, that it’s not interesting to watch.</p>
-<p>A better example of “subversive”, I think, was in the side quests of the game “The Witcher 3”. In the Witcher 3, you play a fantasy wizard-warrior. The game follows your expectations about 90% of the time. As in, 90% of the time, playing a heroic figure who rescues the people from monsters works out well, but 10% of the time you’ll be punished for being naive or foolish or whatever.</p>
+<p>“Subversive” seems almost a joke term with regards to how it was used to
+describe Star Wars’ “The Last Jedi”. TLJ pretty much shits on the legacy that
+came before it.. I think to the point where it’s so different from the material
+it’s ‘subverting’, that it’s not interesting to watch.</p>
+<p>A better example of “subversive”, I think, was in the side quests of the game
+“The Witcher 3”. In the Witcher 3, you play a fantasy wizard-warrior. The game
+follows your expectations about 90% of the time. As in, 90% of the time,
+playing a heroic figure who rescues the people from monsters works out well,
+but 10% of the time you’ll be punished for being naive or foolish or whatever.</p>
 <p>I think with “Invincible”, it’s similar.<br />
-The show knows what you’re set to expect, and will deliver on that most of the time; but will vary from that <em>just</em> enough to keep you on your toes.<br />
-So you end up with 3 or 4 plots going throughout the story where you’re not sure whether you can trust the characters or not.</p>
-<p>I think the premise of the show is more interesting than the characters or plot of the show, though. – I found “Rick and Morty” less interesting as the show seemed to try to develop its characters.. but the characters are only really interesting as archetypes in the weird situations.<br />
-Invincible’s characters are largely not-Superman, not-the-Justice-League, etc. and I enjoyed them as they played a part in this half-ironic, mature interpretation of superhero stories.</p>
+The show knows what you’re set to expect, and will deliver on that most of the
+time; but will vary from that <em>just</em> enough to keep you on your toes.<br />
+So you end up with 3 or 4 plots going throughout the story where you’re not sure
+whether you can trust the characters or not.</p>
+<p>I think the premise of the show is more interesting than the characters or plot
+of the show, though. – I found “Rick and Morty” less interesting as the show
+seemed to try to develop its characters.. but the characters are only really
+interesting as archetypes in the weird situations.<br />
+Invincible’s characters are largely not-Superman, not-the-Justice-League, etc.
+and I enjoyed them as they played a part in this half-ironic, mature
+interpretation of superhero stories.</p>
 <p>The show’s worst part is definitely the main character’s love interest.<br />
-The love interest is the kind of person who reads Ta Nehisi Coates.. the character certainly doesn’t seem to get the same edgy interpretation treatment the rest of the show tells its story from. (Unless the love interest’s character is supposed to subvert our expectations that the superhero’s love interest be a likeable character. Which, maybe is the intent).<br />
-– I was fairly annoyed by one plot point: love interest and the main character are visiting a college campus when a villain terrorises the square. The main character runs off to Clarke-Kent-into-Superman, then fights and stops the villain. Afterwards, the love interest chastises the main character for running away and not helping people(?!). – We then find out she had already figured out that her boyfriend was the superhero. – It comes across as holier-than-thou, smarter-than-thou, author’s-daughter-stand-in character.</p>
-<p>So. I dunno if the story’s going to be able to keep up the momentum. But, I think the edgy, humorous interpretation of popular culture is interesting. I think it’d be interesting to see Star Wars or whatever in a similar manner.</p>]]></summary>
+The love interest is the kind of person who reads Ta Nehisi Coates.. the
+character certainly doesn’t seem to get the same edgy interpretation treatment
+the rest of the show tells its story from. (Unless the love interest’s character
+is supposed to subvert our expectations that the superhero’s love interest be
+a likeable character. Which, maybe is the intent).<br />
+– I was fairly annoyed by one plot point: love interest and the main character
+are visiting a college campus when a villain terrorises the square. The main
+character runs off to Clarke-Kent-into-Superman, then fights and stops the
+villain. Afterwards, the love interest chastises the main character for running
+away and not helping people(?!). – We then find out she had already
+figured out that her boyfriend was the superhero. – It comes across as
+holier-than-thou, smarter-than-thou, author’s-daughter-stand-in character.</p>
+<p>So. I dunno if the story’s going to be able to keep up the momentum.
+But, I think the edgy, humorous interpretation of popular culture is interesting.
+I think it’d be interesting to see Star Wars or whatever in a similar manner.</p>]]></summary>
 </entry>
 <entry>
     <title>Bridgerton 2</title>
@@ -215,27 +292,46 @@ The sweet parts are properly sweet.</p>
 <p>But.</p>
 <p>It’s long.</p>
 <p>It’s loooooooooooooooooong.</p>
-<p>I was ambivalent about Season 1. The season was filled half with a sweet romantic story, and half with a bitter cynical dramatic story.<br />
+<p>I was ambivalent about Season 1. The season was filled half with a sweet
+romantic story, and half with a bitter cynical dramatic story.<br />
 I didn’t like the mix.</p>
-<p>Season 2 is mostly devoit of the bitter cynical drama stuff that polluted Season 1.<br />
+<p>Season 2 is mostly devoit of the bitter cynical drama stuff that polluted
+Season 1.<br />
 But.<br />
 It seemed to drag on a bit.</p>
-<p>I liked the first half of the season, which proceeds at a steady pace through the will-they/will-they relationship between the Hero and Heroine. The two have witty banter. As characters, they both feel bound by duty to do their best to help their family.<br />
-By halfway, the story seems to reach its climax. (The skeleton of it being that the Hero was going to marry the most popular girl of the year, the Heroine’s sister. The wedding was planned to be big/fancy, but the Hero ruins the wedding by giving the Heroine hungry eyes).<br />
-Which leaves half the season left to meander around for the Hero to admit his love for the Herione. And not much plot which rises to the level of “big fancy wedding” to do it with. (The two families are both snubbed in scandal because of it, but by the end their popular reputation is restored because they were nice to the Queen).</p>
-<p>Listening to the instrumental arrangements of pop songs that play in the season is very fun, and brings the best parts of the season to mind!</p>
-<p>I think that explains why Season 1 was filled with the bitter cynical dramatic crap.<br />
+<p>I liked the first half of the season, which proceeds at a steady pace through
+the will-they/will-they relationship between the Hero and Heroine. The two have
+witty banter. As characters, they both feel bound by duty to do their best to
+help their family.<br />
+By halfway, the story seems to reach its climax. (The skeleton of it being that
+the Hero was going to marry the most popular girl of the year, the Heroine’s
+sister. The wedding was planned to be big/fancy, but the Hero ruins the
+wedding by giving the Heroine hungry eyes).<br />
+Which leaves half the season left to meander around for the Hero to admit his
+love for the Herione. And not much plot which rises to the level of “big fancy
+wedding” to do it with. (The two families are both snubbed in scandal because
+of it, but by the end their popular reputation is restored because they were
+nice to the Queen).</p>
+<p>Listening to the instrumental arrangements of pop songs that play in the
+season is very fun, and brings the best parts of the season to mind!</p>
+<p>I think that explains why Season 1 was filled with the bitter cynical dramatic
+crap.<br />
 It pads out the meat of the romance to help with pacing.<br />
 (That they chose bitter crap to pad it with is just a weird decision).</p>
 <p>For Season 2, the writers apparently decided to chill out on the bitterness.<br />
 The padding is still dramatic fluff.<br />
 I don’t think the show would be worth watching if it were just this padding.<br />
 It’s not terrible, but it’s also not fun or particularly engaging.<br />
-e.g. one arc has B. Bridgerton (not the main character in this season) hope to attend an art school, get into the art school, later discover that he got into the school because his rich family donated money to the school, so he quits the art school.<br />
+e.g. one arc has B. Bridgerton (not the main character in this season) hope to
+attend an art school, get into the art school, later discover that he got into
+the school because his rich family donated money to the school, so he quits the
+art school.<br />
 Not terrible.<br />
 But. idk. I just don’t find it compelling.</p>
-<p>(And the fun instrumental pop arrangements don’t bring to mind any of this fluff, either!).</p>
-<p>Overall, I’m glad Season 2 has got less of the bitter crap that Season 1 had. I’m happy that the sweet romantic parts were sweet.</p>]]></summary>
+<p>(And the fun instrumental pop arrangements don’t bring to mind any of this
+fluff, either!).</p>
+<p>Overall, I’m glad Season 2 has got less of the bitter crap that Season 1 had.
+I’m happy that the sweet romantic parts were sweet.</p>]]></summary>
 </entry>
 <entry>
     <title>Project Specific Tooling in Emacs with Nix Flakes and Direnv</title>
@@ -243,20 +339,31 @@ But. idk. I just don’t find it compelling.</p>
     <id>http://www.rgoulter.com/blog//posts/programming/2022-03-21-project-specific-tooling-in-emacs-with-nix-flakes-and-direnv.html</id>
     <published>2022-03-21T00:00:00Z</published>
     <updated>2022-03-21T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<p>One use-case for <a href="https://nixos.org/">nix</a> is to describe the tools/dependencies used on a per-project basis. – This is similar to <a href="https://code.visualstudio.com/docs/remote/containers">VSCode’s Remote Containers</a>, but without the containers.</p>
+    <summary type="html"><![CDATA[<p>One use-case for <a href="https://nixos.org/">nix</a> is to describe the
+tools/dependencies used on a per-project basis. – This is similar to <a href="https://code.visualstudio.com/docs/remote/containers">VSCode’s
+Remote Containers</a>, but
+without the containers.</p>
 <p>We can achieve this in Emacs by leveraging direnv, nix-direnv, and emacs-direnv.</p>
-<p><a href="https://direnv.net/">direnv</a> provides a neat way of specifying environment variables in a per-directory basis.</p>
-<p>Since direnv runs arbitrary bash code in the <code>.envrc</code> files, it’s possible to use direnv to automatically load programs specified in a nix file into the enviroment.</p>
-<p>With the new flake-aware <code>nix</code> cli commands, a <code>flake.nix</code> file is preferred over <code>shell.nix</code> or <code>default.nix</code>. The <a href="https://github.com/nix-community/nix-direnv/">nix-direnv</a> project integrates direnv with nix flakes.</p>
-<p>Example <code>.envrc</code> and <code>flake.nix</code> files are given in <a href="https://github.com/nix-community/nix-direnv/tree/master/template">nix-direnv’s template/ directory</a>. These can also be generated by running:</p>
-<pre><code>nix flake new -t github:nix-community/nix-direnv .</code></pre>
+<p><a href="https://direnv.net/">direnv</a> provides a neat way of specifying environment
+variables in a per-directory basis.</p>
+<p>Since direnv runs arbitrary bash code in the <code>.envrc</code> files, it’s possible to
+use direnv to automatically load programs specified in a nix file into the
+enviroment.</p>
+<p>With the new flake-aware <code>nix</code> cli commands, a <code>flake.nix</code> file is preferred
+over <code>shell.nix</code> or <code>default.nix</code>. The
+<a href="https://github.com/nix-community/nix-direnv/">nix-direnv</a> project integrates
+direnv with nix flakes.</p>
+<p>Example <code>.envrc</code> and <code>flake.nix</code> files are given in <a href="https://github.com/nix-community/nix-direnv/tree/master/template">nix-direnv’s template/
+directory</a>.
+These can also be generated by running:</p>
+<pre class="bash"><code>nix flake new -t github:nix-community/nix-direnv .</code></pre>
 <p>(and <code>direnv allow</code> to grant direnv permission to run the file).</p>
 <p>But for the sake of saving a click, it’s something like:</p>
-<pre><code>if ! has nix_direnv_version || ! nix_direnv_version 1.6.0; then
+<pre class="bash"><code>if ! has nix_direnv_version || ! nix_direnv_version 1.6.0; then
     source_url &quot;https://raw.githubusercontent.com/nix-community/nix-direnv/1.6.0/direnvrc&quot; &quot;sha256-FqqbUyxL8MZdXe5LkMgtNo95raZFbegFpl5k2+PrCow=&quot;
 fi
 use flake</code></pre>
-<pre><code>{
+<pre class="nix"><code>{
   description = &quot;A basic flake with a shell&quot;;
   inputs.nixpkgs.url = &quot;github:NixOS/nixpkgs/nixpkgs-unstable&quot;;
   inputs.flake-utils.url = &quot;github:numtide/flake-utils&quot;;
@@ -271,25 +378,30 @@ use flake</code></pre>
       };
     });
 }</code></pre>
-<p><a href="https://github.com/wbolster/emacs-direnv">emacs-direnv</a> is a package which will load the environment from direnv <code>.envrc</code> files.</p>
-<p>Since <code>emacs-direnv</code> loads the <code>.envrc</code> file, and the <code>.envrc</code> file loads the environment with the <code>devShell</code> from the <code>flake.nix</code>, Emacs will use the programs from the <code>devShell</code>. (As can be verified by evaluating <code>(getenv &quot;PATH&quot;)</code> or <code>(executable-find &quot;bash&quot;)</code>, or whatever).</p>
-<p>e.g. for Go-lang, we want <code>go</code> and <code>gopls</code>, so our <code>devShell</code> is defined in the <code>flake.nix</code> as:</p>
-<pre><code>devShell = pkgs.mkShell {
+<p><a href="https://github.com/wbolster/emacs-direnv">emacs-direnv</a> is a package which
+will load the environment from direnv <code>.envrc</code> files.</p>
+<p>Since <code>emacs-direnv</code> loads the <code>.envrc</code> file, and the <code>.envrc</code> file loads the
+environment with the <code>devShell</code> from the <code>flake.nix</code>, Emacs will use the
+programs from the <code>devShell</code>. (As can be verified by evaluating <code>(getenv "PATH")</code> or <code>(executable-find "bash")</code>, or whatever).</p>
+<p>e.g. for Go-lang, we want <code>go</code> and <code>gopls</code>, so our <code>devShell</code> is defined in the
+<code>flake.nix</code> as:</p>
+<pre class="nix"><code>devShell = pkgs.mkShell {
   packages = with pkgs; [
     go
     gopls
   ];
 };</code></pre>
 <p>e.g. for Terraform:</p>
-<pre><code>devShell = pkgs.mkShell {
+<pre class="nix"><code>devShell = pkgs.mkShell {
   packages = with pkgs; [
     terraform
     terraform-ls
     tflint
   ];
 };</code></pre>
-<p>But, using <code>terraform-ls</code> instead of <code>terraform-lsp</code> is a bit more involved. I needed to fill <code>.dir-locals.el</code> with:</p>
-<pre><code>((terraform-mode . ((eval . (progn
+<p>But, using <code>terraform-ls</code> instead of <code>terraform-lsp</code> is a bit more involved. I
+needed to fill <code>.dir-locals.el</code> with:</p>
+<pre class="elisp"><code>((terraform-mode . ((eval . (progn
                               (direnv-update-environment)
                               (setq-local lsp-terraform-server `(&quot;terraform-ls&quot; &quot;serve&quot;)))))))</code></pre>]]></summary>
 </entry>
@@ -299,32 +411,65 @@ use flake</code></pre>
     <id>http://www.rgoulter.com/blog//posts/programming/2022-02-20-using-home-manager-to-manage-symlinks-to-dotfiles.html</id>
     <published>2022-02-20T00:00:00Z</published>
     <updated>2022-02-20T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<p><a href="https://github.com/anishathalye/dotbot">dotbot</a> is a popular way of managing symlinks to dotfiles, and I used it for some time.</p>
+    <summary type="html"><![CDATA[<p><a href="https://github.com/anishathalye/dotbot">dotbot</a> is a popular way of managing
+symlinks to dotfiles, and I used it for some time.</p>
 <p>I’ve gradually been becoming more comfortable with <a href="https://nixos.org/">Nix</a>.</p>
-<p>Nix remains relatively niche, so: Nix allows programmatic management of packages installed to a computer. Nix refers to the expression language that describes these packages, the tool which evaluates these expressions. It’s also pretty closely tied to Nixpkgs (a large repository of packages), and NixOS (a Linux distribution which is configured using Nix expressions).</p>
+<p>Nix remains relatively niche, so: Nix allows programmatic management of packages
+installed to a computer. Nix refers to the expression language that describes
+these packages, the tool which evaluates these expressions. It’s also pretty
+closely tied to Nixpkgs (a large repository of packages), and NixOS (a Linux
+distribution which is configured using Nix expressions).</p>
 <p>Nix tooling is friendly towards words like “declarative” and “X-as-Code”.</p>
-<p><a href="https://github.com/nix-community/home-manager">Home Manager</a> is a popular tool which uses Nix configurations to manage a user’s environment, in a similar manner to how NixOS’s system is configured from a Nix file.<br />
-It complements NixOS, but I’ve been happy to use NixOS (or nix on macOS) without having tried home manager.</p>
-<p>I was hesitant to try Home Manager, since I didn’t wanna have “vendor lock-in” and be unable to make use of my dotfiles elsewhere.</p>
-<p>To be honest: whenever Nix pops up, I often see people say they don’t like the Nix language, and that its error messages are hard to understand. My experience with Nix before this was using it to describe Python packages, or Go applications, or describe a declarative set of packages to use, and using NixOS.<br />
-– If people’s first experience with Nix is with home manager, I can see why Nix might seem more trouble than it’s worth.</p>
-<p>Here are my notes on the steps I took, following the <a href="https://nix-community.github.io/home-manager/">home manager manual</a> and <a href="https://nixos.wiki/wiki/Home_Manager">the NixOS wiki page on Home Manager</a>.</p>
+<p><a href="https://github.com/nix-community/home-manager">Home Manager</a> is a popular tool
+which uses Nix configurations to manage a user’s environment, in a similar
+manner to how NixOS’s system is configured from a Nix file.<br />
+It complements NixOS, but I’ve been happy to use NixOS (or nix on macOS)
+without having tried home manager.</p>
+<p>I was hesitant to try Home Manager, since I didn’t wanna have “vendor lock-in”
+and be unable to make use of my dotfiles elsewhere.</p>
+<p>To be honest: whenever Nix pops up, I often see people say they don’t like the
+Nix language, and that its error messages are hard to understand. My experience
+with Nix before this was using it to describe Python packages, or Go
+applications, or describe a declarative set of packages to use, and using
+NixOS.<br />
+– If people’s first experience with Nix is with home manager, I can see why
+Nix might seem more trouble than it’s worth.</p>
+<p>Here are my notes on the steps I took, following the <a href="https://nix-community.github.io/home-manager/">home manager
+manual</a> and <a href="https://nixos.wiki/wiki/Home_Manager">the NixOS wiki page
+on Home Manager</a>.</p>
 <h1 id="a-taste-of-nixos-but-for-your-home-directory">A Taste of NixOS, but for Your Home Directory</h1>
-<p>EDIT: Having tried this a bit.. one significant difference from the dotbot approach: dotbot manages symlinks so that e.g. <code>~/.vimrc</code> links to the repository where the dotbot was run from. The home-manager approach first constructs a Nix package with the configuration files, then symlinks to these files.</p>
-<p>This demands a change in mindset, since this means the file which <code>~/.vimrc</code> symlinks to is read-only.<br />
-This makes more sense if describing the configuration files using Nix, compared to the approach described below (which attempts to model dotbot).</p>
-<p>I don’t mind “can’t edit the (generated) configuration files” when it comes to OS files. I find it slightly more awkward with configuration files for Vim or Emacs.</p>
-<p>It’s often possible for configuration files to <code>include</code> other configuration files. This is one way to “work around” the above restriction.</p>
+<p>EDIT: Having tried this a bit.. one significant difference from the dotbot
+approach: dotbot manages symlinks so that e.g. <code>~/.vimrc</code> links to the
+repository where the dotbot was run from. The home-manager approach first
+constructs a Nix package with the configuration files, then symlinks to these
+files.</p>
+<p>This demands a change in mindset, since this means the file which <code>~/.vimrc</code>
+symlinks to is read-only.<br />
+This makes more sense if describing the configuration files using Nix, compared
+to the approach described below (which attempts to model dotbot).</p>
+<p>I don’t mind “can’t edit the (generated) configuration files” when it comes to
+OS files. I find it slightly more awkward with configuration files for Vim or
+Emacs.</p>
+<p>It’s often possible for configuration files to <code>include</code> other configuration
+files. This is one way to “work around” the above restriction.</p>
 <h1 id="installing-home-manager">Installing Home Manager</h1>
 <p>I’d recently started using Nix flakes. Nix flakes are cool.</p>
-<p>So, following the <a href="https://nix-community.github.io/home-manager/index.html#ch-nix-flakes">standalone setup with Nix Flakes</a> chapter of the manual..</p>
-<p>The ‘trouble’ is, per discussion in <a href="https://github.com/nix-community/home-manager/pull/2461">nix-community/home-manager#2461</a>, Home Manager doesn’t support the new “nix command” style of profile management.<br />
-i.e. Installing a package in nix classic would be <code>nix-env -iA nixpkgs.neovim</code>, but with the new nix command style it’s <code>nix profile install nixpkgs#neovim</code>.<br />
-And the old style of command is incompatible with the new style, so you can’t use the old <code>nix-env</code> commands once you’ve used <code>nix profile</code>.</p>
+<p>So, following the <a href="https://nix-community.github.io/home-manager/index.html#ch-nix-flakes">standalone setup with Nix
+Flakes</a>
+chapter of the manual..</p>
+<p>The ‘trouble’ is, per discussion in
+<a href="https://github.com/nix-community/home-manager/pull/2461">nix-community/home-manager#2461</a>,
+Home Manager doesn’t support the new “nix command” style of profile management.<br />
+i.e. Installing a package in nix classic would be <code>nix-env -iA nixpkgs.neovim</code>,
+but with the new nix command style it’s <code>nix profile install nixpkgs#neovim</code>.<br />
+And the old style of command is incompatible with the new style, so you can’t
+use the old <code>nix-env</code> commands once you’ve used <code>nix profile</code>.</p>
 <p>The PR provides people with forks which fix the issue. Worked for me.</p>
-<p>Here’s <a href="https://github.com/rgoulter/dotfiles/commit/01238a1421b7cf48d92451bd63505b5c1c721e79">the commit</a> with the simple <code>home.nix</code> and <code>flake.nix</code> that I started with:</p>
+<p>Here’s <a href="https://github.com/rgoulter/dotfiles/commit/01238a1421b7cf48d92451bd63505b5c1c721e79">the
+commit</a>
+with the simple <code>home.nix</code> and <code>flake.nix</code> that I started with:</p>
 <p><code>flake.nix</code> (which is pretty much boilerplate):</p>
-<pre><code>{
+<pre class="nix"><code>{
   description = &quot;rgoulter&#39;s Home Manager configuration&quot;;
 
   inputs = {
@@ -361,25 +506,30 @@ And the old style of command is incompatible with the new style, so you can’t 
       };
     };
 }</code></pre>
-<p>(I went with <code>rgoulter-x86_64-linux</code> as the profile name since I’m not sure how home manager configurations interact with flake outputs. Presumably <code>rgoulter</code> would work just as well instead).</p>
+<p>(I went with <code>rgoulter-x86_64-linux</code> as the profile name since I’m not sure
+how home manager configurations interact with flake outputs. Presumably
+<code>rgoulter</code> would work just as well instead).</p>
 <p>and the <code>home.nix</code>:</p>
-<pre><code>{ config, pkgs, ... }:
+<pre class="nix"><code>{ config, pkgs, ... }:
 
 {
   home.stateVersion = &quot;22.05&quot;;
 
   programs.home-manager.enable = true;
 }</code></pre>
-<p>And following the commands given in the manual. Since I was running this from a git repository on my machine:</p>
-<pre><code>nix build --no-link .#homeConfigurations.rgoulter-x86_64-linux.activationPackage
+<p>And following the commands given in the manual. Since I was running this from
+a git repository on my machine:</p>
+<pre class="bash"><code>nix build --no-link .#homeConfigurations.rgoulter-x86_64-linux.activationPackage
 &quot;$(nix path-info .#homeConfigurations.rgoulter-x86_64-linux.activationPackage)&quot;/activate</code></pre>
 <h1 id="symlinking-to-existing-dotfiles">Symlinking to Existing Dotfiles</h1>
 <p>Or “using home manager instead of dotbot”.</p>
-<p>Dotbot takes an <a href="https://github.com/rgoulter/dotfiles/blob/aa026733cf7c2bcdebc59a4a527257479549694f/install.conf.yaml">install.conf.yaml</a> to configure what files to link where.</p>
-<p>Home Manager <em>can</em> use nix to write various config files. But it can also just symlink given some source files.</p>
+<p>Dotbot takes an
+<a href="https://github.com/rgoulter/dotfiles/blob/aa026733cf7c2bcdebc59a4a527257479549694f/install.conf.yaml">install.conf.yaml</a> to configure what files to link where.</p>
+<p>Home Manager <em>can</em> use nix to write various config files. But it can also just
+symlink given some source files.</p>
 <p><a href="https://github.com/rgoulter/dotfiles/commit/aa026733cf7c2bcdebc59a4a527257479549694f">Commit</a>.</p>
 <p>Updated <a href="https://github.com/rgoulter/dotfiles/blob/aa026733cf7c2bcdebc59a4a527257479549694f/home.nix"><code>home.nix</code></a>:</p>
-<pre><code>{ config, pkgs, ... }:
+<pre class="nix"><code>{ config, pkgs, ... }:
 
 {
   home.stateVersion = &quot;22.05&quot;;
@@ -405,16 +555,23 @@ And the old style of command is incompatible with the new style, so you can’t 
     sha256 = &quot;sha256-OCCXgMVWj/aBWLGaZmMr+cD546+QgynmEN/ECp1r08Q=&quot;;
   };
 }</code></pre>
-<p>The <code>xdg.configFile.&lt;name&gt;.source</code> (and <code>home.file.&lt;name&gt;.source</code>) are given as examples on the <a href="https://nixos.wiki/wiki/Home_Manager#Managing_your_dotfiles">Home Manager page in the NixOS wiki</a>, and documented in <a href="https://nix-community.github.io/home-manager/options.html">Appendix A of the Home Manager manual</a>.</p>
-<p>I can then apply the <code>home.nix</code> with, as the <a href="https://nix-community.github.io/home-manager/options.html">Home Manager manual</a> explains:</p>
-<pre><code>home-manager switch --flake &#39;.#rgoulter-x86_64-linux&#39;</code></pre>
+<p>The <code>xdg.configFile.&lt;name&gt;.source</code> (and <code>home.file.&lt;name&gt;.source</code>) are given as
+examples on the <a href="https://nixos.wiki/wiki/Home_Manager#Managing_your_dotfiles">Home Manager page in the NixOS
+wiki</a>, and
+documented in <a href="https://nix-community.github.io/home-manager/options.html">Appendix A of the Home Manager
+manual</a>.</p>
+<p>I can then apply the <code>home.nix</code> with, as the <a href="https://nix-community.github.io/home-manager/options.html">Home Manager
+manual</a> explains:</p>
+<pre class="bash"><code>home-manager switch --flake &#39;.#rgoulter-x86_64-linux&#39;</code></pre>
 <h1 id="first-steps-in-refactoring">First Steps in Refactoring</h1>
 <p>As can be seen in the above commit, it’s … not pretty.</p>
-<p>Look. Complain about or be aware of <a href="https://mikehadlow.blogspot.com/2012/05/configuration-complexity-clock.html">the Configuration Complexity Clock</a>. But we’re at DSL o’clock here:</p>
+<p>Look. Complain about or be aware of <a href="https://mikehadlow.blogspot.com/2012/05/configuration-complexity-clock.html">the Configuration Complexity
+Clock</a>.
+But we’re at DSL o’clock here:</p>
 <p>First step is to extract the attribute set out to <code>let ... in</code> bindings.</p>
 <p><a href="https://github.com/rgoulter/dotfiles/commit/0663950cc3e564c35a0df9bf65c06fd66b8a83e6">Commit</a></p>
 <p>Updated <a href="https://github.com/rgoulter/dotfiles/blob/0663950cc3e564c35a0df9bf65c06fd66b8a83e6/home.nix"><code>home.nix</code></a>:</p>
-<pre><code>{ config, pkgs, ... }:
+<pre class="nix"><code>{ config, pkgs, ... }:
 
 let
   # Attribute set for dotfiles in this repo to link into ~/.config.
@@ -451,19 +608,25 @@ in
 
   # ...
 }</code></pre>
-<p>I figured out to use <code>lib.attrsets.mapAttrs</code> by looking at this <a href="https://teu5us.github.io/nix-lib.html">helpful community-provided documentation page</a>. But otherwise, the Nix manual has a chapter on <a href="https://nixos.org/manual/nix/stable/expressions/builtins.html">its builtin functions</a>, and the <a href="https://nixos.org/manual/nixpkgs/stable/#chap-functions">Nixpkgs manual has a chapter on its library functions</a>.</p>
+<p>I figured out to use <code>lib.attrsets.mapAttrs</code> by looking at this <a href="https://teu5us.github.io/nix-lib.html">helpful
+community-provided documentation page</a>.
+But otherwise, the Nix manual has a chapter on <a href="https://nixos.org/manual/nix/stable/expressions/builtins.html">its builtin
+functions</a>, and
+the <a href="https://nixos.org/manual/nixpkgs/stable/#chap-functions">Nixpkgs manual has a chapter on its library
+functions</a>.</p>
 <p>To help read the above code, the example given for <code>mapAttrs</code> is:</p>
-<pre><code>lib.attrsets.mapAttrs
+<pre class="nix"><code>lib.attrsets.mapAttrs
   (name: value: name + &quot;-&quot; + value)
   { x = &quot;foo&quot;; y = &quot;bar&quot;; }
-=&gt; { x = &quot;x-foo&quot;; y = &quot;y-bar&quot;; }</code></pre>
+# =&gt; { x = &quot;x-foo&quot;; y = &quot;y-bar&quot;; }</code></pre>
 <p>I think this level of functional programming is relatively accessible.</p>
 <h1 id="refactoring-a-bit-further">Refactoring a bit Further</h1>
-<p>I mean, the above is okay, but it’s just nagging seeing code like <code>.gvimrc&quot; = ./gvimrc;</code>.</p>
-<p>People have different tastes as how how implicit vs explicit they’d prefer things. It’s hardly a burden to be explicit if you’re unfamiliar with the domain.</p>
+<p>I mean, the above is okay, but it’s just nagging seeing code like <code>.gvimrc" = ./gvimrc;</code>.</p>
+<p>People have different tastes as how how implicit vs explicit they’d prefer things.
+It’s hardly a burden to be explicit if you’re unfamiliar with the domain.</p>
 <p>But I had to try. <a href="https://github.com/rgoulter/dotfiles/commit/6375425ed54d63b807a43c77acdee5acf4680a23">Commit</a>.</p>
 <p>Updated <a href="https://github.com/rgoulter/dotfiles/blob/6375425ed54d63b807a43c77acdee5acf4680a23/home.nix"><code>home.nix</code></a>:</p>
-<pre><code>{ config, pkgs, ... }:
+<pre class="nix"><code>{ config, pkgs, ... }:
 
 let
   # e.g. given &quot;alacritty/alacritty.yml&quot;,
@@ -534,26 +697,31 @@ in
   # ...
 }</code></pre>
 <p>This one takes a bit more explaining.</p>
-<p>In order to get from <code>[ &quot;fish/config.fish&quot; ]</code> to <code>{ &quot;fish/config.fish&quot; = ./fish/config.fish; }</code>, <code>genAttrs</code> can be used.</p>
+<p>In order to get from <code>[ "fish/config.fish" ]</code> to <code>{ "fish/config.fish" = ./fish/config.fish; }</code>,
+<code>genAttrs</code> can be used.</p>
 <pre><code>lib.attrsets.genAttrs [ &quot;foo&quot; &quot;bar&quot; ] (name: &quot;x_${name}&quot;)
 =&gt; { foo = &quot;x_foo&quot;; bar = &quot;x_bar&quot;; }</code></pre>
-<p>Hence, we can factor out the files which follow a nice convention to just a list, and construct <code>configFilesToLink</code> with:</p>
-<pre><code># e.g. given &quot;alacritty/alacritty.yml&quot;,
+<p>Hence, we can factor out the files which follow a nice convention to just a list,
+and construct <code>configFilesToLink</code> with:</p>
+<pre class="nix"><code># e.g. given &quot;alacritty/alacritty.yml&quot;,
 # return the attrset { &quot;alacritty/alacritty.yml&quot; = ./alacritty/alacritty.yml; }.
 genAttrsForSimpleLink = fileName: ./. + (&quot;/&quot; + fileName);
 
 configFilesToLink =
   (pkgs.lib.attrsets.genAttrs simpleConfigFilesToLinkList genAttrsForSimpleLink) //
   unconventionalConfigFilesToLink;</code></pre>
-<p>Unfortunately, to get <code>[ &quot;vimrc&quot; ]</code> into <code>{ &quot;.vimrc&quot; = ./vimrc }</code>, this involves transforming “vimrc” to “.vimrc”, it’s a bit more involved:</p>
-<pre><code># e.g. given &quot;hgrc&quot;
+<p>Unfortunately, to get <code>[ "vimrc" ]</code> into <code>{ ".vimrc" = ./vimrc }</code>, this involves
+transforming “vimrc” to “.vimrc”, it’s a bit more involved:</p>
+<pre class="nix"><code># e.g. given &quot;hgrc&quot;
 # return the attrset { &quot;.hgrc&quot; = ./hgrc; }.
 genAttrsForSimpleDotLink = fileName: { &quot;.${fileName}&quot; = ./. + (&quot;/&quot; + fileName); };
 
 homeFilesToLink =
   (pkgs.lib.lists.foldr (a: b: a // b) {} (map genAttrsForSimpleDotLink simpleHomeFilesToLinkList)) //
   unconventionalHomeFilesToLink;</code></pre>
-<p>(where <code>pkgs.lib.lists.foldr (a: b: a // b) {}</code> is essentially <code>listToAttrs</code>, but my version of Nix didn’t have this. In nix, <code>{ a = 3; } // { b = 4; }</code> evaluates to <code>{ a = 3; b = 4; }</code>).</p>]]></summary>
+<p>(where <code>pkgs.lib.lists.foldr (a: b: a // b) {}</code> is essentially <code>listToAttrs</code>,
+but my version of Nix didn’t have this. In nix, <code>{ a = 3; } // { b = 4; }</code>
+evaluates to <code>{ a = 3; b = 4; }</code>).</p>]]></summary>
 </entry>
 <entry>
     <title>Deborah Tannen's You Just Don't Understand is Wonderful</title>
@@ -561,38 +729,110 @@ homeFilesToLink =
     <id>http://www.rgoulter.com/blog//posts/argument/2022-01-11-deborah-tannens-you-just-dont-understand-is-wonderful.html</id>
     <published>2022-01-11T00:00:00Z</published>
     <updated>2022-01-11T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<p>I finally finished reading through Deborah Tannen’s “You Just Don’t Understand”. It’s interesting to see that it was published in 1990. I’d put it alongside Jonathan Haidt’s “The Righteous Mind” as a book which provides a no-fault explaination for behaviour which seems illogical.</p>
-<p>The core of the book is that some of the conflict which arises between men and women arises resembles conflict which arises due to inter-cultural differences. Sometimes a man will say something intending to be supportive, but it comes across as offensive to a woman (or vice versa).<br />
-The model of interaction Tannen notes from observation is that typically men interact with the world with an emphasis on competition, with a sensitivity to their place in hierarchies, prioritising individuality and independence; and that typically women interact with the world with an emphasis on cooperation, with sensitivity to their place in communities, prioritising connection and intimacy. (The author is aware that people are complicated, and that such a partitioning won’t describe everyone, etc.).</p>
-<p>The chapters in the book generally give an example of an interaction, and use the model to explain the situation. The example interactions are about how the gendered differences play out in telling jokes, or in presenting/lecturing, in domestic conversations, in work meetings, in political leadership, etc..<br />
-– One example of a difference was that in classroom discussions, the competition-oriented style is more inclined to answer questions and give opinions, whereas a communal-oriented style is more inclined to avoid offending. (e.g. avoiding conflict of disagreeing, or appearing to not be equal to others).</p>
-<p>One example (which apparently the book introduced to wider culture) was that “men don’t want to ask for directions”. Asking for directions makes you dependent on someone else for help.<br />
-I think anyone in a relationship who reads through the book will be reminded of misunderstandings they’ve had with their partner.</p>
-<p>An recurring example of how human interaction is complicated comes up in situations where one person helps another. Lending support might be a show of superiority, or an obligation from a subordinate position.</p>
-<p>In the afterword of the book’s reprint, Tannen discusses that many people asked her whether she thought the differences in conversation style were biological, or cultural. She felt that many of the people asking had already made their minds up:<br />
-those who felt the differences were biological felt (typically men) felt that this meant there was no need for the status quo to change,<br />
-vs those who felt the differences were cultural (typically women; although I’d expect these days it would typically be progressives) and felt that this meant the conversation styles malleable.<br />
-– Tannen’s opinion (which she qualifies by saying it’s not within her domain of research) is that it’s not fully biological, but that cultural values are unlikely to change quickly. The differences should be understood as they are, as to mitigate the impact of conflicts arising from differences.</p>
-<p>The book’s foreword similarly makes an interesting claim, as to why we should care about differences:</p>
+    <summary type="html"><![CDATA[<p>I finally finished reading through Deborah Tannen’s “You Just Don’t
+Understand”. It’s interesting to see that it was published in 1990. I’d put it
+alongside Jonathan Haidt’s “The Righteous Mind” as a book which provides a
+no-fault explaination for behaviour which seems illogical.</p>
+<p>The core of the book is that some of the conflict which arises between men and
+women arises resembles conflict which arises due to inter-cultural differences.
+Sometimes a man will say something intending to be supportive, but it comes
+across as offensive to a woman (or vice versa).<br />
+The model of interaction Tannen notes from observation is that typically men
+interact with the world with an emphasis on competition, with a sensitivity to
+their place in hierarchies, prioritising individuality and independence; and
+that typically women interact with the world with an emphasis on cooperation,
+with sensitivity to their place in communities, prioritising connection and
+intimacy. (The author is aware that people are complicated, and that such a
+partitioning won’t describe everyone, etc.).</p>
+<p>The chapters in the book generally give an example of an interaction, and use
+the model to explain the situation. The example interactions are about how the
+gendered differences play out in telling jokes, or in presenting/lecturing, in
+domestic conversations, in work meetings, in political leadership, etc..<br />
+– One example of a difference was that in classroom discussions, the
+competition-oriented style is more inclined to answer questions and give
+opinions, whereas a communal-oriented style is more inclined to avoid
+offending. (e.g. avoiding conflict of disagreeing, or appearing to not be equal
+to others).</p>
+<p>One example (which apparently the book introduced to wider culture) was that
+“men don’t want to ask for directions”. Asking for directions makes you
+dependent on someone else for help.<br />
+I think anyone in a relationship who reads through the book will be
+reminded of misunderstandings they’ve had with their partner.</p>
+<p>An recurring example of how human interaction is complicated comes up
+in situations where one person helps another. Lending support might be
+a show of superiority, or an obligation from a subordinate position.</p>
+<p>In the afterword of the book’s reprint, Tannen discusses that many people asked
+her whether she thought the differences in conversation style were biological,
+or cultural. She felt that many of the people asking had already made their
+minds up:<br />
+those who felt the differences were biological felt (typically men)
+felt that this meant there was no need for the status quo to change,<br />
+vs those who felt the differences were cultural (typically women; although I’d
+expect these days it would typically be progressives) and felt that this meant
+the conversation styles malleable.<br />
+– Tannen’s opinion (which she qualifies by saying it’s not within her domain
+of research) is that it’s not fully biological, but that cultural values are
+unlikely to change quickly. The differences should be understood as they are,
+as to mitigate the impact of conflicts arising from differences.</p>
+<p>The book’s foreword similarly makes an interesting claim, as to why we should
+care about differences:</p>
 <blockquote>
-<p>Pretending that women and men are the same hurts women, because the ways they are treated are based on the norms for men. It also hurts men who, with good intentions, speak to women as they would to men, and are nonplussed when their words don’t work as they expected, or even spark resentment and anger.</p>
-<p>This paradox is expressed by an American Indian woman, Abby Abinati, describing why she found law school a difficult and alienating experience:</p>
+<p>Pretending that women and men are the same hurts women, because the ways they
+are treated are based on the norms for men. It also hurts men who, with good
+intentions, speak to women as they would to men, and are nonplussed when
+their words don’t work as they expected, or even spark resentment and anger.</p>
+<p>This paradox is expressed by an American Indian woman, Abby Abinati,
+describing why she found law school a difficult and alienating experience:</p>
 <blockquote>
-<p>People did not like or accept the idea of Indians or women being lawyers. Some people could not decide which idea they hated more. Some pretended that it didn’t make any difference, that we were all the same. I, too, could be “one of the boys,” “one of the white boys.” Not likely. Both of these approaches created problems for me.</p>
+<p>People did not like or accept the idea of Indians or women being lawyers.
+Some people could not decide which idea they hated more. Some pretended
+that it didn’t make any difference, that we were all the same. I, too,
+could be “one of the boys,” “one of the white boys.” Not likely. Both of
+these approaches created problems for me.</p>
 </blockquote>
 </blockquote>
-<p>That some people thought she as a woman or an Indian shouldn’t be a lawyer is awful.<br />
-That she felt her identity as an Indian and a woman meant she felt left out when she was treated the same way as others would treat a white man… while it seems reasonable to say that people who are different should be recognised as different, but “treat people differently” just sounds disrespectful. – It’s natural to ask “What problems did it create for you? If not treated the same as ‘one of the white boys’, how’d you expect to be treated?”.</p>
-<p>These days, there’s plenty of discussion towards the goal of reducing alienation of people who look different. But, there seems to be an underlying assumption that there’s no substantial difference in the way people interact.<br />
-– When differences are brought up, it kinda follows the two reactions mentioned above (“innate differences, nothing to be done” vs “the differences don’t exist! so, you’re saying women are inferior!?”). I think it’d be better if there were more acknowledgement of differences, and examples of ways to work with those differences.</p>
-<p>I think the book’s treatment of cross-cultural communication is better than what gets passed around on Twitter.<br />
-e.g. the word “mansplaining” was only coined in the Twitter-era, and has come to be used as an unnecessarily-gendered substitute for the word “patronising”. The word’s initial usage, IIRC, was as by a female author frustrated by a conversation where a man explained her own book to her.<br />
-– Conflicts like this are typical of the kinds of inter-gender conflicts the book discusses. Tannen’s typical explanation is that a man is inclined to compete, to demonstrate his skill, with the expectation that a conversation partner reciprocate the competition; that a woman is inclined to cooperate, to not offend, and expect a conversation partner to not dominate a conversation.<br />
-– Twitter’s interpretation is that this conflict doesn’t happen between men, because men don’t patronise other men; Tannen’s interpretation is that this conflict doesn’t happen between men, because a man would simply reply “I know, I wrote the book”. Twitter’s interpretation is that men’s behaviour is pigheaded. Tannen’s interpretation is that the conflict arises due to different conversation styles.</p>
+<p>That some people thought she as a woman or an Indian shouldn’t be a lawyer is
+awful.<br />
+That she felt her identity as an Indian and a woman meant she felt left out
+when she was treated the same way as others would treat a white man… while it
+seems reasonable to say that people who are different should be recognised as
+different, but “treat people differently” just sounds disrespectful. – It’s
+natural to ask “What problems did it create for you? If not treated the same
+as ‘one of the white boys’, how’d you expect to be treated?”.</p>
+<p>These days, there’s plenty of discussion towards the goal of reducing alienation
+of people who look different. But, there seems to be an underlying assumption
+that there’s no substantial difference in the way people interact.<br />
+– When differences are brought up, it kinda follows the two reactions
+mentioned above (“innate differences, nothing to be done” vs “the
+differences don’t exist! so, you’re saying women are inferior!?”).
+I think it’d be better if there were more acknowledgement of differences,
+and examples of ways to work with those differences.</p>
+<p>I think the book’s treatment of cross-cultural communication is better than
+what gets passed around on Twitter.<br />
+e.g. the word “mansplaining” was only coined in the Twitter-era, and has come
+to be used as an unnecessarily-gendered substitute for the word “patronising”.
+The word’s initial usage, IIRC, was as by a female author frustrated by a
+conversation where a man explained her own book to her.<br />
+– Conflicts like this are typical of the kinds of inter-gender conflicts the
+book discusses. Tannen’s typical explanation is that a man is inclined to
+compete, to demonstrate his skill, with the expectation that a conversation
+partner reciprocate the competition; that a woman is inclined to cooperate, to
+not offend, and expect a conversation partner to not dominate a conversation.<br />
+– Twitter’s interpretation is that this conflict doesn’t happen between men,
+because men don’t patronise other men; Tannen’s interpretation is that this
+conflict doesn’t happen between men, because a man would simply reply “I know,
+I wrote the book”. Twitter’s interpretation is that men’s behaviour is
+pigheaded. Tannen’s interpretation is that the conflict arises due to
+different conversation styles.</p>
 <p>I guess it’d be easy to paper-over the different styles of interaction.<br />
-From a framing where interaction is pro-competitive, and everything about one’s place in a hierarchy.. then interactions which style things in a social way seem frilly and stupid.<br />
-From a framing where interaction is pro-cooperative, and everything about one’s belonging to a group.. then interactions which style things in a competitive way are brash and crude.<br />
-– But it seems to me less dignity is lost (and less conflict is had) by considering these as different styles.</p>]]></summary>
+From a framing where interaction is pro-competitive, and everything about one’s
+place in a hierarchy.. then interactions which style things in a social way
+seem frilly and stupid.<br />
+From a framing where interaction is pro-cooperative, and everything about one’s
+belonging to a group.. then interactions which style things in a competitive way
+are brash and crude.<br />
+– But it seems to me less dignity is lost (and less conflict is had)
+by considering these as different styles.</p>]]></summary>
 </entry>
 <entry>
     <title>It's Difficult to Explain Technical Difficulties Encountered</title>
@@ -600,34 +840,80 @@ From a framing where interaction is pro-cooperative, and everything about one’
     <id>http://www.rgoulter.com/blog//posts/programming/2021-12-26-its-difficult-to-explain-technical-difficulties-encountered.html</id>
     <published>2021-12-26T00:00:00Z</published>
     <updated>2021-12-26T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<p>If you’re using a computer, and something doesn’t work, sometimes the best you can come up with when asking for help is: “it doesn’t work”.</p>
-<p>Maybe you can be a bit more specific and say “I’ve plugged in my headphones, and they don’t work”.</p>
-<p>But no one is ever going to say “I’ve got a headset, and I plugged the cable with the microphone icon into the jack with the headphone icon, and vice versa, and I can’t hear audio playing through the headset”.</p>
-<p>Once you understand what’s going on enough to know what facts are significant, you probably know enough to find help on your own.<br />
-But if you don’t understand, then asking for help in a useful way is kindof difficult.</p>
-<p>(From the asker’s side, this just means you can’t find the solution to your problem. But for troubleshooting sites like Reddit forums or StackOverflow, it means most of the questions posted are of low quality).</p>
+    <summary type="html"><![CDATA[<p>If you’re using a computer, and something doesn’t work,
+sometimes the best you can come up with when asking for help is:
+“it doesn’t work”.</p>
+<p>Maybe you can be a bit more specific and say “I’ve plugged in my headphones,
+and they don’t work”.</p>
+<p>But no one is ever going to say “I’ve got a headset, and I plugged the cable
+with the microphone icon into the jack with the headphone icon, and vice versa,
+and I can’t hear audio playing through the headset”.</p>
+<p>Once you understand what’s going on enough to know what facts are significant,
+you probably know enough to find help on your own.<br />
+But if you don’t understand, then asking for help in a useful way is kindof
+difficult.</p>
+<p>(From the asker’s side, this just means you can’t find the solution to your
+problem. But for troubleshooting sites like Reddit forums or StackOverflow,
+it means most of the questions posted are of low quality).</p>
 <hr />
 <p>NixOS can be difficult to use.<br />
 I’d say it’s 95% wonderful, 5% pain in the arse to use.<br />
-The “gotta know what you’re doing” aspect both leads to and exasperates that painful part.</p>
+The “gotta know what you’re doing” aspect both leads to and exasperates that
+painful part.</p>
 <p>Well, Linux in general can be a pain to use.<br />
-Though, there’s an old half-joke that a lot of programming work involves a loop of writing code, compiling, copying the error message into Google and copy-pasting the answer from StackOverflow.<br />
-– If you run into a problem trying to do something on Linux, you’ll probably be able to find some StackOverflow answer which can help you out. You can often get away with not really understanding what’s going on. (Or, rather, “deferring understanding to a later date”).</p>
-<p>With NixOS, there are some factors such that copy-paste-from-StackOverflow doesn’t help out:</p>
+Though, there’s an old half-joke that a lot of programming work
+involves a loop of writing code, compiling, copying the error message into
+Google and copy-pasting the answer from StackOverflow.<br />
+– If you run into a problem trying to do something on Linux, you’ll probably
+be able to find some StackOverflow answer which can help you out. You can often
+get away with not really understanding what’s going on. (Or, rather, “deferring
+understanding to a later date”).</p>
+<p>With NixOS, there are some factors such that copy-paste-from-StackOverflow
+doesn’t help out:</p>
 <ul>
-<li><p>Nix/NixOS’s community is relatively small. So you’re less likely to find someone who’s tried the same thing as you’re trying to do (&amp; asked about it) compared to some other Linux distribution.</p></li>
-<li><p>NixOS is weird. Comparing, say, Ubuntu to Arch to CentOS.. they have different ways of installing packages, and will put configuration files in different places, but more/less if you see how to fix something in one distribution, you’ll be able to apply that to another distribution. – This isn’t necessarily the case with NixOS.</p></li>
-<li><p>Sometimes the problem you run into will be a Linux problem, that you would run into with any Linux distribution. (e.g. setting up Bluetooth). Or it might be because the program is trying to do things which doesn’t work with how Nix arranges its packages. – But you have to understand what’s going on in order to be able to even distinguish.</p></li>
+<li><p>Nix/NixOS’s community is relatively small. So you’re less likely to find
+someone who’s tried the same thing as you’re trying to do (&amp; asked about it)
+compared to some other Linux distribution.</p></li>
+<li><p>NixOS is weird. Comparing, say, Ubuntu to Arch to CentOS.. they have
+different ways of installing packages, and will put configuration files in
+different places, but more/less if you see how to fix something in one distribution,
+you’ll be able to apply that to another distribution. – This isn’t necessarily
+the case with NixOS.</p></li>
+<li><p>Sometimes the problem you run into will be a Linux problem, that you would run
+into with any Linux distribution. (e.g. setting up Bluetooth). Or it might be
+because the program is trying to do things which doesn’t work with how Nix
+arranges its packages. – But you have to understand what’s going on in order
+to be able to even distinguish.</p></li>
 </ul>
-<p>One example I find notorious is the <a href="https://github.com/NixOS/nix/issues/2259">“hello world” in the manual doesn’t build</a>. Rather, I’d expect to be able to take that example, put it in a file named “hello.nix”, and run <code>nix-build hello.nix</code>; but that won’t work. A <a href="https://stackoverflow.com/questions/44088192/when-and-how-should-default-nix-shell-nix-and-release-nix-be-used">StackOverflow answer</a> discusses that the example is a “callPackage derivation”. (And so since it’s supposed to be invoked with <code>callPackage &lt;callPackage derivation&gt; { }</code>, and <code>callPackage</code> comes from nixpkgs, the full command invocation is like <code>nix-build -E '(import &lt;nixpkgs&gt; { }).callPackage ./path/to/default.nix { }'</code>..). – Whereas, usually “Hello World” is a program I’d expect to be able to compile and run without having to understand much about what’s going on.<br />
+<p>One example I find notorious is the <a href="https://github.com/NixOS/nix/issues/2259">“hello world” in the manual doesn’t
+build</a>. Rather, I’d expect to
+be able to take that example, put it in a file named “hello.nix”, and run
+<code>nix-build hello.nix</code>; but that won’t work. A <a href="https://stackoverflow.com/questions/44088192/when-and-how-should-default-nix-shell-nix-and-release-nix-be-used">StackOverflow
+answer</a> discusses that the example is a “callPackage derivation”.
+(And so since it’s supposed to be invoked with <code>callPackage &lt;callPackage derivation&gt; { }</code>, and <code>callPackage</code> comes from nixpkgs, the full command
+invocation is like <code>nix-build -E '(import &lt;nixpkgs&gt; { }).callPackage ./path/to/default.nix { }'</code>..).
+– Whereas, usually “Hello World” is a program I’d expect to be able to compile
+and run without having to understand much about what’s going on.<br />
 – However, it’s imprecise to say “the example is incorrect”.</p>
 <p>I say all this having just run into some technical trouble.<br />
-I was trying to use KiBot to automatically save 3D previews of a circuitboard designed with Kicad. I could achieve this by running the given Docker image. When I tried running the same program on NixOS, <em>it didn’t work</em>.<br />
-Or rather, after some troubleshooting, I found out Kicad wasn’t able to render OpenGL stuff in the Xvfb that was being run; I was able to work-around this by wrapping the Kicad command with virtualgl. – I can’t say I fully understand the issue, or the solution; but it works. Although I feel with NixOS, I had to understand more than if I was using a different Linux distribution.</p>
+I was trying to use KiBot to automatically save 3D previews of a circuitboard
+designed with Kicad. I could achieve this by running the given Docker image.
+When I tried running the same program on NixOS, <em>it didn’t work</em>.<br />
+Or rather, after some troubleshooting, I found out Kicad wasn’t able to render
+OpenGL stuff in the Xvfb that was being run; I was able to work-around this by
+wrapping the Kicad command with virtualgl. – I can’t say I fully understand
+the issue, or the solution; but it works. Although I feel with NixOS, I had to
+understand more than if I was using a different Linux distribution.</p>
 <p>NixOS can be difficult to use.<br />
-I think that’s worth emphasising (with the above in mind) as moderation to a couple of opinions about NixOS I see.<br />
-Some new users walk the 95%-wonderful happy path of NixOS and proclaim that NixOS is really easy to use. (Which <em>way</em> undercounts the pain running into the 5% pain-in-the-arse parts of NixOS).<br />
-Some users tried NixOS but found it too difficult. – While I think this is fair, and I won’t argue that NixOS is practical enough to be worth the effort, what I’d emphasise instead is that NixOS may require understanding a lot more about what’s going on than other distributions would.</p>]]></summary>
+I think that’s worth emphasising (with the above in mind) as moderation to a
+couple of opinions about NixOS I see.<br />
+Some new users walk the 95%-wonderful happy path of NixOS and proclaim that
+NixOS is really easy to use. (Which <em>way</em> undercounts the pain running
+into the 5% pain-in-the-arse parts of NixOS).<br />
+Some users tried NixOS but found it too difficult. – While I think this is fair,
+and I won’t argue that NixOS is practical enough to be worth the effort, what I’d
+emphasise instead is that NixOS may require understanding a lot more about what’s
+going on than other distributions would.</p>]]></summary>
 </entry>
 <entry>
     <title>Netflix's Narcos Mexico Season 3 is a Let Down</title>
@@ -635,23 +921,72 @@ Some users tried NixOS but found it too difficult. – While I think this is fai
     <id>http://www.rgoulter.com/blog//posts/narrative/2021-11-07-netflixs-narcos-mexico-season-3-is-a-let-down.html</id>
     <published>2021-11-07T00:00:00Z</published>
     <updated>2021-11-07T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<p>Netflix’s “Narcos”, and its companion “Narcos: Mexico” are very exciting shows to watch.</p>
-<p>I, uh, am under the impression these shows play quite fast and loose with history in order to make a compelling drama. It does make for good entertainment.</p>
-<p>I was excited to see “Narcos: Mexico”’s Season 3 recently released, and sat down to binge my way through its episodes. – Unfortunately, I found it disappointing.</p>
-<p>“Narcos” especially had this charm of a cat-and-mouse game. You’d feel tense wondering if the good guys would catch the bad guys. I noticed the tension was an inverse of the results: when the tension looked like it might resolve in catching the bad guys, it resolved with the bad guys getting away. But when the tension looked like it leaned in the direction of the bad guys getting away, they’d get caught. – It was very fun to watch.</p>
-<p>“Narcos” ran for 3 seasons, with seasons 1 and 2 based on the story of Pablo Escobar; and season 3 based on the story of the Cali cartel. “Narcos: Mexico” sees the rise of the Guadalajara Cartel; presumably future seasons will show us more of El Chapo.</p>
-<p>After watching “Narcos: Mexico” season 1, I watched Netflix’s “El Chapo”. – The two shows both dramatise the same set of events. I tend to like the latter more.</p>
-<p>Well, “Narcos: Mexico”’s Season 3 is a bit lame. I think it tries to land some emotional punches.. which didn’t really land.</p>
-<p>At one point in the show, the good-guys (an American DEA agent, and a Mexican anti-drug military company) capture the brother of the right hand man of so-and-so that they want to catch. They start torturing the kid for information. Then, to the DEA agent’s <em>horror</em>, the kid claims he had Mexican-American dual-citizenship. There’s more hand-wringing in the show, where the DEA agent feels he’s not one of the good guys, because of the torture of the American.<br />
-– Ugh. I mean, you can say torture is wrong, or argue torture is bad because it’s ineffective, or argue torture is effective despite being horrible. I don’t see it as defensible to say that citizenship has an impact. What the fuck. (The moral shock certainly can’t be from “torturing your own people” is bad, either. The torture was carried out by Mexicans).<br />
-– And while I reckon the show’s writers hold the view that the US are responsible for many bad actions which hurt Mexico.. it feels like the part the story wants you to find shocking is the torture <em>of an American citizen</em>.</p>
-<p>In contrast, Netflix’s “El Chapo” has a few standout episodes which really punch through the desensitization that might otherwise come with these gangster shows. Or rather.. it’s easy to see the gangsters killing other gangsters and not feel much about it. But in “El Chapo”, the show takes the time to tell the story from the perspective of lives of ordinary people impacted by the drug trafficking. – We see a poor family lose their daughter; the mother takes the last money they have, gives it to some police officers who then do nothing to help her. We see a young boy kidnapped of the streets, and forced into training as a soldier for the gang. We see poppy farmers who have a tough time under one cartel be forced to work under much worse conditions as another cartel takes over the area.</p>
-<p>I guess the other let down to “Narcos: Mexico”’s season 3 is the cat-and-mouse aspect to the story just doesn’t feel as prominent.<br />
-Previous seasons of “Narcos” and “Narcos: Mexico” have followed a pattern of following the rise and fall of the biggest drug cartel, and the DEA’s efforts to stop them. Tensions ratchet as the bad guy gets more powerful, and the good guys get closer to catching them.<br />
-– In this season, the bad guys that the DEA are chasing never really seem to hold the position of dominance. And the bad guy who seems to be the the most prominent isn’t spending his time getting ahead of prominent threats. There’s no buildup in tension.<br />
+    <summary type="html"><![CDATA[<p>Netflix’s “Narcos”, and its companion “Narcos: Mexico” are very exciting shows
+to watch.</p>
+<p>I, uh, am under the impression these shows play quite fast and loose with
+history in order to make a compelling drama. It does make for good
+entertainment.</p>
+<p>I was excited to see “Narcos: Mexico”’s Season 3 recently released, and sat
+down to binge my way through its episodes. – Unfortunately, I found it
+disappointing.</p>
+<p>“Narcos” especially had this charm of a cat-and-mouse game. You’d feel tense
+wondering if the good guys would catch the bad guys. I noticed the tension was
+an inverse of the results: when the tension looked like it might resolve in
+catching the bad guys, it resolved with the bad guys getting away. But when the
+tension looked like it leaned in the direction of the bad guys getting away,
+they’d get caught. – It was very fun to watch.</p>
+<p>“Narcos” ran for 3 seasons, with seasons 1 and 2 based on the story of Pablo
+Escobar; and season 3 based on the story of the Cali cartel. “Narcos: Mexico”
+sees the rise of the Guadalajara Cartel; presumably future seasons will show us
+more of El Chapo.</p>
+<p>After watching “Narcos: Mexico” season 1, I watched Netflix’s “El Chapo”. –
+The two shows both dramatise the same set of events. I tend to like the latter
+more.</p>
+<p>Well, “Narcos: Mexico”’s Season 3 is a bit lame. I think it tries to land some
+emotional punches.. which didn’t really land.</p>
+<p>At one point in the show, the good-guys (an American DEA agent, and a Mexican
+anti-drug military company) capture the brother of the right hand man of
+so-and-so that they want to catch. They start torturing the kid for
+information. Then, to the DEA agent’s <em>horror</em>, the kid claims he had
+Mexican-American dual-citizenship. There’s more hand-wringing in the show,
+where the DEA agent feels he’s not one of the good guys, because of the torture
+of the American.<br />
+– Ugh. I mean, you can say torture is wrong, or argue torture is bad because
+it’s ineffective, or argue torture is effective despite being horrible. I don’t
+see it as defensible to say that citizenship has an impact. What the fuck. (The
+moral shock certainly can’t be from “torturing your own people” is bad, either.
+The torture was carried out by Mexicans).<br />
+– And while I reckon the show’s writers hold the view that the US are
+responsible for many bad actions which hurt Mexico.. it feels like the part the
+story wants you to find shocking is the torture <em>of an American citizen</em>.</p>
+<p>In contrast, Netflix’s “El Chapo” has a few standout episodes which really
+punch through the desensitization that might otherwise come with these gangster
+shows. Or rather.. it’s easy to see the gangsters killing other gangsters and
+not feel much about it. But in “El Chapo”, the show takes the time to tell the
+story from the perspective of lives of ordinary people impacted by the drug
+trafficking. – We see a poor family lose their daughter; the mother takes the
+last money they have, gives it to some police officers who then do nothing to
+help her. We see a young boy kidnapped of the streets, and forced into training
+as a soldier for the gang. We see poppy farmers who have a tough time under one
+cartel be forced to work under much worse conditions as another cartel takes
+over the area.</p>
+<p>I guess the other let down to “Narcos: Mexico”’s season 3 is the cat-and-mouse
+aspect to the story just doesn’t feel as prominent.<br />
+Previous seasons of “Narcos” and “Narcos: Mexico” have followed a pattern of
+following the rise and fall of the biggest drug cartel, and the DEA’s efforts
+to stop them. Tensions ratchet as the bad guy gets more powerful, and the good
+guys get closer to catching them.<br />
+– In this season, the bad guys that the DEA are chasing never really seem to
+hold the position of dominance. And the bad guy who seems to be the the most
+prominent isn’t spending his time getting ahead of prominent threats. There’s
+no buildup in tension.<br />
 Stuff just happens.<br />
-– Is that some kind of deliberate meta-narrative harmony with the moral that the war on drugs isn’t a war where the anti-drug enforcement is coherently winning? Nah.</p>
-<p>The hand-wringing of “Narcos: Mexico” season 3 falls flat and seems lame in comparison, where the show was previously very strong at telling a good gangster story.</p>]]></summary>
+– Is that some kind of deliberate meta-narrative harmony with the moral that
+the war on drugs isn’t a war where the anti-drug enforcement is coherently
+winning? Nah.</p>
+<p>The hand-wringing of “Narcos: Mexico” season 3 falls flat and seems lame in
+comparison, where the show was previously very strong at telling a good gangster
+story.</p>]]></summary>
 </entry>
 <entry>
     <title>Example of Using Nix to Run Software Using Different Build Flags</title>
@@ -660,15 +995,25 @@ Stuff just happens.<br />
     <published>2021-10-31T00:00:00Z</published>
     <updated>2021-10-31T00:00:00Z</updated>
     <summary type="html"><![CDATA[<p>I recently wanted to use FreeCAD to export a glTF file from a STEP file.</p>
-<p>Unfortunately, I found that <a href="https://forum.freecadweb.org/viewtopic.php?f=8&amp;t=31680&amp;p=450917&amp;#p450658">FreeCad needed to be built with OCC built with rapidjson</a>.</p>
-<p>The <a href="https://forum.freecadweb.org/viewtopic.php?t=56487&amp;p=486635">suggested solution</a> isn’t <em>hard</em>, as such; but it is more tedious than just installing a package:</p>
+<p>Unfortunately, I found that <a href="https://forum.freecadweb.org/viewtopic.php?f=8&amp;t=31680&amp;p=450917&amp;#p450658">FreeCad needed to be built with OCC built
+with rapidjson</a>.</p>
+<p>The <a href="https://forum.freecadweb.org/viewtopic.php?t=56487&amp;p=486635">suggested
+solution</a> isn’t
+<em>hard</em>, as such; but it is more tedious than just installing a package:</p>
 <blockquote>
-<p>Building from OCC from scratch: 1. get the source code from (https://gitlab.com/blobfish/occt ) –&gt; fillet fix included 2. setup your machine with cmake 3. get freetype2 and tcl/tk 4. setup cmake 5. build occ</p>
+<p>Building from OCC from scratch:
+1. get the source code from (https://gitlab.com/blobfish/occt ) –&gt; fillet fix included
+2. setup your machine with cmake
+3. get freetype2 and tcl/tk
+4. setup cmake
+5. build occ</p>
 </blockquote>
-<p>Per <a href="https://dev.opencascade.org/doc/overview/html/build_upgrade__building_occt.html#build_cmake_conf">the opencascade documentation</a> (or e.g. <a href="https://dev.opencascade.org/content/rebuilding-occt-rapidjson">this forum post</a>), this means building opencascade, but with cmake flags: <code>-D USE_RAPIDJSON:BOOL=&quot;ON&quot;</code>.</p>
+<p>Per <a href="https://dev.opencascade.org/doc/overview/html/build_upgrade__building_occt.html#build_cmake_conf">the opencascade documentation</a>
+(or e.g. <a href="https://dev.opencascade.org/content/rebuilding-occt-rapidjson">this forum post</a>),
+this means building opencascade, but with cmake flags: <code>-D USE_RAPIDJSON:BOOL="ON"</code>.</p>
 <p>It turns out Nixpkgs allows for doing this in a concise way:</p>
 <p>e.g. with a file <code>freecad.nix</code>:</p>
-<pre><code># By convention: this file declares function
+<pre class="nix"><code># By convention: this file declares function
 # which takes in a set of arguments;
 # &#39;pkgs&#39; has a default value of &#39;import &lt;nixpkgs&gt; {}&#39;
 { pkgs ? import &lt;nixpkgs&gt; {} }:
@@ -688,13 +1033,32 @@ in
 pkgs.freecad.override {
   opencascade-occt = opencascade-occt-with-rapidjson;
 }</code></pre>
-<p>The syntax may look esoteric, but it’s hardly more intimidating than the fancy parts of ECMAScript syntax.</p>
-<p>The code declares a function for building a package for freecad. The code is a function as a way of injecting dependencies. The code uses <code>nixpkgs</code> as a whole for our dependency. The code makes use of the <code>pkgs.freecad</code> and <code>pkgs.opencascade-occt</code>, so it doesn’t need to duplicate the effort needed to write those packages. The opencascade here is built with <code>-D USERAPIDJSON:BOOL=&quot;ON&quot;</code> as a flag to CMake; and <code>rapidjson</code> is also given as a dependency. Then this is version of opencascade is given to the <code>pkgs.freecad</code> package.</p>
-<p>The <a href="https://nixos.org/manual/nixpkgs/unstable/#chap-overrides">Overriding</a> section of the nix manual explains <code>&lt;pkg&gt;.override</code> vs <code>&lt;pkg&gt;.overrideAttrs</code>. Roughly: <code>&lt;pkg&gt;.overrideAttrs</code> changes things about the way <code>&lt;pkg&gt;</code> is built; e.g. the code above changes the CMake flags. Whereas, <code>&lt;pkg&gt;.override</code> changes what versions of dependencies are used to build a package; e.g. the code above changes the <code>opencascade-occt</code> dependency of freecad to one which was built with rapidjson.</p>
-<p>Stuff like this is what makes Nix both very powerful, but also very hard to get used to.</p>
-<p>How to use some Nix file like <code>freecad.nix</code> might also be unclear. There are several different ways: e.g. running <code>nix-build freecad.nix</code> then running the <code>./result/bin/freecad</code> which results.. or using the footgun that is <code>nix-env --install</code> and running <code>nix-env --install --file freecad.nix</code>, among others.</p>
+<p>The syntax may look esoteric, but it’s hardly more intimidating
+than the fancy parts of ECMAScript syntax.</p>
+<p>The code declares a function for building a package for freecad.
+The code is a function as a way of injecting dependencies.
+The code uses <code>nixpkgs</code> as a whole for our dependency. The code makes use of
+the <code>pkgs.freecad</code> and <code>pkgs.opencascade-occt</code>, so it doesn’t need to
+duplicate the effort needed to write those packages. The opencascade here
+is built with <code>-D USERAPIDJSON:BOOL="ON"</code> as a flag to CMake; and
+<code>rapidjson</code> is also given as a dependency. Then this is version of
+opencascade is given to the <code>pkgs.freecad</code> package.</p>
+<p>The <a href="https://nixos.org/manual/nixpkgs/unstable/#chap-overrides">Overriding</a> section
+of the nix manual explains <code>&lt;pkg&gt;.override</code> vs <code>&lt;pkg&gt;.overrideAttrs</code>.
+Roughly: <code>&lt;pkg&gt;.overrideAttrs</code> changes things about the way <code>&lt;pkg&gt;</code> is built; e.g. the
+code above changes the CMake flags. Whereas, <code>&lt;pkg&gt;.override</code> changes what
+versions of dependencies are used to build a package; e.g. the code above
+changes the <code>opencascade-occt</code> dependency of freecad to one which was built
+with rapidjson.</p>
+<p>Stuff like this is what makes Nix both very powerful, but also very hard to
+get used to.</p>
+<p>How to use some Nix file like <code>freecad.nix</code> might also be unclear.
+There are several different ways:
+e.g. running <code>nix-build freecad.nix</code> then running the <code>./result/bin/freecad</code>
+which results.. or using the footgun that is <code>nix-env --install</code> and running
+<code>nix-env --install --file freecad.nix</code>, among others.</p>
 <p>The code is more concise without the comments; or without the <code>let</code>:</p>
-<pre><code>{ pkgs ? import &lt;nixpkgs&gt; {} }:
+<pre class="nix"><code>{ pkgs ? import &lt;nixpkgs&gt; {} }:
 
 with pkgs;
 freecad.override {
@@ -704,12 +1068,27 @@ freecad.override {
       cmakeFlags = &#39;&#39;-D USE_RAPIDJSON:bool=&quot;ON&quot;&#39;&#39;;
     });
 }</code></pre>
-<p>That said, I don’t know whether anyone would write code like that without having written similar code previously.</p>
-<p>I arrived at the above code through refactoring. The naive approach is to copy and paste the Nix files from the nixpkgs code, and make adjustments as necessary. This works, but isn’t very elegant.<br />
-– One nice thing about refactoring Nix code, though, is that packages which are built with the same set of inputs don’t require rebuilding. e.g. after building either of the code snippets, the building the other wouldn’t require any further code to be compiled.</p>
-<p>I reckon that even that effort is still less tedious than the suggested solution above.<br />
-– Or perhaps I’m thinking of this from a yak-shaving perspective: e.g. with the good ol’ just clone and install dependencies and configure and build, you’ll have to repeat this understandable but awkward process on every computer you want to use FreeCAD with glTF export. With the Nix approach, at worst you’d just copy the snippet and rebuild on your computer.</p>
-<p>Since rebuilding GUI programs like this can take quite a beefy computer or quite a long time, another nice aspect of Nix is <a href="https://nixos.org/manual/nix/stable/#chap-distributed-builds">the ability to build with other computers</a>. – I’ll have to try that at some point.</p>]]></summary>
+<p>That said, I don’t know whether anyone would write code like that
+without having written similar code previously.</p>
+<p>I arrived at the above code through refactoring. The naive approach is to
+copy and paste the Nix files from the nixpkgs code, and make adjustments as
+necessary. This works, but isn’t very elegant.<br />
+– One nice thing about refactoring Nix code, though, is that packages which
+are built with the same set of inputs don’t require rebuilding. e.g. after
+building either of the code snippets, the building the other wouldn’t require
+any further code to be compiled.</p>
+<p>I reckon that even that effort is still less tedious than the suggested
+solution above.<br />
+– Or perhaps I’m thinking of this from a yak-shaving perspective: e.g. with
+the good ol’ just clone and install dependencies and configure and build,
+you’ll have to repeat this understandable but awkward process on every computer
+you want to use FreeCAD with glTF export. With the Nix approach, at worst you’d
+just copy the snippet and rebuild on your computer.</p>
+<p>Since rebuilding GUI programs like this can take quite a beefy computer or
+quite a long time, another nice aspect of Nix is <a href="https://nixos.org/manual/nix/stable/#chap-distributed-builds">the ability to build with
+other
+computers</a>. –
+I’ll have to try that at some point.</p>]]></summary>
 </entry>
 
 </feed>

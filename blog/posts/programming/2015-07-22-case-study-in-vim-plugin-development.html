@@ -53,6 +53,7 @@
             TOCify
         -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js"></script>
+
         <!--
             Patched TOCify css file.
             (Don't want fixed `.tocify`).
@@ -135,17 +136,27 @@
         by Richard Goulter
     <br />
     
-    Tags: <a href="../../tags/programming.editors.html">programming.editors</a>, <a href="../../tags/programming.vim.html">programming.vim</a>
+    Tags: <a title="All pages tagged 'programming.editors'." href="../../tags/programming.editors.html">programming.editors</a>, <a title="All pages tagged 'programming.vim'." href="../../tags/programming.vim.html">programming.vim</a>
     
 </div>
 
 <p>I don’t know a lot about writing plugins.<br />
-My own experience goes as far as trying to write a plugin for Eclipse (which gets <em>very</em> complicated as soon as a plugin isn’t a “monolithic” bundle); as well as writing a quite small plugin for my <a href="https://github.com/rgoulter/c-worksheet.vim">C worksheet</a>. (The fanciest thing it does is to download a JAR archive dependency if not present in the system.).</p>
+My own experience goes as far as trying to write a plugin for Eclipse (which
+gets <em>very</em> complicated as soon as a plugin isn’t a “monolithic” bundle); as
+well as writing a quite small plugin for my <a href="https://github.com/rgoulter/c-worksheet.vim">C
+worksheet</a>. (The fanciest thing it
+does is to download a JAR archive dependency if not present in the system.).</p>
 <p>So I’m not particularly qualified to say what is or isn’t a good plugin architecture, etc.</p>
-<p>I recently came across the problem: “In Vim, use <code>*</code> to find next occurence of current selection in visual mode”.<br />
+<p>I recently came across the problem: “In Vim, use <code>*</code> to find next occurence of
+current selection in visual mode”.<br />
 Vim doesn’t offer this behaviour out of the box.<br />
-The fella on IRC was using <a href="https://github.com/nelstrom/vim-visual-star-search">nelstrom/vim-visual-star-search</a>. The readme for this somewhat helpfully links to <a href="https://github.com/thinca/vim-visualstar">thinca/vim-visualstar</a>. – Neither of these repos is outstandingly popular.</p>
-<p>Nelstrom remarks “Looks like it uses a lot more code to do pretty much the same thing. Is it better?”.</p>
+The fella on IRC was using
+<a href="https://github.com/nelstrom/vim-visual-star-search">nelstrom/vim-visual-star-search</a>.
+The readme for this somewhat helpfully links to
+<a href="https://github.com/thinca/vim-visualstar">thinca/vim-visualstar</a>. – Neither
+of these repos is outstandingly popular.</p>
+<p>Nelstrom remarks “Looks like it uses a lot more code to do pretty much the same
+thing. Is it better?”.</p>
 <p>Nelstrom’s plugin is simple enough to show here:</p>
 <pre class="vim"><code>&quot; From http://got-ravings.blogspot.com/2008/07/vim-pr0n-visual-search-mappings.html
 
@@ -186,11 +197,19 @@ endfunction</code></pre>
 <p>With my current proficiency, I’m sure Nelstrom writes closer to how I’d write:</p>
 <ul>
 <li><p>Cites any sources / close inspiration.</p></li>
-<li><p>Leaves comments explaining anything non-trivial. (Which Thinca doesn’t do AT ALL. Not even for functions!).</p></li>
+<li><p>Leaves comments explaining anything non-trivial. (Which Thinca doesn’t do AT
+ALL. Not even for functions!).</p></li>
 </ul>
-<p>Even from this snippet it’s clear that Thinca’s is of higher quality. I’d base that one the use of functions to do caretaking of the editor environment. – It’s not clear what the argument <code>g</code> is for (like the <code>g</code> in substitute?), but the ommitted lines seem to take care of some edge case.<br />
-– Something to note, I guess, it seems that in both cases the VimL is ‘impure’ in providing read-only info. (Again, I’m not sure if it’s possible to get this without the caretaking.).</p>
-<p>Not hatin’ on Nelstrom: while the Vim community has some excellent plugins, I think most Vim users don’t bother touching VimL enough to learn how to do this kindof thing.</p>
+<p>Even from this snippet it’s clear that Thinca’s is of higher quality. I’d base
+that one the use of functions to do caretaking of the editor environment. –
+It’s not clear what the argument <code>g</code> is for (like the <code>g</code> in substitute?), but
+the ommitted lines seem to take care of some edge case.<br />
+– Something to note, I guess, it seems that in both cases the VimL is ‘impure’
+in providing read-only info. (Again, I’m not sure if it’s possible to get this
+without the caretaking.).</p>
+<p>Not hatin’ on Nelstrom: while the Vim community has some excellent plugins, I
+think most Vim users don’t bother touching VimL enough to learn how to do this
+kindof thing.</p>
 
 <hr />
 
@@ -205,6 +224,19 @@ endfunction</code></pre>
 <br style="clear: both;" />
 
 <hr />
+
+<!-- Load highlight.js for Syntax Highlighting. -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/bash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/c.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/gherkin.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/haskell.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/lisp.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/nix.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js"></script>
+<script>hljs.highlightAll();</script>
 
             </div>
 

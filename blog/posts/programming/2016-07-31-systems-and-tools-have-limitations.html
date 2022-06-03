@@ -53,6 +53,7 @@
             TOCify
         -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js"></script>
+
         <!--
             Patched TOCify css file.
             (Don't want fixed `.tocify`).
@@ -135,22 +136,69 @@
         by Richard Goulter
     <br />
     
-    Tags: <a href="../../tags/programming.oop.html">programming.oop</a>, <a href="../../tags/programming.fp.html">programming.fp</a>, <a href="../../tags/programming.tools.html">programming.tools</a>
+    Tags: <a title="All pages tagged 'programming.oop'." href="../../tags/programming.oop.html">programming.oop</a>, <a title="All pages tagged 'programming.fp'." href="../../tags/programming.fp.html">programming.fp</a>, <a title="All pages tagged 'programming.tools'." href="../../tags/programming.tools.html">programming.tools</a>
     
 </div>
 
-<p>So <a href="https://medium.com/@cscalfani/goodbye-object-oriented-programming-a59cda4c0e53">“Goodbye OOP”</a> is a piece which has been going around.<br />
-I’ve no idea why. I wasn’t able to finish reading it. The author’s tone is amazingly cringe-worthy.<br />
-After some time the of the clearly inexpert author (adopting a faux-foolish tone) bashing bad ways of OOP, the author concludes in a paragraph or two with “but, hey, Functional Programming looks pretty cool”.<br />
-– I’m reminded of <a href="https://medium.com/@tjholowaychuk/farewell-node-js-4ba9e7f3e52b#.ppia68wvo">“Farewell NodeJS”</a> with 1.4k likes. There the author spends time bashing the shortcomings of NodeJS, (inexpertly or not I can’t tell; at least the author’s tone isn’t as mockable), with a similar naivity of “but, hey, Go-lang looks pretty cool”.</p>
-<p>I found in Undergrad there’s a politics about which tools are cool and which aren’t. PHP isn’t “cool”. (It’s also an abysmal language; I recall reading a great piece I liked, but can’t find it. There’re far too many articles on the topic). Java isn’t “cool”. – But in my experience, those that complain the loudest about how sucky these languages are rarely good programmers.<br />
-(For signalling “good programmer”, admiration of either Erlang or Haskell will do the job. They’re Hipster Cool. – In Haskell’s case, you don’t even need to have written anything in Haskell to say you love the language).<br />
-– What’s quite annoying about these posts, then, is that they try to make an evaluation/judgement (“OOP sucks, FP is cool”) without qualifications. – I like Scala; but I’m also aware there’s some <a href="https://nurkiewicz.github.io/talks/2014/scalar/#/">pretty complicated shit</a> going on. (The real downside you’ll find to Scala is it’s long compilation time, though). – I mean, praising a language/tool without also indicating it’s costs/downsides seems immature. In ComSci, almost everything is a tradeoff.</p>
-<p>– What the post did get right, (from what I read of it, anyway), was that it highlighted ways of <em>misusing</em> OOP; ways which aren’t “obviously” wrong, or which sound like they’re keeping in line with OOP discipline. (By this point, or much earlier, PL purtians would’ve pointed out the distinction between Alan Kay’s “OOP is message-passing + late-binding” from “Java OOP”. – FWIW, the author of “Goodbye OOP” claims experience with Smalltalk and C++, but from the way the author writes, inexperience with each seems evident).<br />
-– Steve Yegge’s <a href="https://sites.google.com/site/steveyegge2/when-polymorphism-fails">“When Polymorphism Fails”</a> is another piece which takes a stab at a problem OOP is unable to model.<br />
-– But there’s a difference between “this tool can’t model this problem; don’t use it for that” (&amp; how to avoid such limitations), and “I’m misusing this tool; it sucks; everyone should use this other tool I just heard of instead”.</p>
-<p>cf. Steve Yegge’s praise of Ruby <a href="http://steve-yegge.blogspot.sg/2006/09/bloggers-block-4-ruby-and-java-and.html">here</a>. Yegge’s a very talented writer, so the comparison is unfair on that front, but he qualifies his praise. (He doesn’t like Ruby, but he uses it; he doesn’t know Ruby, but he rarely needs to look at the docs, compared to languages he knows, where he does have to; it’s performance isn’t amazing, but that’s mostly ok anyway).</p>
-<p>A blogpost from Robert C Martin, <a href="http://blog.cleancoder.com/uncle-bob/2016/07/27/TheChurn.html">“The Churn”</a>, came up on my timeline. ‘The Churn’ referring to the naive programmer’s chase of all new things as “superior”. (Which makes for a fun comparison with <a href="https://quoderat.megginson.com/2006/03/06/programming-languages-of-distinction/">“the programming language cycle”</a>; these two pieces agree about new languages [which smart people like] lack in usable tools/libraries). – Martin makes good observations that OOP, FP are orthogonal; both tools used to solve problems. – I think in insinuation that FP isn’t worth learning/paying attention to drew ire from the FP kids.</p>
+<p>So <a href="https://medium.com/@cscalfani/goodbye-object-oriented-programming-a59cda4c0e53">“Goodbye
+OOP”</a>
+is a piece which has been going around.<br />
+I’ve no idea why. I wasn’t able to finish reading it. The author’s tone is
+amazingly cringe-worthy.<br />
+After some time the of the clearly inexpert author (adopting a faux-foolish
+tone) bashing
+bad ways of OOP, the author concludes in a paragraph or two with “but, hey,
+Functional Programming looks pretty cool”.<br />
+– I’m reminded of <a href="https://medium.com/@tjholowaychuk/farewell-node-js-4ba9e7f3e52b#.ppia68wvo">“Farewell
+NodeJS”</a>
+with 1.4k likes. There the author spends time bashing the shortcomings of
+NodeJS, (inexpertly or not I can’t tell; at least the author’s tone isn’t as
+mockable), with a similar naivity of “but, hey, Go-lang looks pretty cool”.</p>
+<p>I found in Undergrad there’s a politics about which tools are cool and which
+aren’t. PHP isn’t “cool”. (It’s also an abysmal language; I recall reading a
+great piece I liked, but can’t find it. There’re far too many articles on the
+topic). Java isn’t “cool”. – But in my experience, those that complain the
+loudest about how sucky these languages are rarely good programmers.<br />
+(For signalling “good programmer”, admiration of either Erlang or Haskell will
+do the job. They’re Hipster Cool. – In Haskell’s case, you don’t even need to
+have written anything in Haskell to say you love the language).<br />
+– What’s quite annoying about these posts, then, is that they try to make an
+evaluation/judgement (“OOP sucks, FP is cool”) without qualifications. – I
+like Scala; but I’m also aware there’s some <a href="https://nurkiewicz.github.io/talks/2014/scalar/#/">pretty complicated
+shit</a> going on. (The real
+downside you’ll find to Scala is it’s long compilation time, though). – I
+mean, praising a language/tool without also indicating it’s costs/downsides
+seems immature. In ComSci, almost everything is a tradeoff.</p>
+<p>– What the post did get right, (from what I read of it, anyway), was that it
+highlighted ways of <em>misusing</em> OOP; ways which aren’t “obviously” wrong, or
+which sound like they’re keeping in line with OOP discipline. (By this point,
+or much earlier, PL purtians would’ve pointed out the distinction between Alan
+Kay’s “OOP is message-passing + late-binding” from “Java OOP”. – FWIW, the
+author of “Goodbye OOP” claims experience with Smalltalk and C++, but from the
+way the author writes, inexperience with each seems evident).<br />
+– Steve Yegge’s <a href="https://sites.google.com/site/steveyegge2/when-polymorphism-fails">“When Polymorphism
+Fails”</a> is
+another piece which takes a stab at a problem OOP is unable to model.<br />
+– But there’s a difference between “this tool can’t model this problem; don’t
+use it for that” (&amp; how to avoid such limitations), and “I’m misusing this
+tool; it sucks; everyone should use this other tool I just heard of instead”.</p>
+<p>cf. Steve Yegge’s praise of Ruby
+<a href="http://steve-yegge.blogspot.sg/2006/09/bloggers-block-4-ruby-and-java-and.html">here</a>.
+Yegge’s a very talented writer, so the comparison is unfair on that front, but
+he qualifies his praise. (He doesn’t like Ruby, but he uses it; he doesn’t know
+Ruby, but he rarely needs to look at the docs, compared to languages he knows,
+where he does have to; it’s performance isn’t amazing, but that’s mostly ok
+anyway).</p>
+<p>A blogpost from Robert C Martin, <a href="http://blog.cleancoder.com/uncle-bob/2016/07/27/TheChurn.html">“The
+Churn”</a>,
+came up on my timeline. ‘The Churn’ referring to the naive programmer’s chase
+of all new things as “superior”. (Which makes for a fun comparison with <a href="https://quoderat.megginson.com/2006/03/06/programming-languages-of-distinction/">“the
+programming language
+cycle”</a>;
+these two pieces agree about new languages [which smart people like] lack in
+usable tools/libraries). – Martin makes good observations that OOP, FP are
+orthogonal; both tools used to solve problems. – I think in insinuation that
+FP isn’t worth learning/paying attention to drew ire from the FP kids.</p>
 
 <hr />
 
@@ -165,6 +213,19 @@ After some time the of the clearly inexpert author (adopting a faux-foolish tone
 <br style="clear: both;" />
 
 <hr />
+
+<!-- Load highlight.js for Syntax Highlighting. -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/bash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/c.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/gherkin.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/haskell.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/lisp.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/nix.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js"></script>
+<script>hljs.highlightAll();</script>
 
             </div>
 

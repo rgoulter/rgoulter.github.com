@@ -53,6 +53,7 @@
             TOCify
         -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js"></script>
+
         <!--
             Patched TOCify css file.
             (Don't want fixed `.tocify`).
@@ -135,20 +136,35 @@
         by Richard Goulter
     <br />
     
-    Tags: <a href="../../tags/programming.hakyll.html">programming.hakyll</a>, <a href="../../tags/programming.haskell.html">programming.haskell</a>
+    Tags: <a title="All pages tagged 'programming.hakyll'." href="../../tags/programming.hakyll.html">programming.hakyll</a>, <a title="All pages tagged 'programming.haskell'." href="../../tags/programming.haskell.html">programming.haskell</a>
     
 </div>
 
-<p>So. The problem I was trying to solve in my last post was how to add next/prev links to a blogpost.<br />
-I’ve since figured out how to do that. <a href="https://github.com/rgoulter/my-hakyll-blog/commit/a4dd0513553a77f3b819a392078e59f461d884f9">See the commit</a>.</p>
-<p>My problem was, I had an <code>Item String</code>, and wanted to give a <code>Compiler String</code> corresponding to the next (or previous.. let’s ignore that for generality) post’s url.<br />
-I ran into difficulty by taking a list of <code>Identifier</code>s, and getting a list of <code>Compiler String</code>s. That is, I loaded all the posts, and mapped them to their urls. (At which point I was stuck with <code>[Compiler String]</code>).<br />
-What I figured out to do was instead take the list of <code>Identifier</code>s, take the <code>Identifier</code> of the <em>next</em> post, and map that <code>Identifier</code> to a url. (Which is of type <code>Compiler String</code>).</p>
-<p>If it’s unclear to you, then what I mean is that the problem I was struggling with was quite simple when done the wrong way.</p>
-<p>When I struggled, I was wanting to get a <code>Compiler [String]</code> because I figured I would be able to look up the url after some url. I thought there would be some way to treat <code>Compiler [String]</code> more like <code>[String]</code>.<br />
+<p>So. The problem I was trying to solve in my last post was how to add next/prev
+links to a blogpost.<br />
+I’ve since figured out how to do that.
+<a href="https://github.com/rgoulter/my-hakyll-blog/commit/a4dd0513553a77f3b819a392078e59f461d884f9">See the commit</a>.</p>
+<p>My problem was, I had an <code>Item String</code>, and wanted to give a <code>Compiler String</code>
+corresponding to the next (or previous.. let’s ignore that for generality)
+post’s url.<br />
+I ran into difficulty by taking a list of <code>Identifier</code>s, and getting a
+list of <code>Compiler String</code>s. That is, I loaded all the posts, and mapped them
+to their urls. (At which point I was stuck with <code>[Compiler String]</code>).<br />
+What I figured out to do was instead take the list of <code>Identifier</code>s,
+take the <code>Identifier</code> of the <em>next</em> post, and map that <code>Identifier</code> to a url.
+(Which is of type <code>Compiler String</code>).</p>
+<p>If it’s unclear to you, then what I mean is that the problem I was struggling
+with was quite simple when done the wrong way.</p>
+<p>When I struggled, I was wanting to get a <code>Compiler [String]</code> because I
+figured I would be able to look up the url after some url. I thought there
+would be some way to treat <code>Compiler [String]</code> more like <code>[String]</code>.<br />
 Wrong idea, anyway.</p>
-<p>Once you can go from <code>Item a</code> to <code>Compiler String</code>, then it’s quite easy to give this to a post.<br />
-For those who hadn’t tinkered around enough with Hakyll for this to be so obvious, you give the <code>Item a -&gt; Compiler String</code> function to <code>field &quot;nextUrl&quot;</code>, and adding this to the <code>Context a</code> given to the post.</p>
+<p>Once you can go from <code>Item a</code> to <code>Compiler String</code>, then it’s quite easy to
+give this to a post.<br />
+For those who hadn’t tinkered around enough with Hakyll for this to be
+so obvious, you give the
+<code>Item a -&gt; Compiler String</code> function to <code>field "nextUrl"</code>, and adding this to
+the <code>Context a</code> given to the post.</p>
 
 <hr />
 
@@ -163,6 +179,19 @@ For those who hadn’t tinkered around enough with Hakyll for this to be so obvi
 <br style="clear: both;" />
 
 <hr />
+
+<!-- Load highlight.js for Syntax Highlighting. -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/bash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/c.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/gherkin.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/haskell.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/lisp.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/nix.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js"></script>
+<script>hljs.highlightAll();</script>
 
             </div>
 

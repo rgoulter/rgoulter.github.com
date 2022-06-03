@@ -53,6 +53,7 @@
             TOCify
         -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js"></script>
+
         <!--
             Patched TOCify css file.
             (Don't want fixed `.tocify`).
@@ -135,23 +136,50 @@
         by Richard Goulter
     <br />
     
-    Tags: <a href="../../tags/test-automation.html">test-automation</a>, <a href="../../tags/writing.html">writing</a>
+    Tags: <a title="All pages tagged 'test-automation'." href="../../tags/test-automation.html">test-automation</a>, <a title="All pages tagged 'writing'." href="../../tags/writing.html">writing</a>
     
 </div>
 
 <p>I’ve been reading up on the topic of test-automation.</p>
-<p>One kindof useful resource has been <a href="https://www.thoughtworks.com/insights/software-testing">ThoughtWorks’ insights blog</a>, but my feelings towards this are mixed.<br />
-Some of the posts have great insights, others are more mundane; and there’s a fetishization of nouns which makes wading through the bullshit to find the useful tips all that much harder.</p>
-<p>As an example of the latter; in response to DHH saying “TDD is dead”, everyone apparently blew-their-fucking-minds. – That makes no sense to me, unless you’ve fetishized ‘TDD’ to mean ‘some specific thing which is the best, &amp; which we all should do’.<br />
+<p>One kindof useful resource has been <a href="https://www.thoughtworks.com/insights/software-testing">ThoughtWorks’ insights
+blog</a>, but my feelings
+towards this are mixed.<br />
+Some of the posts have great insights, others are more mundane; and there’s a
+fetishization of nouns which makes wading through the bullshit to find the
+useful tips all that much harder.</p>
+<p>As an example of the latter; in response to DHH saying “TDD is dead”, everyone
+apparently blew-their-fucking-minds. – That makes no sense to me, unless you’ve
+fetishized ‘TDD’ to mean ‘some specific thing which is the best, &amp; which we all
+should do’.<br />
 Which is bullshit.<br />
-Either your current practices in making software work well, in which case it doesn’t matter one way or the other whether ‘TDD’ is proclaimed ‘dead’; or there are ways you can improve your software development (in which case, it doesn’t matter whether ‘TDD’ is proclaimed better than Jesus).</p>
-<p>(After reading Steve Yegge’s <a href="http://steve-yegge.blogspot.sg/2008/02/portrait-of-n00b.html">“Portrait of a n00b”</a>, I suspect closer to the truth is “all software is bad, all the time”; but that some approaches are less-bad in some circumstances).</p>
+Either your current practices in making software work well, in which case it
+doesn’t matter one way or the other whether ‘TDD’ is proclaimed ‘dead’; or there
+are ways you can improve your software development (in which case, it doesn’t
+matter whether ‘TDD’ is proclaimed better than Jesus).</p>
+<p>(After reading Steve Yegge’s <a href="http://steve-yegge.blogspot.sg/2008/02/portrait-of-n00b.html">“Portrait of a
+n00b”</a>, I suspect
+closer to the truth is “all software is bad, all the time”; but that some
+approaches are less-bad in some circumstances).</p>
 <p>If programmers had better propensity for moderation, this wouldn’t be so bad.</p>
-<p>But fetishizing nouns is more annoying noise than anything else. (Although I suspect it also indicates immaturity).<br />
-The other flavours of blogposts tend to come in 1) “here’s this fundamentally useful concept you might not’ve heard of”. (e.g. describing the Test Pyramid, or that tests should assert about behaviours, executable specifications should be written declaratively, etc.), 2) “here are good ideas for ways to do things”.</p>
-<p>The trouble with “here are good ideas” is … it comes across as “obvious” while everyone’s still unable to readily apply it. e.g. one blogpost discussed “what to automate”: it mentioned ‘repeated, tedious/painful processes’, which makes sense, but the more salient point written was that “when you’re busy, you might not notice that these things can/should be automated”.<br />
-– Simply saying “automate tedious/repetitive processes” is tautological. Saying “be aware that there may be things you’d benefit from automating” comes from experience.</p>
-<p>It’s largely natural for programmers to ‘program’ without considering testability of their code. Some computations are hard to test. – I wish the blogposts were focussed more on “here’s why we ended up in a state where testing became difficult” (or, “here’s how we’ve improved; here’s why we were doing things we’ve improved-from”).</p>
+<p>But fetishizing nouns is more annoying noise than anything else. (Although I
+suspect it also indicates immaturity).<br />
+The other flavours of blogposts tend to come in 1) “here’s this fundamentally
+useful concept you might not’ve heard of”. (e.g. describing the Test Pyramid,
+or that tests should assert about behaviours, executable specifications should
+be written declaratively, etc.), 2) “here are good ideas for ways to do things”.</p>
+<p>The trouble with “here are good ideas” is … it comes across as “obvious” while
+everyone’s still unable to readily apply it. e.g. one blogpost discussed “what
+to automate”: it mentioned ‘repeated, tedious/painful processes’, which makes
+sense, but the more salient point written was that “when you’re busy, you might
+not notice that these things can/should be automated”.<br />
+– Simply saying “automate tedious/repetitive processes” is tautological. Saying
+“be aware that there may be things you’d benefit from automating” comes from
+experience.</p>
+<p>It’s largely natural for programmers to ‘program’ without considering
+testability of their code. Some computations are hard to test. – I wish the
+blogposts were focussed more on “here’s why we ended up in a state where
+testing became difficult” (or, “here’s how we’ve improved; here’s why we were
+doing things we’ve improved-from”).</p>
 
 <hr />
 
@@ -166,6 +194,19 @@ The other flavours of blogposts tend to come in 1) “here’s this fundamentall
 <br style="clear: both;" />
 
 <hr />
+
+<!-- Load highlight.js for Syntax Highlighting. -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/bash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/c.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/gherkin.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/haskell.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/lisp.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/nix.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js"></script>
+<script>hljs.highlightAll();</script>
 
             </div>
 

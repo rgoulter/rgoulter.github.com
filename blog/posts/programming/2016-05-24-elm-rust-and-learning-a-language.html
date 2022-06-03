@@ -53,6 +53,7 @@
             TOCify
         -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js"></script>
+
         <!--
             Patched TOCify css file.
             (Don't want fixed `.tocify`).
@@ -135,25 +136,75 @@
         by Richard Goulter
     <br />
     
-    Tags: <a href="../../tags/programming.elm.html">programming.elm</a>, <a href="../../tags/programming.rust.html">programming.rust</a>, <a href="../../tags/programming.java.html">programming.java</a>
+    Tags: <a title="All pages tagged 'programming.elm'." href="../../tags/programming.elm.html">programming.elm</a>, <a title="All pages tagged 'programming.rust'." href="../../tags/programming.rust.html">programming.rust</a>, <a title="All pages tagged 'programming.java'." href="../../tags/programming.java.html">programming.java</a>
     
 </div>
 
-<p>Elm and Rust are two programming languages I’m excited about (in the sense of, “wow it’d be cool to use these”).</p>
-<p>Elm is a Haskell-inspired language for client-side web development; with a philosophical emphasis at making Functional Programming <em>usable</em>/accessible. – In a talk from March, <a href="http://www.elmbark.com/2016/03/16/mainstream-elm-user-focused-design">“Let’s be mainstream”</a>, Evan Czaplicki compares JavaScript (easy to write, hard to maintain) to ML (hard to write, easy to maintain): the suggestion being that this isn’t necessarily a trade-off which must be paid; but that perhaps it’s better to try and improve JavaScript than to make ML languages easier.<br />
-There’s a cool <a href="http://elm-lang.org/try">online editor environment</a> for Elm so you can look at some examples &amp; try the language.</p>
-<p>Rust is a “safe C”, with many of the goodies of ‘modern’ languages like product and/or union types, tuples/records, pattern matching, etc.; its unique aspect is that “ownership” must be explicitly modelled.<br />
-For a taste, <a href="http://chrismorgan.info/blog/rust-fizzbuzz.html">“this post showing Fizz-Buzz programs in Rust”</a> explores various parts of Rust which you’ll encounter starting out with the language. This page <a href="http://cglab.ca/~abeinges/blah/too-many-lists/book/">showing implementing linked-lists in Rust</a> does the same thing, exploring aspects of the Rust language while programming a fairly familiar data structure.<br />
-<a href="http://rustbyexample.com">Rust by Example</a> lets you edit &amp; run each of the code snippets.<br />
-Andrei Alexandrescu (guy who coined the term “modern C++”; architect of the D language) <a href="https://www.quora.com/Which-language-has-the-brightest-future-in-replacement-of-C-between-D-Go-and-Rust-And-Why/answer/Andrei-Alexandrescu">wrote an answer on Quora</a> where he compared D, Go and Rust as “C/C++ replacements”. The criticism of Rust is whether it’s worth all the extra effort to model ownership. (On that note, D v Swift v Rust would be interesting; maybe also Scala-Native if that comes to fruition..; Go is cool &amp; all, but relates more to Python/Ruby).</p>
-<p>One thing both of these languages have in common is “great error messages”. (e.g. <a href="http://elm-lang.org/blog/compiler-errors-for-humans">“Compiler Errors for Humans”</a>, Rust’s compiler will try to explain what was wrong / suggest a solution). – One might say that because these languages are so out of wack from your typical <a href="http://www.paulgraham.com/avg.html">blub language</a> that the compiler <em>needs</em> to explain its errors, ha; but I’m more likely to think that reading compiler error messages is strange, … because I’m used to reading compiler errors as “nope” then checking the guilty line to figure out what’s wrong.</p>
+<p>Elm and Rust are two programming languages I’m excited about (in the sense of,
+“wow it’d be cool to use these”).</p>
+<p>Elm is a Haskell-inspired language for client-side web development; with a
+philosophical emphasis at making Functional Programming <em>usable</em>/accessible. –
+In a talk from March, <a href="http://www.elmbark.com/2016/03/16/mainstream-elm-user-focused-design">“Let’s be
+mainstream”</a>,
+Evan Czaplicki compares JavaScript (easy to write, hard to maintain) to ML
+(hard to write, easy to maintain): the suggestion being that this isn’t
+necessarily a trade-off which must be paid; but that perhaps it’s better to try
+and improve JavaScript than to make ML languages easier.<br />
+There’s a cool <a href="http://elm-lang.org/try">online editor environment</a> for Elm so
+you can look at some examples &amp; try the language.</p>
+<p>Rust is a “safe C”, with many of the goodies of ‘modern’ languages like product
+and/or union types, tuples/records, pattern matching, etc.; its unique aspect
+is that “ownership” must be explicitly modelled.<br />
+For a taste, <a href="http://chrismorgan.info/blog/rust-fizzbuzz.html">“this post showing Fizz-Buzz programs in
+Rust”</a> explores various parts
+of Rust which you’ll encounter starting out with the language. This page
+<a href="http://cglab.ca/~abeinges/blah/too-many-lists/book/">showing implementing linked-lists in
+Rust</a> does the same thing,
+exploring aspects of the Rust language while programming a fairly familiar data
+structure.<br />
+<a href="http://rustbyexample.com">Rust by Example</a> lets you edit &amp; run each of the
+code snippets.<br />
+Andrei Alexandrescu (guy who coined the term “modern C++”; architect of the D
+language) <a href="https://www.quora.com/Which-language-has-the-brightest-future-in-replacement-of-C-between-D-Go-and-Rust-And-Why/answer/Andrei-Alexandrescu">wrote an answer on
+Quora</a>
+where he compared D, Go and Rust as “C/C++ replacements”. The criticism of Rust
+is whether it’s worth all the extra effort to model ownership. (On that note, D
+v Swift v Rust would be interesting; maybe also Scala-Native if that comes to
+fruition..; Go is cool &amp; all, but relates more to Python/Ruby).</p>
+<p>One thing both of these languages have in common is “great error messages”.
+(e.g. <a href="http://elm-lang.org/blog/compiler-errors-for-humans">“Compiler Errors for
+Humans”</a>, Rust’s compiler
+will try to explain what was wrong / suggest a solution). – One might say that
+because these languages are so out of wack from your typical <a href="http://www.paulgraham.com/avg.html">blub
+language</a> that the compiler <em>needs</em> to
+explain its errors, ha; but I’m more likely to think that reading compiler
+error messages is strange, … because I’m used to reading compiler errors as
+“nope” then checking the guilty line to figure out what’s wrong.</p>
 <hr />
-<p>These posts about Elm and Rust are interesting and all, but there’s also a limitation to them. You certainly get a taste for the <em>language</em>, (&amp; certainly there’re differences to these languages that you’ve to pay attention to these things); but there’s also a step between “playing with the language in online environment” &amp; being able to run the examples on your computer.<br />
-’cause when someone says they “know Java”, they don’t just mean the Java language, but some familiarity with some JRE library packages, how to setup a development environment for Java, how to setup projects in Java (e.g. in Ant, Maven, Gradle or whatever).<br />
-– I guess newer languages ought to benefit from how older languages have been developed. So you get tools like <a href="https://github.com/sonnym/elmenv">elmenv</a> or <a href="https://github.com/avh4/elm-format">elm-format</a>, <a href="https://github.com/rust-lang-nursery/rustfmt">rustfmt</a>, in addition to decent platform tools like Rust’s cargo.</p>
-<p>I think what’s not immediately obvious is how to pick up &amp; use these languages for tiny projects.<br />
-Python is my go-to language for quick scripts where I just wanna scratch something together. It’s not that these aren’t “programs” or “projects”, but I don’t wanna worry about setting up any kind of package-file, nor freezing dependencies, etc.<br />
-– I don’t necessarily doubt that it’s possible to quickly get something together in Elm or Rust in the same way; but I wonder if this baggage of “things a $LANGUAGE developer knows how to do which a newcomer doesn’t” couldn’t be more obvious to pick up.</p>
+<p>These posts about Elm and Rust are interesting and all, but there’s also a
+limitation to them. You certainly get a taste for the <em>language</em>, (&amp; certainly
+there’re differences to these languages that you’ve to pay attention to these
+things); but there’s also a step between “playing with the language in online
+environment” &amp; being able to run the examples on your computer.<br />
+’cause when someone says they “know Java”, they don’t just mean the Java
+language, but some familiarity with some JRE library packages, how to setup a
+development environment for Java, how to setup projects in Java (e.g. in Ant,
+Maven, Gradle or whatever).<br />
+– I guess newer languages ought to benefit from how older languages have been
+developed. So you get tools like <a href="https://github.com/sonnym/elmenv">elmenv</a> or
+<a href="https://github.com/avh4/elm-format">elm-format</a>,
+<a href="https://github.com/rust-lang-nursery/rustfmt">rustfmt</a>, in addition to decent
+platform tools like Rust’s cargo.</p>
+<p>I think what’s not immediately obvious is how to pick up &amp; use these languages
+for tiny projects.<br />
+Python is my go-to language for quick scripts where I just wanna scratch
+something together. It’s not that these aren’t “programs” or “projects”, but I
+don’t wanna worry about setting up any kind of package-file, nor freezing
+dependencies, etc.<br />
+– I don’t necessarily doubt that it’s possible to quickly get something
+together in Elm or Rust in the same way; but I wonder if this baggage of
+“things a $LANGUAGE developer knows how to do which a newcomer doesn’t”
+couldn’t be more obvious to pick up.</p>
 
 <hr />
 
@@ -168,6 +219,19 @@ Python is my go-to language for quick scripts where I just wanna scratch somethi
 <br style="clear: both;" />
 
 <hr />
+
+<!-- Load highlight.js for Syntax Highlighting. -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/bash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/c.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/gherkin.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/haskell.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/lisp.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/nix.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js"></script>
+<script>hljs.highlightAll();</script>
 
             </div>
 

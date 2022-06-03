@@ -53,6 +53,7 @@
             TOCify
         -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js"></script>
+
         <!--
             Patched TOCify css file.
             (Don't want fixed `.tocify`).
@@ -135,16 +136,21 @@
         by Richard Goulter
     <br />
     
-    Tags: <a href="../../tags/notetaking.html">notetaking</a>, <a href="../../tags/onenote.html">onenote</a>, <a href="../../tags/programming.emacs.html">programming.emacs</a>, <a href="../../tags/programming.org-mode.html">programming.org-mode</a>
+    Tags: <a title="All pages tagged 'notetaking'." href="../../tags/notetaking.html">notetaking</a>, <a title="All pages tagged 'onenote'." href="../../tags/onenote.html">onenote</a>, <a title="All pages tagged 'programming.emacs'." href="../../tags/programming.emacs.html">programming.emacs</a>, <a title="All pages tagged 'programming.org-mode'." href="../../tags/programming.org-mode.html">programming.org-mode</a>
     
 </div>
 
 <p>[Updated 2018-11; my understanding of org-mode has improved]</p>
 <h3 id="onenote">OneNote</h3>
-<p>Roughly: A OneNote Notebook has Sections, and Pages within the section. Editing the notes in a page feels similar to editing a simple Word document.</p>
+<p>Roughly: A OneNote Notebook has Sections, and Pages within the
+section. Editing the notes in a page feels similar to editing a
+simple Word document.</p>
 <h3 id="org-mode">Org Mode</h3>
-<p>Roughly: org-mode is a renowned organisation tool, which is built on top of Emacs.<br />
-org files are plaintext, with notes structured using a “heading”. In addition to marked-up content, each heading can have tags, key-value properties, and sub-headings associated with it.</p>
+<p>Roughly: org-mode is a renowned organisation tool,
+which is built on top of Emacs.<br />
+org files are plaintext, with notes structured using a “heading”. In
+addition to marked-up content, each heading can have tags, key-value
+properties, and sub-headings associated with it.</p>
 <h3 id="comparisons">Comparisons</h3>
 <ul>
 <li>Both are free (as in “free-beer”).
@@ -153,34 +159,61 @@ org files are plaintext, with notes structured using a “heading”. In additio
 </ul></li>
 <li>OneNote is much simpler to use out of the box, compared to org-mode:
 <ul>
-<li>Usage and discovering what OneNote can do is easier out-of-the-box.</li>
-<li>OneNote is much easier to sync OneNote notebooks between multiple devices (desktops, tablets, phones).</li>
-<li>org-mode is a part of Emacs. Which is itself a great tool but is also not necessarily to pick up and use out of the box.
+<li>Usage and discovering what OneNote can do is easier
+out-of-the-box.</li>
+<li>OneNote is much easier to sync OneNote notebooks between multiple
+devices (desktops, tablets, phones).</li>
+<li>org-mode is a part of Emacs. Which is itself a great tool but is
+also not necessarily to pick up and use out of the box.
 <ul>
-<li>For what it’s worth, there are distributions of Emacs which make it easier to pick up and use out of the box (compared to an unconfigured Emacs).</li>
-<li>For what it’s worth, since “org mode” is a set of features implemented for a plaintext file format, it’s possible for non-Emacs editors to have “org mode”s.</li>
+<li>For what it’s worth, there are distributions of Emacs which make
+it easier to pick up and use out of the box (compared to an
+unconfigured Emacs).</li>
+<li>For what it’s worth, since “org mode” is a set of features
+implemented for a plaintext file format, it’s possible for
+non-Emacs editors to have “org mode”s.</li>
 </ul></li>
 </ul></li>
 <li>Sharing and collaborating:
 <ul>
-<li>OneNote puts heavy emphasis on cloud-service. Sharing a OneNote document is as straightforward as getting a link to share with them. Collaborating is also simple, as changes are synced.</li>
-<li>org-mode is a plaintext file. This allows for different solutions depending on the capabilities and requirements involved. (e.g. I’d be surprised if any long-lasting org-mode file weren’t under version control or in a DropBox/etc. folder).</li>
+<li>OneNote puts heavy emphasis on cloud-service.
+Sharing a OneNote document is as straightforward as
+getting a link to share with them.
+Collaborating is also simple, as changes are synced.</li>
+<li>org-mode is a plaintext file.
+This allows for different solutions depending
+on the capabilities and requirements involved.
+(e.g. I’d be surprised if any long-lasting org-mode
+file weren’t under version control or in a DropBox/etc.
+folder).</li>
 </ul></li>
 <li>Notes format:
 <ul>
-<li>simple notes (prose, or simple lists, hyperlinks, various markup) are as good in either format.</li>
-<li>OneNote is much better for very visual notes. e.g. OneNote supports tablets/pens; as well as diagrams. (Similar how ‘visual’ MS Powerpoint can be).
+<li>simple notes (prose, or simple lists, hyperlinks, various markup)
+are as good in either format.</li>
+<li>OneNote is much better for very visual notes.
+e.g. OneNote supports tablets/pens; as well
+as diagrams. (Similar how ‘visual’ MS Powerpoint can be).
 <ul>
-<li>It is possible to get images/diagrams in org-mode, though. <a href="https://stackoverflow.com/questions/27129338/inline-images-in-org-mode">But it’s not as simple out of the box</a></li>
+<li>It is possible to get images/diagrams in org-mode, though.
+<a href="https://stackoverflow.com/questions/27129338/inline-images-in-org-mode">But it’s not as simple out of the
+box</a></li>
 </ul></li>
-<li>org-mode’s emphasis on headings allows for much greater flexibility. But it’s not very clear how to effectively make use of this when first looking at org-mode.</li>
+<li>org-mode’s emphasis on headings allows for much greater
+flexibility. But it’s not very clear how to effectively make use
+of this when first looking at org-mode.</li>
 </ul></li>
 <li>For task management:
 <ul>
-<li>org-mode excels as a system for organising where it’s not always clear what’s a note (to be referenced later) or a task (to be reminded of / done).</li>
-<li>OneNote’s support for this is extremely rudimentary. (e.g. checkboxes beside a bullet-point).
+<li>org-mode excels as a system for organising where
+it’s not always clear what’s a note (to be referenced later)
+or a task (to be reminded of / done).</li>
+<li>OneNote’s support for this is extremely rudimentary.
+(e.g. checkboxes beside a bullet-point).
 <ul>
-<li>OneNote 2016 (which is different than OneNote for Windows 10) had support for integration with Outlook Tasks. And people who love Outlook love Outlook.</li>
+<li>OneNote 2016 (which is different than OneNote for Windows 10)
+had support for integration with Outlook Tasks. And people who
+love Outlook love Outlook.</li>
 </ul></li>
 </ul></li>
 <li>Search:
@@ -192,43 +225,71 @@ org files are plaintext, with notes structured using a “heading”. In additio
 </ul></li>
 <li>org-mode is <em>great</em> at this.
 <ul>
-<li>Because org-mode’s note structure is a hierarchy of headings, and different meta-data (tags, properties) can be attached to each heading, org-mode is able to provide a variety of ways to “see what you want to see”.
+<li>Because org-mode’s note structure is a hierarchy of headings,
+and different meta-data (tags, properties) can be attached to
+each heading, org-mode is able to provide a variety of ways to
+“see what you want to see”.
 <ul>
-<li>e.g. show the headings from all the note files which are scheduled for upcoming day(s). (An “agenda”).</li>
-<li>e.g. show the headings which have state “TODO” and have the tag <code>@work</code>.</li>
+<li>e.g. show the headings from all the note files which are
+scheduled for upcoming day(s). (An “agenda”).</li>
+<li>e.g. show the headings which have state “TODO” and have the
+tag <code>@work</code>.</li>
 </ul></li>
 </ul></li>
 </ul></li>
 </ul>
 <h3 id="recommended-use-cases">Recommended Use Cases</h3>
-<p>org-mode is a much more sophisticated tool, with a much harder learning curve than org-mode. The added complexity provides a rich set of features for making use of notes in org-mode.</p>
-<p>org-mode’s complexity can also be justified like this: - if you’re writing notes, maybe you want to add some tasks to do - if you have tasks to do, you might want to schedule this on a calendar - it’s also probable you’ll want to make notes from your appointments or tasks.</p>
-<p>If you have the time to learn it, I’d recommend org-mode as the better tool, in cases: - notes don’t need multiple collaborators.<br />
-<em>or</em> all collaborators are willing to set up a way to sync the same set of notes. - you can spare some time to learn a few features of org-mode - your note-taking workflow doesn’t need PowerPoint-style visual note-taking, nor tablet-input.</p>
-<p>OneNote and org-mode are both excellent tools. OneNote has a simpler set of features. Simpler means easier to use; but here it also means “more limited”.<br />
-If you’ve not used either, I’d start with OneNote and consider org-mode.</p>
+<p>org-mode is a much more sophisticated tool, with a much harder
+learning curve than org-mode. The added complexity provides a rich set
+of features for making use of notes in org-mode.</p>
+<p>org-mode’s complexity can also be justified like this:
+- if you’re writing notes, maybe you want to add some tasks to do
+- if you have tasks to do, you might want to schedule this on a calendar
+- it’s also probable you’ll want to make notes from your appointments or tasks.</p>
+<p>If you have the time to learn it, I’d recommend org-mode as the better
+tool, in cases:
+- notes don’t need multiple collaborators.<br />
+<em>or</em> all collaborators are willing to set up a way to sync the same
+set of notes.
+- you can spare some time to learn a few features of org-mode
+- your note-taking workflow doesn’t need PowerPoint-style visual
+note-taking, nor tablet-input.</p>
+<p>OneNote and org-mode are both excellent tools. OneNote has a simpler
+set of features. Simpler means easier to use;
+but here it also means “more limited”.<br />
+If you’ve not used either, I’d start with OneNote and consider
+org-mode.</p>
 <h3 id="links-to-org-mode-manual-for-some-features-onenote-lacks">Links to org-mode Manual for Some Features OneNote Lacks</h3>
 <ul>
 <li>Agenda Views https://orgmode.org/manual/Agenda-views.html
 <ul>
-<li>I’d say this is the main thing which makes org-mode so much more powerful than OneNote (and other tools).</li>
+<li>I’d say this is the main thing which makes org-mode
+so much more powerful than OneNote (and other tools).</li>
 </ul></li>
-<li>org-mode’s Babel https://orgmode.org/manual/Working-with-source-code.html
+<li>org-mode’s Babel
+https://orgmode.org/manual/Working-with-source-code.html
 <ul>
-<li>This is programmer-oriented, but if org-mode is a killer feature of emacs; babel is a killer feature of org-mode.</li>
+<li>This is programmer-oriented, but if org-mode is a killer feature
+of emacs; babel is a killer feature of org-mode.</li>
 <li>I like using Babel for ledger-cli journals.</li>
 </ul></li>
 <li>Column View https://orgmode.org/manual/Using-column-view.html
 <ul>
-<li>A more concise way for viewing a sequence of headings and their properties. (This is like JIRA’s query results view; the equivalent org-mode view would have tasks/issues/tickets as headings).</li>
+<li>A more concise way for viewing a sequence of headings and their
+properties. (This is like JIRA’s query results view; the
+equivalent org-mode view would have tasks/issues/tickets as
+headings).</li>
 </ul></li>
 <li>Document Exporting https://orgmode.org/manual/Exporting.html
 <ul>
-<li>Personally I’ve not made use of this. It may be useful for exporting to icalendar, LaTeX/PDF, HTML, beamer.</li>
+<li>Personally I’ve not made use of this. It may be useful for
+exporting to icalendar, LaTeX/PDF, HTML, beamer.</li>
 </ul></li>
 <li>Time Management https://orgmode.org/manual/Dates-and-times.html
 <ul>
-<li>org-mode has a dauntingly large set of features related to date/time. This relates to using org-mode as a calendar, as well as time tracking.</li>
+<li>org-mode has a dauntingly large set of features related to
+date/time. This relates to using org-mode as a calendar, as well
+as time tracking.</li>
 </ul></li>
 </ul>
 
@@ -245,6 +306,19 @@ If you’ve not used either, I’d start with OneNote and consider org-mode.</p>
 <br style="clear: both;" />
 
 <hr />
+
+<!-- Load highlight.js for Syntax Highlighting. -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/bash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/c.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/gherkin.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/haskell.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/lisp.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/nix.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js"></script>
+<script>hljs.highlightAll();</script>
 
             </div>
 

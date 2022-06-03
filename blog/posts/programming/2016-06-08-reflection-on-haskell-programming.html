@@ -53,6 +53,7 @@
             TOCify
         -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js"></script>
+
         <!--
             Patched TOCify css file.
             (Don't want fixed `.tocify`).
@@ -135,43 +136,85 @@
         by Richard Goulter
     <br />
     
-    Tags: <a href="../../tags/programming.haskell.html">programming.haskell</a>
+    Tags: <a title="All pages tagged 'programming.haskell'." href="../../tags/programming.haskell.html">programming.haskell</a>
     
 </div>
 
-<p>With my free time lately I’ve been tinkering on <a href="https://github.com/rgoulter/expenses-csv-utils">a Haskell project of mine</a>.<br />
-Depending on which side of the 80-20 rule you look at, I’d say I’m “about 20% done”.</p>
-<p>I love many things about Haskell, but, I didn’t have any proper pet projects written in Haskell.<br />
-– The impetus to a Haskell project, I guess, is that for quick/dirty projects Python is a much nicer choice. (Depending on your likelihood of revisiting a project after several months/years, it may be worth considering things like “maintainability” or “ease of refactoring”, where Haskell is a much better choice).</p>
-<p>Any language will have drawbacks, and Haskell certainly has some minor ones (like weird record syntax, Cabal-Hell, etc.),<br />
-the <em>BIG</em> drawback to Haskell is its pure functions. – You <em>can’t</em> just slap a <code>printf</code> function in your function. (Concepts like laziness also mean that tracing/debugging a function could result in different results than if you don’t).<br />
-– The community is a bit mixed: some Haskell folk love Category Theory and some others are amazed things compile; documentation often tends toward academic/unhelpful. There’re many concepts to understand beyond the basics (like Lenses, Monad Transformers (let alone monads, like the State Monad), and potentially things like Template Haskell, Arrows, etc.).<br />
+<p>With my free time lately I’ve been tinkering on <a href="https://github.com/rgoulter/expenses-csv-utils">a Haskell project of
+mine</a>.<br />
+Depending on which side of the 80-20 rule you look at, I’d say I’m “about 20%
+done”.</p>
+<p>I love many things about Haskell, but, I didn’t have any proper pet projects
+written in Haskell.<br />
+– The impetus to a Haskell project, I guess, is that for quick/dirty projects
+Python is a much nicer choice. (Depending on your likelihood of revisiting a
+project after several months/years, it may be worth considering things like
+“maintainability” or “ease of refactoring”, where Haskell is a much better
+choice).</p>
+<p>Any language will have drawbacks, and Haskell certainly has some minor ones
+(like weird record syntax, Cabal-Hell, etc.),<br />
+the <em>BIG</em> drawback to Haskell is its pure functions. – You <em>can’t</em> just slap a
+<code>printf</code> function in your function. (Concepts like laziness also mean that
+tracing/debugging a function could result in different results than if you
+don’t).<br />
+– The community is a bit mixed: some Haskell folk love Category Theory and
+some others are amazed things compile; documentation often tends toward
+academic/unhelpful. There’re many concepts to understand beyond the basics
+(like Lenses, Monad Transformers (let alone monads, like the State Monad), and
+potentially things like Template Haskell, Arrows, etc.).<br />
 etc. etc.</p>
 <p>On the other hand, of Haskell they say “if it compiles, it works”.</p>
 <h2 id="first-half-parsers">First Half: Parsers</h2>
-<p>The script-ish part of the project parses in some file format, processes this and outputs it as CSV.</p>
-<p>For writing parsers from scratch, Haskell (or some ML-family language) is a good choice. I used “megaparsec”, a purported successor to the classic parsec library. “parsec” for “Parser Combinator”.<br />
+<p>The script-ish part of the project parses in some file format, processes this
+and outputs it as CSV.</p>
+<p>For writing parsers from scratch, Haskell (or some ML-family language) is a
+good choice. I used “megaparsec”, a purported successor to the classic parsec
+library. “parsec” for “Parser Combinator”.<br />
 ’cause Parsec is cool, and I hadn’t had much experience writing parsers.</p>
-<p>– The file format here is so trivial that (as is) regular expressions would do the trick. (But then I would’ve had two problems).<br />
+<p>– The file format here is so trivial that (as is) regular expressions would do
+the trick. (But then I would’ve had two problems).<br />
 In any case, I didn’t run into much trouble writing the parser.</p>
 <p>It would’ve been better if I’d written unit-tests for the parser earlier.</p>
-<p>In this case, the program was so quick/simple that ‘debugging’ wasn’t necessary.</p>
+<p>In this case, the program was so quick/simple that ‘debugging’ wasn’t
+necessary.</p>
 <h2 id="second-half-ncurses-ui">Second Half: NCurses UI</h2>
-<p>Okay, so. If it’s not clear that writing this project has been an excuse for “playing with things I’ve not used before”, maybe the choice of a NCurses-base UI gives that away.</p>
-<p>Haskell’s <a href="https://hackage.haskell.org/package/brick">brick</a> looked interesting. It constructs/defines UI declaratively. (Loosely comparable to Elm, minus FRP concepts).<br />
-– As with most “I’m just learning this” programming, I was able to iterate on some of the sample programs. (During which, I learnt details of the API anyway, so).</p>
-<p>I’d say most of the ‘programming’ I did involved writing out types, &amp; types of functions in particular.<br />
-Haskell has a value called <code>undefined</code>, which lets you quickly stub functions. (It throws an error if evaluated. Scala has <code>???</code> which does the same thing. I think these are great). – With a type signature, you roughly know whether you can construct the output given the input; &amp; as you implement this, what other functions would be useful.<br />
-In order to test anything useful, this is rather bottom-up. The Python hacking I do would be the opposite.</p>
-<p>There was one case where code compiled, but didn’t pass its unit tests. – Though, I’d left a comment saying “To Be Implemented: (some computation)”, and this computation was what was needed for the test to pass.</p>
+<p>Okay, so. If it’s not clear that writing this project has been an excuse for
+“playing with things I’ve not used before”, maybe the choice of a NCurses-base
+UI gives that away.</p>
+<p>Haskell’s <a href="https://hackage.haskell.org/package/brick">brick</a> looked
+interesting. It constructs/defines UI declaratively. (Loosely comparable to
+Elm, minus FRP concepts).<br />
+– As with most “I’m just learning this” programming, I was able to iterate on
+some of the sample programs. (During which, I learnt details of the API anyway,
+so).</p>
+<p>I’d say most of the ‘programming’ I did involved writing out types, &amp; types of
+functions in particular.<br />
+Haskell has a value called <code>undefined</code>, which lets you quickly stub functions.
+(It throws an error if evaluated. Scala has <code>???</code> which does the same thing. I
+think these are great). – With a type signature, you roughly know whether you
+can construct the output given the input; &amp; as you implement this, what other
+functions would be useful.<br />
+In order to test anything useful, this is rather bottom-up. The Python hacking
+I do would be the opposite.</p>
+<p>There was one case where code compiled, but didn’t pass its unit tests. –
+Though, I’d left a comment saying “To Be Implemented: (some computation)”, and
+this computation was what was needed for the test to pass.</p>
 <p>– Only a few times did I ever think “I wish I could put a printf there”.<br />
-In one case, I was using unsafe pattern matching (e.g. assuming an input list had at-least 2 elements), &amp; this didn’t hold. (I should’ve either relaxed this assumption, or made it so that the types I used explicitly held this assumption). – Again, I’d left a comment somewhere critical saying “To Be Implemented..”.<br />
-In another, my UI was receiving a new input, but not updating the UI components to show this.</p>
-<p>What’d I think of NCurses/Brick? Not bad. The trickiest part seems to be keeping the event-handling function to a maintainable size.</p>
+In one case, I was using unsafe pattern matching (e.g. assuming an input list
+had at-least 2 elements), &amp; this didn’t hold. (I should’ve either relaxed this
+assumption, or made it so that the types I used explicitly held this
+assumption). – Again, I’d left a comment somewhere critical saying “To Be
+Implemented..”.<br />
+In another, my UI was receiving a new input, but not updating the UI components
+to show this.</p>
+<p>What’d I think of NCurses/Brick? Not bad. The trickiest part seems to be
+keeping the event-handling function to a maintainable size.</p>
 <h2 id="the-next-80">The Next 80%</h2>
-<p>Sure, I’d rather maintain a Haskell project than a Python project. But that Haskell’s compiler is so good allows you write pretty unclear code, too.<br />
+<p>Sure, I’d rather maintain a Haskell project than a Python project. But that
+Haskell’s compiler is so good allows you write pretty unclear code, too.<br />
 – I’d certainly like the code to be prettier.</p>
-<p>I’d also expect to iterate on the UI to see if it could better fit how I’d like to use it, but anyway.</p>
+<p>I’d also expect to iterate on the UI to see if it could better fit how I’d like
+to use it, but anyway.</p>
 
 <hr />
 
@@ -186,6 +229,19 @@ In another, my UI was receiving a new input, but not updating the UI components 
 <br style="clear: both;" />
 
 <hr />
+
+<!-- Load highlight.js for Syntax Highlighting. -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/bash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/c.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/gherkin.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/haskell.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/lisp.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/nix.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js"></script>
+<script>hljs.highlightAll();</script>
 
             </div>
 

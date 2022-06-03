@@ -53,6 +53,7 @@
             TOCify
         -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js"></script>
+
         <!--
             Patched TOCify css file.
             (Don't want fixed `.tocify`).
@@ -135,39 +136,127 @@
         by Richard Goulter
     <br />
     
-    Tags: <a href="../../tags/programming.c%2B%2B.html">programming.c++</a>, <a href="../../tags/programming.github.html">programming.github</a>
+    Tags: <a title="All pages tagged 'programming.c++'." href="../../tags/programming.c%2B%2B.html">programming.c++</a>, <a title="All pages tagged 'programming.github'." href="../../tags/programming.github.html">programming.github</a>
     
 </div>
 
-<p>A few years ago, for a course on Computational Geometry, my team made a program aiming for a stain-glass effect using Voronoi Diagrams.</p>
+<p>A few years ago, for a course on Computational Geometry, my team made a program
+aiming for a stain-glass effect using Voronoi Diagrams.</p>
 <p>To quickly explain:<br />
-Voronoi Diagrams show the regions which are closest to each point. e.g. for 2 points, you’d bisect the space between them. – By analogy, each ‘point’ would be pizza-delivery, and each region would be the region served by that store.<br />
-We’d found a <a href="http://www.cs.swarthmore.edu/%7Eadanner/cs97/s08/papers/gorbach.pdf">cool paper</a> explaining how to create a “stained-glass effect” using Voronoi diagrams. (Roughly, since edges in a Voronoi diagram are equidistant to two points, you wanna make points which are equidistant to edges on some input image: using an edge-detection filter of the image, you can construct a probability-distribution defined as “0 for an edge or far away from an edge, but quite high for close to an edge”… etc. etc.).</p>
+Voronoi Diagrams show the regions which are closest to each point. e.g. for 2
+points, you’d bisect the space between them. – By analogy, each ‘point’ would
+be pizza-delivery, and each region would be the region served by that store.<br />
+We’d found a <a href="http://www.cs.swarthmore.edu/%7Eadanner/cs97/s08/papers/gorbach.pdf">cool
+paper</a>
+explaining how to create a “stained-glass effect” using Voronoi diagrams.
+(Roughly, since edges in a Voronoi diagram are equidistant to two points, you
+wanna make points which are equidistant to edges on some input image: using an
+edge-detection filter of the image, you can construct a
+probability-distribution defined as “0 for an edge or far away from an edge,
+but quite high for close to an edge”… etc. etc.).</p>
 <p>But, uh, this was a school assignment.<br />
-The original assignment was in four stages; the first three iterating towards a Delaunay Algorithm, using precise big-int computations. (Delaunay is the dual of Voronoi; where Voronoi shows the regions, a Delaunay Triangulation shows which points are closest to each other. Btw, besides stained-glass effects, there’re a bunch of practical applications to this). (Another fun fact: during this assignment, one of the teammates rage-quitted to go do a whole project by himself, which he never presented on. I had all the luck for getting teammates in uni).<br />
+The original assignment was in four stages; the first three iterating towards a
+Delaunay Algorithm, using precise big-int computations. (Delaunay is the dual
+of Voronoi; where Voronoi shows the regions, a Delaunay Triangulation shows
+which points are closest to each other. Btw, besides stained-glass effects,
+there’re a bunch of practical applications to this). (Another fun fact: during
+this assignment, one of the teammates rage-quitted to go do a whole project by
+himself, which he never presented on. I had all the luck for getting teammates
+in uni).<br />
 Part four was “do something cool”.<br />
-The trouble with this being that the assignment was initially in C++. (I think ‘cause the module was taught by the same Professor who taught ’Intro to Computer Graphics’, which used OpenGL in C++). – Fun fact, the given code wasn’t “const correct” &amp; so wouldn’t compile with compilers not on Windows; oddly, Uni courses are one of the places where Windows is presumed. The trouble with C++ in University courses is, unless the code is monkey-see-monkey-do, or the students are <em>really</em> good at C++, then there’s just too much C++ lets you screw up with to be a good language to use. (I recall at the time a teammate included a hard-coded <code>include &quot;C:\\Users\\username\\....\\whatever.h&quot;</code>, because how the hell are you supposed to know that’s not The Right Thing to do?).<br />
-(Besides that, it’s much more difficult to install/setup dependencies for a C++ than for other languages like Python or Java).<br />
-Only for the most basic things can a programmer get away with blindly writing C++.</p>
-<p>Somehow, we managed to get something which worked (ish) submitted. (When I presented it to the class, I said it was “<em>half</em> cool”; ’cause it was a really cool project but it was only half-working).</p>
+The trouble with this being that the assignment was initially in C++. (I think
+‘cause the module was taught by the same Professor who taught ’Intro to
+Computer Graphics’, which used OpenGL in C++). – Fun fact, the given code
+wasn’t “const correct” &amp; so wouldn’t compile with compilers not on Windows;
+oddly, Uni courses are one of the places where Windows is presumed.
+The trouble with C++ in University courses is, unless the code is
+monkey-see-monkey-do, or the students are <em>really</em> good at C++, then there’s
+just too much C++ lets you screw up with to be a good language to use. (I
+recall at the time a teammate included a hard-coded <code>include "C:\\Users\\username\\....\\whatever.h"</code>, because how the hell are you supposed
+to know that’s not The Right Thing to do?).<br />
+(Besides that, it’s much more difficult to install/setup dependencies for a C++
+than for other languages like Python or Java).<br />
+Only for the most basic things can a programmer get away with blindly writing
+C++.</p>
+<p>Somehow, we managed to get something which worked (ish) submitted. (When I
+presented it to the class, I said it was “<em>half</em> cool”; ’cause it was a really
+cool project but it was only half-working).</p>
 <p>I put it on my GitHub.<br />
-I’d tinkered with it a year ago, enough to fix some <code>SEGFAULT</code> I was somehow getting.<br />
-– Going through job interviews at the moment, I can see that the places I apply to will at least look at my GitHub; and <a href="https://github.com/rgoulter/cs5237-VoronoiArt">this project</a> is my only C++ project. Fortunately, no one gives enough of a shit to actually try out the project (since, as I discovered tinkering with it again recently, the code had some other <code>SEGFAULT</code> issue in normal use),=; unfortunately, I’d reckon even at a glance the project was in pretty bad shape. (Maybe not ‘typical undergrad C++’ bad, but still).</p>
-<p>– To be honest, most of what made me say that was superficial: poorly arranged files, inconsistently named files, and inconsistent coding conventions. Prob’ly my favourite being <code>halfcamelCase</code> which annoyed the hell out of me. – In fairness, there were a number of ‘bad’ C++ things (heavy use of <code>extern</code>/global variables, <em>really long</em> methods/functions, etc. – I did write down the things I reckoned were shit; it’s theraputic).<br />
-People glancing at the repo (e.g. people I’m applying to for a job) can notice the former easily; and when the latter isn’t so egregious, it’s difficult to notice. – But that’s not really a good excuse. I feel it’s not insane to say “well-designed &gt; testable &gt; working &gt; not-working”. Software is fragile, so “working” is often going to become “not working”. Testable code lets you know this <em>quickly</em>. And well-designed code is easy to bring under test (and/or, a good design makes it really difficult to write bad code on top of it).</p>
-<p>Btw, “legacy code” = any code which is untested. lol, most of aforementioned codebase is “legacy”.<br />
-In fact, in the days after we presented, the others worked their arses off to get it somewhat working. – Looking at the code again, I came across comments written in Czech. Given that my teammates were Kazakhstani and Indian, I figure this means they “adapted” the code from somewhere else. (TBH, I don’t doubt that they worked hard). – Though, looking at the code we had from the parts one to three, I kinda don’t blame them. – I don’t excuse them, either; after tidying up the code to remove the egregious Bad Things (tm), the code still doesn’t work, but at least the shit is within-functions rather than at a project-level; which is testable.<br />
-(For myself, the code I wrote was the Qt &amp; OpenGL code. The uni graphics courses are quite happy to use GLUT.. I wanted a “real GUI”. – I’d made mistakes in loading the image into OpenGL texture coordinates, so the rendering would sometimes [though not always] be wonky).</p>
-<p>– One thing I’ll note is about ‘cognitive load’: Programmers tend to know about the immediate-term cognitive-load, where if interrupted from being “in the zone”, it takes time to get back to the task at hand. – I think the thing most undergrads miss out on by not maintaining projects over a long term is the experience of why documentation is important. Coming back to the codebase after 1-2 years without touching it, especially a not-well-designed codebase, it’s <em>really</em> not clear what a particular function is for. Documentation, like <em>good names</em>, as well as describing what a function does (and what it assumes) is surely useful. Or, rather, in its absence, it takes quite some time to read through <em>to remember</em> what things were for. (&amp; that’s with the advantage of having once before carried such a cognitive load).<br />
-– As well, for non-trivial algorithms (like Delaunay Triangulation, or constructing a Voronoi Diagram using Fortune’s Algorithm), absence of high-level explanations is quite annoying.</p>
+I’d tinkered with it a year ago, enough to fix some <code>SEGFAULT</code> I was somehow
+getting.<br />
+– Going through job interviews at the moment, I can see that the places I
+apply to will at least look at my GitHub; and <a href="https://github.com/rgoulter/cs5237-VoronoiArt">this
+project</a> is my only C++ project.
+Fortunately, no one gives enough of a shit to actually try out the project
+(since, as I discovered tinkering with it again recently, the code had some
+other <code>SEGFAULT</code> issue in normal use),=; unfortunately, I’d reckon even at a
+glance the project was in pretty bad shape. (Maybe not ‘typical undergrad C++’
+bad, but still).</p>
+<p>– To be honest, most of what made me say that was superficial: poorly arranged
+files, inconsistently named files, and inconsistent coding conventions. Prob’ly
+my favourite being <code>halfcamelCase</code> which annoyed the hell out of me. – In
+fairness, there were a number of ‘bad’ C++ things (heavy use of <code>extern</code>/global
+variables, <em>really long</em> methods/functions, etc. – I did write down the things
+I reckoned were shit; it’s theraputic).<br />
+People glancing at the repo (e.g. people I’m applying to for a job) can notice
+the former easily; and when the latter isn’t so egregious, it’s difficult to
+notice. – But that’s not really a good excuse. I feel it’s not insane to say
+“well-designed &gt; testable &gt; working &gt; not-working”. Software is fragile, so
+“working” is often going to become “not working”. Testable code lets you know
+this <em>quickly</em>. And well-designed code is easy to bring under test (and/or, a
+good design makes it really difficult to write bad code on top of it).</p>
+<p>Btw, “legacy code” = any code which is untested. lol, most of aforementioned
+codebase is “legacy”.<br />
+In fact, in the days after we presented, the others worked their arses off to
+get it somewhat working. – Looking at the code again, I came across comments
+written in Czech. Given that my teammates were Kazakhstani and Indian, I figure
+this means they “adapted” the code from somewhere else. (TBH, I don’t doubt
+that they worked hard). – Though, looking at the code we had from the parts
+one to three, I kinda don’t blame them. – I don’t excuse them, either; after
+tidying up the code to remove the egregious Bad Things (tm), the code still
+doesn’t work, but at least the shit is within-functions rather than at a
+project-level; which is testable.<br />
+(For myself, the code I wrote was the Qt &amp; OpenGL code. The uni graphics
+courses are quite happy to use GLUT.. I wanted a “real GUI”. – I’d made
+mistakes in loading the image into OpenGL texture coordinates, so the rendering
+would sometimes [though not always] be wonky).</p>
+<p>– One thing I’ll note is about ‘cognitive load’: Programmers tend to know
+about the immediate-term cognitive-load, where if interrupted from being “in
+the zone”, it takes time to get back to the task at hand. – I think the thing
+most undergrads miss out on by not maintaining projects over a long term is the
+experience of why documentation is important. Coming back to the codebase after
+1-2 years without touching it, especially a not-well-designed codebase, it’s
+<em>really</em> not clear what a particular function is for. Documentation, like <em>good
+names</em>, as well as describing what a function does (and what it assumes) is
+surely useful. Or, rather, in its absence, it takes quite some time to read
+through <em>to remember</em> what things were for. (&amp; that’s with the advantage of
+having once before carried such a cognitive load).<br />
+– As well, for non-trivial algorithms (like Delaunay Triangulation, or
+constructing a Voronoi Diagram using Fortune’s Algorithm), absence of
+high-level explanations is quite annoying.</p>
 <p>C++ itself is pretty brutal for novice-codebases.<br />
-Unlike Rust, C++ is quite happy to let you do stupid shit (but then yell at you about it at runtime). – “<code>NullPointerException</code> is for wimp languages” is what C++ must think. Apparently C++ also thinks “just wing it” when a function never returns a value (when it’s supposed to return a value), which led to some deal of “wtf, it’s not even possible to construct a value like that!”, before I realised this. (No, really, wtf C++?).<br />
-Java &amp; JVM languages happily print a stacktrace indicating <em>where</em> an error occurred; “where” meaning not just which line-of-code, but the function calls leading to it. – With a “pretty bad undergrad” codebase, it can be pretty shitty to find where the sinner is.<br />
-– I mean, Rust looks hard as hell (for the borrowing/lifetimes stuff), but at least it’s damned-hard to run into errors like this.</p>
+Unlike Rust, C++ is quite happy to let you do stupid shit (but then yell at you
+about it at runtime). – “<code>NullPointerException</code> is for wimp languages” is what
+C++ must think. Apparently C++ also thinks “just wing it” when a function never
+returns a value (when it’s supposed to return a value), which led to some deal
+of “wtf, it’s not even possible to construct a value like that!”, before I
+realised this. (No, really, wtf C++?).<br />
+Java &amp; JVM languages happily print a stacktrace indicating <em>where</em> an error
+occurred; “where” meaning not just which line-of-code, but the function calls
+leading to it. – With a “pretty bad undergrad” codebase, it can be pretty
+shitty to find where the sinner is.<br />
+– I mean, Rust looks hard as hell (for the borrowing/lifetimes stuff), but at
+least it’s damned-hard to run into errors like this.</p>
 <p>Anyway.<br />
-The project isn’t <em>that bad</em> at the moment. (The older code for Delaunay Triangulation is, but the rest ain’t). – “Why not start from scratch?” is a nice temptation, but it’s usually better to iterate towards a good solution than to start from scratch.<br />
-If I was so concerned about a blight in my GitHub profile, yeah, maybe it’d’ve been better to remove it. But as a “cool project which mostly works”, it’d’ve been a shame to lose.</p>
-<p>Also, protip: if you go too far while climbing Ballmer’s Peak, coding becomes less interesting.</p>
+The project isn’t <em>that bad</em> at the moment. (The older code for Delaunay
+Triangulation is, but the rest ain’t). – “Why not start from scratch?” is a
+nice temptation, but it’s usually better to iterate towards a good solution
+than to start from scratch.<br />
+If I was so concerned about a blight in my GitHub profile, yeah, maybe it’d’ve
+been better to remove it. But as a “cool project which mostly works”, it’d’ve
+been a shame to lose.</p>
+<p>Also, protip: if you go too far while climbing Ballmer’s Peak, coding becomes
+less interesting.</p>
 
 <hr />
 
@@ -182,6 +271,19 @@ If I was so concerned about a blight in my GitHub profile, yeah, maybe it’d’
 <br style="clear: both;" />
 
 <hr />
+
+<!-- Load highlight.js for Syntax Highlighting. -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/bash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/c.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/gherkin.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/haskell.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/lisp.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/nix.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js"></script>
+<script>hljs.highlightAll();</script>
 
             </div>
 
