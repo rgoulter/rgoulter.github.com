@@ -8,8 +8,78 @@
         <name>Richard Goulter</name>
         <email>richard.goulter+blog@gmail.com</email>
     </author>
-    <updated>2022-05-19T00:00:00Z</updated>
+    <updated>2022-06-07T00:00:00Z</updated>
     <entry>
+    <title>EPA in Emacs is a Neat UX on top of GPG</title>
+    <link href="http://www.rgoulter.com/blog//posts/programming/2022-06-07-epa-in-emacs-is-a-neat-ux-on-top-of-gpg.html" />
+    <id>http://www.rgoulter.com/blog//posts/programming/2022-06-07-epa-in-emacs-is-a-neat-ux-on-top-of-gpg.html</id>
+    <published>2022-06-07T00:00:00Z</published>
+    <updated>2022-06-07T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<p>GPG is notorious for having an archane interface
+which is easy to misuse.</p>
+<p>As a developer, the most I’ve used it for has been to
+sign git commits.</p>
+<p>Emacs supports a workflow which uses GPG to automatically
+decrypt the file when reading it, and automatically
+encrypt the file when saving it.</p>
+<p>With the Doom Emacs distribution of Emacs,
+if the user’s <code>config.el</code> sets <code>user-full-name</code> or <code>user-mail-address</code>,
+and the GnuPG keyring on the computer has a PGP key pair with this
+as a user ID, then this works seamlessly. (Well, subject to things
+like pinentry and GPG agents and all).</p>
+<p>Even that sounds complicated; but you probably will have those things set
+if you’re using Doom Emacs; and probably do have GPG keys with your email/name
+if you’ve used GPG for anything.</p>
+<p>Since the acronyms are confusing:</p>
+<ul>
+<li><p>PGP = Pretty Good Privacy. OpenPGP is an open standard for signing/encrypting things.</p></li>
+<li><p>GPG = GnuPG = Gnu Privacy Guard. Implements OpenPGP.</p></li>
+<li><p>EPG = EasyPG. An Emacs library for GnuPG.</p></li>
+<li><p>EPA = EasyPG Assistant. The Emacs user interface to GnuPG that’s part of the EPG package.</p></li>
+</ul>
+<p>Some notes:</p>
+<p>Doom Emacs achieves this in its <code>modules/config/default/config.el</code>:</p>
+<pre class="elisp"><code>(after! epa
+  ;; With GPG 2.1+, this forces gpg-agent to use the Emacs minibuffer to prompt
+  ;; for the key passphrase.
+  (set &#39;epg-pinentry-mode &#39;loopback)
+  ;; Default to the first enabled and non-expired key in your keyring.
+  (setq-default
+   epa-file-encrypt-to
+   (or (default-value &#39;epa-file-encrypt-to)
+       (unless (string-empty-p user-full-name)
+         (when-let (context (ignore-errors (epg-make-context)))
+           (cl-loop for key in (epg-list-keys context user-full-name &#39;public)
+                    for subkey = (car (epg-key-sub-key-list key))
+                    if (not (memq &#39;disabled (epg-sub-key-capability subkey)))
+                    if (&lt; (or (epg-sub-key-expiration-time subkey) 0)
+                          (time-to-seconds))
+                    collect (epg-sub-key-fingerprint subkey))))
+       user-mail-address))
+   ;; And suppress prompts if epa-file-encrypt-to has a default value (without
+   ;; overwriting file-local values).
+  (defadvice! +default--dont-prompt-for-keys-a (&amp;rest _)
+    :before #&#39;epa-file-write-region
+    (unless (local-variable-p &#39;epa-file-encrypt-to)
+      (setq-local epa-file-encrypt-to (default-value &#39;epa-file-encrypt-to)))))</code></pre>
+<p>Since it wasn’t obvious to me: the <code>epa-file-encrypt-to</code> is used to determine
+which PGP keys in the keyring to encrypt the file to.<br />
+It’s sortof similar to the <code>--recipient</code> flag when using <code>gpg --encrypt</code>.
+Some additional functionality EPA adds is that if there are multiple public
+keys which match, EPA will encrypt the file for all of these; whereas <code>gpg --encrypt</code>
+will only encrypt for the most recent encryption key which matches.</p>
+<p>When opening an encrypted file,
+<code>epa-file-encrypt-to</code> will be filled with the keys which were used to encrypt
+the file. You can change the value of this variable to change which keys
+are used to encrypt the file.</p>
+<p>In Emacs, you can visit the <code>info</code> node for EPA’s encrypting/decrypting by
+executing the elisp:</p>
+<pre class="elisp"><code>(info &quot;(epa) Encrypting/decrypting gpg files&quot;)</code></pre>
+<p>(assuming <code>epa.info</code> has been installed to the right place).</p>
+<p>Or, going to the “EasyPG Assistant” manual, “Commands”, “Encrypting/decrypting gpg files” menu items.</p>
+<p>Or, in the online manual: <a href="https://www.gnu.org/software/emacs/manual/html_node/epa/Encrypting_002fdecrypting-gpg-files.html" class="uri">https://www.gnu.org/software/emacs/manual/html_node/epa/Encrypting_002fdecrypting-gpg-files.html</a>.</p>]]></summary>
+</entry>
+<entry>
     <title>Tool Recommendation: Helix Editor</title>
     <link href="http://www.rgoulter.com/blog//posts/programming/2022-05-19-tool-recommendation-helix-editor.html" />
     <id>http://www.rgoulter.com/blog//posts/programming/2022-05-19-tool-recommendation-helix-editor.html</id>
@@ -987,108 +1057,6 @@ winning? Nah.</p>
 <p>The hand-wringing of “Narcos: Mexico” season 3 falls flat and seems lame in
 comparison, where the show was previously very strong at telling a good gangster
 story.</p>]]></summary>
-</entry>
-<entry>
-    <title>Example of Using Nix to Run Software Using Different Build Flags</title>
-    <link href="http://www.rgoulter.com/blog//posts/programming/2021-10-31-example-of-using-nix-to-run-software-using-different-build-flags.html" />
-    <id>http://www.rgoulter.com/blog//posts/programming/2021-10-31-example-of-using-nix-to-run-software-using-different-build-flags.html</id>
-    <published>2021-10-31T00:00:00Z</published>
-    <updated>2021-10-31T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<p>I recently wanted to use FreeCAD to export a glTF file from a STEP file.</p>
-<p>Unfortunately, I found that <a href="https://forum.freecadweb.org/viewtopic.php?f=8&amp;t=31680&amp;p=450917&amp;#p450658">FreeCad needed to be built with OCC built
-with rapidjson</a>.</p>
-<p>The <a href="https://forum.freecadweb.org/viewtopic.php?t=56487&amp;p=486635">suggested
-solution</a> isn’t
-<em>hard</em>, as such; but it is more tedious than just installing a package:</p>
-<blockquote>
-<p>Building from OCC from scratch:
-1. get the source code from (https://gitlab.com/blobfish/occt ) –&gt; fillet fix included
-2. setup your machine with cmake
-3. get freetype2 and tcl/tk
-4. setup cmake
-5. build occ</p>
-</blockquote>
-<p>Per <a href="https://dev.opencascade.org/doc/overview/html/build_upgrade__building_occt.html#build_cmake_conf">the opencascade documentation</a>
-(or e.g. <a href="https://dev.opencascade.org/content/rebuilding-occt-rapidjson">this forum post</a>),
-this means building opencascade, but with cmake flags: <code>-D USE_RAPIDJSON:BOOL="ON"</code>.</p>
-<p>It turns out Nixpkgs allows for doing this in a concise way:</p>
-<p>e.g. with a file <code>freecad.nix</code>:</p>
-<pre class="nix"><code># By convention: this file declares function
-# which takes in a set of arguments;
-# &#39;pkgs&#39; has a default value of &#39;import &lt;nixpkgs&gt; {}&#39;
-{ pkgs ? import &lt;nixpkgs&gt; {} }:
-
-let
-  # declare a package opencascade-occt, but with rapidjson support
-  opencascade-occt-with-rapidjson =
-    pkgs.opencascade-occt.overrideAttrs(oldAttrs: {
-      # opencascade-occt depends on rapidjson if built with USE_RAPIDJSON
-      nativeBuildInputs = oldAttrs.nativeBuildInputs ++ [ pkgs.rapidjson ];
-      # and change which extra cmakeFlags are passed to the configuration.
-      cmakeFlags = &#39;&#39;-D USE_RAPIDJSON:bool=&quot;ON&quot;&#39;&#39;;
-    });
-in
-# The result of the function is the freecad package,
-# but using the opencascade package we declared above.
-pkgs.freecad.override {
-  opencascade-occt = opencascade-occt-with-rapidjson;
-}</code></pre>
-<p>The syntax may look esoteric, but it’s hardly more intimidating
-than the fancy parts of ECMAScript syntax.</p>
-<p>The code declares a function for building a package for freecad.
-The code is a function as a way of injecting dependencies.
-The code uses <code>nixpkgs</code> as a whole for our dependency. The code makes use of
-the <code>pkgs.freecad</code> and <code>pkgs.opencascade-occt</code>, so it doesn’t need to
-duplicate the effort needed to write those packages. The opencascade here
-is built with <code>-D USERAPIDJSON:BOOL="ON"</code> as a flag to CMake; and
-<code>rapidjson</code> is also given as a dependency. Then this is version of
-opencascade is given to the <code>pkgs.freecad</code> package.</p>
-<p>The <a href="https://nixos.org/manual/nixpkgs/unstable/#chap-overrides">Overriding</a> section
-of the nix manual explains <code>&lt;pkg&gt;.override</code> vs <code>&lt;pkg&gt;.overrideAttrs</code>.
-Roughly: <code>&lt;pkg&gt;.overrideAttrs</code> changes things about the way <code>&lt;pkg&gt;</code> is built; e.g. the
-code above changes the CMake flags. Whereas, <code>&lt;pkg&gt;.override</code> changes what
-versions of dependencies are used to build a package; e.g. the code above
-changes the <code>opencascade-occt</code> dependency of freecad to one which was built
-with rapidjson.</p>
-<p>Stuff like this is what makes Nix both very powerful, but also very hard to
-get used to.</p>
-<p>How to use some Nix file like <code>freecad.nix</code> might also be unclear.
-There are several different ways:
-e.g. running <code>nix-build freecad.nix</code> then running the <code>./result/bin/freecad</code>
-which results.. or using the footgun that is <code>nix-env --install</code> and running
-<code>nix-env --install --file freecad.nix</code>, among others.</p>
-<p>The code is more concise without the comments; or without the <code>let</code>:</p>
-<pre class="nix"><code>{ pkgs ? import &lt;nixpkgs&gt; {} }:
-
-with pkgs;
-freecad.override {
-  opencascade-occt =
-    opencascade-occt.overrideAttrs(oldAttrs: {
-      nativeBuildInputs = oldAttrs.nativeBuildInputs ++ [ rapidjson ];
-      cmakeFlags = &#39;&#39;-D USE_RAPIDJSON:bool=&quot;ON&quot;&#39;&#39;;
-    });
-}</code></pre>
-<p>That said, I don’t know whether anyone would write code like that
-without having written similar code previously.</p>
-<p>I arrived at the above code through refactoring. The naive approach is to
-copy and paste the Nix files from the nixpkgs code, and make adjustments as
-necessary. This works, but isn’t very elegant.<br />
-– One nice thing about refactoring Nix code, though, is that packages which
-are built with the same set of inputs don’t require rebuilding. e.g. after
-building either of the code snippets, the building the other wouldn’t require
-any further code to be compiled.</p>
-<p>I reckon that even that effort is still less tedious than the suggested
-solution above.<br />
-– Or perhaps I’m thinking of this from a yak-shaving perspective: e.g. with
-the good ol’ just clone and install dependencies and configure and build,
-you’ll have to repeat this understandable but awkward process on every computer
-you want to use FreeCAD with glTF export. With the Nix approach, at worst you’d
-just copy the snippet and rebuild on your computer.</p>
-<p>Since rebuilding GUI programs like this can take quite a beefy computer or
-quite a long time, another nice aspect of Nix is <a href="https://nixos.org/manual/nix/stable/#chap-distributed-builds">the ability to build with
-other
-computers</a>. –
-I’ll have to try that at some point.</p>]]></summary>
 </entry>
 
 </feed>

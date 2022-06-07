@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Tool Recommendation: Helix Editor - Richard Goulter's Blog</title>
+        <title>EPA in Emacs is a Neat UX on top of GPG - Richard Goulter's Blog</title>
 
         <!-- My (Old) CSS theme -->
         <link rel="stylesheet" type="text/css" href="../../css/default.css" />
@@ -129,9 +129,9 @@
             <hr style="margin: 0px; border-top: 5px solid black;" />
 
             <div id="content" class="container">
-                <h1>Tool Recommendation: Helix Editor</h1>
+                <h1>EPA in Emacs is a Neat UX on top of GPG</h1>
                 <div class="info">
-    Posted on May 19, 2022
+    Posted on June  7, 2022
     
         by Richard Goulter
     <br />
@@ -140,174 +140,76 @@
     
 </div>
 
-<p>The <a href="https://helix-editor.com/">Helix editor</a> is a fancy new text editor which
-looks to be a compelling competitor to vim for modern developer environments.</p>
-<p>Currently, my preferred editing environment is Emacs, making use of the Doom
-Emacs distribution.</p>
-<p>Before that, I was using vim (and its cousin, neovim). And I still use
-neovim for editing files from the command line.</p>
-<p>But, I’d heard of <a href="http://kakoune.org/">kakoune</a>. Kakoune takes the “verb +
-text object” text navigation and manipulation of Vim, and flips it into a more
-user friendly direction: Kakoune opts for “text object + verb”.</p>
-<p>This seems like it would soften the rough edges of the finer parts of vim. It’s
-often easier to make use of vim’s visual mode, and then copy/delete/replace that
-selection.</p>
-<p>So. The <a href="https://helix-editor.com/">Helix editor</a>, another text editor, is
-interesting for a few reasons:</p>
-<ol type="1">
-<li><p>It takes the same user-friendly “text object + verb” approach that kakoune
-used. (This also allows for powerful multi-cursor text manipulation).</p></li>
-<li><p>It leverages <a href="https://microsoft.github.io/language-server-protocol/">language server protocol
-(LSP)</a>, which enables
-editor integration with language compilers, allowing for code completion or
-quickly bringing up documentation.</p></li>
-<li><p>It leverages <a href="https://tree-sitter.github.io/tree-sitter/">tree sitter</a>. This
-allows different editors to share parsers for different languages, for syntax
-highlighting, or perhaps navigation of text objects.</p></li>
-</ol>
-<p>So. It’s got a few fancy features, each are worth being excited about.</p>
-<p>So I’ve given it a try.</p>
-<p>Overall, as a vim user, trying out Helix has the following loop:</p>
-<ol type="1">
-<li><p>Try and use Helix as if it’s vim (but swapping text object and action).</p></li>
-<li><p>Be surprised when something doesn’t work, because Helix isn’t vim,
-so look up the equivalent action, and remember to use the Helix
-keybinding.</p></li>
-</ol>
-<p>I’d say the ‘trouble’ here is that with Vim, there’s a long tail of keybindings
-which you’ll use infrequently.</p>
-<p>e.g. it took me a while to notice that Helix doesn’t open directories in
-a buffer. (Whereas, vim has netrw, and Emacs has dired).</p>
-<p>Overall, Helix’s keybindings seem consistent and well thought out.</p>
-<p>e.g. my current “rosetta stone” is:</p>
-<table>
-<colgroup>
-<col style="width: 11%" />
-<col style="width: 13%" />
-<col style="width: 13%" />
-<col style="width: 9%" />
-<col style="width: 51%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>vim mode</th>
-<th>vim</th>
-<th>helix mode</th>
-<th>helix</th>
-<th>note</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td></td>
-<td>0</td>
-<td></td>
-<td>gh</td>
-<td></td>
-</tr>
-<tr class="even">
-<td></td>
-<td>^</td>
-<td></td>
-<td>gs</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td>$</td>
-<td></td>
-<td>gl</td>
-<td></td>
-</tr>
-<tr class="even">
-<td></td>
-<td>gq</td>
-<td></td>
-<td>=</td>
-<td>format. TBI in helix. Vim’s = is ‘indent’.</td>
-</tr>
-<tr class="odd">
-<td></td>
-<td>C-v i</td>
-<td></td>
-<td>C i</td>
-<td>Or Alt-s to split selection on newline.</td>
-</tr>
-<tr class="even">
-<td></td>
-<td>C</td>
-<td></td>
-<td>v gl c</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td>x</td>
-<td></td>
-<td>;d</td>
-<td></td>
-</tr>
-<tr class="even">
-<td></td>
-<td>V</td>
-<td></td>
-<td>X</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td>*</td>
-<td></td>
-<td>*n</td>
-<td></td>
-</tr>
-<tr class="even">
-<td></td>
-<td>G</td>
-<td></td>
-<td>ge</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td>:bprev, [b</td>
-<td></td>
-<td>gp</td>
-<td></td>
-</tr>
-<tr class="even">
-<td></td>
-<td>:bnext, ]b</td>
-<td></td>
-<td>gn</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td><code>.         |            | g.     |                                            | |          | H          |            | gt     |                                            | |          | M          |            | gc     |                                            | |          | L          |            | gb     |                                            | |          | C-r        |            | U      | redo                                       | |          |            |            | ga     | last accessed file                         | |          |            |            | &lt;SPC&gt;R | replace selection with clipboard           | |          | %          |            | mm     |                                            | |          | ggVG       |            | %      | select entire file                         | |          | ,          |            |        |                                            | |          | ;          |            | Alt-.  |                                            | | visual   | o          |            | Alt-;  |                                            | |          | (/)        |            |        | left up to tree-sitter?                    | |          | {/}        |            |        | left up to tree-sitter?                    | |          | gc         |            | Ctrl-c | Evil comment                               | |          | ~          |            | ~      | (same in both) toggle case                 | |          | gu         |            |</code></td>
-<td>to lowerlase</td>
-<td></td>
-<td></td>
-</tr>
-<tr class="even">
-<td></td>
-<td>gU</td>
-<td></td>
-<td>Alt+<code>| to uppercase                               | |          | vi"        |            | vmi"   | prefix sequence with</code>m` for things.</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<p>Overall, I like what I’ve tried of Helix. It feels very polished out-of-the-box.</p>
+<p>GPG is notorious for having an archane interface
+which is easy to misuse.</p>
+<p>As a developer, the most I’ve used it for has been to
+sign git commits.</p>
+<p>Emacs supports a workflow which uses GPG to automatically
+decrypt the file when reading it, and automatically
+encrypt the file when saving it.</p>
+<p>With the Doom Emacs distribution of Emacs,
+if the user’s <code>config.el</code> sets <code>user-full-name</code> or <code>user-mail-address</code>,
+and the GnuPG keyring on the computer has a PGP key pair with this
+as a user ID, then this works seamlessly. (Well, subject to things
+like pinentry and GPG agents and all).</p>
+<p>Even that sounds complicated; but you probably will have those things set
+if you’re using Doom Emacs; and probably do have GPG keys with your email/name
+if you’ve used GPG for anything.</p>
+<p>Since the acronyms are confusing:</p>
+<ul>
+<li><p>PGP = Pretty Good Privacy. OpenPGP is an open standard for signing/encrypting things.</p></li>
+<li><p>GPG = GnuPG = Gnu Privacy Guard. Implements OpenPGP.</p></li>
+<li><p>EPG = EasyPG. An Emacs library for GnuPG.</p></li>
+<li><p>EPA = EasyPG Assistant. The Emacs user interface to GnuPG that’s part of the EPG package.</p></li>
+</ul>
+<p>Some notes:</p>
+<p>Doom Emacs achieves this in its <code>modules/config/default/config.el</code>:</p>
+<pre class="elisp"><code>(after! epa
+  ;; With GPG 2.1+, this forces gpg-agent to use the Emacs minibuffer to prompt
+  ;; for the key passphrase.
+  (set 'epg-pinentry-mode 'loopback)
+  ;; Default to the first enabled and non-expired key in your keyring.
+  (setq-default
+   epa-file-encrypt-to
+   (or (default-value 'epa-file-encrypt-to)
+       (unless (string-empty-p user-full-name)
+         (when-let (context (ignore-errors (epg-make-context)))
+           (cl-loop for key in (epg-list-keys context user-full-name 'public)
+                    for subkey = (car (epg-key-sub-key-list key))
+                    if (not (memq 'disabled (epg-sub-key-capability subkey)))
+                    if (&lt; (or (epg-sub-key-expiration-time subkey) 0)
+                          (time-to-seconds))
+                    collect (epg-sub-key-fingerprint subkey))))
+       user-mail-address))
+   ;; And suppress prompts if epa-file-encrypt-to has a default value (without
+   ;; overwriting file-local values).
+  (defadvice! +default--dont-prompt-for-keys-a (&amp;rest _)
+    :before #'epa-file-write-region
+    (unless (local-variable-p 'epa-file-encrypt-to)
+      (setq-local epa-file-encrypt-to (default-value 'epa-file-encrypt-to)))))</code></pre>
+<p>Since it wasn’t obvious to me: the <code>epa-file-encrypt-to</code> is used to determine
+which PGP keys in the keyring to encrypt the file to.<br />
+It’s sortof similar to the <code>--recipient</code> flag when using <code>gpg --encrypt</code>.
+Some additional functionality EPA adds is that if there are multiple public
+keys which match, EPA will encrypt the file for all of these; whereas <code>gpg --encrypt</code>
+will only encrypt for the most recent encryption key which matches.</p>
+<p>When opening an encrypted file,
+<code>epa-file-encrypt-to</code> will be filled with the keys which were used to encrypt
+the file. You can change the value of this variable to change which keys
+are used to encrypt the file.</p>
+<p>In Emacs, you can visit the <code>info</code> node for EPA’s encrypting/decrypting by
+executing the elisp:</p>
+<pre class="elisp"><code>(info &quot;(epa) Encrypting/decrypting gpg files&quot;)</code></pre>
+<p>(assuming <code>epa.info</code> has been installed to the right place).</p>
+<p>Or, going to the “EasyPG Assistant” manual, “Commands”, “Encrypting/decrypting gpg files” menu items.</p>
+<p>Or, in the online manual: <a href="https://www.gnu.org/software/emacs/manual/html_node/epa/Encrypting_002fdecrypting-gpg-files.html" class="uri">https://www.gnu.org/software/emacs/manual/html_node/epa/Encrypting_002fdecrypting-gpg-files.html</a>.</p>
 
 <hr />
 
 <div>
     
-    <a href="../../posts/programming/2022-06-07-epa-in-emacs-is-a-neat-ux-on-top-of-gpg.html" style="float:left;">Newer post</a>
     
-    
-    <a href="../../posts/narrative/2022-05-01-prime-videos-invincible-is-wonderful.html" style="float:right; text-align: right;">Older post</a>
+    <a href="../../posts/programming/2022-05-19-tool-recommendation-helix-editor.html" style="float:right; text-align: right;">Older post</a>
     
 </div>
 <br style="clear: both;" />
