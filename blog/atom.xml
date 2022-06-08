@@ -72,6 +72,10 @@ will only encrypt for the most recent encryption key which matches.</p>
 <code>epa-file-encrypt-to</code> will be filled with the keys which were used to encrypt
 the file. You can change the value of this variable to change which keys
 are used to encrypt the file.</p>
+<p>Also, since it wasn’t obvious to me: a file encrypted with <code>gpg</code> for multiple
+keys is like a concatenation of the file encrypted for each key. So a file
+can obviously be encrypted for multiple keys; and that encrypted file can
+be decrypted with any of the keys it was encrypted with.</p>
 <p>In Emacs, you can visit the <code>info</code> node for EPA’s encrypting/decrypting by
 executing the elisp:</p>
 <pre class="elisp"><code>(info &quot;(epa) Encrypting/decrypting gpg files&quot;)</code></pre>
@@ -229,17 +233,129 @@ a buffer. (Whereas, vim has netrw, and Emacs has dired).</p>
 </tr>
 <tr class="odd">
 <td></td>
-<td><code>.         |            | g.     |                                            | |          | H          |            | gt     |                                            | |          | M          |            | gc     |                                            | |          | L          |            | gb     |                                            | |          | C-r        |            | U      | redo                                       | |          |            |            | ga     | last accessed file                         | |          |            |            | &lt;SPC&gt;R | replace selection with clipboard           | |          | %          |            | mm     |                                            | |          | ggVG       |            | %      | select entire file                         | |          | ,          |            |        |                                            | |          | ;          |            | Alt-.  |                                            | | visual   | o          |            | Alt-;  |                                            | |          | (/)        |            |        | left up to tree-sitter?                    | |          | {/}        |            |        | left up to tree-sitter?                    | |          | gc         |            | Ctrl-c | Evil comment                               | |          | ~          |            | ~      | (same in both) toggle case                 | |          | gu         |            |</code></td>
-<td>to lowerlase</td>
+<td>`.</td>
 <td></td>
+<td>g.</td>
 <td></td>
 </tr>
 <tr class="even">
 <td></td>
-<td>gU</td>
+<td>H</td>
 <td></td>
-<td>Alt+<code>| to uppercase                               | |          | vi"        |            | vmi"   | prefix sequence with</code>m` for things.</td>
+<td>gt</td>
 <td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>M</td>
+<td></td>
+<td>gc</td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td>L</td>
+<td></td>
+<td>gb</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>C-r</td>
+<td></td>
+<td>U</td>
+<td>redo</td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+<td>ga</td>
+<td>last accessed file</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td></td>
+<td><SPC>R</td>
+<td>replace selection with clipboard</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>%</td>
+<td></td>
+<td>mm</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>ggVG</td>
+<td></td>
+<td>%</td>
+<td>select entire file</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>,</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>;</td>
+<td></td>
+<td>Alt-.</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>visual</td>
+<td>o</td>
+<td></td>
+<td>Alt-;</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>(/)</td>
+<td></td>
+<td></td>
+<td>left up to tree-sitter?</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>{/}</td>
+<td></td>
+<td></td>
+<td>left up to tree-sitter?</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>gc</td>
+<td></td>
+<td>Ctrl-c</td>
+<td>Evil comment</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>~</td>
+<td></td>
+<td>~</td>
+<td>(same in both) toggle case</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>gu</td>
+<td></td>
+<td><code>| to lowerlase                               | |          | gU         |            | Alt+</code></td>
+<td>to uppercase</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>vi”</td>
+<td></td>
+<td>vmi”</td>
+<td>prefix sequence with <code>m</code> for things.</td>
 </tr>
 </tbody>
 </table>

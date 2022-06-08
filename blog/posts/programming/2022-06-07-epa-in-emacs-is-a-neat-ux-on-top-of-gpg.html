@@ -197,6 +197,10 @@ will only encrypt for the most recent encryption key which matches.</p>
 <code>epa-file-encrypt-to</code> will be filled with the keys which were used to encrypt
 the file. You can change the value of this variable to change which keys
 are used to encrypt the file.</p>
+<p>Also, since it wasn’t obvious to me: a file encrypted with <code>gpg</code> for multiple
+keys is like a concatenation of the file encrypted for each key. So a file
+can obviously be encrypted for multiple keys; and that encrypted file can
+be decrypted with any of the keys it was encrypted with.</p>
 <p>In Emacs, you can visit the <code>info</code> node for EPA’s encrypting/decrypting by
 executing the elisp:</p>
 <pre class="elisp"><code>(info &quot;(epa) Encrypting/decrypting gpg files&quot;)</code></pre>
