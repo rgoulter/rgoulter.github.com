@@ -8,8 +8,317 @@
         <name>Richard Goulter</name>
         <email>richard.goulter+blog@gmail.com</email>
     </author>
-    <updated>2022-06-07T00:00:00Z</updated>
+    <updated>2022-06-10T00:00:00Z</updated>
     <entry>
+    <title>A Visual Explanation of GPG Subkeys</title>
+    <link href="http://www.rgoulter.com/blog//posts/programming/2022-06-10-a-visual-explanation-of-gpg-subkeys.html" />
+    <id>http://www.rgoulter.com/blog//posts/programming/2022-06-10-a-visual-explanation-of-gpg-subkeys.html</id>
+    <published>2022-06-10T00:00:00Z</published>
+    <updated>2022-06-10T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<p>As with anyone who’s been using git for long enough, I’m familiar enough with
+SSH keys (Even to the point where I don’t really need to follow <a href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent">the GitHub docs
+for generating a new
+key</a>.</p>
+<p>My developer journey hasn’t led me to build the same intuition for GPG keys.</p>
+<p>So, when I see fancy wiki pages and guids, such as <a href="https://wiki.debian.org/Subkeys">Debian wiki’s page on
+subkeys</a>, <a href="https://wiki.debian.org/OfflineMasterKey">on offline master
+keys</a>, or <a href="https://wiki.debian.org/GnuPG/AirgappedMasterKey">on an airgapped master
+key</a>, it sounds really fancy;
+but I’m left curious to get an intuition for what’s going on.</p>
+<p>I hope to use this blogpost illustrate enough of the details to build an
+intuition.</p>
+<h3 id="public-key-cryptography">Public Key Cryptography</h3>
+<p>The <a href="https://en.wikipedia.org/wiki/Public-key_cryptography">Wikipedia page on Public Key cryptography</a>
+has some nice diagrams.</p>
+<p>This itself should still be relatively straightforward, comparing with how SSH
+keys get used with git forges like GitHub, and with SSHing into servers:</p>
+<div style="text-align: center;">
+<p><img src="https://raw.githubusercontent.com/rgoulter/rgoulter.github.com/master/images/gpg/key_generation.png"  /></p>
+</div>
+<ul>
+<li><p>You have a key pair with a private key and public key,</p></li>
+<li><p>you keep the private key <em>private</em>,</p></li>
+<li><p>you share the public key with the servers you want to access to.</p>
+<ul>
+<li>Having the private key gives access.
+And this is ‘secure’ because only the user with the private key
+which matches the public keys will be granted access.</li>
+</ul></li>
+</ul>
+<p>So it makes sense: Encrypting;</p>
+<div style="text-align: center;">
+<p><img src="https://raw.githubusercontent.com/rgoulter/rgoulter.github.com/master/images/gpg/encrypt_document.png"  />
+<img src="https://raw.githubusercontent.com/rgoulter/rgoulter.github.com/master/images/gpg/decrypt_document.png"  /></p>
+</div>
+<ul>
+<li><p>You encrypt something for someone else using their public key.</p>
+<ul>
+<li><p>Everyone has their public key, so everyone can send them something.</p></li>
+<li><p>Only they have their private key, so only they can read the message.</p></li>
+</ul></li>
+</ul>
+<p>Or signing:</p>
+<div style="text-align: center;">
+<p><img src="https://raw.githubusercontent.com/rgoulter/rgoulter.github.com/master/images/gpg/sign_document.png"  />
+<img src="https://raw.githubusercontent.com/rgoulter/rgoulter.github.com/master/images/gpg/verify_signature.png"  /></p>
+</div>
+<ul>
+<li><p>You sign something with your private key.</p>
+<ul>
+<li><p>You’re the only person who has your private key, so only you can sign something.</p></li>
+<li><p>Everyone has your public key, so everyone else can verify you signed it.</p></li>
+</ul></li>
+</ul>
+<h3 id="the-rote-gpg-commands">The Rote GPG Commands</h3>
+<p>So far, we can just label everything above with “GPG” and it still makes sense:</p>
+<p>e.g. Key generation could be done by invoking a command like:</p>
+<pre><code>gpg --quick-generate-key &quot;Richard Goulter (NixOS Desktop) &lt;richard.goulter@rgoulter.com&gt;&quot;</code></pre>
+<p>e.g. exporting a key, to copy the public part to GitHub or whatever could be done by invoking a command like:</p>
+<pre><code>gpg --export --armor &quot;Richard Goulter (NixOS Desktop)&quot;</code></pre>
+<p>e.g. encrypting/decrypting a message could be done by invoking a command like:</p>
+<pre><code>gpg --encrypt --recipient &quot;My Colleague&quot; document.txt</code></pre>
+<p>and the recipient could decrypt it with:</p>
+<pre><code>gpg --decrypt document.txt.gpg</code></pre>
+<p>e.g. signing could be done by invoking a command like:</p>
+<pre><code>gpg --clearsign file.txt</code></pre>
+<p>or</p>
+<pre><code>gpg --detach-sign file.txt</code></pre>
+<p>and the signature could be verified with a command like:</p>
+<pre><code>gpg --verify file.txt.asc</code></pre>
+<p>or</p>
+<pre><code>gpg --verify file.txt.sig</code></pre>
+<h3 id="what-starts-to-confuse-me-subkeys">What Starts to Confuse Me: Subkeys</h3>
+<p>Okay, but having created a key, then list the keys:</p>
+<pre><code>gpg --list-keys</code></pre>
+<p>outputs something like:</p>
+<pre>
+pub   rsa4096 2020-10-05 [SC] [expires: 2022-08-01]
+      D9463A85F093811B887DE4B03229F4BB09CC8A22
+uid           [ultimate] Richard Goulter (NixOS Desktop) <richard.goulter@gmail.com>
+sub   rsa4096 2020-10-05 [E] [expires: 2022-08-01]
+</pre>
+<p>and secret keys:</p>
+<pre><code>gpg --list-secret-keys</code></pre>
+<p>outputs something like:</p>
+<pre>
+sec   rsa4096 2020-10-05 [SC] [expires: 2022-08-01]
+      D9463A85F093811B887DE4B03229F4BB09CC8A22
+uid           [ultimate] Richard Goulter (NixOS Desktop) <richard.goulter@gmail.com>
+ssb   rsa4096 2020-10-05 [E] [expires: 2022-08-01]
+</pre>
+<p>I can see the only difference is <code>pub</code>, <code>sub</code>, vs <code>sec</code> and <code>ssb</code>. What?</p>
+<p>What’s <code>[SC]</code>, <code>[E]</code>?</p>
+<p>And if you enable some recommended options in <code>~/.gnupg/gpg.conf</code>:</p>
+<pre><code>keyid-format LONG
+with-fingerprint
+with-keygrip</code></pre>
+<p>re-running:</p>
+<pre><code>gpg --list-keys</code></pre>
+<p>outputs:</p>
+<pre>
+pub   rsa4096/3229F4BB09CC8A22 2020-10-05 [SC] [expires: 2022-08-01]
+      Key fingerprint = D946 3A85 F093 811B 887D  E4B0 3229 F4BB 09CC 8A22
+      Keygrip = 480A928A7AA17A693FDF4F4E9DEAEBEE1B778FB7
+uid                 [ultimate] Richard Goulter (NixOS Desktop) <richard.goulter@gmail.com>
+sub   rsa4096/15BAE7FB6F3DA787 2020-10-05 [E] [expires: 2022-08-01]
+      Keygrip = A996CF5366A2FFCA11EE958FBA3AC4BDFDB6AC76
+</pre>
+<p>I feel like this one I’m allowed to be confused by.</p>
+<p>Long Id?</p>
+<p>Fingerprint??</p>
+<p>Keygrip???</p>
+<h3 id="a-key-consisting-of-multiple-keys">A Key Consisting of Multiple Keys</h3>
+<p>Uh. Hopefully it’s not too late in this blogpost to mention it.<br />
+But “key” gets used in multiple ways e.g. “running <code>gpg --quick-generate-key</code>
+generates a GPG ‘key’”, and in “a GPG ‘key’ consists of at least one key pair”.</p>
+<p>Generally, context is often enough to disambiguate these. But given that GPG is
+confusing enough as it is, it’s worth mentioning the ambiguity.</p>
+<p>Taking a look at the terminology GPG’s manual uses:
+<a href="https://www.gnupg.org/gph/en/manual.html#CONCEPTS" class="uri">https://www.gnupg.org/gph/en/manual.html#CONCEPTS</a></p>
+<blockquote>
+<p>GnuPG uses a somewhat more sophisticated scheme in which a user has a primary
+keypair and then zero or more additional subordinate keypairs. The primary and
+subordinate keypairs are bundled to facilitate key management and the bundle
+can often be considered simply as one keypair.</p>
+</blockquote>
+<p>This excerpt refers to the keys being ‘bundled’, and that the bundle can often
+be considered as a keypair.</p>
+<p>The GnuPG FAQ has an answer which better describes the ambiguity.
+<a href="https://www.gnupg.org/faq/gnupg-faq.html#define_key" class="uri">https://www.gnupg.org/faq/gnupg-faq.html#define_key</a></p>
+<blockquote>
+<p>The word ‘key’ is unfortunately ambiguous. It can either refer to the
+mathematical structures that allow encryption, decryption, signing and
+verification to occur, or to the rather large blobs of data that contain those
+mathematical structures as well as information about the person associated
+with it, additional subkeys, and so forth.</p>
+<p>With respect to the large blobs of data, it is preferable to call them
+‘certificates’, so that the word ‘key’ may be unambiguously recognized as
+meaning just the mathematical structures. Unfortunately, this is a custom that
+seems to be honored mostly in the breach.</p>
+</blockquote>
+<p>In this blogpost, I’ll try to use the word “key” in scare quotes to indicate
+“bundle of key pairs”.</p>
+<h3 id="other-gpg-featurescomplications">Other GPG Features/Complications</h3>
+<p>So while I feel like the idea of “a key pair, with a private part and a public
+part” is understandable, there are other features of GPG “keys” which make
+things more complicated:</p>
+<p>GPG “keys” can be set with an expiry date.<br />
+(This is useful as a way of indicating you’ve still got access to the private
+key).</p>
+<p>GPG “keys” can have multiple “User IDs” (Name + email). Photos can be included
+in the GPG “key”.</p>
+<p>GPG “keys” can be signed. Or more specifically: the keys and UIDs can be signed.<br />
+– I don’t find this intuitive. Sure, Bruce Wayne and Batman are different
+identities, but I don’t see why they’d want to use the same key.</p>
+<p>GPG “keys” can be revoked. That is, an indication that other subkeys or UIDs or signatures
+should not be trusted.<br />
+– I didn’t find this intuitive.</p>
+<p>GPG “keys” can have some level of trust.<br />
+– This also seems unintuitive to me.</p>
+<h3 id="why-subkeys-are-subkeys">Why Subkeys are Subkeys</h3>
+<p>I found <a href="https://serverfault.com/questions/397973/gpg-why-am-i-encrypting-with-subkey-instead-of-primary-key">this StackOverflow answer about why different keys are used for
+encryption vs signing</a>
+illuminating:</p>
+<blockquote>
+<p>If you look into the details of the math of public-key encryption, you will
+discover that signing and decrypting are actually identical operations. Thus
+in a naïve implementation it is possible to trick somebody into decrypting a
+message by asking them to sign it.</p>
+</blockquote>
+<p>i.e. it would be bad a idea to use the same (sub)key for both signing and
+encryption. So, GPG uses a separate subkey for at least encryption.</p>
+<p>This answer also explains what the <code>[SC]</code> and <code>[E]</code> refer to:</p>
+<blockquote>
+<p>E = encrypt/decrypt (decrypt a message you received encrypted for you to read)<br />
+S = sign (sign data. For example a file or to send signed e-mail)<br />
+C = certify (sign another key, establishing a trust-relation)<br />
+A = authentication (log in to SSH with a PGP key; this is relatively new usage)</p>
+</blockquote>
+<p>The <a href="https://en.wikipedia.org/wiki/RSA_(cryptosystem)">Wikipedia page about RSA</a>
+gives an example of using RSA keys, which is useful for understanding “signing
+and decrypting are identical operations”.</p>
+<p><a href="https://www.gnupg.org/gph/en/manual.html#AEN267">The GPG User Guide (Section “Key Management”, subsection “Key
+integrity”)</a> sort of does
+explain the “master” and “subordinate” part:</p>
+<blockquote>
+<p>Using digital signatures is a solution to this problem. When data is signed by
+a private key, the corresponding public key is bound to the signed data. In
+other words, only the corresponding public key can be used to verify the
+signature and ensure that the data has not been modified. A public key can be
+protected from tampering by using its corresponding private master key to sign
+the public key components and user IDs, thus binding the components to the
+public master key. Signing public key components with the corresponding
+private master signing key is called self-signing, and a public key that has
+self-signed user IDs bound to it is called a certificate.</p>
+</blockquote>
+<p>The ‘self-signing’ of sub-keys by the master key is a detail which wasn’t clear to me.</p>
+<p>“Subordinate” is a surprising word here.<br />
+Even the <em>absolutely excellent</em> post <a href="https://davesteele.github.io/gpg/2014/09/20/anatomy-of-a-gpg-key/">“anatomy of a gpg
+key”</a> expands
+“subkey” to “sub-component of another key”, not “subordinate key”.</p>
+<p>I further feel vindication in that the website <a href="https://gpg.wtf/" class="uri">https://gpg.wtf/</a> also discusses
+‘what a subkey is’ in its “things that are confusing about gpg”.</p>
+<p>The “master key signs the subkeys” can be seen by running a command like:</p>
+<pre><code>gpg --check-signatures 0x3229F4BB09CC8A22</code></pre>
+<p>which outputs something like:</p>
+<style>
+span.key0 {
+  color: #2072B8;
+};
+span.key1 {
+  color: #7FBA42;
+};
+</style>
+<pre>
+<b>pub</b>   rsa4096/<span class="key0">0x3229F4BB09CC8A22</span> 2020-10-05 [SC] [expires: 2022-08-01]
+      Key fingerprint = <span class="key0">D946 3A85 F093 811B 887D  E4B0 3229 F4BB 09CC 8A22</span>
+      Keygrip = <span>480A928A7AA17A693FDF4F4E9DEAEBEE1B778FB7</span>
+<b>uid</b>                   [ultimate] Richard Goulter (NixOS Desktop) <richard.goulter@gmail.com>
+sig!3        <span class="key0">0x3229F4BB09CC8A22</span> 2022-05-03  Richard Goulter (NixOS Desktop) <richard.goulter@gmail.com>
+<b>sub</b>   rsa4096/<span class="key1">0x15BAE7FB6F3DA787</span> 2020-10-05 [E] [expires: 2022-08-01]
+      Keygrip = <span class="key1">A996CF5366A2FFCA11EE958FBA3AC4BDFDB6AC76</span>
+sig!         <span class="key0">0x3229F4BB09CC8A22</span> 2022-05-03  Richard Goulter (NixOS Desktop) <richard.goulter@gmail.com>
+
+gpg: 2 good signatures
+</pre>
+<p>i.e. The GPG “key” has:</p>
+<ul>
+<li><p>the public master key,</p></li>
+<li><p>a UID which is signed with the <code>[SC]</code> key,</p></li>
+<li><p>a subordiate key, which is intended for <code>[E]</code> usage, as signed with the <code>[SC]</code> key.</p></li>
+</ul>
+<h3 id="illustrating-the-rote-gpg-operations">Illustrating the Rote GPG Operations</h3>
+<p>Going back over the rote commands again, now with a diagrams to illustrate
+subkeys at work:</p>
+<p>e.g. key generation:</p>
+<div style="text-align: center;">
+<p><img src="https://raw.githubusercontent.com/rgoulter/rgoulter.github.com/master/images/gpg/sign_document.png"  /></p>
+</div>
+<p>could be done by invoking a command like:</p>
+<pre><code>gpg --quick-generate-key &quot;Richard Goulter (NixOS Desktop) &lt;richard.goulter@rgoulter.com&gt;&quot;</code></pre>
+<p>e.g. exporting a key, to copy the public part to GitHub or whatever:</p>
+<div style="text-align: center;">
+<p><img src="https://raw.githubusercontent.com/rgoulter/rgoulter.github.com/master/images/gpg/gpg_export_key.png"  /></p>
+</div>
+<p>could be done by invoking a command like:</p>
+<pre><code>gpg --export --armor &quot;Richard Goulter (NixOS Desktop)&quot;</code></pre>
+<p>e.g. encrypting/decrypting a message:</p>
+<div style="text-align: center;">
+<p><img src="https://raw.githubusercontent.com/rgoulter/rgoulter.github.com/master/images/gpg/gpg_encrypt_document.png"  />
+<img src="https://raw.githubusercontent.com/rgoulter/rgoulter.github.com/master/images/gpg/gpg_decrypt_document.png"  /></p>
+</div>
+<p>could be done by invoking a command like:</p>
+<pre><code>gpg --encrypt --recipient &quot;My Colleague&quot; document.txt</code></pre>
+<p>and the recipient could decrypt it with:</p>
+<pre><code>gpg --decrypt document.txt.gpg</code></pre>
+<p>e.g. signing:</p>
+<div style="text-align: center;">
+<p><img src="https://raw.githubusercontent.com/rgoulter/rgoulter.github.com/master/images/gpg/gpg_sign_document.png"  />
+<img src="https://raw.githubusercontent.com/rgoulter/rgoulter.github.com/master/images/gpg/gpg_verify_signature.png"  /></p>
+</div>
+<p>could be done by invoking a command like:</p>
+<pre><code>gpg --clearsign file.txt</code></pre>
+<p>or</p>
+<pre><code>gpg --detach-sign file.txt</code></pre>
+<p>and the signature could be verified with a command like:</p>
+<pre><code>gpg --verify file.txt.asc</code></pre>
+<p>or</p>
+<pre><code>gpg --verify file.txt.sig</code></pre>
+<h3 id="gpg-for-ssh">GPG for SSH</h3>
+<p>Again, coming from the mindset of “SSH keys for pushing to <code>git</code> repositories,
+<code>gpg</code> for signing stuff”, hearing “GPG ‘keys’ can be used for SSH too” sounds
+like wizardry.</p>
+<p>This is also where “keygrip” comes into use. As <a href="https://blog.djoproject.net/2020/05/03/main-differences-between-a-gnupg-fingerprint-a-ssh-fingerprint-and-a-keygrip/">this blogpost discussing GPG
+fingerprint vs SSH key fingerprint vs GPG
+keygrip</a>
+explains, the keygrip is a way of identifying the key regardless of
+protocol/usage.</p>
+<p>Now that I have a better understanding of subkeys,
+it seems the main points for “using GPG for SSH” involves two things to understand:</p>
+<ul>
+<li><p>Using a suitably configured <code>gpg-agent</code> instead of <code>ssh-agent</code>, by pointing
+the <code>SSH_AUTH_SOCK</code> and <code>SSH_AGENT_PID</code> to GPG.</p></li>
+<li><p>Having a subkey with <code>[A]</code> capability.</p></li>
+</ul>
+<h3 id="visualisation-of-the-offline-master-key-setup">Visualisation of the Offline Master Key Setup</h3>
+<p>With the above in mind, a summary of the result of these tutorials for setting
+up master keys could be visualised as follows:</p>
+<div style="text-align: center;">
+<p><img src="https://raw.githubusercontent.com/rgoulter/rgoulter.github.com/master/images/gpg/gpg_offline_master_key.png"  /></p>
+</div>
+<p>Which seems less complex than all the confusion I had over it made it out to be.</p>
+<p>As the Debian wiki article pages discuss, because the private master key is used
+to self-sign the subkeys in the GPG “key”, it can then be used to revoke the
+other subkeys.</p>
+<h3 id="yubikey-as-a-gpg-smart-card">Yubikey as a GPG Smart Card</h3>
+<p>Yubikeys can then allow a nicer User Experience for using
+GPG keys. e.g. the Yubikey supports 3 slots for private keys: for signing, encryption, or authentication.</p>
+<div style="text-align: center;">
+<p><img src="https://raw.githubusercontent.com/rgoulter/rgoulter.github.com/master/images/gpg/gpg_smart_card_slots.png"  /></p>
+</div>
+<p>e.g. <a href="https://developers.yubico.com/PGP/PGP_Walk-Through.html">Yubico’s PGP walkthrough</a>.</p>]]></summary>
+</entry>
+<entry>
     <title>EPA in Emacs is a Neat UX on top of GPG</title>
     <link href="http://www.rgoulter.com/blog//posts/programming/2022-06-07-epa-in-emacs-is-a-neat-ux-on-top-of-gpg.html" />
     <id>http://www.rgoulter.com/blog//posts/programming/2022-06-07-epa-in-emacs-is-a-neat-ux-on-top-of-gpg.html</id>
@@ -1100,79 +1409,6 @@ Some users tried NixOS but found it too difficult. – While I think this is fai
 and I won’t argue that NixOS is practical enough to be worth the effort, what I’d
 emphasise instead is that NixOS may require understanding a lot more about what’s
 going on than other distributions would.</p>]]></summary>
-</entry>
-<entry>
-    <title>Netflix's Narcos Mexico Season 3 is a Let Down</title>
-    <link href="http://www.rgoulter.com/blog//posts/narrative/2021-11-07-netflixs-narcos-mexico-season-3-is-a-let-down.html" />
-    <id>http://www.rgoulter.com/blog//posts/narrative/2021-11-07-netflixs-narcos-mexico-season-3-is-a-let-down.html</id>
-    <published>2021-11-07T00:00:00Z</published>
-    <updated>2021-11-07T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<p>Netflix’s “Narcos”, and its companion “Narcos: Mexico” are very exciting shows
-to watch.</p>
-<p>I, uh, am under the impression these shows play quite fast and loose with
-history in order to make a compelling drama. It does make for good
-entertainment.</p>
-<p>I was excited to see “Narcos: Mexico”’s Season 3 recently released, and sat
-down to binge my way through its episodes. – Unfortunately, I found it
-disappointing.</p>
-<p>“Narcos” especially had this charm of a cat-and-mouse game. You’d feel tense
-wondering if the good guys would catch the bad guys. I noticed the tension was
-an inverse of the results: when the tension looked like it might resolve in
-catching the bad guys, it resolved with the bad guys getting away. But when the
-tension looked like it leaned in the direction of the bad guys getting away,
-they’d get caught. – It was very fun to watch.</p>
-<p>“Narcos” ran for 3 seasons, with seasons 1 and 2 based on the story of Pablo
-Escobar; and season 3 based on the story of the Cali cartel. “Narcos: Mexico”
-sees the rise of the Guadalajara Cartel; presumably future seasons will show us
-more of El Chapo.</p>
-<p>After watching “Narcos: Mexico” season 1, I watched Netflix’s “El Chapo”. –
-The two shows both dramatise the same set of events. I tend to like the latter
-more.</p>
-<p>Well, “Narcos: Mexico”’s Season 3 is a bit lame. I think it tries to land some
-emotional punches.. which didn’t really land.</p>
-<p>At one point in the show, the good-guys (an American DEA agent, and a Mexican
-anti-drug military company) capture the brother of the right hand man of
-so-and-so that they want to catch. They start torturing the kid for
-information. Then, to the DEA agent’s <em>horror</em>, the kid claims he had
-Mexican-American dual-citizenship. There’s more hand-wringing in the show,
-where the DEA agent feels he’s not one of the good guys, because of the torture
-of the American.<br />
-– Ugh. I mean, you can say torture is wrong, or argue torture is bad because
-it’s ineffective, or argue torture is effective despite being horrible. I don’t
-see it as defensible to say that citizenship has an impact. What the fuck. (The
-moral shock certainly can’t be from “torturing your own people” is bad, either.
-The torture was carried out by Mexicans).<br />
-– And while I reckon the show’s writers hold the view that the US are
-responsible for many bad actions which hurt Mexico.. it feels like the part the
-story wants you to find shocking is the torture <em>of an American citizen</em>.</p>
-<p>In contrast, Netflix’s “El Chapo” has a few standout episodes which really
-punch through the desensitization that might otherwise come with these gangster
-shows. Or rather.. it’s easy to see the gangsters killing other gangsters and
-not feel much about it. But in “El Chapo”, the show takes the time to tell the
-story from the perspective of lives of ordinary people impacted by the drug
-trafficking. – We see a poor family lose their daughter; the mother takes the
-last money they have, gives it to some police officers who then do nothing to
-help her. We see a young boy kidnapped of the streets, and forced into training
-as a soldier for the gang. We see poppy farmers who have a tough time under one
-cartel be forced to work under much worse conditions as another cartel takes
-over the area.</p>
-<p>I guess the other let down to “Narcos: Mexico”’s season 3 is the cat-and-mouse
-aspect to the story just doesn’t feel as prominent.<br />
-Previous seasons of “Narcos” and “Narcos: Mexico” have followed a pattern of
-following the rise and fall of the biggest drug cartel, and the DEA’s efforts
-to stop them. Tensions ratchet as the bad guy gets more powerful, and the good
-guys get closer to catching them.<br />
-– In this season, the bad guys that the DEA are chasing never really seem to
-hold the position of dominance. And the bad guy who seems to be the the most
-prominent isn’t spending his time getting ahead of prominent threats. There’s
-no buildup in tension.<br />
-Stuff just happens.<br />
-– Is that some kind of deliberate meta-narrative harmony with the moral that
-the war on drugs isn’t a war where the anti-drug enforcement is coherently
-winning? Nah.</p>
-<p>The hand-wringing of “Narcos: Mexico” season 3 falls flat and seems lame in
-comparison, where the show was previously very strong at telling a good gangster
-story.</p>]]></summary>
 </entry>
 
 </feed>
