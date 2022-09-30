@@ -8,8 +8,58 @@
         <name>Richard Goulter</name>
         <email>richard.goulter+blog@gmail.com</email>
     </author>
-    <updated>2022-06-10T00:00:00Z</updated>
+    <updated>2022-09-30T00:00:00Z</updated>
     <entry>
+    <title>Signal Boost drduh's Yubikey Guide</title>
+    <link href="http://www.rgoulter.com/blog//posts/programming/2022-09-30-signal-boost-dr-duhs-yubikey-guide.html" />
+    <id>http://www.rgoulter.com/blog//posts/programming/2022-09-30-signal-boost-dr-duhs-yubikey-guide.html</id>
+    <published>2022-09-30T00:00:00Z</published>
+    <updated>2022-09-30T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<p><a href="https://github.com/drduh/YubiKey-Guide" class="uri">https://github.com/drduh/YubiKey-Guide</a></p>
+<p>I recently set up my Yubikeys so that I could use the key to hold the private
+keys I use with git.</p>
+<p>I spent a bunch of time reading through various guides discussing how to set up
+a master key with an offline backup, and how to put this on a GPG smartcard.</p>
+<p>Drduh’s guide above is the best I’ve come across.</p>
+<p>e.g. Most guides only mention the interactive way to generate keys. This guide
+at least mentions using a <a href="https://github.com/drduh/YubiKey-Guide#create-keys-with---batch-and---quick-add-keys">the batch
+interface</a>.</p>
+<p>(c.f. <a href="https://github.com/rgoulter/nix-user-repository/blob/a96522d387396e7dd9ab8b6e489a97ffb6bcec92/scripts/gpg-quick-generate-master-key.sh">my key generation
+invocations</a>).</p>]]></summary>
+</entry>
+<entry>
+    <title>Travel Setup Using a Fancy Keyboard with a Laptop</title>
+    <link href="http://www.rgoulter.com/blog//posts/programming/2022-08-24-travel-setup-using-a-fancy-keyboard-with-a-laptop.html" />
+    <id>http://www.rgoulter.com/blog//posts/programming/2022-08-24-travel-setup-using-a-fancy-keyboard-with-a-laptop.html</id>
+    <published>2022-08-24T00:00:00Z</published>
+    <updated>2022-08-24T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<p>One of the downsides to using a fancy keyboard is that it’s difficult to use
+when out and about with a laptop.</p>
+<p>This is arguably mitigated by that laptops themselves have a keyboard.</p>
+<p>I like my small, fancy keyboard much more than the laptop keyboard, though.
+(My thumbs get access to 2-3 keys each on my fancy keyboard, etc.).</p>
+<p>Here’s the travel setup I’ve used:</p>
+<p>The first thing which helps is getting a bit of acrylic cut to shape, with some
+bumpons to lift it above the keys:</p>
+<p><img src="https://raw.githubusercontent.com/rgoulter/rgoulter.github.com/master/images/keyboards/travel-setup/keyboard_travel_mba.JPG" /></p>
+<p><img src="https://raw.githubusercontent.com/rgoulter/rgoulter.github.com/master/images/keyboards/travel-setup/keyboard_travel_mba_plate.JPG" /></p>
+<p>In terms of cables:</p>
+<p>I was able to have a working setup with an ordinary USB-C cable. Since the
+cable needs some clearance, the keyboard couldn’t quite be close to the screen.
+Thanks to how HUGE the Macbook trackpads are, I could get by without needing an
+extra mouse.</p>
+<p><img src="https://raw.githubusercontent.com/rgoulter/rgoulter.github.com/master/images/keyboards/travel-setup/keyboard_travel_mba_plate_usbc.JPG" /></p>
+<p>What I haven’t yet tried while traveling, but I expect to work much better, is
+to use a USB-C cable with a right-angle connector:</p>
+<p><img src="https://raw.githubusercontent.com/rgoulter/rgoulter.github.com/master/images/keyboards/travel-setup/keyboard_travel_mba_plate_rightangle.JPG" /></p>
+<p>Unfortunately, use of right-angled connectors like this depends a bit on the
+keyboard. In the following pictures, both have a magnetic connector inserted.
+The right-angled USB-C cables I’ve tried cannot connect to the BM40, since the
+case is too thick.</p>
+<p><img src="https://raw.githubusercontent.com/rgoulter/rgoulter.github.com/master/images/keyboards/travel-setup/keyboard_bm40.JPG" /></p>
+<p><img src="https://raw.githubusercontent.com/rgoulter/rgoulter.github.com/master/images/keyboards/travel-setup/keyboard_gh60_case.JPG" /></p>]]></summary>
+</entry>
+<entry>
     <title>A Visual Explanation of GPG Subkeys</title>
     <link href="http://www.rgoulter.com/blog//posts/programming/2022-06-10-a-visual-explanation-of-gpg-subkeys.html" />
     <id>http://www.rgoulter.com/blog//posts/programming/2022-06-10-a-visual-explanation-of-gpg-subkeys.html</id>
@@ -844,6 +894,7 @@ variables in a per-directory basis.</p>
 <p>Since direnv runs arbitrary bash code in the <code>.envrc</code> files, it’s possible to
 use direnv to automatically load programs specified in a nix file into the
 enviroment.</p>
+<h3 id="using-nix-direnv">Using <code>nix-direnv</code></h3>
 <p>With the new flake-aware <code>nix</code> cli commands, a <code>flake.nix</code> file is preferred
 over <code>shell.nix</code> or <code>default.nix</code>. The
 <a href="https://github.com/nix-community/nix-direnv/">nix-direnv</a> project integrates
@@ -878,6 +929,11 @@ will load the environment from direnv <code>.envrc</code> files.</p>
 <p>Since <code>emacs-direnv</code> loads the <code>.envrc</code> file, and the <code>.envrc</code> file loads the
 environment with the <code>devShell</code> from the <code>flake.nix</code>, Emacs will use the
 programs from the <code>devShell</code>. (As can be verified by evaluating <code>(getenv "PATH")</code> or <code>(executable-find "bash")</code>, or whatever).</p>
+<p>With recent versions of direnv, the <code>.envrc</code> can be as simple as:</p>
+<pre><code>use flake</code></pre>
+<p>and I often find it useful to refer to a <code>devShell</code> output of a flake elsewhere:</p>
+<pre><code>use flake github:rgoulter/nix-user-repository#python_3_10</code></pre>
+<h3 id="example-go-lang">Example: Go-lang</h3>
 <p>e.g. for Go-lang, we want <code>go</code> and <code>gopls</code>, so our <code>devShell</code> is defined in the
 <code>flake.nix</code> as:</p>
 <pre class="nix"><code>devShell = pkgs.mkShell {
@@ -886,6 +942,7 @@ programs from the <code>devShell</code>. (As can be verified by evaluating <code
     gopls
   ];
 };</code></pre>
+<h3 id="example-terraform">Example: Terraform</h3>
 <p>e.g. for Terraform:</p>
 <pre class="nix"><code>devShell = pkgs.mkShell {
   packages = with pkgs; [
@@ -894,11 +951,27 @@ programs from the <code>devShell</code>. (As can be verified by evaluating <code
     tflint
   ];
 };</code></pre>
-<p>But, using <code>terraform-ls</code> instead of <code>terraform-lsp</code> is a bit more involved. I
-needed to fill <code>.dir-locals.el</code> with:</p>
+<p>But, using <code>terraform-ls</code> instead of <code>terraform-lsp</code> is a bit more involved. In
+order to get the LSP working, I needed to fill <code>.dir-locals.el</code> with:</p>
 <pre class="elisp"><code>((terraform-mode . ((eval . (progn
                               (direnv-update-environment)
-                              (setq-local lsp-terraform-server `(&quot;terraform-ls&quot; &quot;serve&quot;)))))))</code></pre>]]></summary>
+                              (setq-local lsp-terraform-server `(&quot;terraform-ls&quot; &quot;serve&quot;)))))))</code></pre>
+<h3 id="downsides">Downsides</h3>
+<ul>
+<li><p>Some tooling (linting, LSP) can be a bit finicky with editors depending on the
+load order of the direnv plugin, and the load order of the tool. This can
+sometimes be mitigated by launching the editor from the direnv environment.</p></li>
+<li><p>For code intelligence with LSP, often the code for the dependecies is outside
+of the project directory.</p>
+<ul>
+<li>e.g. in a Rust project, the source code for crates ends up under the home
+directory. – So, if you navigate to some function’s declaration, but that’s
+outside the project directory, then direnv unloads the LSP no longer
+provides the server on the path (and the editor LSP plugin is not able to
+start the LSP server in this outside-of-project-directory folder).</li>
+</ul></li>
+</ul>
+<p>And obviously it takes a bit of effort to write the above.</p>]]></summary>
 </entry>
 <entry>
     <title>Using Home Manager to Manage Symlinks to Dotfiles</title>
@@ -1217,198 +1290,6 @@ homeFilesToLink =
 <p>(where <code>pkgs.lib.lists.foldr (a: b: a // b) {}</code> is essentially <code>listToAttrs</code>,
 but my version of Nix didn’t have this. In nix, <code>{ a = 3; } // { b = 4; }</code>
 evaluates to <code>{ a = 3; b = 4; }</code>).</p>]]></summary>
-</entry>
-<entry>
-    <title>Deborah Tannen's You Just Don't Understand is Wonderful</title>
-    <link href="http://www.rgoulter.com/blog//posts/argument/2022-01-11-deborah-tannens-you-just-dont-understand-is-wonderful.html" />
-    <id>http://www.rgoulter.com/blog//posts/argument/2022-01-11-deborah-tannens-you-just-dont-understand-is-wonderful.html</id>
-    <published>2022-01-11T00:00:00Z</published>
-    <updated>2022-01-11T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<p>I finally finished reading through Deborah Tannen’s “You Just Don’t
-Understand”. It’s interesting to see that it was published in 1990. I’d put it
-alongside Jonathan Haidt’s “The Righteous Mind” as a book which provides a
-no-fault explaination for behaviour which seems illogical.</p>
-<p>The core of the book is that some of the conflict which arises between men and
-women arises resembles conflict which arises due to inter-cultural differences.
-Sometimes a man will say something intending to be supportive, but it comes
-across as offensive to a woman (or vice versa).<br />
-The model of interaction Tannen notes from observation is that typically men
-interact with the world with an emphasis on competition, with a sensitivity to
-their place in hierarchies, prioritising individuality and independence; and
-that typically women interact with the world with an emphasis on cooperation,
-with sensitivity to their place in communities, prioritising connection and
-intimacy. (The author is aware that people are complicated, and that such a
-partitioning won’t describe everyone, etc.).</p>
-<p>The chapters in the book generally give an example of an interaction, and use
-the model to explain the situation. The example interactions are about how the
-gendered differences play out in telling jokes, or in presenting/lecturing, in
-domestic conversations, in work meetings, in political leadership, etc..<br />
-– One example of a difference was that in classroom discussions, the
-competition-oriented style is more inclined to answer questions and give
-opinions, whereas a communal-oriented style is more inclined to avoid
-offending. (e.g. avoiding conflict of disagreeing, or appearing to not be equal
-to others).</p>
-<p>One example (which apparently the book introduced to wider culture) was that
-“men don’t want to ask for directions”. Asking for directions makes you
-dependent on someone else for help.<br />
-I think anyone in a relationship who reads through the book will be
-reminded of misunderstandings they’ve had with their partner.</p>
-<p>An recurring example of how human interaction is complicated comes up
-in situations where one person helps another. Lending support might be
-a show of superiority, or an obligation from a subordinate position.</p>
-<p>In the afterword of the book’s reprint, Tannen discusses that many people asked
-her whether she thought the differences in conversation style were biological,
-or cultural. She felt that many of the people asking had already made their
-minds up:<br />
-those who felt the differences were biological felt (typically men)
-felt that this meant there was no need for the status quo to change,<br />
-vs those who felt the differences were cultural (typically women; although I’d
-expect these days it would typically be progressives) and felt that this meant
-the conversation styles malleable.<br />
-– Tannen’s opinion (which she qualifies by saying it’s not within her domain
-of research) is that it’s not fully biological, but that cultural values are
-unlikely to change quickly. The differences should be understood as they are,
-as to mitigate the impact of conflicts arising from differences.</p>
-<p>The book’s foreword similarly makes an interesting claim, as to why we should
-care about differences:</p>
-<blockquote>
-<p>Pretending that women and men are the same hurts women, because the ways they
-are treated are based on the norms for men. It also hurts men who, with good
-intentions, speak to women as they would to men, and are nonplussed when
-their words don’t work as they expected, or even spark resentment and anger.</p>
-<p>This paradox is expressed by an American Indian woman, Abby Abinati,
-describing why she found law school a difficult and alienating experience:</p>
-<blockquote>
-<p>People did not like or accept the idea of Indians or women being lawyers.
-Some people could not decide which idea they hated more. Some pretended
-that it didn’t make any difference, that we were all the same. I, too,
-could be “one of the boys,” “one of the white boys.” Not likely. Both of
-these approaches created problems for me.</p>
-</blockquote>
-</blockquote>
-<p>That some people thought she as a woman or an Indian shouldn’t be a lawyer is
-awful.<br />
-That she felt her identity as an Indian and a woman meant she felt left out
-when she was treated the same way as others would treat a white man… while it
-seems reasonable to say that people who are different should be recognised as
-different, but “treat people differently” just sounds disrespectful. – It’s
-natural to ask “What problems did it create for you? If not treated the same
-as ‘one of the white boys’, how’d you expect to be treated?”.</p>
-<p>These days, there’s plenty of discussion towards the goal of reducing alienation
-of people who look different. But, there seems to be an underlying assumption
-that there’s no substantial difference in the way people interact.<br />
-– When differences are brought up, it kinda follows the two reactions
-mentioned above (“innate differences, nothing to be done” vs “the
-differences don’t exist! so, you’re saying women are inferior!?”).
-I think it’d be better if there were more acknowledgement of differences,
-and examples of ways to work with those differences.</p>
-<p>I think the book’s treatment of cross-cultural communication is better than
-what gets passed around on Twitter.<br />
-e.g. the word “mansplaining” was only coined in the Twitter-era, and has come
-to be used as an unnecessarily-gendered substitute for the word “patronising”.
-The word’s initial usage, IIRC, was as by a female author frustrated by a
-conversation where a man explained her own book to her.<br />
-– Conflicts like this are typical of the kinds of inter-gender conflicts the
-book discusses. Tannen’s typical explanation is that a man is inclined to
-compete, to demonstrate his skill, with the expectation that a conversation
-partner reciprocate the competition; that a woman is inclined to cooperate, to
-not offend, and expect a conversation partner to not dominate a conversation.<br />
-– Twitter’s interpretation is that this conflict doesn’t happen between men,
-because men don’t patronise other men; Tannen’s interpretation is that this
-conflict doesn’t happen between men, because a man would simply reply “I know,
-I wrote the book”. Twitter’s interpretation is that men’s behaviour is
-pigheaded. Tannen’s interpretation is that the conflict arises due to
-different conversation styles.</p>
-<p>I guess it’d be easy to paper-over the different styles of interaction.<br />
-From a framing where interaction is pro-competitive, and everything about one’s
-place in a hierarchy.. then interactions which style things in a social way
-seem frilly and stupid.<br />
-From a framing where interaction is pro-cooperative, and everything about one’s
-belonging to a group.. then interactions which style things in a competitive way
-are brash and crude.<br />
-– But it seems to me less dignity is lost (and less conflict is had)
-by considering these as different styles.</p>]]></summary>
-</entry>
-<entry>
-    <title>It's Difficult to Explain Technical Difficulties Encountered</title>
-    <link href="http://www.rgoulter.com/blog//posts/programming/2021-12-26-its-difficult-to-explain-technical-difficulties-encountered.html" />
-    <id>http://www.rgoulter.com/blog//posts/programming/2021-12-26-its-difficult-to-explain-technical-difficulties-encountered.html</id>
-    <published>2021-12-26T00:00:00Z</published>
-    <updated>2021-12-26T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<p>If you’re using a computer, and something doesn’t work,
-sometimes the best you can come up with when asking for help is:
-“it doesn’t work”.</p>
-<p>Maybe you can be a bit more specific and say “I’ve plugged in my headphones,
-and they don’t work”.</p>
-<p>But no one is ever going to say “I’ve got a headset, and I plugged the cable
-with the microphone icon into the jack with the headphone icon, and vice versa,
-and I can’t hear audio playing through the headset”.</p>
-<p>Once you understand what’s going on enough to know what facts are significant,
-you probably know enough to find help on your own.<br />
-But if you don’t understand, then asking for help in a useful way is kindof
-difficult.</p>
-<p>(From the asker’s side, this just means you can’t find the solution to your
-problem. But for troubleshooting sites like Reddit forums or StackOverflow,
-it means most of the questions posted are of low quality).</p>
-<hr />
-<p>NixOS can be difficult to use.<br />
-I’d say it’s 95% wonderful, 5% pain in the arse to use.<br />
-The “gotta know what you’re doing” aspect both leads to and exasperates that
-painful part.</p>
-<p>Well, Linux in general can be a pain to use.<br />
-Though, there’s an old half-joke that a lot of programming work
-involves a loop of writing code, compiling, copying the error message into
-Google and copy-pasting the answer from StackOverflow.<br />
-– If you run into a problem trying to do something on Linux, you’ll probably
-be able to find some StackOverflow answer which can help you out. You can often
-get away with not really understanding what’s going on. (Or, rather, “deferring
-understanding to a later date”).</p>
-<p>With NixOS, there are some factors such that copy-paste-from-StackOverflow
-doesn’t help out:</p>
-<ul>
-<li><p>Nix/NixOS’s community is relatively small. So you’re less likely to find
-someone who’s tried the same thing as you’re trying to do (&amp; asked about it)
-compared to some other Linux distribution.</p></li>
-<li><p>NixOS is weird. Comparing, say, Ubuntu to Arch to CentOS.. they have
-different ways of installing packages, and will put configuration files in
-different places, but more/less if you see how to fix something in one distribution,
-you’ll be able to apply that to another distribution. – This isn’t necessarily
-the case with NixOS.</p></li>
-<li><p>Sometimes the problem you run into will be a Linux problem, that you would run
-into with any Linux distribution. (e.g. setting up Bluetooth). Or it might be
-because the program is trying to do things which doesn’t work with how Nix
-arranges its packages. – But you have to understand what’s going on in order
-to be able to even distinguish.</p></li>
-</ul>
-<p>One example I find notorious is the <a href="https://github.com/NixOS/nix/issues/2259">“hello world” in the manual doesn’t
-build</a>. Rather, I’d expect to
-be able to take that example, put it in a file named “hello.nix”, and run
-<code>nix-build hello.nix</code>; but that won’t work. A <a href="https://stackoverflow.com/questions/44088192/when-and-how-should-default-nix-shell-nix-and-release-nix-be-used">StackOverflow
-answer</a> discusses that the example is a “callPackage derivation”.
-(And so since it’s supposed to be invoked with <code>callPackage &lt;callPackage derivation&gt; { }</code>, and <code>callPackage</code> comes from nixpkgs, the full command
-invocation is like <code>nix-build -E '(import &lt;nixpkgs&gt; { }).callPackage ./path/to/default.nix { }'</code>..).
-– Whereas, usually “Hello World” is a program I’d expect to be able to compile
-and run without having to understand much about what’s going on.<br />
-– However, it’s imprecise to say “the example is incorrect”.</p>
-<p>I say all this having just run into some technical trouble.<br />
-I was trying to use KiBot to automatically save 3D previews of a circuitboard
-designed with Kicad. I could achieve this by running the given Docker image.
-When I tried running the same program on NixOS, <em>it didn’t work</em>.<br />
-Or rather, after some troubleshooting, I found out Kicad wasn’t able to render
-OpenGL stuff in the Xvfb that was being run; I was able to work-around this by
-wrapping the Kicad command with virtualgl. – I can’t say I fully understand
-the issue, or the solution; but it works. Although I feel with NixOS, I had to
-understand more than if I was using a different Linux distribution.</p>
-<p>NixOS can be difficult to use.<br />
-I think that’s worth emphasising (with the above in mind) as moderation to a
-couple of opinions about NixOS I see.<br />
-Some new users walk the 95%-wonderful happy path of NixOS and proclaim that
-NixOS is really easy to use. (Which <em>way</em> undercounts the pain running
-into the 5% pain-in-the-arse parts of NixOS).<br />
-Some users tried NixOS but found it too difficult. – While I think this is fair,
-and I won’t argue that NixOS is practical enough to be worth the effort, what I’d
-emphasise instead is that NixOS may require understanding a lot more about what’s
-going on than other distributions would.</p>]]></summary>
 </entry>
 
 </feed>
