@@ -8,8 +8,99 @@
         <name>Richard Goulter</name>
         <email>richard.goulter+blog@gmail.com</email>
     </author>
-    <updated>2022-09-30T00:00:00Z</updated>
+    <updated>2022-10-06T00:00:00Z</updated>
     <entry>
+    <title>Using NixOS Specialisations to Try Out Different Desktop Environments</title>
+    <link href="http://www.rgoulter.com/blog//posts/programming/2022-10-06-using-nixos-specialisations-to-try-out-different-desktop-environments.html" />
+    <id>http://www.rgoulter.com/blog//posts/programming/2022-10-06-using-nixos-specialisations-to-try-out-different-desktop-environments.html</id>
+    <published>2022-10-06T00:00:00Z</published>
+    <updated>2022-10-06T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<p>Recently, Tweag’s blog featured a post on <a href="https://www.tweag.io/blog/2022-08-18-nixos-specialisations/">NixOS
+specialisations</a>.</p>
+<p>It allows for having an additional boot entry in grub which
+loads a slightly different configuration. – This makes it very convenient
+to try slightly different NixOS configurations.</p>
+<p>As the blogpost above shows, this can be used for different desktop environments.</p>
+<p>I ran into some problems with conflicting attributes, and wasn’t previously
+aware of how to set the priority. (e.g. as discussed in this <a href="https://discourse.nixos.org/t/what-does-mkdefault-do-exactly/9028">discourse
+post</a>).</p>
+<p>e.g. I’d wanted to try out the <a href="https://wiki.archlinux.org/title/Pantheon">Pantheon</a> desktop environment, which comes out of <a href="https://elementary.io/">Elementary OS</a> and looks very nice. – But, if you try to enable both <code>services.xserver.desktopManager.gnome</code> and <code>services.xserver.desktopManager.pantheon</code>, you get an error like:</p>
+<pre><code>error: The option `environment.sessionVariables.NIX_GSETTINGS_OVERRIDES_DIR&#39; has conflicting definition values:</code></pre>
+<p>Not knowing about overriding attribute priorities, my first attempt at solving this problem was using <code>specialisations</code> to separate the conflicting config options: <a href="https://github.com/rgoulter/nix-user-repository/blob/8df3abaea46b8fbd5d212e64c209d5ef0602955c/modules/desktops.nix">8df3…/modules/desktops.nix</a>.</p>
+<p>Knowing the above about overriding attribute priorites, it makes sense that it’s possible to use Gnome in the ‘parent’ config, and to disable Gnome in the specialisations, with:</p>
+<pre><code>services.xserver.desktopManager.gnome.enable = lib.mkDefault true;</code></pre>
+<p>e.g. <a href="https://github.com/rgoulter/nix-user-repository/blob/c3f0df686ea024f3fae8da13dae6e10a02e920cd/modules/desktops.nix">c3f0…./modules/desktops.nix</a>.</p>
+<pre class="nix"><code>{ config, lib, pkgs, ... }:
+
+{
+  services = {
+    xserver = {
+      desktopManager.gnome.enable = lib.mkDefault true;
+      displayManager.gdm.enable = lib.mkDefault true;
+
+      enable = true;
+
+      layout = &quot;us&quot;;
+    };
+  };
+
+  specialisation = {
+    gnome.configuration = {
+      services.xserver = {
+        desktopManager.gnome.enable = true;
+        displayManager.gdm.enable = true;
+      };
+      system.nixos.tags = [ &quot;gnome&quot; ];
+    };
+    pantheon.configuration = {
+      services.xserver = {
+        # Pantheon conflicts with gnome
+        desktopManager = {
+          gnome.enable = false;
+          pantheon.enable = true;
+        };
+        # Pantheon requires lightdm
+        displayManager = {
+          gdm.enable = false;
+          lightdm.enable = true;
+        };
+      };
+      system.nixos.tags = [ &quot;pantheon&quot; ];
+    };
+    xfce.configuration = {
+      networking.networkmanager.enable = true;
+      services.xserver = {
+        desktopManager = {
+          gnome.enable = false;
+          xfce.enable = true;
+        };
+        displayManager = {
+          gdm.enable = false;
+        };
+      };
+      system.nixos.tags = [ &quot;gnome&quot; ];
+    };
+  };
+}</code></pre>]]></summary>
+</entry>
+<entry>
+    <title>Git Worktrees a Neat Command for Working with Multiple Versions of a Repo</title>
+    <link href="http://www.rgoulter.com/blog//posts/programming/2022-10-01-git-worktrees-a-neat-command-for-working-with-multiple-versions-of-a-repo.html" />
+    <id>http://www.rgoulter.com/blog//posts/programming/2022-10-01-git-worktrees-a-neat-command-for-working-with-multiple-versions-of-a-repo.html</id>
+    <published>2022-10-01T00:00:00Z</published>
+    <updated>2022-10-01T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<p><a href="https://git-scm.com/docs/git-worktree">git-worktree</a> has apparently been in git
+for some time, but I’ve only recently learned of it.</p>
+<p>It lets you conveniently check out multiple versions of a repository at once.</p>
+<p>Which may sound only marginally useful; but I find the benefit to be better than
+it sounds. (e.g. Without the worktree command, perhaps the easiest way to
+imitate it would be to clone from the local repository, and adjust the remotes).</p>
+<p>I’ve found it’s useful to keep a checkout of the master branch, as well as using
+worktrees for feature branches, or other experimenting.</p>
+<p>By keeping work-in-progress in a separate working tree, you don’t have to worry
+about the working tree being dirty in order to check out different versions.</p>]]></summary>
+</entry>
+<entry>
     <title>Signal Boost drduh's Yubikey Guide</title>
     <link href="http://www.rgoulter.com/blog//posts/programming/2022-09-30-signal-boost-dr-duhs-yubikey-guide.html" />
     <id>http://www.rgoulter.com/blog//posts/programming/2022-09-30-signal-boost-dr-duhs-yubikey-guide.html</id>
@@ -877,419 +968,6 @@ But. idk. I just don’t find it compelling.</p>
 fluff, either!).</p>
 <p>Overall, I’m glad Season 2 has got less of the bitter crap that Season 1 had.
 I’m happy that the sweet romantic parts were sweet.</p>]]></summary>
-</entry>
-<entry>
-    <title>Project Specific Tooling in Emacs with Nix Flakes and Direnv</title>
-    <link href="http://www.rgoulter.com/blog//posts/programming/2022-03-21-project-specific-tooling-in-emacs-with-nix-flakes-and-direnv.html" />
-    <id>http://www.rgoulter.com/blog//posts/programming/2022-03-21-project-specific-tooling-in-emacs-with-nix-flakes-and-direnv.html</id>
-    <published>2022-03-21T00:00:00Z</published>
-    <updated>2022-03-21T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<p>One use-case for <a href="https://nixos.org/">nix</a> is to describe the
-tools/dependencies used on a per-project basis. – This is similar to <a href="https://code.visualstudio.com/docs/remote/containers">VSCode’s
-Remote Containers</a>, but
-without the containers.</p>
-<p>We can achieve this in Emacs by leveraging direnv, nix-direnv, and emacs-direnv.</p>
-<p><a href="https://direnv.net/">direnv</a> provides a neat way of specifying environment
-variables in a per-directory basis.</p>
-<p>Since direnv runs arbitrary bash code in the <code>.envrc</code> files, it’s possible to
-use direnv to automatically load programs specified in a nix file into the
-enviroment.</p>
-<h3 id="using-nix-direnv">Using <code>nix-direnv</code></h3>
-<p>With the new flake-aware <code>nix</code> cli commands, a <code>flake.nix</code> file is preferred
-over <code>shell.nix</code> or <code>default.nix</code>. The
-<a href="https://github.com/nix-community/nix-direnv/">nix-direnv</a> project integrates
-direnv with nix flakes.</p>
-<p>Example <code>.envrc</code> and <code>flake.nix</code> files are given in <a href="https://github.com/nix-community/nix-direnv/tree/master/template">nix-direnv’s template/
-directory</a>.
-These can also be generated by running:</p>
-<pre class="bash"><code>nix flake new -t github:nix-community/nix-direnv .</code></pre>
-<p>(and <code>direnv allow</code> to grant direnv permission to run the file).</p>
-<p>But for the sake of saving a click, it’s something like:</p>
-<pre class="bash"><code>if ! has nix_direnv_version || ! nix_direnv_version 1.6.0; then
-    source_url &quot;https://raw.githubusercontent.com/nix-community/nix-direnv/1.6.0/direnvrc&quot; &quot;sha256-FqqbUyxL8MZdXe5LkMgtNo95raZFbegFpl5k2+PrCow=&quot;
-fi
-use flake</code></pre>
-<pre class="nix"><code>{
-  description = &quot;A basic flake with a shell&quot;;
-  inputs.nixpkgs.url = &quot;github:NixOS/nixpkgs/nixpkgs-unstable&quot;;
-  inputs.flake-utils.url = &quot;github:numtide/flake-utils&quot;;
-
-  outputs = { self, nixpkgs, flake-utils }:
-    flake-utils.lib.eachDefaultSystem (system: let
-      pkgs = nixpkgs.legacyPackages.${system};
-    in {
-      devShell = pkgs.mkShell {
-        nativeBuildInputs = [ pkgs.bashInteractive ];
-        buildInputs = [ ];
-      };
-    });
-}</code></pre>
-<p><a href="https://github.com/wbolster/emacs-direnv">emacs-direnv</a> is a package which
-will load the environment from direnv <code>.envrc</code> files.</p>
-<p>Since <code>emacs-direnv</code> loads the <code>.envrc</code> file, and the <code>.envrc</code> file loads the
-environment with the <code>devShell</code> from the <code>flake.nix</code>, Emacs will use the
-programs from the <code>devShell</code>. (As can be verified by evaluating <code>(getenv "PATH")</code> or <code>(executable-find "bash")</code>, or whatever).</p>
-<p>With recent versions of direnv, the <code>.envrc</code> can be as simple as:</p>
-<pre><code>use flake</code></pre>
-<p>and I often find it useful to refer to a <code>devShell</code> output of a flake elsewhere:</p>
-<pre><code>use flake github:rgoulter/nix-user-repository#python_3_10</code></pre>
-<h3 id="example-go-lang">Example: Go-lang</h3>
-<p>e.g. for Go-lang, we want <code>go</code> and <code>gopls</code>, so our <code>devShell</code> is defined in the
-<code>flake.nix</code> as:</p>
-<pre class="nix"><code>devShell = pkgs.mkShell {
-  packages = with pkgs; [
-    go
-    gopls
-  ];
-};</code></pre>
-<h3 id="example-terraform">Example: Terraform</h3>
-<p>e.g. for Terraform:</p>
-<pre class="nix"><code>devShell = pkgs.mkShell {
-  packages = with pkgs; [
-    terraform
-    terraform-ls
-    tflint
-  ];
-};</code></pre>
-<p>But, using <code>terraform-ls</code> instead of <code>terraform-lsp</code> is a bit more involved. In
-order to get the LSP working, I needed to fill <code>.dir-locals.el</code> with:</p>
-<pre class="elisp"><code>((terraform-mode . ((eval . (progn
-                              (direnv-update-environment)
-                              (setq-local lsp-terraform-server `(&quot;terraform-ls&quot; &quot;serve&quot;)))))))</code></pre>
-<h3 id="downsides">Downsides</h3>
-<ul>
-<li><p>Some tooling (linting, LSP) can be a bit finicky with editors depending on the
-load order of the direnv plugin, and the load order of the tool. This can
-sometimes be mitigated by launching the editor from the direnv environment.</p></li>
-<li><p>For code intelligence with LSP, often the code for the dependecies is outside
-of the project directory.</p>
-<ul>
-<li>e.g. in a Rust project, the source code for crates ends up under the home
-directory. – So, if you navigate to some function’s declaration, but that’s
-outside the project directory, then direnv unloads the LSP no longer
-provides the server on the path (and the editor LSP plugin is not able to
-start the LSP server in this outside-of-project-directory folder).</li>
-</ul></li>
-</ul>
-<p>And obviously it takes a bit of effort to write the above.</p>]]></summary>
-</entry>
-<entry>
-    <title>Using Home Manager to Manage Symlinks to Dotfiles</title>
-    <link href="http://www.rgoulter.com/blog//posts/programming/2022-02-20-using-home-manager-to-manage-symlinks-to-dotfiles.html" />
-    <id>http://www.rgoulter.com/blog//posts/programming/2022-02-20-using-home-manager-to-manage-symlinks-to-dotfiles.html</id>
-    <published>2022-02-20T00:00:00Z</published>
-    <updated>2022-02-20T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<p><a href="https://github.com/anishathalye/dotbot">dotbot</a> is a popular way of managing
-symlinks to dotfiles, and I used it for some time.</p>
-<p>I’ve gradually been becoming more comfortable with <a href="https://nixos.org/">Nix</a>.</p>
-<p>Nix remains relatively niche, so: Nix allows programmatic management of packages
-installed to a computer. Nix refers to the expression language that describes
-these packages, the tool which evaluates these expressions. It’s also pretty
-closely tied to Nixpkgs (a large repository of packages), and NixOS (a Linux
-distribution which is configured using Nix expressions).</p>
-<p>Nix tooling is friendly towards words like “declarative” and “X-as-Code”.</p>
-<p><a href="https://github.com/nix-community/home-manager">Home Manager</a> is a popular tool
-which uses Nix configurations to manage a user’s environment, in a similar
-manner to how NixOS’s system is configured from a Nix file.<br />
-It complements NixOS, but I’ve been happy to use NixOS (or nix on macOS)
-without having tried home manager.</p>
-<p>I was hesitant to try Home Manager, since I didn’t wanna have “vendor lock-in”
-and be unable to make use of my dotfiles elsewhere.</p>
-<p>To be honest: whenever Nix pops up, I often see people say they don’t like the
-Nix language, and that its error messages are hard to understand. My experience
-with Nix before this was using it to describe Python packages, or Go
-applications, or describe a declarative set of packages to use, and using
-NixOS.<br />
-– If people’s first experience with Nix is with home manager, I can see why
-Nix might seem more trouble than it’s worth.</p>
-<p>Here are my notes on the steps I took, following the <a href="https://nix-community.github.io/home-manager/">home manager
-manual</a> and <a href="https://nixos.wiki/wiki/Home_Manager">the NixOS wiki page
-on Home Manager</a>.</p>
-<h1 id="a-taste-of-nixos-but-for-your-home-directory">A Taste of NixOS, but for Your Home Directory</h1>
-<p>EDIT: Having tried this a bit.. one significant difference from the dotbot
-approach: dotbot manages symlinks so that e.g. <code>~/.vimrc</code> links to the
-repository where the dotbot was run from. The home-manager approach first
-constructs a Nix package with the configuration files, then symlinks to these
-files.</p>
-<p>This demands a change in mindset, since this means the file which <code>~/.vimrc</code>
-symlinks to is read-only.<br />
-This makes more sense if describing the configuration files using Nix, compared
-to the approach described below (which attempts to model dotbot).</p>
-<p>I don’t mind “can’t edit the (generated) configuration files” when it comes to
-OS files. I find it slightly more awkward with configuration files for Vim or
-Emacs.</p>
-<p>It’s often possible for configuration files to <code>include</code> other configuration
-files. This is one way to “work around” the above restriction.</p>
-<h1 id="installing-home-manager">Installing Home Manager</h1>
-<p>I’d recently started using Nix flakes. Nix flakes are cool.</p>
-<p>So, following the <a href="https://nix-community.github.io/home-manager/index.html#ch-nix-flakes">standalone setup with Nix
-Flakes</a>
-chapter of the manual..</p>
-<p>The ‘trouble’ is, per discussion in
-<a href="https://github.com/nix-community/home-manager/pull/2461">nix-community/home-manager#2461</a>,
-Home Manager doesn’t support the new “nix command” style of profile management.<br />
-i.e. Installing a package in nix classic would be <code>nix-env -iA nixpkgs.neovim</code>,
-but with the new nix command style it’s <code>nix profile install nixpkgs#neovim</code>.<br />
-And the old style of command is incompatible with the new style, so you can’t
-use the old <code>nix-env</code> commands once you’ve used <code>nix profile</code>.</p>
-<p>The PR provides people with forks which fix the issue. Worked for me.</p>
-<p>Here’s <a href="https://github.com/rgoulter/dotfiles/commit/01238a1421b7cf48d92451bd63505b5c1c721e79">the
-commit</a>
-with the simple <code>home.nix</code> and <code>flake.nix</code> that I started with:</p>
-<p><code>flake.nix</code> (which is pretty much boilerplate):</p>
-<pre class="nix"><code>{
-  description = &quot;rgoulter&#39;s Home Manager configuration&quot;;
-
-  inputs = {
-    nixpkgs.url = &quot;github:NixOS/nixpkgs/nixpkgs-unstable&quot;;
-    home-manager = {
-      # https://github.com/nix-community/home-manager/pull/2461
-      inputs.nixpkgs.follows = &quot;nixpkgs&quot;;
-      # Fork which allows using `nix profile` instead of `nix-env`
-      # https://github.com/FlorianFranzen/home-manager/commit/4e97b01b2737bb0f39c18a65d87dd98659391b97
-      # url = {
-      type  = &quot;github&quot;;
-      owner = &quot;FlorianFranzen&quot;;
-      repo  = &quot;home-manager&quot;;
-      rev   = &quot;4e97b01b2737bb0f39c18a65d87dd98659391b97&quot;;
-    };
-  };
-
-  outputs = { home-manager, ... }:
-    let
-      system = &quot;x86_64-linux&quot;;
-      username = &quot;rgoulter&quot;;
-    in {
-      homeConfigurations.&quot;${username}-${system}&quot; = home-manager.lib.homeManagerConfiguration {
-        inherit system username;
-
-        configuration = import ./home.nix;
-
-        homeDirectory = &quot;/home/${username}&quot;;
-
-        # Update the state version as needed.
-        # See the changelog here:
-        # https://nix-community.github.io/home-manager/release-notes.html
-        stateVersion = &quot;22.05&quot;;
-      };
-    };
-}</code></pre>
-<p>(I went with <code>rgoulter-x86_64-linux</code> as the profile name since I’m not sure
-how home manager configurations interact with flake outputs. Presumably
-<code>rgoulter</code> would work just as well instead).</p>
-<p>and the <code>home.nix</code>:</p>
-<pre class="nix"><code>{ config, pkgs, ... }:
-
-{
-  home.stateVersion = &quot;22.05&quot;;
-
-  programs.home-manager.enable = true;
-}</code></pre>
-<p>And following the commands given in the manual. Since I was running this from
-a git repository on my machine:</p>
-<pre class="bash"><code>nix build --no-link .#homeConfigurations.rgoulter-x86_64-linux.activationPackage
-&quot;$(nix path-info .#homeConfigurations.rgoulter-x86_64-linux.activationPackage)&quot;/activate</code></pre>
-<h1 id="symlinking-to-existing-dotfiles">Symlinking to Existing Dotfiles</h1>
-<p>Or “using home manager instead of dotbot”.</p>
-<p>Dotbot takes an
-<a href="https://github.com/rgoulter/dotfiles/blob/aa026733cf7c2bcdebc59a4a527257479549694f/install.conf.yaml">install.conf.yaml</a> to configure what files to link where.</p>
-<p>Home Manager <em>can</em> use nix to write various config files. But it can also just
-symlink given some source files.</p>
-<p><a href="https://github.com/rgoulter/dotfiles/commit/aa026733cf7c2bcdebc59a4a527257479549694f">Commit</a>.</p>
-<p>Updated <a href="https://github.com/rgoulter/dotfiles/blob/aa026733cf7c2bcdebc59a4a527257479549694f/home.nix"><code>home.nix</code></a>:</p>
-<pre class="nix"><code>{ config, pkgs, ... }:
-
-{
-  home.stateVersion = &quot;22.05&quot;;
-
-  programs.home-manager.enable = true;
-
-  # files in ~/.config/
-  xdg.configFile.&quot;alacritty/alacritty.yml&quot;.source = ./alacritty.yml;
-  xdg.configFile.&quot;emacs-rgoulter/init.el&quot;.source  = ./emacs.el;
-  # etc.
-
-  # files in ~/
-  home.file.&quot;.emacs-profiles.el&quot;.source = ./emacs-profiles.el;
-  home.file.&quot;.gvimrc&quot;.source = ./gvimrc;
-  # etc.
-
-  # Using the submodule in this dotfiles repo would make
-  # require a more awkward flake URI.
-  home.file.&quot;.nvim/bundle/Vundle.vim&quot;.source = pkgs.fetchFromGitHub {
-    owner = &quot;VundleVim&quot;;
-    repo = &quot;Vundle.vim&quot;;
-    rev = &quot;cfd3b2d388a8c2e9903d7a9d80a65539aabfe933&quot;;
-    sha256 = &quot;sha256-OCCXgMVWj/aBWLGaZmMr+cD546+QgynmEN/ECp1r08Q=&quot;;
-  };
-}</code></pre>
-<p>The <code>xdg.configFile.&lt;name&gt;.source</code> (and <code>home.file.&lt;name&gt;.source</code>) are given as
-examples on the <a href="https://nixos.wiki/wiki/Home_Manager#Managing_your_dotfiles">Home Manager page in the NixOS
-wiki</a>, and
-documented in <a href="https://nix-community.github.io/home-manager/options.html">Appendix A of the Home Manager
-manual</a>.</p>
-<p>I can then apply the <code>home.nix</code> with, as the <a href="https://nix-community.github.io/home-manager/options.html">Home Manager
-manual</a> explains:</p>
-<pre class="bash"><code>home-manager switch --flake &#39;.#rgoulter-x86_64-linux&#39;</code></pre>
-<h1 id="first-steps-in-refactoring">First Steps in Refactoring</h1>
-<p>As can be seen in the above commit, it’s … not pretty.</p>
-<p>Look. Complain about or be aware of <a href="https://mikehadlow.blogspot.com/2012/05/configuration-complexity-clock.html">the Configuration Complexity
-Clock</a>.
-But we’re at DSL o’clock here:</p>
-<p>First step is to extract the attribute set out to <code>let ... in</code> bindings.</p>
-<p><a href="https://github.com/rgoulter/dotfiles/commit/0663950cc3e564c35a0df9bf65c06fd66b8a83e6">Commit</a></p>
-<p>Updated <a href="https://github.com/rgoulter/dotfiles/blob/0663950cc3e564c35a0df9bf65c06fd66b8a83e6/home.nix"><code>home.nix</code></a>:</p>
-<pre class="nix"><code>{ config, pkgs, ... }:
-
-let
-  # Attribute set for dotfiles in this repo to link into ~/.config.
-  # The attribute name is for ~/.config/$attrSetName,
-  #  e.g. &quot;alacritty/alacritty.yml&quot; for ~/.config/alacritty/alacritty.yml
-  # The attribute value is the path to the dotfile in this repo.
-  configFilesToLink = {
-    &quot;alacritty/alacritty.yml&quot; = ./alacritty.yml;
-    &quot;emacs-rgoulter/init.el&quot;  = ./emacs.el;
-    &quot;emacs-rgoulter/straight/versions/default.el&quot;  = ./emacs.d/straight/versions/default.el;
-    # etc.
-  };
-
-  # Attribute set for dotfiles in this repo to link into home directory.
-  # The attribute name is for ~/$attrSetName,
-  #  e.g. &quot;.hgrc&quot; for ~/.hgrc.
-  # The attribute value is the path to the dotfile in this repo.
-  homeFilesToLink = {
-    &quot;.emacs-profiles.el&quot; = ./emacs-profiles.el;
-    &quot;.gvimrc&quot; = ./gvimrc;
-    # etc.
-  };
-
-  # Function to help map attrs for symlinking home.file, xdg.configFile
-  # e.g. from { &quot;.hgrc&quot; = ./hgrc; } to { &quot;.hgrc&quot;.source = ./hgrc; }
-  toSource = configDirName: dotfilesPath: { source = dotfilesPath; };
-in
-{
-  # Symlink files under ~, e.g. ~/.hgrc
-  home.file = pkgs.lib.attrsets.mapAttrs toSource homeFilesToLink;
-
-  # Symlink files under ~/.config, e.g. ~/.config/alacritty/alacritty.yml
-  xdg.configFile = pkgs.lib.attrsets.mapAttrs toSource configFilesToLink;
-
-  # ...
-}</code></pre>
-<p>I figured out to use <code>lib.attrsets.mapAttrs</code> by looking at this <a href="https://teu5us.github.io/nix-lib.html">helpful
-community-provided documentation page</a>.
-But otherwise, the Nix manual has a chapter on <a href="https://nixos.org/manual/nix/stable/expressions/builtins.html">its builtin
-functions</a>, and
-the <a href="https://nixos.org/manual/nixpkgs/stable/#chap-functions">Nixpkgs manual has a chapter on its library
-functions</a>.</p>
-<p>To help read the above code, the example given for <code>mapAttrs</code> is:</p>
-<pre class="nix"><code>lib.attrsets.mapAttrs
-  (name: value: name + &quot;-&quot; + value)
-  { x = &quot;foo&quot;; y = &quot;bar&quot;; }
-# =&gt; { x = &quot;x-foo&quot;; y = &quot;y-bar&quot;; }</code></pre>
-<p>I think this level of functional programming is relatively accessible.</p>
-<h1 id="refactoring-a-bit-further">Refactoring a bit Further</h1>
-<p>I mean, the above is okay, but it’s just nagging seeing code like <code>.gvimrc" = ./gvimrc;</code>.</p>
-<p>People have different tastes as how how implicit vs explicit they’d prefer things.
-It’s hardly a burden to be explicit if you’re unfamiliar with the domain.</p>
-<p>But I had to try. <a href="https://github.com/rgoulter/dotfiles/commit/6375425ed54d63b807a43c77acdee5acf4680a23">Commit</a>.</p>
-<p>Updated <a href="https://github.com/rgoulter/dotfiles/blob/6375425ed54d63b807a43c77acdee5acf4680a23/home.nix"><code>home.nix</code></a>:</p>
-<pre class="nix"><code>{ config, pkgs, ... }:
-
-let
-  # e.g. given &quot;alacritty/alacritty.yml&quot;,
-  # return the attrset { &quot;alacritty/alacritty.yml&quot; = ./alacritty/alacritty.yml; }.
-  genAttrsForSimpleLink = fileName: ./. + (&quot;/&quot; + fileName);
-
-  # e.g. given &quot;hgrc&quot;
-  # return the attrset { &quot;.hgrc&quot; = ./hgrc; }.
-  genAttrsForSimpleDotLink = fileName: { &quot;.${fileName}&quot; = ./. + (&quot;/&quot; + fileName); };
-
-  # ...
-
-  # List of dotfiles where the path to link under
-  # ~/.config/ matches the path in the dotfiles repo.
-  # e.g. ~/.config/alacritty/alacritty.yml matches ./alacritty/alacritty.yml.
-  simpleConfigFilesToLinkList = [
-    &quot;fish/config.fish&quot;
-    &quot;kitty/kitty.conf&quot;
-    &quot;starship.toml&quot;
-    # etc.
-  ];
-
-  # Files where the symlinks aren&#39;t following a nice convention.
-  unconventionalConfigFilesToLink = {
-    &quot;emacs-rgoulter/init.el&quot;  = ./emacs.el;
-    &quot;nvim/init.vim&quot; = ./vimrc;
-    # etc.
-  };
-
-  # e.g. &quot;gvimrc&quot; to link &quot;~/.gvimrc&quot; to ./gvimrc
-  simpleHomeFilesToLinkList = [
-    &quot;gvimrc&quot;
-    &quot;hgrc&quot;
-    &quot;tmux.conf&quot;
-    &quot;vimrc&quot;
-    # etc.
-  ];
-
-  unconventionalHomeFilesToLink = {
-    &quot;.nvim/after/ftplugin/org.vim&quot; = ./vim/after/ftplugin/org.vim;
-    &quot;.nvim/bundle/Vundle.vim&quot; = vundleRepoSrc;
-    &quot;.vim/bundle/Vundle.vim&quot; = vundleRepoSrc;
-  };
-
-  # Attribute set for dotfiles in this repo to link into ~/.config.
-  # The attribute name is for ~/.config/$attrSetName,
-  #  e.g. &quot;alacritty/alacritty.yml&quot; for ~/.config/alacritty/alacritty.yml
-  # The attribute value is the path to the dotfile in this repo.
-  configFilesToLink =
-    (pkgs.lib.attrsets.genAttrs simpleConfigFilesToLinkList genAttrsForSimpleLink) //
-    unconventionalConfigFilesToLink;
-
-  # Attribute set for dotfiles in this repo to link into home directory.
-  # The attribute name is for ~/$attrSetName,
-  #  e.g. &quot;.hgrc&quot; for ~/.hgrc.
-  # The attribute value is the path to the dotfile in this repo.
-  homeFilesToLink =
-    (pkgs.lib.lists.foldr (a: b: a // b) {} (map genAttrsForSimpleDotLink simpleHomeFilesToLinkList)) //
-    unconventionalHomeFilesToLink;
-in
-{
-  # Symlink files under ~, e.g. ~/.hgrc
-  home.file = pkgs.lib.attrsets.mapAttrs toSource homeFilesToLink;
-
-  # Symlink files under ~/.config, e.g. ~/.config/alacritty/alacritty.yml
-  xdg.configFile = pkgs.lib.attrsets.mapAttrs toSource configFilesToLink;
-
-  # ...
-}</code></pre>
-<p>This one takes a bit more explaining.</p>
-<p>In order to get from <code>[ "fish/config.fish" ]</code> to <code>{ "fish/config.fish" = ./fish/config.fish; }</code>,
-<code>genAttrs</code> can be used.</p>
-<pre><code>lib.attrsets.genAttrs [ &quot;foo&quot; &quot;bar&quot; ] (name: &quot;x_${name}&quot;)
-=&gt; { foo = &quot;x_foo&quot;; bar = &quot;x_bar&quot;; }</code></pre>
-<p>Hence, we can factor out the files which follow a nice convention to just a list,
-and construct <code>configFilesToLink</code> with:</p>
-<pre class="nix"><code># e.g. given &quot;alacritty/alacritty.yml&quot;,
-# return the attrset { &quot;alacritty/alacritty.yml&quot; = ./alacritty/alacritty.yml; }.
-genAttrsForSimpleLink = fileName: ./. + (&quot;/&quot; + fileName);
-
-configFilesToLink =
-  (pkgs.lib.attrsets.genAttrs simpleConfigFilesToLinkList genAttrsForSimpleLink) //
-  unconventionalConfigFilesToLink;</code></pre>
-<p>Unfortunately, to get <code>[ "vimrc" ]</code> into <code>{ ".vimrc" = ./vimrc }</code>, this involves
-transforming “vimrc” to “.vimrc”, it’s a bit more involved:</p>
-<pre class="nix"><code># e.g. given &quot;hgrc&quot;
-# return the attrset { &quot;.hgrc&quot; = ./hgrc; }.
-genAttrsForSimpleDotLink = fileName: { &quot;.${fileName}&quot; = ./. + (&quot;/&quot; + fileName); };
-
-homeFilesToLink =
-  (pkgs.lib.lists.foldr (a: b: a // b) {} (map genAttrsForSimpleDotLink simpleHomeFilesToLinkList)) //
-  unconventionalHomeFilesToLink;</code></pre>
-<p>(where <code>pkgs.lib.lists.foldr (a: b: a // b) {}</code> is essentially <code>listToAttrs</code>,
-but my version of Nix didn’t have this. In nix, <code>{ a = 3; } // { b = 4; }</code>
-evaluates to <code>{ a = 3; b = 4; }</code>).</p>]]></summary>
 </entry>
 
 </feed>

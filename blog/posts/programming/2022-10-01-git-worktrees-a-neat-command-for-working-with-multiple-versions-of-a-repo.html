@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Signal Boost drduh's Yubikey Guide - Richard Goulter's Blog</title>
+        <title>Git Worktrees a Neat Command for Working with Multiple Versions of a Repo - Richard Goulter's Blog</title>
 
         <!-- My (Old) CSS theme -->
         <link rel="stylesheet" type="text/css" href="../../css/default.css" />
@@ -129,9 +129,9 @@
             <hr style="margin: 0px; border-top: 5px solid black;" />
 
             <div id="content" class="container">
-                <h1>Signal Boost drduh's Yubikey Guide</h1>
+                <h1>Git Worktrees a Neat Command for Working with Multiple Versions of a Repo</h1>
                 <div class="info">
-    Posted on September 30, 2022
+    Posted on October  1, 2022
     
         by Richard Goulter
     <br />
@@ -140,26 +140,25 @@
     
 </div>
 
-<p><a href="https://github.com/drduh/YubiKey-Guide" class="uri">https://github.com/drduh/YubiKey-Guide</a></p>
-<p>I recently set up my Yubikeys so that I could use the key to hold the private
-keys I use with git.</p>
-<p>I spent a bunch of time reading through various guides discussing how to set up
-a master key with an offline backup, and how to put this on a GPG smartcard.</p>
-<p>Drduh’s guide above is the best I’ve come across.</p>
-<p>e.g. Most guides only mention the interactive way to generate keys. This guide
-at least mentions using a <a href="https://github.com/drduh/YubiKey-Guide#create-keys-with---batch-and---quick-add-keys">the batch
-interface</a>.</p>
-<p>(c.f. <a href="https://github.com/rgoulter/nix-user-repository/blob/a96522d387396e7dd9ab8b6e489a97ffb6bcec92/scripts/gpg-quick-generate-master-key.sh">my key generation
-invocations</a>).</p>
+<p><a href="https://git-scm.com/docs/git-worktree">git-worktree</a> has apparently been in git
+for some time, but I’ve only recently learned of it.</p>
+<p>It lets you conveniently check out multiple versions of a repository at once.</p>
+<p>Which may sound only marginally useful; but I find the benefit to be better than
+it sounds. (e.g. Without the worktree command, perhaps the easiest way to
+imitate it would be to clone from the local repository, and adjust the remotes).</p>
+<p>I’ve found it’s useful to keep a checkout of the master branch, as well as using
+worktrees for feature branches, or other experimenting.</p>
+<p>By keeping work-in-progress in a separate working tree, you don’t have to worry
+about the working tree being dirty in order to check out different versions.</p>
 
 <hr />
 
 <div>
     
-    <a href="../../posts/programming/2022-10-01-git-worktrees-a-neat-command-for-working-with-multiple-versions-of-a-repo.html" style="float:left;">Newer post</a>
+    <a href="../../posts/programming/2022-10-06-using-nixos-specialisations-to-try-out-different-desktop-environments.html" style="float:left;">Newer post</a>
     
     
-    <a href="../../posts/programming/2022-08-24-travel-setup-using-a-fancy-keyboard-with-a-laptop.html" style="float:right; text-align: right;">Older post</a>
+    <a href="../../posts/programming/2022-09-30-signal-boost-dr-duhs-yubikey-guide.html" style="float:right; text-align: right;">Older post</a>
     
 </div>
 <br style="clear: both;" />
