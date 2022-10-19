@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Using NixOS Specialisations to Try Out Different Desktop Environments - Richard Goulter's Blog</title>
+        <title>The just Command Runner is an Neat Tool - Richard Goulter's Blog</title>
 
         <!-- My (Old) CSS theme -->
         <link rel="stylesheet" type="text/css" href="../../css/default.css" />
@@ -129,9 +129,9 @@
             <hr style="margin: 0px; border-top: 5px solid black;" />
 
             <div id="content" class="container">
-                <h1>Using NixOS Specialisations to Try Out Different Desktop Environments</h1>
+                <h1>The just Command Runner is an Neat Tool</h1>
                 <div class="info">
-    Posted on October  6, 2022
+    Posted on October 17, 2022
     
         by Richard Goulter
     <br />
@@ -140,82 +140,61 @@
     
 </div>
 
-<p>Recently, Tweag’s blog featured a post on <a href="https://www.tweag.io/blog/2022-08-18-nixos-specialisations/">NixOS
-specialisations</a>.</p>
-<p>It allows for having an additional boot entry in grub which
-loads a slightly different configuration. – This makes it very convenient
-to try slightly different NixOS configurations.</p>
-<p>As the blogpost above shows, this can be used for different desktop environments.</p>
-<p>I ran into some problems with conflicting attributes, and wasn’t previously
-aware of how to set the priority. (e.g. as discussed in this <a href="https://discourse.nixos.org/t/what-does-mkdefault-do-exactly/9028">discourse
-post</a>).</p>
-<p>e.g. I’d wanted to try out the <a href="https://wiki.archlinux.org/title/Pantheon">Pantheon</a> desktop environment, which comes out of <a href="https://elementary.io/">Elementary OS</a> and looks very nice. – But, if you try to enable both <code>services.xserver.desktopManager.gnome</code> and <code>services.xserver.desktopManager.pantheon</code>, you get an error like:</p>
-<pre><code>error: The option `environment.sessionVariables.NIX_GSETTINGS_OVERRIDES_DIR' has conflicting definition values:</code></pre>
-<p>Not knowing about overriding attribute priorities, my first attempt at solving this problem was using <code>specialisations</code> to separate the conflicting config options: <a href="https://github.com/rgoulter/nix-user-repository/blob/8df3abaea46b8fbd5d212e64c209d5ef0602955c/modules/desktops.nix">8df3…/modules/desktops.nix</a>.</p>
-<p>Knowing the above about overriding attribute priorites, it makes sense that it’s possible to use Gnome in the ‘parent’ config, and to disable Gnome in the specialisations, with:</p>
-<pre><code>services.xserver.desktopManager.gnome.enable = lib.mkDefault true;</code></pre>
-<p>e.g. <a href="https://github.com/rgoulter/nix-user-repository/blob/c3f0df686ea024f3fae8da13dae6e10a02e920cd/modules/desktops.nix">c3f0…./modules/desktops.nix</a>.</p>
-<pre class="nix"><code>{ config, lib, pkgs, ... }:
-
-{
-  services = {
-    xserver = {
-      desktopManager.gnome.enable = lib.mkDefault true;
-      displayManager.gdm.enable = lib.mkDefault true;
-
-      enable = true;
-
-      layout = &quot;us&quot;;
-    };
-  };
-
-  specialisation = {
-    gnome.configuration = {
-      services.xserver = {
-        desktopManager.gnome.enable = true;
-        displayManager.gdm.enable = true;
-      };
-      system.nixos.tags = [ &quot;gnome&quot; ];
-    };
-    pantheon.configuration = {
-      services.xserver = {
-        # Pantheon conflicts with gnome
-        desktopManager = {
-          gnome.enable = false;
-          pantheon.enable = true;
-        };
-        # Pantheon requires lightdm
-        displayManager = {
-          gdm.enable = false;
-          lightdm.enable = true;
-        };
-      };
-      system.nixos.tags = [ &quot;pantheon&quot; ];
-    };
-    xfce.configuration = {
-      networking.networkmanager.enable = true;
-      services.xserver = {
-        desktopManager = {
-          gnome.enable = false;
-          xfce.enable = true;
-        };
-        displayManager = {
-          gdm.enable = false;
-        };
-      };
-      system.nixos.tags = [ &quot;gnome&quot; ];
-    };
-  };
-}</code></pre>
+<p>I came across the tool <a href="https://just.systems/man/en/chapter_1.html">just</a>.</p>
+<p>It’s a tool for running commands/scripts.</p>
+<p>My initial impression was “that’s it?”.</p>
+<p>I might describe it slightly differently, compared to other common workflows:</p>
+<ul>
+<li>It’s common to see <code>make</code> used with a bunch of <code>.PHONY:</code> targets. The point
+of a <code>make</code> is to describe how some target is built. But since people will
+often want to run tasks (e.g. run tests with <code>make test</code>), a ‘phony’ target
+is a task where the target isn’t a file that gets built.
+<ul>
+<li>Compared to “use <code>make</code> with a bunch of <code>.PHONY</code> targets”, <code>just</code> has some
+nice quality of life features.
+<ul>
+<li>e.g. with <code>just</code>, you don’t have to indent the definitions using Tabs.</li>
+<li>e.g. <code>just</code> can list the targets in its <code>justfile</code>.</li>
+</ul></li>
+</ul></li>
+<li>In the NodeJS ecosystem, its <code>package.json</code> files often contain a <code>scripts</code>
+property, which is used to describe common tasks that will be run when
+working with the project.
+<ul>
+<li>Compared to this, a <code>justfile</code> is more expressive / less constrained.
+<ul>
+<li>e.g. ‘make with <code>.PHONY</code> targets’ is more expressive than
+<code>package.json</code>’s scripts`.</li>
+</ul></li>
+</ul></li>
+<li>It’s common to have a ‘script directory’ where you keep a bunch of scripts
+for common functionality.
+<ul>
+<li>Compared to this, <code>just</code> allows for a consistent starting point, some
+quality of life features (e.g. by-default always starting scripts with
+starting directory being the <code>justfile</code>’s directory) and allow for
+integration with editors.</li>
+</ul></li>
+</ul>
+<p>Overall, I find that quite persuasive: it’s more polished/tailored than <code>make</code>
+for a particular use case; and that use case is something which developers
+definitely make use of.</p>
+<p>There is the downside that <code>just</code> isn’t a standard tool that you can hope to
+find on most systems (in contrast to e.g. <code>python</code>, <code>bash</code>, or maybe <code>awk</code> or
+<code>make</code>).<br />
+But, installing packages isn’t all that hard. (And <code>just</code> is <a href="https://just.systems/man/en/chapter_4.html">available in many
+places</a>).<br />
+And I use <code>nix</code>, so it’s especially easy to ensure it’s available when I want
+it.</p>
+<p>I think this is a good example of “sometimes better isn’t MUCH better; it’s
+merely slightly better”.</p>
 
 <hr />
 
 <div>
     
-    <a href="../../posts/programming/2022-10-17-the-just-command-runner-is-an-neat-tool.html" style="float:left;">Newer post</a>
     
-    
-    <a href="../../posts/programming/2022-10-01-git-worktrees-a-neat-command-for-working-with-multiple-versions-of-a-repo.html" style="float:right; text-align: right;">Older post</a>
+    <a href="../../posts/programming/2022-10-06-using-nixos-specialisations-to-try-out-different-desktop-environments.html" style="float:right; text-align: right;">Older post</a>
     
 </div>
 <br style="clear: both;" />

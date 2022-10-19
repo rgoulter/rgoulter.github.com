@@ -8,8 +8,63 @@
         <name>Richard Goulter</name>
         <email>richard.goulter+blog@gmail.com</email>
     </author>
-    <updated>2022-10-06T00:00:00Z</updated>
+    <updated>2022-10-17T00:00:00Z</updated>
     <entry>
+    <title>The just Command Runner is an Neat Tool</title>
+    <link href="http://www.rgoulter.com/blog//posts/programming/2022-10-17-the-just-command-runner-is-an-neat-tool.html" />
+    <id>http://www.rgoulter.com/blog//posts/programming/2022-10-17-the-just-command-runner-is-an-neat-tool.html</id>
+    <published>2022-10-17T00:00:00Z</published>
+    <updated>2022-10-17T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<p>I came across the tool <a href="https://just.systems/man/en/chapter_1.html">just</a>.</p>
+<p>It’s a tool for running commands/scripts.</p>
+<p>My initial impression was “that’s it?”.</p>
+<p>I might describe it slightly differently, compared to other common workflows:</p>
+<ul>
+<li>It’s common to see <code>make</code> used with a bunch of <code>.PHONY:</code> targets. The point
+of a <code>make</code> is to describe how some target is built. But since people will
+often want to run tasks (e.g. run tests with <code>make test</code>), a ‘phony’ target
+is a task where the target isn’t a file that gets built.
+<ul>
+<li>Compared to “use <code>make</code> with a bunch of <code>.PHONY</code> targets”, <code>just</code> has some
+nice quality of life features.
+<ul>
+<li>e.g. with <code>just</code>, you don’t have to indent the definitions using Tabs.</li>
+<li>e.g. <code>just</code> can list the targets in its <code>justfile</code>.</li>
+</ul></li>
+</ul></li>
+<li>In the NodeJS ecosystem, its <code>package.json</code> files often contain a <code>scripts</code>
+property, which is used to describe common tasks that will be run when
+working with the project.
+<ul>
+<li>Compared to this, a <code>justfile</code> is more expressive / less constrained.
+<ul>
+<li>e.g. ‘make with <code>.PHONY</code> targets’ is more expressive than
+<code>package.json</code>’s scripts`.</li>
+</ul></li>
+</ul></li>
+<li>It’s common to have a ‘script directory’ where you keep a bunch of scripts
+for common functionality.
+<ul>
+<li>Compared to this, <code>just</code> allows for a consistent starting point, some
+quality of life features (e.g. by-default always starting scripts with
+starting directory being the <code>justfile</code>’s directory) and allow for
+integration with editors.</li>
+</ul></li>
+</ul>
+<p>Overall, I find that quite persuasive: it’s more polished/tailored than <code>make</code>
+for a particular use case; and that use case is something which developers
+definitely make use of.</p>
+<p>There is the downside that <code>just</code> isn’t a standard tool that you can hope to
+find on most systems (in contrast to e.g. <code>python</code>, <code>bash</code>, or maybe <code>awk</code> or
+<code>make</code>).<br />
+But, installing packages isn’t all that hard. (And <code>just</code> is <a href="https://just.systems/man/en/chapter_4.html">available in many
+places</a>).<br />
+And I use <code>nix</code>, so it’s especially easy to ensure it’s available when I want
+it.</p>
+<p>I think this is a good example of “sometimes better isn’t MUCH better; it’s
+merely slightly better”.</p>]]></summary>
+</entry>
+<entry>
     <title>Using NixOS Specialisations to Try Out Different Desktop Environments</title>
     <link href="http://www.rgoulter.com/blog//posts/programming/2022-10-06-using-nixos-specialisations-to-try-out-different-desktop-environments.html" />
     <id>http://www.rgoulter.com/blog//posts/programming/2022-10-06-using-nixos-specialisations-to-try-out-different-desktop-environments.html</id>
@@ -915,59 +970,6 @@ holier-than-thou, smarter-than-thou, author’s-daughter-stand-in character.</p>
 <p>So. I dunno if the story’s going to be able to keep up the momentum.
 But, I think the edgy, humorous interpretation of popular culture is interesting.
 I think it’d be interesting to see Star Wars or whatever in a similar manner.</p>]]></summary>
-</entry>
-<entry>
-    <title>Bridgerton 2</title>
-    <link href="http://www.rgoulter.com/blog//posts/romance/2022-03-27-bridgerton-2.html" />
-    <id>http://www.rgoulter.com/blog//posts/romance/2022-03-27-bridgerton-2.html</id>
-    <published>2022-03-27T00:00:00Z</published>
-    <updated>2022-03-27T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<p>I liked Bridgerton Season 2 more than Season 1.</p>
-<p>It’s good.<br />
-The sweet parts are properly sweet.</p>
-<p>But.</p>
-<p>It’s long.</p>
-<p>It’s loooooooooooooooooong.</p>
-<p>I was ambivalent about Season 1. The season was filled half with a sweet
-romantic story, and half with a bitter cynical dramatic story.<br />
-I didn’t like the mix.</p>
-<p>Season 2 is mostly devoit of the bitter cynical drama stuff that polluted
-Season 1.<br />
-But.<br />
-It seemed to drag on a bit.</p>
-<p>I liked the first half of the season, which proceeds at a steady pace through
-the will-they/will-they relationship between the Hero and Heroine. The two have
-witty banter. As characters, they both feel bound by duty to do their best to
-help their family.<br />
-By halfway, the story seems to reach its climax. (The skeleton of it being that
-the Hero was going to marry the most popular girl of the year, the Heroine’s
-sister. The wedding was planned to be big/fancy, but the Hero ruins the
-wedding by giving the Heroine hungry eyes).<br />
-Which leaves half the season left to meander around for the Hero to admit his
-love for the Herione. And not much plot which rises to the level of “big fancy
-wedding” to do it with. (The two families are both snubbed in scandal because
-of it, but by the end their popular reputation is restored because they were
-nice to the Queen).</p>
-<p>Listening to the instrumental arrangements of pop songs that play in the
-season is very fun, and brings the best parts of the season to mind!</p>
-<p>I think that explains why Season 1 was filled with the bitter cynical dramatic
-crap.<br />
-It pads out the meat of the romance to help with pacing.<br />
-(That they chose bitter crap to pad it with is just a weird decision).</p>
-<p>For Season 2, the writers apparently decided to chill out on the bitterness.<br />
-The padding is still dramatic fluff.<br />
-I don’t think the show would be worth watching if it were just this padding.<br />
-It’s not terrible, but it’s also not fun or particularly engaging.<br />
-e.g. one arc has B. Bridgerton (not the main character in this season) hope to
-attend an art school, get into the art school, later discover that he got into
-the school because his rich family donated money to the school, so he quits the
-art school.<br />
-Not terrible.<br />
-But. idk. I just don’t find it compelling.</p>
-<p>(And the fun instrumental pop arrangements don’t bring to mind any of this
-fluff, either!).</p>
-<p>Overall, I’m glad Season 2 has got less of the bitter crap that Season 1 had.
-I’m happy that the sweet romantic parts were sweet.</p>]]></summary>
 </entry>
 
 </feed>
