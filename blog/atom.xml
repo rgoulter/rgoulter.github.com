@@ -8,8 +8,110 @@
         <name>Richard Goulter</name>
         <email>richard.goulter+blog@gmail.com</email>
     </author>
-    <updated>2022-10-17T00:00:00Z</updated>
+    <updated>2022-12-11T00:00:00Z</updated>
     <entry>
+    <title>Factorio on the Switch Still Scratches the Itch</title>
+    <link href="http://www.rgoulter.com/blog//posts/games/2022-12-11-factorio-on-the-switch-still-scratches-the-itch.html" />
+    <id>http://www.rgoulter.com/blog//posts/games/2022-12-11-factorio-on-the-switch-still-scratches-the-itch.html</id>
+    <published>2022-12-11T00:00:00Z</published>
+    <updated>2022-12-11T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<p>Factorio is a game which is widely regarded as addictingly fun to play.</p>
+<p>The ostensible goal of the game is to assemble &amp; launch a rocket ship.</p>
+<p>The start of the game is reasonably familiar: you control a character, mine some
+ores from resource deposits, and then use these resources to assemble tools or
+whatever item you need. (e.g. you’ll mine some iron ore, put this ore in a
+furnace,
+and use the resulting iron plates to assemble an iron pickaxe).<br />
+– Factorio allows for automating these process. A mining machine can
+automatically gather resources; conveyor belts can automatically move these
+resources along; an assembly machine can automatically assemble some item, and
+inserter arm machines can automatically insert items from the convey belts into
+the assembly machines.</p>
+<p>The first time you play the game (if you don’t read guides first), you’ll
+probably end up with a factory which works, but you’ll certainly end up with
+something that’s difficult to maintain or improve on. You’ll end up with
+a disorganised mess.<br />
+(Then you hear the term “main bus”, and that helps organise things <em>a lot</em>).</p>
+<p>The dynamic of the game ends up feeling very similar to programming or
+electrical engineering.<br />
+So much so that, while I think most programmers who play the game find it
+addictively engaging, there are also those who don’t want to play it. – I think
+it’s one of two responses: “it’s similar to what I do for work, but without
+having to do what others tell me to do, and without having to be reliable. Fun!”
+or “it’s similar to what I do for work, but I don’t benefit from putting in the
+effort.
+Why would I do that?”.<br />
+I mean, there’s a satisfying feeling of constructing a system which works (as
+well as ‘debugging’ why some system doesn’t work).</p>
+<p>I think complementing this is that usually there are multiple things that you
+can do to reduce the mess in your factory; and that improvements often have some
+delay before you see the tangible benefits from them. So there’s often some task
+you can aim towards that feels satisfying to do. (Sid Meier’s Civilization games
+are similarly entralling).</p>
+<p>Probably “fun is in the eye of the beholder”.<br />
+There are parts of Factorio where I think it’s fun for me to come up with my own
+solution to the problem. There are parts where I’d rather lookup a guide for how
+to do it on the Factorio wiki, or some YouTube video.</p>
+<p>I found it fun to play Factorio with particular challenges/goals in mind. One
+achievement requires that you craft only the minimal number of items by hand
+(and use assembly machines to bootstrap the rest). Another achievement was to
+play the game on non-peaceful, but without using solar power.</p>
+<p>“Non-peaceful” mode is the default setting for the enemies’ aggression mode.
+The player’s factory produces pollution; the enemies react to the pollution by
+getting stronger and attacking the player every now and then in waves. Whereas,
+in peaceful mode, enemies will only attack if attacked first (and attacking
+one enemy base doesn’t ‘aggro’ other enemy bases).<br />
+In my experience, non-peaceful mode ‘just’ requires the extra pushback/effort of
+automatically building (sufficient) ammunition/defenses, etc. – It adds a bit
+of pressure/flavor to the game, and isn’t extremely stressful, but I prefer to
+play with peaceful mode.</p>
+<p>At the higher end of things, some players enjoy seeing how frequently their
+factory is able to assemble/launch a rocket (since this requires a well organised
+factory at significant scale). – I’ve not yet tried doing this.</p>
+<p>For the playthroughs I’ve spent significant time on, I inevitably had the same
+task/notes system I use when programming. (Start the day by writing down status
+of WIP; write down tasks to-do, and obstacles faced which need to be resolved).</p>
+<p>Anyway.</p>
+<p>The game was recently released for the Nintendo Switch. I was travelling for a couple of
+weeks, have a Nintendo Switch, and have enjoyed playing Factorio.</p>
+<p>I can vouch that the game scratches the same itch as it does on PC.</p>
+<p>The controls are reasonably nice, although using the controller won’t be as fast
+as using the mouse.</p>
+<p>I think if someone were (somehow) playing through Factorio for the first time on
+the Nintendo Switch, I think they’d opt to play on PC by the time they got to
+the blue science technologies. (About halfway through the game). – Because at
+that point, you’ve unlocked trains and the construction robots and solar power
+and electric furances… there’s lots of stuff which can all be used to improve
+your factory. (Trains are earlier; but, I didn’t bother assembling rail stuff
+until after I’d assembled blue science).</p>
+<p>I’d bet that the Switch is suited to people having the large post-game factories.
+I never noticed performance issues in my playing, though.</p>
+<p>If someone were wondering whether to by Factorio for PC or for the Switch, I’d
+say “yes”. Well, I don’t think anyone’s going to regret buying this game. I
+think PC is the better environment to play it on. But, on the Switch it still
+stratches the same itch just the same.</p>]]></summary>
+</entry>
+<entry>
+    <title>The CapsLock Key was not the Problem</title>
+    <link href="http://www.rgoulter.com/blog//posts/programming/2022-10-28-the-capslock-key-was-not-the-problem.html" />
+    <id>http://www.rgoulter.com/blog//posts/programming/2022-10-28-the-capslock-key-was-not-the-problem.html</id>
+    <published>2022-10-28T00:00:00Z</published>
+    <updated>2022-10-28T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<p>It’s fashionable among developers to give a tip about the CapsLock key: you can switch out its functionality, replacing it with the Escape key.</p>
+<p>When I did this, in order to then type out something like <code>SEQUENCE_OF_UPPERCASE_WORDS</code>, I’d hold down the shift key using my left pinky finger, and type out the letters as necessary.<br />
+– And if you can do that, then the CapsLock key is redundant.</p>
+<p>These days, I prefer using a fancy, symmetrical keyboard. (I think buying an expensive fancy keyboard is justifiable if it’s symmetrical, and offers more keys for the thumb to press; and I don’t think it makes sense to spend a lot of money on a keyboard which isn’t symmetrical, etc.).<br />
+And the fashionable (and I think superior) way of arranging the modifier keys Shift, Ctrl, Windows/Cmd, Alt keys is to put these as dual-use tap-hold keys
+on the home row. (Which allows access to these keys without having to move your hand).</p>
+<p>With such a keyboard, and with home row modifiers, the “use an improper position which stretches your weak pinky finger” technique doesn’t really work.<br />
+Instead, to type <code>UPPERCASE</code>, you end up having to alternate use of the shift key; pressing shift for the opposite side of the letter being pushed.<br />
+– I can do this; but I find it to be slower, and error prone. (It’s easy to miss the timing, and type ‘THhiS’ instead of ‘THIS’, as the Shift key requires holding down ‘h’).</p>
+<p>For long sequences of uppercases letters, it does make sense to have the CapsLock key available. – Though, with a fancy keyboard, you can have the CapsLock key accessible on (or hidden away on) a layer.</p>
+<p>Rather. The CapsLock functionality itself isn’t inherently useless, and needn’t be banished.<br />
+It’s that, in a standard keyboard, the real-estate of “on home row, easy to reach” that the CapsLock key occupies is put to much better use by using it for Escape (or Ctrl, or dual-use Escape/Ctrl).<br />
+Since a fancy keyboard is nicer to use (the modifier keys are easy to each, and layers allow bringing more keys to within easy reach), you get to use the CapsLock key without it taking up space which could be better utilized.</p>]]></summary>
+</entry>
+<entry>
     <title>The just Command Runner is an Neat Tool</title>
     <link href="http://www.rgoulter.com/blog//posts/programming/2022-10-17-the-just-command-runner-is-an-neat-tool.html" />
     <id>http://www.rgoulter.com/blog//posts/programming/2022-10-17-the-just-command-runner-is-an-neat-tool.html</id>
@@ -865,111 +967,6 @@ a buffer. (Whereas, vim has netrw, and Emacs has dired).</p>
 </tbody>
 </table>
 <p>Overall, I like what I’ve tried of Helix. It feels very polished out-of-the-box.</p>]]></summary>
-</entry>
-<entry>
-    <title>Use of Anki for Programming</title>
-    <link href="http://www.rgoulter.com/blog//posts/programming/2022-05-01-use-of-anki-for-programming.html" />
-    <id>http://www.rgoulter.com/blog//posts/programming/2022-05-01-use-of-anki-for-programming.html</id>
-    <published>2022-05-01T00:00:00Z</published>
-    <updated>2022-05-01T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<p>Anki is software which helps you to review flash cards.
-What’s notable about it is it uses the idea of Spaced Repitition;
-by getting you to recall something at approximately the time you
-would otherwise have forgotten it, you’re better able to recall
-some fact at increasingly long intervals.</p>
-<p>This is useful for foreign language learning (or health science)
-where you’ll want to recall terms, sometimes with low frequency.</p>
-<p>One serious article I’ve seen about using Anki for non-language stuff
-was this:
-<a href="http://augmentingcognition.com/ltm.html" class="uri">http://augmentingcognition.com/ltm.html</a></p>
-<p>One quick take-away I recall is just the emphasis that Anki isn’t
-a completely magical to help you remember everything.</p>
-<p>For things you use frequently anyway, Anki won’t be of much help.
-And for things you wish to recall in infrequent contexts,
-Anki is going to require much more effort than it’s worth. (As in,
-it’s harder to remember because you won’t have motivation to use it).</p>
-<p>For programming, I’ve only used Anki slightly.</p>
-<p>To give a somewhat specific example of how I’ve used it:
-e.g. I noticed I wanted to be able to recall the different <code>ServiceType</code>s
-of a Kubernetes <code>Service</code>. e.g. per https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services-service-types<br />
-I think once you understand the concept, recalling the facts of it
-is easier.<br />
-Short of that, the easiest flashcard to make is with a brute-force
-approach which enumerates the types. (Which is not terrible in this case,
-since there are four types).<br />
-I’d say it would be better to then later create more flash cards about the
-topic. e.g. in this case, flashcards about what the default service type is,
-and flashcards in the form “service type which exposes service on a port on
-each node” or “service type which uses cloud provider’s load balancer”, etc.</p>
-<p>Another example I have been trying recently has been keybindings.
-e.g. I want to be able to use the fancy Helix editor, or to get
-more out of Doom Emacs.<br />
-Keybindings which work well in you workflow are easy to remember.<br />
-But.. I think it’s always easier to continue doing something in an
-known-and-adequate-but-bad way rather than a nice-but-unknown way.<br />
-I think writing up flashcards for anki helps to build the mental
-model for what the mnemonics for the keybindings are. And I think
-“I’d like to use this functionality, but can’t recall the keybinding”
-is close to that margin of “frequent enough to want to recall it,
-infrequent enough such that you’re not using it all the time”.</p>
-<p>In the worst case, I think Anki flashcards are a useful intermediate artifact
-to aim for when studying.</p>]]></summary>
-</entry>
-<entry>
-    <title>Prime Video's Invincible is Wonderful</title>
-    <link href="http://www.rgoulter.com/blog//posts/narrative/2022-05-01-prime-videos-invincible-is-wonderful.html" />
-    <id>http://www.rgoulter.com/blog//posts/narrative/2022-05-01-prime-videos-invincible-is-wonderful.html</id>
-    <published>2022-05-01T00:00:00Z</published>
-    <updated>2022-05-01T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<p>Amazon Prime Video’s “Invincible” is probably most well known
-for <a href="https://knowyourmeme.com/memes/think-mark/">the meme image</a>.</p>
-<p>I saw it <a href="https://www.youtube.com/watch?v=_1Mlm2LLcs0">recommended by the YouTube channel “Critical
-Drinker”</a>.</p>
-<p>So I watched the show, it’s pretty good!</p>
-<p>In the same way that “Rick and Morty”’s Rick and Morty are kinda bastardised
-versions of “Back to the Future”’s Doc and Marty,
-“Invincible” is kindof a bastardised homage to superhero media the same way
-“The Incredibles” is.</p>
-<p>It’s both a bit dark, at times emphasising cosmic-horror themes that underlie
-superhero shows, as well as poking fun of superhero motifs.</p>
-<p>I find the show suspenseful and subversive.</p>
-<p>“Subversive” seems almost a joke term with regards to how it was used to
-describe Star Wars’ “The Last Jedi”. TLJ pretty much shits on the legacy that
-came before it.. I think to the point where it’s so different from the material
-it’s ‘subverting’, that it’s not interesting to watch.</p>
-<p>A better example of “subversive”, I think, was in the side quests of the game
-“The Witcher 3”. In the Witcher 3, you play a fantasy wizard-warrior. The game
-follows your expectations about 90% of the time. As in, 90% of the time,
-playing a heroic figure who rescues the people from monsters works out well,
-but 10% of the time you’ll be punished for being naive or foolish or whatever.</p>
-<p>I think with “Invincible”, it’s similar.<br />
-The show knows what you’re set to expect, and will deliver on that most of the
-time; but will vary from that <em>just</em> enough to keep you on your toes.<br />
-So you end up with 3 or 4 plots going throughout the story where you’re not sure
-whether you can trust the characters or not.</p>
-<p>I think the premise of the show is more interesting than the characters or plot
-of the show, though. – I found “Rick and Morty” less interesting as the show
-seemed to try to develop its characters.. but the characters are only really
-interesting as archetypes in the weird situations.<br />
-Invincible’s characters are largely not-Superman, not-the-Justice-League, etc.
-and I enjoyed them as they played a part in this half-ironic, mature
-interpretation of superhero stories.</p>
-<p>The show’s worst part is definitely the main character’s love interest.<br />
-The love interest is the kind of person who reads Ta Nehisi Coates.. the
-character certainly doesn’t seem to get the same edgy interpretation treatment
-the rest of the show tells its story from. (Unless the love interest’s character
-is supposed to subvert our expectations that the superhero’s love interest be
-a likeable character. Which, maybe is the intent).<br />
-– I was fairly annoyed by one plot point: love interest and the main character
-are visiting a college campus when a villain terrorises the square. The main
-character runs off to Clarke-Kent-into-Superman, then fights and stops the
-villain. Afterwards, the love interest chastises the main character for running
-away and not helping people(?!). – We then find out she had already
-figured out that her boyfriend was the superhero. – It comes across as
-holier-than-thou, smarter-than-thou, author’s-daughter-stand-in character.</p>
-<p>So. I dunno if the story’s going to be able to keep up the momentum.
-But, I think the edgy, humorous interpretation of popular culture is interesting.
-I think it’d be interesting to see Star Wars or whatever in a similar manner.</p>]]></summary>
 </entry>
 
 </feed>

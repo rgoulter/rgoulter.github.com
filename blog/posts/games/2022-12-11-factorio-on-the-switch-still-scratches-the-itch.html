@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>The just Command Runner is an Neat Tool - Richard Goulter's Blog</title>
+        <title>Factorio on the Switch Still Scratches the Itch - Richard Goulter's Blog</title>
 
         <!-- My (Old) CSS theme -->
         <link rel="stylesheet" type="text/css" href="../../css/default.css" />
@@ -129,9 +129,9 @@
             <hr style="margin: 0px; border-top: 5px solid black;" />
 
             <div id="content" class="container">
-                <h1>The just Command Runner is an Neat Tool</h1>
+                <h1>Factorio on the Switch Still Scratches the Itch</h1>
                 <div class="info">
-    Posted on October 17, 2022
+    Posted on December 11, 2022
     
         by Richard Goulter
     <br />
@@ -140,63 +140,88 @@
     
 </div>
 
-<p>I came across the tool <a href="https://just.systems/man/en/chapter_1.html">just</a>.</p>
-<p>It’s a tool for running commands/scripts.</p>
-<p>My initial impression was “that’s it?”.</p>
-<p>I might describe it slightly differently, compared to other common workflows:</p>
-<ul>
-<li>It’s common to see <code>make</code> used with a bunch of <code>.PHONY:</code> targets. The point
-of a <code>make</code> is to describe how some target is built. But since people will
-often want to run tasks (e.g. run tests with <code>make test</code>), a ‘phony’ target
-is a task where the target isn’t a file that gets built.
-<ul>
-<li>Compared to “use <code>make</code> with a bunch of <code>.PHONY</code> targets”, <code>just</code> has some
-nice quality of life features.
-<ul>
-<li>e.g. with <code>just</code>, you don’t have to indent the definitions using Tabs.</li>
-<li>e.g. <code>just</code> can list the targets in its <code>justfile</code>.</li>
-</ul></li>
-</ul></li>
-<li>In the NodeJS ecosystem, its <code>package.json</code> files often contain a <code>scripts</code>
-property, which is used to describe common tasks that will be run when
-working with the project.
-<ul>
-<li>Compared to this, a <code>justfile</code> is more expressive / less constrained.
-<ul>
-<li>e.g. ‘make with <code>.PHONY</code> targets’ is more expressive than
-<code>package.json</code>’s scripts`.</li>
-</ul></li>
-</ul></li>
-<li>It’s common to have a ‘script directory’ where you keep a bunch of scripts
-for common functionality.
-<ul>
-<li>Compared to this, <code>just</code> allows for a consistent starting point, some
-quality of life features (e.g. by-default always starting scripts with
-starting directory being the <code>justfile</code>’s directory) and allow for
-integration with editors.</li>
-</ul></li>
-</ul>
-<p>Overall, I find that quite persuasive: it’s more polished/tailored than <code>make</code>
-for a particular use case; and that use case is something which developers
-definitely make use of.</p>
-<p>There is the downside that <code>just</code> isn’t a standard tool that you can hope to
-find on most systems (in contrast to e.g. <code>python</code>, <code>bash</code>, or maybe <code>awk</code> or
-<code>make</code>).<br />
-But, installing packages isn’t all that hard. (And <code>just</code> is <a href="https://just.systems/man/en/chapter_4.html">available in many
-places</a>).<br />
-And I use <code>nix</code>, so it’s especially easy to ensure it’s available when I want
-it.</p>
-<p>I think this is a good example of “sometimes better isn’t MUCH better; it’s
-merely slightly better”.</p>
+<p>Factorio is a game which is widely regarded as addictingly fun to play.</p>
+<p>The ostensible goal of the game is to assemble &amp; launch a rocket ship.</p>
+<p>The start of the game is reasonably familiar: you control a character, mine some
+ores from resource deposits, and then use these resources to assemble tools or
+whatever item you need. (e.g. you’ll mine some iron ore, put this ore in a
+furnace,
+and use the resulting iron plates to assemble an iron pickaxe).<br />
+– Factorio allows for automating these process. A mining machine can
+automatically gather resources; conveyor belts can automatically move these
+resources along; an assembly machine can automatically assemble some item, and
+inserter arm machines can automatically insert items from the convey belts into
+the assembly machines.</p>
+<p>The first time you play the game (if you don’t read guides first), you’ll
+probably end up with a factory which works, but you’ll certainly end up with
+something that’s difficult to maintain or improve on. You’ll end up with
+a disorganised mess.<br />
+(Then you hear the term “main bus”, and that helps organise things <em>a lot</em>).</p>
+<p>The dynamic of the game ends up feeling very similar to programming or
+electrical engineering.<br />
+So much so that, while I think most programmers who play the game find it
+addictively engaging, there are also those who don’t want to play it. – I think
+it’s one of two responses: “it’s similar to what I do for work, but without
+having to do what others tell me to do, and without having to be reliable. Fun!”
+or “it’s similar to what I do for work, but I don’t benefit from putting in the
+effort.
+Why would I do that?”.<br />
+I mean, there’s a satisfying feeling of constructing a system which works (as
+well as ‘debugging’ why some system doesn’t work).</p>
+<p>I think complementing this is that usually there are multiple things that you
+can do to reduce the mess in your factory; and that improvements often have some
+delay before you see the tangible benefits from them. So there’s often some task
+you can aim towards that feels satisfying to do. (Sid Meier’s Civilization games
+are similarly entralling).</p>
+<p>Probably “fun is in the eye of the beholder”.<br />
+There are parts of Factorio where I think it’s fun for me to come up with my own
+solution to the problem. There are parts where I’d rather lookup a guide for how
+to do it on the Factorio wiki, or some YouTube video.</p>
+<p>I found it fun to play Factorio with particular challenges/goals in mind. One
+achievement requires that you craft only the minimal number of items by hand
+(and use assembly machines to bootstrap the rest). Another achievement was to
+play the game on non-peaceful, but without using solar power.</p>
+<p>“Non-peaceful” mode is the default setting for the enemies’ aggression mode.
+The player’s factory produces pollution; the enemies react to the pollution by
+getting stronger and attacking the player every now and then in waves. Whereas,
+in peaceful mode, enemies will only attack if attacked first (and attacking
+one enemy base doesn’t ‘aggro’ other enemy bases).<br />
+In my experience, non-peaceful mode ‘just’ requires the extra pushback/effort of
+automatically building (sufficient) ammunition/defenses, etc. – It adds a bit
+of pressure/flavor to the game, and isn’t extremely stressful, but I prefer to
+play with peaceful mode.</p>
+<p>At the higher end of things, some players enjoy seeing how frequently their
+factory is able to assemble/launch a rocket (since this requires a well organised
+factory at significant scale). – I’ve not yet tried doing this.</p>
+<p>For the playthroughs I’ve spent significant time on, I inevitably had the same
+task/notes system I use when programming. (Start the day by writing down status
+of WIP; write down tasks to-do, and obstacles faced which need to be resolved).</p>
+<p>Anyway.</p>
+<p>The game was recently released for the Nintendo Switch. I was travelling for a couple of
+weeks, have a Nintendo Switch, and have enjoyed playing Factorio.</p>
+<p>I can vouch that the game scratches the same itch as it does on PC.</p>
+<p>The controls are reasonably nice, although using the controller won’t be as fast
+as using the mouse.</p>
+<p>I think if someone were (somehow) playing through Factorio for the first time on
+the Nintendo Switch, I think they’d opt to play on PC by the time they got to
+the blue science technologies. (About halfway through the game). – Because at
+that point, you’ve unlocked trains and the construction robots and solar power
+and electric furances… there’s lots of stuff which can all be used to improve
+your factory. (Trains are earlier; but, I didn’t bother assembling rail stuff
+until after I’d assembled blue science).</p>
+<p>I’d bet that the Switch is suited to people having the large post-game factories.
+I never noticed performance issues in my playing, though.</p>
+<p>If someone were wondering whether to by Factorio for PC or for the Switch, I’d
+say “yes”. Well, I don’t think anyone’s going to regret buying this game. I
+think PC is the better environment to play it on. But, on the Switch it still
+stratches the same itch just the same.</p>
 
 <hr />
 
 <div>
     
-    <a href="../../posts/programming/2022-10-28-the-capslock-key-was-not-the-problem.html" style="float:left;">Newer post</a>
     
-    
-    <a href="../../posts/programming/2022-10-06-using-nixos-specialisations-to-try-out-different-desktop-environments.html" style="float:right; text-align: right;">Older post</a>
+    <a href="../../posts/programming/2022-10-28-the-capslock-key-was-not-the-problem.html" style="float:right; text-align: right;">Older post</a>
     
 </div>
 <br style="clear: both;" />

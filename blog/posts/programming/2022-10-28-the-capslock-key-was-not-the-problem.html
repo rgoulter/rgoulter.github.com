@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>The just Command Runner is an Neat Tool - Richard Goulter's Blog</title>
+        <title>The CapsLock Key was not the Problem - Richard Goulter's Blog</title>
 
         <!-- My (Old) CSS theme -->
         <link rel="stylesheet" type="text/css" href="../../css/default.css" />
@@ -129,9 +129,9 @@
             <hr style="margin: 0px; border-top: 5px solid black;" />
 
             <div id="content" class="container">
-                <h1>The just Command Runner is an Neat Tool</h1>
+                <h1>The CapsLock Key was not the Problem</h1>
                 <div class="info">
-    Posted on October 17, 2022
+    Posted on October 28, 2022
     
         by Richard Goulter
     <br />
@@ -140,63 +140,28 @@
     
 </div>
 
-<p>I came across the tool <a href="https://just.systems/man/en/chapter_1.html">just</a>.</p>
-<p>It’s a tool for running commands/scripts.</p>
-<p>My initial impression was “that’s it?”.</p>
-<p>I might describe it slightly differently, compared to other common workflows:</p>
-<ul>
-<li>It’s common to see <code>make</code> used with a bunch of <code>.PHONY:</code> targets. The point
-of a <code>make</code> is to describe how some target is built. But since people will
-often want to run tasks (e.g. run tests with <code>make test</code>), a ‘phony’ target
-is a task where the target isn’t a file that gets built.
-<ul>
-<li>Compared to “use <code>make</code> with a bunch of <code>.PHONY</code> targets”, <code>just</code> has some
-nice quality of life features.
-<ul>
-<li>e.g. with <code>just</code>, you don’t have to indent the definitions using Tabs.</li>
-<li>e.g. <code>just</code> can list the targets in its <code>justfile</code>.</li>
-</ul></li>
-</ul></li>
-<li>In the NodeJS ecosystem, its <code>package.json</code> files often contain a <code>scripts</code>
-property, which is used to describe common tasks that will be run when
-working with the project.
-<ul>
-<li>Compared to this, a <code>justfile</code> is more expressive / less constrained.
-<ul>
-<li>e.g. ‘make with <code>.PHONY</code> targets’ is more expressive than
-<code>package.json</code>’s scripts`.</li>
-</ul></li>
-</ul></li>
-<li>It’s common to have a ‘script directory’ where you keep a bunch of scripts
-for common functionality.
-<ul>
-<li>Compared to this, <code>just</code> allows for a consistent starting point, some
-quality of life features (e.g. by-default always starting scripts with
-starting directory being the <code>justfile</code>’s directory) and allow for
-integration with editors.</li>
-</ul></li>
-</ul>
-<p>Overall, I find that quite persuasive: it’s more polished/tailored than <code>make</code>
-for a particular use case; and that use case is something which developers
-definitely make use of.</p>
-<p>There is the downside that <code>just</code> isn’t a standard tool that you can hope to
-find on most systems (in contrast to e.g. <code>python</code>, <code>bash</code>, or maybe <code>awk</code> or
-<code>make</code>).<br />
-But, installing packages isn’t all that hard. (And <code>just</code> is <a href="https://just.systems/man/en/chapter_4.html">available in many
-places</a>).<br />
-And I use <code>nix</code>, so it’s especially easy to ensure it’s available when I want
-it.</p>
-<p>I think this is a good example of “sometimes better isn’t MUCH better; it’s
-merely slightly better”.</p>
+<p>It’s fashionable among developers to give a tip about the CapsLock key: you can switch out its functionality, replacing it with the Escape key.</p>
+<p>When I did this, in order to then type out something like <code>SEQUENCE_OF_UPPERCASE_WORDS</code>, I’d hold down the shift key using my left pinky finger, and type out the letters as necessary.<br />
+– And if you can do that, then the CapsLock key is redundant.</p>
+<p>These days, I prefer using a fancy, symmetrical keyboard. (I think buying an expensive fancy keyboard is justifiable if it’s symmetrical, and offers more keys for the thumb to press; and I don’t think it makes sense to spend a lot of money on a keyboard which isn’t symmetrical, etc.).<br />
+And the fashionable (and I think superior) way of arranging the modifier keys Shift, Ctrl, Windows/Cmd, Alt keys is to put these as dual-use tap-hold keys
+on the home row. (Which allows access to these keys without having to move your hand).</p>
+<p>With such a keyboard, and with home row modifiers, the “use an improper position which stretches your weak pinky finger” technique doesn’t really work.<br />
+Instead, to type <code>UPPERCASE</code>, you end up having to alternate use of the shift key; pressing shift for the opposite side of the letter being pushed.<br />
+– I can do this; but I find it to be slower, and error prone. (It’s easy to miss the timing, and type ‘THhiS’ instead of ‘THIS’, as the Shift key requires holding down ‘h’).</p>
+<p>For long sequences of uppercases letters, it does make sense to have the CapsLock key available. – Though, with a fancy keyboard, you can have the CapsLock key accessible on (or hidden away on) a layer.</p>
+<p>Rather. The CapsLock functionality itself isn’t inherently useless, and needn’t be banished.<br />
+It’s that, in a standard keyboard, the real-estate of “on home row, easy to reach” that the CapsLock key occupies is put to much better use by using it for Escape (or Ctrl, or dual-use Escape/Ctrl).<br />
+Since a fancy keyboard is nicer to use (the modifier keys are easy to each, and layers allow bringing more keys to within easy reach), you get to use the CapsLock key without it taking up space which could be better utilized.</p>
 
 <hr />
 
 <div>
     
-    <a href="../../posts/programming/2022-10-28-the-capslock-key-was-not-the-problem.html" style="float:left;">Newer post</a>
+    <a href="../../posts/games/2022-12-11-factorio-on-the-switch-still-scratches-the-itch.html" style="float:left;">Newer post</a>
     
     
-    <a href="../../posts/programming/2022-10-06-using-nixos-specialisations-to-try-out-different-desktop-environments.html" style="float:right; text-align: right;">Older post</a>
+    <a href="../../posts/programming/2022-10-17-the-just-command-runner-is-an-neat-tool.html" style="float:right; text-align: right;">Older post</a>
     
 </div>
 <br style="clear: both;" />
