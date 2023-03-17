@@ -8,8 +8,338 @@
         <name>Richard Goulter</name>
         <email>richard.goulter+blog@gmail.com</email>
     </author>
-    <updated>2022-12-11T00:00:00Z</updated>
+    <updated>2023-03-05T00:00:00Z</updated>
     <entry>
+    <title>Review of Apple Pencil for Note Taking</title>
+    <link href="http://www.rgoulter.com/blog//posts/programming/2023-03-05-review-of-apple-pencil-for-note-taking.html" />
+    <id>http://www.rgoulter.com/blog//posts/programming/2023-03-05-review-of-apple-pencil-for-note-taking.html</id>
+    <published>2023-03-05T00:00:00Z</published>
+    <updated>2023-03-05T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<p>I recently purchased the Apple Pencil.</p>
+<p>There is a more recent “2nd Generation” Apple Pencil, but the iPad I have is old
+enough that it doesn’t support that “2nd Generation”.</p>
+<p>Overall, it’s been a useful thing to have, I like using it, but it’s also
+probably not worth the cost.</p>
+<p>I have found it useful. Before having an Apple Pencil, my household’s use of the
+iPad was 99% my wife using it to watch Netflix. – With the Apple Pencil, its
+use is 90% for taking notes.</p>
+<p>It’s pretty good for handwriting notes.<br />
+The feeling isn’t as tactile as an actual pen on actual paper. But, the feeling
+isn’t so bad or off so as to be uncomfortable. (Albeit, I strongly recommend
+getting some kind of pencil grip. The device itself is very thin!).</p>
+<p>Of course, since it is digital, this comes with its own neat benefits:</p>
+<ul>
+<li><p>Hassle-free deletion of mistakes.</p></li>
+<li><p>Flexible use of space.</p>
+<ul>
+<li>The digital paper is practically infinite in width and length.</li>
+<li>But, also, it’s easy to move notes about, and so make more space to amend
+earlier notes.</li>
+</ul></li>
+<li><p>Storage. Digital storage is essentially allows for higher capacity, compared
+to paper.</p></li>
+<li><p>Text recognition. … Although the apps I’ve tried (Apple’s; and Microsoft’s)
+don’t support my use case (described below) nicely, so I don’t use this, and
+can’t comment on how useful it is. But, I mean, if you want notes in text,
+text-recognition is an advantage over traditional pen &amp; paper tools.</p></li>
+</ul>
+<p>Using an iPad for notes has some disadvantages; but, is not significantly worse
+than pen &amp; paper note taking. (e.g. takes up desk space, and can’t easily copy &amp;
+paste text from a workstation).</p>
+<p>One limitation is that in some ways it’s more limited than pen &amp; paper. In that,
+with pen &amp; paper, you can take notes however you wish. – This leads to all
+sorts of note taking idiosyncracies.</p>
+<p>So. Here’s how I like making notes while working:</p>
+<ul>
+<li><p>Calendar: I don’t have many meetings, so this isn’t important to me.</p></li>
+<li><p>Task Management: I find it useful to keep a list of tasks of “maybe later” or
+“too difficult for now” tasks for tasks I’d like done. Stuff like chasing down
+loose threads which would deepen my understanding of some system. (Which are
+sometimes “not important, until they suddenly become important”).</p></li>
+<li><p>Diary: I <em>love</em> maintaining some kind of ‘done list’, with a weekly view of
+“here’s what I got done on each day, &amp; what significant obstacles I ran into
+that day”.</p></li>
+<li><p>Work Journal: In the spirit of “if you’re not writing, you’re not thinking” or
+“I wrote it down so that I don’t have to remember”.. I found that I’d often
+find myself running into the same error or failure, but forgetting how I’d
+solved it earlier.</p>
+<ul>
+<li>These can be relatively transient. It’s very rare for me to lookup notes
+from a long time ago.</li>
+</ul></li>
+</ul>
+<p>Though mostly I only really use handwriting for the ‘diary’ and ‘work journal’
+parts.</p>
+<p>To elaborate on the ‘work journal’: So, I like writing down a work notes (a
+log?) so that it’s easier to offload/recall the mental context I had when
+tackling some problem.</p>
+<p>A work flow might be:</p>
+<ul>
+<li><p>writing down the status / work in progress,</p></li>
+<li><p>write down the short-term related tasks to do.</p></li>
+</ul>
+<p>then:</p>
+<ul>
+<li><p>write down things I try,</p></li>
+<li><p>write down problems I face,</p></li>
+<li><p>write down any questions I have,</p></li>
+<li><p>write down any interesting related facts which might be hard to find later,</p></li>
+<li><p>write down any further tasks to follow up for the work to be ‘done’.</p></li>
+</ul>
+<p>A strong part of my note taking process is colour-coding.</p>
+<p>This means a dense page of notes is often colourful, and is easier to scan.
+e.g. black for things I tried, red for problems, green for questions, blue for
+facts, purple for tasks to do.</p>
+<p>For traditional pen &amp; paper, it’s often very easy to find families of pens which
+have all of these colours. Or even a good multi-pen which has 4 (albeit, those
+are ball-point pens, which are unergonomic).</p>
+<p>I’ve even quite liked using a set of Preppy fountain pens, each with cartridge
+converters. The Preppy pens are cheap (relative to fountain pens); and can be
+found with coloured caps/bodies in each of the colours above.</p>
+<p>For the Apple Pencil, I have to rely on what software has been written for the
+iPad. – I like OneNote enough, so I thought I’d try it with the Apple Pencil.
+It’s fine. It does support easily using different styles of pencil (e.g.
+different thicknesses, colours, pen/highlighter). It can cover the above use
+case adequately. The most glaring limitation is support for easily switching
+colours for the auto-text-recognition. – Maybe some other app supports my use
+case better.</p>
+<p>In terms of cost.. I was able to get the Preppy pens relatively cheaply. I got
+converters for them which were cheaper than the pens; although I see e.g. on
+jetpens, this isn’t the case there. – The Apple Pencil is quite expensive. It’s
+not worth buying an iPad specifically to use that. I like using the Apple
+Pencil. I don’t regret buying it. But, I’d describe it as a luxury purchase, for
+the use case of “taking notes on the iPad”. (Whereas, say, I do feel that
+“ortholinear keyboard” or “trackball mouse” are such significant ergonomic wins
+that they’re worth buying, especially for professionals, despite their high
+cost).</p>
+<p>Other nit-picky problems with the Apple Pencil:</p>
+<ul>
+<li><p>Without a pencil grip, the device rolls around easily.</p></li>
+<li><p>Charging and pairing the device looks very stupid. The butt of the pencil is a
+cap for a lightning male connector.</p>
+<ul>
+<li>Pairing with an iPad involves plugging this into the iPad.</li>
+<li>Charging this requires using a F-to-F adaptor in order for it to connect to
+an iPad charging cable.</li>
+</ul></li>
+<li><p>It requires Bluetooth to be enabled on the iPad, which can be undesirable.</p></li>
+</ul>]]></summary>
+</entry>
+<entry>
+    <title>Disco Elysium</title>
+    <link href="http://www.rgoulter.com/blog//posts/games/2023-01-19-disco-elysium.html" />
+    <id>http://www.rgoulter.com/blog//posts/games/2023-01-19-disco-elysium.html</id>
+    <published>2023-01-19T00:00:00Z</published>
+    <updated>2023-01-19T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<h3 id="one-beautiful-moment-from-the-game">One Beautiful Moment from the Game</h3>
+<p>I’d only really call something a “spoiler” if it ruins enjoyment from watching
+the story.</p>
+<p>e.g. The classic show “Columbo” is re-watchable, and we always know that Columbo
+will bumble around and annoy the villian in all sorts of homely ways, and ask
+“just one more thing”.. but it ruins the suspense if you remember exactly what
+the “gotcha” of the episode is.</p>
+<p>In contrast, I think the “The Wire” is such a great TV show that hearing what
+happens doesn’t spoil it. – Or maybe that’s because of the structure of the
+show; the entertainment isn’t structured around figuring out the mystery.</p>
+<p>“Disco Elysium” is a cult classic of a game, often enthusiastically recommended
+by those who have played it. While I can’t say I enjoyed the gameplay, I found
+the story to be very well done.</p>
+<p>It’s mature.. not in the sense of sexual content or gore, but in the sense that
+it’s got a bitter taste to it. Kinda like Nick Hornby’s “High Fidelity” (which
+is also about a music-loving, potentially charming man who’s not quite as cool
+as he thinks he had hoped to be).</p>
+<p>I think the climax of one of the subplots is so well done, that sharing it
+doesn’t spoil the game. (Or maybe it’s because of <em>how</em> the game does it).</p>
+<p>The shortest way to describe the game’s setting is that we’ve woken up as a
+detective who has lost his memory, after a bender of a night singing sad songs
+and trashing his hotel room. We’re supposed to be investigating a murder, which
+has sparked tensions between rival factions in a beat-down unimportant corner of
+the world (in an alternative universe).</p>
+<p>One thing which becomes apparent early on is that the character used to be
+married, and misses his ex-wife.</p>
+<p>I find the climax to this sub-plot very beautiful.</p>
+<p>Because.. as we play through the game, we see the detective can interact well
+with all kinds of people. He comfortably converses with those who are angry with
+him, with poorly mannered children, with slimy mobster bosses, with intimidating
+enforcers.. and he’s able to navigate these conversations and often get what he
+wants out of them. (At one point, his reputation proceeds him as a “human can
+opener”).</p>
+<p>And each night when we sleep, not conscious, the character’s internal monologue
+is that of a deep, base resentment of himself. That he’s a failure.</p>
+<p>So it’s quite impactful that the game plays differently when the main character
+thinks about his ex-wife.</p>
+<p>In every other conversation, usually it’s possible to end the conversations
+quickly (even if this leads to less than ideal outcomes).</p>
+<p>But, when interactions with the character’s ex-wife, the option to “leave
+conversation” does nothing; the we can’t just leave a conversation with his
+ex-wife, the main character is too enthralled.</p>
+<p>In the climax of this subplot, the character has suffered significant physical
+injuries, and takes a nap as he is investigating a fresh lead into the case.</p>
+<p>In his dream, he takes himself back to a memory of the time where he last saw
+his ex-wife, as she’s leaving for the airport. In his dream, she appears to him
+as the avatar of the very beautiful, saintly holy patroness of moralism. The
+conversation goes around in circles as he keeps admiring her, and she keeps
+rejecting him, and saying how things didn’t work out.</p>
+<p>It lands so hard.</p>
+<p>So, although “talented, unconventional cop with an alcohol problem misses
+ex-wife” is extremely cliche, I think how it’s executed in the game is a
+demonstration of the game’s quality.</p>
+<h3 id="recommendations">Recommendations</h3>
+<p>Disco Elysium certainly a game I’ve seen recommended in several places.</p>
+<p>e.g. I’d first seen it recommended by Zero Punctuation, <a href="https://www.youtube.com/watch?v=Hi0pyPwxz6Y">stealthily disguised as
+a review of Call of Duty</a>.</p>
+<p>e.g. The next place I saw it recommended was in the comments of <a href="https://www.youtube.com/watch?v=8PUCSyIkEus">Mandalore
+Gaming’s video on The Mystery of the
+Druids</a>. “The Mystery of the
+Druids” is an adventure game, which features a detective who acts as
+antisocially as typical adventure game character, but in a world where everyone
+actually reacts to the antisocial behaviour.</p>
+<p>The comments in the video suggested that Disco Elysium is almost a spiritual
+successor in this regard.</p>
+<p>I can see why. It’s an adventure game. And in the same way “adventure game
+character, but where everyone else reacts like a real person would” is a riff on
+adventure games, frequently the game will give you dialogue options which are so
+strange that characters will ask why you’d say such a thing. (It’s a well done
+equivalent to “we’re not in a videogame”).</p>
+<p>Similarly, Disco Elysium’s protagonist can act in all sorts of interesting ways;
+and the game <em>encourages</em> role-playing into these more colourful roles.</p>
+<p>Indeed, Disco Elysium very much is a role-playing game.</p>
+<p>I didn’t like this aspect of the game very much.</p>
+<p>Whereas, say, The Witcher 3, is more of an Action Role Playing Game. There are
+dialogue trees which impact the story. (And I did enjoy how the Witcher 3
+handled this with its many side quests). But, ultimately the Witcher 3 has lots
+of action, and you’re just such a powerful character.</p>
+<p>Disco Elysium, some solutions are gated behind getting a successful dice roll on
+a skill check. – I can accept this mechanic during conversations, but I find it
+strange that I can’t try to open a container again just because I failed a skill
+check.</p>
+<p>That said. While I didn’t enjoy the gameplay.. the game’s execution is so well
+done, and its story is highly engaging, I also recommend it.</p>
+<h1 id="inside-out">Inside Out</h1>
+<p>I love Disney Pixar’s “Inside Out”, particularly for an easy and adorable mental
+model about how people’s minds work, with different emotions taking the wheel.</p>
+<p>Disco Elysium’s story has a similar thing: you’ll have internal characteristics
+like “Drama”, “Volution”, “Persuasion”, “Encyclopedia”, etc. The game uses these
+as flavourful ways of providing dialogue options.</p>
+<p>e.g. With ‘encyclopedia’, you might be informed of the model of a particular
+vehicle (which can be useful), or it might recall random irrelevant details.
+– I think that’s really cute.</p>
+<p>e.g. With ‘drama’ might pick up that someone is lying, or it might suggest
+something sarcastic (and unhelpful) to say.</p>
+<h1 id="diegeticy">Diegeticy</h1>
+<p>I think part of what makes the game so well done is how it handles “this isn’t a
+videogame”.</p>
+<p>For example, I think it’s an interesting detail that the game starts with the
+character having amnesia. – It’s interesting because throughout the game, you
+get to ask other characters details about the world.<br />
+– In other games, this might be business as usual. But in this game, there’s a
+sense the NPC is thinking “ugh, why are you asking me questions about the
+world”.</p>
+<p>I mean, the player character not knowing about the world is ‘diagetic’ in the
+sense that the player doesn’t know the world (which is the point of the trope),
+but that this not knowing also plays out significantly in the gameplay. (As
+opposed to, say, the Bourne Identity, wherein the player’s amnesia drives the
+plot more than it really hinders the protagonists’ perceived competency).</p>
+<p>I think a lot of the writing is like this; it’s almost like the protagonist acts
+like a detective in a detective videogame (e.g. “I found this item I can
+interact with, so it must be significant to the case”), and a lot of the writing
+reminds him that he’s not the protagonist in a videogame.</p>
+<p>The game as a whole probably serves as a good demonstration that tropes aren’t
+necessarily bad; it’s about how they’re used.</p>]]></summary>
+</entry>
+<entry>
+    <title>Post Factorio Playthrough Ramble</title>
+    <link href="http://www.rgoulter.com/blog//posts/games/2022-12-27-post-factorio-playthrough-ramble.html" />
+    <id>http://www.rgoulter.com/blog//posts/games/2022-12-27-post-factorio-playthrough-ramble.html</id>
+    <published>2022-12-27T00:00:00Z</published>
+    <updated>2022-12-27T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<p>Okay, so maybe Factorio is “hyper-engaging”.</p>
+<p>After playing through the game a bit on the Nintendo Switch,
+I decided that I’d go back and play the game
+in order to complete a few more
+of the game’s achievements.</p>
+<p>So I went to load my savegame from when I’d completed a
+game on peaceful, only to discover that this savegame
+was from an old pre-1.0 version of the game, and so
+wouldn’t load.</p>
+<p>Darn.</p>
+<p>Guess my best option was to start a new game.</p>
+<p>(Having played through the game on the standard non-peaceful,
+I’d decided that I prefer to play on peaceful).</p>
+<p>I’d describe my time as a “bender”.</p>
+<p>I did learn some things, though.</p>
+<p>This time, I made use of Factorio’s railway systems.
+I’d previously thought this was intimidatingly difficult.
+Fortunately, one of the Guides in the Steam Community provides
+blueprints for a set of rails with the following nice
+properties:</p>
+<ul>
+<li><p>4 lanes of rails, spaced such-that the outer-pair of rails
+form a neat U-turn shape.</p></li>
+<li><p>To simplify the train signals, each rail only allows
+trains to go one-way.</p></li>
+<li><p>The outer pair of rails is intended for trains to then
+leave/enter train stations, whereas the inner pair of rails
+is intended for ‘express’.</p></li>
+</ul>
+<p>I do generally worry that just using other people’s blueprints
+takes out half of the fun of the game. (Especially if the blueprint
+is well-optimised, and not something you’d naturally think of).
+– With these rails designs, I felt I was able to enjoy the game
+more without having to do this thinking though.</p>
+<p>I did also borrow from <a href="https://www.youtube.com/watch?v=MPUcU37hXH4">a mall design that KatherineOfSky</a> presented
+a few years ago. I didn’t notice that this was for an older version of
+the game.</p>
+<p>One other thing I did better this game was “get comfortable with
+the nuclear power system”. The nuclear power system is complicated
+because it involves dealing with heat (which behaves differently than
+other resources systems in the game), and dealing with the two kinds of uranium (which comes with its own issues).</p>
+<p>My goal was to clear some of the achievements which deal with the late game.
+I hadn’t achieved “research all technology”, the top “produce X amount of iron”,
+the last “produce 20M green circuits” achievements; and a post-game “have 100 robot followers” achievement.</p>
+<p>I find the game to be hyper-engaging up until researching blue science; at which point there are <em>so many</em> exciting things to do, that I have to slow down
+to focus task by task on what to achieve.</p>
+<p>In particular, ‘blue science’ is when the construction &amp; logistic robots become available.<br />
+And so while Factorio is overall a game about designing systems..
+the construction robots are the game mechanic where this really takes off.<br />
+The construction robots will automatically place buildings/etc. from blueprint designs. (It’s also possible to ad-hoc copy-paste buildings using the construction bots). – So if you’ve placed your buildings in such a way that they can be tiled, this allows rapidly scaling parts of your factory up. (Or, if you’ve got blueprint designs from previous playthroughs/wherever, bots will be able to start constructing these).<br />
+The logistic robots can bring items to you so long as your factory has the robo-ports built in a ‘network’. (You can come up with a tiling design of robo-ports such that you can use construction bots to construct a large roboport network area…). And, later, certain storage boxes can have requirements set, so that the logistic robots will ensure the boxes have those items. (This allows e.g. creating a ‘cache’ area, so you can quickly have whatever items you want delivered to you).</p>
+<p>I mean, I knew the robots were good previously.
+But, I find the game shifts gears when they’re unlocked.</p>
+<p>Previously, I’d always puttered along in the last mile when reaching the game’s
+end objective of launching a rocket. But, since I wanted some achievements which
+require multiple rocket launches, I was able to continue developing my factory.</p>
+<p>This meant I was able to try out more of the late-game combat stuff. (Even though the game was peaceful, I still did have to clear out enemy bases which
+got in my way).</p>
+<p>The robot followers are very powerful, and kinda allow just waltzing through
+an enemy base.</p>
+<p>The <a href="https://wiki.factorio.com/Spidertron">spidertron</a> was a lot of fun to use.</p>
+<p>The post-game technologies increased the range and firing speed of the rail artillery; which became my favourite tool for clearing out big areas of land. – I’d not used laser turrets before. (My main non-peaceful playthrough had been for getting a “no lasers” and “no solar power” achievement). The laser turrets were very convenient for defending the rail artillery! (The enemy would rush the site where the artillery fired from).</p>
+<p>The main ‘insight’ I gained was from using the trains / railway network. Rather, because I’d never used the trains for transporting resources, I’d
+always just used the standard transport belts.. with trains, trains allow
+‘decoupling’ resource movement.</p>
+<p>That is: with trains, you have a station where you load some resource, and a station where you unload that resource. With Factorio, stations can be named by their role, and a train can be routed to follow a route like “refuel -&gt; load resource X -&gt; unload resource X”. The train station’s name is an indirection; it doesn’t concretely matter where the station is.</p>
+<p>Whereas, the with the transport belts, the belts must be explicitly placed on the map. There’s no indirection, no flexibility. If some resource is depleted, you can place more belts; but that’s all you can do.</p>
+<p>Logistic bots similarly can automatically move resources from one location to another, but with a more limited throughput and a more limited distance compared to trains.</p>
+<p>Rather. I found it neat to be able to consider “load input, move it, unload” as an abstraction. – Although, a lot of Factorio is dealing with the details of the implementation.</p>
+<p>I saw on YouTube there are speedruns of the game in under two hours; speedruns on random seeds in under three; speedruns of getting 100% achievements in under four or five hours!<br />
+These are all impressive.</p>
+<p>In speedruns, the player will also bootstrap the factory with techniques which don’t scale well.
+An assembly machine will be placed &amp; will require the player to manually insert the
+input ingredients. – This doesn’t ‘scale’ since it’s infeasible for the player to continue
+doing this for the whole game; but for bootstrapping the factory, it’s quicker than setting
+things up ‘the right way’.</p>
+<p>I’ve also heard the term “city blocks” in the community.</p>
+<p>I got the achievement for producing 20M green circuits.</p>
+<p>By that time, my factory was producing about 60 of each science per minute.
+The “megafactories” that some enthusiasts go for aim for 1000 of each science per minute.</p>
+<p>Unfortunately, I hadn’t really scaled up the green circuit production.
+So, getting the achievement was more from “playing the post-game for quite
+some time” than from “you have a factory which is producing many green circuits”.</p>
+<p>The remaining achievements I haven’t yet unlocked are related to completing
+the game quickly.</p>]]></summary>
+</entry>
+<entry>
     <title>Factorio on the Switch Still Scratches the Itch</title>
     <link href="http://www.rgoulter.com/blog//posts/games/2022-12-11-factorio-on-the-switch-still-scratches-the-itch.html" />
     <id>http://www.rgoulter.com/blog//posts/games/2022-12-11-factorio-on-the-switch-still-scratches-the-itch.html</id>
@@ -306,667 +636,6 @@ The right-angled USB-C cables I’ve tried cannot connect to the BM40, since the
 case is too thick.</p>
 <p><img src="https://raw.githubusercontent.com/rgoulter/rgoulter.github.com/master/images/keyboards/travel-setup/keyboard_bm40.JPG" /></p>
 <p><img src="https://raw.githubusercontent.com/rgoulter/rgoulter.github.com/master/images/keyboards/travel-setup/keyboard_gh60_case.JPG" /></p>]]></summary>
-</entry>
-<entry>
-    <title>A Visual Explanation of GPG Subkeys</title>
-    <link href="http://www.rgoulter.com/blog//posts/programming/2022-06-10-a-visual-explanation-of-gpg-subkeys.html" />
-    <id>http://www.rgoulter.com/blog//posts/programming/2022-06-10-a-visual-explanation-of-gpg-subkeys.html</id>
-    <published>2022-06-10T00:00:00Z</published>
-    <updated>2022-06-10T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<p>As with anyone who’s been using git for long enough, I’m familiar enough with
-SSH keys (Even to the point where I don’t really need to follow <a href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent">the GitHub docs
-for generating a new
-key</a>.</p>
-<p>My developer journey hasn’t led me to build the same intuition for GPG keys.</p>
-<p>So, when I see fancy wiki pages and guids, such as <a href="https://wiki.debian.org/Subkeys">Debian wiki’s page on
-subkeys</a>, <a href="https://wiki.debian.org/OfflineMasterKey">on offline master
-keys</a>, or <a href="https://wiki.debian.org/GnuPG/AirgappedMasterKey">on an airgapped master
-key</a>, it sounds really fancy;
-but I’m left curious to get an intuition for what’s going on.</p>
-<p>I hope to use this blogpost illustrate enough of the details to build an
-intuition.</p>
-<h3 id="public-key-cryptography">Public Key Cryptography</h3>
-<p>The <a href="https://en.wikipedia.org/wiki/Public-key_cryptography">Wikipedia page on Public Key cryptography</a>
-has some nice diagrams.</p>
-<p>This itself should still be relatively straightforward, comparing with how SSH
-keys get used with git forges like GitHub, and with SSHing into servers:</p>
-<div style="text-align: center;">
-<p><img src="https://raw.githubusercontent.com/rgoulter/rgoulter.github.com/master/images/gpg/key_generation.png"  /></p>
-</div>
-<ul>
-<li><p>You have a key pair with a private key and public key,</p></li>
-<li><p>you keep the private key <em>private</em>,</p></li>
-<li><p>you share the public key with the servers you want to access to.</p>
-<ul>
-<li>Having the private key gives access.
-And this is ‘secure’ because only the user with the private key
-which matches the public keys will be granted access.</li>
-</ul></li>
-</ul>
-<p>So it makes sense: Encrypting;</p>
-<div style="text-align: center;">
-<p><img src="https://raw.githubusercontent.com/rgoulter/rgoulter.github.com/master/images/gpg/encrypt_document.png"  />
-<img src="https://raw.githubusercontent.com/rgoulter/rgoulter.github.com/master/images/gpg/decrypt_document.png"  /></p>
-</div>
-<ul>
-<li><p>You encrypt something for someone else using their public key.</p>
-<ul>
-<li><p>Everyone has their public key, so everyone can send them something.</p></li>
-<li><p>Only they have their private key, so only they can read the message.</p></li>
-</ul></li>
-</ul>
-<p>Or signing:</p>
-<div style="text-align: center;">
-<p><img src="https://raw.githubusercontent.com/rgoulter/rgoulter.github.com/master/images/gpg/sign_document.png"  />
-<img src="https://raw.githubusercontent.com/rgoulter/rgoulter.github.com/master/images/gpg/verify_signature.png"  /></p>
-</div>
-<ul>
-<li><p>You sign something with your private key.</p>
-<ul>
-<li><p>You’re the only person who has your private key, so only you can sign something.</p></li>
-<li><p>Everyone has your public key, so everyone else can verify you signed it.</p></li>
-</ul></li>
-</ul>
-<h3 id="the-rote-gpg-commands">The Rote GPG Commands</h3>
-<p>So far, we can just label everything above with “GPG” and it still makes sense:</p>
-<p>e.g. Key generation could be done by invoking a command like:</p>
-<pre><code>gpg --quick-generate-key &quot;Richard Goulter (NixOS Desktop) &lt;richard.goulter@rgoulter.com&gt;&quot;</code></pre>
-<p>e.g. exporting a key, to copy the public part to GitHub or whatever could be done by invoking a command like:</p>
-<pre><code>gpg --export --armor &quot;Richard Goulter (NixOS Desktop)&quot;</code></pre>
-<p>e.g. encrypting/decrypting a message could be done by invoking a command like:</p>
-<pre><code>gpg --encrypt --recipient &quot;My Colleague&quot; document.txt</code></pre>
-<p>and the recipient could decrypt it with:</p>
-<pre><code>gpg --decrypt document.txt.gpg</code></pre>
-<p>e.g. signing could be done by invoking a command like:</p>
-<pre><code>gpg --clearsign file.txt</code></pre>
-<p>or</p>
-<pre><code>gpg --detach-sign file.txt</code></pre>
-<p>and the signature could be verified with a command like:</p>
-<pre><code>gpg --verify file.txt.asc</code></pre>
-<p>or</p>
-<pre><code>gpg --verify file.txt.sig</code></pre>
-<h3 id="what-starts-to-confuse-me-subkeys">What Starts to Confuse Me: Subkeys</h3>
-<p>Okay, but having created a key, then list the keys:</p>
-<pre><code>gpg --list-keys</code></pre>
-<p>outputs something like:</p>
-<pre>
-pub   rsa4096 2020-10-05 [SC] [expires: 2022-08-01]
-      D9463A85F093811B887DE4B03229F4BB09CC8A22
-uid           [ultimate] Richard Goulter (NixOS Desktop) <richard.goulter@gmail.com>
-sub   rsa4096 2020-10-05 [E] [expires: 2022-08-01]
-</pre>
-<p>and secret keys:</p>
-<pre><code>gpg --list-secret-keys</code></pre>
-<p>outputs something like:</p>
-<pre>
-sec   rsa4096 2020-10-05 [SC] [expires: 2022-08-01]
-      D9463A85F093811B887DE4B03229F4BB09CC8A22
-uid           [ultimate] Richard Goulter (NixOS Desktop) <richard.goulter@gmail.com>
-ssb   rsa4096 2020-10-05 [E] [expires: 2022-08-01]
-</pre>
-<p>I can see the only difference is <code>pub</code>, <code>sub</code>, vs <code>sec</code> and <code>ssb</code>. What?</p>
-<p>What’s <code>[SC]</code>, <code>[E]</code>?</p>
-<p>And if you enable some recommended options in <code>~/.gnupg/gpg.conf</code>:</p>
-<pre><code>keyid-format LONG
-with-fingerprint
-with-keygrip</code></pre>
-<p>re-running:</p>
-<pre><code>gpg --list-keys</code></pre>
-<p>outputs:</p>
-<pre>
-pub   rsa4096/3229F4BB09CC8A22 2020-10-05 [SC] [expires: 2022-08-01]
-      Key fingerprint = D946 3A85 F093 811B 887D  E4B0 3229 F4BB 09CC 8A22
-      Keygrip = 480A928A7AA17A693FDF4F4E9DEAEBEE1B778FB7
-uid                 [ultimate] Richard Goulter (NixOS Desktop) <richard.goulter@gmail.com>
-sub   rsa4096/15BAE7FB6F3DA787 2020-10-05 [E] [expires: 2022-08-01]
-      Keygrip = A996CF5366A2FFCA11EE958FBA3AC4BDFDB6AC76
-</pre>
-<p>I feel like this one I’m allowed to be confused by.</p>
-<p>Long Id?</p>
-<p>Fingerprint??</p>
-<p>Keygrip???</p>
-<h3 id="a-key-consisting-of-multiple-keys">A Key Consisting of Multiple Keys</h3>
-<p>Uh. Hopefully it’s not too late in this blogpost to mention it.<br />
-But “key” gets used in multiple ways e.g. “running <code>gpg --quick-generate-key</code>
-generates a GPG ‘key’”, and in “a GPG ‘key’ consists of at least one key pair”.</p>
-<p>Generally, context is often enough to disambiguate these. But given that GPG is
-confusing enough as it is, it’s worth mentioning the ambiguity.</p>
-<p>Taking a look at the terminology GPG’s manual uses:
-<a href="https://www.gnupg.org/gph/en/manual.html#CONCEPTS" class="uri">https://www.gnupg.org/gph/en/manual.html#CONCEPTS</a></p>
-<blockquote>
-<p>GnuPG uses a somewhat more sophisticated scheme in which a user has a primary
-keypair and then zero or more additional subordinate keypairs. The primary and
-subordinate keypairs are bundled to facilitate key management and the bundle
-can often be considered simply as one keypair.</p>
-</blockquote>
-<p>This excerpt refers to the keys being ‘bundled’, and that the bundle can often
-be considered as a keypair.</p>
-<p>The GnuPG FAQ has an answer which better describes the ambiguity.
-<a href="https://www.gnupg.org/faq/gnupg-faq.html#define_key" class="uri">https://www.gnupg.org/faq/gnupg-faq.html#define_key</a></p>
-<blockquote>
-<p>The word ‘key’ is unfortunately ambiguous. It can either refer to the
-mathematical structures that allow encryption, decryption, signing and
-verification to occur, or to the rather large blobs of data that contain those
-mathematical structures as well as information about the person associated
-with it, additional subkeys, and so forth.</p>
-<p>With respect to the large blobs of data, it is preferable to call them
-‘certificates’, so that the word ‘key’ may be unambiguously recognized as
-meaning just the mathematical structures. Unfortunately, this is a custom that
-seems to be honored mostly in the breach.</p>
-</blockquote>
-<p>In this blogpost, I’ll try to use the word “key” in scare quotes to indicate
-“bundle of key pairs”.</p>
-<h3 id="other-gpg-featurescomplications">Other GPG Features/Complications</h3>
-<p>So while I feel like the idea of “a key pair, with a private part and a public
-part” is understandable, there are other features of GPG “keys” which make
-things more complicated:</p>
-<p>GPG “keys” can be set with an expiry date.<br />
-(This is useful as a way of indicating you’ve still got access to the private
-key).</p>
-<p>GPG “keys” can have multiple “User IDs” (Name + email). Photos can be included
-in the GPG “key”.</p>
-<p>GPG “keys” can be signed. Or more specifically: the keys and UIDs can be signed.<br />
-– I don’t find this intuitive. Sure, Bruce Wayne and Batman are different
-identities, but I don’t see why they’d want to use the same key.</p>
-<p>GPG “keys” can be revoked. That is, an indication that other subkeys or UIDs or signatures
-should not be trusted.<br />
-– I didn’t find this intuitive.</p>
-<p>GPG “keys” can have some level of trust.<br />
-– This also seems unintuitive to me.</p>
-<h3 id="why-subkeys-are-subkeys">Why Subkeys are Subkeys</h3>
-<p>I found <a href="https://serverfault.com/questions/397973/gpg-why-am-i-encrypting-with-subkey-instead-of-primary-key">this StackOverflow answer about why different keys are used for
-encryption vs signing</a>
-illuminating:</p>
-<blockquote>
-<p>If you look into the details of the math of public-key encryption, you will
-discover that signing and decrypting are actually identical operations. Thus
-in a naïve implementation it is possible to trick somebody into decrypting a
-message by asking them to sign it.</p>
-</blockquote>
-<p>i.e. it would be bad a idea to use the same (sub)key for both signing and
-encryption. So, GPG uses a separate subkey for at least encryption.</p>
-<p>This answer also explains what the <code>[SC]</code> and <code>[E]</code> refer to:</p>
-<blockquote>
-<p>E = encrypt/decrypt (decrypt a message you received encrypted for you to read)<br />
-S = sign (sign data. For example a file or to send signed e-mail)<br />
-C = certify (sign another key, establishing a trust-relation)<br />
-A = authentication (log in to SSH with a PGP key; this is relatively new usage)</p>
-</blockquote>
-<p>The <a href="https://en.wikipedia.org/wiki/RSA_(cryptosystem)">Wikipedia page about RSA</a>
-gives an example of using RSA keys, which is useful for understanding “signing
-and decrypting are identical operations”.</p>
-<p><a href="https://www.gnupg.org/gph/en/manual.html#AEN267">The GPG User Guide (Section “Key Management”, subsection “Key
-integrity”)</a> sort of does
-explain the “master” and “subordinate” part:</p>
-<blockquote>
-<p>Using digital signatures is a solution to this problem. When data is signed by
-a private key, the corresponding public key is bound to the signed data. In
-other words, only the corresponding public key can be used to verify the
-signature and ensure that the data has not been modified. A public key can be
-protected from tampering by using its corresponding private master key to sign
-the public key components and user IDs, thus binding the components to the
-public master key. Signing public key components with the corresponding
-private master signing key is called self-signing, and a public key that has
-self-signed user IDs bound to it is called a certificate.</p>
-</blockquote>
-<p>The ‘self-signing’ of sub-keys by the master key is a detail which wasn’t clear to me.</p>
-<p>“Subordinate” is a surprising word here.<br />
-Even the <em>absolutely excellent</em> post <a href="https://davesteele.github.io/gpg/2014/09/20/anatomy-of-a-gpg-key/">“anatomy of a gpg
-key”</a> expands
-“subkey” to “sub-component of another key”, not “subordinate key”.</p>
-<p>I further feel vindication in that the website <a href="https://gpg.wtf/" class="uri">https://gpg.wtf/</a> also discusses
-‘what a subkey is’ in its “things that are confusing about gpg”.</p>
-<p>The “master key signs the subkeys” can be seen by running a command like:</p>
-<pre><code>gpg --check-signatures 0x3229F4BB09CC8A22</code></pre>
-<p>which outputs something like:</p>
-<style>
-span.key0 {
-  color: #2072B8;
-}
-span.key1 {
-  color: #7FBA42;
-}
-</style>
-<pre>
-<b>pub</b>   rsa4096/<span class="key0">0x3229F4BB09CC8A22</span> 2020-10-05 [SC] [expires: 2022-08-01]
-      Key fingerprint = <span class="key0">D946 3A85 F093 811B 887D  E4B0 3229 F4BB 09CC 8A22</span>
-      Keygrip = <span class="key0">480A928A7AA17A693FDF4F4E9DEAEBEE1B778FB7</span>
-<b>uid</b>                   [ultimate] Richard Goulter (NixOS Desktop) <richard.goulter@gmail.com>
-sig!3        <span class="key0">0x3229F4BB09CC8A22</span> 2022-05-03  Richard Goulter (NixOS Desktop) <richard.goulter@gmail.com>
-<b>sub</b>   rsa4096/<span class="key1">0x15BAE7FB6F3DA787</span> 2020-10-05 [E] [expires: 2022-08-01]
-      Keygrip = <span class="key1">A996CF5366A2FFCA11EE958FBA3AC4BDFDB6AC76</span>
-sig!         <span class="key0">0x3229F4BB09CC8A22</span> 2022-05-03  Richard Goulter (NixOS Desktop) <richard.goulter@gmail.com>
-
-gpg: 2 good signatures
-</pre>
-<p>i.e. The GPG “key” has:</p>
-<ul>
-<li><p>the public master key,</p></li>
-<li><p>a UID which is signed with the <code>[SC]</code> key,</p></li>
-<li><p>a subordiate key, which is intended for <code>[E]</code> usage, as signed with the <code>[SC]</code> key.</p></li>
-</ul>
-<h3 id="illustrating-the-rote-gpg-operations">Illustrating the Rote GPG Operations</h3>
-<p>Going back over the rote commands again, now with a diagrams to illustrate
-subkeys at work:</p>
-<p>e.g. key generation:</p>
-<div style="text-align: center;">
-<p><img src="https://raw.githubusercontent.com/rgoulter/rgoulter.github.com/master/images/gpg/sign_document.png"  /></p>
-</div>
-<p>could be done by invoking a command like:</p>
-<pre><code>gpg --quick-generate-key &quot;Richard Goulter (NixOS Desktop) &lt;richard.goulter@rgoulter.com&gt;&quot;</code></pre>
-<p>e.g. exporting a key, to copy the public part to GitHub or whatever:</p>
-<div style="text-align: center;">
-<p><img src="https://raw.githubusercontent.com/rgoulter/rgoulter.github.com/master/images/gpg/gpg_export_key.png"  /></p>
-</div>
-<p>could be done by invoking a command like:</p>
-<pre><code>gpg --export --armor &quot;Richard Goulter (NixOS Desktop)&quot;</code></pre>
-<p>e.g. encrypting/decrypting a message:</p>
-<div style="text-align: center;">
-<p><img src="https://raw.githubusercontent.com/rgoulter/rgoulter.github.com/master/images/gpg/gpg_encrypt_document.png"  />
-<img src="https://raw.githubusercontent.com/rgoulter/rgoulter.github.com/master/images/gpg/gpg_decrypt_document.png"  /></p>
-</div>
-<p>could be done by invoking a command like:</p>
-<pre><code>gpg --encrypt --recipient &quot;My Colleague&quot; document.txt</code></pre>
-<p>and the recipient could decrypt it with:</p>
-<pre><code>gpg --decrypt document.txt.gpg</code></pre>
-<p>e.g. signing:</p>
-<div style="text-align: center;">
-<p><img src="https://raw.githubusercontent.com/rgoulter/rgoulter.github.com/master/images/gpg/gpg_sign_document.png"  />
-<img src="https://raw.githubusercontent.com/rgoulter/rgoulter.github.com/master/images/gpg/gpg_verify_signature.png"  /></p>
-</div>
-<p>could be done by invoking a command like:</p>
-<pre><code>gpg --clearsign file.txt</code></pre>
-<p>or</p>
-<pre><code>gpg --detach-sign file.txt</code></pre>
-<p>and the signature could be verified with a command like:</p>
-<pre><code>gpg --verify file.txt.asc</code></pre>
-<p>or</p>
-<pre><code>gpg --verify file.txt.sig</code></pre>
-<h3 id="gpg-for-ssh">GPG for SSH</h3>
-<p>Again, coming from the mindset of “SSH keys for pushing to <code>git</code> repositories,
-<code>gpg</code> for signing stuff”, hearing “GPG ‘keys’ can be used for SSH too” sounds
-like wizardry.</p>
-<p>This is also where “keygrip” comes into use. As <a href="https://blog.djoproject.net/2020/05/03/main-differences-between-a-gnupg-fingerprint-a-ssh-fingerprint-and-a-keygrip/">this blogpost discussing GPG
-fingerprint vs SSH key fingerprint vs GPG
-keygrip</a>
-explains, the keygrip is a way of identifying the key regardless of
-protocol/usage.</p>
-<p>Now that I have a better understanding of subkeys,
-it seems the main points for “using GPG for SSH” involves two things to understand:</p>
-<ul>
-<li><p>Using a suitably configured <code>gpg-agent</code> instead of <code>ssh-agent</code>, by pointing
-the <code>SSH_AUTH_SOCK</code> and <code>SSH_AGENT_PID</code> to GPG.</p></li>
-<li><p>Having a subkey with <code>[A]</code> capability.</p></li>
-</ul>
-<h3 id="visualisation-of-the-offline-master-key-setup">Visualisation of the Offline Master Key Setup</h3>
-<p>With the above in mind, a summary of the result of these tutorials for setting
-up master keys could be visualised as follows:</p>
-<div style="text-align: center;">
-<p><img src="https://raw.githubusercontent.com/rgoulter/rgoulter.github.com/master/images/gpg/gpg_offline_master_key.png"  /></p>
-</div>
-<p>Which seems less complex than all the confusion I had over it made it out to be.</p>
-<p>As the Debian wiki article pages discuss, because the private master key is used
-to self-sign the subkeys in the GPG “key”, it can then be used to revoke the
-other subkeys.</p>
-<h3 id="yubikey-as-a-gpg-smart-card">Yubikey as a GPG Smart Card</h3>
-<p>Yubikeys can then allow a nicer User Experience for using
-GPG keys. e.g. the Yubikey supports 3 slots for private keys: for signing, encryption, or authentication.</p>
-<div style="text-align: center;">
-<p><img src="https://raw.githubusercontent.com/rgoulter/rgoulter.github.com/master/images/gpg/gpg_smart_card_slots.png"  /></p>
-</div>
-<p>e.g. <a href="https://developers.yubico.com/PGP/PGP_Walk-Through.html">Yubico’s PGP walkthrough</a>.</p>]]></summary>
-</entry>
-<entry>
-    <title>EPA in Emacs is a Neat UX on top of GPG</title>
-    <link href="http://www.rgoulter.com/blog//posts/programming/2022-06-07-epa-in-emacs-is-a-neat-ux-on-top-of-gpg.html" />
-    <id>http://www.rgoulter.com/blog//posts/programming/2022-06-07-epa-in-emacs-is-a-neat-ux-on-top-of-gpg.html</id>
-    <published>2022-06-07T00:00:00Z</published>
-    <updated>2022-06-07T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<p>GPG is notorious for having an archane interface
-which is easy to misuse.</p>
-<p>As a developer, the most I’ve used it for has been to
-sign git commits.</p>
-<p>Emacs supports a workflow which uses GPG to automatically
-decrypt the file when reading it, and automatically
-encrypt the file when saving it.</p>
-<p>With the Doom Emacs distribution of Emacs,
-if the user’s <code>config.el</code> sets <code>user-full-name</code> or <code>user-mail-address</code>,
-and the GnuPG keyring on the computer has a PGP key pair with this
-as a user ID, then this works seamlessly. (Well, subject to things
-like pinentry and GPG agents and all).</p>
-<p>Even that sounds complicated; but you probably will have those things set
-if you’re using Doom Emacs; and probably do have GPG keys with your email/name
-if you’ve used GPG for anything.</p>
-<p>Since the acronyms are confusing:</p>
-<ul>
-<li><p>PGP = Pretty Good Privacy. OpenPGP is an open standard for signing/encrypting things.</p></li>
-<li><p>GPG = GnuPG = Gnu Privacy Guard. Implements OpenPGP.</p></li>
-<li><p>EPG = EasyPG. An Emacs library for GnuPG.</p></li>
-<li><p>EPA = EasyPG Assistant. The Emacs user interface to GnuPG that’s part of the EPG package.</p></li>
-</ul>
-<p>Some notes:</p>
-<p>Doom Emacs achieves this in its <code>modules/config/default/config.el</code>:</p>
-<pre class="elisp"><code>(after! epa
-  ;; With GPG 2.1+, this forces gpg-agent to use the Emacs minibuffer to prompt
-  ;; for the key passphrase.
-  (set &#39;epg-pinentry-mode &#39;loopback)
-  ;; Default to the first enabled and non-expired key in your keyring.
-  (setq-default
-   epa-file-encrypt-to
-   (or (default-value &#39;epa-file-encrypt-to)
-       (unless (string-empty-p user-full-name)
-         (when-let (context (ignore-errors (epg-make-context)))
-           (cl-loop for key in (epg-list-keys context user-full-name &#39;public)
-                    for subkey = (car (epg-key-sub-key-list key))
-                    if (not (memq &#39;disabled (epg-sub-key-capability subkey)))
-                    if (&lt; (or (epg-sub-key-expiration-time subkey) 0)
-                          (time-to-seconds))
-                    collect (epg-sub-key-fingerprint subkey))))
-       user-mail-address))
-   ;; And suppress prompts if epa-file-encrypt-to has a default value (without
-   ;; overwriting file-local values).
-  (defadvice! +default--dont-prompt-for-keys-a (&amp;rest _)
-    :before #&#39;epa-file-write-region
-    (unless (local-variable-p &#39;epa-file-encrypt-to)
-      (setq-local epa-file-encrypt-to (default-value &#39;epa-file-encrypt-to)))))</code></pre>
-<p>Since it wasn’t obvious to me: the <code>epa-file-encrypt-to</code> is used to determine
-which PGP keys in the keyring to encrypt the file to.<br />
-It’s sortof similar to the <code>--recipient</code> flag when using <code>gpg --encrypt</code>.
-Some additional functionality EPA adds is that if there are multiple public
-keys which match, EPA will encrypt the file for all of these; whereas <code>gpg --encrypt</code>
-will only encrypt for the most recent encryption key which matches.</p>
-<p>When opening an encrypted file,
-<code>epa-file-encrypt-to</code> will be filled with the keys which were used to encrypt
-the file. You can change the value of this variable to change which keys
-are used to encrypt the file.</p>
-<p>Also, since it wasn’t obvious to me: a file encrypted with <code>gpg</code> for multiple
-keys is like a concatenation of the file encrypted for each key. So a file
-can obviously be encrypted for multiple keys; and that encrypted file can
-be decrypted with any of the keys it was encrypted with.</p>
-<p>In Emacs, you can visit the <code>info</code> node for EPA’s encrypting/decrypting by
-executing the elisp:</p>
-<pre class="elisp"><code>(info &quot;(epa) Encrypting/decrypting gpg files&quot;)</code></pre>
-<p>(assuming <code>epa.info</code> has been installed to the right place).</p>
-<p>Or, going to the “EasyPG Assistant” manual, “Commands”, “Encrypting/decrypting gpg files” menu items.</p>
-<p>Or, in the online manual: <a href="https://www.gnu.org/software/emacs/manual/html_node/epa/Encrypting_002fdecrypting-gpg-files.html" class="uri">https://www.gnu.org/software/emacs/manual/html_node/epa/Encrypting_002fdecrypting-gpg-files.html</a>.</p>]]></summary>
-</entry>
-<entry>
-    <title>Tool Recommendation: Helix Editor</title>
-    <link href="http://www.rgoulter.com/blog//posts/programming/2022-05-19-tool-recommendation-helix-editor.html" />
-    <id>http://www.rgoulter.com/blog//posts/programming/2022-05-19-tool-recommendation-helix-editor.html</id>
-    <published>2022-05-19T00:00:00Z</published>
-    <updated>2022-05-19T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<p>The <a href="https://helix-editor.com/">Helix editor</a> is a fancy new text editor which
-looks to be a compelling competitor to vim for modern developer environments.</p>
-<p>Currently, my preferred editing environment is Emacs, making use of the Doom
-Emacs distribution.</p>
-<p>Before that, I was using vim (and its cousin, neovim). And I still use
-neovim for editing files from the command line.</p>
-<p>But, I’d heard of <a href="http://kakoune.org/">kakoune</a>. Kakoune takes the “verb +
-text object” text navigation and manipulation of Vim, and flips it into a more
-user friendly direction: Kakoune opts for “text object + verb”.</p>
-<p>This seems like it would soften the rough edges of the finer parts of vim. It’s
-often easier to make use of vim’s visual mode, and then copy/delete/replace that
-selection.</p>
-<p>So. The <a href="https://helix-editor.com/">Helix editor</a>, another text editor, is
-interesting for a few reasons:</p>
-<ol type="1">
-<li><p>It takes the same user-friendly “text object + verb” approach that kakoune
-used. (This also allows for powerful multi-cursor text manipulation).</p></li>
-<li><p>It leverages <a href="https://microsoft.github.io/language-server-protocol/">language server protocol
-(LSP)</a>, which enables
-editor integration with language compilers, allowing for code completion or
-quickly bringing up documentation.</p></li>
-<li><p>It leverages <a href="https://tree-sitter.github.io/tree-sitter/">tree sitter</a>. This
-allows different editors to share parsers for different languages, for syntax
-highlighting, or perhaps navigation of text objects.</p></li>
-</ol>
-<p>So. It’s got a few fancy features, each are worth being excited about.</p>
-<p>So I’ve given it a try.</p>
-<p>Overall, as a vim user, trying out Helix has the following loop:</p>
-<ol type="1">
-<li><p>Try and use Helix as if it’s vim (but swapping text object and action).</p></li>
-<li><p>Be surprised when something doesn’t work, because Helix isn’t vim,
-so look up the equivalent action, and remember to use the Helix
-keybinding.</p></li>
-</ol>
-<p>I’d say the ‘trouble’ here is that with Vim, there’s a long tail of keybindings
-which you’ll use infrequently.</p>
-<p>e.g. it took me a while to notice that Helix doesn’t open directories in
-a buffer. (Whereas, vim has netrw, and Emacs has dired).</p>
-<p>Overall, Helix’s keybindings seem consistent and well thought out.</p>
-<p>e.g. my current “rosetta stone” is:</p>
-<table>
-<colgroup>
-<col style="width: 11%" />
-<col style="width: 13%" />
-<col style="width: 13%" />
-<col style="width: 9%" />
-<col style="width: 51%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>vim mode</th>
-<th>vim</th>
-<th>helix mode</th>
-<th>helix</th>
-<th>note</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td></td>
-<td>0</td>
-<td></td>
-<td>gh</td>
-<td></td>
-</tr>
-<tr class="even">
-<td></td>
-<td>^</td>
-<td></td>
-<td>gs</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td>$</td>
-<td></td>
-<td>gl</td>
-<td></td>
-</tr>
-<tr class="even">
-<td></td>
-<td>gq</td>
-<td></td>
-<td>=</td>
-<td>format. TBI in helix. Vim’s = is ‘indent’.</td>
-</tr>
-<tr class="odd">
-<td></td>
-<td>C-v i</td>
-<td></td>
-<td>C i</td>
-<td>Or Alt-s to split selection on newline.</td>
-</tr>
-<tr class="even">
-<td></td>
-<td>C</td>
-<td></td>
-<td>v gl c</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td>x</td>
-<td></td>
-<td>;d</td>
-<td></td>
-</tr>
-<tr class="even">
-<td></td>
-<td>V</td>
-<td></td>
-<td>X</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td>*</td>
-<td></td>
-<td>*n</td>
-<td></td>
-</tr>
-<tr class="even">
-<td></td>
-<td>G</td>
-<td></td>
-<td>ge</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td>:bprev, [b</td>
-<td></td>
-<td>gp</td>
-<td></td>
-</tr>
-<tr class="even">
-<td></td>
-<td>:bnext, ]b</td>
-<td></td>
-<td>gn</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td>`.</td>
-<td></td>
-<td>g.</td>
-<td></td>
-</tr>
-<tr class="even">
-<td></td>
-<td>H</td>
-<td></td>
-<td>gt</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td>M</td>
-<td></td>
-<td>gc</td>
-<td></td>
-</tr>
-<tr class="even">
-<td></td>
-<td>L</td>
-<td></td>
-<td>gb</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td>C-r</td>
-<td></td>
-<td>U</td>
-<td>redo</td>
-</tr>
-<tr class="even">
-<td></td>
-<td></td>
-<td></td>
-<td>ga</td>
-<td>last accessed file</td>
-</tr>
-<tr class="odd">
-<td></td>
-<td></td>
-<td></td>
-<td><SPC>R</td>
-<td>replace selection with clipboard</td>
-</tr>
-<tr class="even">
-<td></td>
-<td>%</td>
-<td></td>
-<td>mm</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td>ggVG</td>
-<td></td>
-<td>%</td>
-<td>select entire file</td>
-</tr>
-<tr class="even">
-<td></td>
-<td>,</td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td>;</td>
-<td></td>
-<td>Alt-.</td>
-<td></td>
-</tr>
-<tr class="even">
-<td>visual</td>
-<td>o</td>
-<td></td>
-<td>Alt-;</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td>(/)</td>
-<td></td>
-<td></td>
-<td>left up to tree-sitter?</td>
-</tr>
-<tr class="even">
-<td></td>
-<td>{/}</td>
-<td></td>
-<td></td>
-<td>left up to tree-sitter?</td>
-</tr>
-<tr class="odd">
-<td></td>
-<td>gc</td>
-<td></td>
-<td>Ctrl-c</td>
-<td>Evil comment</td>
-</tr>
-<tr class="even">
-<td></td>
-<td>~</td>
-<td></td>
-<td>~</td>
-<td>(same in both) toggle case</td>
-</tr>
-<tr class="odd">
-<td></td>
-<td>gu</td>
-<td></td>
-<td><code>| to lowerlase                               | |          | gU         |            | Alt+</code></td>
-<td>to uppercase</td>
-</tr>
-<tr class="even">
-<td></td>
-<td>vi”</td>
-<td></td>
-<td>vmi”</td>
-<td>prefix sequence with <code>m</code> for things.</td>
-</tr>
-</tbody>
-</table>
-<p>Overall, I like what I’ve tried of Helix. It feels very polished out-of-the-box.</p>]]></summary>
 </entry>
 
 </feed>
