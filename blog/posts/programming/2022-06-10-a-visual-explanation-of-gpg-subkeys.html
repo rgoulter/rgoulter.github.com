@@ -375,19 +375,20 @@ gpg: 2 good signatures
 <h3 id="illustrating-the-rote-gpg-operations">Illustrating the Rote GPG Operations</h3>
 <p>Going back over the rote commands again, now with a diagrams to illustrate
 subkeys at work:</p>
-<p>e.g. key generation:</p>
+<h5 id="key-generation">Key Generation</h5>
 <div style="text-align: center;">
-<p><img src="https://raw.githubusercontent.com/rgoulter/rgoulter.github.com/master/images/gpg/sign_document.png" /></p>
+<p><img src="https://raw.githubusercontent.com/rgoulter/rgoulter.github.com/master/images/gpg/gpg_key_generation.png" /></p>
 </div>
 <p>could be done by invoking a command like:</p>
 <pre><code>gpg --quick-generate-key &quot;Richard Goulter (NixOS Desktop) &lt;richard.goulter@rgoulter.com&gt;&quot;</code></pre>
-<p>e.g. exporting a key, to copy the public part to GitHub or whatever:</p>
+<h5 id="export-public-key">Export Public Key</h5>
+<p>Exporting the key to copy the public part to GitHub or whatever:</p>
 <div style="text-align: center;">
 <p><img src="https://raw.githubusercontent.com/rgoulter/rgoulter.github.com/master/images/gpg/gpg_export_key.png" /></p>
 </div>
 <p>could be done by invoking a command like:</p>
 <pre><code>gpg --export --armor &quot;Richard Goulter (NixOS Desktop)&quot;</code></pre>
-<p>e.g. encrypting/decrypting a message:</p>
+<h5 id="encryptingdecrypting-a-message">Encrypting/Decrypting a Message</h5>
 <div style="text-align: center;">
 <p><img src="https://raw.githubusercontent.com/rgoulter/rgoulter.github.com/master/images/gpg/gpg_encrypt_document.png" />
 <img src="https://raw.githubusercontent.com/rgoulter/rgoulter.github.com/master/images/gpg/gpg_decrypt_document.png" /></p>
@@ -396,7 +397,7 @@ subkeys at work:</p>
 <pre><code>gpg --encrypt --recipient &quot;My Colleague&quot; document.txt</code></pre>
 <p>and the recipient could decrypt it with:</p>
 <pre><code>gpg --decrypt document.txt.gpg</code></pre>
-<p>e.g. signing:</p>
+<h5 id="signing">Signing</h5>
 <div style="text-align: center;">
 <p><img src="https://raw.githubusercontent.com/rgoulter/rgoulter.github.com/master/images/gpg/gpg_sign_document.png" />
 <img src="https://raw.githubusercontent.com/rgoulter/rgoulter.github.com/master/images/gpg/gpg_verify_signature.png" /></p>
