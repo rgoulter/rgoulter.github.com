@@ -297,8 +297,9 @@ other resources systems in the game), and dealing with the two kinds of uranium 
 <p>My goal was to clear some of the achievements which deal with the late game.
 I hadn’t achieved “research all technology”, the top “produce X amount of iron”,
 the last “produce 20M green circuits” achievements; and a post-game “have 100 robot followers” achievement.</p>
-<p>I find the game to be hyper-engaging up until researching blue science; at which point there are <em>so many</em> exciting things to do, that I have to slow down
-to focus task by task on what to achieve.</p>
+<p>I find the game to be hyper-engaging up until researching blue science; at which
+point there are <em>so many</em> exciting things to do, that I have to slow down to
+focus task by task on what to achieve.</p>
 <p>In particular, ‘blue science’ is when the construction &amp; logistic robots become available.<br />
 And so while Factorio is overall a game about designing systems..
 the construction robots are the game mechanic where this really takes off.<br />
@@ -309,35 +310,53 @@ But, I find the game shifts gears when they’re unlocked.</p>
 <p>Previously, I’d always puttered along in the last mile when reaching the game’s
 end objective of launching a rocket. But, since I wanted some achievements which
 require multiple rocket launches, I was able to continue developing my factory.</p>
-<p>This meant I was able to try out more of the late-game combat stuff. (Even though the game was peaceful, I still did have to clear out enemy bases which
+<p>This meant I was able to try out more of the late-game combat stuff. (Even
+though the game was peaceful, I still did have to clear out enemy bases which
 got in my way).</p>
 <p>The robot followers are very powerful, and kinda allow just waltzing through
 an enemy base.</p>
 <p>The <a href="https://wiki.factorio.com/Spidertron">spidertron</a> was a lot of fun to use.</p>
-<p>The post-game technologies increased the range and firing speed of the rail artillery; which became my favourite tool for clearing out big areas of land. – I’d not used laser turrets before. (My main non-peaceful playthrough had been for getting a “no lasers” and “no solar power” achievement). The laser turrets were very convenient for defending the rail artillery! (The enemy would rush the site where the artillery fired from).</p>
-<p>The main ‘insight’ I gained was from using the trains / railway network. Rather, because I’d never used the trains for transporting resources, I’d
-always just used the standard transport belts.. with trains, trains allow
-‘decoupling’ resource movement.</p>
-<p>That is: with trains, you have a station where you load some resource, and a station where you unload that resource. With Factorio, stations can be named by their role, and a train can be routed to follow a route like “refuel -&gt; load resource X -&gt; unload resource X”. The train station’s name is an indirection; it doesn’t concretely matter where the station is.</p>
-<p>Whereas, the with the transport belts, the belts must be explicitly placed on the map. There’s no indirection, no flexibility. If some resource is depleted, you can place more belts; but that’s all you can do.</p>
-<p>Logistic bots similarly can automatically move resources from one location to another, but with a more limited throughput and a more limited distance compared to trains.</p>
-<p>Rather. I found it neat to be able to consider “load input, move it, unload” as an abstraction. – Although, a lot of Factorio is dealing with the details of the implementation.</p>
+<p>The post-game technologies increased the range and firing speed of the rail
+artillery; which became my favourite tool for clearing out big areas of land. –
+I’d not used laser turrets before. (My main non-peaceful playthrough had been
+for getting a “no lasers” and “no solar power” achievement). The laser turrets
+were very convenient for defending the rail artillery! (The enemy would rush the
+site where the artillery fired from).</p>
+<p>The main ‘insight’ I gained was from using the trains / railway network. Rather,
+because I’d never used the trains for transporting resources, I’d always just
+used the standard transport belts.. with trains, trains allow ‘decoupling’
+resource movement.</p>
+<p>That is: with trains, you have a station where you load some resource, and a
+station where you unload that resource. With Factorio, stations can be named by
+their role, and a train can be routed to follow a route like “refuel -&gt; load
+resource X -&gt; unload resource X”. The train station’s name is an indirection; it
+doesn’t concretely matter where the station is.</p>
+<p>Whereas, the with the transport belts, the belts must be explicitly placed on
+the map. There’s no indirection, no flexibility. If some resource is depleted,
+you can place more belts; but that’s all you can do.</p>
+<p>Logistic bots similarly can automatically move resources from one location to
+another, but with a more limited throughput and a more limited distance compared
+to trains.</p>
+<p>Rather. I found it neat to be able to consider “load input, move it, unload” as
+an abstraction. – Although, a lot of Factorio is dealing with the details of
+the implementation.</p>
 <p>I saw on YouTube there are speedruns of the game in under two hours; speedruns on random seeds in under three; speedruns of getting 100% achievements in under four or five hours!<br />
 These are all impressive.</p>
-<p>In speedruns, the player will also bootstrap the factory with techniques which don’t scale well.
-An assembly machine will be placed &amp; will require the player to manually insert the
-input ingredients. – This doesn’t ‘scale’ since it’s infeasible for the player to continue
-doing this for the whole game; but for bootstrapping the factory, it’s quicker than setting
-things up ‘the right way’.</p>
+<p>In speedruns, the player will also bootstrap the factory with techniques which
+don’t scale well. An assembly machine will be placed &amp; will require the player
+to manually insert the input ingredients. – This doesn’t ‘scale’ since it’s
+infeasible for the player to continue doing this for the whole game; but for
+bootstrapping the factory, it’s quicker than setting things up ‘the right way’.</p>
 <p>I’ve also heard the term “city blocks” in the community.</p>
 <p>I got the achievement for producing 20M green circuits.</p>
-<p>By that time, my factory was producing about 60 of each science per minute.
-The “megafactories” that some enthusiasts go for aim for 1000 of each science per minute.</p>
-<p>Unfortunately, I hadn’t really scaled up the green circuit production.
-So, getting the achievement was more from “playing the post-game for quite
-some time” than from “you have a factory which is producing many green circuits”.</p>
-<p>The remaining achievements I haven’t yet unlocked are related to completing
-the game quickly.</p>]]></summary>
+<p>By that time, my factory was producing about 60 of each science per minute. The
+“megafactories” that some enthusiasts go for aim for 1000 of each science per
+minute.</p>
+<p>Unfortunately, I hadn’t really scaled up the green circuit production. So,
+getting the achievement was more from “playing the post-game for quite some
+time” than from “you have a factory which is producing many green circuits”.</p>
+<p>The remaining achievements I haven’t yet unlocked are related to completing the
+game quickly.</p>]]></summary>
 </entry>
 <entry>
     <title>Factorio on the Switch Still Scratches the Itch</title>
