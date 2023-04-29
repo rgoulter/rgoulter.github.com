@@ -152,7 +152,7 @@ key</a>, it sounds really fancy;
 but I’m left curious to get an intuition for what’s going on.</p>
 <p>I hope to use this blogpost illustrate enough of the details to build an
 intuition.</p>
-<h3 id="public-key-cryptography">Public Key Cryptography</h3>
+<h2 id="public-key-cryptography">Public Key Cryptography</h2>
 <p>The <a href="https://en.wikipedia.org/wiki/Public-key_cryptography">Wikipedia page on Public Key cryptography</a>
 has some nice diagrams.</p>
 <p>This itself should still be relatively straightforward, comparing with how SSH
@@ -194,7 +194,7 @@ which matches the public keys will be granted access.</li>
 <li><p>Everyone has your public key, so everyone else can verify you signed it.</p></li>
 </ul></li>
 </ul>
-<h3 id="the-rote-gpg-commands">The Rote GPG Commands</h3>
+<h2 id="the-rote-gpg-commands">The Rote GPG Commands</h2>
 <p>So far, we can just label everything above with “GPG” and it still makes sense:</p>
 <p>e.g. Key generation could be done by invoking a command like:</p>
 <pre><code>gpg --quick-generate-key &quot;Richard Goulter (NixOS Desktop) &lt;richard.goulter@rgoulter.com&gt;&quot;</code></pre>
@@ -212,7 +212,7 @@ which matches the public keys will be granted access.</li>
 <pre><code>gpg --verify file.txt.asc</code></pre>
 <p>or</p>
 <pre><code>gpg --verify file.txt.sig</code></pre>
-<h3 id="what-starts-to-confuse-me-subkeys">What Starts to Confuse Me: Subkeys</h3>
+<h2 id="what-starts-to-confuse-me-subkeys">What Starts to Confuse Me: Subkeys</h2>
 <p>Okay, but having created a key, then list the keys:</p>
 <pre><code>gpg --list-keys</code></pre>
 <p>outputs something like:</p>
@@ -252,7 +252,7 @@ sub   rsa4096/15BAE7FB6F3DA787 2020-10-05 [E] [expires: 2022-08-01]
 <p>Long Id?</p>
 <p>Fingerprint??</p>
 <p>Keygrip???</p>
-<h3 id="a-key-consisting-of-multiple-keys">A Key Consisting of Multiple Keys</h3>
+<h2 id="a-key-consisting-of-multiple-keys">A Key Consisting of Multiple Keys</h2>
 <p>Uh. Hopefully it’s not too late in this blogpost to mention it.<br />
 But “key” gets used in multiple ways e.g. “running <code>gpg --quick-generate-key</code>
 generates a GPG ‘key’”, and in “a GPG ‘key’ consists of at least one key pair”.</p>
@@ -283,7 +283,7 @@ seems to be honored mostly in the breach.</p>
 </blockquote>
 <p>In this blogpost, I’ll try to use the word “key” in scare quotes to indicate
 “bundle of key pairs”.</p>
-<h3 id="other-gpg-featurescomplications">Other GPG Features/Complications</h3>
+<h2 id="other-gpg-featurescomplications">Other GPG Features/Complications</h2>
 <p>So while I feel like the idea of “a key pair, with a private part and a public
 part” is understandable, there are other features of GPG “keys” which make
 things more complicated:</p>
@@ -300,7 +300,7 @@ should not be trusted.<br />
 – I didn’t find this intuitive.</p>
 <p>GPG “keys” can have some level of trust.<br />
 – This also seems unintuitive to me.</p>
-<h3 id="why-subkeys-are-subkeys">Why Subkeys are Subkeys</h3>
+<h2 id="why-subkeys-are-subkeys">Why Subkeys are Subkeys</h2>
 <p>I found <a href="https://serverfault.com/questions/397973/gpg-why-am-i-encrypting-with-subkey-instead-of-primary-key">this StackOverflow answer about why different keys are used for
 encryption vs signing</a>
 illuminating:</p>
@@ -372,23 +372,23 @@ gpg: 2 good signatures
 <li><p>a UID which is signed with the <code>[SC]</code> key,</p></li>
 <li><p>a subordiate key, which is intended for <code>[E]</code> usage, as signed with the <code>[SC]</code> key.</p></li>
 </ul>
-<h3 id="illustrating-the-rote-gpg-operations">Illustrating the Rote GPG Operations</h3>
+<h2 id="illustrating-the-rote-gpg-operations">Illustrating the Rote GPG Operations</h2>
 <p>Going back over the rote commands again, now with a diagrams to illustrate
 subkeys at work:</p>
-<h5 id="key-generation">Key Generation</h5>
+<h3 id="key-generation">Key Generation</h3>
 <div style="text-align: center;">
 <p><img src="https://raw.githubusercontent.com/rgoulter/rgoulter.github.com/master/images/gpg/gpg_key_generation.png" /></p>
 </div>
 <p>could be done by invoking a command like:</p>
 <pre><code>gpg --quick-generate-key &quot;Richard Goulter (NixOS Desktop) &lt;richard.goulter@rgoulter.com&gt;&quot;</code></pre>
-<h5 id="export-public-key">Export Public Key</h5>
+<h3 id="export-public-key">Export Public Key</h3>
 <p>Exporting the key to copy the public part to GitHub or whatever:</p>
 <div style="text-align: center;">
 <p><img src="https://raw.githubusercontent.com/rgoulter/rgoulter.github.com/master/images/gpg/gpg_export_key.png" /></p>
 </div>
 <p>could be done by invoking a command like:</p>
 <pre><code>gpg --export --armor &quot;Richard Goulter (NixOS Desktop)&quot;</code></pre>
-<h5 id="encryptingdecrypting-a-message">Encrypting/Decrypting a Message</h5>
+<h3 id="encryptingdecrypting-a-message">Encrypting/Decrypting a Message</h3>
 <div style="text-align: center;">
 <p><img src="https://raw.githubusercontent.com/rgoulter/rgoulter.github.com/master/images/gpg/gpg_encrypt_document.png" />
 <img src="https://raw.githubusercontent.com/rgoulter/rgoulter.github.com/master/images/gpg/gpg_decrypt_document.png" /></p>
@@ -397,7 +397,7 @@ subkeys at work:</p>
 <pre><code>gpg --encrypt --recipient &quot;My Colleague&quot; document.txt</code></pre>
 <p>and the recipient could decrypt it with:</p>
 <pre><code>gpg --decrypt document.txt.gpg</code></pre>
-<h5 id="signing">Signing</h5>
+<h3 id="signing">Signing</h3>
 <div style="text-align: center;">
 <p><img src="https://raw.githubusercontent.com/rgoulter/rgoulter.github.com/master/images/gpg/gpg_sign_document.png" />
 <img src="https://raw.githubusercontent.com/rgoulter/rgoulter.github.com/master/images/gpg/gpg_verify_signature.png" /></p>
@@ -410,7 +410,7 @@ subkeys at work:</p>
 <pre><code>gpg --verify file.txt.asc</code></pre>
 <p>or</p>
 <pre><code>gpg --verify file.txt.sig</code></pre>
-<h3 id="gpg-for-ssh">GPG for SSH</h3>
+<h2 id="gpg-for-ssh">GPG for SSH</h2>
 <p>Again, coming from the mindset of “SSH keys for pushing to <code>git</code> repositories,
 <code>gpg</code> for signing stuff”, hearing “GPG ‘keys’ can be used for SSH too” sounds
 like wizardry.</p>
@@ -426,7 +426,7 @@ it seems the main points for “using GPG for SSH” involves two things to unde
 the <code>SSH_AUTH_SOCK</code> and <code>SSH_AGENT_PID</code> to GPG.</p></li>
 <li><p>Having a subkey with <code>[A]</code> capability.</p></li>
 </ul>
-<h3 id="visualisation-of-the-offline-master-key-setup">Visualisation of the Offline Master Key Setup</h3>
+<h2 id="visualisation-of-the-offline-master-key-setup">Visualisation of the Offline Master Key Setup</h2>
 <p>With the above in mind, a summary of the result of these tutorials for setting
 up master keys could be visualised as follows:</p>
 <div style="text-align: center;">
@@ -436,7 +436,7 @@ up master keys could be visualised as follows:</p>
 <p>As the Debian wiki article pages discuss, because the private master key is used
 to self-sign the subkeys in the GPG “key”, it can then be used to revoke the
 other subkeys.</p>
-<h3 id="yubikey-as-a-gpg-smart-card">Yubikey as a GPG Smart Card</h3>
+<h2 id="yubikey-as-a-gpg-smart-card">Yubikey as a GPG Smart Card</h2>
 <p>Yubikeys can then allow a nicer User Experience for using
 GPG keys. e.g. the Yubikey supports 3 slots for private keys: for signing, encryption, or authentication.</p>
 <div style="text-align: center;">
