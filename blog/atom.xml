@@ -8,8 +8,269 @@
         <name>Richard Goulter</name>
         <email>richard.goulter+blog@gmail.com</email>
     </author>
-    <updated>2023-03-05T00:00:00Z</updated>
+    <updated>2023-05-14T00:00:00Z</updated>
     <entry>
+    <title>XCOM2 has its Moments of Fun</title>
+    <link href="http://www.rgoulter.com/blog//posts/games/2023-05-14-xcom2-has-its-moments-of-fun.html" />
+    <id>http://www.rgoulter.com/blog//posts/games/2023-05-14-xcom2-has-its-moments-of-fun.html</id>
+    <published>2023-05-14T00:00:00Z</published>
+    <updated>2023-05-14T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<h2 id="xcom-and-civilization-theyre-okay">XCOM and Civilization: They’re Okay</h2>
+<p>I recently picked up the XCOM 2 Collection for the Nintendo Switch. I was lucky to catch it on sale at a discount of 85%.</p>
+<p>I just completed a playthrough of the base game. The collection also includes the expansion “War of the Chosen”, but I didn’t want to dive into too much content at once.</p>
+<p>The Nintendo Switch isn’t <em>quite</em> powerful enough to run the game. (Frequently, with common interactions, the game slows down to a crawl). But, it gets the job done.</p>
+<p>XCOM 2 was released in 2016, and is a sequel to XCOM: Enemy Unknown which was released in 2012.</p>
+<p>I kinda put XCOM and Civilization in the same bucket: They’re from the same publisher. Some people really like them. They’re turn-based games, which involve strategic game over a long game. (Albeit, XCOM’s meat is with turn-based tactics, and Civilization’s turn-based gameplay is strategic).<br />
+They both also kinda have a flavour of unfairness to them. (Civilization was controversial for having cases where a spearman can defeat a tank). They both also take such a long time to play (&amp; tend to have long feedback loops), that I find it hard to really get a deep intuitive understanding of the strategic considerations.</p>
+<h2 id="what-new-in-xcom-2">What New in XCOM 2</h2>
+<p>Recall, the XCOM gameplay involves two phases/modes: a base-building phase where you build specialised buildings &amp; research improvements; and a mission-phase where your soldiers skirmish with alien forces in turn-based tactics gameplay. (The broad game loop, then, is base-building improves your skirmishing capabilities; and your skirmishing earns you resources with which to build up your base).</p>
+<p>At its core, the skirmishing is turn-based tactics in a square grid-based map, where you control a few soldiers who can take cover behind walls (cover is either ‘full’ or ‘half’); each turn involves moving all your units, a unit may move a limited distance, or use its turn to shoot its gun. – Whether your unit successfully hits the target it’s trying to shoot is probabilistic: you’re shown that a unit has a X% chance to hit. (ranging from e.g. 95% for if the target really close, to 10% if the it is really far away).<br />
+One significant mechanic is the ‘overwatch’ ability: instead of shooting their gun, a unit might be put into ‘overwatch’, where they will then shoot at the first target that moves within their range.<br />
+Units have different classes, and different abilities they might use their action points on. (e.g. sniper, medic, wizard).</p>
+<p>XCOM 2 of course added some stuff.</p>
+<p>I think the base-building strategic part is somewhat more dynamic in XCOM 2 than it was in the first game. Your base is like a flying castle/carrier, and it needs to be re-located in order to complete tasks. – In the first game, you started with all the countries in the council and had to minimize losses; whereas in this game, you start with no territories and have to build up your domination. I prefer this constructive approach.</p>
+<p>In terms of the missions:</p>
+<p>One mechanic they added was a ‘stealth’ mechanic at the start of the level.<br />
+On most missions, the level starts out where your units are ‘concealed’ (enemies aren’t in an alert state). This leads to a nice dynamic where you can essentially set up an ambush against an enemy squad, by sneaking your units up close to the enemy, and then shooting the enemy all at once.</p>
+<p>Many of the missions now have a turn limit.<br />
+This was added to discourage turtling. But, it’s a bit obnoxious, and sometimes doesn’t make sense.<br />
+One type of mission where it makes sense is strike missions against a landed UFO: it makes sense that the crew of a landed UFO may not be alerted to an enemy’s presence (and indeed, in this half of the mission, there isn’t a turn limit); and it makes sense that, once alerted, the UFO might try to take off within X turns (or send an alert out within X turns).<br />
+But, for other missions, the turn limit doesn’t seem to make as much sense in tandem with the stealth mechanic. (“Enemies start unalerted; but there’s a time limit” is itself a neat strategical consideration, though; since the more time you take to leverage an advantage from stealth means more effort is required to beat the goal in the turn limit).</p>
+<p>I don’t recall it being possible in the previous XCOM game, but in XCOM 2 many of the enemy units are robots, and these can be ‘hacked’ so you can control the robot for a few turns.</p>
+<h2 id="xcom-is-not-entirely-to-my-taste">XCOM is Not Entirely to My Taste</h2>
+<p>To be honest, I think the intended XCOM playing experience is not to my taste.</p>
+<p>I don’t like the RNG fuckery.</p>
+<p>Largely the probabilistic combat mechanics.. this means that, even if you make reasonable decisions in order to stop the enemy, your actions may still be ineffective. (It doesn’t matter what decisions you make if all of your shots miss). To a lesser extent, it’s also possible that enemies can show up at an inconvenient time (e.g. spotting one enemy in a squad then aggros the whole enemy squad), and so you learn to ‘game’ the mechanics to avoid this (with XCOM rules, you never want to have your final unit move further than your other units).<br />
+– Whenever I felt XCOM was being ‘unfair’, as a casual player I just reloaded an earlier save &amp; avoided making the same mistake. This isn’t a “fun” way to play, but it’s less not-fun than playing an ‘unfair’ game.</p>
+<p>XCOM seems to be about “eh, make what you can with what you’re given”.<br />
+The first tutorial mission does a good job of setting this up, where it gives you only a handful of soldiers, kills one of them and badly wounds the other.</p>
+<p>I know there are some players who can play the game on the hardest difficulty without reloading a save, sure. – But I reckon such people know the rules of the game much more intimately than someone who’s just doing a blind playthrough and doesn’t know the boundaries.</p>
+<h2 id="whats-fun">What’s Fun</h2>
+<p>I did complete one playthrough. Partly for the sake of completing it.</p>
+<p>As much as I generally dislike the game, there were some parts which were quite fun:</p>
+<p>I did like the new stealth mechanic.<br />
+It’s a lot of fun to set up an ambush and completely wipe out an enemy.<br />
+It is possible to screw up, so the stealth mechanic is not a freebie.<br />
+– I felt it was a lot of fun to get all of my units into overwatch mode, and to then break stealth by using a grenade (or some other attack which damaged multiple units). The whole squad firing their weapons at once reminds me of the <a href="https://www.youtube.com/watch?v=iG0i0g7Csc8">overkill scene in Generation Kill</a><br />
+– Maybe it would be overpowered, but I wonder if having a “synchronised shot” system would also work nicely with this mechanic.</p>
+<p>I liked using the sharpshooter (sniper), especially once I was able to upgrade all the unit’s abilities.<br />
+Initially, the sharpshooter’s rifle’s magazine has only 3 rounds. Shooting consumes the sharpshooter’s whole turn, so at least 1 turn out of 4 has to be used to reload.<br />
+It’s possible to upgrade the sharpshooter’s rifle with an upgrade that gives the magazine an extra 3 rounds (to a total of 6).<br />
+This synergises with:<br />
+For one, there’s an ability “kill zone”, which has the unit shoot at anything which moves within an area.<br />
+For another, there’s an ability where the sharpshooter can keep making shots, so long as each shot they take kills an enemy.<br />
+Both of these really encourage effective tactical use of the sharpshooter. The “kill zone” is very powerful to use when setting up the ambush at the start of the level (since enemies will move to cover once the stealth breaks, and thus would trigger the kill zone’s reaction shot).<br />
+The “keep shooting so long as you kill units” is also a very powerful way of dealing with situations where you face a large number of enemies at once; you can get your other squadmates to destroy the cover the enemies are hiding behind (to ensure a better hit), to shred some of the enemy’s armour (so that the marksman is more likely to kill the enemy), or to bring a powerful enemy’s health down just enough.</p>
+<p>There are times when enemy reinforcements will be fast-roped in from an enemy dropship; the location they show up is marked 1 turn before they insert. – This gives you the opportunity to ambush these units; I found that pretty fun too.</p>
+<h2 id="its-enthralling-but-undermined-by-not-being-fun">It’s Enthralling, but Undermined by not being Fun</h2>
+<p>I remember from Zero Punctuation’s review of the previous XCOM game, ZP asks rhetorically “Is it fun? Let me play one more level to check… hours later, I noticed it was 2am. Let’s pencil that in as a ‘yes’”.</p>
+<p>And I agree that the game is enthralling.</p>
+<p>But, I think it’s enthralling in not such a nice way.</p>
+<p>The main driving motivation is “if I just get X, then later Y will not be so bad”.
+(“once I get the laser guns, then combat will be easier”, “once I get more resources, then my base will be more powerful”, etc.).</p>
+<p>Factorio (which I <em>really</em> enjoy playing) also has prominently has “your actions make things easier later” as a driving motivation.<br />
+(Whereas, say, shooter games, or RPGs don’t necessarily).<br />
+For Factorio, building more stuff means that later I’ll be able to build even more stuff. – e.g. In Factorio’s early game, you might notice that you’re not mining enough copper; so you’ll build more copper miners to speed things up. In the late game, you’ll build bots which then allow you to focus on building your base at a higher level.</p>
+<p>But for XCOM?<br />
+For XCOM, the draw of continuing to play feels like “just one more thing, and them I’m safe”.</p>
+<p>It would be an exaggeration to say that XCOM’s gameplay is all about rolling a dice.<br />
+But, I don’t think it’s the same level of exaggeration to say that XCOM wants you to consider what happens when it rolls the dice low, and your shots miss, or you fail to hack the robot, etc.<br />
+– Once you have powerful guns, it’s less of a worry if one soldier misses, since another soldier is likely to hit. Once you have the powerful armour, you don’t have to worry about being OHKO’d by random enemies.</p>
+<p>So, while obviously a game is ‘not fun’ if it’s trivially easy,<br />
+a game is also not fun if it’s unfair.<br />
+– I’d say ‘fun’ is about whether I can make decisions where I can feel responsible for things not going well. And XCOM’s RNG fuckery undermines that, even if the worst stuff is a long tail.</p>
+<p>With XCOM, in order for me to feel that something is my fault, I have to have fucked up pretty badly.</p>
+<p>I don’t feel like I’ve accomplished much by winning, I feel <em>relieved</em> I didn’t roll low RNG.</p>
+<h2 id="and-xcom2-has-too-many-not-fun-moments">And XCOM2 Has Too Many Not-Fun Moments</h2>
+<p>Okay, so I keep banging on about how XCOM has RNG fuckery.</p>
+<p>I’m sure I haven’t experienced the worst, but here were some moments in my playthrough which were pretty annoying:</p>
+<ul>
+<li><p>Some enemy unit was able to charge past 3 of my units in overwatch (i.e. all 3 missed), as well as completely dodging two of the “melee attack if enemy moves to adjancent square” reactions, as well as <em>then</em> missing some the shots I made on my turn.</p>
+<ul>
+<li>It doesn’t matter how tactically well you play if the enemy can just ignore all of your attacks.</li>
+</ul></li>
+<li><p>Due to ‘bad timing’, as soon as I completed an objective at the end of my turn (i.e. my units all had to reload, and had no AP left), completing the objective aggro’d the enemies who were defending the objective (okay, fine), but also aggro’d the squad hiding just behind them, and reinforcements showed up on that same turn. – This meant that my squad went from “no enemies in sight” to “outnumbered 2 to 1”.</p></li>
+<li><p>I have the expectation that one randomly generated level should be approximately as difficult as another (at the same point of progression). Once I did attempt a mission which I found to be too difficult; when I reloaded (and the mission re-generated), the regenerated mission was much easier to tackle.</p></li>
+<li><p>XCOM 2 has some DLC bosses. These are powerful enough that they take actions (moving &amp; attacking) between each one of your unit’s actions. (e.g. if your unit reloads their weapon, the DLC boss will move &amp; attack something).</p>
+<ul>
+<li>On the one hand, the bosses being this bullshit-powerful kinda balances against how bullshit-powerful your squad can be in the late game.</li>
+<li>On the other hand, the bosses show up randomly; it’s also not signposted. I would be expect most people playing casually would just reload an earlier save to prepare for the boss encounter.</li>
+</ul></li>
+<li><p>RNG bullshit in the player’s favour: there’s a powerup which gives your weapon a 5%/10%/15% chance of instantly killing an enemy (depending on whether the powerup is level 1/2/3). I was able to beat a powerful enemy robot with this once. I was surprised.</p>
+<ul>
+<li>On the one hand, I’ll take it.</li>
+<li>On the other hand, I think when this activates, it undermines the tactical demands of the situation.</li>
+</ul></li>
+</ul>
+<p>I saw XCOM described as “hope your units avoid critical hits at the start, and by the end your units are glass cannons”.<br />
+This seems quite accurate.</p>
+<p>I somewhat didn’t like the turn-limit.<br />
+Well, since I was fine with save-scumming, it’s not such an issue.<br />
+But, I feel the design goals of “you’d better go fast” really conflict with the design goals of “you have to be able to mitigate for when RNG doesn’t go your way”.</p>]]></summary>
+</entry>
+<entry>
+    <title>Netflix's 1899 is Fascinating</title>
+    <link href="http://www.rgoulter.com/blog//posts/2023-05-09-netflixs-1899-is-fascinating.html" />
+    <id>http://www.rgoulter.com/blog//posts/2023-05-09-netflixs-1899-is-fascinating.html</id>
+    <published>2023-05-09T00:00:00Z</published>
+    <updated>2023-05-09T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<p>Netflix’s “1899” comes from the same creators as “Dark”.</p>
+<p>I’d watched “Dark” a few years ago; watching the first two seasons in 2019, and then its final third season some time later.</p>
+<p>It’s very much a case of “if you like one, you’ll like the other”.<br />
+With “1899”, I definitely enjoyed it enough to binge my way through it.</p>
+<h2 id="summary-of-the-show">Summary of the Show</h2>
+<p>I think an apt enough comparison to make is that watching “Dark” in many ways engages the same parts of my brain as programming does.<br />
+– I think more precisely, “Dark” and “1899” are probably most entertaining for people who love modelling for modelling’s sake. The shows each provide interesting and dense relations between each of the characters. – e.g. I recall that “Dark”, a show about time travelling, plays with at least two grandfather paradoxes: a classic ‘her daughter is her mother’, and a more fun ‘his girlfriend is his father’s sister’.</p>
+<p>I’m not sure if these shows are quite for everyone.<br />
+One reason why these shows might not be broadly appealing to everyone is that the aesthetic and the characters generally are ostensibly quite miserable.<br />
+Another is that these shows dawdle their way around their mysteries elements, and aren’t in a particular hurry to explain things.</p>
+<p>I knew going in to “1899” that it wouldn’t end with everything explained.<br />
+Rather, “Dark” takes 3 seasons to tell its story. And each season essentially added a whole other dimension to the world. Or it crawled, then walked, then ran.<br />
+So, that, and, I’d heard “1899” wasn’t going to get its second and third seasons.<br />
+– Netflix not renewing seasons reminds me of the YouTube channel “Achievement Hunter”, which would not follow through on series they would start because of a lack of views; and so each episode they put out would be immature (since the ensemble were getting familiar with the game they made a video about). The end result (amongst many other controversies) was that people stopped watching the series, and viewership slowly spiraled down.</p>
+<h2 id="what-i-found-engaging-its-themes-and-setting">What I Found Engaging: Its Themes and Setting</h2>
+<p>I’d say what makes “1899” so fascinating is its setting, and the themes it plays with as part of its story.<br />
+I think the plot (and the mystery aspect of that), and the characters are somewhat weaker.</p>
+<p>“1899” is set on an ocean liner at sea in … 1899.<br />
+Woven throughout the narrative are themes like ‘the mind and what influences it’, ‘perception and perspective and presentation’, ‘dreams of the future, their realization in the present, and thoughts of the past’, ‘exploration and avoidance and curiousity and fear’.</p>
+<p>I mean, to give a couple of examples:</p>
+<ul>
+<li><p>The ship is filled with crew &amp; passengers who speak different languages such as English, German, Polish, Spanish (not necessarily all overlapping). Sometimes characters who have no hope of understanding one another will still communicate openly and honestly; whereas characters who speak the same language may speak in a guarded manner, not revealing the things they know.</p></li>
+<li><p>Early on one character from first class visits the third class below decks. She’s told by the captain “it’s against the rules for you to go there”, and the lady responds “who sets those rules, and for what benefit?”. – Later on, the captain gives an order to his crew; the first mate appeals with “but captain, the rules say…”. – From a certain perspective, these interactions deal with: the boundaries of what’s possible, conformance to or defiance of those rules and perceived expectations.</p></li>
+</ul>
+<p>I don’t think this is a case of searching for symbolism where there’s none.<br />
+Say, “the colour of the carpet” probably has no symbolic value.<br />
+But, I think the show densely relates a bunch of things, and doesn’t got out of your way to make sure you notice.</p>
+<p>Some of the symbolism I don’t quite get.<br />
+We learn the ship is named “Kerberos”. “Kerberos” the three-headed dog that guards Hades in Greek mythology.. but, its symbolism as it applies to “1899” isn’t clear to me.<br />
+Triangles and tetrahedrons (<a href="https://en.wikipedia.org/wiki/Simplex">simplexes</a>???) are also shown prominently. But, any thematic meaning around this also isn’t clear to me.</p>
+<p>Anyway.</p>
+<p>The characters, if nothing else, do feel like they’re well suited or situated to play around with these kinds of themes. The story weaves in all sorts of details about the characters’ dreams, regrets, and masks.</p>
+<p>The show is fun enough to watch in and of itself.<br />
+But, there was a moment where I felt the intention really is “hey, this is fun, huh!”:<br />
+Each episode ends with a 60’s rock song. (Or some are the 70’s).<br />
+– There’s a ‘risk’ of using pop music in media. The viewer might already associate the song with some feeling or emotion. And it seems clear to me that the writers know that, since the story often makes points about being reminded of the past, or of seeing what you want to see.<br />
+One episode ended with “(Don’t Fear) the Reaper”.<br />
+Or as I know it as: the “More Cowbell” song.</p>
+<h2 id="where-the-show-felt-weak-plot-and-characters">Where the Show Felt Weak: Plot and Characters</h2>
+<p>The plot?</p>
+<p>Well. Each episode will end with a teasing reveal of something mysterious, the effect of which is you’ll want to watch the next episode right away.<br />
+This works even if you know it’s going for a cliffhanger; and works even if you’re pretty sure it won’t get explained. (’cause, hey, there’s only so many episodes; some of them will have to explain some stuff).<br />
+– I don’t think this is so sophisticated; but it is effective.</p>
+<p>Again, not everything gets explained.<br />
+But even considering that it’s only one season out of three, there’re still some surreal mystery elements which drive the plot that don’t get explained.<br />
+I can’t help but be reminded of that quote from “The Simpsons”: ‘well, anytime you notice something like that, a wizard did it’.<br />
+(“The Matrix” was able to do ‘trilogy of stories about weird mystery stuff’ while also having the first part of the story be a coherent whole; I think it’s reasonable that a first part be able to work as a coherent whole).</p>
+<p>The show avoids overstaying its welcome… it doesn’t linger on its cleverness or go out of its way to show off how clever it is.<br />
+e.g. I did spot the show’s main symbol appearing behind the ear on one character. It’s probably not too hard to spot. But, it’s not emphasised.</p>
+<p>I found the characters a bit ‘ehhhhh’.</p>
+<p>I’m reminded of what I felt reading R. A. Salvatore’s fantasy stories. Salvatore’s action is excellent: it’s gripping; at the start of the book, the villains seem powerful, and by the end, the heroes manage to make a daring strike to beat the villains, and it’s all very fun. – But Salvatore’s characters <em>sucked</em>, and were a little too self-indulgent. His main character never makes mistakes, everything he does is perfect, everyone who challenges him is a mean pig and a bad person. – It’s … not all that interesting.</p>
+<p>With “1899”, my senses are tickled in the same way.<br />
+The main character is a women who studied science. And so of course we get such insightful dialogue like “Woman disagrees with me? That’s because she’s letting her emotions affect her” or some such flat thing like that.<br />
+The characters feel constructed as if by the morals that would have the Christians all be either naive, crazy, or faking their belief; where the same morality would also emphasise and lament that Muslims aren’t treated with respect in society.<br />
+Mostly the show’s characters avoid filling such a sanctimonious role as this.</p>
+<h2 id="woulda-been-nice-to-see-the-rest-of-the-story">Woulda Been Nice to See the Rest of the Story</h2>
+<p>In any case, I did enjoy watching the show.</p>
+<p>I think it’s a shame that the series didn’t continue. (I wonder if it’s the kind of story where by the end of season of season 3, the characters come to realise they’re characters in a TV show).</p>
+<p>If a storyteller’s able to come up with something as intruiging as this with this set of toys, it’s a shame to not let them go on present the rest of their toychest.</p>]]></summary>
+</entry>
+<entry>
+    <title>I Played Star Wars Republic Commando on the Nintendo Switch</title>
+    <link href="http://www.rgoulter.com/blog//posts/games/2023-05-06-i-played-star-wars-republic-commando-on-the-nintendo-switch.html" />
+    <id>http://www.rgoulter.com/blog//posts/games/2023-05-06-i-played-star-wars-republic-commando-on-the-nintendo-switch.html</id>
+    <published>2023-05-06T00:00:00Z</published>
+    <updated>2023-05-06T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<p>I had played “Star Wars: Republic Commando” years ago on the PC.</p>
+<p>It’s a first person shooter game, and its setting is very cool: Star Wars, but from a grittier perspective of the soldiers fighting in the Clone Wars, rather than the more operatic stories of Jedi space-wizarding their way around the galaxy.</p>
+<p>Although it did release on the PC, it did somewhat feel more like a ‘console port’. – So, playing it on the Nintendo Switch isn’t that much of a degraded experience. (And, I see that Crysis 2 and Crysis 3 are available for the Switch; so, the Switch is certainly capable of running a game from 2005!).</p>
+<p>I can only recommend the game out of nostalgia. – I think there are several things which bring the gameplay down.</p>
+<p>My preference for games is relatively casual. A game is boring if it’s too easy. But, I’m not interested in a game that’s so difficult that I have to give it the best I can in order to win. – So, ‘a little difficult’ is nice. But, when a part of a level is difficult, it’s only fun if losing feels fair; it’s frustrating if I feel like I lost for reasons that aren’t my fault.</p>
+<p>Unfortunately, I think there are some places where Republic Commandos ends up in that “lost but it’s not my fault”.</p>
+<h2 id="problem-combat-is-boringly-spongy-and-ammo-is-limited">Problem: Combat is Boringly Spongy and Ammo is Limited</h2>
+<p>One example is the combination of enemy sponginess, &amp; ammo limitations.</p>
+<p>Enemies are <em>really</em> spongy. They soak up a lot of damage before dying.<br />
+This makes sense for the ‘elite’ enemies like the Super Battle Droids or the Destroyer Droids.<br />
+But, it feels <em>boring</em> for the regular Battle Droids.</p>
+<p>It takes about 15 shots from the standard laser blaster to kill the <em>basic</em> enemies.<br />
+Your basic blaster has a magazine with 50 shots.<br />
+Your ammo capacity is for 300 shots.<br />
+– i.e. It takes a long time to kill even basic enemies; if you don’t miss, you can kill 3 enemies before you have to reload; you can kill maybe 20 <em>basic</em> enemies before running out of ammo. (Sniper rifle ammo is similar: you can kill a basic enemy with 1 shot; but your ammo limit is 20 shots).</p>
+<p>Unlike most other shooter games, where you can pick up ammo for your guns from enemies you defeat, in “Republic Commando”, you can only pick up ammo from supplies at the end of each area. Often, ammo feels pretty scarce.</p>
+<p>With elite enemies the limitation is more stark:<br />
+The Super Battle Droids are so spongey that you essentially <em>need</em> to use heavy weapons to defeat them.<br />
+One option is to use your Grenade Launcher: a direct hit from the grenade launcher will destroy a Super Battle Droid. Your ammo capacity for the grenade launcher is <em>4 shots</em>.<br />
+Another alternative is to use EMP grenades, which will weaken the Super Battle Droids, and in this weakened state blaster fire or thermal detonators are effective. – You have a limit of 5 EMP grenades.<br />
+– To me the problem is, since these enemies require particular ammo to fight, and ammo is scarce, it’s really easy to get into a situation where you don’t have a good way of fighting these enemies.</p>
+<p>The game generally follows a loop where you need to clear enemies from an area, and then proceed to the next area.<br />
+Generally, at the end of an area, you can replenish your health, and some of your ammo. But, not all types of ammo are provided in every area.<br />
+But, especially in the later levels, the number of elite enemies that you have to deal with will be matched to the limit of your grenade launcher ammo.<br />
+– It somewhat defies worldbuilding to have boxes of the Republic’s blaster rifle ammo lying around in an enemy spaceship.</p>
+<p>In contrast to the ammo, the game offers unlimited health refills.<br />
+Like many games, you have both a shield and a health bar.<br />
+The shield will absorb some damage, and will recharge if you can avoid taking damage for some time.<br />
+Damage only affects your health if you’re hit when you have no shield.<br />
+– But. There are health recharge stations that you can use to refill your health, and these can generally be found in between fighting areas in a level.</p>
+<p>One way of dealing with this: I think it’d be better if the game did have an “unlimited ammo cache”, where you could refill all your ammo between levels. Another possibility is to have “ask for ammo” from your squadmates. (The game “Brothers in Arms: Earned in Blood” had a feature like this).</p>
+<p>Or another way: I think it would be better if you could pick up ammo from enemies, and there was always some effective way to fight powerful enemies. – e.g. in Halo, the weapons are mainly (human) bullet guns or (alien) energy guns; the energy guns are effective against shields, and bullets are effective against unshielded enemies. Which leads to a nice gameplay dynamic.</p>
+<h2 id="problem-the-tactical-squad-based-gameplay-doesnt-inspire-tactics-nor-teamwork">Problem: The Tactical Squad-based Gameplay Doesn’t Inspire Tactics nor Teamwork</h2>
+<p>The other main thing that brings the gameplay down is that the squad AI doesn’t feel very good.</p>
+<p>Okay, okay. So what I think would be really cool would be to have “Brothers in Arms: Earned in Blood”, but <em>in spaaaaace</em>.<br />
+And “Brothers in Arms: Earned in Blood” was also released in 2005.</p>
+<p>Rather.<br />
+In “Brothers in Arms”, it’s still mostly a casual game, but the gameplay requires sufficient tactical effort. You can’t <em>just</em> run up and shoot enemies who are hiding in cover. You have to first suppress them, and then move to their flanks. You’re given command of two teams, and the controls are simple and console friendly. (“Go there”, “shoot at those enemies”, “charge those enemies”).<br />
+– This results in a gameplay dynamic where you have to puzzle out how to navigate to a spot where you can flank a suppressed enemy.</p>
+<p>Whereas, for most of “Republic Commando”, the combat is as simple as “make enemies healthbar go down quicker than your healthbar”, where the main ‘winning tactic’ is “hide behind cover if your shield runs out”.<br />
+The main “tactics” required are “use your heavy weapons to defeat the heavy enemies”.</p>
+<p>The parts where you ‘need’ your squadmates mostly feels contrived:<br />
+There are certain interactable elements in the game. e.g. mounting a turret, or spending time ‘interacting’ with a console to hack it.<br />
+You can fulfill this interaction, or a member of your squad can do it.</p>
+<p>Perhaps at its most contrived is at the end of one level, you need to hack 3 consoles at once, but you need to fend off enemies charging your position. – This feels inorganic, compared to just designing a level where you happen to be a squad of 4 soldiers fighting through.</p>
+<p>It is possible to get your squad members to equip the sniper rifle, the grenade launcher, or to focus on throwing grenades at enemies. – Though, since this is obviously very powerful, the game restricts this. You can only get your squad members to do this if the level design specifically has allocated areas for you to do this. You can’t free-form task your squad members to do this.<br />
+– But simultaneously, typically the level design involves throwing tougher enemies at the player when these ‘specialised’ spots are in the level. – So, it doesn’t really feel like a ‘tactical’ choice to assign your squad members as a sniper (where maybe they shoot more powerfully but can’t shoot as many enemies at once). It feels like it’s a decision already made as part of the level design.</p>
+<p>Another common ‘tactical opportunity’ is whether to enter through a door ‘loudly’ or ‘silently’.<br />
+It never really makes a difference, since none of the gameplay benefits from a stealthy/silent approach. – Whereas, more recent game design might allow for sneaking up on enemies and stealth killing them, or skillfully using silenced weapons to eliminate enemies.</p>
+<p>The gameplay feels very similar to “Halo”; but with simpler (i.e. more boring) gun combat, and doesn’t really make use of the squad in an interesting way.</p>
+<h2 id="other-tactical-squad-games-ive-enjoyed">Other Tactical Squad Games I’ve Enjoyed</h2>
+<p>Come to think of it. There are other games I’ve played which have done “team-based tactics” quite well, which would be fun <em>in spaaaaace</em>.</p>
+<p>“Door Kickers” is a top-down realtime-tactics game.<br />
+It’s “tactical” in the sense that you can only ‘see’ what your units can see. You have to carefully maneouver your units around the map, taking care whether open doors loudly (which might attract attention) or quietly (which might take too long); you have to be careful to ‘sweep’ the rooms your units move through for enemies; and ensure that your soldiers don’t get flanked from behind.<br />
+– Most of “Door Kickers” setting involves hostages or terrorists or cartel members. – I could totally envision a ‘reskin’ of the game where you play as Rebel commandos fighting against holdouts of the Empire.</p>
+<p><em>Maybe</em> another game that might be interesting with a Star Wars theme would be a real-time tactics game like “Commandos” or its modern flavour, Mimimi Games’ “Shadow Tactics”.<br />
+With these, you’re faced with stealthily eliminating a large number of enemy soldiers on a map. The gameplay is puzzle-like, and often requires leveraging the unique abilities of your units so as to untangle the web of guards. – e.g. You might sneak around with the ninja, or use the sniper to take out a target from a distance.<br />
+I could see a similar set of roles in a Star Wars flavour. “Lego Star Wars” already has puzzles around different ‘classes’ within Star Wars, such as astromech droids vs protocol droids, jedi, rogues.</p>
+<h2 id="what-republic-commando-does-well-its-really-cool">What Republic Commando Does Well: It’s Really Cool</h2>
+<p>Despite the above grievances.. what “Republic Commando” does well is it’s got a great Cool Factor.</p>
+<p>The opening scenes where you fly in on the Republic transport craft into the battle on Geonosis are quite cinematic.<br />
+Such scenes are now cliche. But, they’re cliche for a good reason.</p>
+<p>It’s cool to get into gunfights against the battle droids, and to see the fearsome Super Battledroids and Destroyer Droids.</p>
+<p>It’s cool to do the fancy tacti-cool door-breach thing.</p>
+<p>You get to fight against the tank-like Spider droids, as well as see the Republic’s gunships and artillery in action.</p>
+<p>The gameplay here really emphasises the game’s setting of “you’re not a powerful jedi”..<br />
+– The excellent “Titanfall 2” achieved a similar thing: in “Titanfall 2”, you play as both a soldier, as well as a giant mech robot. When you encounter some robot enemy as a soldier, the robot enemy is big and tough to fight; but when you encounter the same enemy when playing as the mech robot, the robot enemy is much smaller and squishier than you are.<br />
+– In “Republic Commando”, you fight against enemies which are relatively easy for the jedi to defeat, but are tough encounters for you.</p>
+<p>Though, come to think of it:<br />
+Heh. The classic “Star Wars Battlefront II” also came out in 2005, and was essentially just “Battlefield 1942” but reskinned so it’s <em>in spaaaaace</em>.<br />
+Though I only played the lootbox most-downvoted-comment-in-reddit-history-related “Battlefront II” that was released in 2017.<br />
+These do somewhat evoke the feeling of “regular soldier in the Star Wars universe”.
+– But, these aren’t really quite as cinematic. “Battlefield 1942”-style rules are too game-y.<br />
+The 2017 “Battlefront II” did have a story. But, I recall it also didn’t feel like it was trying to be ‘grounded’. I can’t remember much of it, but re-reading the plot on the Wikipedia page doesn’t jog my memory all that much.</p>
+<p>Perhaps it’s paradoxical, but by not trying to be ‘Most Important Story Evar!!!’, “Republic Commando”’s story does seem much weightier to me. (You do commando-stuff on Geonosis, like surgical strikes against strategically vital facilities; you’re tasked with investigating a ghost-ship; you’re tasked as a vanguard force ahead of the Republic’s invasion of Kashyyyk).</p>
+<p>I’d say that “Rogue One” also captures some of the same feeling of gritty-ish spec ops in the Star Wars universe. – I’m thinking especially of stuff like the scene where the Rebels go to make an assassination/strike against the Death Star plans guy.</p>]]></summary>
+</entry>
+<entry>
+    <title>Capsword is a Neat Keyboard Feature</title>
+    <link href="http://www.rgoulter.com/blog//posts/programming/2023-05-04-capsword-is-a-neat-keyboard-feature.html" />
+    <id>http://www.rgoulter.com/blog//posts/programming/2023-05-04-capsword-is-a-neat-keyboard-feature.html</id>
+    <published>2023-05-04T00:00:00Z</published>
+    <updated>2023-05-04T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<p>QMK is a framework for customising how your keyboard functions.</p>
+<p>One of its relatively new features is <a href="https://docs.qmk.fm/#/feature_caps_word">“Caps Word”</a>.</p>
+<p>Roughly, it’s “like caps lock, but only for one word”.</p>
+<p>This is quite useful for programmers, since writing program code often involves writing stuff like <code>const THE_CONST = "some value";</code>. – So, it’s as if shift is pressed for any letter that might be in a variable identifier (letters, numbers, underscores); and the keyboard exits out of its “caps word mode” if any other key (like escape, space, or backspace) is pressed.</p>
+<p>Although the original Caps Lock only requires one key press to toggle ‘Caps Lock mode’ on, and one key to toggle it off, you’re more likely to accidentally keep ‘Caps Lock mode’ on when you don’t mean to. – Whereas, with “Caps Word”, you’re not. So, the risk of a ‘modal error’, of accidentally being in ‘Caps Lock mode’, when you don’t intend to be, is reduced.</p>
+<p>The biggest downside I can think of is that you’ve got to find a spot to put the “Caps Word key” on your keyboard layout. – Which is only really a problem if you also want to keep the original “Caps Lock” key around.</p>]]></summary>
+</entry>
+<entry>
     <title>Review of Apple Pencil for Note Taking</title>
     <link href="http://www.rgoulter.com/blog//posts/programming/2023-03-05-review-of-apple-pencil-for-note-taking.html" />
     <id>http://www.rgoulter.com/blog//posts/programming/2023-03-05-review-of-apple-pencil-for-note-taking.html</id>
@@ -514,147 +775,6 @@ And I use <code>nix</code>, so it’s especially easy to ensure it’s available
 it.</p>
 <p>I think this is a good example of “sometimes better isn’t MUCH better; it’s
 merely slightly better”.</p>]]></summary>
-</entry>
-<entry>
-    <title>Using NixOS Specialisations to Try Out Different Desktop Environments</title>
-    <link href="http://www.rgoulter.com/blog//posts/programming/2022-10-06-using-nixos-specialisations-to-try-out-different-desktop-environments.html" />
-    <id>http://www.rgoulter.com/blog//posts/programming/2022-10-06-using-nixos-specialisations-to-try-out-different-desktop-environments.html</id>
-    <published>2022-10-06T00:00:00Z</published>
-    <updated>2022-10-06T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<p>Recently, Tweag’s blog featured a post on <a href="https://www.tweag.io/blog/2022-08-18-nixos-specialisations/">NixOS
-specialisations</a>.</p>
-<p>It allows for having an additional boot entry in grub which
-loads a slightly different configuration. – This makes it very convenient
-to try slightly different NixOS configurations.</p>
-<p>As the blogpost above shows, this can be used for different desktop environments.</p>
-<p>I ran into some problems with conflicting attributes, and wasn’t previously
-aware of how to set the priority. (e.g. as discussed in this <a href="https://discourse.nixos.org/t/what-does-mkdefault-do-exactly/9028">discourse
-post</a>).</p>
-<p>e.g. I’d wanted to try out the <a href="https://wiki.archlinux.org/title/Pantheon">Pantheon</a> desktop environment, which comes out of <a href="https://elementary.io/">Elementary OS</a> and looks very nice. – But, if you try to enable both <code>services.xserver.desktopManager.gnome</code> and <code>services.xserver.desktopManager.pantheon</code>, you get an error like:</p>
-<pre><code>error: The option `environment.sessionVariables.NIX_GSETTINGS_OVERRIDES_DIR&#39; has conflicting definition values:</code></pre>
-<p>Not knowing about overriding attribute priorities, my first attempt at solving this problem was using <code>specialisations</code> to separate the conflicting config options: <a href="https://github.com/rgoulter/nix-user-repository/blob/8df3abaea46b8fbd5d212e64c209d5ef0602955c/modules/desktops.nix">8df3…/modules/desktops.nix</a>.</p>
-<p>Knowing the above about overriding attribute priorites, it makes sense that it’s possible to use Gnome in the ‘parent’ config, and to disable Gnome in the specialisations, with:</p>
-<pre><code>services.xserver.desktopManager.gnome.enable = lib.mkDefault true;</code></pre>
-<p>e.g. <a href="https://github.com/rgoulter/nix-user-repository/blob/c3f0df686ea024f3fae8da13dae6e10a02e920cd/modules/desktops.nix">c3f0…./modules/desktops.nix</a>.</p>
-<pre class="nix"><code>{ config, lib, pkgs, ... }:
-
-{
-  services = {
-    xserver = {
-      desktopManager.gnome.enable = lib.mkDefault true;
-      displayManager.gdm.enable = lib.mkDefault true;
-
-      enable = true;
-
-      layout = &quot;us&quot;;
-    };
-  };
-
-  specialisation = {
-    gnome.configuration = {
-      services.xserver = {
-        desktopManager.gnome.enable = true;
-        displayManager.gdm.enable = true;
-      };
-      system.nixos.tags = [ &quot;gnome&quot; ];
-    };
-    pantheon.configuration = {
-      services.xserver = {
-        # Pantheon conflicts with gnome
-        desktopManager = {
-          gnome.enable = false;
-          pantheon.enable = true;
-        };
-        # Pantheon requires lightdm
-        displayManager = {
-          gdm.enable = false;
-          lightdm.enable = true;
-        };
-      };
-      system.nixos.tags = [ &quot;pantheon&quot; ];
-    };
-    xfce.configuration = {
-      networking.networkmanager.enable = true;
-      services.xserver = {
-        desktopManager = {
-          gnome.enable = false;
-          xfce.enable = true;
-        };
-        displayManager = {
-          gdm.enable = false;
-        };
-      };
-      system.nixos.tags = [ &quot;gnome&quot; ];
-    };
-  };
-}</code></pre>]]></summary>
-</entry>
-<entry>
-    <title>Git Worktrees a Neat Command for Working with Multiple Versions of a Repo</title>
-    <link href="http://www.rgoulter.com/blog//posts/programming/2022-10-01-git-worktrees-a-neat-command-for-working-with-multiple-versions-of-a-repo.html" />
-    <id>http://www.rgoulter.com/blog//posts/programming/2022-10-01-git-worktrees-a-neat-command-for-working-with-multiple-versions-of-a-repo.html</id>
-    <published>2022-10-01T00:00:00Z</published>
-    <updated>2022-10-01T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<p><a href="https://git-scm.com/docs/git-worktree">git-worktree</a> has apparently been in git
-for some time, but I’ve only recently learned of it.</p>
-<p>It lets you conveniently check out multiple versions of a repository at once.</p>
-<p>Which may sound only marginally useful; but I find the benefit to be better than
-it sounds. (e.g. Without the worktree command, perhaps the easiest way to
-imitate it would be to clone from the local repository, and adjust the remotes).</p>
-<p>I’ve found it’s useful to keep a checkout of the master branch, as well as using
-worktrees for feature branches, or other experimenting.</p>
-<p>By keeping work-in-progress in a separate working tree, you don’t have to worry
-about the working tree being dirty in order to check out different versions.</p>]]></summary>
-</entry>
-<entry>
-    <title>Signal Boost drduh's Yubikey Guide</title>
-    <link href="http://www.rgoulter.com/blog//posts/programming/2022-09-30-signal-boost-dr-duhs-yubikey-guide.html" />
-    <id>http://www.rgoulter.com/blog//posts/programming/2022-09-30-signal-boost-dr-duhs-yubikey-guide.html</id>
-    <published>2022-09-30T00:00:00Z</published>
-    <updated>2022-09-30T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<p><a href="https://github.com/drduh/YubiKey-Guide" class="uri">https://github.com/drduh/YubiKey-Guide</a></p>
-<p>I recently set up my Yubikeys so that I could use the key to hold the private
-keys I use with git.</p>
-<p>I spent a bunch of time reading through various guides discussing how to set up
-a master key with an offline backup, and how to put this on a GPG smartcard.</p>
-<p>Drduh’s guide above is the best I’ve come across.</p>
-<p>e.g. Most guides only mention the interactive way to generate keys. This guide
-at least mentions using a <a href="https://github.com/drduh/YubiKey-Guide#create-keys-with---batch-and---quick-add-keys">the batch
-interface</a>.</p>
-<p>(c.f. <a href="https://github.com/rgoulter/nix-user-repository/blob/a96522d387396e7dd9ab8b6e489a97ffb6bcec92/scripts/gpg-quick-generate-master-key.sh">my key generation
-invocations</a>).</p>]]></summary>
-</entry>
-<entry>
-    <title>Travel Setup Using a Fancy Keyboard with a Laptop</title>
-    <link href="http://www.rgoulter.com/blog//posts/programming/2022-08-24-travel-setup-using-a-fancy-keyboard-with-a-laptop.html" />
-    <id>http://www.rgoulter.com/blog//posts/programming/2022-08-24-travel-setup-using-a-fancy-keyboard-with-a-laptop.html</id>
-    <published>2022-08-24T00:00:00Z</published>
-    <updated>2022-08-24T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<p>One of the downsides to using a fancy keyboard is that it’s difficult to use
-when out and about with a laptop.</p>
-<p>This is arguably mitigated by that laptops themselves have a keyboard.</p>
-<p>I like my small, fancy keyboard much more than the laptop keyboard, though.
-(My thumbs get access to 2-3 keys each on my fancy keyboard, etc.).</p>
-<p>Here’s the travel setup I’ve used:</p>
-<p>The first thing which helps is getting a bit of acrylic cut to shape, with some
-bumpons to lift it above the keys:</p>
-<p><img src="https://raw.githubusercontent.com/rgoulter/rgoulter.github.com/master/images/keyboards/travel-setup/keyboard_travel_mba.JPG" /></p>
-<p><img src="https://raw.githubusercontent.com/rgoulter/rgoulter.github.com/master/images/keyboards/travel-setup/keyboard_travel_mba_plate.JPG" /></p>
-<p>In terms of cables:</p>
-<p>I was able to have a working setup with an ordinary USB-C cable. Since the
-cable needs some clearance, the keyboard couldn’t quite be close to the screen.
-Thanks to how HUGE the Macbook trackpads are, I could get by without needing an
-extra mouse.</p>
-<p><img src="https://raw.githubusercontent.com/rgoulter/rgoulter.github.com/master/images/keyboards/travel-setup/keyboard_travel_mba_plate_usbc.JPG" /></p>
-<p>What I haven’t yet tried while traveling, but I expect to work much better, is
-to use a USB-C cable with a right-angle connector:</p>
-<p><img src="https://raw.githubusercontent.com/rgoulter/rgoulter.github.com/master/images/keyboards/travel-setup/keyboard_travel_mba_plate_rightangle.JPG" /></p>
-<p>Unfortunately, use of right-angled connectors like this depends a bit on the
-keyboard. In the following pictures, both have a magnetic connector inserted.
-The right-angled USB-C cables I’ve tried cannot connect to the BM40, since the
-case is too thick.</p>
-<p><img src="https://raw.githubusercontent.com/rgoulter/rgoulter.github.com/master/images/keyboards/travel-setup/keyboard_bm40.JPG" /></p>
-<p><img src="https://raw.githubusercontent.com/rgoulter/rgoulter.github.com/master/images/keyboards/travel-setup/keyboard_gh60_case.JPG" /></p>]]></summary>
 </entry>
 
 </feed>
