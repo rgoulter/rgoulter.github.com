@@ -1,0 +1,370 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>XCOM2 WOTC Added Some Good Parts - Richard Goulter's Blog</title>
+
+        <!-- My (Old) CSS theme -->
+        <link rel="stylesheet" type="text/css" href="../../css/default.css" />
+
+        <!--
+            jQuery & jQueryUI
+        -->
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css" />
+
+        <!--
+            Pandoc Style CSS
+            (for syntax highlighted snippets)
+        -->
+        <link rel="stylesheet" type="text/css" href="../../css/syntax.css" />
+
+        <!--
+            Bootstrap
+        -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+        <style>
+            /*
+             * Bootstrap defines blockquote as 17px,
+             * so it looks stupidly large in my blogposts. */
+            blockquote {
+                font-size: 14px;
+            }
+        </style>
+
+        <!--
+            Waypoints, and Waypoints-Sticky,
+            so we can do this:
+            http://imakewebthings.com/waypoints/shortcuts/sticky-elements/
+        -->
+        <script src="../../js/jquery.waypoints.min.js"></script>
+        <script src="../../js/sticky.min.js"></script>
+
+        <!-- My analytics stuff -->
+        <script src="../../js/my_analytics.js"></script>
+        <script src="../../js/my_analytics_debug.js"></script>
+
+        <!--
+            TOCify
+        -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js"></script>
+
+        <!--
+            Patched TOCify css file.
+            (Don't want fixed `.tocify`).
+        -->
+        <link rel="stylesheet" type="text/css" href="../../css/jquery.tocify.css" />
+
+        <style>
+        .navbar {
+            margin-bottom: 0px;
+        }
+
+        .banner-image {
+            width:100%;
+        }
+
+        .banner {
+            margin-left: 0px;
+            margin-right: 0px;
+        }
+
+        body {
+            background-color: #e2e2e2;
+        }
+
+        #page {
+            padding-left:0;
+            padding-right:0;
+            background-color: #ffffff;
+        }
+        </style>
+
+        <!-- Google Analytics -->
+        <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+          ga('create', 'UA-73116015-1', 'auto');
+          ga('send', 'pageview');
+        </script>
+    </head>
+    <body>
+        <div id="page" class="container">
+            <!-- This, with no padding on left/right -->
+            <div class="banner">
+                <nav class="navbar navbar-default">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+
+            <!-- The Hamburger -->
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../../">Richard Goulter's Blog</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="../../">Home</a></li>
+            <li><a href="../../yi.html">Yi</a></li>
+            <li><a href="../../emacs.html">Emacs</a></li>
+            <li><a href="../../what-i-wish-i-knew-when-i-started-using-nix.html">Nixpkgs</a></li>
+            <li><a href="../../archive.html">Archive</a></li>
+        </ul>
+    </div>
+</nav>
+
+            </div>
+
+            <hr style="margin: 0px; border-top: 5px solid black;" />
+
+            <div id="content" class="container">
+                <h1>XCOM2 WOTC Added Some Good Parts</h1>
+                <div class="info">
+    Posted on May 29, 2023
+    
+        by Richard Goulter
+    <br />
+    
+    Tags: 
+    
+</div>
+
+<h2 id="xcom2-wotc">XCOM2 WotC</h2>
+<p>I bought XCOM2 WotC (“War of the Chosen”) in a bundle for the Nintendo Switch. I’d completed a playthrough of the base game first. Overall, I found the game enthralling, but didn’t enjoy the RNG parts and so save-scummed my way through.</p>
+<p>I just completed a playthrough of XCOM2 WotC. And while I still don’t like the RNG parts, WotC added some stuff which I thought was quite fun.</p>
+<p>Broadly, the changes it made:</p>
+<ul>
+<li><p>New character classes: a stealthy sniper, and two other classes I didn’t find useful.</p></li>
+<li><p>New enemy bosses: though fortunately, not quite as difficult as the bullshit Alien Rulers from XCOM2’s DLC.</p></li>
+<li><p>Additional strategic components: you can assign your squad members to spend time away on non-gameplay missions.</p></li>
+<li><p>Some more map varieties; including maps with zombie-like enemies.</p></li>
+<li><p>Squadmate bonding. Which I didn’t use as much as I should have.</p></li>
+</ul>
+<p>To a greater or lesser extent, I liked these additions.</p>
+<p>I also opted to play the game with “2x long mission timers”, “2x long game limit timer”, which eased some of the stress from playing.</p>
+<h2 id="new-character-classes">New Character Classes</h2>
+<p>From what I’d known of XCOM2 before playing it, this is the part I was most apprehensive about. – There being so many character classes, that it’d be overwhelming.</p>
+<p>I do think it could benefit from being simplified. (Or benefit from the complexity moving about to some other layer of the game).</p>
+<p>The ‘basic’ classes are the ‘rifleman (who can hack things)’, ‘the shotgunner (who also has a sword)’, ‘the Animal Mother wannabe with a big machine gun’, and ‘the sniper’. XCOM2 also has ‘the wizard’ and ‘the robot’.</p>
+<p>What WotC adds is a few rarer classes:</p>
+<ul>
+<li>A ‘stealth sniper’.
+<ul>
+<li>The main thing this class has over the regular sniper is “concealment” as an individual. This is the same “concealment” that the team gets which allows for the ambush mechanics, but since it applies to the ‘stealth sniper’ as an individual unit, it means the ‘stealth sniper’ can stay hidden while the other units aren’t.</li>
+<li>This unit ends up being super useful for scouting out the map, since it can ‘see’ the enemies, without aggro’ing the enemies.</li>
+<li>However, the unit isn’t as good at dealing a lot of power to multiple units, so isn’t always better than the normal sniper.</li>
+</ul></li>
+<li>A ‘skirmisher’ unit.
+<ul>
+<li>idk. It has a submachine gun, and can shoot twice in one turn (or ‘shoot, then move’).
+<ul>
+<li>It also has a grappling hook, and can hook enemies towards it &amp; melee that enemy.</li>
+</ul></li>
+</ul></li>
+<li>A ’battlemage unit.
+<ul>
+<li>It gets magic points by using its magic sword to kill enemies.</li>
+</ul></li>
+</ul>
+<p>The ‘stealth sniper’ is powerful to use right from the get-go, and gets even more powerful as it levels up.</p>
+<p>The other two classes… maybe someone found them useful. Or maybe they’re really powerful when levelled up. But, I generally didn’t find them useful.</p>
+<p>(I believe XCOM2 also tries to encourage using the DLC stuff by-way-of having some DLC stuff only be weak to other DLC stuff. I think that’s dubious design).</p>
+<h2 id="new-enemy-bosses">New Enemy Bosses</h2>
+<p>The new enemy bosses are the ‘Chosen’.</p>
+<p>These aren’t as bullshit as the Alien Rulers; the Alien Rulers were both powerful <em>AND</em> moved/attacked after every <em>action</em> you took(!!!).</p>
+<p>The Chosen each add their own effects to the map.</p>
+<p>In the order I encountered them:</p>
+<ol type="1">
+<li>The ‘ninja’ enemy boss.
+<ul>
+<li>Can teleport around the map, stun any of your units, then runs off somewhere far away where you can’t attack them.</li>
+</ul></li>
+<li>The ‘sniper’ enemy boss.
+<ul>
+<li>Uhm. … Might have a “I’m gonna shoot you next turn!” area-of-effect,
+which is easily avoided.
+<ul>
+<li>To be clear: this is much less powerful than the effects the standard, common enemies are able to inflict.</li>
+</ul></li>
+</ul></li>
+<li>The ‘mage’ enemy boss.
+<ul>
+<li>Uhm. Can spawn low tier enemies, I think?</li>
+</ul></li>
+</ol>
+<p>So. Starting off with the hardest enemy boss somewhat affected my feeling towards it.</p>
+<p>The most annoying thing about these is the missions to defeat them involve “infinitely spawning enemies”, similar to the final mission.</p>
+<h2 id="new-strategic-component-covert-actions-teammate-bonding">New Strategic Component: Covert Actions, Teammate Bonding</h2>
+<p>I think these made interesting additions.</p>
+<p>With “covert actions”, you assign some of your soldiers to a particular mission. So, the ‘cost’ is that these soldiers will be unavailable while on this mission. The benefits vary; sometimes it adds stats for the soldiers assigned. – One thing I liked here is that sometimes the soldiers could get “ambushed”, so you’d need to complete a small mission with these two soldiers to get them to safety. (This happened frequently enough that you’d have to worry about it, but not so frequently that it became boring or expected).</p>
+<p>I like that because it’s a nice set of trade-offs. – You might want to send your best sniper on a mission which will add 5 to their aim stat, but you’d need to trust they can get out of an ambush situation, or that you won’t need that sniper on a mission in the meantime.</p>
+<p>The teammate bonding.. I didn’t make much use of this. But the effects at level 3 look to be pretty powerful, so I kinda wish I had. – “Bonding” is sending the same pairs of soldiers out on missions together. The more you do that, the more benefits you get. – The first level of benefits involves being able to ‘share’ one action-point from one squadmate to the other, which ends up being <em>very</em> useful!</p>
+<h2 id="more-map-varieties-zombie-like-maps-and-rebels-with-guns">More Map Varieties: Zombie-like Maps, and Rebels with Guns</h2>
+<p>One thing XCOM suffers from is just how same-y the missions can get. – Every mission can be described as “get from A to Z, do it quickly, kill every enemy you see”.</p>
+<p>Any mission that’s not like that stands out.<br />
+(And, no, randomly throwing minibosses into levels doesn’t “add variety”).</p>
+<h4 id="zombies">Zombies</h4>
+<p>I was pleasantly surprised by the zombie-infected maps.<br />
+That is, there are some maps which are filled with zombies. Since XCOM is usually focused on “your 4 squadmates vs 3 tough enemy units”, in order to handle “vs 6+ zombies”, the game adds a couple of rules: if you kill a zombie, your unit gets 1 more action point. (So instead of just shooting once, you can shoot 3 times if each shot kills a zombie). And, using explosives attracts a horde of zombies.</p>
+<p>Part of what I liked is it does a good job of making your units feel properly powerful. (Often it takes just one or two of your units to dispatch all of the zombies on the screen).</p>
+<p>I also like that: it adds a tactical drawback to using explosives above/beyond “you can’t use your grenade now and use it later too”.</p>
+<p>An additional tactical aspect this adds is: the zombies will attack the regular alien enemies, too (and vice versa). – So you don’t necessarily want to dispatch all the zombies; or maybe you do. – It adds an interesting decision.</p>
+<h4 id="rebels-with-guns">Rebels With Guns</h4>
+<p>I also liked that there are missions which will feature friendly NPCs with guns.<br />
+Rather. In XCOM, you’ll sometimes get missions where you have to rescue a bunch of civilians from the genocidal aliens.<br />
+With XCOM2 WotC, some of these missions instead involve rescuing a friendly rebel base which in under attack from aliens.</p>
+<p>I feel this makes more sense than not from a worldbuilding perspective.<br />
+On the one hand, there’s the same uncanny “your team arrived just in time” problem that the other missions have. (Your dropship flies halfway around the world, and yet manages to always arrive in just-enough-time).<br />
+On the other hand, I think it makes sense to have rapid-response forces react to enemy strikes. And it makes sense that there would be rebel forces which have guns.</p>
+<p>From a gameplay perspective, these maps do add more enemies to deal with. But, it’s also nice to have more units fighting the enemies, too.</p>
+<h2 id="wotcs-new-stuff-enhances-xcom-at-its-best-fun-tactical-combinations">WotC’s New Stuff Enhances XCOM at its Best: Fun Tactical Combinations</h2>
+<p>The new abilities also added room for some more fun situational tactical combinations.</p>
+<p>I think that’s where XCOM is at its most fun.</p>
+<p>Albeit, these all sound like complicated sequences of Yugioh card moves:</p>
+<p>One I liked:<br />
+Using the stealth sniper’s ‘sticky bomb’ and ‘stealth shoot’ in tandem with the sniper’s ‘kill everything that moves in this zone’ ability.<br />
+That is: The stealth sniper has a ‘sticky bomb’ that can be thrown onto an enemy (somehow without the enemy noticing), which explodes when the enemy takes damage. The stealth sniper also has an ability to shoot without breaking stealth (which is usable once per turn). The regular sniper has a “kill zone” ability which will shoot at anything that moves in a zone during that turn.<br />
+Also: the stealth sniper can be in stealth and spot a group of enemies even when the other units have broken from stealth. It’s still possible to set up the “kill zone” and have the enemies be far away enough that they don’t aggro despite the sniper being able to set up the “kill zone”.<br />
+It’s a nice ‘second ambush’, which quickly does a lot of damage to a group of enemies (if not outright destroy them)!</p>
+<p>Another I liked:<br />
+I saw there was a tech tower which had a 100% chance to ‘restore squad’s action points that turn’. And I had a heavy (machine gun + grenade launcher) unit who had a bond with a hacker unit; and that heavy unit had the upgrade such that shooting a grenade wouldn’t end its turn…<br />
+This resulted in: setting up an ambush, with every unit (except the heavy) poised on overwatch – shoot the first thing that moves. Then, using the heavy unit to lob a grenade (and thus do a bit of damage to each of the enemies). This aggro’d the enemies, who then moved to cover; the enemies moving to cover then each triggers an overwatch reaction shot from my squad. <em>Then</em> I was able to have my heavy unit share its remaining action point with the hacker; that hacker then hacked the tower to restore all the action points for the squad.<br />
+The net effect is being able to execute an ambush, but then have another turn for free (instead of normally having to let the enemy have a turn after the ambush is done).</p>
+<p>I can agree that these are fun in part because the whole game isn’t filled with this. If everything was overpowered tactics, it wouldn’t feel overpowered. These opportunities are organic, and not on a pre-scripted linear path.</p>
+
+<hr />
+
+<div>
+    
+    
+    <a href="../../posts/games/2023-05-14-xcom2-has-its-moments-of-fun.html" style="float:right; text-align: right;">Older post</a>
+    
+</div>
+<br style="clear: both;" />
+
+<hr />
+
+<!-- Load highlight.js for Syntax Highlighting. -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/bash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/c.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/gherkin.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/haskell.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/lisp.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/nix.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js"></script>
+<script>hljs.highlightAll();</script>
+
+            </div>
+
+            <hr style="margin-bottom: 0px; border-top: 2px solid black;" />
+
+            <div id="footer" class="pull-right" style="padding-right: 10px;">
+                Site proudly generated by
+                <a href="http://jaspervdj.be/hakyll">Hakyll</a>
+            </div>
+        </div>
+
+        <script>
+            // The callbacks we wanna use
+            // Phone-home, telling Google Analytics various metrics/dimensions
+
+            // Use custom dimensions & metrics
+            var AnalyticDimensionReaderKind = 'dimension1';
+            var AnalyticMetricActiveTime      = 'metric1';
+            var AnalyticMetricLongestIdleTime = 'metric2';
+            var AnalyticMetricReadCount       = 'metric3';
+
+            var gaCallbacks = {
+                "scrollPercent": function(ms, perc) {
+                    if (perc > 85) {
+                        // EVENT: Page read
+                        ga('send', {
+                            hitType:       'event',
+                            eventCategory: 'Scrolling',
+                            eventAction:   'atBottom',
+                            eventValue:    String(ms)
+                        });
+                    }
+                },
+                "read": function(ms, ct, timeToReach) {
+                    // Use this to set DIMENSION
+                    // timeToReach < 5s ==> Skim (default = Visitor)
+                    if (timeToReach < 5 * 1000) {
+                        // dimension1 = ReaderKind
+                        ga('set', AnalyticDimensionReaderKind, "skimmer");
+                    }
+
+                    // timeToReach > 30s ==> Reader
+                    if (timeToReach > 30 * 1000) {
+                        // dimension1 = ReaderKind
+                        ga('set', AnalyticDimensionReaderKind, "reader");
+                    }
+
+                    // EVENT: Page read
+                    ga('send', {
+                        hitType:       'event',
+                        eventCategory: 'Reading',
+                        eventAction:   'read',
+                        eventValue:    String(timeToReach)
+                    });
+
+                    // METRIC
+                    ga('set', AnalyticMetricReadCount, String(ct));
+                },
+                "initialIdle": function(ms) {
+                    // EVENT: Started Reading
+                    ga('send', {
+                        hitType:       'event',
+                        eventCategory: 'Scrolling',
+                        eventAction:   'begun',
+                        eventValue:    String(ms)
+                    });
+                },
+                "timeSpent": function(total, active, curIdle, initIdle, longestIdle) {
+                    // Update METRIC(S)?
+                    ga('set', AnalyticMetricActiveTime, String(active));
+                    ga('set', AnalyticMetricLongestIdleTime, String(longestIdle));
+                },
+                "idle": function(ms) {
+                },
+                "longestIdle": function(ms) {
+                }
+            }
+
+            window.onload = function() {
+                myAnalyticsInit(gaCallbacks);
+
+                //
+                // Initial dimensions & metrics
+                //
+
+                ga('set', AnalyticMetricReadCount, String(0));
+
+                // EVENT: Page load
+                ga('send', {
+                    hitType:       'event',
+                    eventCategory: 'pageLoad',
+                    eventAction:   'begun',
+                    eventValue:    String(ms)
+                });
+
+                // DIMENSION: visitor
+                ga('set', AnalyticDimensionReaderKind, "visitor");
+            }
+        </script>
+    </body>
+</html>

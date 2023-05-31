@@ -8,8 +8,117 @@
         <name>Richard Goulter</name>
         <email>richard.goulter+blog@gmail.com</email>
     </author>
-    <updated>2023-05-14T00:00:00Z</updated>
+    <updated>2023-05-29T00:00:00Z</updated>
     <entry>
+    <title>XCOM2 WOTC Added Some Good Parts</title>
+    <link href="http://www.rgoulter.com/blog//posts/games/2023-05-29-xcom2-wotc-added-some-good-parts.html" />
+    <id>http://www.rgoulter.com/blog//posts/games/2023-05-29-xcom2-wotc-added-some-good-parts.html</id>
+    <published>2023-05-29T00:00:00Z</published>
+    <updated>2023-05-29T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<h2 id="xcom2-wotc">XCOM2 WotC</h2>
+<p>I bought XCOM2 WotC (“War of the Chosen”) in a bundle for the Nintendo Switch. I’d completed a playthrough of the base game first. Overall, I found the game enthralling, but didn’t enjoy the RNG parts and so save-scummed my way through.</p>
+<p>I just completed a playthrough of XCOM2 WotC. And while I still don’t like the RNG parts, WotC added some stuff which I thought was quite fun.</p>
+<p>Broadly, the changes it made:</p>
+<ul>
+<li><p>New character classes: a stealthy sniper, and two other classes I didn’t find useful.</p></li>
+<li><p>New enemy bosses: though fortunately, not quite as difficult as the bullshit Alien Rulers from XCOM2’s DLC.</p></li>
+<li><p>Additional strategic components: you can assign your squad members to spend time away on non-gameplay missions.</p></li>
+<li><p>Some more map varieties; including maps with zombie-like enemies.</p></li>
+<li><p>Squadmate bonding. Which I didn’t use as much as I should have.</p></li>
+</ul>
+<p>To a greater or lesser extent, I liked these additions.</p>
+<p>I also opted to play the game with “2x long mission timers”, “2x long game limit timer”, which eased some of the stress from playing.</p>
+<h2 id="new-character-classes">New Character Classes</h2>
+<p>From what I’d known of XCOM2 before playing it, this is the part I was most apprehensive about. – There being so many character classes, that it’d be overwhelming.</p>
+<p>I do think it could benefit from being simplified. (Or benefit from the complexity moving about to some other layer of the game).</p>
+<p>The ‘basic’ classes are the ‘rifleman (who can hack things)’, ‘the shotgunner (who also has a sword)’, ‘the Animal Mother wannabe with a big machine gun’, and ‘the sniper’. XCOM2 also has ‘the wizard’ and ‘the robot’.</p>
+<p>What WotC adds is a few rarer classes:</p>
+<ul>
+<li>A ‘stealth sniper’.
+<ul>
+<li>The main thing this class has over the regular sniper is “concealment” as an individual. This is the same “concealment” that the team gets which allows for the ambush mechanics, but since it applies to the ‘stealth sniper’ as an individual unit, it means the ‘stealth sniper’ can stay hidden while the other units aren’t.</li>
+<li>This unit ends up being super useful for scouting out the map, since it can ‘see’ the enemies, without aggro’ing the enemies.</li>
+<li>However, the unit isn’t as good at dealing a lot of power to multiple units, so isn’t always better than the normal sniper.</li>
+</ul></li>
+<li>A ‘skirmisher’ unit.
+<ul>
+<li>idk. It has a submachine gun, and can shoot twice in one turn (or ‘shoot, then move’).
+<ul>
+<li>It also has a grappling hook, and can hook enemies towards it &amp; melee that enemy.</li>
+</ul></li>
+</ul></li>
+<li>A ’battlemage unit.
+<ul>
+<li>It gets magic points by using its magic sword to kill enemies.</li>
+</ul></li>
+</ul>
+<p>The ‘stealth sniper’ is powerful to use right from the get-go, and gets even more powerful as it levels up.</p>
+<p>The other two classes… maybe someone found them useful. Or maybe they’re really powerful when levelled up. But, I generally didn’t find them useful.</p>
+<p>(I believe XCOM2 also tries to encourage using the DLC stuff by-way-of having some DLC stuff only be weak to other DLC stuff. I think that’s dubious design).</p>
+<h2 id="new-enemy-bosses">New Enemy Bosses</h2>
+<p>The new enemy bosses are the ‘Chosen’.</p>
+<p>These aren’t as bullshit as the Alien Rulers; the Alien Rulers were both powerful <em>AND</em> moved/attacked after every <em>action</em> you took(!!!).</p>
+<p>The Chosen each add their own effects to the map.</p>
+<p>In the order I encountered them:</p>
+<ol type="1">
+<li>The ‘ninja’ enemy boss.
+<ul>
+<li>Can teleport around the map, stun any of your units, then runs off somewhere far away where you can’t attack them.</li>
+</ul></li>
+<li>The ‘sniper’ enemy boss.
+<ul>
+<li>Uhm. … Might have a “I’m gonna shoot you next turn!” area-of-effect,
+which is easily avoided.
+<ul>
+<li>To be clear: this is much less powerful than the effects the standard, common enemies are able to inflict.</li>
+</ul></li>
+</ul></li>
+<li>The ‘mage’ enemy boss.
+<ul>
+<li>Uhm. Can spawn low tier enemies, I think?</li>
+</ul></li>
+</ol>
+<p>So. Starting off with the hardest enemy boss somewhat affected my feeling towards it.</p>
+<p>The most annoying thing about these is the missions to defeat them involve “infinitely spawning enemies”, similar to the final mission.</p>
+<h2 id="new-strategic-component-covert-actions-teammate-bonding">New Strategic Component: Covert Actions, Teammate Bonding</h2>
+<p>I think these made interesting additions.</p>
+<p>With “covert actions”, you assign some of your soldiers to a particular mission. So, the ‘cost’ is that these soldiers will be unavailable while on this mission. The benefits vary; sometimes it adds stats for the soldiers assigned. – One thing I liked here is that sometimes the soldiers could get “ambushed”, so you’d need to complete a small mission with these two soldiers to get them to safety. (This happened frequently enough that you’d have to worry about it, but not so frequently that it became boring or expected).</p>
+<p>I like that because it’s a nice set of trade-offs. – You might want to send your best sniper on a mission which will add 5 to their aim stat, but you’d need to trust they can get out of an ambush situation, or that you won’t need that sniper on a mission in the meantime.</p>
+<p>The teammate bonding.. I didn’t make much use of this. But the effects at level 3 look to be pretty powerful, so I kinda wish I had. – “Bonding” is sending the same pairs of soldiers out on missions together. The more you do that, the more benefits you get. – The first level of benefits involves being able to ‘share’ one action-point from one squadmate to the other, which ends up being <em>very</em> useful!</p>
+<h2 id="more-map-varieties-zombie-like-maps-and-rebels-with-guns">More Map Varieties: Zombie-like Maps, and Rebels with Guns</h2>
+<p>One thing XCOM suffers from is just how same-y the missions can get. – Every mission can be described as “get from A to Z, do it quickly, kill every enemy you see”.</p>
+<p>Any mission that’s not like that stands out.<br />
+(And, no, randomly throwing minibosses into levels doesn’t “add variety”).</p>
+<h4 id="zombies">Zombies</h4>
+<p>I was pleasantly surprised by the zombie-infected maps.<br />
+That is, there are some maps which are filled with zombies. Since XCOM is usually focused on “your 4 squadmates vs 3 tough enemy units”, in order to handle “vs 6+ zombies”, the game adds a couple of rules: if you kill a zombie, your unit gets 1 more action point. (So instead of just shooting once, you can shoot 3 times if each shot kills a zombie). And, using explosives attracts a horde of zombies.</p>
+<p>Part of what I liked is it does a good job of making your units feel properly powerful. (Often it takes just one or two of your units to dispatch all of the zombies on the screen).</p>
+<p>I also like that: it adds a tactical drawback to using explosives above/beyond “you can’t use your grenade now and use it later too”.</p>
+<p>An additional tactical aspect this adds is: the zombies will attack the regular alien enemies, too (and vice versa). – So you don’t necessarily want to dispatch all the zombies; or maybe you do. – It adds an interesting decision.</p>
+<h4 id="rebels-with-guns">Rebels With Guns</h4>
+<p>I also liked that there are missions which will feature friendly NPCs with guns.<br />
+Rather. In XCOM, you’ll sometimes get missions where you have to rescue a bunch of civilians from the genocidal aliens.<br />
+With XCOM2 WotC, some of these missions instead involve rescuing a friendly rebel base which in under attack from aliens.</p>
+<p>I feel this makes more sense than not from a worldbuilding perspective.<br />
+On the one hand, there’s the same uncanny “your team arrived just in time” problem that the other missions have. (Your dropship flies halfway around the world, and yet manages to always arrive in just-enough-time).<br />
+On the other hand, I think it makes sense to have rapid-response forces react to enemy strikes. And it makes sense that there would be rebel forces which have guns.</p>
+<p>From a gameplay perspective, these maps do add more enemies to deal with. But, it’s also nice to have more units fighting the enemies, too.</p>
+<h2 id="wotcs-new-stuff-enhances-xcom-at-its-best-fun-tactical-combinations">WotC’s New Stuff Enhances XCOM at its Best: Fun Tactical Combinations</h2>
+<p>The new abilities also added room for some more fun situational tactical combinations.</p>
+<p>I think that’s where XCOM is at its most fun.</p>
+<p>Albeit, these all sound like complicated sequences of Yugioh card moves:</p>
+<p>One I liked:<br />
+Using the stealth sniper’s ‘sticky bomb’ and ‘stealth shoot’ in tandem with the sniper’s ‘kill everything that moves in this zone’ ability.<br />
+That is: The stealth sniper has a ‘sticky bomb’ that can be thrown onto an enemy (somehow without the enemy noticing), which explodes when the enemy takes damage. The stealth sniper also has an ability to shoot without breaking stealth (which is usable once per turn). The regular sniper has a “kill zone” ability which will shoot at anything that moves in a zone during that turn.<br />
+Also: the stealth sniper can be in stealth and spot a group of enemies even when the other units have broken from stealth. It’s still possible to set up the “kill zone” and have the enemies be far away enough that they don’t aggro despite the sniper being able to set up the “kill zone”.<br />
+It’s a nice ‘second ambush’, which quickly does a lot of damage to a group of enemies (if not outright destroy them)!</p>
+<p>Another I liked:<br />
+I saw there was a tech tower which had a 100% chance to ‘restore squad’s action points that turn’. And I had a heavy (machine gun + grenade launcher) unit who had a bond with a hacker unit; and that heavy unit had the upgrade such that shooting a grenade wouldn’t end its turn…<br />
+This resulted in: setting up an ambush, with every unit (except the heavy) poised on overwatch – shoot the first thing that moves. Then, using the heavy unit to lob a grenade (and thus do a bit of damage to each of the enemies). This aggro’d the enemies, who then moved to cover; the enemies moving to cover then each triggers an overwatch reaction shot from my squad. <em>Then</em> I was able to have my heavy unit share its remaining action point with the hacker; that hacker then hacked the tower to restore all the action points for the squad.<br />
+The net effect is being able to execute an ambush, but then have another turn for free (instead of normally having to let the enemy have a turn after the ambush is done).</p>
+<p>I can agree that these are fun in part because the whole game isn’t filled with this. If everything was overpowered tactics, it wouldn’t feel overpowered. These opportunities are organic, and not on a pre-scripted linear path.</p>]]></summary>
+</entry>
+<entry>
     <title>XCOM2 has its Moments of Fun</title>
     <link href="http://www.rgoulter.com/blog//posts/games/2023-05-14-xcom2-has-its-moments-of-fun.html" />
     <id>http://www.rgoulter.com/blog//posts/games/2023-05-14-xcom2-has-its-moments-of-fun.html</id>
@@ -720,61 +829,6 @@ Instead, to type <code>UPPERCASE</code>, you end up having to alternate use of t
 <p>Rather. The CapsLock functionality itself isn’t inherently useless, and needn’t be banished.<br />
 It’s that, in a standard keyboard, the real-estate of “on home row, easy to reach” that the CapsLock key occupies is put to much better use by using it for Escape (or Ctrl, or dual-use Escape/Ctrl).<br />
 Since a fancy keyboard is nicer to use (the modifier keys are easy to each, and layers allow bringing more keys to within easy reach), you get to use the CapsLock key without it taking up space which could be better utilized.</p>]]></summary>
-</entry>
-<entry>
-    <title>The just Command Runner is an Neat Tool</title>
-    <link href="http://www.rgoulter.com/blog//posts/programming/2022-10-17-the-just-command-runner-is-an-neat-tool.html" />
-    <id>http://www.rgoulter.com/blog//posts/programming/2022-10-17-the-just-command-runner-is-an-neat-tool.html</id>
-    <published>2022-10-17T00:00:00Z</published>
-    <updated>2022-10-17T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<p>I came across the tool <a href="https://just.systems/man/en/chapter_1.html">just</a>.</p>
-<p>It’s a tool for running commands/scripts.</p>
-<p>My initial impression was “that’s it?”.</p>
-<p>I might describe it slightly differently, compared to other common workflows:</p>
-<ul>
-<li>It’s common to see <code>make</code> used with a bunch of <code>.PHONY:</code> targets. The point
-of a <code>make</code> is to describe how some target is built. But since people will
-often want to run tasks (e.g. run tests with <code>make test</code>), a ‘phony’ target
-is a task where the target isn’t a file that gets built.
-<ul>
-<li>Compared to “use <code>make</code> with a bunch of <code>.PHONY</code> targets”, <code>just</code> has some
-nice quality of life features.
-<ul>
-<li>e.g. with <code>just</code>, you don’t have to indent the definitions using Tabs.</li>
-<li>e.g. <code>just</code> can list the targets in its <code>justfile</code>.</li>
-</ul></li>
-</ul></li>
-<li>In the NodeJS ecosystem, its <code>package.json</code> files often contain a <code>scripts</code>
-property, which is used to describe common tasks that will be run when
-working with the project.
-<ul>
-<li>Compared to this, a <code>justfile</code> is more expressive / less constrained.
-<ul>
-<li>e.g. ‘make with <code>.PHONY</code> targets’ is more expressive than
-<code>package.json</code>’s scripts`.</li>
-</ul></li>
-</ul></li>
-<li>It’s common to have a ‘script directory’ where you keep a bunch of scripts
-for common functionality.
-<ul>
-<li>Compared to this, <code>just</code> allows for a consistent starting point, some
-quality of life features (e.g. by-default always starting scripts with
-starting directory being the <code>justfile</code>’s directory) and allow for
-integration with editors.</li>
-</ul></li>
-</ul>
-<p>Overall, I find that quite persuasive: it’s more polished/tailored than <code>make</code>
-for a particular use case; and that use case is something which developers
-definitely make use of.</p>
-<p>There is the downside that <code>just</code> isn’t a standard tool that you can hope to
-find on most systems (in contrast to e.g. <code>python</code>, <code>bash</code>, or maybe <code>awk</code> or
-<code>make</code>).<br />
-But, installing packages isn’t all that hard. (And <code>just</code> is <a href="https://just.systems/man/en/chapter_4.html">available in many
-places</a>).<br />
-And I use <code>nix</code>, so it’s especially easy to ensure it’s available when I want
-it.</p>
-<p>I think this is a good example of “sometimes better isn’t MUCH better; it’s
-merely slightly better”.</p>]]></summary>
 </entry>
 
 </feed>
