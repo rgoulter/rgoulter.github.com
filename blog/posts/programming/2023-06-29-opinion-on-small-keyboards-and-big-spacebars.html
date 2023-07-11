@@ -1,0 +1,410 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Opinion on Small Keyboards and Big Spacebars - Richard Goulter's Blog</title>
+
+        <!-- My (Old) CSS theme -->
+        <link rel="stylesheet" type="text/css" href="../../css/default.css" />
+
+        <!--
+            jQuery & jQueryUI
+        -->
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css" />
+
+        <!--
+            Pandoc Style CSS
+            (for syntax highlighted snippets)
+        -->
+        <link rel="stylesheet" type="text/css" href="../../css/syntax.css" />
+
+        <!--
+            Bootstrap
+        -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+        <style>
+            /*
+             * Bootstrap defines blockquote as 17px,
+             * so it looks stupidly large in my blogposts. */
+            blockquote {
+                font-size: 14px;
+            }
+        </style>
+
+        <!--
+            Waypoints, and Waypoints-Sticky,
+            so we can do this:
+            http://imakewebthings.com/waypoints/shortcuts/sticky-elements/
+        -->
+        <script src="../../js/jquery.waypoints.min.js"></script>
+        <script src="../../js/sticky.min.js"></script>
+
+        <!-- My analytics stuff -->
+        <script src="../../js/my_analytics.js"></script>
+        <script src="../../js/my_analytics_debug.js"></script>
+
+        <!--
+            TOCify
+        -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js"></script>
+
+        <!--
+            Patched TOCify css file.
+            (Don't want fixed `.tocify`).
+        -->
+        <link rel="stylesheet" type="text/css" href="../../css/jquery.tocify.css" />
+
+        <style>
+        .navbar {
+            margin-bottom: 0px;
+        }
+
+        .banner-image {
+            width:100%;
+        }
+
+        .banner {
+            margin-left: 0px;
+            margin-right: 0px;
+        }
+
+        body {
+            background-color: #e2e2e2;
+        }
+
+        #page {
+            padding-left:0;
+            padding-right:0;
+            background-color: #ffffff;
+        }
+        </style>
+
+        <!-- Google Analytics -->
+        <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+          ga('create', 'UA-73116015-1', 'auto');
+          ga('send', 'pageview');
+        </script>
+    </head>
+    <body>
+        <div id="page" class="container">
+            <!-- This, with no padding on left/right -->
+            <div class="banner">
+                <nav class="navbar navbar-default">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+
+            <!-- The Hamburger -->
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../../">Richard Goulter's Blog</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="../../">Home</a></li>
+            <li><a href="../../yi.html">Yi</a></li>
+            <li><a href="../../emacs.html">Emacs</a></li>
+            <li><a href="../../what-i-wish-i-knew-when-i-started-using-nix.html">Nixpkgs</a></li>
+            <li><a href="../../archive.html">Archive</a></li>
+        </ul>
+    </div>
+</nav>
+
+            </div>
+
+            <hr style="margin: 0px; border-top: 5px solid black;" />
+
+            <div id="content" class="container">
+                <h1>Opinion on Small Keyboards and Big Spacebars</h1>
+                <div class="info">
+    Posted on June 29, 2023
+    
+        by Richard Goulter
+    <br />
+    
+    Tags: 
+    
+</div>
+
+<p>The mechanical keyboard hobby pretty much exploded in popularity during the pandemic.</p>
+<p>“Mechanical keyboards” generally brings to mind the loud, clicky switches;
+or perhaps people who have spent a lot of time (and often money) in order
+to get a keyboard that feels nice.</p>
+<p>But, there’s a niche part of the hobby which is passionate about
+playing around with more exotic keyboard designs.</p>
+<p>Rather. The mechanical keyboard switches allow for manufacturing
+low volumes of keyboards which improve upon the standard keyboard design.</p>
+<p>The standard keyboard design suffers several problems,
+which make the keyboard less than efficient:</p>
+<ol type="1">
+<li><p>The keyboard’s spacebar is impractically big.</p></li>
+<li><p>The hands have to be close together, rather than at more natural distances apart.</p></li>
+<li><p>It’s asymmetrical.</p></li>
+<li><p>The rows are staggered (again, asymmetrically).</p></li>
+<li><p>There are keys of different sizes.</p></li>
+</ol>
+<p>For myself, although I can understand spending more money to get a ‘nicer feeling keyboard’,
+I cannot understand why anyone would pay luxury prices for
+keyboards which still suffer these problems.</p>
+<p>(“Cheap Logitech keyboard” gets to answer these by way of: this is what keyboards have always been
+and what people are used to. With economies of scale, you get to have a very cheap keyboard).</p>
+<p>But to explain why I think each of the above is a design flaw,
+and how custom mechanical keyboards tend to improve on these:</p>
+<h3 id="design-flaw-the-spacebar-is-impractically-big">Design Flaw: The Spacebar is Impractically Big</h3>
+<p>The spacebar is impractically big. It’s often 6 times as large as the normal keys.</p>
+<p>Or to put it another way: our thumbs are much stronger than our pinkies.
+But on a standard keyboard, our thumbs pretty much only get to use the spacebar, and the pinkies
+tend to get used frequently for all sorts of important keys (such as backspace, shift, enter, etc.).</p>
+<p>There’s no good reason for the spacebar to be that big: although not everyone presses the spacebar in the same place,
+everyone will tend to push the spacebar consistently in the same place they press it.
+(As opposed to using the full with of the spacebar).</p>
+<p>It would be better to replace the wide spacebar with a key that’s as wide as the standard keys;
+this would allow putting another 5 keys in the same space. – It wouldn’t matter what those keys did;
+anything would be a big improvement.</p>
+<h5 id="multiple-thumb-keys-hugely-increase-what-your-hands-can-do-without-moving">Multiple Thumb Keys Hugely Increase What Your Hands Can Do Without Moving</h5>
+<p>The term “home row” refers to the row of keys where your hand rests when it’s not typing.
+The ‘F’ and ‘J’ keys have bumps on them which allow your hands to find their place,
+without you having to look for them.</p>
+<p>If instead of one big spacebar, there were 6 individual keys, then your thumbs would be able to
+use 2-3 keys each.</p>
+<p>e.g. I like using these for Space, Backspace, Enter, Esc, Tab, Del. (As a developer, I use the Esc key frequently).</p>
+<p>Whereas, with the spacebar being so big, in order to hit those keys, you’d have to either
+stretch your pinky, or move your hand from home row.</p>
+<h5 id="thumb-keys-are-great-layer-keys">Thumb Keys are Great Layer Keys</h5>
+<p>“Layers” allow for re-using a key for multiple purposes.</p>
+<p>This idea is extremely common on laptop keyboards: there’s often a “Fn” key,
+and the keys will indicate what functionality they have if pressed when the Fn key is held.
+e.g. “Volume Up” / “Volume Down” might not have their own keys, but might be available
+when a Fn key is pressed.</p>
+<p>That’s an example of using keymap layers.</p>
+<p>From a pessimistic perspective, it’s a technique used by small keyboards to cope with not having so many keys.</p>
+<p>From an optimistic perspective, it allows more functionality without having to have more keys.</p>
+<p>Thumb keys are excellent keys to use for as “Fn” keys for layers.</p>
+<h3 id="aside-dual-use-keys-are-neat">Aside: Dual-Use Keys are Neat</h3>
+<p>One idea in the keyboard space which is useful for really getting
+the most out of a keyboard is “key behaves like T when tapped, like H when held down”.</p>
+<p>It’s relatively common for programmers to come across this good idea:
+When using Vim, programmers want to tap Esc all the time;
+when using MacOS, programmers want to hold Ctrl all the time. Programmers pretty much
+don’t want to use CapsLock. (Not that frequently, anyway).<br />
+So, solution: use the CapsLock key as an Esc key when it’s tapped, but have it act as a Ctrl key when it’s held down.</p>
+<p>Above, I was pointing out that the weak-pinky finger gets used for Shift, Ctrl, Win, Alt keys.. one neat idea to
+alleviate that is to put these modifier keys underneath the F,D,S,A keys (and J,K,L,; keys) using this dual-use
+tap-hold functionality. – This technique is known as “home row modifiers”, or “home row mods”; since it allows
+using the modifier keys without having to leave home row.</p>
+<p>Similarly. Above I argue that thumb keys are well placed for backspace, and are well placed
+for use with layers. Indeed, I think having these as dual use is a good idea, too.</p>
+<h3 id="design-flaw-the-hands-are-too-close-together">Design Flaw: The Hands are Too Close Together</h3>
+<p>While this is (to an extent) unavoidable with small devices like laptops,
+what I mean is that for desktops, keyboards can be in “split” halves.</p>
+<p>This allows positioning each half of the keyboard so that the hands can rest
+at a more natural distance.</p>
+<p>I’ve seen for many people, this is a significant improvement. I’m not as won over.</p>
+<p>I also see there are many keyboards which are “split”, but retain
+all the other design flaws mentioned above.</p>
+<p>Anyway. Split keyboard designs are quite popular amongst the niche
+of mechanical keyboard enthusiasts that prefer exotic designs.</p>
+<h3 id="design-flaw-the-keyboard-is-asymmetrical">Design Flaw: The Keyboard is Asymmetrical</h3>
+<p>The standard keyboard is asymmetrically laid out.
+With the hands resting on home row, there are far more keys to the right than to the left.
+That’s particularly strange, given that most people use a mouse to the right of the keyboard.</p>
+<p>Even laptop keyboards suffer the same. – Worse, it’s easy to come across
+laptop keyboards which don’t have all four modifier keys (Shift, Ctrl, Win, Alt)
+on the right hand side.</p>
+<p>At a glance, it might look like the key map is symmetrical; but, the asymmetry
+is clear when considering that “Q” is the left hand pinky’s, and has one key to its left;
+whereas “P” is the right hand pinky’s, and has 3-4 to its right.</p>
+<p>To me, it doesn’t make sense why you’d introduce that asymmetry. – Why add keys to one side,
+but not to the other?</p>
+<h3 id="design-flaw-the-key-rows-are-staggered">Design Flaw: The Key Rows Are Staggered</h3>
+<p>This somewhat goes hand in hand with the above point.</p>
+<p>The <a href="https://golem.hu/board/Katana60-202.html">Katana60</a> one of one a <em>very few</em> keyboards
+I’m aware of that are symmetrical while retaining the row stagger. (It aims to use
+keys from a standard keyset; so, I guess I’ll give it that).</p>
+<p>Most of what I dislike about row stagger could be blamed on asymmetry:
+it hardly makes sense for the left hand’s keys to “slant left” with the same slant
+that the right hand has. – I mean, “R” relative to “F” is the same as “U” relative to “J”; but,
+the slants should be <em>mirrored</em>.</p>
+<p>What does seem more sensible is either to lay the keys out in a grid, or to stagger the columns.
+(I’ve also seen keys “splayed” out).</p>
+<p>The grid arrangement is called “ortholinear”. (Despite that “ortho” and “linear” both mean ‘straight’ in Greek, Latin).</p>
+<p>Staggering the columns means that each column of keys is straight, but each column is staggered compared to the one
+next to it.</p>
+<p>These all try and deal with how the fingers reach the keys on a flat keyboard.
+Perhaps something like a Maltron or a Dactyl Manuform are much better than either of these.<br />
+– For flat keyboards, I’m willing to compromise.</p>
+<p>95% of what makes a row stagger bad is the asymmetry. But, my intuition is still
+that there are good reasons row stagger is much rarer once breaking from the traditional shape.</p>
+<h3 id="design-flaw-the-keys-are-different-sizes">Design Flaw: The Keys are Different Sizes</h3>
+<p>This is arguably a consequence of the above design flaws.</p>
+<p>But I’m also not sure why you’d design keyboards where the keys had different sizes?</p>
+<p>Rather.</p>
+<p>One consequence of keys having different sizes is that keycap sets
+may not be compatible with every keyboard.</p>
+<p>This affects the exotic keyboards I like, which only have space for “1U” keys.</p>
+<p>But I see that keycap sets will often have the same modifier keys
+in an additional two or three different sizes. – It seems wasteful and silly;
+or it would, if all keys were “1U” big all the time.</p>
+<h3 id="aside-comfort-is-the-main-goal-not-speed">Aside: Comfort is the Main Goal, Not Speed</h3>
+<p>I think the most common reaction people have in discussions about
+alternative keyboard stuff like ergonomic layouts, or the Dvorak layout,
+is asking whether such alternatives are faster.</p>
+<p>Perhaps the thought process is: “I’m fine with my keyboard as-is; but, sure,
+if I could type faster then it would be worth putting in effort to learn a new thing”.</p>
+<p>The most common comment I do see from people who have used these
+alternative methods (different keyboard layout, etc.) is that they are
+much more comfortable.</p>
+<p>And regarding the above discussion about improving on the design flaws of
+the standard keyboard, the improvements are all about being able to do
+more with your hands without having to leave home row.</p>
+<h3 id="keyboard-recommendations">Keyboard Recommendations</h3>
+<p>So what would I recommend to those who are looking for a keyboard which doesn’t suffer these flaws?</p>
+<p>For desktop use, a good default recommendation is <a href="https://www.zsa.io/moonlander/">ZSA’s Moonlander</a>.</p>
+<p>If you’re rarely using mouse + keyboard work (e.g. the bulk of your work is typing,
+and doesn’t require rapidly entering digits while using the mouse, such as a FPS shooter game would),
+then a keyboard like <a href="https://www.zsa.io/planck/">ZSA’s Planck EZ</a> is hard to beat.</p>
+<p>Those are quite expensive. For a lower cost option from AliExpress, the <a href="https://www.aliexpress.com/item/1005004568409963.html">Idobao ID75</a>
+looks compelling. It fits in a GH60-sized case (which are easy to find), and like (I think) the above it’s got a powerful ARM MCU, hotswap (so no need to solder), and the fancy per-key RGB and RGB underglow.</p>
+<p>For the smaller planck-size, previously I’ve used and recommended the BM40 keyboard. It’s still … okay. The main drawback to the BM40 is that its MCU is the weaker ATMega32U4. It’s powerful enough for a decently sophisticated keymap; but you’ll not really be able to push the keyboard to its full potential.</p>
+<p>Albeit, I don’t use any of these since I got deep enough into the rabbit hole of mechanical keyboards
+to make my own DIY designs. I share these designs <a href="https://github.com/rgoulter/keyboard-labs">in this GitHub repository</a>.</p>
+
+<hr />
+
+<div>
+    
+    
+    <a href="../../posts/programming/2023-06-18-nix-remains-useful-for-side-projects.html" style="float:right; text-align: right;">Older post</a>
+    
+</div>
+<br style="clear: both;" />
+
+<hr />
+
+<!-- Load highlight.js for Syntax Highlighting. -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/bash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/c.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/gherkin.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/haskell.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/lisp.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/nix.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js"></script>
+<script>hljs.highlightAll();</script>
+
+            </div>
+
+            <hr style="margin-bottom: 0px; border-top: 2px solid black;" />
+
+            <div id="footer" class="pull-right" style="padding-right: 10px;">
+                Site proudly generated by
+                <a href="http://jaspervdj.be/hakyll">Hakyll</a>
+            </div>
+        </div>
+
+        <script>
+            // The callbacks we wanna use
+            // Phone-home, telling Google Analytics various metrics/dimensions
+
+            // Use custom dimensions & metrics
+            var AnalyticDimensionReaderKind = 'dimension1';
+            var AnalyticMetricActiveTime      = 'metric1';
+            var AnalyticMetricLongestIdleTime = 'metric2';
+            var AnalyticMetricReadCount       = 'metric3';
+
+            var gaCallbacks = {
+                "scrollPercent": function(ms, perc) {
+                    if (perc > 85) {
+                        // EVENT: Page read
+                        ga('send', {
+                            hitType:       'event',
+                            eventCategory: 'Scrolling',
+                            eventAction:   'atBottom',
+                            eventValue:    String(ms)
+                        });
+                    }
+                },
+                "read": function(ms, ct, timeToReach) {
+                    // Use this to set DIMENSION
+                    // timeToReach < 5s ==> Skim (default = Visitor)
+                    if (timeToReach < 5 * 1000) {
+                        // dimension1 = ReaderKind
+                        ga('set', AnalyticDimensionReaderKind, "skimmer");
+                    }
+
+                    // timeToReach > 30s ==> Reader
+                    if (timeToReach > 30 * 1000) {
+                        // dimension1 = ReaderKind
+                        ga('set', AnalyticDimensionReaderKind, "reader");
+                    }
+
+                    // EVENT: Page read
+                    ga('send', {
+                        hitType:       'event',
+                        eventCategory: 'Reading',
+                        eventAction:   'read',
+                        eventValue:    String(timeToReach)
+                    });
+
+                    // METRIC
+                    ga('set', AnalyticMetricReadCount, String(ct));
+                },
+                "initialIdle": function(ms) {
+                    // EVENT: Started Reading
+                    ga('send', {
+                        hitType:       'event',
+                        eventCategory: 'Scrolling',
+                        eventAction:   'begun',
+                        eventValue:    String(ms)
+                    });
+                },
+                "timeSpent": function(total, active, curIdle, initIdle, longestIdle) {
+                    // Update METRIC(S)?
+                    ga('set', AnalyticMetricActiveTime, String(active));
+                    ga('set', AnalyticMetricLongestIdleTime, String(longestIdle));
+                },
+                "idle": function(ms) {
+                },
+                "longestIdle": function(ms) {
+                }
+            }
+
+            window.onload = function() {
+                myAnalyticsInit(gaCallbacks);
+
+                //
+                // Initial dimensions & metrics
+                //
+
+                ga('set', AnalyticMetricReadCount, String(0));
+
+                // EVENT: Page load
+                ga('send', {
+                    hitType:       'event',
+                    eventCategory: 'pageLoad',
+                    eventAction:   'begun',
+                    eventValue:    String(ms)
+                });
+
+                // DIMENSION: visitor
+                ga('set', AnalyticDimensionReaderKind, "visitor");
+            }
+        </script>
+    </body>
+</html>

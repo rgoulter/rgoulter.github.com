@@ -8,8 +8,220 @@
         <name>Richard Goulter</name>
         <email>richard.goulter+blog@gmail.com</email>
     </author>
-    <updated>2023-05-29T00:00:00Z</updated>
+    <updated>2023-06-29T00:00:00Z</updated>
     <entry>
+    <title>Opinion on Small Keyboards and Big Spacebars</title>
+    <link href="http://www.rgoulter.com/blog//posts/programming/2023-06-29-opinion-on-small-keyboards-and-big-spacebars.html" />
+    <id>http://www.rgoulter.com/blog//posts/programming/2023-06-29-opinion-on-small-keyboards-and-big-spacebars.html</id>
+    <published>2023-06-29T00:00:00Z</published>
+    <updated>2023-06-29T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<p>The mechanical keyboard hobby pretty much exploded in popularity during the pandemic.</p>
+<p>“Mechanical keyboards” generally brings to mind the loud, clicky switches;
+or perhaps people who have spent a lot of time (and often money) in order
+to get a keyboard that feels nice.</p>
+<p>But, there’s a niche part of the hobby which is passionate about
+playing around with more exotic keyboard designs.</p>
+<p>Rather. The mechanical keyboard switches allow for manufacturing
+low volumes of keyboards which improve upon the standard keyboard design.</p>
+<p>The standard keyboard design suffers several problems,
+which make the keyboard less than efficient:</p>
+<ol type="1">
+<li><p>The keyboard’s spacebar is impractically big.</p></li>
+<li><p>The hands have to be close together, rather than at more natural distances apart.</p></li>
+<li><p>It’s asymmetrical.</p></li>
+<li><p>The rows are staggered (again, asymmetrically).</p></li>
+<li><p>There are keys of different sizes.</p></li>
+</ol>
+<p>For myself, although I can understand spending more money to get a ‘nicer feeling keyboard’,
+I cannot understand why anyone would pay luxury prices for
+keyboards which still suffer these problems.</p>
+<p>(“Cheap Logitech keyboard” gets to answer these by way of: this is what keyboards have always been
+and what people are used to. With economies of scale, you get to have a very cheap keyboard).</p>
+<p>But to explain why I think each of the above is a design flaw,
+and how custom mechanical keyboards tend to improve on these:</p>
+<h3 id="design-flaw-the-spacebar-is-impractically-big">Design Flaw: The Spacebar is Impractically Big</h3>
+<p>The spacebar is impractically big. It’s often 6 times as large as the normal keys.</p>
+<p>Or to put it another way: our thumbs are much stronger than our pinkies.
+But on a standard keyboard, our thumbs pretty much only get to use the spacebar, and the pinkies
+tend to get used frequently for all sorts of important keys (such as backspace, shift, enter, etc.).</p>
+<p>There’s no good reason for the spacebar to be that big: although not everyone presses the spacebar in the same place,
+everyone will tend to push the spacebar consistently in the same place they press it.
+(As opposed to using the full with of the spacebar).</p>
+<p>It would be better to replace the wide spacebar with a key that’s as wide as the standard keys;
+this would allow putting another 5 keys in the same space. – It wouldn’t matter what those keys did;
+anything would be a big improvement.</p>
+<h5 id="multiple-thumb-keys-hugely-increase-what-your-hands-can-do-without-moving">Multiple Thumb Keys Hugely Increase What Your Hands Can Do Without Moving</h5>
+<p>The term “home row” refers to the row of keys where your hand rests when it’s not typing.
+The ‘F’ and ‘J’ keys have bumps on them which allow your hands to find their place,
+without you having to look for them.</p>
+<p>If instead of one big spacebar, there were 6 individual keys, then your thumbs would be able to
+use 2-3 keys each.</p>
+<p>e.g. I like using these for Space, Backspace, Enter, Esc, Tab, Del. (As a developer, I use the Esc key frequently).</p>
+<p>Whereas, with the spacebar being so big, in order to hit those keys, you’d have to either
+stretch your pinky, or move your hand from home row.</p>
+<h5 id="thumb-keys-are-great-layer-keys">Thumb Keys are Great Layer Keys</h5>
+<p>“Layers” allow for re-using a key for multiple purposes.</p>
+<p>This idea is extremely common on laptop keyboards: there’s often a “Fn” key,
+and the keys will indicate what functionality they have if pressed when the Fn key is held.
+e.g. “Volume Up” / “Volume Down” might not have their own keys, but might be available
+when a Fn key is pressed.</p>
+<p>That’s an example of using keymap layers.</p>
+<p>From a pessimistic perspective, it’s a technique used by small keyboards to cope with not having so many keys.</p>
+<p>From an optimistic perspective, it allows more functionality without having to have more keys.</p>
+<p>Thumb keys are excellent keys to use for as “Fn” keys for layers.</p>
+<h3 id="aside-dual-use-keys-are-neat">Aside: Dual-Use Keys are Neat</h3>
+<p>One idea in the keyboard space which is useful for really getting
+the most out of a keyboard is “key behaves like T when tapped, like H when held down”.</p>
+<p>It’s relatively common for programmers to come across this good idea:
+When using Vim, programmers want to tap Esc all the time;
+when using MacOS, programmers want to hold Ctrl all the time. Programmers pretty much
+don’t want to use CapsLock. (Not that frequently, anyway).<br />
+So, solution: use the CapsLock key as an Esc key when it’s tapped, but have it act as a Ctrl key when it’s held down.</p>
+<p>Above, I was pointing out that the weak-pinky finger gets used for Shift, Ctrl, Win, Alt keys.. one neat idea to
+alleviate that is to put these modifier keys underneath the F,D,S,A keys (and J,K,L,; keys) using this dual-use
+tap-hold functionality. – This technique is known as “home row modifiers”, or “home row mods”; since it allows
+using the modifier keys without having to leave home row.</p>
+<p>Similarly. Above I argue that thumb keys are well placed for backspace, and are well placed
+for use with layers. Indeed, I think having these as dual use is a good idea, too.</p>
+<h3 id="design-flaw-the-hands-are-too-close-together">Design Flaw: The Hands are Too Close Together</h3>
+<p>While this is (to an extent) unavoidable with small devices like laptops,
+what I mean is that for desktops, keyboards can be in “split” halves.</p>
+<p>This allows positioning each half of the keyboard so that the hands can rest
+at a more natural distance.</p>
+<p>I’ve seen for many people, this is a significant improvement. I’m not as won over.</p>
+<p>I also see there are many keyboards which are “split”, but retain
+all the other design flaws mentioned above.</p>
+<p>Anyway. Split keyboard designs are quite popular amongst the niche
+of mechanical keyboard enthusiasts that prefer exotic designs.</p>
+<h3 id="design-flaw-the-keyboard-is-asymmetrical">Design Flaw: The Keyboard is Asymmetrical</h3>
+<p>The standard keyboard is asymmetrically laid out.
+With the hands resting on home row, there are far more keys to the right than to the left.
+That’s particularly strange, given that most people use a mouse to the right of the keyboard.</p>
+<p>Even laptop keyboards suffer the same. – Worse, it’s easy to come across
+laptop keyboards which don’t have all four modifier keys (Shift, Ctrl, Win, Alt)
+on the right hand side.</p>
+<p>At a glance, it might look like the key map is symmetrical; but, the asymmetry
+is clear when considering that “Q” is the left hand pinky’s, and has one key to its left;
+whereas “P” is the right hand pinky’s, and has 3-4 to its right.</p>
+<p>To me, it doesn’t make sense why you’d introduce that asymmetry. – Why add keys to one side,
+but not to the other?</p>
+<h3 id="design-flaw-the-key-rows-are-staggered">Design Flaw: The Key Rows Are Staggered</h3>
+<p>This somewhat goes hand in hand with the above point.</p>
+<p>The <a href="https://golem.hu/board/Katana60-202.html">Katana60</a> one of one a <em>very few</em> keyboards
+I’m aware of that are symmetrical while retaining the row stagger. (It aims to use
+keys from a standard keyset; so, I guess I’ll give it that).</p>
+<p>Most of what I dislike about row stagger could be blamed on asymmetry:
+it hardly makes sense for the left hand’s keys to “slant left” with the same slant
+that the right hand has. – I mean, “R” relative to “F” is the same as “U” relative to “J”; but,
+the slants should be <em>mirrored</em>.</p>
+<p>What does seem more sensible is either to lay the keys out in a grid, or to stagger the columns.
+(I’ve also seen keys “splayed” out).</p>
+<p>The grid arrangement is called “ortholinear”. (Despite that “ortho” and “linear” both mean ‘straight’ in Greek, Latin).</p>
+<p>Staggering the columns means that each column of keys is straight, but each column is staggered compared to the one
+next to it.</p>
+<p>These all try and deal with how the fingers reach the keys on a flat keyboard.
+Perhaps something like a Maltron or a Dactyl Manuform are much better than either of these.<br />
+– For flat keyboards, I’m willing to compromise.</p>
+<p>95% of what makes a row stagger bad is the asymmetry. But, my intuition is still
+that there are good reasons row stagger is much rarer once breaking from the traditional shape.</p>
+<h3 id="design-flaw-the-keys-are-different-sizes">Design Flaw: The Keys are Different Sizes</h3>
+<p>This is arguably a consequence of the above design flaws.</p>
+<p>But I’m also not sure why you’d design keyboards where the keys had different sizes?</p>
+<p>Rather.</p>
+<p>One consequence of keys having different sizes is that keycap sets
+may not be compatible with every keyboard.</p>
+<p>This affects the exotic keyboards I like, which only have space for “1U” keys.</p>
+<p>But I see that keycap sets will often have the same modifier keys
+in an additional two or three different sizes. – It seems wasteful and silly;
+or it would, if all keys were “1U” big all the time.</p>
+<h3 id="aside-comfort-is-the-main-goal-not-speed">Aside: Comfort is the Main Goal, Not Speed</h3>
+<p>I think the most common reaction people have in discussions about
+alternative keyboard stuff like ergonomic layouts, or the Dvorak layout,
+is asking whether such alternatives are faster.</p>
+<p>Perhaps the thought process is: “I’m fine with my keyboard as-is; but, sure,
+if I could type faster then it would be worth putting in effort to learn a new thing”.</p>
+<p>The most common comment I do see from people who have used these
+alternative methods (different keyboard layout, etc.) is that they are
+much more comfortable.</p>
+<p>And regarding the above discussion about improving on the design flaws of
+the standard keyboard, the improvements are all about being able to do
+more with your hands without having to leave home row.</p>
+<h3 id="keyboard-recommendations">Keyboard Recommendations</h3>
+<p>So what would I recommend to those who are looking for a keyboard which doesn’t suffer these flaws?</p>
+<p>For desktop use, a good default recommendation is <a href="https://www.zsa.io/moonlander/">ZSA’s Moonlander</a>.</p>
+<p>If you’re rarely using mouse + keyboard work (e.g. the bulk of your work is typing,
+and doesn’t require rapidly entering digits while using the mouse, such as a FPS shooter game would),
+then a keyboard like <a href="https://www.zsa.io/planck/">ZSA’s Planck EZ</a> is hard to beat.</p>
+<p>Those are quite expensive. For a lower cost option from AliExpress, the <a href="https://www.aliexpress.com/item/1005004568409963.html">Idobao ID75</a>
+looks compelling. It fits in a GH60-sized case (which are easy to find), and like (I think) the above it’s got a powerful ARM MCU, hotswap (so no need to solder), and the fancy per-key RGB and RGB underglow.</p>
+<p>For the smaller planck-size, previously I’ve used and recommended the BM40 keyboard. It’s still … okay. The main drawback to the BM40 is that its MCU is the weaker ATMega32U4. It’s powerful enough for a decently sophisticated keymap; but you’ll not really be able to push the keyboard to its full potential.</p>
+<p>Albeit, I don’t use any of these since I got deep enough into the rabbit hole of mechanical keyboards
+to make my own DIY designs. I share these designs <a href="https://github.com/rgoulter/keyboard-labs">in this GitHub repository</a>.</p>]]></summary>
+</entry>
+<entry>
+    <title>Nix Remains Useful for Side Projects</title>
+    <link href="http://www.rgoulter.com/blog//posts/programming/2023-06-18-nix-remains-useful-for-side-projects.html" />
+    <id>http://www.rgoulter.com/blog//posts/programming/2023-06-18-nix-remains-useful-for-side-projects.html</id>
+    <published>2023-06-18T00:00:00Z</published>
+    <updated>2023-06-18T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<p><a href="nixos.org/">Nix</a> is a sophisticated package manager.</p>
+<p>Nix has a steep learning curve; but those who do take the time to learn it are
+often enthusiastic about its benefits.</p>
+<p>The trade off with Nix is this: you put in effort up front to declaratively
+describe your software, and then you reap the benefits, such as being able to
+reproduce the same toolchain setup effortlessly.</p>
+<p>One use case I’ve found this useful for has been side projects which I work with infrequently.<br />
+Comparing the typical workflow vs the nix workflow of “returning to a
+sideproject after months/years”:</p>
+<h1 id="typical-workflow-when-returning-to-sideprojects">Typical Workflow When Returning to Sideprojects</h1>
+<p>e.g. The static site generator for my blog uses Haskell.</p>
+<p>So, when I write it, and then return to writing it months/years later, typically
+some effort to tinkering on it would be getting the system set up again.</p>
+<p>If the system package manager (e.g. <code>apt</code> or <code>pacman</code>) doesn’t have the old
+version of the compiler, then I’d have to build the old code with the new
+compiler. Likely this left me in the situation where the code was too old to
+compile; so the project is in a state where I don’t have a working version of
+it.</p>
+<h1 id="workflow-with-nix-when-returning-to-sideprojects">Workflow with Nix When Returning to Sideprojects</h1>
+<p>It’s boring. It works.</p>
+<p>With Nix, you can ensure that you’ll end up with the same (old) compiler &amp;
+libraries which you knew worked previously.</p>
+<p>The hard part of working with Nix is more likely to be getting it set up so it
+works.</p>
+<p>I recently updated the version of the Haskell compiler which my site’s static
+site generator uses.</p>
+<p>It pretty much just worked.</p>
+<p>The only thing that didn’t work: the Nixpkgs provides several versions of the
+GHC compiler, and a large set of Haskell packages, but only tests the packages
+with the current version of the GHC compiler. When I tried newer versions of the
+compiler than was tested to work, for some reason these didn’t work. – This
+isn’t really a big deal for my use case; I’m fine with using the current GHC
+version.</p>
+<h1 id="effort-involved-in-setting-up-nix">Effort Involved in Setting Up Nix</h1>
+<p>It’s easier to get something to build on your machine, than it is to
+build/distribute software.<br />
+And it’s easier to use Nix to get a working development environment than to use
+Nix to describe a package.</p>
+<p>It somewhat overstates it to say “writing a package with Nix is hard”. It can be
+very simple, but it may be very difficult.</p>
+<p>I used the approach described in the <a href="https://nixos.org/manual/nixpkgs/stable/#haskell">nixpkgs manual about its haskell
+support</a>. There’s a nice
+<a href="https://nixos.wiki/wiki/Haskell">NixOS Wiki page for Haskell</a> which also
+describes different ways of using Nix.</p>
+<p>Here’s <a href="https://github.com/rgoulter/my-hakyll-blog/blob/44c1507cd3cc249d00f89e5fc83fdd81ef645cd4/my-hakyll-blog.nix">a link to my current Nix package for my hakyll static site
+generator</a>.</p>
+<p>I don’t recall significant pain in setting that up; although I was learning Nix
+while doing this. e.g. <a href="https://github.com/rgoulter/my-hakyll-blog/commit/42004c09c941c3f7818ecb5e4103ab1726918399">here’s the commit where I upgraded from a shell.nix to a
+default.nix</a>,
+<a href="https://github.com/rgoulter/my-hakyll-blog/commit/8dbd2aebb6648d5677636290f7e34775c814e617">added
+flake.nix</a>,
+<a href="https://github.com/rgoulter/my-hakyll-blog/commit/7576644e8623654c8222349945be3fa63b941932">upgraded from GHC 8.4.3 to
+9.0.2</a>.</p>
+<p>Looking at the <code>my-hakyll-blog.nix</code> file, I don’t love that it duplicates the
+list of packages from the <code>.cabal</code> file. But, it does work, and I haven’t needed
+to change it.</p>]]></summary>
+</entry>
+<entry>
     <title>XCOM2 WOTC Added Some Good Parts</title>
     <link href="http://www.rgoulter.com/blog//posts/games/2023-05-29-xcom2-wotc-added-some-good-parts.html" />
     <id>http://www.rgoulter.com/blog//posts/games/2023-05-29-xcom2-wotc-added-some-good-parts.html</id>
@@ -727,108 +939,6 @@ getting the achievement was more from “playing the post-game for quite some
 time” than from “you have a factory which is producing many green circuits”.</p>
 <p>The remaining achievements I haven’t yet unlocked are related to completing the
 game quickly.</p>]]></summary>
-</entry>
-<entry>
-    <title>Factorio on the Switch Still Scratches the Itch</title>
-    <link href="http://www.rgoulter.com/blog//posts/games/2022-12-11-factorio-on-the-switch-still-scratches-the-itch.html" />
-    <id>http://www.rgoulter.com/blog//posts/games/2022-12-11-factorio-on-the-switch-still-scratches-the-itch.html</id>
-    <published>2022-12-11T00:00:00Z</published>
-    <updated>2022-12-11T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<p>Factorio is a game which is widely regarded as addictingly fun to play.</p>
-<p>The ostensible goal of the game is to assemble &amp; launch a rocket ship.</p>
-<p>The start of the game is reasonably familiar: you control a character, mine some
-ores from resource deposits, and then use these resources to assemble tools or
-whatever item you need. (e.g. you’ll mine some iron ore, put this ore in a
-furnace,
-and use the resulting iron plates to assemble an iron pickaxe).<br />
-– Factorio allows for automating these process. A mining machine can
-automatically gather resources; conveyor belts can automatically move these
-resources along; an assembly machine can automatically assemble some item, and
-inserter arm machines can automatically insert items from the convey belts into
-the assembly machines.</p>
-<p>The first time you play the game (if you don’t read guides first), you’ll
-probably end up with a factory which works, but you’ll certainly end up with
-something that’s difficult to maintain or improve on. You’ll end up with
-a disorganised mess.<br />
-(Then you hear the term “main bus”, and that helps organise things <em>a lot</em>).</p>
-<p>The dynamic of the game ends up feeling very similar to programming or
-electrical engineering.<br />
-So much so that, while I think most programmers who play the game find it
-addictively engaging, there are also those who don’t want to play it. – I think
-it’s one of two responses: “it’s similar to what I do for work, but without
-having to do what others tell me to do, and without having to be reliable. Fun!”
-or “it’s similar to what I do for work, but I don’t benefit from putting in the
-effort.
-Why would I do that?”.<br />
-I mean, there’s a satisfying feeling of constructing a system which works (as
-well as ‘debugging’ why some system doesn’t work).</p>
-<p>I think complementing this is that usually there are multiple things that you
-can do to reduce the mess in your factory; and that improvements often have some
-delay before you see the tangible benefits from them. So there’s often some task
-you can aim towards that feels satisfying to do. (Sid Meier’s Civilization games
-are similarly entralling).</p>
-<p>Probably “fun is in the eye of the beholder”.<br />
-There are parts of Factorio where I think it’s fun for me to come up with my own
-solution to the problem. There are parts where I’d rather lookup a guide for how
-to do it on the Factorio wiki, or some YouTube video.</p>
-<p>I found it fun to play Factorio with particular challenges/goals in mind. One
-achievement requires that you craft only the minimal number of items by hand
-(and use assembly machines to bootstrap the rest). Another achievement was to
-play the game on non-peaceful, but without using solar power.</p>
-<p>“Non-peaceful” mode is the default setting for the enemies’ aggression mode.
-The player’s factory produces pollution; the enemies react to the pollution by
-getting stronger and attacking the player every now and then in waves. Whereas,
-in peaceful mode, enemies will only attack if attacked first (and attacking
-one enemy base doesn’t ‘aggro’ other enemy bases).<br />
-In my experience, non-peaceful mode ‘just’ requires the extra pushback/effort of
-automatically building (sufficient) ammunition/defenses, etc. – It adds a bit
-of pressure/flavor to the game, and isn’t extremely stressful, but I prefer to
-play with peaceful mode.</p>
-<p>At the higher end of things, some players enjoy seeing how frequently their
-factory is able to assemble/launch a rocket (since this requires a well organised
-factory at significant scale). – I’ve not yet tried doing this.</p>
-<p>For the playthroughs I’ve spent significant time on, I inevitably had the same
-task/notes system I use when programming. (Start the day by writing down status
-of WIP; write down tasks to-do, and obstacles faced which need to be resolved).</p>
-<p>Anyway.</p>
-<p>The game was recently released for the Nintendo Switch. I was travelling for a couple of
-weeks, have a Nintendo Switch, and have enjoyed playing Factorio.</p>
-<p>I can vouch that the game scratches the same itch as it does on PC.</p>
-<p>The controls are reasonably nice, although using the controller won’t be as fast
-as using the mouse.</p>
-<p>I think if someone were (somehow) playing through Factorio for the first time on
-the Nintendo Switch, I think they’d opt to play on PC by the time they got to
-the blue science technologies. (About halfway through the game). – Because at
-that point, you’ve unlocked trains and the construction robots and solar power
-and electric furances… there’s lots of stuff which can all be used to improve
-your factory. (Trains are earlier; but, I didn’t bother assembling rail stuff
-until after I’d assembled blue science).</p>
-<p>I’d bet that the Switch is suited to people having the large post-game factories.
-I never noticed performance issues in my playing, though.</p>
-<p>If someone were wondering whether to by Factorio for PC or for the Switch, I’d
-say “yes”. Well, I don’t think anyone’s going to regret buying this game. I
-think PC is the better environment to play it on. But, on the Switch it still
-stratches the same itch just the same.</p>]]></summary>
-</entry>
-<entry>
-    <title>The CapsLock Key was not the Problem</title>
-    <link href="http://www.rgoulter.com/blog//posts/programming/2022-10-28-the-capslock-key-was-not-the-problem.html" />
-    <id>http://www.rgoulter.com/blog//posts/programming/2022-10-28-the-capslock-key-was-not-the-problem.html</id>
-    <published>2022-10-28T00:00:00Z</published>
-    <updated>2022-10-28T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<p>It’s fashionable among developers to give a tip about the CapsLock key: you can switch out its functionality, replacing it with the Escape key.</p>
-<p>When I did this, in order to then type out something like <code>SEQUENCE_OF_UPPERCASE_WORDS</code>, I’d hold down the shift key using my left pinky finger, and type out the letters as necessary.<br />
-– And if you can do that, then the CapsLock key is redundant.</p>
-<p>These days, I prefer using a fancy, symmetrical keyboard. (I think buying an expensive fancy keyboard is justifiable if it’s symmetrical, and offers more keys for the thumb to press; and I don’t think it makes sense to spend a lot of money on a keyboard which isn’t symmetrical, etc.).<br />
-And the fashionable (and I think superior) way of arranging the modifier keys Shift, Ctrl, Windows/Cmd, Alt keys is to put these as dual-use tap-hold keys
-on the home row. (Which allows access to these keys without having to move your hand).</p>
-<p>With such a keyboard, and with home row modifiers, the “use an improper position which stretches your weak pinky finger” technique doesn’t really work.<br />
-Instead, to type <code>UPPERCASE</code>, you end up having to alternate use of the shift key; pressing shift for the opposite side of the letter being pushed.<br />
-– I can do this; but I find it to be slower, and error prone. (It’s easy to miss the timing, and type ‘THhiS’ instead of ‘THIS’, as the Shift key requires holding down ‘h’).</p>
-<p>For long sequences of uppercases letters, it does make sense to have the CapsLock key available. – Though, with a fancy keyboard, you can have the CapsLock key accessible on (or hidden away on) a layer.</p>
-<p>Rather. The CapsLock functionality itself isn’t inherently useless, and needn’t be banished.<br />
-It’s that, in a standard keyboard, the real-estate of “on home row, easy to reach” that the CapsLock key occupies is put to much better use by using it for Escape (or Ctrl, or dual-use Escape/Ctrl).<br />
-Since a fancy keyboard is nicer to use (the modifier keys are easy to each, and layers allow bringing more keys to within easy reach), you get to use the CapsLock key without it taking up space which could be better utilized.</p>]]></summary>
 </entry>
 
 </feed>

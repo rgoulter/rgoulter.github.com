@@ -1,0 +1,326 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Nix Remains Useful for Side Projects - Richard Goulter's Blog</title>
+
+        <!-- My (Old) CSS theme -->
+        <link rel="stylesheet" type="text/css" href="../../css/default.css" />
+
+        <!--
+            jQuery & jQueryUI
+        -->
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css" />
+
+        <!--
+            Pandoc Style CSS
+            (for syntax highlighted snippets)
+        -->
+        <link rel="stylesheet" type="text/css" href="../../css/syntax.css" />
+
+        <!--
+            Bootstrap
+        -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+        <style>
+            /*
+             * Bootstrap defines blockquote as 17px,
+             * so it looks stupidly large in my blogposts. */
+            blockquote {
+                font-size: 14px;
+            }
+        </style>
+
+        <!--
+            Waypoints, and Waypoints-Sticky,
+            so we can do this:
+            http://imakewebthings.com/waypoints/shortcuts/sticky-elements/
+        -->
+        <script src="../../js/jquery.waypoints.min.js"></script>
+        <script src="../../js/sticky.min.js"></script>
+
+        <!-- My analytics stuff -->
+        <script src="../../js/my_analytics.js"></script>
+        <script src="../../js/my_analytics_debug.js"></script>
+
+        <!--
+            TOCify
+        -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js"></script>
+
+        <!--
+            Patched TOCify css file.
+            (Don't want fixed `.tocify`).
+        -->
+        <link rel="stylesheet" type="text/css" href="../../css/jquery.tocify.css" />
+
+        <style>
+        .navbar {
+            margin-bottom: 0px;
+        }
+
+        .banner-image {
+            width:100%;
+        }
+
+        .banner {
+            margin-left: 0px;
+            margin-right: 0px;
+        }
+
+        body {
+            background-color: #e2e2e2;
+        }
+
+        #page {
+            padding-left:0;
+            padding-right:0;
+            background-color: #ffffff;
+        }
+        </style>
+
+        <!-- Google Analytics -->
+        <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+          ga('create', 'UA-73116015-1', 'auto');
+          ga('send', 'pageview');
+        </script>
+    </head>
+    <body>
+        <div id="page" class="container">
+            <!-- This, with no padding on left/right -->
+            <div class="banner">
+                <nav class="navbar navbar-default">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+
+            <!-- The Hamburger -->
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../../">Richard Goulter's Blog</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="../../">Home</a></li>
+            <li><a href="../../yi.html">Yi</a></li>
+            <li><a href="../../emacs.html">Emacs</a></li>
+            <li><a href="../../what-i-wish-i-knew-when-i-started-using-nix.html">Nixpkgs</a></li>
+            <li><a href="../../archive.html">Archive</a></li>
+        </ul>
+    </div>
+</nav>
+
+            </div>
+
+            <hr style="margin: 0px; border-top: 5px solid black;" />
+
+            <div id="content" class="container">
+                <h1>Nix Remains Useful for Side Projects</h1>
+                <div class="info">
+    Posted on June 18, 2023
+    
+        by Richard Goulter
+    <br />
+    
+    Tags: 
+    
+</div>
+
+<p><a href="nixos.org/">Nix</a> is a sophisticated package manager.</p>
+<p>Nix has a steep learning curve; but those who do take the time to learn it are
+often enthusiastic about its benefits.</p>
+<p>The trade off with Nix is this: you put in effort up front to declaratively
+describe your software, and then you reap the benefits, such as being able to
+reproduce the same toolchain setup effortlessly.</p>
+<p>One use case I’ve found this useful for has been side projects which I work with infrequently.<br />
+Comparing the typical workflow vs the nix workflow of “returning to a
+sideproject after months/years”:</p>
+<h1 id="typical-workflow-when-returning-to-sideprojects">Typical Workflow When Returning to Sideprojects</h1>
+<p>e.g. The static site generator for my blog uses Haskell.</p>
+<p>So, when I write it, and then return to writing it months/years later, typically
+some effort to tinkering on it would be getting the system set up again.</p>
+<p>If the system package manager (e.g. <code>apt</code> or <code>pacman</code>) doesn’t have the old
+version of the compiler, then I’d have to build the old code with the new
+compiler. Likely this left me in the situation where the code was too old to
+compile; so the project is in a state where I don’t have a working version of
+it.</p>
+<h1 id="workflow-with-nix-when-returning-to-sideprojects">Workflow with Nix When Returning to Sideprojects</h1>
+<p>It’s boring. It works.</p>
+<p>With Nix, you can ensure that you’ll end up with the same (old) compiler &amp;
+libraries which you knew worked previously.</p>
+<p>The hard part of working with Nix is more likely to be getting it set up so it
+works.</p>
+<p>I recently updated the version of the Haskell compiler which my site’s static
+site generator uses.</p>
+<p>It pretty much just worked.</p>
+<p>The only thing that didn’t work: the Nixpkgs provides several versions of the
+GHC compiler, and a large set of Haskell packages, but only tests the packages
+with the current version of the GHC compiler. When I tried newer versions of the
+compiler than was tested to work, for some reason these didn’t work. – This
+isn’t really a big deal for my use case; I’m fine with using the current GHC
+version.</p>
+<h1 id="effort-involved-in-setting-up-nix">Effort Involved in Setting Up Nix</h1>
+<p>It’s easier to get something to build on your machine, than it is to
+build/distribute software.<br />
+And it’s easier to use Nix to get a working development environment than to use
+Nix to describe a package.</p>
+<p>It somewhat overstates it to say “writing a package with Nix is hard”. It can be
+very simple, but it may be very difficult.</p>
+<p>I used the approach described in the <a href="https://nixos.org/manual/nixpkgs/stable/#haskell">nixpkgs manual about its haskell
+support</a>. There’s a nice
+<a href="https://nixos.wiki/wiki/Haskell">NixOS Wiki page for Haskell</a> which also
+describes different ways of using Nix.</p>
+<p>Here’s <a href="https://github.com/rgoulter/my-hakyll-blog/blob/44c1507cd3cc249d00f89e5fc83fdd81ef645cd4/my-hakyll-blog.nix">a link to my current Nix package for my hakyll static site
+generator</a>.</p>
+<p>I don’t recall significant pain in setting that up; although I was learning Nix
+while doing this. e.g. <a href="https://github.com/rgoulter/my-hakyll-blog/commit/42004c09c941c3f7818ecb5e4103ab1726918399">here’s the commit where I upgraded from a shell.nix to a
+default.nix</a>,
+<a href="https://github.com/rgoulter/my-hakyll-blog/commit/8dbd2aebb6648d5677636290f7e34775c814e617">added
+flake.nix</a>,
+<a href="https://github.com/rgoulter/my-hakyll-blog/commit/7576644e8623654c8222349945be3fa63b941932">upgraded from GHC 8.4.3 to
+9.0.2</a>.</p>
+<p>Looking at the <code>my-hakyll-blog.nix</code> file, I don’t love that it duplicates the
+list of packages from the <code>.cabal</code> file. But, it does work, and I haven’t needed
+to change it.</p>
+
+<hr />
+
+<div>
+    
+    <a href="../../posts/programming/2023-06-29-opinion-on-small-keyboards-and-big-spacebars.html" style="float:left;">Newer post</a>
+    
+    
+    <a href="../../posts/games/2023-05-29-xcom2-wotc-added-some-good-parts.html" style="float:right; text-align: right;">Older post</a>
+    
+</div>
+<br style="clear: both;" />
+
+<hr />
+
+<!-- Load highlight.js for Syntax Highlighting. -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/bash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/c.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/gherkin.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/haskell.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/lisp.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/nix.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js"></script>
+<script>hljs.highlightAll();</script>
+
+            </div>
+
+            <hr style="margin-bottom: 0px; border-top: 2px solid black;" />
+
+            <div id="footer" class="pull-right" style="padding-right: 10px;">
+                Site proudly generated by
+                <a href="http://jaspervdj.be/hakyll">Hakyll</a>
+            </div>
+        </div>
+
+        <script>
+            // The callbacks we wanna use
+            // Phone-home, telling Google Analytics various metrics/dimensions
+
+            // Use custom dimensions & metrics
+            var AnalyticDimensionReaderKind = 'dimension1';
+            var AnalyticMetricActiveTime      = 'metric1';
+            var AnalyticMetricLongestIdleTime = 'metric2';
+            var AnalyticMetricReadCount       = 'metric3';
+
+            var gaCallbacks = {
+                "scrollPercent": function(ms, perc) {
+                    if (perc > 85) {
+                        // EVENT: Page read
+                        ga('send', {
+                            hitType:       'event',
+                            eventCategory: 'Scrolling',
+                            eventAction:   'atBottom',
+                            eventValue:    String(ms)
+                        });
+                    }
+                },
+                "read": function(ms, ct, timeToReach) {
+                    // Use this to set DIMENSION
+                    // timeToReach < 5s ==> Skim (default = Visitor)
+                    if (timeToReach < 5 * 1000) {
+                        // dimension1 = ReaderKind
+                        ga('set', AnalyticDimensionReaderKind, "skimmer");
+                    }
+
+                    // timeToReach > 30s ==> Reader
+                    if (timeToReach > 30 * 1000) {
+                        // dimension1 = ReaderKind
+                        ga('set', AnalyticDimensionReaderKind, "reader");
+                    }
+
+                    // EVENT: Page read
+                    ga('send', {
+                        hitType:       'event',
+                        eventCategory: 'Reading',
+                        eventAction:   'read',
+                        eventValue:    String(timeToReach)
+                    });
+
+                    // METRIC
+                    ga('set', AnalyticMetricReadCount, String(ct));
+                },
+                "initialIdle": function(ms) {
+                    // EVENT: Started Reading
+                    ga('send', {
+                        hitType:       'event',
+                        eventCategory: 'Scrolling',
+                        eventAction:   'begun',
+                        eventValue:    String(ms)
+                    });
+                },
+                "timeSpent": function(total, active, curIdle, initIdle, longestIdle) {
+                    // Update METRIC(S)?
+                    ga('set', AnalyticMetricActiveTime, String(active));
+                    ga('set', AnalyticMetricLongestIdleTime, String(longestIdle));
+                },
+                "idle": function(ms) {
+                },
+                "longestIdle": function(ms) {
+                }
+            }
+
+            window.onload = function() {
+                myAnalyticsInit(gaCallbacks);
+
+                //
+                // Initial dimensions & metrics
+                //
+
+                ga('set', AnalyticMetricReadCount, String(0));
+
+                // EVENT: Page load
+                ga('send', {
+                    hitType:       'event',
+                    eventCategory: 'pageLoad',
+                    eventAction:   'begun',
+                    eventValue:    String(ms)
+                });
+
+                // DIMENSION: visitor
+                ga('set', AnalyticDimensionReaderKind, "visitor");
+            }
+        </script>
+    </body>
+</html>
