@@ -1,0 +1,433 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Two Kinds of Small Keyboards - Richard Goulter's Blog</title>
+
+        <!-- My (Old) CSS theme -->
+        <link rel="stylesheet" type="text/css" href="../../css/default.css" />
+
+        <!--
+            jQuery & jQueryUI
+        -->
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css" />
+
+        <!--
+            Pandoc Style CSS
+            (for syntax highlighted snippets)
+        -->
+        <link rel="stylesheet" type="text/css" href="../../css/syntax.css" />
+
+        <!--
+            Bootstrap
+        -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+        <style>
+            /*
+             * Bootstrap defines blockquote as 17px,
+             * so it looks stupidly large in my blogposts. */
+            blockquote {
+                font-size: 14px;
+            }
+        </style>
+
+        <!--
+            Waypoints, and Waypoints-Sticky,
+            so we can do this:
+            http://imakewebthings.com/waypoints/shortcuts/sticky-elements/
+        -->
+        <script src="../../js/jquery.waypoints.min.js"></script>
+        <script src="../../js/sticky.min.js"></script>
+
+        <!-- My analytics stuff -->
+        <script src="../../js/my_analytics.js"></script>
+        <script src="../../js/my_analytics_debug.js"></script>
+
+        <!--
+            TOCify
+        -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js"></script>
+
+        <!--
+            Patched TOCify css file.
+            (Don't want fixed `.tocify`).
+        -->
+        <link rel="stylesheet" type="text/css" href="../../css/jquery.tocify.css" />
+
+        <style>
+        .navbar {
+            margin-bottom: 0px;
+        }
+
+        .banner-image {
+            width:100%;
+        }
+
+        .banner {
+            margin-left: 0px;
+            margin-right: 0px;
+        }
+
+        body {
+            background-color: #e2e2e2;
+        }
+
+        #page {
+            padding-left:0;
+            padding-right:0;
+            background-color: #ffffff;
+        }
+        </style>
+
+        <!-- Google Analytics -->
+        <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+          ga('create', 'UA-73116015-1', 'auto');
+          ga('send', 'pageview');
+        </script>
+    </head>
+    <body>
+        <div id="page" class="container">
+            <!-- This, with no padding on left/right -->
+            <div class="banner">
+                <nav class="navbar navbar-default">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+
+            <!-- The Hamburger -->
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../../">Richard Goulter's Blog</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="../../">Home</a></li>
+            <li><a href="../../yi.html">Yi</a></li>
+            <li><a href="../../emacs.html">Emacs</a></li>
+            <li><a href="../../what-i-wish-i-knew-when-i-started-using-nix.html">Nixpkgs</a></li>
+            <li><a href="../../archive.html">Archive</a></li>
+        </ul>
+    </div>
+</nav>
+
+            </div>
+
+            <hr style="margin: 0px; border-top: 5px solid black;" />
+
+            <div id="content" class="container">
+                <h1>Two Kinds of Small Keyboards</h1>
+                <div class="info">
+    Posted on August 29, 2023
+    
+        by Richard Goulter
+    <br />
+    
+    Tags: 
+    
+</div>
+
+<p>In an earlier post, <a href="../programming/2023-06-29-opinion-on-small-keyboards-and-big-spacebars.html">“Opinion on Small Keyboards and Big Spacebars”</a>,
+I discussed the design flaws of traditional keyboards. – Mainly, traditional keyboards have big spacebars. Our thumbs are stronger than our pinky fingers, so it would be better to be able to use the thumbs more than the pinky fingers. A large spacebar results in the opposite: our thumbs only get to use one key, and our pinky fingers get used for all sorts of <em>frequently used</em> keys. The other flaws being that the traditional keyboard is asymmetrical, and has a row stagger, etc.</p>
+<p>I neglected to explicitly describe the link between “big spacebar is stupid” and “small keyboards are good”.</p>
+<p>It happens to be the case that most keyboards which fix those design problems of the traditional keyboard layout are small. – Although there are small keyboards which don’t fix the traditional keyboard layout’s design flaws.</p>
+<p>So, I’d suggest this way of categorising (small) keyboards:</p>
+<ol type="1">
+<li><p>Traditional Keyboard Layouts</p>
+<ul>
+<li>Big Spacebar</li>
+<li>Row-Stagger</li>
+<li>Essentially the same as small keyboards on a laptop</li>
+</ul></li>
+<li><p>Ergonomic Keyboard Layouts</p>
+<ul>
+<li>Many thumb keys</li>
+<li>Ortholinear, Column Stagger (or similar)</li>
+</ul></li>
+</ol>
+<p>There is a third group, of non-traditional keyboards which are also not ergonomic; or with other design incoherencies. I don’t think these are good at all: if it’s got a traditional layout, it’s not good, but it’s <em>understandably</em> bad. (Traditional = retains familiar design elements). So, if a design isn’t traditional, it will take time to get used to; but, effort spent getting used to the keyboard doesn’t result in an ergonomic keyboard.</p>
+<h2 id="techniques-of-small-keyboard-keymaps">Techniques of Small Keyboard Keymaps</h2>
+<p>I distinguish “big spacebar =&gt; traditional” vs “many thumbkeys =&gt; ergonomic” small keyboards in part because of the techniques small keyboards use:</p>
+<p>Small keyboards make use of techniques like “layers”, “tap-hold”, “chords”, etc.</p>
+<p>Layers: Layers are a more general mechanism of the “Fn” key, something laptop users are familiar with. e.g. on Macbooks, there are a row of F-keys F1-F12; but these keys also have special functionality such as “screen dimmer / brighter”. By holding the Fn key, the key changes its functionality.<br />
+The alternate functionality is considered a “layer” of a keymap; and a key like Fn will momentarily switch keys to use that “layer” of functionality.</p>
+<p>Tap-Hold: The keys behaves one way when tapped, and behaves another way when held down. e.g. For programmers, I’ve seen some will change the CapsLock key to “Esc when tapped, Ctrl when held”; Ctrl is a useful key in many shortcuts, and Esc is a useful key in programs such as vim.<br />
+Home Row Modifiers: Using Tap-Hold keys to put the modifier keys “Shift, Ctrl, Win, Alt” underneath the home row keys fdsa and jkl;.</p>
+<p>Some keyboard layouts don’t allow the possibility of pressing keys like F1-F12, etc., even in layers.<br />
+These keyboard layouts aren’t layouts which can be used for serious purposes.<br />
+– Whereas, even a small keyboards, even those which lack a number row, will likely still allow users to enter numbers (on a layer).</p>
+<p>Albeit, sure, a keyboard without a number row isn’t as easy to use for playing FPS games.</p>
+<h2 id="why-thumb-keys-matter">Why Thumb Keys Matter</h2>
+<p>Thumb keys make a keyboard more ergonomic for two reasons:</p>
+<ul>
+<li><p>Thumb keys allow using keys with the thumb instead of the pinky fingers (e.g. it’s useful to put backspace, enter, tab, escape as well as space on thumb keys).</p></li>
+<li><p>“Fn” keys on thumbs (especially with tap-hold, so the thumb key can be used for something else too) also avoids having to use the pinky fingers.</p></li>
+</ul>
+<p>Most “traditional” small keyboards I’ve seen have Fn keys which are clearly meant to be pushed using the pinky fingers.</p>
+<p>Whereas, with ergonomic small keyboards, the thumbs get to be useful, and allow the pinky fingers to work less.</p>
+<p>I’d say essentially the difference is:</p>
+<ul>
+<li><p>‘Traditional’ small keyboards use Fn keys because the keyboard <em>must</em> be smaller. (e.g. on laptops).</p></li>
+<li><p>‘Ergonomic’ small keyboards are (often) small because they do not need
+to be bigger; the full functionality of a standard keyboard is within
+easy reach of the thumbs and fingers.</p></li>
+</ul>
+<h2 id="example-keymap">Example Keymap</h2>
+<p>Here’s an example of a keymap for a small keyboard with several thumbkeys.</p>
+<p><img src="../../images/small-keyboards/layout-ortho-4x12.jpg" /></p>
+<p>To step through it a bit more slowly:</p>
+<ul>
+<li><p>The keymap retains many mnemonics / spacial similarities to traditional keyboards:</p>
+<ul>
+<li><p>The keys <code>0-9</code> (Well, <code>1-9, 0</code>) are available in the same column as on a standard keyboard, just brought a row down. (And not staggered).</p></li>
+<li><p>The <code>~</code> key is still in the top-left.</p></li>
+<li><p>The <code>-=</code> keys are adjacent to each other.</p></li>
+<li><p><code>PrintScr</code>/<code>ScrollLock</code>/<code>PauseBrk</code> remain adjacent to each other.</p></li>
+<li><p><code>Ins</code> is ‘above’ <code>Del</code>, in the same way the symbols are ‘above’ numbers.</p></li>
+</ul></li>
+<li><p>And some things I think are improvements:</p>
+<ul>
+<li><p>The <code>[]</code> keys have been brought closer to the middle of the keyboard;
+but are on the same columns as <code>()</code>.</p></li>
+<li><p><code>/\</code> are now adjacent to each other.</p></li>
+<li><p>The cursor keys follow an ‘hjkl’ vim-style setup. The Home/PgDn/PgUp/End follows the same idiom, and is placed in the same columns.</p></li>
+</ul></li>
+<li><p>Symmetrical and reduced usage of pinky finger:</p>
+<ul>
+<li><p>The modifier keys (shift/ctrl/win/alt) are available in similar places to a traditional keyboard; but these don’t need to be used, since the keymap has home row modifiers.</p></li>
+<li><p>Similarly: Backspace, Tab, Esc can be hit with the pinky fingers; but, it’s more convenient to use the thumbkeys provided for this.</p></li>
+</ul></li>
+</ul>
+<h2 id="gallery-of-examples">Gallery of Examples</h2>
+<p>Applying the idea of “it’s good to use the thumbs more”/“it’s bad to use the pinky”, I think looking at some examples will help why I think it makes sense to categorise traditional (small) keyboard differently than the keyboards which offer several thumb keys.</p>
+<h2 id="traditional-and-non-ergonomic">Traditional and non-Ergonomic</h2>
+<p><img src="../../images/small-keyboards/apple.jpg" /></p>
+<p>Apple’s keyboard.<br />
+This is more/less like a Macbook keyboard.</p>
+<p>Note that the Fn key is in the corner, so you’d have to use your pinky finger.</p>
+<p>The thumbs pretty much only have the one big spacebar they can press, without moving the hands from home row.</p>
+<p><img src="../../images/small-keyboards/pok3r.jpg" /></p>
+<p>A Poker keyboard, which I understand to be the original ‘small’ mechanical keyboard. – The Fn key is in the corner, so you’d have to use your pinky finger to hold it.</p>
+<p>The thumbs pretty much only have the one big spacebar they can press, without moving the hands from home row.</p>
+<p><img src="../../images/small-keyboards/hhkb.jpg" /></p>
+<p>A HHKB (“happy hacking keyboard”). – The Fn key is in the corner, so you’d have to use your pinky finger to hold it.</p>
+<p>The thumbs pretty much only have the one big spacebar they can press, without moving the hands from home row.</p>
+<p>I don’t think the hacker is going be all that happy given how much the keyboard requires using the pinky instead of the thumb.</p>
+<p><img src="../../images/small-keyboards/daisy.jpg" /></p>
+<p>A Daisy keyboard. – The Fn key is to the right of shift, so you’d have to use your pinky finger to hold it.</p>
+<p>The thumbs pretty much only have the one big spacebar they can press, without moving the hands from home row.</p>
+<p>– This keyboard lacks a number row. I’d describe “keyboards without a number row” as “<em>fashionably</em> small”. With two hands on the keyboard, you’re not missing much by going without a number row. (Although, a number row is more/less essential for playing FPS games). But, it’s trendy to have fewer keys.</p>
+<p><img src="../../images/small-keyboards/vortex-core.jpg" /></p>
+<p>The Vortex Core.</p>
+<p>Here, the Fn/Pn keys are <em>almost</em> reachable by the thumb. But, I don’t get the impression the intention was for the thumbs to hit these keys.</p>
+<p>Here the thumbs do actually get to hit one key <em>each</em>. – It’s not enough to cover all of “space/backspace/enter/etc.”, but it’s an improvement.</p>
+<p><img src="../../images/small-keyboards/alice.jpg" /></p>
+<p>The Alice.</p>
+<p>I think the Alice keyboard layout is pretty bad.</p>
+<p>It’s apparently different enough from a traditional keyboard layout that some people struggle typing on it. But, it’s also not an ergonomic keyboard layout.</p>
+<p>e.g. the <code>6</code> key is not above the <code>y</code> key. It’s common to see people put the <code>b</code> key on the right hand side of the keyboard(!!!). It’s not symmetrical.</p>
+<p>– Anyway.</p>
+<p>The keyboard does offer maybe <em>three</em> whole keys shared between the two thumbs.</p>
+<p>And (hard to tell from this picture, but) the Fn key is off in the corner. – The intention is to use the pinky finger for it.</p>
+<h4 id="ortholinear">Ortholinear</h4>
+<p><img src="../../images/small-keyboards/id75.jpg" /></p>
+<p>The ID75. This is the same size as the Poker keyboard above.</p>
+<p>I don’t know how many keys the Poker has, but this clearly has more.</p>
+<p>For the thumbs, there are at least two to three for <em>each</em> thumb.</p>
+<p>With that many thumb keys, it’s easy to see how this keyboard could have a good keymap like the example given above.</p>
+<p>Here, the user has the alphabetical characters in a pseudo-split arrangement.</p>
+<p><img src="../../images/small-keyboards/xd75.jpg" /></p>
+<p>Another 5x15 Ortho. Here, the alphabetical characters are kept together. It’s an option.</p>
+<p><img src="../../images/small-keyboards/boardsource-ortho4x12.jpg" /></p>
+<p>For the thumbs, there are at least two to three for <em>each</em> thumb.</p>
+<p>With that many thumb keys, it’s easy to see how this keyboard could have a good keymap like the example given above.</p>
+<p><img src="../../images/small-keyboards/planck.jpg" /></p>
+<p>The Planck, with a 2U spacebar.</p>
+<p>So, it’s at least one or two keys for each thumb. But, the intention is clearly for the thumb to get used.</p>
+<p><img src="../../images/small-keyboards/bm40-alt.jpg" /></p>
+<p>Following the logic of “use the thumb more than the pinky fingers”, one option is to do the same ‘pseudo-split’ arrangement here.</p>
+<ul>
+<li><p>The pinky fingers don’t have to stretch to reach an outer column.</p></li>
+<li><p>The thumbs get at least two to three keys each.</p></li>
+</ul>
+<h4 id="split-unrelated-to-traditional-vs-ergonomic">“Split”: Unrelated to “Traditional vs Ergonomic”</h4>
+<p>For many, a split keyboard is a big ergonomic improvement over a non-split keyboard.</p>
+<p>However, I’d still say that the keyboards fall under either “traditional” or “ergonomic” categories.</p>
+<p><img src="../../images/small-keyboards/kineses-edge.jpg" /></p>
+<p>This is clearly ‘just’ a traditional keyboard layout, but split.
+(It’s only ‘small’ in the sense that there’s no numpad).</p>
+<p>There are more thumb keys than a traditional keyboard only in the sense that each thumb now gets to press one key.</p>
+<p><img src="../../images/small-keyboards/helix.jpg" /></p>
+<p>Whereas with this Helix keyboard, the same remarks about the ortholinear keyboards apply here.</p>
+<p>The thumb gets to use at least two to three keys each.</p>
+<h4 id="column-staggered">Column-Staggered</h4>
+<p>Most of what I dislike about row-staggered is that it’s asymmetrical. An ortholinear grid just makes more sense as a default.</p>
+<p>Many ergonomic keyboards opt for a column stagger.</p>
+<p><img src="../../images/small-keyboards/reviung41b.jpg" /></p>
+<p>The Reviung 41.</p>
+<p>Here, the thumbs can reach the same as the Planck with the 2U spacebar: one to two keys each.</p>
+<p><img src="../../images/small-keyboards/kyria.jpg" /></p>
+<p>The Kyria.</p>
+<p>The thumbs can easily reach two or three keys each; but there are several more keys available to the thumb if the hand moves a bit.</p>
+<p><img src="../../images/small-keyboards/ferris-sweep-bling.jpg" /></p>
+<p>The Ferris Sweep.</p>
+<p>I mostly see this keyboard associated with those who advocate for 34-key keyboards.</p>
+<p>But, again. The keyboard clearly doesn’t rely on the pinky finger much. The keyboard gives each thumb two keys.</p>
+<p><img src="../../images/small-keyboards/klor.jpg" /></p>
+<p>The Klor.</p>
+<p>I’m omitting the famous Corne/crkbd from these examples. Many keyboards look like variations of the crkbd.</p>
+<p>The Klor is the most interesting keyboard I’ve come across in DIY, split column-staggered family of keyboards. (e.g. It splays its pinky column).</p>
+<p>But the same observation applies to these: the thumbs get two-three keys each, and with five columns for the fingers, the pinky finger isn’t used so much.</p>
+<h4 id="i-cant-understand-why-anyone-would-like-row-stagger">I Can’t Understand Why Anyone Would Like Row Stagger</h4>
+<p>I’ve seen that some people prefer the look of the row-stagger keyboard.</p>
+<p>I don’t mean those who only know the traditional layout and don’t want to learn ortho. – I mean people who have learned about symmetrical keyboards and still prefer the traditional row-stagger.</p>
+<p>I can’t understand why.</p>
+<p>I can almost understand someone considering this symmetrical:</p>
+<p><img src="../../images/small-keyboards/row-stagger-1.jpg" /></p>
+<p>But I can’t understand anyone who knows what human hands looks like thinking this layout makes sense:</p>
+<p><img src="../../images/small-keyboards/row-stagger-2.jpg" /></p>
+<p>Or to better illustrate, if you look at just the homing keys (f, j) and the keys above-inner and below-inner for the left hand side:</p>
+<p><img src="../../images/small-keyboards/row-stagger-3.jpg" /></p>
+<p>The distance between ‘jn’ is closer than on an ortholinear board; but the distance between ‘fb’ is <em>way</em> farther.</p>
+<h4 id="key-takeaway-from-the-examples">Key Takeaway from the Examples</h4>
+<p>Most of the traditional small keyboards really only allowed the thumbs to use one or two keys total, whereas the ergonomic ones allowed at least two thumb keys each.</p>
+<p>Most of the traditional small keyboards made strong use of the pinky finger, whereas many of the ergonomic keyboards lacked an extra outer column for the pinky fingers to use.</p>
+
+<hr />
+
+<div>
+    
+    
+    <a href="../../posts/narrative/2023-08-14-rewatching-james-bond.html" style="float:right; text-align: right;">Older post</a>
+    
+</div>
+<br style="clear: both;" />
+
+<hr />
+
+<!-- Load highlight.js for Syntax Highlighting. -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/bash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/c.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/gherkin.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/haskell.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/lisp.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/nix.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js"></script>
+<script>hljs.highlightAll();</script>
+
+            </div>
+
+            <hr style="margin-bottom: 0px; border-top: 2px solid black;" />
+
+            <div id="footer" class="pull-right" style="padding-right: 10px;">
+                Site proudly generated by
+                <a href="http://jaspervdj.be/hakyll">Hakyll</a>
+            </div>
+        </div>
+
+        <script>
+            // The callbacks we wanna use
+            // Phone-home, telling Google Analytics various metrics/dimensions
+
+            // Use custom dimensions & metrics
+            var AnalyticDimensionReaderKind = 'dimension1';
+            var AnalyticMetricActiveTime      = 'metric1';
+            var AnalyticMetricLongestIdleTime = 'metric2';
+            var AnalyticMetricReadCount       = 'metric3';
+
+            var gaCallbacks = {
+                "scrollPercent": function(ms, perc) {
+                    if (perc > 85) {
+                        // EVENT: Page read
+                        ga('send', {
+                            hitType:       'event',
+                            eventCategory: 'Scrolling',
+                            eventAction:   'atBottom',
+                            eventValue:    String(ms)
+                        });
+                    }
+                },
+                "read": function(ms, ct, timeToReach) {
+                    // Use this to set DIMENSION
+                    // timeToReach < 5s ==> Skim (default = Visitor)
+                    if (timeToReach < 5 * 1000) {
+                        // dimension1 = ReaderKind
+                        ga('set', AnalyticDimensionReaderKind, "skimmer");
+                    }
+
+                    // timeToReach > 30s ==> Reader
+                    if (timeToReach > 30 * 1000) {
+                        // dimension1 = ReaderKind
+                        ga('set', AnalyticDimensionReaderKind, "reader");
+                    }
+
+                    // EVENT: Page read
+                    ga('send', {
+                        hitType:       'event',
+                        eventCategory: 'Reading',
+                        eventAction:   'read',
+                        eventValue:    String(timeToReach)
+                    });
+
+                    // METRIC
+                    ga('set', AnalyticMetricReadCount, String(ct));
+                },
+                "initialIdle": function(ms) {
+                    // EVENT: Started Reading
+                    ga('send', {
+                        hitType:       'event',
+                        eventCategory: 'Scrolling',
+                        eventAction:   'begun',
+                        eventValue:    String(ms)
+                    });
+                },
+                "timeSpent": function(total, active, curIdle, initIdle, longestIdle) {
+                    // Update METRIC(S)?
+                    ga('set', AnalyticMetricActiveTime, String(active));
+                    ga('set', AnalyticMetricLongestIdleTime, String(longestIdle));
+                },
+                "idle": function(ms) {
+                },
+                "longestIdle": function(ms) {
+                }
+            }
+
+            window.onload = function() {
+                myAnalyticsInit(gaCallbacks);
+
+                //
+                // Initial dimensions & metrics
+                //
+
+                ga('set', AnalyticMetricReadCount, String(0));
+
+                // EVENT: Page load
+                ga('send', {
+                    hitType:       'event',
+                    eventCategory: 'pageLoad',
+                    eventAction:   'begun',
+                    eventValue:    String(ms)
+                });
+
+                // DIMENSION: visitor
+                ga('set', AnalyticDimensionReaderKind, "visitor");
+            }
+        </script>
+    </body>
+</html>
