@@ -8,8 +8,331 @@
         <name>Richard Goulter</name>
         <email>richard.goulter+blog@gmail.com</email>
     </author>
-    <updated>2023-08-29T00:00:00Z</updated>
+    <updated>2023-09-09T00:00:00Z</updated>
     <entry>
+    <title>Using NixOS on an OpenStack Public Cloud</title>
+    <link href="http://www.rgoulter.com/blog//posts/programming/2023-09-09-using-nixos-on-an-openstack-public-cloud.html" />
+    <id>http://www.rgoulter.com/blog//posts/programming/2023-09-09-using-nixos-on-an-openstack-public-cloud.html</id>
+    <published>2023-09-09T00:00:00Z</published>
+    <updated>2023-09-09T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<p>Here are some notes on using NixOS in an OpenStack public cloud.</p>
+<p>Recall, NixOS is an operating system which makes use of the Nix package manager to manage its system configuration.<br />
+That NixOS allows declarative configuration of a system lends itself to building cloud VM images.</p>
+<p>OpenStack is a standard cloud computing platform. It offers services broadly similar to AWS’ EC2, S3, etc..</p>
+<p>One option for deploying NixOS configurations to a cloud VM is to run a NixOS VM, and then switch that VM to the configuration you want. – If the cloud provider doesn’t have a NixOS VM image to run, you’ll have to build your own image.</p>
+<h3 id="general-approach">General Approach</h3>
+<p>The most ‘challenging’ part of this is wanting to run a NixOS VM, but the cloud provider not having a public NixOS image.</p>
+<p>It’s possible to build a your own image in a format the cloud provider wants.</p>
+<p>The <a href="https://github.com/nix-community/nixos-generators">nix-community’s nixos-generators</a> is a good place to start for this.<br />
+Many popular image formats are supported.</p>
+<p>In the case of OpenStack images, there’s a generator specifically for that.<br />
+I guess for other cloud providers, some customisation may be required; I’d dig through the
+code within <a href="https://github.com/NixOS/nixpkgs/tree/master/nixos/maintainers/scripts/">nixos’ maintainers/scripts/</a> and <a href="https://github.com/NixOS/nixpkgs/tree/master/nixos/modules/virtualisation">modules/virtualisation/</a> to get an idea of what was done for the ones which are supported.</p>
+<h3 id="using-terraform-to-launch-a-vm-on-an-openstack-public-cloud">Using Terraform to Launch a VM on an OpenStack Public Cloud</h3>
+<p>I was doing this from a rather weak Macbook Air (Intel). I figured it’d be easier to build Linux images using Linux; so the first thing to do is launch a linux VM in the cloud.</p>
+<p>My experience with using OpenStack on public clouds is that the networking may be handled slightly differently from one public cloud and another.<br />
+(The related “used to hope this would work” is the idea of “Terraform works with different clouds” translating to “plenty of Terraform code can be reused in order to easily support a multi-cloud deployment; e.g. have the same service in both AWS and GCP”. Maybe for OpenStack public clouds this could be largely true; but, it’s unlikely Terraform code for networking resources can be reused).</p>
+<p>With AWS, I would think that an example of a simple Terraform task is “launch a VM with a publicly accessible IP”.<br />
+From what I’ve tried, it’s slightly trickier with OpenStack public clouds.</p>
+<p>I had some spare credits with <a href="https://cleura.com/">Cleura</a> to use, and they offer a public cloud with an OpenStack API.</p>
+<p>Managing OpenStack resources from outside the cloud console requires an OpenStack user.
+I found it convenient to download the RC file for the user, and use <a href="https://direnv.net/">direnv</a> to load those credentials.</p>
+<p>Here’s the code listing for a <code>main.tf</code> to achieve this (with some notes below):</p>
+<pre><code>terraform {
+  required_providers {
+    openstack = {
+      source  = &quot;terraform-provider-openstack/openstack&quot;
+      version = &quot;~&gt; 1.49.0&quot;
+    }
+  }
+}
+
+provider &quot;openstack&quot; {}
+
+# Variables
+
+variable &quot;default_user_name&quot; {
+  description = &quot;the name of the default user&quot;
+  type        = string
+  default     = &quot;debian&quot;
+}
+
+variable &quot;ssh_public_key&quot; {
+  description = &quot;the SSH public key used to access the VM&quot;
+  type        = string
+  default     = &quot;ssh-ed25519 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA&quot;
+}
+
+variable &quot;allow_ssh_access_cidr&quot; {
+  description = &quot;the CIDR to allow SSH access to. Defaults to 0.0.0.0/0 (unrestricted)&quot;
+  type        = string
+  default     = &quot;0.0.0.0/0&quot;
+}
+
+variable &quot;flavor&quot; {
+  description = &quot;the compute flavor to use&quot;
+  type        = string
+  default     = &quot;1C-2GB-20GB&quot;
+}
+
+variable &quot;image_name&quot; {
+  description = &quot;the name of the image the VM uses&quot;
+  type        = string
+  default     = &quot;Debian 11 Bullseye x86_64&quot;
+}
+
+variable &quot;instance_name&quot; {
+  description = &quot;the name of the VM&quot;
+  type        = string
+  default     = &quot;debian&quot;
+}
+
+# OpenStack Server flavor &amp; image
+
+data &quot;openstack_compute_flavor_v2&quot; &quot;self&quot; {
+  name = var.flavor
+}
+
+data &quot;openstack_images_image_v2&quot; &quot;self&quot; {
+  name        = var.image_name
+  most_recent = true
+}
+
+# Networking
+
+data &quot;openstack_networking_network_v2&quot; &quot;ext&quot; {
+  name = &quot;ext-net&quot;
+}
+
+resource &quot;openstack_networking_network_v2&quot; &quot;self&quot; {
+  name           = &quot;terraform_vm_network&quot;
+  admin_state_up = &quot;true&quot;
+}
+
+resource &quot;openstack_networking_subnet_v2&quot; &quot;self&quot; {
+  name       = &quot;terraform_vm_subnet&quot;
+  network_id = openstack_networking_network_v2.self.id
+  cidr       = &quot;192.168.199.0/24&quot;
+  ip_version = 4
+}
+
+resource &quot;openstack_networking_router_v2&quot; &quot;self&quot; {
+  name                = &quot;terraform_vm_router&quot;
+  external_network_id = data.openstack_networking_network_v2.ext.id
+}
+
+resource &quot;openstack_networking_router_interface_v2&quot; &quot;self&quot; {
+  router_id = openstack_networking_router_v2.self.id
+  subnet_id = openstack_networking_subnet_v2.self.id
+}
+
+resource &quot;openstack_networking_floatingip_v2&quot; &quot;self&quot; {
+  pool = data.openstack_networking_network_v2.ext.name
+}
+
+# Security
+
+resource &quot;openstack_compute_secgroup_v2&quot; &quot;allow_ssh&quot; {
+  name        = &quot;allow_ssh&quot;
+  description = &quot;allow SSH from the given CIDR&quot;
+
+  rule {
+    from_port   = 22
+    to_port     = 22
+    ip_protocol = &quot;tcp&quot;
+    cidr        = var.allow_ssh_access_cidr
+  }
+}
+
+resource &quot;openstack_compute_keypair_v2&quot; &quot;self&quot; {
+  name       = &quot;terraform_keypair&quot;
+  public_key = var.ssh_public_key
+}
+
+# Instance
+
+resource &quot;openstack_compute_instance_v2&quot; &quot;self&quot; {
+  name            = var.instance_name
+  flavor_id       = data.openstack_compute_flavor_v2.self.id
+  key_pair        = openstack_compute_keypair_v2.self.name
+  security_groups = [openstack_compute_secgroup_v2.allow_ssh.name]
+  user_data       = &lt;&lt;-USER
+  #cloud-config
+  system_info:
+   default_user:
+    name: ${var.default_user_name}
+  chpasswd: { expire: false }
+  ssh_pwauth: false
+  package_upgrade: true
+  manage_etc_hosts: localhost
+  runcmd:
+    - &quot;curl --proto &#39;=https&#39; --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install --no-confirm&quot;
+  USER
+
+  block_device {
+    uuid                  = data.openstack_images_image_v2.self.id
+    source_type           = &quot;image&quot;
+    volume_size           = 20 # GBs
+    boot_index            = 0
+    destination_type      = &quot;volume&quot;
+    delete_on_termination = true
+  }
+}
+
+resource &quot;openstack_compute_floatingip_associate_v2&quot; &quot;self&quot; {
+  floating_ip = openstack_networking_floatingip_v2.self.address
+  instance_id = openstack_compute_instance_v2.self.id
+}
+
+# Outputs
+
+output &quot;public_ipv4&quot; {
+  value = openstack_networking_floatingip_v2.self.address
+}</code></pre>
+<p>Again, I found the networking details to be a quite complicated.<br />
+The details were found by observing what resources were created when creating a VM with a public IP in the console.<br />
+Cleara uses the public network <code>ext-net</code>.<br />
+I’m not sure on the exact details, but I create a private network with a subnet, and to get a public IP (i.e. a floating ip in <code>ext-net</code>) to route to the VM, I create a router for the <code>ext-net</code> and a router interface which routes that to the private subnet. That public IP then gets associated with the VM.</p>
+<p>Another part that can be annoying with OpenStack is specifying the VM resources (CPU/memory/storage).<br />
+It’s more flexible than AWS’ “c5.small/medium/large”.<br />
+One thing I found annoying it it’s not quite so freeform as <code>"xC-yGB-zGB"</code> for arbitrary x,y,z; I had to list the flavors to find one.<br />
+(The impression I got was that the console lets you choose the number of cpu/mem/disk, so the flavor is created on demand for that).</p>
+<p>Idiosyncracies of OpenStack clouds aside, I think the other details are relatively straightforward.<br />
+The name <code>"Debian 11 Bullseye x86_64"</code> comes from running <code>openstack images list</code>.<br />
+(An easy way to get the <code>openstack</code> client is to run <code>nix shell nixpkgs#openstackclient</code>).</p>
+<p>Looking at the user data passed to the VM…</p>
+<pre><code>#cloud-config
+system_info:
+ default_user:
+  name: ${var.default_user_name}
+chpasswd: { expire: false }
+ssh_pwauth: false
+package_upgrade: true
+manage_etc_hosts: localhost
+runcmd:
+  - &quot;curl --proto &#39;=https&#39; --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install --no-confirm&quot;</code></pre>
+<p>…this uses <a href="https://cloud-init.io/">cloud-init</a>, which declares some things we want set up in the VM.<br />
+The <code>curl ... | sh</code> installs the <a href="https://github.com/DeterminateSystems/nix-installer">determinate-systems nix installer</a>.<br />
+This means the VM will have <code>nix</code> available shortly after the VM launches. (Running the command <code>cloud-init status</code> on the launched VM shows whether cloud-init has finished).</p>
+<p>Running the Terraform file involves (as is usual):</p>
+<pre><code>terraform apply</code></pre>
+<p>(and removing these resources with <code>terraform destroy</code>).</p>
+<p>The public IP is an <code>output</code>, which allows SSH’ing into the VM with a command like:</p>
+<pre><code>ssh debian@(terraform output -json public_ipv4 | jq -r)</code></pre>
+<h3 id="building-the-nixos-image-for-openstack">Building the NixOS Image for OpenStack</h3>
+<p>This is the <code>flake.nix</code> file. Below, some implementation notes, and the commands for building/uploading.</p>
+<pre><code>{
+  inputs = {
+    nixos-generators = {
+      url = &quot;github:nix-community/nixos-generators&quot;;
+      inputs.nixpkgs.follows = &quot;nixpkgs&quot;;
+    };
+    nixpkgs.url = &quot;github:NixOS/nixpkgs/nixos-22.11&quot;;
+    rgoulter.url = &quot;github:rgoulter/nix-user-repository&quot;;
+  };
+
+  outputs = {
+    self,
+    nixos-generators,
+    nixpkgs,
+    rgoulter,
+    ...
+  }: {
+    packages.&quot;x86_64-linux&quot;.small-openstack = nixos-generators.nixosGenerate {
+      pkgs = nixpkgs.legacyPackages.&quot;x86_64-linux&quot;;
+      format = &quot;openstack&quot;;
+      modules = [
+        rgoulter.nixosModules.cloud-interactive
+        rgoulter.nixosModules.ssh
+        rgoulter.nixosModules.ssh-users
+        rgoulter.nixosModules.tailscale
+      ];
+    };
+  };
+}</code></pre>
+<p>Recall, a <code>flake.nix</code> file is more/less equivalent to a <code>package.json</code>/<code>Cargo.toml</code>/etc. project file,
+and is a standard entry point into a Nix codebase.</p>
+<p>Here, the OpenStack image is declared as a package, using <a href="https://github.com/nix-community/nixos-generators">nixos-generators</a>
+and its <code>nixosGenerate</code> package. (The OpenStack specific part is the <code>format = "openstack";</code> attribute. As mentioned above, you can dig into the details in <code>nixos/</code>, which <code>nixos-generators</code> makes use of).</p>
+<p>The <code>rgoulter.nixosModules</code> refers to the <a href="https://github.com/rgoulter/nix-user-repository/tree/95968968d32f7a6754978f099e975ca56b916977/modules">modules</a> in my <code>nix-user-repository</code>. (Though, you could just inline these all as one module in this <code>flake.nix</code> file, etc.).</p>
+<p>e.g. cloud-interactive ensures that some CLI tools I like are installed:</p>
+<pre><code>{
+  config,
+  lib,
+  pkgs,
+  ...
+}: {
+  environment.systemPackages = with pkgs; [
+    direnv
+    fd
+    fish
+    git
+    helix
+    jq
+    ripgrep
+    starship
+    tmux
+  ];
+  nix = {
+    extraOptions = &#39;&#39;
+      experimental-features = nix-command flakes
+    &#39;&#39;;
+  };
+  security.sudo.wheelNeedsPassword = false;
+}</code></pre>
+<p>and <code>ssh-users</code> declares the user I log in with:</p>
+<pre><code>{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+{
+  users.users.rgoulter = {
+    isNormalUser = true;
+    extraGroups = [
+      &quot;wheel&quot;
+    ];
+    openssh.authorizedKeys.keys = [
+      &quot;ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOmQ9/u9qV9Vvy2pbcPtGiAmIrhXdi/vY6IesJ5RYpS4&quot;
+    ];
+  };
+}</code></pre>
+<p>(This doesn’t necessarily need to be hard coded into the image; but, for this use case, doing it this way is simple).</p>
+<p>With this <code>flake.nix</code>, on a Linux computer with <code>nix</code> installed (and flakes, nix-command enabled, as the determinate-systems does),
+the image is built by running a command like:</p>
+<pre><code>nix build .#small-openstack</code></pre>
+<p>(A quick &amp; dirty approach is to just copy the <code>flake.nix</code> file to the Linux VM we’re running. But, it’d also be possible to have a <code>nixosGenerate</code> package in a <code>flake.nix</code> in a repository else &amp; refer to it using the appropriate flake URI).</p>
+<p>The resulting file is linked to by <code>./result/nixos.qcow2</code>.</p>
+<h3 id="uploading-the-image">Uploading the Image</h3>
+<p>With the <code>openstack</code> client (use <code>nix shell nixpkgs#openstackclient</code> to make it available to the shell),
+and appropriate openstack credentials (e.g. copying the openstack user RC file over and <code>source</code>’ing it),
+the built image can be uploaded with:</p>
+<pre><code>openstack image create \
+  --private \
+  --disk-format qcow2 \
+  --container-format bare \
+  --file ./result/nixos.qcow2 \
+  my-nixos</code></pre>
+<p>which creates the OpenStack image <code>my-nixos</code>.</p>
+<h3 id="launching-a-vm-with-our-private-nixos-image">Launching a VM with Our Private NixOS Image</h3>
+<p>This is straightforward, by re-using the code from “Using Terraform to Launch a VM”.</p>
+<p>Simply change the <code>name</code> of the image in the <code>data.openstack_images_image_v2</code> block to <code>"my-nixos"</code>. (e.g. change the value of the Terraform variable <code>image_name</code>). – The NixOS image ignores the user data.</p>
+<h3 id="switching-configuration-after-launch">Switching Configuration After Launch</h3>
+<p>There are uses cases where it makes sense to ‘switch’ the NixOS configuration after the VM has launched.</p>
+<p>There are plenty of options for doing this.</p>
+<p>I liked using a command like:</p>
+<pre><code>ssh -A &quot;rgoulter@${IP}&quot; -- &quot; \
+  sudo sh -c &#39;mkdir -p ~/.ssh &amp;&amp; \
+  chmod 700 ~/.ssh &amp;&amp; \
+  ssh-keyscan github.com &gt;&gt; ~/.ssh/known_hosts &amp;&amp; \
+  echo switch to ${FLAKE_URI} &amp;&amp; \
+  nixos-rebuild switch --flake ${FLAKE_URI}&#39; \
+&quot;</code></pre>
+<p>I think another option instead of doing the <code>ssh-keyscan</code> here is to add it to
+<a href="https://search.nixos.org/options?channel=23.05&amp;from=0&amp;size=50&amp;sort=relevance&amp;type=packages&amp;query=services.openssh.knownHosts">services.openssh.knownHosts</a>.</p>]]></summary>
+</entry>
+<entry>
     <title>Two Kinds of Small Keyboards</title>
     <link href="http://www.rgoulter.com/blog//posts/programming/2023-08-29-two-kinds-of-small-keyboards.html" />
     <id>http://www.rgoulter.com/blog//posts/programming/2023-08-29-two-kinds-of-small-keyboards.html</id>
@@ -800,89 +1123,6 @@ Mostly the show’s characters avoid filling such a sanctimonious role as this.<
 <p>In any case, I did enjoy watching the show.</p>
 <p>I think it’s a shame that the series didn’t continue. (I wonder if it’s the kind of story where by the end of season of season 3, the characters come to realise they’re characters in a TV show).</p>
 <p>If a storyteller’s able to come up with something as intruiging as this with this set of toys, it’s a shame to not let them go on present the rest of their toychest.</p>]]></summary>
-</entry>
-<entry>
-    <title>I Played Star Wars Republic Commando on the Nintendo Switch</title>
-    <link href="http://www.rgoulter.com/blog//posts/games/2023-05-06-i-played-star-wars-republic-commando-on-the-nintendo-switch.html" />
-    <id>http://www.rgoulter.com/blog//posts/games/2023-05-06-i-played-star-wars-republic-commando-on-the-nintendo-switch.html</id>
-    <published>2023-05-06T00:00:00Z</published>
-    <updated>2023-05-06T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<p>I had played “Star Wars: Republic Commando” years ago on the PC.</p>
-<p>It’s a first person shooter game, and its setting is very cool: Star Wars, but from a grittier perspective of the soldiers fighting in the Clone Wars, rather than the more operatic stories of Jedi space-wizarding their way around the galaxy.</p>
-<p>Although it did release on the PC, it did somewhat feel more like a ‘console port’. – So, playing it on the Nintendo Switch isn’t that much of a degraded experience. (And, I see that Crysis 2 and Crysis 3 are available for the Switch; so, the Switch is certainly capable of running a game from 2005!).</p>
-<p>I can only recommend the game out of nostalgia. – I think there are several things which bring the gameplay down.</p>
-<p>My preference for games is relatively casual. A game is boring if it’s too easy. But, I’m not interested in a game that’s so difficult that I have to give it the best I can in order to win. – So, ‘a little difficult’ is nice. But, when a part of a level is difficult, it’s only fun if losing feels fair; it’s frustrating if I feel like I lost for reasons that aren’t my fault.</p>
-<p>Unfortunately, I think there are some places where Republic Commandos ends up in that “lost but it’s not my fault”.</p>
-<h2 id="problem-combat-is-boringly-spongy-and-ammo-is-limited">Problem: Combat is Boringly Spongy and Ammo is Limited</h2>
-<p>One example is the combination of enemy sponginess, &amp; ammo limitations.</p>
-<p>Enemies are <em>really</em> spongy. They soak up a lot of damage before dying.<br />
-This makes sense for the ‘elite’ enemies like the Super Battle Droids or the Destroyer Droids.<br />
-But, it feels <em>boring</em> for the regular Battle Droids.</p>
-<p>It takes about 15 shots from the standard laser blaster to kill the <em>basic</em> enemies.<br />
-Your basic blaster has a magazine with 50 shots.<br />
-Your ammo capacity is for 300 shots.<br />
-– i.e. It takes a long time to kill even basic enemies; if you don’t miss, you can kill 3 enemies before you have to reload; you can kill maybe 20 <em>basic</em> enemies before running out of ammo. (Sniper rifle ammo is similar: you can kill a basic enemy with 1 shot; but your ammo limit is 20 shots).</p>
-<p>Unlike most other shooter games, where you can pick up ammo for your guns from enemies you defeat, in “Republic Commando”, you can only pick up ammo from supplies at the end of each area. Often, ammo feels pretty scarce.</p>
-<p>With elite enemies the limitation is more stark:<br />
-The Super Battle Droids are so spongey that you essentially <em>need</em> to use heavy weapons to defeat them.<br />
-One option is to use your Grenade Launcher: a direct hit from the grenade launcher will destroy a Super Battle Droid. Your ammo capacity for the grenade launcher is <em>4 shots</em>.<br />
-Another alternative is to use EMP grenades, which will weaken the Super Battle Droids, and in this weakened state blaster fire or thermal detonators are effective. – You have a limit of 5 EMP grenades.<br />
-– To me the problem is, since these enemies require particular ammo to fight, and ammo is scarce, it’s really easy to get into a situation where you don’t have a good way of fighting these enemies.</p>
-<p>The game generally follows a loop where you need to clear enemies from an area, and then proceed to the next area.<br />
-Generally, at the end of an area, you can replenish your health, and some of your ammo. But, not all types of ammo are provided in every area.<br />
-But, especially in the later levels, the number of elite enemies that you have to deal with will be matched to the limit of your grenade launcher ammo.<br />
-– It somewhat defies worldbuilding to have boxes of the Republic’s blaster rifle ammo lying around in an enemy spaceship.</p>
-<p>In contrast to the ammo, the game offers unlimited health refills.<br />
-Like many games, you have both a shield and a health bar.<br />
-The shield will absorb some damage, and will recharge if you can avoid taking damage for some time.<br />
-Damage only affects your health if you’re hit when you have no shield.<br />
-– But. There are health recharge stations that you can use to refill your health, and these can generally be found in between fighting areas in a level.</p>
-<p>One way of dealing with this: I think it’d be better if the game did have an “unlimited ammo cache”, where you could refill all your ammo between levels. Another possibility is to have “ask for ammo” from your squadmates. (The game “Brothers in Arms: Earned in Blood” had a feature like this).</p>
-<p>Or another way: I think it would be better if you could pick up ammo from enemies, and there was always some effective way to fight powerful enemies. – e.g. in Halo, the weapons are mainly (human) bullet guns or (alien) energy guns; the energy guns are effective against shields, and bullets are effective against unshielded enemies. Which leads to a nice gameplay dynamic.</p>
-<h2 id="problem-the-tactical-squad-based-gameplay-doesnt-inspire-tactics-nor-teamwork">Problem: The Tactical Squad-based Gameplay Doesn’t Inspire Tactics nor Teamwork</h2>
-<p>The other main thing that brings the gameplay down is that the squad AI doesn’t feel very good.</p>
-<p>Okay, okay. So what I think would be really cool would be to have “Brothers in Arms: Earned in Blood”, but <em>in spaaaaace</em>.<br />
-And “Brothers in Arms: Earned in Blood” was also released in 2005.</p>
-<p>Rather.<br />
-In “Brothers in Arms”, it’s still mostly a casual game, but the gameplay requires sufficient tactical effort. You can’t <em>just</em> run up and shoot enemies who are hiding in cover. You have to first suppress them, and then move to their flanks. You’re given command of two teams, and the controls are simple and console friendly. (“Go there”, “shoot at those enemies”, “charge those enemies”).<br />
-– This results in a gameplay dynamic where you have to puzzle out how to navigate to a spot where you can flank a suppressed enemy.</p>
-<p>Whereas, for most of “Republic Commando”, the combat is as simple as “make enemies healthbar go down quicker than your healthbar”, where the main ‘winning tactic’ is “hide behind cover if your shield runs out”.<br />
-The main “tactics” required are “use your heavy weapons to defeat the heavy enemies”.</p>
-<p>The parts where you ‘need’ your squadmates mostly feels contrived:<br />
-There are certain interactable elements in the game. e.g. mounting a turret, or spending time ‘interacting’ with a console to hack it.<br />
-You can fulfill this interaction, or a member of your squad can do it.</p>
-<p>Perhaps at its most contrived is at the end of one level, you need to hack 3 consoles at once, but you need to fend off enemies charging your position. – This feels inorganic, compared to just designing a level where you happen to be a squad of 4 soldiers fighting through.</p>
-<p>It is possible to get your squad members to equip the sniper rifle, the grenade launcher, or to focus on throwing grenades at enemies. – Though, since this is obviously very powerful, the game restricts this. You can only get your squad members to do this if the level design specifically has allocated areas for you to do this. You can’t free-form task your squad members to do this.<br />
-– But simultaneously, typically the level design involves throwing tougher enemies at the player when these ‘specialised’ spots are in the level. – So, it doesn’t really feel like a ‘tactical’ choice to assign your squad members as a sniper (where maybe they shoot more powerfully but can’t shoot as many enemies at once). It feels like it’s a decision already made as part of the level design.</p>
-<p>Another common ‘tactical opportunity’ is whether to enter through a door ‘loudly’ or ‘silently’.<br />
-It never really makes a difference, since none of the gameplay benefits from a stealthy/silent approach. – Whereas, more recent game design might allow for sneaking up on enemies and stealth killing them, or skillfully using silenced weapons to eliminate enemies.</p>
-<p>The gameplay feels very similar to “Halo”; but with simpler (i.e. more boring) gun combat, and doesn’t really make use of the squad in an interesting way.</p>
-<h2 id="other-tactical-squad-games-ive-enjoyed">Other Tactical Squad Games I’ve Enjoyed</h2>
-<p>Come to think of it. There are other games I’ve played which have done “team-based tactics” quite well, which would be fun <em>in spaaaaace</em>.</p>
-<p>“Door Kickers” is a top-down realtime-tactics game.<br />
-It’s “tactical” in the sense that you can only ‘see’ what your units can see. You have to carefully maneouver your units around the map, taking care whether open doors loudly (which might attract attention) or quietly (which might take too long); you have to be careful to ‘sweep’ the rooms your units move through for enemies; and ensure that your soldiers don’t get flanked from behind.<br />
-– Most of “Door Kickers” setting involves hostages or terrorists or cartel members. – I could totally envision a ‘reskin’ of the game where you play as Rebel commandos fighting against holdouts of the Empire.</p>
-<p><em>Maybe</em> another game that might be interesting with a Star Wars theme would be a real-time tactics game like “Commandos” or its modern flavour, Mimimi Games’ “Shadow Tactics”.<br />
-With these, you’re faced with stealthily eliminating a large number of enemy soldiers on a map. The gameplay is puzzle-like, and often requires leveraging the unique abilities of your units so as to untangle the web of guards. – e.g. You might sneak around with the ninja, or use the sniper to take out a target from a distance.<br />
-I could see a similar set of roles in a Star Wars flavour. “Lego Star Wars” already has puzzles around different ‘classes’ within Star Wars, such as astromech droids vs protocol droids, jedi, rogues.</p>
-<h2 id="what-republic-commando-does-well-its-really-cool">What Republic Commando Does Well: It’s Really Cool</h2>
-<p>Despite the above grievances.. what “Republic Commando” does well is it’s got a great Cool Factor.</p>
-<p>The opening scenes where you fly in on the Republic transport craft into the battle on Geonosis are quite cinematic.<br />
-Such scenes are now cliche. But, they’re cliche for a good reason.</p>
-<p>It’s cool to get into gunfights against the battle droids, and to see the fearsome Super Battledroids and Destroyer Droids.</p>
-<p>It’s cool to do the fancy tacti-cool door-breach thing.</p>
-<p>You get to fight against the tank-like Spider droids, as well as see the Republic’s gunships and artillery in action.</p>
-<p>The gameplay here really emphasises the game’s setting of “you’re not a powerful jedi”..<br />
-– The excellent “Titanfall 2” achieved a similar thing: in “Titanfall 2”, you play as both a soldier, as well as a giant mech robot. When you encounter some robot enemy as a soldier, the robot enemy is big and tough to fight; but when you encounter the same enemy when playing as the mech robot, the robot enemy is much smaller and squishier than you are.<br />
-– In “Republic Commando”, you fight against enemies which are relatively easy for the jedi to defeat, but are tough encounters for you.</p>
-<p>Though, come to think of it:<br />
-Heh. The classic “Star Wars Battlefront II” also came out in 2005, and was essentially just “Battlefield 1942” but reskinned so it’s <em>in spaaaaace</em>.<br />
-Though I only played the lootbox most-downvoted-comment-in-reddit-history-related “Battlefront II” that was released in 2017.<br />
-These do somewhat evoke the feeling of “regular soldier in the Star Wars universe”.
-– But, these aren’t really quite as cinematic. “Battlefield 1942”-style rules are too game-y.<br />
-The 2017 “Battlefront II” did have a story. But, I recall it also didn’t feel like it was trying to be ‘grounded’. I can’t remember much of it, but re-reading the plot on the Wikipedia page doesn’t jog my memory all that much.</p>
-<p>Perhaps it’s paradoxical, but by not trying to be ‘Most Important Story Evar!!!’, “Republic Commando”’s story does seem much weightier to me. (You do commando-stuff on Geonosis, like surgical strikes against strategically vital facilities; you’re tasked with investigating a ghost-ship; you’re tasked as a vanguard force ahead of the Republic’s invasion of Kashyyyk).</p>
-<p>I’d say that “Rogue One” also captures some of the same feeling of gritty-ish spec ops in the Star Wars universe. – I’m thinking especially of stuff like the scene where the Rebels go to make an assassination/strike against the Death Star plans guy.</p>]]></summary>
 </entry>
 
 </feed>

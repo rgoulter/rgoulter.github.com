@@ -1,0 +1,584 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Using NixOS on an OpenStack Public Cloud - Richard Goulter's Blog</title>
+
+        <!-- My (Old) CSS theme -->
+        <link rel="stylesheet" type="text/css" href="../../css/default.css" />
+
+        <!--
+            jQuery & jQueryUI
+        -->
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css" />
+
+        <!--
+            Pandoc Style CSS
+            (for syntax highlighted snippets)
+        -->
+        <link rel="stylesheet" type="text/css" href="../../css/syntax.css" />
+
+        <!--
+            Bootstrap
+        -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+        <style>
+            /*
+             * Bootstrap defines blockquote as 17px,
+             * so it looks stupidly large in my blogposts. */
+            blockquote {
+                font-size: 14px;
+            }
+        </style>
+
+        <!--
+            Waypoints, and Waypoints-Sticky,
+            so we can do this:
+            http://imakewebthings.com/waypoints/shortcuts/sticky-elements/
+        -->
+        <script src="../../js/jquery.waypoints.min.js"></script>
+        <script src="../../js/sticky.min.js"></script>
+
+        <!-- My analytics stuff -->
+        <script src="../../js/my_analytics.js"></script>
+        <script src="../../js/my_analytics_debug.js"></script>
+
+        <!--
+            TOCify
+        -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js"></script>
+
+        <!--
+            Patched TOCify css file.
+            (Don't want fixed `.tocify`).
+        -->
+        <link rel="stylesheet" type="text/css" href="../../css/jquery.tocify.css" />
+
+        <style>
+        .navbar {
+            margin-bottom: 0px;
+        }
+
+        .banner-image {
+            width:100%;
+        }
+
+        .banner {
+            margin-left: 0px;
+            margin-right: 0px;
+        }
+
+        body {
+            background-color: #e2e2e2;
+        }
+
+        #page {
+            padding-left:0;
+            padding-right:0;
+            background-color: #ffffff;
+        }
+        </style>
+
+        <!-- Google Analytics -->
+        <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+          ga('create', 'UA-73116015-1', 'auto');
+          ga('send', 'pageview');
+        </script>
+    </head>
+    <body>
+        <div id="page" class="container">
+            <!-- This, with no padding on left/right -->
+            <div class="banner">
+                <nav class="navbar navbar-default">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+
+            <!-- The Hamburger -->
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../../">Richard Goulter's Blog</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="../../">Home</a></li>
+            <li><a href="../../yi.html">Yi</a></li>
+            <li><a href="../../emacs.html">Emacs</a></li>
+            <li><a href="../../what-i-wish-i-knew-when-i-started-using-nix.html">Nixpkgs</a></li>
+            <li><a href="../../archive.html">Archive</a></li>
+        </ul>
+    </div>
+</nav>
+
+            </div>
+
+            <hr style="margin: 0px; border-top: 5px solid black;" />
+
+            <div id="content" class="container">
+                <h1>Using NixOS on an OpenStack Public Cloud</h1>
+                <div class="info">
+    Posted on September  9, 2023
+    
+        by Richard Goulter
+    <br />
+    
+    Tags: 
+    
+</div>
+
+<p>Here are some notes on using NixOS in an OpenStack public cloud.</p>
+<p>Recall, NixOS is an operating system which makes use of the Nix package manager to manage its system configuration.<br />
+That NixOS allows declarative configuration of a system lends itself to building cloud VM images.</p>
+<p>OpenStack is a standard cloud computing platform. It offers services broadly similar to AWS’ EC2, S3, etc..</p>
+<p>One option for deploying NixOS configurations to a cloud VM is to run a NixOS VM, and then switch that VM to the configuration you want. – If the cloud provider doesn’t have a NixOS VM image to run, you’ll have to build your own image.</p>
+<h3 id="general-approach">General Approach</h3>
+<p>The most ‘challenging’ part of this is wanting to run a NixOS VM, but the cloud provider not having a public NixOS image.</p>
+<p>It’s possible to build a your own image in a format the cloud provider wants.</p>
+<p>The <a href="https://github.com/nix-community/nixos-generators">nix-community’s nixos-generators</a> is a good place to start for this.<br />
+Many popular image formats are supported.</p>
+<p>In the case of OpenStack images, there’s a generator specifically for that.<br />
+I guess for other cloud providers, some customisation may be required; I’d dig through the
+code within <a href="https://github.com/NixOS/nixpkgs/tree/master/nixos/maintainers/scripts/">nixos’ maintainers/scripts/</a> and <a href="https://github.com/NixOS/nixpkgs/tree/master/nixos/modules/virtualisation">modules/virtualisation/</a> to get an idea of what was done for the ones which are supported.</p>
+<h3 id="using-terraform-to-launch-a-vm-on-an-openstack-public-cloud">Using Terraform to Launch a VM on an OpenStack Public Cloud</h3>
+<p>I was doing this from a rather weak Macbook Air (Intel). I figured it’d be easier to build Linux images using Linux; so the first thing to do is launch a linux VM in the cloud.</p>
+<p>My experience with using OpenStack on public clouds is that the networking may be handled slightly differently from one public cloud and another.<br />
+(The related “used to hope this would work” is the idea of “Terraform works with different clouds” translating to “plenty of Terraform code can be reused in order to easily support a multi-cloud deployment; e.g. have the same service in both AWS and GCP”. Maybe for OpenStack public clouds this could be largely true; but, it’s unlikely Terraform code for networking resources can be reused).</p>
+<p>With AWS, I would think that an example of a simple Terraform task is “launch a VM with a publicly accessible IP”.<br />
+From what I’ve tried, it’s slightly trickier with OpenStack public clouds.</p>
+<p>I had some spare credits with <a href="https://cleura.com/">Cleura</a> to use, and they offer a public cloud with an OpenStack API.</p>
+<p>Managing OpenStack resources from outside the cloud console requires an OpenStack user.
+I found it convenient to download the RC file for the user, and use <a href="https://direnv.net/">direnv</a> to load those credentials.</p>
+<p>Here’s the code listing for a <code>main.tf</code> to achieve this (with some notes below):</p>
+<pre><code>terraform {
+  required_providers {
+    openstack = {
+      source  = &quot;terraform-provider-openstack/openstack&quot;
+      version = &quot;~&gt; 1.49.0&quot;
+    }
+  }
+}
+
+provider &quot;openstack&quot; {}
+
+# Variables
+
+variable &quot;default_user_name&quot; {
+  description = &quot;the name of the default user&quot;
+  type        = string
+  default     = &quot;debian&quot;
+}
+
+variable &quot;ssh_public_key&quot; {
+  description = &quot;the SSH public key used to access the VM&quot;
+  type        = string
+  default     = &quot;ssh-ed25519 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA&quot;
+}
+
+variable &quot;allow_ssh_access_cidr&quot; {
+  description = &quot;the CIDR to allow SSH access to. Defaults to 0.0.0.0/0 (unrestricted)&quot;
+  type        = string
+  default     = &quot;0.0.0.0/0&quot;
+}
+
+variable &quot;flavor&quot; {
+  description = &quot;the compute flavor to use&quot;
+  type        = string
+  default     = &quot;1C-2GB-20GB&quot;
+}
+
+variable &quot;image_name&quot; {
+  description = &quot;the name of the image the VM uses&quot;
+  type        = string
+  default     = &quot;Debian 11 Bullseye x86_64&quot;
+}
+
+variable &quot;instance_name&quot; {
+  description = &quot;the name of the VM&quot;
+  type        = string
+  default     = &quot;debian&quot;
+}
+
+# OpenStack Server flavor &amp; image
+
+data &quot;openstack_compute_flavor_v2&quot; &quot;self&quot; {
+  name = var.flavor
+}
+
+data &quot;openstack_images_image_v2&quot; &quot;self&quot; {
+  name        = var.image_name
+  most_recent = true
+}
+
+# Networking
+
+data &quot;openstack_networking_network_v2&quot; &quot;ext&quot; {
+  name = &quot;ext-net&quot;
+}
+
+resource &quot;openstack_networking_network_v2&quot; &quot;self&quot; {
+  name           = &quot;terraform_vm_network&quot;
+  admin_state_up = &quot;true&quot;
+}
+
+resource &quot;openstack_networking_subnet_v2&quot; &quot;self&quot; {
+  name       = &quot;terraform_vm_subnet&quot;
+  network_id = openstack_networking_network_v2.self.id
+  cidr       = &quot;192.168.199.0/24&quot;
+  ip_version = 4
+}
+
+resource &quot;openstack_networking_router_v2&quot; &quot;self&quot; {
+  name                = &quot;terraform_vm_router&quot;
+  external_network_id = data.openstack_networking_network_v2.ext.id
+}
+
+resource &quot;openstack_networking_router_interface_v2&quot; &quot;self&quot; {
+  router_id = openstack_networking_router_v2.self.id
+  subnet_id = openstack_networking_subnet_v2.self.id
+}
+
+resource &quot;openstack_networking_floatingip_v2&quot; &quot;self&quot; {
+  pool = data.openstack_networking_network_v2.ext.name
+}
+
+# Security
+
+resource &quot;openstack_compute_secgroup_v2&quot; &quot;allow_ssh&quot; {
+  name        = &quot;allow_ssh&quot;
+  description = &quot;allow SSH from the given CIDR&quot;
+
+  rule {
+    from_port   = 22
+    to_port     = 22
+    ip_protocol = &quot;tcp&quot;
+    cidr        = var.allow_ssh_access_cidr
+  }
+}
+
+resource &quot;openstack_compute_keypair_v2&quot; &quot;self&quot; {
+  name       = &quot;terraform_keypair&quot;
+  public_key = var.ssh_public_key
+}
+
+# Instance
+
+resource &quot;openstack_compute_instance_v2&quot; &quot;self&quot; {
+  name            = var.instance_name
+  flavor_id       = data.openstack_compute_flavor_v2.self.id
+  key_pair        = openstack_compute_keypair_v2.self.name
+  security_groups = [openstack_compute_secgroup_v2.allow_ssh.name]
+  user_data       = &lt;&lt;-USER
+  #cloud-config
+  system_info:
+   default_user:
+    name: ${var.default_user_name}
+  chpasswd: { expire: false }
+  ssh_pwauth: false
+  package_upgrade: true
+  manage_etc_hosts: localhost
+  runcmd:
+    - &quot;curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install --no-confirm&quot;
+  USER
+
+  block_device {
+    uuid                  = data.openstack_images_image_v2.self.id
+    source_type           = &quot;image&quot;
+    volume_size           = 20 # GBs
+    boot_index            = 0
+    destination_type      = &quot;volume&quot;
+    delete_on_termination = true
+  }
+}
+
+resource &quot;openstack_compute_floatingip_associate_v2&quot; &quot;self&quot; {
+  floating_ip = openstack_networking_floatingip_v2.self.address
+  instance_id = openstack_compute_instance_v2.self.id
+}
+
+# Outputs
+
+output &quot;public_ipv4&quot; {
+  value = openstack_networking_floatingip_v2.self.address
+}</code></pre>
+<p>Again, I found the networking details to be a quite complicated.<br />
+The details were found by observing what resources were created when creating a VM with a public IP in the console.<br />
+Cleara uses the public network <code>ext-net</code>.<br />
+I’m not sure on the exact details, but I create a private network with a subnet, and to get a public IP (i.e. a floating ip in <code>ext-net</code>) to route to the VM, I create a router for the <code>ext-net</code> and a router interface which routes that to the private subnet. That public IP then gets associated with the VM.</p>
+<p>Another part that can be annoying with OpenStack is specifying the VM resources (CPU/memory/storage).<br />
+It’s more flexible than AWS’ “c5.small/medium/large”.<br />
+One thing I found annoying it it’s not quite so freeform as <code>"xC-yGB-zGB"</code> for arbitrary x,y,z; I had to list the flavors to find one.<br />
+(The impression I got was that the console lets you choose the number of cpu/mem/disk, so the flavor is created on demand for that).</p>
+<p>Idiosyncracies of OpenStack clouds aside, I think the other details are relatively straightforward.<br />
+The name <code>"Debian 11 Bullseye x86_64"</code> comes from running <code>openstack images list</code>.<br />
+(An easy way to get the <code>openstack</code> client is to run <code>nix shell nixpkgs#openstackclient</code>).</p>
+<p>Looking at the user data passed to the VM…</p>
+<pre><code>#cloud-config
+system_info:
+ default_user:
+  name: ${var.default_user_name}
+chpasswd: { expire: false }
+ssh_pwauth: false
+package_upgrade: true
+manage_etc_hosts: localhost
+runcmd:
+  - &quot;curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install --no-confirm&quot;</code></pre>
+<p>…this uses <a href="https://cloud-init.io/">cloud-init</a>, which declares some things we want set up in the VM.<br />
+The <code>curl ... | sh</code> installs the <a href="https://github.com/DeterminateSystems/nix-installer">determinate-systems nix installer</a>.<br />
+This means the VM will have <code>nix</code> available shortly after the VM launches. (Running the command <code>cloud-init status</code> on the launched VM shows whether cloud-init has finished).</p>
+<p>Running the Terraform file involves (as is usual):</p>
+<pre><code>terraform apply</code></pre>
+<p>(and removing these resources with <code>terraform destroy</code>).</p>
+<p>The public IP is an <code>output</code>, which allows SSH’ing into the VM with a command like:</p>
+<pre><code>ssh debian@(terraform output -json public_ipv4 | jq -r)</code></pre>
+<h3 id="building-the-nixos-image-for-openstack">Building the NixOS Image for OpenStack</h3>
+<p>This is the <code>flake.nix</code> file. Below, some implementation notes, and the commands for building/uploading.</p>
+<pre><code>{
+  inputs = {
+    nixos-generators = {
+      url = &quot;github:nix-community/nixos-generators&quot;;
+      inputs.nixpkgs.follows = &quot;nixpkgs&quot;;
+    };
+    nixpkgs.url = &quot;github:NixOS/nixpkgs/nixos-22.11&quot;;
+    rgoulter.url = &quot;github:rgoulter/nix-user-repository&quot;;
+  };
+
+  outputs = {
+    self,
+    nixos-generators,
+    nixpkgs,
+    rgoulter,
+    ...
+  }: {
+    packages.&quot;x86_64-linux&quot;.small-openstack = nixos-generators.nixosGenerate {
+      pkgs = nixpkgs.legacyPackages.&quot;x86_64-linux&quot;;
+      format = &quot;openstack&quot;;
+      modules = [
+        rgoulter.nixosModules.cloud-interactive
+        rgoulter.nixosModules.ssh
+        rgoulter.nixosModules.ssh-users
+        rgoulter.nixosModules.tailscale
+      ];
+    };
+  };
+}</code></pre>
+<p>Recall, a <code>flake.nix</code> file is more/less equivalent to a <code>package.json</code>/<code>Cargo.toml</code>/etc. project file,
+and is a standard entry point into a Nix codebase.</p>
+<p>Here, the OpenStack image is declared as a package, using <a href="https://github.com/nix-community/nixos-generators">nixos-generators</a>
+and its <code>nixosGenerate</code> package. (The OpenStack specific part is the <code>format = "openstack";</code> attribute. As mentioned above, you can dig into the details in <code>nixos/</code>, which <code>nixos-generators</code> makes use of).</p>
+<p>The <code>rgoulter.nixosModules</code> refers to the <a href="https://github.com/rgoulter/nix-user-repository/tree/95968968d32f7a6754978f099e975ca56b916977/modules">modules</a> in my <code>nix-user-repository</code>. (Though, you could just inline these all as one module in this <code>flake.nix</code> file, etc.).</p>
+<p>e.g. cloud-interactive ensures that some CLI tools I like are installed:</p>
+<pre><code>{
+  config,
+  lib,
+  pkgs,
+  ...
+}: {
+  environment.systemPackages = with pkgs; [
+    direnv
+    fd
+    fish
+    git
+    helix
+    jq
+    ripgrep
+    starship
+    tmux
+  ];
+  nix = {
+    extraOptions = ''
+      experimental-features = nix-command flakes
+    '';
+  };
+  security.sudo.wheelNeedsPassword = false;
+}</code></pre>
+<p>and <code>ssh-users</code> declares the user I log in with:</p>
+<pre><code>{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+{
+  users.users.rgoulter = {
+    isNormalUser = true;
+    extraGroups = [
+      &quot;wheel&quot;
+    ];
+    openssh.authorizedKeys.keys = [
+      &quot;ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOmQ9/u9qV9Vvy2pbcPtGiAmIrhXdi/vY6IesJ5RYpS4&quot;
+    ];
+  };
+}</code></pre>
+<p>(This doesn’t necessarily need to be hard coded into the image; but, for this use case, doing it this way is simple).</p>
+<p>With this <code>flake.nix</code>, on a Linux computer with <code>nix</code> installed (and flakes, nix-command enabled, as the determinate-systems does),
+the image is built by running a command like:</p>
+<pre><code>nix build .#small-openstack</code></pre>
+<p>(A quick &amp; dirty approach is to just copy the <code>flake.nix</code> file to the Linux VM we’re running. But, it’d also be possible to have a <code>nixosGenerate</code> package in a <code>flake.nix</code> in a repository else &amp; refer to it using the appropriate flake URI).</p>
+<p>The resulting file is linked to by <code>./result/nixos.qcow2</code>.</p>
+<h3 id="uploading-the-image">Uploading the Image</h3>
+<p>With the <code>openstack</code> client (use <code>nix shell nixpkgs#openstackclient</code> to make it available to the shell),
+and appropriate openstack credentials (e.g. copying the openstack user RC file over and <code>source</code>’ing it),
+the built image can be uploaded with:</p>
+<pre><code>openstack image create \
+  --private \
+  --disk-format qcow2 \
+  --container-format bare \
+  --file ./result/nixos.qcow2 \
+  my-nixos</code></pre>
+<p>which creates the OpenStack image <code>my-nixos</code>.</p>
+<h3 id="launching-a-vm-with-our-private-nixos-image">Launching a VM with Our Private NixOS Image</h3>
+<p>This is straightforward, by re-using the code from “Using Terraform to Launch a VM”.</p>
+<p>Simply change the <code>name</code> of the image in the <code>data.openstack_images_image_v2</code> block to <code>"my-nixos"</code>. (e.g. change the value of the Terraform variable <code>image_name</code>). – The NixOS image ignores the user data.</p>
+<h3 id="switching-configuration-after-launch">Switching Configuration After Launch</h3>
+<p>There are uses cases where it makes sense to ‘switch’ the NixOS configuration after the VM has launched.</p>
+<p>There are plenty of options for doing this.</p>
+<p>I liked using a command like:</p>
+<pre><code>ssh -A &quot;rgoulter@${IP}&quot; -- &quot; \
+  sudo sh -c 'mkdir -p ~/.ssh &amp;&amp; \
+  chmod 700 ~/.ssh &amp;&amp; \
+  ssh-keyscan github.com &gt;&gt; ~/.ssh/known_hosts &amp;&amp; \
+  echo switch to ${FLAKE_URI} &amp;&amp; \
+  nixos-rebuild switch --flake ${FLAKE_URI}' \
+&quot;</code></pre>
+<p>I think another option instead of doing the <code>ssh-keyscan</code> here is to add it to
+<a href="https://search.nixos.org/options?channel=23.05&amp;from=0&amp;size=50&amp;sort=relevance&amp;type=packages&amp;query=services.openssh.knownHosts">services.openssh.knownHosts</a>.</p>
+
+<hr />
+
+<div>
+    
+    
+    <a href="../../posts/programming/2023-08-29-two-kinds-of-small-keyboards.html" style="float:right; text-align: right;">Older post</a>
+    
+</div>
+<br style="clear: both;" />
+
+<hr />
+
+<!-- Load highlight.js for Syntax Highlighting. -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/bash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/c.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/gherkin.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/haskell.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/lisp.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/nix.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js"></script>
+<script>hljs.highlightAll();</script>
+
+            </div>
+
+            <hr style="margin-bottom: 0px; border-top: 2px solid black;" />
+
+            <div id="footer" class="pull-right" style="padding-right: 10px;">
+                Site proudly generated by
+                <a href="http://jaspervdj.be/hakyll">Hakyll</a>
+            </div>
+        </div>
+
+        <script>
+            // The callbacks we wanna use
+            // Phone-home, telling Google Analytics various metrics/dimensions
+
+            // Use custom dimensions & metrics
+            var AnalyticDimensionReaderKind = 'dimension1';
+            var AnalyticMetricActiveTime      = 'metric1';
+            var AnalyticMetricLongestIdleTime = 'metric2';
+            var AnalyticMetricReadCount       = 'metric3';
+
+            var gaCallbacks = {
+                "scrollPercent": function(ms, perc) {
+                    if (perc > 85) {
+                        // EVENT: Page read
+                        ga('send', {
+                            hitType:       'event',
+                            eventCategory: 'Scrolling',
+                            eventAction:   'atBottom',
+                            eventValue:    String(ms)
+                        });
+                    }
+                },
+                "read": function(ms, ct, timeToReach) {
+                    // Use this to set DIMENSION
+                    // timeToReach < 5s ==> Skim (default = Visitor)
+                    if (timeToReach < 5 * 1000) {
+                        // dimension1 = ReaderKind
+                        ga('set', AnalyticDimensionReaderKind, "skimmer");
+                    }
+
+                    // timeToReach > 30s ==> Reader
+                    if (timeToReach > 30 * 1000) {
+                        // dimension1 = ReaderKind
+                        ga('set', AnalyticDimensionReaderKind, "reader");
+                    }
+
+                    // EVENT: Page read
+                    ga('send', {
+                        hitType:       'event',
+                        eventCategory: 'Reading',
+                        eventAction:   'read',
+                        eventValue:    String(timeToReach)
+                    });
+
+                    // METRIC
+                    ga('set', AnalyticMetricReadCount, String(ct));
+                },
+                "initialIdle": function(ms) {
+                    // EVENT: Started Reading
+                    ga('send', {
+                        hitType:       'event',
+                        eventCategory: 'Scrolling',
+                        eventAction:   'begun',
+                        eventValue:    String(ms)
+                    });
+                },
+                "timeSpent": function(total, active, curIdle, initIdle, longestIdle) {
+                    // Update METRIC(S)?
+                    ga('set', AnalyticMetricActiveTime, String(active));
+                    ga('set', AnalyticMetricLongestIdleTime, String(longestIdle));
+                },
+                "idle": function(ms) {
+                },
+                "longestIdle": function(ms) {
+                }
+            }
+
+            window.onload = function() {
+                myAnalyticsInit(gaCallbacks);
+
+                //
+                // Initial dimensions & metrics
+                //
+
+                ga('set', AnalyticMetricReadCount, String(0));
+
+                // EVENT: Page load
+                ga('send', {
+                    hitType:       'event',
+                    eventCategory: 'pageLoad',
+                    eventAction:   'begun',
+                    eventValue:    String(ms)
+                });
+
+                // DIMENSION: visitor
+                ga('set', AnalyticDimensionReaderKind, "visitor");
+            }
+        </script>
+    </body>
+</html>
