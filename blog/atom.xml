@@ -8,8 +8,491 @@
         <name>Richard Goulter</name>
         <email>richard.goulter+blog@gmail.com</email>
     </author>
-    <updated>2023-09-09T00:00:00Z</updated>
+    <updated>2023-11-15T00:00:00Z</updated>
     <entry>
+    <title>Experience with the Tweag Configuration Language as an End User</title>
+    <link href="http://www.rgoulter.com/blog//posts/programming/2023-11-15-experience-with-the-tweag-configuration-language-as-an-end-user.html" />
+    <id>http://www.rgoulter.com/blog//posts/programming/2023-11-15-experience-with-the-tweag-configuration-language-as-an-end-user.html</id>
+    <published>2023-11-15T00:00:00Z</published>
+    <updated>2023-11-15T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<p>I recently had the chance at writing some keyboard firmware with <a href="https://github.com/semickolon/fak">semickolon’s
+fak</a>. (e.g. <a href="https://github.com/rgoulter/fak/tree/rgoulter-keyboards-and-layouts/ncl/keyboards/rgoulter/ch552-44">keyboard
+definition</a>,
+<a href="https://github.com/rgoulter/fak/blob/rgoulter-keyboards-and-layouts/ncl/keymaps/split_3x5_3/rgoulter/keymap.ncl">keymap
+definition</a>).</p>
+<p>Fak uses <a href="https://nickel-lang.org/">tweag’s Nickel</a> for declarative definitions
+of keyboards and keymaps. – Nickel is sophisticated type-safe configuration
+language.</p>
+<p>I’d first heard of Tweag in discussions around the Nix package manager, and how
+people found the Nix expression language’s lack of types to add friction to
+writing packages. I’d put Nickel in the same family as
+<a href="https://github.com/dhall-lang/dhall-lang">dhall</a>, or
+<a href="https://github.com/cue-lang/cue">cue</a>, or perhaps
+<a href="https://github.com/google/jsonnet">jsonnet</a>. (Although of those, I have minor
+experience with jsonnet, and briefly tried Dhall. I don’t have enough experience
+to do a good comparison). – In a sense, these could all be described as “JSON
+plus functions plus modules (plus types)”.</p>
+<p>Here are some notes on that.</p>
+<h2 id="context-what-kind-of-configuration-does-a-keyboard-use">Context: What Kind of Configuration Does a Keyboard Use</h2>
+<p>Fancy keyboards allow the user to customize the keyboard’s behaviour.</p>
+<p>One example is for users can change the keyboard’s keymap to some alternative
+layout (such as Dvorak, or Colemak) on the keyboard itself; this reduces
+friction, since then the computer can assume it’s using a typical QWERTY
+keyboard, and the user doesn’t have to worry about changing the OS configuration
+to use a keymap that might not be installed on the OS.</p>
+<p>Anyway, the point is, in order to be able to change the keyboard’s behaviour,
+you have to some way of the user describing that behaviour.</p>
+<p>With <a href="https://docs.qmk.fm/">QMK firmware</a>, the approach previously had been that
+you’d write out your keyboard definition and keymap definition in the C
+programming language, and compile the firmware and flash this onto the keyboard.</p>
+<p>C is a simple language; but with the C PreProcessor, it’s also <em>unrestrained</em> and formless.<br />
+The formless nature can be a benefit for the creative expression of the end user (in terms of <em>how</em> the keymap is expressed),<br />
+but I guess it’s a significant burden for the framework maintainers, presumably
+since it makes changing interfaces of the framework difficult.</p>
+<p>Hence, there’s been a move towards <a href="https://docs.qmk.fm/#/data_driven_config">data-driven
+configuration</a>.</p>
+<p>QMK’s <code>info.json</code> adds a layer of abstraction so that the relevant information
+can be declared from a single source of truth; this data can then be used to
+generate the code which QMK had been using before. The keyboard definitions
+describe the keyboard’s pinout, and what features it supports / how it supports
+them; and the keymap definitions describe the layout of keys. (e.g. <a href="https://github.com/rgoulter/qmk_firmware/blob/rgoulter-keyboards-and-layouts/keyboards/rgoulter/pykey40/info.json">my
+info.json for
+PyKey40</a>,
+or for my <a href="https://github.com/rgoulter/qmk_firmware/blob/rgoulter-keyboards-and-layouts/keyboards/rgoulter/x_2/info.json">“X-2”
+keyboard</a>).</p>
+<p>And, as I described in my previous post that I’d rather read Rust than read C;
+it’s easier to read someone else’s JSON than to read someone else’s C.</p>
+<p>So. Custom keyboard firmware makes use of configurations for things like
+keyboard definitions and keymap definitions.</p>
+<h2 id="nickel">Nickel</h2>
+<p>Roughly, my feeling is that Nickel is to JSON and YAML what Rust is to C and
+C++.</p>
+<p>C is ubiquitous, and bare bones. C++ has some features which make it seem nicer
+for some use cases, but it’s got many rough edges. Rust is ‘complex’, but avoids
+many of the previous rough edges, and has some really nice features.</p>
+<p>JSON is ubiquitous, and bare bones. etc.</p>
+<p>Technically, these “JSON plus functions plus modules” languages operate at a
+different level than JSON.. but I think that since the goal is to declare a
+particular configuration, I’d put them alongside each other when writing them.</p>
+<p>Cosmetically, much of Nickel’s syntax does seem similar to Rust. (Whereas, say,
+Dhall’s syntax seems similar to Haskell).</p>
+<p>Since I was using Nickel to write configuration (as opposed to writing the
+application which uses the configuration, or library modules for the
+configuration), I didn’t poke around with Nickel’s typing or contracts.</p>
+<h2 id="json-plus-functions-allows-for-clearer-configuration">“JSON plus Functions” Allows for Clearer Configuration</h2>
+<p>With JSON, there’s no choice but to be explicit, unfactored, and undocumented.</p>
+<p>Consider the value each of the additions to JSON in “JSON plus functions plus
+modules (plus types)”.</p>
+<p>Types can be useful for avoiding ‘illegal’ configurations, or otherwise
+navigating code, even though technically types provide no value at runtime.</p>
+<p>“Plus functions” implies “plus variables”. – I recall one way of describing
+programming was: “means of naming, means of combining, and means of
+abstraction”. That’s really the functionality “JSON plus functions” is getting
+at.</p>
+<p>“Plus modules” on top of that is (more/less) simply being able to break up one
+big file into many smaller ones.</p>
+<p>Without a means of naming/combining/abstracting, JSON values must be explicit
+and can’t be factored. “list of numbers from 4 to 30” would be tedious to
+describe in JSON, but may be useful to describe in USB keyboard configurations
+(e.g. “values A-Z in the <a href="https://www.usb.org/sites/default/files/hut1_21.pdf">keyboard usage
+page</a>”).</p>
+<p>And for anything non-trivial, there’s always going to be a benefit in being able
+to add documentation.</p>
+<h2 id="configuration-languages-hamstrung-by-json">Configuration Languages Hamstrung by JSON</h2>
+<p>These “JSON plus functions” languages do allow for a nicer experience, but I
+think they’re also inherently limited by JSON’s success.</p>
+<p>I like sum types, pattern matching and value destructuring. (And apparently
+alongside pattern matching, I like tuples).</p>
+<p>But since JSON values are either primitive (null, boolean, number, string) or an
+array or an dictionary… there’s not really a natural way to express sum types
+(or tuples) as JSON values. – Or languages like Go-lang also lack sum types; so
+while you can parse JSON into Go values without too much difficulty, there’s
+more friction trying to do the same with sum types.</p>
+<p>I guess with sum types, you need to know all the variations of the type before
+you can do meaningfully useful things with the value (check for invalid
+variants, exhaustively check variants have been considered, etc.); the other
+JSON values don’t have this constraint. Still, it’d be nice to somehow have sum
+types in more places.</p>
+<h2 id="it-lacks-tuples">It Lacks Tuples</h2>
+<p>I’m not sure if it was a deliberate design decision motivated by a preference
+for the explicit, or a distaste of implementing a tuple using heterogeneous
+values in an array (or perhaps a limitation that lists can’t be heterogeneous?),
+but I noticed that Nickel doesn’t support tuple types (in contrast to its other
+fancy features).</p>
+<p>e.g. the signature for <a href="https://nickel-lang.org/stdlib/std-array/#partition">Nickel’s
+std.array.partition</a> is:</p>
+<pre><code>partition : forall a. (a -&gt; Bool) -&gt; Array a -&gt; { right : Array a, wrong : Array a }</code></pre>
+<p>whereas e.g. <a href="https://hackage.haskell.org/package/base-4.18.0.0/docs/Data-List.html#v:partition">Haskell’s
+Data.List.partition</a>
+uses tuples:</p>
+<pre><code>partition :: (a -&gt; Bool) -&gt; [a] -&gt; ([a], [a]) </code></pre>
+<p>Similarly,
+<a href="https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.partition">Rust’s Iterator’s partition returns a tuple</a>,
+<a href="https://lodash.com/docs/4.17.15#partition">JavaScript’s lodash returns an array</a>,
+<a href="https://package.elm-lang.org/packages/elm/core/latest/List#partition">elm’s List.partition returns a tuple</a>.</p>
+<p>I don’t think the other “JSON plus functions” languages have tuples, either; so
+it’s not Nickel’s so much as JSON’s limitation.</p>
+<h2 id="smelly-syntax-lists-vs-arrays-and-recursive-vs-iterative">Smelly Syntax: Lists vs Arrays and Recursive vs Iterative</h2>
+<p>In my use case, use of <code>nickel</code> was done at compile time on a powerful machine,
+so I’m not concerned with memory consumption, nor too concerned about runtime.</p>
+<p>My taste was <em>tickled</em> by that Nickel’s <code>std.array</code> has functions which are
+geared towards list manipulation (e.g.
+<a href="https://nickel-lang.org/stdlib/std-array/#fold_left">fold_left</a>), whereas the
+structure is an array.</p>
+<p>I found this at times awkward since AFAICT in Nickel, arrays don’t have syntax
+to destructure them.</p>
+<p>Rather, it’s natural to interact with lists recursively. A list is recursively
+defined as either an empty list, or some item followed by a list. (e.g. the
+<code>(list 1 2 3)</code> is <code>1</code> followed by <code>(list 2 3)</code>; and ultimately <code>(list 3)</code> is <code>3</code>
+followed by the empty list). In Haskell, a list can be pattern-matched against
+<code>x:xs</code> (the head of the list, followed by its tail).</p>
+<p>Whereas, it’s natural to interact with arrays using loops and indices.</p>
+<p>It’s natural for an expression-oriented language like Nickel to work with lists
+(and it would be unusual for an expression-based language to have loop
+constructs, I think); and JSON has arrays.</p>
+<h2 id="configuration-complexity-is-about-how-you-use-it">Configuration Complexity is About How You Use It</h2>
+<p>A blogpost I think about a lot is the <a href="https://mikehadlow.blogspot.com/2012/05/configuration-complexity-clock.html">“Configuration Complexity
+Clock”</a>.
+Its picture tells 1,000 words; but roughly the point is that at each step, the
+trade-offs look desirable for going from hard-coded values to a configuration;
+and from a configuration to a DSL; and from a DSL to hard-coded values. –
+Hence, don’t just accept “hard coded values bad” as a dogma, and take care when
+adopting a configuration or a DSL.</p>
+<p>What’s “too hard to read” is also dependent on the person.. <a href="https://steve-yegge.blogspot.com/2008/02/portrait-of-n00b.html">Steve Yegge’s
+“Portrait of a
+n00b”</a> discusses
+that what’s considered acceptable to someone unfamiliar with the code may be
+unacceptable to someone who is very familiar with the code. (Code that’s too
+sparse or too verbose means changing the code takes more effort than it needs
+to; whereas code that’s too dense or too terse also means changing the code
+takes more effort than it needs to).</p>
+<p>Adding functions to JSON provides a more powerful tool for configuration. But,
+sometimes a “more powerful tool” is like a rocket-powered chainsaw: if you’re
+not careful about how you’re using it, you might end up causing more damage than
+it’s worth.</p>
+<h2 id="types-arent-sufficient-to-describe-interfaces">Types Aren’t Sufficient to Describe Interfaces</h2>
+<p>Something John Ousterhout’s <a href="https://web.stanford.edu/~ouster/cgi-bin/book.php">A Philosophy of Software
+Design</a> talks about is about
+the distinction between a software module’s interface and its implementation.
+Its interface is “what someone needs to know to use the module”. – He gives the
+example of a bad interface: on Windows, you can’t delete a file if it’s open by
+some process; this is ‘bad’ because in order to delete a file, you need to also
+know that the file is not opened by any process (or which processes to close!).</p>
+<p>The broader point is that a module is “complex” if its interface requires
+superfluous details (the interface is over-specified), or if using the interface
+also requires knowing implementation details not exposed as part of the
+interface (the interface is under-specified).</p>
+<p>PoSD makes the point that, similar to how Test-Driven Development emphasises the
+benefits of writing unit tests before writing the implementation, it’s similarly
+beneficial to write out a module’s documentation before writing the
+implementation.</p>
+<p>While types show what an implementation is capable of, documentation describes
+what a module user needs to know in order to use the module (especially since
+it’s often not practical or possible to describe with types).</p>
+<p>To illustrate the point, looking at <a href="https://github.com/semickolon/fak/blob/8f3d29d3705a0e7b7cadcd1650c162fceaba7ced/ncl/fak/keymap.ncl#L26-L53">a rather gnarly Nickel excerpt in
+fak</a>:</p>
+<pre><code>let HoldTapKeyInterrupt = {
+  decision | [| &#39;none, &#39;hold, &#39;tap |] | default = &#39;none,
+  trigger_on | [| &#39;press, &#39;release |] | default = &#39;press
+} in
+
+let HoldTapKeyInterrupts = (
+  # ...
+  std.contract.Sequence [ Array HoldTapKeyInterrupt, ValidLength ]
+) in
+
+let HoldTapBehavior = let
+  default_key_interrupts = std.array.replicate key_count {}
+in {
+  timeout_decision | [| &#39;hold, &#39;tap |] | default = &#39;hold,
+  timeout_ms | Uint16 | default = 200,
+  key_interrupts | HoldTapKeyInterrupts | default = default_key_interrupts,
+  # ...
+} in</code></pre>
+<p>It’s not too hard to discern what values can be constructed for these types
+(e.g. a <code>HoldTapKeyInterrupt</code> could be <code>{ "decision": "none", "trigger_on": "press" }</code>), but the types themselves aren’t sufficient to describe what the key
+interrupt logic is, or how the values should be used. (For this code, there’s
+<a href="https://github.com/semickolon/fak/tree/ebbb07c63721009c60d9951112d0587929657e3d#complex-hold-tap-behaviors">documentation
+elsewhere</a>).</p>
+<p>A <code>HoldTapBehavior</code> value could be expressed in JSON. having types <em>and
+documentation</em> guide understanding.</p>
+<p>Getting back to Nickel: it does support adding documentation by way of adding a
+<code>doc</code> <a href="https://nickel-lang.org/user-manual/syntax/#metadata">metadata decoration to record
+fields</a>. – But I guess I
+wish I saw people say “types <em>and</em> documentation”. (Although perhaps by the time
+you add enough features to the DSL, you’ve essentially just got hard-coded
+values in a general purpose programming language).</p>
+<h2 id="toolinglsp">Tooling/LSP</h2>
+<p>I expect it will improve, but I found that the Nickel LSP server wasn’t quite
+clever enough to go-to-definition for all the situations I tried it in.</p>
+<h2 id="overall">Overall</h2>
+<p>Overall, I was pleased with my experience.</p>
+<p>“JSON plus functions” does let me apply creativity to describe a configuration
+in a way that I find to be a good balance of cleverness and clarity.</p>
+<p>There are more costs/risks to using Nickel compared to using plain JSON, but
+there are also many benefits.</p>]]></summary>
+</entry>
+<entry>
+    <title>Experience Report on Updating Keyboard Firmware Written in Rust</title>
+    <link href="http://www.rgoulter.com/blog//posts/programming/2023-10-30-experience-report-on-updating-keyboard-firmware-written-in-rust.html" />
+    <id>http://www.rgoulter.com/blog//posts/programming/2023-10-30-experience-report-on-updating-keyboard-firmware-written-in-rust.html</id>
+    <published>2023-10-30T00:00:00Z</published>
+    <updated>2023-10-30T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<p>Here are some notes on the experiences I had updating some keyboard firmware I had written in the Rust programming language.</p>
+<h2 id="context-my-dive-into-the-mechanical-keyboard-rabbit-hole">Context: My Dive into the Mechanical Keyboard Rabbit Hole</h2>
+<p>This was for keyboard firmware I’d written in Rust.</p>
+<p>In mid-2020, I took my first steps into the mechanical keyboard hobby when I bought the BM40 keyboard.
+I thought it looked pretty neat, since the keys were arranged in a symmetrical grid, and the keyboard was very small (so would require some skill to use). It was a decent keyboard to start with.</p>
+<p>One of the nice things about the mechanical keyboard hobby is there are all sorts ways you can be creative with fancy keyboards. (e.g. from purchasing a different set of keycaps so that your keyboard looks nicer, trying out different styles of keyboard switches, etc.).</p>
+<p>By the start of 2021, I was trying to design keyboard PCBs. (You can find the results of my playing around at github, <a href="https://github.com/rgoulter/keyboard-labs">rgoulter/keyboard-labs</a>). – The idea of trying to pack bells &amp; whistles onto a keyboard all within a pair of 100x100mm PCBs sounded like such a fun/interesting challenge.</p>
+<p>These PCBs would need firmware written for them. Fortunately, almost all of the custom keyboards that enthusiasts buy allow customising the keyboard layout. And, the most popular by far was QMK, which is relatively easy to work with. I had enough experience to work with QMK. (I was the one who added HSRGB functionality to the BM40 rev1, which took about 3 days to merge; I also made a PR for BM40 rev2, which took just over 550 days to get merged…). I was able to use QMK to write firmware for my custom designs.</p>
+<p>But, I also came across the <a href="https://github.com/teXitoi/keyberon">keyberon</a>, a library which supported writing keyboard firmware in Rust. Of course, I had to try it.</p>
+<h2 id="mechanical-keyboard-firmware-options">Mechanical Keyboard Firmware Options</h2>
+<p>For writing keyboard firmware, there are several popular options. There are probably others, but to my mind:</p>
+<ul>
+<li><p>QMK, by far the most popular and featureful.</p></li>
+<li><p>ZMK, for keyboards which have Bluetooth.</p></li>
+<li><p>KMK, which is built upon CircuitPython.</p></li>
+<li><p>Keyberon, which uses Rust.</p></li>
+</ul>
+<p>My experience has been that QMK is by far the most practical one of these to use.</p>
+<p>e.g. Although it’s much easier to iterate on firmware using CircuitPython (since “flash firmware” is as simple as “copy file to thumbdrive”), my experience with KMK was that its tap-hold functionality didn’t work well enough for home-row modifiers; which essentially makes the firmware impractical for small keyboards.</p>
+<p>However. Keyberon is written in Rust, so I was curious to give it a try.</p>
+<h2 id="general-impressions-of-rust-keyboard-firmware">General Impressions of Rust Keyboard Firmware</h2>
+<p>It’s to QMK’s credit that it does such a great job at making writing keyboard firmware so accessible.
+As QMK is a framework, you just bolt on your own parts to it (e.g. a keyboard pinout, if the keyboard isn’t already supported by QMK; and a keymap). You to can make use of a wide variety of software features (like layering, or tap-dance key behaviour), as well as hardware features (such as RGB LEDs, OLED screens, etc.). – Essentially, almost no embedded system knowledge is required to write a keymap, and very little is required to add on a keyboard definition.</p>
+<p>As I understand it, Keyberon’s goal isn’t to compete with QMK. Its goal is to be a library for helping write keyboard firmware. (I think limiting the project scope is a good thing).</p>
+<p>I reckon a downside to this is: it ends up that the keyboard firmware written in Rust that I’ve seen all have the feeling of “copied and pasted” to them. – The potential upside to this is all the keyboard firmware programs are small and easy to understand; but I can’t help but feel that everyone doing this copying-and-pasting is having to pay the cost of a learning curve in each instance.</p>
+<h2 id="on-rust-vs-c">On Rust vs C</h2>
+<p>I really like that Rust has features like Sum types (tagged unions), and destructuring.</p>
+<p>I got the impression that in order to write Rust code, you still need to have a decent mental model for how C works. – e.g. when I’m writing TypeScript or Python, I don’t need to care about whether the values I’m using are concrete or abstract; however, in Rust, I’d frequently make the compiler point out that with the code I had written, the size of the value couldn’t be determined. To me, that kind of restriction is less confusing if I can think “oh, right, in C, you’d have to …”.</p>
+<p>In terms of “reading others’ code”: I would rather read code written in Rust than code written in C. – Frequently, C’s CPP <code>#ifdefs</code> make its code complex to read, since it’s that much more you need to keep in mind when reading the code. It’s also harder to setup tooling for C such that you can use development-environment features like “jump to definition”.</p>
+<p>It’s really useful to be able to rely on code others have written. I wouldn’t want to set up a C project to depend on others code. (It’s more straightforward to add a dependency to a Rust project than to a C project). But, especially for this use case, building on QMK allows firmware which does more, with a wider variety of peripherals, than writing Rust code would. To an extent, I’d think the much of the code that gets into QMK also benefitted from there being more embedded firmware code in C than in Rust.</p>
+<p>It’s difficult to write Rust code.<br />
+It can be difficult to correctly express lifetimes, or generic trait bounds. A strict compiler which adds friction is great for <em>maintaining</em> code, but it makes just shitting out code much harder. (And sometimes “shitting out code” is what you want to be doing).</p>
+<p>In terms of “risk of writing code that’s too clever”: If someone’s writing code in C that’s <em>too clever</em>, one mechanism they have to use is the C Pre-Processor. Rust’s macros can be very similar; but Rust also has other ways of writing code that’s <em>too clever</em>.</p>
+<p>Rust is also a complex language. I don’t want to point to any one thing and say “this is too hard to understand”; but with so many sophisticated features, it can be difficult to have a good intuition for how Rust’s features interact with each other. – So if you’re coming back to a codebase after some months of not having used Rust, it can take time to recall a good mental model.</p>
+<p>That QMK is much more practical to use than the other keyboard firmware alternatives is a testament to just how much work has gone into making the project accessible.</p>
+<h2 id="earlier-iterations-of-my-rust-firmware">Earlier Iterations of my Rust Firmware</h2>
+<p>My Rust keyboard firmware has been a project which I return to maintain once or twice a year. I initially wrote it, largely by copy-pasting from similar codebases. As a sideproject / hobby repo, each iteration was an opportunity for me to have fun, and make the code more sophisticated. e.g.:</p>
+<ul>
+<li><p>by refactoring the code by breaking up a single file into several modules,</p></li>
+<li><p>adding firmware code for a different keyboard,</p></li>
+<li><p>adding Nix support code, so that it’d be easier to build,</p></li>
+</ul>
+<p>I mean, each iteration was a chance to take something that worked, and add onto it a bit so the code was less messy. – “The first time, as a scientist; the second time, as an engineer”.</p>
+<h2 id="updating-the-code">Updating the Code</h2>
+<p>I had tried (and failed) to update the code’s dependencies back in 2023 May.</p>
+<p>My expectation when updating dependencies is: if I can bump the dependencies and there are no compilation errors, I expect the code to work as it did before.<br />
+If I run into compilation errors (e.g. function signatures or types changed), then I’ll have to look to see what changed, figure out the smallest reasonable change to get the code to compile, and hope that works.</p>
+<p>I found difficulty in updating 3 things: the version of the realtime framework (RTIC), the version of the HAL (API for driving the hardware), and the toolchain version. – When I updated <em>just that</em>, then the code might compile but the firmware wouldn’t work as it did before.</p>
+<p>When I updated the toolchain, the code compiled but didn’t run the same way it had before. – This was frustrating and unfortunate.<br />
+But, given that I was able to update the toolchain after resolving the other two problems, my best understanding is: my code was wrong, and happened to work with the old compiler version.</p>
+<p>Similarly, when I tried updating the HAL dependency, the code would compile but wouldn’t result in a working keyboard; ditto for the RTIC.<br />
+This was frustrating and unfortunate.<br />
+But in this case, I think the problem was more clearly my bad code.<br />
+– I was using the wrong kind of Timer in the firmware. A closer read of the documentation indicated “if the system runs above such and such frequency, then don’t use this Timer”.<br />
+If there’s any fault of the dependencies, it’s apparently that they happened to previously be lenient enough to run bad code.</p>
+<p>I’d put this frustrating experience up to the difficulty of embedded development.</p>
+<p>That said, I will say I also ended up replacing the dependency of the USB HID keyboard from Keyberon’s implementation to <a href="https://docs.rs/usbd-human-interface-device/latest/usbd_human_interface_device/">usbd-human-interface-device</a>’s.<br />
+For one, <code>usbd-human-interface-device</code> implemented support for media keys (play/pause, next track, etc.) which Keyberon didn’t.<br />
+But I’d ran into a bug related to sending USB HID reports when using Keyberon’s implementation, which went away when using <code>usbd-human-interface-device</code>’s.</p>
+<h2 id="things-i-found-difficult-about-embedded-development">Things I Found Difficult about Embedded Development</h2>
+<h3 id="deploying-the-program-is-harder">Deploying the Program is Harder</h3>
+<p>The easiest kind of deployment action is to run software on some Linux machine that you control. e.g. To deploy a web server, copy the program over, and then run the program there.</p>
+<p>Running a program on an embedded device is somewhat more involved.</p>
+<p>For a newbie, there are many things about this which are quite confusing.</p>
+<p>Fortunately, it has become much easier in the time since I started. With UF2 bootloaders, flashing the firmware onto a device is as simple as copying a file to a thumbdrive. – Albeit, compiling the UF2 file is not totally trivial; and you still have to flash a UF2 bootloader onto the device.</p>
+<h3 id="printf-debugging-harder-to-set-up">Printf Debugging Harder to Set Up</h3>
+<p>A staple of debugging is “printf debugging”. You put a bunch of <code>print</code> statements in your code, and use those as evidence to lead you to a better understanding of how a system works.</p>
+<p>With embedded devices (even very powerful ones), it’s … not quite that simple.</p>
+<p>Ideally, with USB devices, you can somehow set up some kind of CDC serial console and output messages over that. But, if you’re at the level of copy-paste coding, this isn’t so simple to set up. (… and doesn’t help if you mess up something in the firmware before it gets to that point).</p>
+<p>I saw <a href="https://probe.rs/">probe-rs</a> puts in a bunch of effort to make debugging embedded software much easier, to the extent where you can just run <code>cargo embed</code> and you <em>can</em> have this printf debugging. – But, you still have to figure out how to setup a probe device, and connect that to your device, etc.</p>
+<h3 id="the-small-details-might-really-matter">The Small Details Might Really Matter</h3>
+<p>In one sense, programming is about structuring complexity so that you only need to pay attention to the things that are important to you (and can ignore the things that aren’t).</p>
+<p>But I’d say with embedded development, it’s more likely that small details will be significant, compared to writing an HTTP API server.</p>
+<p>One mistake I made was constructing a USB class after I’d constructed a USB device; this caused the program to crash, and it wasn’t obvious to me as to why. (Well, once I got the SWD connected and printf debugging working, <em>then</em> it was obvious what was happening).</p>
+<h3 id="getting-a-good-mental-model-of-rust">Getting a Good Mental Model of Rust</h3>
+<p>I think it’s widely accepted that when learning Rust, you’ll be struggling to get code to compile. (Even code which would be acceptable in memory-managed languages like TypeScript or Python). Especially with concepts related to ownership and lifetimes.</p>
+<p>More than once, I’d encounter difficulty trying to convince the compiler that my code was fine; or I might have some intuition that what I wanted to try was okay, but would have difficulty expressing that in how Rust actually worked. – I do believe many experienced Rust developers will try and avoid having to fight the compiler when they get into these situations.</p>
+<h2 id="fancy-tech-that-helped">Fancy Tech that Helped</h2>
+<h3 id="llms">LLMs</h3>
+<p>I used LLMs both for code-assistance in the IDE, as well as asking questions to a chat bot.</p>
+<h4 id="code-suggestions-in-the-editor">Code Suggestions in the Editor</h4>
+<p>Because the code for keyboard firmware so naturally reflected the structure of the keyboard’s schematic, the kind of code I was writing was very easy for GitHub’s CoPilot to predict. – e.g. you might leave a comment saying “the column pins are PA3, PB7, PB8, PA13, …”, and then GitHub CoPilot is able to predict what you’ll want <code>let col_pins =</code> to match against. This effectively removes a lot of drudge; rather than having to type 30-50 chars of what you know, you only have to type about 5 or so.</p>
+<p>CoPilot didn’t get it right 100% of the time; but, with a nudge in the right direction, it was able to suggest exactly the code I wanted to write. – Even with having to check the output &amp; adjust, overall, it was beneficial to use CoPilot.</p>
+<p>CoPilot was also very useful for writing rote bits of code which I’d describe as “the kind of stuff you’d seach ‘how do I do this’ and copy-paste” (if you’re new to the language/library) or perhaps “the kind of thing you’d write without thought” (if you’re familiar with the language/library).<br />
+– Perhaps a <em>downside</em> being, if you’re not familiar with best practices, nor idioms of what the code <em>should</em> be, then maybe you’re just writing bad code.</p>
+<p>(I also ran into some tooling problems: there were some contexts where CoPilot didn’t make suggestions, and some contexts where “use CoPilot’s completion” conflicted with other bindings).</p>
+<h4 id="asking-llms-for-help">Asking LLMs for Help</h4>
+<p>I liked the idea that Go-lang made for a good language to use for side-projects, since the language strives to be simple to write. This reduces the cost of coming back to the project after months of not having touched the technology; whereas with a more complicated language, you have more to recall.</p>
+<p>Rust is a complex language. There are going to be things that won’t be obvious.</p>
+<p>This is the kind of problem StackOverflow is good for. You’re likely to have the same questions as other people, and ask “how can I…?” or “why can’t I combine this and that…?”.</p>
+<p>I tried asking ChatGPT for help whenever I was stuck with something.</p>
+<p>The results were hit and miss.</p>
+<p>When I got a good result, it would provide code snippets tailored closely to what I’d asked for.</p>
+<p>When I got bad results, the LLM would confidently tell me “oh, this is how this works”, and it felt the <a href="https://www.youtube.com/watch?v=oN2_NarcM8c">Abbott and Costello joke about 7x13 = 28</a>. – The joke is funny because I know basic multiplication; but I wonder what the joke is like if you have no understanding of the domain.</p>
+<p>Ultimately, at the moment, I think this leaves only a few places where I’m comfortable asking LLMs stuff: domains where inaccuracy leaves me no-worse-off than the average person; and domains where I know enough to verify the LLM output to make use of it.</p>
+<h3 id="nix">Nix</h3>
+<p>Probably <code>rustup</code> with a toolchain file and <code>Cargo.lock</code> are sufficient to reproduce the same binaries/behaviour that had worked before. I used Nix to take care of this, instead.</p>
+<p>The additional benefits I got from Nix:</p>
+<ul>
+<li><p>By declaring the tools I used as part of a nix shell, I didn’t have to worry about how to install these programs.
+With embedded development, there were several tools which were useful for working with the binaries (such as <code>probe-rs</code> or <code>st-write</code>).</p></li>
+<li><p>I found it nice to have the outputs I wanted declared as a package.</p></li>
+</ul>
+<p>I’m able to trust that a Nix package isn’t affected by a dirty environment in a way that’s difficult to achieve with a Makefile.</p>
+<h3 id="just-task-runner">Just (Task Runner)</h3>
+<p>One thing I don’t see eye to eye on with QMK is it has its own bespoke <code>qmk</code> CLI (which both depends on, and is intended for use within the qmk_firmware repository; you can’t use <code>make</code> without having <code>qmk</code> installed).</p>
+<p>One DX improvement I value from the <code>qmk</code> cli is its <code>qmk flash</code>, which has a “do what I mean” feel to it, in that it waits for the expected device to become available, and then will flash the firmware appropriately.</p>
+<p>While <code>Makefile</code>s are suitable for describing how files are to be built, <code>justfile</code>s are suitable for describing tasks to be run. So, I added a <code>justfile</code> with a convenience command to help me flash the firmware. It’s a small thing, but it improved the DX.</p>
+<h3 id="lsp">LSP</h3>
+<p>https://grugbrain.dev/#grug-on-type-systems</p>
+<blockquote>
+<p>grug very like type systems make programming easier. for grug, type systems most value when grug hit dot on keyboard and list of things grug can do pop up magic. this 90% of value of type system or more to grug</p>
+</blockquote>
+<p>LSP means it’s easier for “hit dot on keyboard and list of things grug can do pop up magic”.</p>
+<p>Also useful is: being able to show the type, and being able to show the documentation for the type.</p>
+<p>(Albeit, for some reason, the LSP in Helix was better able to find information in the RTIC framework’s tasks than the LSP I used with Emacs could. Perhaps this has to do with proc macros or some other thing.).</p>]]></summary>
+</entry>
+<entry>
+    <title>John Wick 4 is Good Fun</title>
+    <link href="http://www.rgoulter.com/blog//posts/narrative/2023-09-27-john-wick-4-is-good-fun.html" />
+    <id>http://www.rgoulter.com/blog//posts/narrative/2023-09-27-john-wick-4-is-good-fun.html</id>
+    <published>2023-09-27T00:00:00Z</published>
+    <updated>2023-09-27T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<p>I finally got around to watching John Wick 4.</p>
+<p>I hadn’t <em>loved</em> John Wick 3.<br />
+In JW3, Wick takes <em>a lot</em> of physical punishment and manages to keep fighting against all his enemies. What ruins the movie for me is scenes like where his enemies beat him, but they then don’t kill him; and so Wick is then able to keep fighting and kill them.</p>
+<p>Fortunately, I enjoyed John Wick 4 much better.</p>
+<p>Perhaps I went in with a more suitable mindset. – The films aren’t really good as a coherent “how would one super assassin survive against a horde of other assassins”.<br />
+Instead, I think films like JW4 are more like excuses for stringing a bunch of action scenes together that have all sorts of fantastic stunts.</p>
+<p>e.g. Extraction 2 is directed by a stuntman.. its first third has an unbelievably impressive fight scene in an open courtyard during a prison riot.</p>
+<p>In JW4.. does it make sense to have a fist fight in the middle of a busy street at night, in front of a muscle car that’s been turned on its side? No. Not one detail makes sense. (Traffic would stop, or the assassins would shoot Wick, or whatever). – But, it looks striking.</p>
+<p>Does it make sense for assassins to have tacti-cool models of old firearms like the WW2-era’s Thompson gun, or the Wild West era’s lever action? No, but it follows rule-of-cool.</p>
+<p>I reckon JW4 does a better job at integrating its ensemble of assassins and villains than the previous movies. The series has always had a set of heroes and villains.. but, I liked it in this one.<br />
+The fights are perhaps ‘accommodating’ for the sake of rule-of-cool.<br />
+One of the fun ideas that hasn’t been beaten to death is the idea of competing assassins protecting a target. – The anti-hero Mr Nobody in this movie wants to make lots of money off of killing John Wick, and so he kills the other assassins who are attacking Wick.</p>
+<p>Plot wise… it’s so “rule of cool” that it’s as if it’s been perfectly rendered from the mind of a 12 year old.</p>
+<p>I assume the series is going to continue.<br />
+I hope the next one is a bit more chilled out. The Fast and the Furious series is fun, but it’s a bit too over-the-top.</p>]]></summary>
+</entry>
+<entry>
+    <title>So I Just Finished Tomb Raider 2</title>
+    <link href="http://www.rgoulter.com/blog//posts/games/2023-09-20-so-i-just-finished-tomb-raider-2.html" />
+    <id>http://www.rgoulter.com/blog//posts/games/2023-09-20-so-i-just-finished-tomb-raider-2.html</id>
+    <published>2023-09-20T00:00:00Z</published>
+    <updated>2023-09-20T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<p>Well. I’d played it years ago. And I would’ve cheated when I played it last.</p>
+<p>I had fun playing it again now.</p>
+<p>I loved the adventure aspects of the game.<br />
+It’s satisfying to have enough of a grasp of how the level is designed so as to make your way through it!</p>
+<p>The designs of the levels themselves are interesting.<br />
+The levels themselves are laid out along an easily discernable grid.<br />
+This makes the navigation physics pretty easy to understand.<br />
+But, it’s also quite a constraint on the ability to design good looking levels.</p>
+<p>Despite that, there are many memorable moments throughout the game that leaves more of an impact than, say, a more spectacle-heavy game like Call of Duty.</p>
+<h3 id="the-gameplay-loop">The Gameplay Loop</h3>
+<p>At its moments of low friction, Tomb Raider II involves traversing through an area, dealing with any threats (e.g. enemies or traps), and perhaps collecting key items or interacting with switches in order to get to the next area. – e.g. you’ll notice there’s a switch, you’ll pull the switch, and this opens a door nearby where you’ll then proceed to the next area.</p>
+<p>When there’s more friction, often you’ll have overlooked some part of the area that allows you to proceed; or perhaps there’s some under-explained puzzle mechanic that you need to understand to continue.</p>
+<p>“Under-explained puzzle mechanic” is a good thing. A puzzle explained isn’t much of a puzzle.<br />
+It just means you’ll need to try different things.</p>
+<p>The “overlooked some part of the area” I have more mixed feelings about.<br />
+Most of the game, the area you need to look in isn’t all <em>that</em> large; and so it’s not too mean.<br />
+On the other hand, if they used guide paint to highlight the areas to go next, that’d take out most of the fun. – Often the level <em>does</em> have markers suggesting where to go next, but it’s typically very subtle.</p>
+<p>In terms of friction,<br />
+I’d say it’s “soft stuck” when you’re not fully certain how to proceed to the next area, but you still have plenty of things to try.<br />
+Whereas, you feel “hard stuck” if you still think you’ve checked everywhere, and you think you’ve tried everything that could possibly work.<br />
+– It’s <em>really</em> satisfying to think: “Hmm, okay, I’ll try this,” and for that to be the solution.</p>
+<p>I felt more stuck early on in the game. For the last two levels, the challenge shifted to the areas being trap-heavy.</p>
+<h3 id="the-controls">The Controls</h3>
+<p>These days, with twin stick controllers, the most common controls involve using the right stick for controlling the camera, and the left stick for movement.</p>
+<p>These classic Tomb Raider games use “tank controls”. i.e. up/down/left/right control Lara relative to <em>Lara’s body</em>, regardless of where the camera is looking.</p>
+<p>This works well with the grid system to have a navigation logic which works quite discretely. It’s something like: Lara can do a standing jump reaching 1 block away; or a running jump reaching 2 blocks away; or she can grab the edge of a block 3 blocks away after a running jump.</p>
+<p>Some people don’t like these controls somehow. I guess there’s a subtlety to the running jump, where Lara needs to run 1 block before will do a running jump.</p>
+<p>In terms of combat, Lara auto-aims her weapons.<br />
+This makes combat more about acrobatically dodging around enemies (and navigating the terrain while doing so) than about aiming with a mouse.<br />
+Two things I miss from twin-stick controls: the controls don’t support strafing around an enemy; and with the auto aim, it’s difficult to tell which target I’m aiming at (which is important for one level where there are friendly units).</p>
+<p>The tank controls are more direct, more raw, and ‘lower level’ than the twin-stick controls. – You can screw up and look stupid; but it’s satisfying to pull off an elegant maneouver.</p>
+<p>What <em>doesn’t</em> work well is that since the tank controls’ camera is automatically controlled, this can result in awkward situations where you can’t see what’s in front of you. This mostly impacts combat in some places.</p>
+<h3 id="memorable-moments">Memorable Moments</h3>
+<p>The start of the underwater missions sees Lara underwater, and the first thing we have to do is find a pocket of air to breathe in!<br />
+I don’t <em>love</em> the underwater levels; I think the underwater combat is lame.<br />
+But, the design of the levels is fun. At one part, you’re in an upside-down ocean liner.</p>
+<p>In the Tibetan mountains, there’s a dark room filled with the growls of yetis. Lara can’t light the room and shoot at the same time. Although, yeah, turns out the yetis are safely in cages, until you flip the switch that lights the room a bit.</p>
+<p>The ancient temple near the end, where we once again hunt down the titular Dagger of Xian.. it’s a trap-heavy level, it feels a little mean, but it’s got such a fascinating feel to it.</p>
+<p>The epilogue strikes me as special. Yeah, sure, it’s got Lara wearing a bathrobe. But, it’s also got gameplay where you’re fighting off a bunch of goons from what was otherwise an iconic training area outside of the main game.</p>]]></summary>
+</entry>
+<entry>
+    <title>Classic Lara Croft is Back, Huh</title>
+    <link href="http://www.rgoulter.com/blog//posts/games/2023-09-19-classic-lara-croft-is-back-huh.html" />
+    <id>http://www.rgoulter.com/blog//posts/games/2023-09-19-classic-lara-croft-is-back-huh.html</id>
+    <published>2023-09-19T00:00:00Z</published>
+    <updated>2023-09-19T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<p><a href="https://twitter.com/tombraider/status/1702355960809812035">A remaster of the first three Tomb Raider games has been announced</a>.</p>
+<h3 id="remastered-games">Remastered Games</h3>
+<p>This continues a trend of classic games receiving touch ups and being sold as new.</p>
+<p>For gamers, this has the advantage of making these remastered games easy to play on modern systems. Without such remasters, you’d either have to play the game on a console with physical media, or perhaps fiddle with compatibility mechanisms to get the game to play on PC.</p>
+<p>This seems to have gone quite well for the “Age of Empires” series.<br />
+I remember a decade ago or so, the idea of polishing AoE2 and re-releasing it was quite popular.<br />
+In the end, they re-released it twice: with an “HD” edition, and then with a “Definitive” edition. I suspect the “HD” edition was more of a pilot to gauge response; and “Definitive” was more of a continuation.</p>
+<p>Another remaster I was excited for was for “Commandos 2”.<br />
+Unfortunately, here the remaster altered some of the iconic graphics from the original. The game removed nazi swastikas, but also some of the Japanese “rising sun” icons. (Although I disagree with their removal from the game, I can at least understand why you’d want to remove nazi swastikas; I find removing big red circles a bit too much, though). – The game doesn’t depict brutal realities of war; but it does depict situations where a small crew of Allied commandos go and beat up a bunch of the bad guys (including situations where enemies occupy towns, and use prisoners of war for labour).<br />
+So, the argument of “the removed symbols may remind people of the bad things done in war” is bizarre, since you’re playing as <em>the good guys stopping the bad guys</em>.</p>
+<p>Other old classics like Crash Bandicoot and Spyro have had faithful re-releases.</p>
+<h3 id="different-laras">Different Laras</h3>
+<p>The “Tomb Raider” series has had several different generations of its series:</p>
+<p>The original, classic “Tomb Raider” was developed by Core Design; these Tomb Raider games still have numbers after the title. By “Tomb Raider IV”, the developers were a somewhat burnt out, and so killed off Lara at the end of the game. TR5 was told as flashbacks. – TR6 was an attempt at making a new game for the next generation of consoles; but the game was released in an unfinished state and wasn’t all that good.</p>
+<p>Crystal Dynamics picked up “Tomb Raider” with a reboot with a more dramatic “Lara Croft”; these games “Tomb Raider: Legend”, “Tomb Raider: Anniversary” (a remake of TR1), and “Tomb Raider: Underworld” were quite different than the classics: the controls were for twin-stick controllers, giving players control of the camera; and Lara had a different look (replacing the classic green tank top with a khaki top).</p>
+<p>This Lara then gets ditched in the 2013 reboot “Tomb Raider”, and its sequels “Rise of the Tomb Raider” (2015) and “Shadow of the Tomb Raider” (2018).<br />
+This Lara is called “Survivor Lara”.<br />
+The gameplay in the games changes again, now closer to an open-world action game. Lara’s looks have changed too (I recall it being described as: the devs made her boobs smaller until play testers stopped looking at them). Lara here is <em>very</em> dramatic; where the story’s excuse for this is each of these games are an origin story telling <em>how</em> Lara comes to be such a badass.</p>
+<p>The best discussion of this I’ve seen is in <a href="https://www.youtube.com/watch?v=kJMj3B1BFko">Liana Kerzner’s Lady Bits series</a>.<br />
+Kerzner describes classic Lara as a Byronic heroine (passionate and heroic, but unlikable/antisocial), whose exaggerated figure reflects the exaggerated gameplay; whereas Survivor Lara is more down to earth as a character, with a relatively more realistic figure, but more of a damsel-in-distress in a game with mass-market accessibility.</p>
+<p>(The ways in which Survivor Lara is less-than-ideal is also interesting: the more action-oriented gameplay leads to this ‘realistic’ Lara killing <em>way</em> more people than the classic Lara ever did; and although the new look is more ‘realistic’, it’s still the same Megan-Fox-in-Transformers glamorous with a thin layer of dirt on top despite the brutal adventuring).</p>
+<p>Kerzner also describes the current zeitgeist’s attitude to big boobs as “eww, icky”, as a response to negative sexual attention many women receive; that the big boobs get removed so as to reduce repulsiveness (as opposed to adding other stuff, to add appeal elsewhere). – This leads to the notion that the title of Kerzner’s video responds to: that Survivor Lara is presumed to be ‘more feminist’.</p>
+<h3 id="classic-lara-is-back">Classic Lara is Back</h3>
+<p>And so it’s quite surprising to see that these remastered games feature a Lara that retains the look of the original.</p>
+<p>Or as <a href="https://www.youtube.com/watch?v=-4HX0fXY8yo">Melonie Mac</a> puts it:</p>
+<p>“[I wanted a remaster, but was worried they] would mess it up … the design would look bad, they would change Lara’s proportions, they would change the controls. That’s a huge thing: the controls!”</p>
+<p>I find it funny that the way Lara looks is coupled to the gameplay.</p>
+<p>Mac reacts to the idea of making the games more accessible the same way many reacted to Netflix’s 2022 “Persuasion”: significantly simplifying the original removes a lot of the depth that brought quality to the original.</p>
+<p>I suppose it makes sense. Both “reducing the aggressively-attractive features” and “making the gameplay easier” intend to make the game reach a broader audience. – But a part of me still wonders what it’d be like if the gameplay remained, but the looks were toned down.</p>
+<p>My favourite part of Mac’s video is this:</p>
+<p>“[if you don’t like the classic controls] spend 30 minutes learning them and then it’ll be all worth it. Here’s the thing, classic Tomb Raiders were built on a grid based system…”</p>
+<p>It’s just such unadulterated nerd talk.</p>
+<p>Watching some of Mac’s other thoughts:</p>
+<ul>
+<li><p>There’s the idea that ‘attractive female character’ is only for men, attractive female characters make women feel bad. – Mac reckons that in similar way that super tough male character is a male power fantasy, an attractive (female) character is a female power fantasy. https://www.youtube.com/watch?v=AotyaLxqMmk – When women <em>do</em> get the chance to customise their character, you’ll see women play as attractive characters.</p></li>
+<li><p>And in this video: https://www.youtube.com/watch?v=uqOn9w-OrqY Mac discusses “classic Lara Croft was sexist”.</p>
+<ul>
+<li><p>Mac’s not fussed about Lara wearing short-shorts in the snowy Tibetan foothills. Mac argues the other outfits Lara wears aren’t more revealing than what you’d see at the gym. Mac reckons that the classic Lara had a figure only slightly exaggerated from that of a gym rat;</p></li>
+<li><p>whereas Legend Lara is too stretched out (&amp; it’s Legend Lara has the sexy revealing dress, and the option to dress Lara in a bikini in-game);</p></li>
+<li><p>and by Shadow of the Tomb Raider, the outfits are extremely muted, and Lara’s body is unathletic (and legs are very short).</p></li>
+</ul></li>
+</ul>
+<p>Overall.. short-shorts in the snow is a bit silly; but, as is someone carrying around an arsenal of weapons, leaping acrobatics around in gunfights, going 1-on-1 against a T-Rex!, and dodging around ancient traps. – Short-shorts in snow is silly, but I don’t think it weighs significantly so as to degrade the character.</p>
+<h3 id="hashtag-representation">Hashtag Representation</h3>
+<p>I find it striking that a number of the people reacting on social media to the announcement of the TR Remaster were women.</p>
+<p>As always: generally, you can’t say “this group of people all think the same way”. It’s frustrating for people to feel left out or rejected.<br />
+Kerzner’s video does a good job discussing why some women don’t love the classic Lara look.<br />
+But it’s also clear to see that the women who do love the way classic Lara looks feel <em>really</em> rejected when classic Lara is denegrated.</p>
+<p>The assumption “people want to see characters that look like themselves” is obnoxious…<br />
+and I don’t doubt many of the women who enjoyed Tomb Raider enjoy other games too,<br />
+I’d say Tomb Raider’s protagonist being a woman brought more women to the game. Or, probably there’d be significantly fewer female fans of Tomb Raider if its main protagonist was a man.</p>
+<p>And <em>maybe</em> it’s a bit presumptuous, but.. Mac describes the Shiva statues in TR3 as scary for her when she was a young girl. Those TR3 levels <em>are</em> scary. –</p>
+<p>Above, both Kerzner and Mac discuss that the newer games feature significantly easier gameplay, and a more dramatic Lara with a more down to earth look. – I get the feeling that if the Tomb Raider games had kept the hardcore difficulty, and still made the changes to Lara’s appearance from “aggressively, conspicuously attractive” to a more muted everyday look, there’d still be some women upset.<br />
+– The games aren’t really realistic: having a stunningly feminine protagonist in such wild environments is silly. I can see why toning down the feminine aspects of Lara’s character, but retaining unrealistic action in the gameplay would come across as “femininity not welcome”.</p>
+<p>Related, but in contrast: e.g. <a href="https://www.youtube.com/watch?v=AGql5ay5TVY">Angel Eduardo discusses how he likes Superman</a> despite that he doesn’t share skin colour with Superman. Eduardo is disagreeing with “making superman non-white would make him more accessible to non-white people”.<br />
+(Eduardo argues: diversity requires more depth than just skin colour;
+it’s absurd to say “superman is just for whites” just because his skin is white, &amp; seeing superman as “white” is regressive, changing his skin colour validates that; superman is an immigrant, an orphan, and an outsider, so it ought to be easy for many to relate to him).</p>
+<p>(Now I’m wondering if they race-swapped Lara, but kept the hardcore gameplay, and the aggressively attractive looks…).</p>
+<p>In both cases above, the fans of a classic character don’t like the idea of changing the character’s appearance (at least) for the sake of ‘representation’.<br />
+– Although <em>surely</em> women being upset at a character’s femininity being diminished relates to ‘representation’?</p>
+<p>In Eduardo’s argument, race-swapping-as-representation undermines the value of a character that people should otherwise all be able to see themselves in. By ‘race swapping’, it emphasises differences rather than similarities.<br />
+In Mac’s discussion that classic Lara’s appearance is significant, by reducing the character’s aggressive beauty, it at least mutes the character from something distinct into something bland (and perhaps is ashamed of the femininity).</p>]]></summary>
+</entry>
+<entry>
     <title>Using NixOS on an OpenStack Public Cloud</title>
     <link href="http://www.rgoulter.com/blog//posts/programming/2023-09-09-using-nixos-on-an-openstack-public-cloud.html" />
     <id>http://www.rgoulter.com/blog//posts/programming/2023-09-09-using-nixos-on-an-openstack-public-cloud.html</id>
@@ -637,492 +1120,6 @@ Chess.com and lichess both allow chat; most games won’t result in a chat. The 
 <p>Less-fun was people expressing their frustration about how they thought their teammates suck. (It’s a casual game; chill out).</p>
 <p>There were also accusations of cheating.. and, eh… idk. – With chess, it’s easier to tell if someone’s cheating, because you can look through the game and see if the moves are moves a human would make. But generally, accusing others of cheating makes you look butthurt about losing.</p>
 <p>Overall, I felt a lot of the gameplay involved following your squad or your team up until you encountered the enemy, and then either keeping the enemy back or following on whoever made a successful push.</p>]]></summary>
-</entry>
-<entry>
-    <title>Opinion on Small Keyboards and Big Spacebars</title>
-    <link href="http://www.rgoulter.com/blog//posts/programming/2023-06-29-opinion-on-small-keyboards-and-big-spacebars.html" />
-    <id>http://www.rgoulter.com/blog//posts/programming/2023-06-29-opinion-on-small-keyboards-and-big-spacebars.html</id>
-    <published>2023-06-29T00:00:00Z</published>
-    <updated>2023-06-29T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<p>The mechanical keyboard hobby pretty much exploded in popularity during the pandemic.</p>
-<p>“Mechanical keyboards” generally brings to mind the loud, clicky switches;
-or perhaps people who have spent a lot of time (and often money) in order
-to get a keyboard that feels nice.</p>
-<p>But, there’s a niche part of the hobby which is passionate about
-playing around with more exotic keyboard designs.</p>
-<p>Rather. The mechanical keyboard switches allow for manufacturing
-low volumes of keyboards which improve upon the standard keyboard design.</p>
-<p>The standard keyboard design suffers several problems,
-which make the keyboard less than efficient:</p>
-<ol type="1">
-<li><p>The keyboard’s spacebar is impractically big.</p></li>
-<li><p>The hands have to be close together, rather than at more natural distances apart.</p></li>
-<li><p>It’s asymmetrical.</p></li>
-<li><p>The rows are staggered (again, asymmetrically).</p></li>
-<li><p>There are keys of different sizes.</p></li>
-</ol>
-<p>For myself, although I can understand spending more money to get a ‘nicer feeling keyboard’,
-I cannot understand why anyone would pay luxury prices for
-keyboards which still suffer these problems.</p>
-<p>(“Cheap Logitech keyboard” gets to answer these by way of: this is what keyboards have always been
-and what people are used to. With economies of scale, you get to have a very cheap keyboard).</p>
-<p>But to explain why I think each of the above is a design flaw,
-and how custom mechanical keyboards tend to improve on these:</p>
-<h3 id="design-flaw-the-spacebar-is-impractically-big">Design Flaw: The Spacebar is Impractically Big</h3>
-<p>The spacebar is impractically big. It’s often 6 times as large as the normal keys.</p>
-<p>Or to put it another way: our thumbs are much stronger than our pinkies.
-But on a standard keyboard, our thumbs pretty much only get to use the spacebar, and the pinkies
-tend to get used frequently for all sorts of important keys (such as backspace, shift, enter, etc.).</p>
-<p>There’s no good reason for the spacebar to be that big: although not everyone presses the spacebar in the same place,
-everyone will tend to push the spacebar consistently in the same place they press it.
-(As opposed to using the full with of the spacebar).</p>
-<p>It would be better to replace the wide spacebar with a key that’s as wide as the standard keys;
-this would allow putting another 5 keys in the same space. – It wouldn’t matter what those keys did;
-anything would be a big improvement.</p>
-<h5 id="multiple-thumb-keys-hugely-increase-what-your-hands-can-do-without-moving">Multiple Thumb Keys Hugely Increase What Your Hands Can Do Without Moving</h5>
-<p>The term “home row” refers to the row of keys where your hand rests when it’s not typing.
-The ‘F’ and ‘J’ keys have bumps on them which allow your hands to find their place,
-without you having to look for them.</p>
-<p>If instead of one big spacebar, there were 6 individual keys, then your thumbs would be able to
-use 2-3 keys each.</p>
-<p>e.g. I like using these for Space, Backspace, Enter, Esc, Tab, Del. (As a developer, I use the Esc key frequently).</p>
-<p>Whereas, with the spacebar being so big, in order to hit those keys, you’d have to either
-stretch your pinky, or move your hand from home row.</p>
-<h5 id="thumb-keys-are-great-layer-keys">Thumb Keys are Great Layer Keys</h5>
-<p>“Layers” allow for re-using a key for multiple purposes.</p>
-<p>This idea is extremely common on laptop keyboards: there’s often a “Fn” key,
-and the keys will indicate what functionality they have if pressed when the Fn key is held.
-e.g. “Volume Up” / “Volume Down” might not have their own keys, but might be available
-when a Fn key is pressed.</p>
-<p>That’s an example of using keymap layers.</p>
-<p>From a pessimistic perspective, it’s a technique used by small keyboards to cope with not having so many keys.</p>
-<p>From an optimistic perspective, it allows more functionality without having to have more keys.</p>
-<p>Thumb keys are excellent keys to use for as “Fn” keys for layers.</p>
-<h3 id="aside-dual-use-keys-are-neat">Aside: Dual-Use Keys are Neat</h3>
-<p>One idea in the keyboard space which is useful for really getting
-the most out of a keyboard is “key behaves like T when tapped, like H when held down”.</p>
-<p>It’s relatively common for programmers to come across this good idea:
-When using Vim, programmers want to tap Esc all the time;
-when using MacOS, programmers want to hold Ctrl all the time. Programmers pretty much
-don’t want to use CapsLock. (Not that frequently, anyway).<br />
-So, solution: use the CapsLock key as an Esc key when it’s tapped, but have it act as a Ctrl key when it’s held down.</p>
-<p>Above, I was pointing out that the weak-pinky finger gets used for Shift, Ctrl, Win, Alt keys.. one neat idea to
-alleviate that is to put these modifier keys underneath the F,D,S,A keys (and J,K,L,; keys) using this dual-use
-tap-hold functionality. – This technique is known as “home row modifiers”, or “home row mods”; since it allows
-using the modifier keys without having to leave home row.</p>
-<p>Similarly. Above I argue that thumb keys are well placed for backspace, and are well placed
-for use with layers. Indeed, I think having these as dual use is a good idea, too.</p>
-<h3 id="design-flaw-the-hands-are-too-close-together">Design Flaw: The Hands are Too Close Together</h3>
-<p>While this is (to an extent) unavoidable with small devices like laptops,
-what I mean is that for desktops, keyboards can be in “split” halves.</p>
-<p>This allows positioning each half of the keyboard so that the hands can rest
-at a more natural distance.</p>
-<p>I’ve seen for many people, this is a significant improvement. I’m not as won over.</p>
-<p>I also see there are many keyboards which are “split”, but retain
-all the other design flaws mentioned above.</p>
-<p>Anyway. Split keyboard designs are quite popular amongst the niche
-of mechanical keyboard enthusiasts that prefer exotic designs.</p>
-<h3 id="design-flaw-the-keyboard-is-asymmetrical">Design Flaw: The Keyboard is Asymmetrical</h3>
-<p>The standard keyboard is asymmetrically laid out.
-With the hands resting on home row, there are far more keys to the right than to the left.
-That’s particularly strange, given that most people use a mouse to the right of the keyboard.</p>
-<p>Even laptop keyboards suffer the same. – Worse, it’s easy to come across
-laptop keyboards which don’t have all four modifier keys (Shift, Ctrl, Win, Alt)
-on the right hand side.</p>
-<p>At a glance, it might look like the key map is symmetrical; but, the asymmetry
-is clear when considering that “Q” is the left hand pinky’s, and has one key to its left;
-whereas “P” is the right hand pinky’s, and has 3-4 to its right.</p>
-<p>To me, it doesn’t make sense why you’d introduce that asymmetry. – Why add keys to one side,
-but not to the other?</p>
-<h3 id="design-flaw-the-key-rows-are-staggered">Design Flaw: The Key Rows Are Staggered</h3>
-<p>This somewhat goes hand in hand with the above point.</p>
-<p>The <a href="https://golem.hu/board/Katana60-202.html">Katana60</a> one of one a <em>very few</em> keyboards
-I’m aware of that are symmetrical while retaining the row stagger. (It aims to use
-keys from a standard keyset; so, I guess I’ll give it that).</p>
-<p>Most of what I dislike about row stagger could be blamed on asymmetry:
-it hardly makes sense for the left hand’s keys to “slant left” with the same slant
-that the right hand has. – I mean, “R” relative to “F” is the same as “U” relative to “J”; but,
-the slants should be <em>mirrored</em>.</p>
-<p>What does seem more sensible is either to lay the keys out in a grid, or to stagger the columns.
-(I’ve also seen keys “splayed” out).</p>
-<p>The grid arrangement is called “ortholinear”. (Despite that “ortho” and “linear” both mean ‘straight’ in Greek, Latin).</p>
-<p>Staggering the columns means that each column of keys is straight, but each column is staggered compared to the one
-next to it.</p>
-<p>These all try and deal with how the fingers reach the keys on a flat keyboard.
-Perhaps something like a Maltron or a Dactyl Manuform are much better than either of these.<br />
-– For flat keyboards, I’m willing to compromise.</p>
-<p>95% of what makes a row stagger bad is the asymmetry. But, my intuition is still
-that there are good reasons row stagger is much rarer once breaking from the traditional shape.</p>
-<h3 id="design-flaw-the-keys-are-different-sizes">Design Flaw: The Keys are Different Sizes</h3>
-<p>This is arguably a consequence of the above design flaws.</p>
-<p>But I’m also not sure why you’d design keyboards where the keys had different sizes?</p>
-<p>Rather.</p>
-<p>One consequence of keys having different sizes is that keycap sets
-may not be compatible with every keyboard.</p>
-<p>This affects the exotic keyboards I like, which only have space for “1U” keys.</p>
-<p>But I see that keycap sets will often have the same modifier keys
-in an additional two or three different sizes. – It seems wasteful and silly;
-or it would, if all keys were “1U” big all the time.</p>
-<h3 id="aside-comfort-is-the-main-goal-not-speed">Aside: Comfort is the Main Goal, Not Speed</h3>
-<p>I think the most common reaction people have in discussions about
-alternative keyboard stuff like ergonomic layouts, or the Dvorak layout,
-is asking whether such alternatives are faster.</p>
-<p>Perhaps the thought process is: “I’m fine with my keyboard as-is; but, sure,
-if I could type faster then it would be worth putting in effort to learn a new thing”.</p>
-<p>The most common comment I do see from people who have used these
-alternative methods (different keyboard layout, etc.) is that they are
-much more comfortable.</p>
-<p>And regarding the above discussion about improving on the design flaws of
-the standard keyboard, the improvements are all about being able to do
-more with your hands without having to leave home row.</p>
-<h3 id="keyboard-recommendations">Keyboard Recommendations</h3>
-<p>So what would I recommend to those who are looking for a keyboard which doesn’t suffer these flaws?</p>
-<p>For desktop use, a good default recommendation is <a href="https://www.zsa.io/moonlander/">ZSA’s Moonlander</a>.</p>
-<p>If you’re rarely using mouse + keyboard work (e.g. the bulk of your work is typing,
-and doesn’t require rapidly entering digits while using the mouse, such as a FPS shooter game would),
-then a keyboard like <a href="https://www.zsa.io/planck/">ZSA’s Planck EZ</a> is hard to beat.</p>
-<p>Those are quite expensive. For a lower cost option from AliExpress, the <a href="https://www.aliexpress.com/item/1005004568409963.html">Idobao ID75</a>
-looks compelling. It fits in a GH60-sized case (which are easy to find), and like (I think) the above it’s got a powerful ARM MCU, hotswap (so no need to solder), and the fancy per-key RGB and RGB underglow.</p>
-<p>For the smaller planck-size, previously I’ve used and recommended the BM40 keyboard. It’s still … okay. The main drawback to the BM40 is that its MCU is the weaker ATMega32U4. It’s powerful enough for a decently sophisticated keymap; but you’ll not really be able to push the keyboard to its full potential.</p>
-<p>Albeit, I don’t use any of these since I got deep enough into the rabbit hole of mechanical keyboards
-to make my own DIY designs. I share these designs <a href="https://github.com/rgoulter/keyboard-labs">in this GitHub repository</a>.</p>]]></summary>
-</entry>
-<entry>
-    <title>Nix Remains Useful for Side Projects</title>
-    <link href="http://www.rgoulter.com/blog//posts/programming/2023-06-18-nix-remains-useful-for-side-projects.html" />
-    <id>http://www.rgoulter.com/blog//posts/programming/2023-06-18-nix-remains-useful-for-side-projects.html</id>
-    <published>2023-06-18T00:00:00Z</published>
-    <updated>2023-06-18T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<p><a href="nixos.org/">Nix</a> is a sophisticated package manager.</p>
-<p>Nix has a steep learning curve; but those who do take the time to learn it are
-often enthusiastic about its benefits.</p>
-<p>The trade off with Nix is this: you put in effort up front to declaratively
-describe your software, and then you reap the benefits, such as being able to
-reproduce the same toolchain setup effortlessly.</p>
-<p>One use case I’ve found this useful for has been side projects which I work with infrequently.<br />
-Comparing the typical workflow vs the nix workflow of “returning to a
-sideproject after months/years”:</p>
-<h1 id="typical-workflow-when-returning-to-sideprojects">Typical Workflow When Returning to Sideprojects</h1>
-<p>e.g. The static site generator for my blog uses Haskell.</p>
-<p>So, when I write it, and then return to writing it months/years later, typically
-some effort to tinkering on it would be getting the system set up again.</p>
-<p>If the system package manager (e.g. <code>apt</code> or <code>pacman</code>) doesn’t have the old
-version of the compiler, then I’d have to build the old code with the new
-compiler. Likely this left me in the situation where the code was too old to
-compile; so the project is in a state where I don’t have a working version of
-it.</p>
-<h1 id="workflow-with-nix-when-returning-to-sideprojects">Workflow with Nix When Returning to Sideprojects</h1>
-<p>It’s boring. It works.</p>
-<p>With Nix, you can ensure that you’ll end up with the same (old) compiler &amp;
-libraries which you knew worked previously.</p>
-<p>The hard part of working with Nix is more likely to be getting it set up so it
-works.</p>
-<p>I recently updated the version of the Haskell compiler which my site’s static
-site generator uses.</p>
-<p>It pretty much just worked.</p>
-<p>The only thing that didn’t work: the Nixpkgs provides several versions of the
-GHC compiler, and a large set of Haskell packages, but only tests the packages
-with the current version of the GHC compiler. When I tried newer versions of the
-compiler than was tested to work, for some reason these didn’t work. – This
-isn’t really a big deal for my use case; I’m fine with using the current GHC
-version.</p>
-<h1 id="effort-involved-in-setting-up-nix">Effort Involved in Setting Up Nix</h1>
-<p>It’s easier to get something to build on your machine, than it is to
-build/distribute software.<br />
-And it’s easier to use Nix to get a working development environment than to use
-Nix to describe a package.</p>
-<p>It somewhat overstates it to say “writing a package with Nix is hard”. It can be
-very simple, but it may be very difficult.</p>
-<p>I used the approach described in the <a href="https://nixos.org/manual/nixpkgs/stable/#haskell">nixpkgs manual about its haskell
-support</a>. There’s a nice
-<a href="https://nixos.wiki/wiki/Haskell">NixOS Wiki page for Haskell</a> which also
-describes different ways of using Nix.</p>
-<p>Here’s <a href="https://github.com/rgoulter/my-hakyll-blog/blob/44c1507cd3cc249d00f89e5fc83fdd81ef645cd4/my-hakyll-blog.nix">a link to my current Nix package for my hakyll static site
-generator</a>.</p>
-<p>I don’t recall significant pain in setting that up; although I was learning Nix
-while doing this. e.g. <a href="https://github.com/rgoulter/my-hakyll-blog/commit/42004c09c941c3f7818ecb5e4103ab1726918399">here’s the commit where I upgraded from a shell.nix to a
-default.nix</a>,
-<a href="https://github.com/rgoulter/my-hakyll-blog/commit/8dbd2aebb6648d5677636290f7e34775c814e617">added
-flake.nix</a>,
-<a href="https://github.com/rgoulter/my-hakyll-blog/commit/7576644e8623654c8222349945be3fa63b941932">upgraded from GHC 8.4.3 to
-9.0.2</a>.</p>
-<p>Looking at the <code>my-hakyll-blog.nix</code> file, I don’t love that it duplicates the
-list of packages from the <code>.cabal</code> file. But, it does work, and I haven’t needed
-to change it.</p>]]></summary>
-</entry>
-<entry>
-    <title>XCOM2 WOTC Added Some Good Parts</title>
-    <link href="http://www.rgoulter.com/blog//posts/games/2023-05-29-xcom2-wotc-added-some-good-parts.html" />
-    <id>http://www.rgoulter.com/blog//posts/games/2023-05-29-xcom2-wotc-added-some-good-parts.html</id>
-    <published>2023-05-29T00:00:00Z</published>
-    <updated>2023-05-29T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<h2 id="xcom2-wotc">XCOM2 WotC</h2>
-<p>I bought XCOM2 WotC (“War of the Chosen”) in a bundle for the Nintendo Switch. I’d completed a playthrough of the base game first. Overall, I found the game enthralling, but didn’t enjoy the RNG parts and so save-scummed my way through.</p>
-<p>I just completed a playthrough of XCOM2 WotC. And while I still don’t like the RNG parts, WotC added some stuff which I thought was quite fun.</p>
-<p>Broadly, the changes it made:</p>
-<ul>
-<li><p>New character classes: a stealthy sniper, and two other classes I didn’t find useful.</p></li>
-<li><p>New enemy bosses: though fortunately, not quite as difficult as the bullshit Alien Rulers from XCOM2’s DLC.</p></li>
-<li><p>Additional strategic components: you can assign your squad members to spend time away on non-gameplay missions.</p></li>
-<li><p>Some more map varieties; including maps with zombie-like enemies.</p></li>
-<li><p>Squadmate bonding. Which I didn’t use as much as I should have.</p></li>
-</ul>
-<p>To a greater or lesser extent, I liked these additions.</p>
-<p>I also opted to play the game with “2x long mission timers”, “2x long game limit timer”, which eased some of the stress from playing.</p>
-<h2 id="new-character-classes">New Character Classes</h2>
-<p>From what I’d known of XCOM2 before playing it, this is the part I was most apprehensive about. – There being so many character classes, that it’d be overwhelming.</p>
-<p>I do think it could benefit from being simplified. (Or benefit from the complexity moving about to some other layer of the game).</p>
-<p>The ‘basic’ classes are the ‘rifleman (who can hack things)’, ‘the shotgunner (who also has a sword)’, ‘the Animal Mother wannabe with a big machine gun’, and ‘the sniper’. XCOM2 also has ‘the wizard’ and ‘the robot’.</p>
-<p>What WotC adds is a few rarer classes:</p>
-<ul>
-<li>A ‘stealth sniper’.
-<ul>
-<li>The main thing this class has over the regular sniper is “concealment” as an individual. This is the same “concealment” that the team gets which allows for the ambush mechanics, but since it applies to the ‘stealth sniper’ as an individual unit, it means the ‘stealth sniper’ can stay hidden while the other units aren’t.</li>
-<li>This unit ends up being super useful for scouting out the map, since it can ‘see’ the enemies, without aggro’ing the enemies.</li>
-<li>However, the unit isn’t as good at dealing a lot of power to multiple units, so isn’t always better than the normal sniper.</li>
-</ul></li>
-<li>A ‘skirmisher’ unit.
-<ul>
-<li>idk. It has a submachine gun, and can shoot twice in one turn (or ‘shoot, then move’).
-<ul>
-<li>It also has a grappling hook, and can hook enemies towards it &amp; melee that enemy.</li>
-</ul></li>
-</ul></li>
-<li>A ’battlemage unit.
-<ul>
-<li>It gets magic points by using its magic sword to kill enemies.</li>
-</ul></li>
-</ul>
-<p>The ‘stealth sniper’ is powerful to use right from the get-go, and gets even more powerful as it levels up.</p>
-<p>The other two classes… maybe someone found them useful. Or maybe they’re really powerful when levelled up. But, I generally didn’t find them useful.</p>
-<p>(I believe XCOM2 also tries to encourage using the DLC stuff by-way-of having some DLC stuff only be weak to other DLC stuff. I think that’s dubious design).</p>
-<h2 id="new-enemy-bosses">New Enemy Bosses</h2>
-<p>The new enemy bosses are the ‘Chosen’.</p>
-<p>These aren’t as bullshit as the Alien Rulers; the Alien Rulers were both powerful <em>AND</em> moved/attacked after every <em>action</em> you took(!!!).</p>
-<p>The Chosen each add their own effects to the map.</p>
-<p>In the order I encountered them:</p>
-<ol type="1">
-<li>The ‘ninja’ enemy boss.
-<ul>
-<li>Can teleport around the map, stun any of your units, then runs off somewhere far away where you can’t attack them.</li>
-</ul></li>
-<li>The ‘sniper’ enemy boss.
-<ul>
-<li>Uhm. … Might have a “I’m gonna shoot you next turn!” area-of-effect,
-which is easily avoided.
-<ul>
-<li>To be clear: this is much less powerful than the effects the standard, common enemies are able to inflict.</li>
-</ul></li>
-</ul></li>
-<li>The ‘mage’ enemy boss.
-<ul>
-<li>Uhm. Can spawn low tier enemies, I think?</li>
-</ul></li>
-</ol>
-<p>So. Starting off with the hardest enemy boss somewhat affected my feeling towards it.</p>
-<p>The most annoying thing about these is the missions to defeat them involve “infinitely spawning enemies”, similar to the final mission.</p>
-<h2 id="new-strategic-component-covert-actions-teammate-bonding">New Strategic Component: Covert Actions, Teammate Bonding</h2>
-<p>I think these made interesting additions.</p>
-<p>With “covert actions”, you assign some of your soldiers to a particular mission. So, the ‘cost’ is that these soldiers will be unavailable while on this mission. The benefits vary; sometimes it adds stats for the soldiers assigned. – One thing I liked here is that sometimes the soldiers could get “ambushed”, so you’d need to complete a small mission with these two soldiers to get them to safety. (This happened frequently enough that you’d have to worry about it, but not so frequently that it became boring or expected).</p>
-<p>I like that because it’s a nice set of trade-offs. – You might want to send your best sniper on a mission which will add 5 to their aim stat, but you’d need to trust they can get out of an ambush situation, or that you won’t need that sniper on a mission in the meantime.</p>
-<p>The teammate bonding.. I didn’t make much use of this. But the effects at level 3 look to be pretty powerful, so I kinda wish I had. – “Bonding” is sending the same pairs of soldiers out on missions together. The more you do that, the more benefits you get. – The first level of benefits involves being able to ‘share’ one action-point from one squadmate to the other, which ends up being <em>very</em> useful!</p>
-<h2 id="more-map-varieties-zombie-like-maps-and-rebels-with-guns">More Map Varieties: Zombie-like Maps, and Rebels with Guns</h2>
-<p>One thing XCOM suffers from is just how same-y the missions can get. – Every mission can be described as “get from A to Z, do it quickly, kill every enemy you see”.</p>
-<p>Any mission that’s not like that stands out.<br />
-(And, no, randomly throwing minibosses into levels doesn’t “add variety”).</p>
-<h4 id="zombies">Zombies</h4>
-<p>I was pleasantly surprised by the zombie-infected maps.<br />
-That is, there are some maps which are filled with zombies. Since XCOM is usually focused on “your 4 squadmates vs 3 tough enemy units”, in order to handle “vs 6+ zombies”, the game adds a couple of rules: if you kill a zombie, your unit gets 1 more action point. (So instead of just shooting once, you can shoot 3 times if each shot kills a zombie). And, using explosives attracts a horde of zombies.</p>
-<p>Part of what I liked is it does a good job of making your units feel properly powerful. (Often it takes just one or two of your units to dispatch all of the zombies on the screen).</p>
-<p>I also like that: it adds a tactical drawback to using explosives above/beyond “you can’t use your grenade now and use it later too”.</p>
-<p>An additional tactical aspect this adds is: the zombies will attack the regular alien enemies, too (and vice versa). – So you don’t necessarily want to dispatch all the zombies; or maybe you do. – It adds an interesting decision.</p>
-<h4 id="rebels-with-guns">Rebels With Guns</h4>
-<p>I also liked that there are missions which will feature friendly NPCs with guns.<br />
-Rather. In XCOM, you’ll sometimes get missions where you have to rescue a bunch of civilians from the genocidal aliens.<br />
-With XCOM2 WotC, some of these missions instead involve rescuing a friendly rebel base which in under attack from aliens.</p>
-<p>I feel this makes more sense than not from a worldbuilding perspective.<br />
-On the one hand, there’s the same uncanny “your team arrived just in time” problem that the other missions have. (Your dropship flies halfway around the world, and yet manages to always arrive in just-enough-time).<br />
-On the other hand, I think it makes sense to have rapid-response forces react to enemy strikes. And it makes sense that there would be rebel forces which have guns.</p>
-<p>From a gameplay perspective, these maps do add more enemies to deal with. But, it’s also nice to have more units fighting the enemies, too.</p>
-<h2 id="wotcs-new-stuff-enhances-xcom-at-its-best-fun-tactical-combinations">WotC’s New Stuff Enhances XCOM at its Best: Fun Tactical Combinations</h2>
-<p>The new abilities also added room for some more fun situational tactical combinations.</p>
-<p>I think that’s where XCOM is at its most fun.</p>
-<p>Albeit, these all sound like complicated sequences of Yugioh card moves:</p>
-<p>One I liked:<br />
-Using the stealth sniper’s ‘sticky bomb’ and ‘stealth shoot’ in tandem with the sniper’s ‘kill everything that moves in this zone’ ability.<br />
-That is: The stealth sniper has a ‘sticky bomb’ that can be thrown onto an enemy (somehow without the enemy noticing), which explodes when the enemy takes damage. The stealth sniper also has an ability to shoot without breaking stealth (which is usable once per turn). The regular sniper has a “kill zone” ability which will shoot at anything that moves in a zone during that turn.<br />
-Also: the stealth sniper can be in stealth and spot a group of enemies even when the other units have broken from stealth. It’s still possible to set up the “kill zone” and have the enemies be far away enough that they don’t aggro despite the sniper being able to set up the “kill zone”.<br />
-It’s a nice ‘second ambush’, which quickly does a lot of damage to a group of enemies (if not outright destroy them)!</p>
-<p>Another I liked:<br />
-I saw there was a tech tower which had a 100% chance to ‘restore squad’s action points that turn’. And I had a heavy (machine gun + grenade launcher) unit who had a bond with a hacker unit; and that heavy unit had the upgrade such that shooting a grenade wouldn’t end its turn…<br />
-This resulted in: setting up an ambush, with every unit (except the heavy) poised on overwatch – shoot the first thing that moves. Then, using the heavy unit to lob a grenade (and thus do a bit of damage to each of the enemies). This aggro’d the enemies, who then moved to cover; the enemies moving to cover then each triggers an overwatch reaction shot from my squad. <em>Then</em> I was able to have my heavy unit share its remaining action point with the hacker; that hacker then hacked the tower to restore all the action points for the squad.<br />
-The net effect is being able to execute an ambush, but then have another turn for free (instead of normally having to let the enemy have a turn after the ambush is done).</p>
-<p>I can agree that these are fun in part because the whole game isn’t filled with this. If everything was overpowered tactics, it wouldn’t feel overpowered. These opportunities are organic, and not on a pre-scripted linear path.</p>]]></summary>
-</entry>
-<entry>
-    <title>XCOM2 has its Moments of Fun</title>
-    <link href="http://www.rgoulter.com/blog//posts/games/2023-05-14-xcom2-has-its-moments-of-fun.html" />
-    <id>http://www.rgoulter.com/blog//posts/games/2023-05-14-xcom2-has-its-moments-of-fun.html</id>
-    <published>2023-05-14T00:00:00Z</published>
-    <updated>2023-05-14T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<h2 id="xcom-and-civilization-theyre-okay">XCOM and Civilization: They’re Okay</h2>
-<p>I recently picked up the XCOM 2 Collection for the Nintendo Switch. I was lucky to catch it on sale at a discount of 85%.</p>
-<p>I just completed a playthrough of the base game. The collection also includes the expansion “War of the Chosen”, but I didn’t want to dive into too much content at once.</p>
-<p>The Nintendo Switch isn’t <em>quite</em> powerful enough to run the game. (Frequently, with common interactions, the game slows down to a crawl). But, it gets the job done.</p>
-<p>XCOM 2 was released in 2016, and is a sequel to XCOM: Enemy Unknown which was released in 2012.</p>
-<p>I kinda put XCOM and Civilization in the same bucket: They’re from the same publisher. Some people really like them. They’re turn-based games, which involve strategic game over a long game. (Albeit, XCOM’s meat is with turn-based tactics, and Civilization’s turn-based gameplay is strategic).<br />
-They both also kinda have a flavour of unfairness to them. (Civilization was controversial for having cases where a spearman can defeat a tank). They both also take such a long time to play (&amp; tend to have long feedback loops), that I find it hard to really get a deep intuitive understanding of the strategic considerations.</p>
-<h2 id="what-new-in-xcom-2">What New in XCOM 2</h2>
-<p>Recall, the XCOM gameplay involves two phases/modes: a base-building phase where you build specialised buildings &amp; research improvements; and a mission-phase where your soldiers skirmish with alien forces in turn-based tactics gameplay. (The broad game loop, then, is base-building improves your skirmishing capabilities; and your skirmishing earns you resources with which to build up your base).</p>
-<p>At its core, the skirmishing is turn-based tactics in a square grid-based map, where you control a few soldiers who can take cover behind walls (cover is either ‘full’ or ‘half’); each turn involves moving all your units, a unit may move a limited distance, or use its turn to shoot its gun. – Whether your unit successfully hits the target it’s trying to shoot is probabilistic: you’re shown that a unit has a X% chance to hit. (ranging from e.g. 95% for if the target really close, to 10% if the it is really far away).<br />
-One significant mechanic is the ‘overwatch’ ability: instead of shooting their gun, a unit might be put into ‘overwatch’, where they will then shoot at the first target that moves within their range.<br />
-Units have different classes, and different abilities they might use their action points on. (e.g. sniper, medic, wizard).</p>
-<p>XCOM 2 of course added some stuff.</p>
-<p>I think the base-building strategic part is somewhat more dynamic in XCOM 2 than it was in the first game. Your base is like a flying castle/carrier, and it needs to be re-located in order to complete tasks. – In the first game, you started with all the countries in the council and had to minimize losses; whereas in this game, you start with no territories and have to build up your domination. I prefer this constructive approach.</p>
-<p>In terms of the missions:</p>
-<p>One mechanic they added was a ‘stealth’ mechanic at the start of the level.<br />
-On most missions, the level starts out where your units are ‘concealed’ (enemies aren’t in an alert state). This leads to a nice dynamic where you can essentially set up an ambush against an enemy squad, by sneaking your units up close to the enemy, and then shooting the enemy all at once.</p>
-<p>Many of the missions now have a turn limit.<br />
-This was added to discourage turtling. But, it’s a bit obnoxious, and sometimes doesn’t make sense.<br />
-One type of mission where it makes sense is strike missions against a landed UFO: it makes sense that the crew of a landed UFO may not be alerted to an enemy’s presence (and indeed, in this half of the mission, there isn’t a turn limit); and it makes sense that, once alerted, the UFO might try to take off within X turns (or send an alert out within X turns).<br />
-But, for other missions, the turn limit doesn’t seem to make as much sense in tandem with the stealth mechanic. (“Enemies start unalerted; but there’s a time limit” is itself a neat strategical consideration, though; since the more time you take to leverage an advantage from stealth means more effort is required to beat the goal in the turn limit).</p>
-<p>I don’t recall it being possible in the previous XCOM game, but in XCOM 2 many of the enemy units are robots, and these can be ‘hacked’ so you can control the robot for a few turns.</p>
-<h2 id="xcom-is-not-entirely-to-my-taste">XCOM is Not Entirely to My Taste</h2>
-<p>To be honest, I think the intended XCOM playing experience is not to my taste.</p>
-<p>I don’t like the RNG fuckery.</p>
-<p>Largely the probabilistic combat mechanics.. this means that, even if you make reasonable decisions in order to stop the enemy, your actions may still be ineffective. (It doesn’t matter what decisions you make if all of your shots miss). To a lesser extent, it’s also possible that enemies can show up at an inconvenient time (e.g. spotting one enemy in a squad then aggros the whole enemy squad), and so you learn to ‘game’ the mechanics to avoid this (with XCOM rules, you never want to have your final unit move further than your other units).<br />
-– Whenever I felt XCOM was being ‘unfair’, as a casual player I just reloaded an earlier save &amp; avoided making the same mistake. This isn’t a “fun” way to play, but it’s less not-fun than playing an ‘unfair’ game.</p>
-<p>XCOM seems to be about “eh, make what you can with what you’re given”.<br />
-The first tutorial mission does a good job of setting this up, where it gives you only a handful of soldiers, kills one of them and badly wounds the other.</p>
-<p>I know there are some players who can play the game on the hardest difficulty without reloading a save, sure. – But I reckon such people know the rules of the game much more intimately than someone who’s just doing a blind playthrough and doesn’t know the boundaries.</p>
-<h2 id="whats-fun">What’s Fun</h2>
-<p>I did complete one playthrough. Partly for the sake of completing it.</p>
-<p>As much as I generally dislike the game, there were some parts which were quite fun:</p>
-<p>I did like the new stealth mechanic.<br />
-It’s a lot of fun to set up an ambush and completely wipe out an enemy.<br />
-It is possible to screw up, so the stealth mechanic is not a freebie.<br />
-– I felt it was a lot of fun to get all of my units into overwatch mode, and to then break stealth by using a grenade (or some other attack which damaged multiple units). The whole squad firing their weapons at once reminds me of the <a href="https://www.youtube.com/watch?v=iG0i0g7Csc8">overkill scene in Generation Kill</a><br />
-– Maybe it would be overpowered, but I wonder if having a “synchronised shot” system would also work nicely with this mechanic.</p>
-<p>I liked using the sharpshooter (sniper), especially once I was able to upgrade all the unit’s abilities.<br />
-Initially, the sharpshooter’s rifle’s magazine has only 3 rounds. Shooting consumes the sharpshooter’s whole turn, so at least 1 turn out of 4 has to be used to reload.<br />
-It’s possible to upgrade the sharpshooter’s rifle with an upgrade that gives the magazine an extra 3 rounds (to a total of 6).<br />
-This synergises with:<br />
-For one, there’s an ability “kill zone”, which has the unit shoot at anything which moves within an area.<br />
-For another, there’s an ability where the sharpshooter can keep making shots, so long as each shot they take kills an enemy.<br />
-Both of these really encourage effective tactical use of the sharpshooter. The “kill zone” is very powerful to use when setting up the ambush at the start of the level (since enemies will move to cover once the stealth breaks, and thus would trigger the kill zone’s reaction shot).<br />
-The “keep shooting so long as you kill units” is also a very powerful way of dealing with situations where you face a large number of enemies at once; you can get your other squadmates to destroy the cover the enemies are hiding behind (to ensure a better hit), to shred some of the enemy’s armour (so that the marksman is more likely to kill the enemy), or to bring a powerful enemy’s health down just enough.</p>
-<p>There are times when enemy reinforcements will be fast-roped in from an enemy dropship; the location they show up is marked 1 turn before they insert. – This gives you the opportunity to ambush these units; I found that pretty fun too.</p>
-<h2 id="its-enthralling-but-undermined-by-not-being-fun">It’s Enthralling, but Undermined by not being Fun</h2>
-<p>I remember from Zero Punctuation’s review of the previous XCOM game, ZP asks rhetorically “Is it fun? Let me play one more level to check… hours later, I noticed it was 2am. Let’s pencil that in as a ‘yes’”.</p>
-<p>And I agree that the game is enthralling.</p>
-<p>But, I think it’s enthralling in not such a nice way.</p>
-<p>The main driving motivation is “if I just get X, then later Y will not be so bad”.
-(“once I get the laser guns, then combat will be easier”, “once I get more resources, then my base will be more powerful”, etc.).</p>
-<p>Factorio (which I <em>really</em> enjoy playing) also has prominently has “your actions make things easier later” as a driving motivation.<br />
-(Whereas, say, shooter games, or RPGs don’t necessarily).<br />
-For Factorio, building more stuff means that later I’ll be able to build even more stuff. – e.g. In Factorio’s early game, you might notice that you’re not mining enough copper; so you’ll build more copper miners to speed things up. In the late game, you’ll build bots which then allow you to focus on building your base at a higher level.</p>
-<p>But for XCOM?<br />
-For XCOM, the draw of continuing to play feels like “just one more thing, and them I’m safe”.</p>
-<p>It would be an exaggeration to say that XCOM’s gameplay is all about rolling a dice.<br />
-But, I don’t think it’s the same level of exaggeration to say that XCOM wants you to consider what happens when it rolls the dice low, and your shots miss, or you fail to hack the robot, etc.<br />
-– Once you have powerful guns, it’s less of a worry if one soldier misses, since another soldier is likely to hit. Once you have the powerful armour, you don’t have to worry about being OHKO’d by random enemies.</p>
-<p>So, while obviously a game is ‘not fun’ if it’s trivially easy,<br />
-a game is also not fun if it’s unfair.<br />
-– I’d say ‘fun’ is about whether I can make decisions where I can feel responsible for things not going well. And XCOM’s RNG fuckery undermines that, even if the worst stuff is a long tail.</p>
-<p>With XCOM, in order for me to feel that something is my fault, I have to have fucked up pretty badly.</p>
-<p>I don’t feel like I’ve accomplished much by winning, I feel <em>relieved</em> I didn’t roll low RNG.</p>
-<h2 id="and-xcom2-has-too-many-not-fun-moments">And XCOM2 Has Too Many Not-Fun Moments</h2>
-<p>Okay, so I keep banging on about how XCOM has RNG fuckery.</p>
-<p>I’m sure I haven’t experienced the worst, but here were some moments in my playthrough which were pretty annoying:</p>
-<ul>
-<li><p>Some enemy unit was able to charge past 3 of my units in overwatch (i.e. all 3 missed), as well as completely dodging two of the “melee attack if enemy moves to adjancent square” reactions, as well as <em>then</em> missing some the shots I made on my turn.</p>
-<ul>
-<li>It doesn’t matter how tactically well you play if the enemy can just ignore all of your attacks.</li>
-</ul></li>
-<li><p>Due to ‘bad timing’, as soon as I completed an objective at the end of my turn (i.e. my units all had to reload, and had no AP left), completing the objective aggro’d the enemies who were defending the objective (okay, fine), but also aggro’d the squad hiding just behind them, and reinforcements showed up on that same turn. – This meant that my squad went from “no enemies in sight” to “outnumbered 2 to 1”.</p></li>
-<li><p>I have the expectation that one randomly generated level should be approximately as difficult as another (at the same point of progression). Once I did attempt a mission which I found to be too difficult; when I reloaded (and the mission re-generated), the regenerated mission was much easier to tackle.</p></li>
-<li><p>XCOM 2 has some DLC bosses. These are powerful enough that they take actions (moving &amp; attacking) between each one of your unit’s actions. (e.g. if your unit reloads their weapon, the DLC boss will move &amp; attack something).</p>
-<ul>
-<li>On the one hand, the bosses being this bullshit-powerful kinda balances against how bullshit-powerful your squad can be in the late game.</li>
-<li>On the other hand, the bosses show up randomly; it’s also not signposted. I would be expect most people playing casually would just reload an earlier save to prepare for the boss encounter.</li>
-</ul></li>
-<li><p>RNG bullshit in the player’s favour: there’s a powerup which gives your weapon a 5%/10%/15% chance of instantly killing an enemy (depending on whether the powerup is level 1/2/3). I was able to beat a powerful enemy robot with this once. I was surprised.</p>
-<ul>
-<li>On the one hand, I’ll take it.</li>
-<li>On the other hand, I think when this activates, it undermines the tactical demands of the situation.</li>
-</ul></li>
-</ul>
-<p>I saw XCOM described as “hope your units avoid critical hits at the start, and by the end your units are glass cannons”.<br />
-This seems quite accurate.</p>
-<p>I somewhat didn’t like the turn-limit.<br />
-Well, since I was fine with save-scumming, it’s not such an issue.<br />
-But, I feel the design goals of “you’d better go fast” really conflict with the design goals of “you have to be able to mitigate for when RNG doesn’t go your way”.</p>]]></summary>
-</entry>
-<entry>
-    <title>Netflix's 1899 is Fascinating</title>
-    <link href="http://www.rgoulter.com/blog//posts/2023-05-09-netflixs-1899-is-fascinating.html" />
-    <id>http://www.rgoulter.com/blog//posts/2023-05-09-netflixs-1899-is-fascinating.html</id>
-    <published>2023-05-09T00:00:00Z</published>
-    <updated>2023-05-09T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<p>Netflix’s “1899” comes from the same creators as “Dark”.</p>
-<p>I’d watched “Dark” a few years ago; watching the first two seasons in 2019, and then its final third season some time later.</p>
-<p>It’s very much a case of “if you like one, you’ll like the other”.<br />
-With “1899”, I definitely enjoyed it enough to binge my way through it.</p>
-<h2 id="summary-of-the-show">Summary of the Show</h2>
-<p>I think an apt enough comparison to make is that watching “Dark” in many ways engages the same parts of my brain as programming does.<br />
-– I think more precisely, “Dark” and “1899” are probably most entertaining for people who love modelling for modelling’s sake. The shows each provide interesting and dense relations between each of the characters. – e.g. I recall that “Dark”, a show about time travelling, plays with at least two grandfather paradoxes: a classic ‘her daughter is her mother’, and a more fun ‘his girlfriend is his father’s sister’.</p>
-<p>I’m not sure if these shows are quite for everyone.<br />
-One reason why these shows might not be broadly appealing to everyone is that the aesthetic and the characters generally are ostensibly quite miserable.<br />
-Another is that these shows dawdle their way around their mysteries elements, and aren’t in a particular hurry to explain things.</p>
-<p>I knew going in to “1899” that it wouldn’t end with everything explained.<br />
-Rather, “Dark” takes 3 seasons to tell its story. And each season essentially added a whole other dimension to the world. Or it crawled, then walked, then ran.<br />
-So, that, and, I’d heard “1899” wasn’t going to get its second and third seasons.<br />
-– Netflix not renewing seasons reminds me of the YouTube channel “Achievement Hunter”, which would not follow through on series they would start because of a lack of views; and so each episode they put out would be immature (since the ensemble were getting familiar with the game they made a video about). The end result (amongst many other controversies) was that people stopped watching the series, and viewership slowly spiraled down.</p>
-<h2 id="what-i-found-engaging-its-themes-and-setting">What I Found Engaging: Its Themes and Setting</h2>
-<p>I’d say what makes “1899” so fascinating is its setting, and the themes it plays with as part of its story.<br />
-I think the plot (and the mystery aspect of that), and the characters are somewhat weaker.</p>
-<p>“1899” is set on an ocean liner at sea in … 1899.<br />
-Woven throughout the narrative are themes like ‘the mind and what influences it’, ‘perception and perspective and presentation’, ‘dreams of the future, their realization in the present, and thoughts of the past’, ‘exploration and avoidance and curiousity and fear’.</p>
-<p>I mean, to give a couple of examples:</p>
-<ul>
-<li><p>The ship is filled with crew &amp; passengers who speak different languages such as English, German, Polish, Spanish (not necessarily all overlapping). Sometimes characters who have no hope of understanding one another will still communicate openly and honestly; whereas characters who speak the same language may speak in a guarded manner, not revealing the things they know.</p></li>
-<li><p>Early on one character from first class visits the third class below decks. She’s told by the captain “it’s against the rules for you to go there”, and the lady responds “who sets those rules, and for what benefit?”. – Later on, the captain gives an order to his crew; the first mate appeals with “but captain, the rules say…”. – From a certain perspective, these interactions deal with: the boundaries of what’s possible, conformance to or defiance of those rules and perceived expectations.</p></li>
-</ul>
-<p>I don’t think this is a case of searching for symbolism where there’s none.<br />
-Say, “the colour of the carpet” probably has no symbolic value.<br />
-But, I think the show densely relates a bunch of things, and doesn’t got out of your way to make sure you notice.</p>
-<p>Some of the symbolism I don’t quite get.<br />
-We learn the ship is named “Kerberos”. “Kerberos” the three-headed dog that guards Hades in Greek mythology.. but, its symbolism as it applies to “1899” isn’t clear to me.<br />
-Triangles and tetrahedrons (<a href="https://en.wikipedia.org/wiki/Simplex">simplexes</a>???) are also shown prominently. But, any thematic meaning around this also isn’t clear to me.</p>
-<p>Anyway.</p>
-<p>The characters, if nothing else, do feel like they’re well suited or situated to play around with these kinds of themes. The story weaves in all sorts of details about the characters’ dreams, regrets, and masks.</p>
-<p>The show is fun enough to watch in and of itself.<br />
-But, there was a moment where I felt the intention really is “hey, this is fun, huh!”:<br />
-Each episode ends with a 60’s rock song. (Or some are the 70’s).<br />
-– There’s a ‘risk’ of using pop music in media. The viewer might already associate the song with some feeling or emotion. And it seems clear to me that the writers know that, since the story often makes points about being reminded of the past, or of seeing what you want to see.<br />
-One episode ended with “(Don’t Fear) the Reaper”.<br />
-Or as I know it as: the “More Cowbell” song.</p>
-<h2 id="where-the-show-felt-weak-plot-and-characters">Where the Show Felt Weak: Plot and Characters</h2>
-<p>The plot?</p>
-<p>Well. Each episode will end with a teasing reveal of something mysterious, the effect of which is you’ll want to watch the next episode right away.<br />
-This works even if you know it’s going for a cliffhanger; and works even if you’re pretty sure it won’t get explained. (’cause, hey, there’s only so many episodes; some of them will have to explain some stuff).<br />
-– I don’t think this is so sophisticated; but it is effective.</p>
-<p>Again, not everything gets explained.<br />
-But even considering that it’s only one season out of three, there’re still some surreal mystery elements which drive the plot that don’t get explained.<br />
-I can’t help but be reminded of that quote from “The Simpsons”: ‘well, anytime you notice something like that, a wizard did it’.<br />
-(“The Matrix” was able to do ‘trilogy of stories about weird mystery stuff’ while also having the first part of the story be a coherent whole; I think it’s reasonable that a first part be able to work as a coherent whole).</p>
-<p>The show avoids overstaying its welcome… it doesn’t linger on its cleverness or go out of its way to show off how clever it is.<br />
-e.g. I did spot the show’s main symbol appearing behind the ear on one character. It’s probably not too hard to spot. But, it’s not emphasised.</p>
-<p>I found the characters a bit ‘ehhhhh’.</p>
-<p>I’m reminded of what I felt reading R. A. Salvatore’s fantasy stories. Salvatore’s action is excellent: it’s gripping; at the start of the book, the villains seem powerful, and by the end, the heroes manage to make a daring strike to beat the villains, and it’s all very fun. – But Salvatore’s characters <em>sucked</em>, and were a little too self-indulgent. His main character never makes mistakes, everything he does is perfect, everyone who challenges him is a mean pig and a bad person. – It’s … not all that interesting.</p>
-<p>With “1899”, my senses are tickled in the same way.<br />
-The main character is a women who studied science. And so of course we get such insightful dialogue like “Woman disagrees with me? That’s because she’s letting her emotions affect her” or some such flat thing like that.<br />
-The characters feel constructed as if by the morals that would have the Christians all be either naive, crazy, or faking their belief; where the same morality would also emphasise and lament that Muslims aren’t treated with respect in society.<br />
-Mostly the show’s characters avoid filling such a sanctimonious role as this.</p>
-<h2 id="woulda-been-nice-to-see-the-rest-of-the-story">Woulda Been Nice to See the Rest of the Story</h2>
-<p>In any case, I did enjoy watching the show.</p>
-<p>I think it’s a shame that the series didn’t continue. (I wonder if it’s the kind of story where by the end of season of season 3, the characters come to realise they’re characters in a TV show).</p>
-<p>If a storyteller’s able to come up with something as intruiging as this with this set of toys, it’s a shame to not let them go on present the rest of their toychest.</p>]]></summary>
 </entry>
 
 </feed>

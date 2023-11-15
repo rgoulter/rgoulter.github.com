@@ -1,0 +1,309 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>So I Just Finished Tomb Raider 2 - Richard Goulter's Blog</title>
+
+        <!-- My (Old) CSS theme -->
+        <link rel="stylesheet" type="text/css" href="../../css/default.css" />
+
+        <!--
+            jQuery & jQueryUI
+        -->
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css" />
+
+        <!--
+            Pandoc Style CSS
+            (for syntax highlighted snippets)
+        -->
+        <link rel="stylesheet" type="text/css" href="../../css/syntax.css" />
+
+        <!--
+            Bootstrap
+        -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+        <style>
+            /*
+             * Bootstrap defines blockquote as 17px,
+             * so it looks stupidly large in my blogposts. */
+            blockquote {
+                font-size: 14px;
+            }
+        </style>
+
+        <!--
+            Waypoints, and Waypoints-Sticky,
+            so we can do this:
+            http://imakewebthings.com/waypoints/shortcuts/sticky-elements/
+        -->
+        <script src="../../js/jquery.waypoints.min.js"></script>
+        <script src="../../js/sticky.min.js"></script>
+
+        <!-- My analytics stuff -->
+        <script src="../../js/my_analytics.js"></script>
+        <script src="../../js/my_analytics_debug.js"></script>
+
+        <!--
+            TOCify
+        -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js"></script>
+
+        <!--
+            Patched TOCify css file.
+            (Don't want fixed `.tocify`).
+        -->
+        <link rel="stylesheet" type="text/css" href="../../css/jquery.tocify.css" />
+
+        <style>
+        .navbar {
+            margin-bottom: 0px;
+        }
+
+        .banner-image {
+            width:100%;
+        }
+
+        .banner {
+            margin-left: 0px;
+            margin-right: 0px;
+        }
+
+        body {
+            background-color: #e2e2e2;
+        }
+
+        #page {
+            padding-left:0;
+            padding-right:0;
+            background-color: #ffffff;
+        }
+        </style>
+
+        <!-- Google Analytics -->
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-H13NWYDX0G"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'G-H13NWYDX0G');
+        </script>
+    </head>
+    <body>
+        <div id="page" class="container">
+            <!-- This, with no padding on left/right -->
+            <div class="banner">
+                <nav class="navbar navbar-default">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+
+            <!-- The Hamburger -->
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../../">Richard Goulter's Blog</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="../../">Home</a></li>
+            <li><a href="../../yi.html">Yi</a></li>
+            <li><a href="../../emacs.html">Emacs</a></li>
+            <li><a href="../../what-i-wish-i-knew-when-i-started-using-nix.html">Nixpkgs</a></li>
+            <li><a href="../../archive.html">Archive</a></li>
+        </ul>
+    </div>
+</nav>
+
+            </div>
+
+            <hr style="margin: 0px; border-top: 5px solid black;" />
+
+            <div id="content" class="container">
+                <h1>So I Just Finished Tomb Raider 2</h1>
+                <div class="info">
+    Posted on September 20, 2023
+    
+        by Richard Goulter
+    <br />
+    
+    Tags: 
+    
+</div>
+
+<p>Well. I’d played it years ago. And I would’ve cheated when I played it last.</p>
+<p>I had fun playing it again now.</p>
+<p>I loved the adventure aspects of the game.<br />
+It’s satisfying to have enough of a grasp of how the level is designed so as to make your way through it!</p>
+<p>The designs of the levels themselves are interesting.<br />
+The levels themselves are laid out along an easily discernable grid.<br />
+This makes the navigation physics pretty easy to understand.<br />
+But, it’s also quite a constraint on the ability to design good looking levels.</p>
+<p>Despite that, there are many memorable moments throughout the game that leaves more of an impact than, say, a more spectacle-heavy game like Call of Duty.</p>
+<h3 id="the-gameplay-loop">The Gameplay Loop</h3>
+<p>At its moments of low friction, Tomb Raider II involves traversing through an area, dealing with any threats (e.g. enemies or traps), and perhaps collecting key items or interacting with switches in order to get to the next area. – e.g. you’ll notice there’s a switch, you’ll pull the switch, and this opens a door nearby where you’ll then proceed to the next area.</p>
+<p>When there’s more friction, often you’ll have overlooked some part of the area that allows you to proceed; or perhaps there’s some under-explained puzzle mechanic that you need to understand to continue.</p>
+<p>“Under-explained puzzle mechanic” is a good thing. A puzzle explained isn’t much of a puzzle.<br />
+It just means you’ll need to try different things.</p>
+<p>The “overlooked some part of the area” I have more mixed feelings about.<br />
+Most of the game, the area you need to look in isn’t all <em>that</em> large; and so it’s not too mean.<br />
+On the other hand, if they used guide paint to highlight the areas to go next, that’d take out most of the fun. – Often the level <em>does</em> have markers suggesting where to go next, but it’s typically very subtle.</p>
+<p>In terms of friction,<br />
+I’d say it’s “soft stuck” when you’re not fully certain how to proceed to the next area, but you still have plenty of things to try.<br />
+Whereas, you feel “hard stuck” if you still think you’ve checked everywhere, and you think you’ve tried everything that could possibly work.<br />
+– It’s <em>really</em> satisfying to think: “Hmm, okay, I’ll try this,” and for that to be the solution.</p>
+<p>I felt more stuck early on in the game. For the last two levels, the challenge shifted to the areas being trap-heavy.</p>
+<h3 id="the-controls">The Controls</h3>
+<p>These days, with twin stick controllers, the most common controls involve using the right stick for controlling the camera, and the left stick for movement.</p>
+<p>These classic Tomb Raider games use “tank controls”. i.e. up/down/left/right control Lara relative to <em>Lara’s body</em>, regardless of where the camera is looking.</p>
+<p>This works well with the grid system to have a navigation logic which works quite discretely. It’s something like: Lara can do a standing jump reaching 1 block away; or a running jump reaching 2 blocks away; or she can grab the edge of a block 3 blocks away after a running jump.</p>
+<p>Some people don’t like these controls somehow. I guess there’s a subtlety to the running jump, where Lara needs to run 1 block before will do a running jump.</p>
+<p>In terms of combat, Lara auto-aims her weapons.<br />
+This makes combat more about acrobatically dodging around enemies (and navigating the terrain while doing so) than about aiming with a mouse.<br />
+Two things I miss from twin-stick controls: the controls don’t support strafing around an enemy; and with the auto aim, it’s difficult to tell which target I’m aiming at (which is important for one level where there are friendly units).</p>
+<p>The tank controls are more direct, more raw, and ‘lower level’ than the twin-stick controls. – You can screw up and look stupid; but it’s satisfying to pull off an elegant maneouver.</p>
+<p>What <em>doesn’t</em> work well is that since the tank controls’ camera is automatically controlled, this can result in awkward situations where you can’t see what’s in front of you. This mostly impacts combat in some places.</p>
+<h3 id="memorable-moments">Memorable Moments</h3>
+<p>The start of the underwater missions sees Lara underwater, and the first thing we have to do is find a pocket of air to breathe in!<br />
+I don’t <em>love</em> the underwater levels; I think the underwater combat is lame.<br />
+But, the design of the levels is fun. At one part, you’re in an upside-down ocean liner.</p>
+<p>In the Tibetan mountains, there’s a dark room filled with the growls of yetis. Lara can’t light the room and shoot at the same time. Although, yeah, turns out the yetis are safely in cages, until you flip the switch that lights the room a bit.</p>
+<p>The ancient temple near the end, where we once again hunt down the titular Dagger of Xian.. it’s a trap-heavy level, it feels a little mean, but it’s got such a fascinating feel to it.</p>
+<p>The epilogue strikes me as special. Yeah, sure, it’s got Lara wearing a bathrobe. But, it’s also got gameplay where you’re fighting off a bunch of goons from what was otherwise an iconic training area outside of the main game.</p>
+
+<hr />
+
+<div>
+    
+    <a href="../../posts/narrative/2023-09-27-john-wick-4-is-good-fun.html" style="float:left;">Newer post</a>
+    
+    
+    <a href="../../posts/games/2023-09-19-classic-lara-croft-is-back-huh.html" style="float:right; text-align: right;">Older post</a>
+    
+</div>
+<br style="clear: both;" />
+
+<hr />
+
+<!-- Load highlight.js for Syntax Highlighting. -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/bash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/c.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/gherkin.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/haskell.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/lisp.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/nix.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js"></script>
+<script>hljs.highlightAll();</script>
+
+            </div>
+
+            <hr style="margin-bottom: 0px; border-top: 2px solid black;" />
+
+            <div id="footer" class="pull-right" style="padding-right: 10px;">
+                Site proudly generated by
+                <a href="http://jaspervdj.be/hakyll">Hakyll</a>
+            </div>
+        </div>
+
+        <script>
+            // The callbacks we wanna use
+            // Phone-home, telling Google Analytics various metrics/dimensions
+
+            // Use custom dimensions & metrics
+            var AnalyticDimensionReaderKind = 'dimension1';
+            var AnalyticMetricActiveTime      = 'metric1';
+            var AnalyticMetricLongestIdleTime = 'metric2';
+            var AnalyticMetricReadCount       = 'metric3';
+
+            var gaCallbacks = {
+                "scrollPercent": function(ms, perc) {
+                    if (perc > 85) {
+                        // EVENT: Page read
+                        ga('send', {
+                            hitType:       'event',
+                            eventCategory: 'Scrolling',
+                            eventAction:   'atBottom',
+                            eventValue:    String(ms)
+                        });
+                    }
+                },
+                "read": function(ms, ct, timeToReach) {
+                    // Use this to set DIMENSION
+                    // timeToReach < 5s ==> Skim (default = Visitor)
+                    if (timeToReach < 5 * 1000) {
+                        // dimension1 = ReaderKind
+                        ga('set', AnalyticDimensionReaderKind, "skimmer");
+                    }
+
+                    // timeToReach > 30s ==> Reader
+                    if (timeToReach > 30 * 1000) {
+                        // dimension1 = ReaderKind
+                        ga('set', AnalyticDimensionReaderKind, "reader");
+                    }
+
+                    // EVENT: Page read
+                    ga('send', {
+                        hitType:       'event',
+                        eventCategory: 'Reading',
+                        eventAction:   'read',
+                        eventValue:    String(timeToReach)
+                    });
+
+                    // METRIC
+                    ga('set', AnalyticMetricReadCount, String(ct));
+                },
+                "initialIdle": function(ms) {
+                    // EVENT: Started Reading
+                    ga('send', {
+                        hitType:       'event',
+                        eventCategory: 'Scrolling',
+                        eventAction:   'begun',
+                        eventValue:    String(ms)
+                    });
+                },
+                "timeSpent": function(total, active, curIdle, initIdle, longestIdle) {
+                    // Update METRIC(S)?
+                    ga('set', AnalyticMetricActiveTime, String(active));
+                    ga('set', AnalyticMetricLongestIdleTime, String(longestIdle));
+                },
+                "idle": function(ms) {
+                },
+                "longestIdle": function(ms) {
+                }
+            }
+
+            window.onload = function() {
+                myAnalyticsInit(gaCallbacks);
+
+                //
+                // Initial dimensions & metrics
+                //
+
+                ga('set', AnalyticMetricReadCount, String(0));
+
+                // EVENT: Page load
+                ga('send', {
+                    hitType:       'event',
+                    eventCategory: 'pageLoad',
+                    eventAction:   'begun',
+                    eventValue:    String(ms)
+                });
+
+                // DIMENSION: visitor
+                ga('set', AnalyticDimensionReaderKind, "visitor");
+            }
+        </script>
+    </body>
+</html>

@@ -1,0 +1,484 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Experience with the Tweag Configuration Language as an End User - Richard Goulter's Blog</title>
+
+        <!-- My (Old) CSS theme -->
+        <link rel="stylesheet" type="text/css" href="../../css/default.css" />
+
+        <!--
+            jQuery & jQueryUI
+        -->
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css" />
+
+        <!--
+            Pandoc Style CSS
+            (for syntax highlighted snippets)
+        -->
+        <link rel="stylesheet" type="text/css" href="../../css/syntax.css" />
+
+        <!--
+            Bootstrap
+        -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+        <style>
+            /*
+             * Bootstrap defines blockquote as 17px,
+             * so it looks stupidly large in my blogposts. */
+            blockquote {
+                font-size: 14px;
+            }
+        </style>
+
+        <!--
+            Waypoints, and Waypoints-Sticky,
+            so we can do this:
+            http://imakewebthings.com/waypoints/shortcuts/sticky-elements/
+        -->
+        <script src="../../js/jquery.waypoints.min.js"></script>
+        <script src="../../js/sticky.min.js"></script>
+
+        <!-- My analytics stuff -->
+        <script src="../../js/my_analytics.js"></script>
+        <script src="../../js/my_analytics_debug.js"></script>
+
+        <!--
+            TOCify
+        -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js"></script>
+
+        <!--
+            Patched TOCify css file.
+            (Don't want fixed `.tocify`).
+        -->
+        <link rel="stylesheet" type="text/css" href="../../css/jquery.tocify.css" />
+
+        <style>
+        .navbar {
+            margin-bottom: 0px;
+        }
+
+        .banner-image {
+            width:100%;
+        }
+
+        .banner {
+            margin-left: 0px;
+            margin-right: 0px;
+        }
+
+        body {
+            background-color: #e2e2e2;
+        }
+
+        #page {
+            padding-left:0;
+            padding-right:0;
+            background-color: #ffffff;
+        }
+        </style>
+
+        <!-- Google Analytics -->
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-H13NWYDX0G"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'G-H13NWYDX0G');
+        </script>
+    </head>
+    <body>
+        <div id="page" class="container">
+            <!-- This, with no padding on left/right -->
+            <div class="banner">
+                <nav class="navbar navbar-default">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+
+            <!-- The Hamburger -->
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../../">Richard Goulter's Blog</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="../../">Home</a></li>
+            <li><a href="../../yi.html">Yi</a></li>
+            <li><a href="../../emacs.html">Emacs</a></li>
+            <li><a href="../../what-i-wish-i-knew-when-i-started-using-nix.html">Nixpkgs</a></li>
+            <li><a href="../../archive.html">Archive</a></li>
+        </ul>
+    </div>
+</nav>
+
+            </div>
+
+            <hr style="margin: 0px; border-top: 5px solid black;" />
+
+            <div id="content" class="container">
+                <h1>Experience with the Tweag Configuration Language as an End User</h1>
+                <div class="info">
+    Posted on November 15, 2023
+    
+        by Richard Goulter
+    <br />
+    
+    Tags: 
+    
+</div>
+
+<p>I recently had the chance at writing some keyboard firmware with <a href="https://github.com/semickolon/fak">semickolon’s
+fak</a>. (e.g. <a href="https://github.com/rgoulter/fak/tree/rgoulter-keyboards-and-layouts/ncl/keyboards/rgoulter/ch552-44">keyboard
+definition</a>,
+<a href="https://github.com/rgoulter/fak/blob/rgoulter-keyboards-and-layouts/ncl/keymaps/split_3x5_3/rgoulter/keymap.ncl">keymap
+definition</a>).</p>
+<p>Fak uses <a href="https://nickel-lang.org/">tweag’s Nickel</a> for declarative definitions
+of keyboards and keymaps. – Nickel is sophisticated type-safe configuration
+language.</p>
+<p>I’d first heard of Tweag in discussions around the Nix package manager, and how
+people found the Nix expression language’s lack of types to add friction to
+writing packages. I’d put Nickel in the same family as
+<a href="https://github.com/dhall-lang/dhall-lang">dhall</a>, or
+<a href="https://github.com/cue-lang/cue">cue</a>, or perhaps
+<a href="https://github.com/google/jsonnet">jsonnet</a>. (Although of those, I have minor
+experience with jsonnet, and briefly tried Dhall. I don’t have enough experience
+to do a good comparison). – In a sense, these could all be described as “JSON
+plus functions plus modules (plus types)”.</p>
+<p>Here are some notes on that.</p>
+<h2 id="context-what-kind-of-configuration-does-a-keyboard-use">Context: What Kind of Configuration Does a Keyboard Use</h2>
+<p>Fancy keyboards allow the user to customize the keyboard’s behaviour.</p>
+<p>One example is for users can change the keyboard’s keymap to some alternative
+layout (such as Dvorak, or Colemak) on the keyboard itself; this reduces
+friction, since then the computer can assume it’s using a typical QWERTY
+keyboard, and the user doesn’t have to worry about changing the OS configuration
+to use a keymap that might not be installed on the OS.</p>
+<p>Anyway, the point is, in order to be able to change the keyboard’s behaviour,
+you have to some way of the user describing that behaviour.</p>
+<p>With <a href="https://docs.qmk.fm/">QMK firmware</a>, the approach previously had been that
+you’d write out your keyboard definition and keymap definition in the C
+programming language, and compile the firmware and flash this onto the keyboard.</p>
+<p>C is a simple language; but with the C PreProcessor, it’s also <em>unrestrained</em> and formless.<br />
+The formless nature can be a benefit for the creative expression of the end user (in terms of <em>how</em> the keymap is expressed),<br />
+but I guess it’s a significant burden for the framework maintainers, presumably
+since it makes changing interfaces of the framework difficult.</p>
+<p>Hence, there’s been a move towards <a href="https://docs.qmk.fm/#/data_driven_config">data-driven
+configuration</a>.</p>
+<p>QMK’s <code>info.json</code> adds a layer of abstraction so that the relevant information
+can be declared from a single source of truth; this data can then be used to
+generate the code which QMK had been using before. The keyboard definitions
+describe the keyboard’s pinout, and what features it supports / how it supports
+them; and the keymap definitions describe the layout of keys. (e.g. <a href="https://github.com/rgoulter/qmk_firmware/blob/rgoulter-keyboards-and-layouts/keyboards/rgoulter/pykey40/info.json">my
+info.json for
+PyKey40</a>,
+or for my <a href="https://github.com/rgoulter/qmk_firmware/blob/rgoulter-keyboards-and-layouts/keyboards/rgoulter/x_2/info.json">“X-2”
+keyboard</a>).</p>
+<p>And, as I described in my previous post that I’d rather read Rust than read C;
+it’s easier to read someone else’s JSON than to read someone else’s C.</p>
+<p>So. Custom keyboard firmware makes use of configurations for things like
+keyboard definitions and keymap definitions.</p>
+<h2 id="nickel">Nickel</h2>
+<p>Roughly, my feeling is that Nickel is to JSON and YAML what Rust is to C and
+C++.</p>
+<p>C is ubiquitous, and bare bones. C++ has some features which make it seem nicer
+for some use cases, but it’s got many rough edges. Rust is ‘complex’, but avoids
+many of the previous rough edges, and has some really nice features.</p>
+<p>JSON is ubiquitous, and bare bones. etc.</p>
+<p>Technically, these “JSON plus functions plus modules” languages operate at a
+different level than JSON.. but I think that since the goal is to declare a
+particular configuration, I’d put them alongside each other when writing them.</p>
+<p>Cosmetically, much of Nickel’s syntax does seem similar to Rust. (Whereas, say,
+Dhall’s syntax seems similar to Haskell).</p>
+<p>Since I was using Nickel to write configuration (as opposed to writing the
+application which uses the configuration, or library modules for the
+configuration), I didn’t poke around with Nickel’s typing or contracts.</p>
+<h2 id="json-plus-functions-allows-for-clearer-configuration">“JSON plus Functions” Allows for Clearer Configuration</h2>
+<p>With JSON, there’s no choice but to be explicit, unfactored, and undocumented.</p>
+<p>Consider the value each of the additions to JSON in “JSON plus functions plus
+modules (plus types)”.</p>
+<p>Types can be useful for avoiding ‘illegal’ configurations, or otherwise
+navigating code, even though technically types provide no value at runtime.</p>
+<p>“Plus functions” implies “plus variables”. – I recall one way of describing
+programming was: “means of naming, means of combining, and means of
+abstraction”. That’s really the functionality “JSON plus functions” is getting
+at.</p>
+<p>“Plus modules” on top of that is (more/less) simply being able to break up one
+big file into many smaller ones.</p>
+<p>Without a means of naming/combining/abstracting, JSON values must be explicit
+and can’t be factored. “list of numbers from 4 to 30” would be tedious to
+describe in JSON, but may be useful to describe in USB keyboard configurations
+(e.g. “values A-Z in the <a href="https://www.usb.org/sites/default/files/hut1_21.pdf">keyboard usage
+page</a>”).</p>
+<p>And for anything non-trivial, there’s always going to be a benefit in being able
+to add documentation.</p>
+<h2 id="configuration-languages-hamstrung-by-json">Configuration Languages Hamstrung by JSON</h2>
+<p>These “JSON plus functions” languages do allow for a nicer experience, but I
+think they’re also inherently limited by JSON’s success.</p>
+<p>I like sum types, pattern matching and value destructuring. (And apparently
+alongside pattern matching, I like tuples).</p>
+<p>But since JSON values are either primitive (null, boolean, number, string) or an
+array or an dictionary… there’s not really a natural way to express sum types
+(or tuples) as JSON values. – Or languages like Go-lang also lack sum types; so
+while you can parse JSON into Go values without too much difficulty, there’s
+more friction trying to do the same with sum types.</p>
+<p>I guess with sum types, you need to know all the variations of the type before
+you can do meaningfully useful things with the value (check for invalid
+variants, exhaustively check variants have been considered, etc.); the other
+JSON values don’t have this constraint. Still, it’d be nice to somehow have sum
+types in more places.</p>
+<h2 id="it-lacks-tuples">It Lacks Tuples</h2>
+<p>I’m not sure if it was a deliberate design decision motivated by a preference
+for the explicit, or a distaste of implementing a tuple using heterogeneous
+values in an array (or perhaps a limitation that lists can’t be heterogeneous?),
+but I noticed that Nickel doesn’t support tuple types (in contrast to its other
+fancy features).</p>
+<p>e.g. the signature for <a href="https://nickel-lang.org/stdlib/std-array/#partition">Nickel’s
+std.array.partition</a> is:</p>
+<pre><code>partition : forall a. (a -&gt; Bool) -&gt; Array a -&gt; { right : Array a, wrong : Array a }</code></pre>
+<p>whereas e.g. <a href="https://hackage.haskell.org/package/base-4.18.0.0/docs/Data-List.html#v:partition">Haskell’s
+Data.List.partition</a>
+uses tuples:</p>
+<pre><code>partition :: (a -&gt; Bool) -&gt; [a] -&gt; ([a], [a]) </code></pre>
+<p>Similarly,
+<a href="https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.partition">Rust’s Iterator’s partition returns a tuple</a>,
+<a href="https://lodash.com/docs/4.17.15#partition">JavaScript’s lodash returns an array</a>,
+<a href="https://package.elm-lang.org/packages/elm/core/latest/List#partition">elm’s List.partition returns a tuple</a>.</p>
+<p>I don’t think the other “JSON plus functions” languages have tuples, either; so
+it’s not Nickel’s so much as JSON’s limitation.</p>
+<h2 id="smelly-syntax-lists-vs-arrays-and-recursive-vs-iterative">Smelly Syntax: Lists vs Arrays and Recursive vs Iterative</h2>
+<p>In my use case, use of <code>nickel</code> was done at compile time on a powerful machine,
+so I’m not concerned with memory consumption, nor too concerned about runtime.</p>
+<p>My taste was <em>tickled</em> by that Nickel’s <code>std.array</code> has functions which are
+geared towards list manipulation (e.g.
+<a href="https://nickel-lang.org/stdlib/std-array/#fold_left">fold_left</a>), whereas the
+structure is an array.</p>
+<p>I found this at times awkward since AFAICT in Nickel, arrays don’t have syntax
+to destructure them.</p>
+<p>Rather, it’s natural to interact with lists recursively. A list is recursively
+defined as either an empty list, or some item followed by a list. (e.g. the
+<code>(list 1 2 3)</code> is <code>1</code> followed by <code>(list 2 3)</code>; and ultimately <code>(list 3)</code> is <code>3</code>
+followed by the empty list). In Haskell, a list can be pattern-matched against
+<code>x:xs</code> (the head of the list, followed by its tail).</p>
+<p>Whereas, it’s natural to interact with arrays using loops and indices.</p>
+<p>It’s natural for an expression-oriented language like Nickel to work with lists
+(and it would be unusual for an expression-based language to have loop
+constructs, I think); and JSON has arrays.</p>
+<h2 id="configuration-complexity-is-about-how-you-use-it">Configuration Complexity is About How You Use It</h2>
+<p>A blogpost I think about a lot is the <a href="https://mikehadlow.blogspot.com/2012/05/configuration-complexity-clock.html">“Configuration Complexity
+Clock”</a>.
+Its picture tells 1,000 words; but roughly the point is that at each step, the
+trade-offs look desirable for going from hard-coded values to a configuration;
+and from a configuration to a DSL; and from a DSL to hard-coded values. –
+Hence, don’t just accept “hard coded values bad” as a dogma, and take care when
+adopting a configuration or a DSL.</p>
+<p>What’s “too hard to read” is also dependent on the person.. <a href="https://steve-yegge.blogspot.com/2008/02/portrait-of-n00b.html">Steve Yegge’s
+“Portrait of a
+n00b”</a> discusses
+that what’s considered acceptable to someone unfamiliar with the code may be
+unacceptable to someone who is very familiar with the code. (Code that’s too
+sparse or too verbose means changing the code takes more effort than it needs
+to; whereas code that’s too dense or too terse also means changing the code
+takes more effort than it needs to).</p>
+<p>Adding functions to JSON provides a more powerful tool for configuration. But,
+sometimes a “more powerful tool” is like a rocket-powered chainsaw: if you’re
+not careful about how you’re using it, you might end up causing more damage than
+it’s worth.</p>
+<h2 id="types-arent-sufficient-to-describe-interfaces">Types Aren’t Sufficient to Describe Interfaces</h2>
+<p>Something John Ousterhout’s <a href="https://web.stanford.edu/~ouster/cgi-bin/book.php">A Philosophy of Software
+Design</a> talks about is about
+the distinction between a software module’s interface and its implementation.
+Its interface is “what someone needs to know to use the module”. – He gives the
+example of a bad interface: on Windows, you can’t delete a file if it’s open by
+some process; this is ‘bad’ because in order to delete a file, you need to also
+know that the file is not opened by any process (or which processes to close!).</p>
+<p>The broader point is that a module is “complex” if its interface requires
+superfluous details (the interface is over-specified), or if using the interface
+also requires knowing implementation details not exposed as part of the
+interface (the interface is under-specified).</p>
+<p>PoSD makes the point that, similar to how Test-Driven Development emphasises the
+benefits of writing unit tests before writing the implementation, it’s similarly
+beneficial to write out a module’s documentation before writing the
+implementation.</p>
+<p>While types show what an implementation is capable of, documentation describes
+what a module user needs to know in order to use the module (especially since
+it’s often not practical or possible to describe with types).</p>
+<p>To illustrate the point, looking at <a href="https://github.com/semickolon/fak/blob/8f3d29d3705a0e7b7cadcd1650c162fceaba7ced/ncl/fak/keymap.ncl#L26-L53">a rather gnarly Nickel excerpt in
+fak</a>:</p>
+<pre><code>let HoldTapKeyInterrupt = {
+  decision | [| 'none, 'hold, 'tap |] | default = 'none,
+  trigger_on | [| 'press, 'release |] | default = 'press
+} in
+
+let HoldTapKeyInterrupts = (
+  # ...
+  std.contract.Sequence [ Array HoldTapKeyInterrupt, ValidLength ]
+) in
+
+let HoldTapBehavior = let
+  default_key_interrupts = std.array.replicate key_count {}
+in {
+  timeout_decision | [| 'hold, 'tap |] | default = 'hold,
+  timeout_ms | Uint16 | default = 200,
+  key_interrupts | HoldTapKeyInterrupts | default = default_key_interrupts,
+  # ...
+} in</code></pre>
+<p>It’s not too hard to discern what values can be constructed for these types
+(e.g. a <code>HoldTapKeyInterrupt</code> could be <code>{ "decision": "none", "trigger_on": "press" }</code>), but the types themselves aren’t sufficient to describe what the key
+interrupt logic is, or how the values should be used. (For this code, there’s
+<a href="https://github.com/semickolon/fak/tree/ebbb07c63721009c60d9951112d0587929657e3d#complex-hold-tap-behaviors">documentation
+elsewhere</a>).</p>
+<p>A <code>HoldTapBehavior</code> value could be expressed in JSON. having types <em>and
+documentation</em> guide understanding.</p>
+<p>Getting back to Nickel: it does support adding documentation by way of adding a
+<code>doc</code> <a href="https://nickel-lang.org/user-manual/syntax/#metadata">metadata decoration to record
+fields</a>. – But I guess I
+wish I saw people say “types <em>and</em> documentation”. (Although perhaps by the time
+you add enough features to the DSL, you’ve essentially just got hard-coded
+values in a general purpose programming language).</p>
+<h2 id="toolinglsp">Tooling/LSP</h2>
+<p>I expect it will improve, but I found that the Nickel LSP server wasn’t quite
+clever enough to go-to-definition for all the situations I tried it in.</p>
+<h2 id="overall">Overall</h2>
+<p>Overall, I was pleased with my experience.</p>
+<p>“JSON plus functions” does let me apply creativity to describe a configuration
+in a way that I find to be a good balance of cleverness and clarity.</p>
+<p>There are more costs/risks to using Nickel compared to using plain JSON, but
+there are also many benefits.</p>
+
+<hr />
+
+<div>
+    
+    
+    <a href="../../posts/programming/2023-10-30-experience-report-on-updating-keyboard-firmware-written-in-rust.html" style="float:right; text-align: right;">Older post</a>
+    
+</div>
+<br style="clear: both;" />
+
+<hr />
+
+<!-- Load highlight.js for Syntax Highlighting. -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/bash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/c.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/gherkin.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/haskell.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/lisp.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/nix.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js"></script>
+<script>hljs.highlightAll();</script>
+
+            </div>
+
+            <hr style="margin-bottom: 0px; border-top: 2px solid black;" />
+
+            <div id="footer" class="pull-right" style="padding-right: 10px;">
+                Site proudly generated by
+                <a href="http://jaspervdj.be/hakyll">Hakyll</a>
+            </div>
+        </div>
+
+        <script>
+            // The callbacks we wanna use
+            // Phone-home, telling Google Analytics various metrics/dimensions
+
+            // Use custom dimensions & metrics
+            var AnalyticDimensionReaderKind = 'dimension1';
+            var AnalyticMetricActiveTime      = 'metric1';
+            var AnalyticMetricLongestIdleTime = 'metric2';
+            var AnalyticMetricReadCount       = 'metric3';
+
+            var gaCallbacks = {
+                "scrollPercent": function(ms, perc) {
+                    if (perc > 85) {
+                        // EVENT: Page read
+                        ga('send', {
+                            hitType:       'event',
+                            eventCategory: 'Scrolling',
+                            eventAction:   'atBottom',
+                            eventValue:    String(ms)
+                        });
+                    }
+                },
+                "read": function(ms, ct, timeToReach) {
+                    // Use this to set DIMENSION
+                    // timeToReach < 5s ==> Skim (default = Visitor)
+                    if (timeToReach < 5 * 1000) {
+                        // dimension1 = ReaderKind
+                        ga('set', AnalyticDimensionReaderKind, "skimmer");
+                    }
+
+                    // timeToReach > 30s ==> Reader
+                    if (timeToReach > 30 * 1000) {
+                        // dimension1 = ReaderKind
+                        ga('set', AnalyticDimensionReaderKind, "reader");
+                    }
+
+                    // EVENT: Page read
+                    ga('send', {
+                        hitType:       'event',
+                        eventCategory: 'Reading',
+                        eventAction:   'read',
+                        eventValue:    String(timeToReach)
+                    });
+
+                    // METRIC
+                    ga('set', AnalyticMetricReadCount, String(ct));
+                },
+                "initialIdle": function(ms) {
+                    // EVENT: Started Reading
+                    ga('send', {
+                        hitType:       'event',
+                        eventCategory: 'Scrolling',
+                        eventAction:   'begun',
+                        eventValue:    String(ms)
+                    });
+                },
+                "timeSpent": function(total, active, curIdle, initIdle, longestIdle) {
+                    // Update METRIC(S)?
+                    ga('set', AnalyticMetricActiveTime, String(active));
+                    ga('set', AnalyticMetricLongestIdleTime, String(longestIdle));
+                },
+                "idle": function(ms) {
+                },
+                "longestIdle": function(ms) {
+                }
+            }
+
+            window.onload = function() {
+                myAnalyticsInit(gaCallbacks);
+
+                //
+                // Initial dimensions & metrics
+                //
+
+                ga('set', AnalyticMetricReadCount, String(0));
+
+                // EVENT: Page load
+                ga('send', {
+                    hitType:       'event',
+                    eventCategory: 'pageLoad',
+                    eventAction:   'begun',
+                    eventValue:    String(ms)
+                });
+
+                // DIMENSION: visitor
+                ga('set', AnalyticDimensionReaderKind, "visitor");
+            }
+        </script>
+    </body>
+</html>

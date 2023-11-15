@@ -1,0 +1,386 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Experience Report on Updating Keyboard Firmware Written in Rust - Richard Goulter's Blog</title>
+
+        <!-- My (Old) CSS theme -->
+        <link rel="stylesheet" type="text/css" href="../../css/default.css" />
+
+        <!--
+            jQuery & jQueryUI
+        -->
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css" />
+
+        <!--
+            Pandoc Style CSS
+            (for syntax highlighted snippets)
+        -->
+        <link rel="stylesheet" type="text/css" href="../../css/syntax.css" />
+
+        <!--
+            Bootstrap
+        -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+        <style>
+            /*
+             * Bootstrap defines blockquote as 17px,
+             * so it looks stupidly large in my blogposts. */
+            blockquote {
+                font-size: 14px;
+            }
+        </style>
+
+        <!--
+            Waypoints, and Waypoints-Sticky,
+            so we can do this:
+            http://imakewebthings.com/waypoints/shortcuts/sticky-elements/
+        -->
+        <script src="../../js/jquery.waypoints.min.js"></script>
+        <script src="../../js/sticky.min.js"></script>
+
+        <!-- My analytics stuff -->
+        <script src="../../js/my_analytics.js"></script>
+        <script src="../../js/my_analytics_debug.js"></script>
+
+        <!--
+            TOCify
+        -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js"></script>
+
+        <!--
+            Patched TOCify css file.
+            (Don't want fixed `.tocify`).
+        -->
+        <link rel="stylesheet" type="text/css" href="../../css/jquery.tocify.css" />
+
+        <style>
+        .navbar {
+            margin-bottom: 0px;
+        }
+
+        .banner-image {
+            width:100%;
+        }
+
+        .banner {
+            margin-left: 0px;
+            margin-right: 0px;
+        }
+
+        body {
+            background-color: #e2e2e2;
+        }
+
+        #page {
+            padding-left:0;
+            padding-right:0;
+            background-color: #ffffff;
+        }
+        </style>
+
+        <!-- Google Analytics -->
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-H13NWYDX0G"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'G-H13NWYDX0G');
+        </script>
+    </head>
+    <body>
+        <div id="page" class="container">
+            <!-- This, with no padding on left/right -->
+            <div class="banner">
+                <nav class="navbar navbar-default">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+
+            <!-- The Hamburger -->
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../../">Richard Goulter's Blog</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="../../">Home</a></li>
+            <li><a href="../../yi.html">Yi</a></li>
+            <li><a href="../../emacs.html">Emacs</a></li>
+            <li><a href="../../what-i-wish-i-knew-when-i-started-using-nix.html">Nixpkgs</a></li>
+            <li><a href="../../archive.html">Archive</a></li>
+        </ul>
+    </div>
+</nav>
+
+            </div>
+
+            <hr style="margin: 0px; border-top: 5px solid black;" />
+
+            <div id="content" class="container">
+                <h1>Experience Report on Updating Keyboard Firmware Written in Rust</h1>
+                <div class="info">
+    Posted on October 30, 2023
+    
+        by Richard Goulter
+    <br />
+    
+    Tags: 
+    
+</div>
+
+<p>Here are some notes on the experiences I had updating some keyboard firmware I had written in the Rust programming language.</p>
+<h2 id="context-my-dive-into-the-mechanical-keyboard-rabbit-hole">Context: My Dive into the Mechanical Keyboard Rabbit Hole</h2>
+<p>This was for keyboard firmware I’d written in Rust.</p>
+<p>In mid-2020, I took my first steps into the mechanical keyboard hobby when I bought the BM40 keyboard.
+I thought it looked pretty neat, since the keys were arranged in a symmetrical grid, and the keyboard was very small (so would require some skill to use). It was a decent keyboard to start with.</p>
+<p>One of the nice things about the mechanical keyboard hobby is there are all sorts ways you can be creative with fancy keyboards. (e.g. from purchasing a different set of keycaps so that your keyboard looks nicer, trying out different styles of keyboard switches, etc.).</p>
+<p>By the start of 2021, I was trying to design keyboard PCBs. (You can find the results of my playing around at github, <a href="https://github.com/rgoulter/keyboard-labs">rgoulter/keyboard-labs</a>). – The idea of trying to pack bells &amp; whistles onto a keyboard all within a pair of 100x100mm PCBs sounded like such a fun/interesting challenge.</p>
+<p>These PCBs would need firmware written for them. Fortunately, almost all of the custom keyboards that enthusiasts buy allow customising the keyboard layout. And, the most popular by far was QMK, which is relatively easy to work with. I had enough experience to work with QMK. (I was the one who added HSRGB functionality to the BM40 rev1, which took about 3 days to merge; I also made a PR for BM40 rev2, which took just over 550 days to get merged…). I was able to use QMK to write firmware for my custom designs.</p>
+<p>But, I also came across the <a href="https://github.com/teXitoi/keyberon">keyberon</a>, a library which supported writing keyboard firmware in Rust. Of course, I had to try it.</p>
+<h2 id="mechanical-keyboard-firmware-options">Mechanical Keyboard Firmware Options</h2>
+<p>For writing keyboard firmware, there are several popular options. There are probably others, but to my mind:</p>
+<ul>
+<li><p>QMK, by far the most popular and featureful.</p></li>
+<li><p>ZMK, for keyboards which have Bluetooth.</p></li>
+<li><p>KMK, which is built upon CircuitPython.</p></li>
+<li><p>Keyberon, which uses Rust.</p></li>
+</ul>
+<p>My experience has been that QMK is by far the most practical one of these to use.</p>
+<p>e.g. Although it’s much easier to iterate on firmware using CircuitPython (since “flash firmware” is as simple as “copy file to thumbdrive”), my experience with KMK was that its tap-hold functionality didn’t work well enough for home-row modifiers; which essentially makes the firmware impractical for small keyboards.</p>
+<p>However. Keyberon is written in Rust, so I was curious to give it a try.</p>
+<h2 id="general-impressions-of-rust-keyboard-firmware">General Impressions of Rust Keyboard Firmware</h2>
+<p>It’s to QMK’s credit that it does such a great job at making writing keyboard firmware so accessible.
+As QMK is a framework, you just bolt on your own parts to it (e.g. a keyboard pinout, if the keyboard isn’t already supported by QMK; and a keymap). You to can make use of a wide variety of software features (like layering, or tap-dance key behaviour), as well as hardware features (such as RGB LEDs, OLED screens, etc.). – Essentially, almost no embedded system knowledge is required to write a keymap, and very little is required to add on a keyboard definition.</p>
+<p>As I understand it, Keyberon’s goal isn’t to compete with QMK. Its goal is to be a library for helping write keyboard firmware. (I think limiting the project scope is a good thing).</p>
+<p>I reckon a downside to this is: it ends up that the keyboard firmware written in Rust that I’ve seen all have the feeling of “copied and pasted” to them. – The potential upside to this is all the keyboard firmware programs are small and easy to understand; but I can’t help but feel that everyone doing this copying-and-pasting is having to pay the cost of a learning curve in each instance.</p>
+<h2 id="on-rust-vs-c">On Rust vs C</h2>
+<p>I really like that Rust has features like Sum types (tagged unions), and destructuring.</p>
+<p>I got the impression that in order to write Rust code, you still need to have a decent mental model for how C works. – e.g. when I’m writing TypeScript or Python, I don’t need to care about whether the values I’m using are concrete or abstract; however, in Rust, I’d frequently make the compiler point out that with the code I had written, the size of the value couldn’t be determined. To me, that kind of restriction is less confusing if I can think “oh, right, in C, you’d have to …”.</p>
+<p>In terms of “reading others’ code”: I would rather read code written in Rust than code written in C. – Frequently, C’s CPP <code>#ifdefs</code> make its code complex to read, since it’s that much more you need to keep in mind when reading the code. It’s also harder to setup tooling for C such that you can use development-environment features like “jump to definition”.</p>
+<p>It’s really useful to be able to rely on code others have written. I wouldn’t want to set up a C project to depend on others code. (It’s more straightforward to add a dependency to a Rust project than to a C project). But, especially for this use case, building on QMK allows firmware which does more, with a wider variety of peripherals, than writing Rust code would. To an extent, I’d think the much of the code that gets into QMK also benefitted from there being more embedded firmware code in C than in Rust.</p>
+<p>It’s difficult to write Rust code.<br />
+It can be difficult to correctly express lifetimes, or generic trait bounds. A strict compiler which adds friction is great for <em>maintaining</em> code, but it makes just shitting out code much harder. (And sometimes “shitting out code” is what you want to be doing).</p>
+<p>In terms of “risk of writing code that’s too clever”: If someone’s writing code in C that’s <em>too clever</em>, one mechanism they have to use is the C Pre-Processor. Rust’s macros can be very similar; but Rust also has other ways of writing code that’s <em>too clever</em>.</p>
+<p>Rust is also a complex language. I don’t want to point to any one thing and say “this is too hard to understand”; but with so many sophisticated features, it can be difficult to have a good intuition for how Rust’s features interact with each other. – So if you’re coming back to a codebase after some months of not having used Rust, it can take time to recall a good mental model.</p>
+<p>That QMK is much more practical to use than the other keyboard firmware alternatives is a testament to just how much work has gone into making the project accessible.</p>
+<h2 id="earlier-iterations-of-my-rust-firmware">Earlier Iterations of my Rust Firmware</h2>
+<p>My Rust keyboard firmware has been a project which I return to maintain once or twice a year. I initially wrote it, largely by copy-pasting from similar codebases. As a sideproject / hobby repo, each iteration was an opportunity for me to have fun, and make the code more sophisticated. e.g.:</p>
+<ul>
+<li><p>by refactoring the code by breaking up a single file into several modules,</p></li>
+<li><p>adding firmware code for a different keyboard,</p></li>
+<li><p>adding Nix support code, so that it’d be easier to build,</p></li>
+</ul>
+<p>I mean, each iteration was a chance to take something that worked, and add onto it a bit so the code was less messy. – “The first time, as a scientist; the second time, as an engineer”.</p>
+<h2 id="updating-the-code">Updating the Code</h2>
+<p>I had tried (and failed) to update the code’s dependencies back in 2023 May.</p>
+<p>My expectation when updating dependencies is: if I can bump the dependencies and there are no compilation errors, I expect the code to work as it did before.<br />
+If I run into compilation errors (e.g. function signatures or types changed), then I’ll have to look to see what changed, figure out the smallest reasonable change to get the code to compile, and hope that works.</p>
+<p>I found difficulty in updating 3 things: the version of the realtime framework (RTIC), the version of the HAL (API for driving the hardware), and the toolchain version. – When I updated <em>just that</em>, then the code might compile but the firmware wouldn’t work as it did before.</p>
+<p>When I updated the toolchain, the code compiled but didn’t run the same way it had before. – This was frustrating and unfortunate.<br />
+But, given that I was able to update the toolchain after resolving the other two problems, my best understanding is: my code was wrong, and happened to work with the old compiler version.</p>
+<p>Similarly, when I tried updating the HAL dependency, the code would compile but wouldn’t result in a working keyboard; ditto for the RTIC.<br />
+This was frustrating and unfortunate.<br />
+But in this case, I think the problem was more clearly my bad code.<br />
+– I was using the wrong kind of Timer in the firmware. A closer read of the documentation indicated “if the system runs above such and such frequency, then don’t use this Timer”.<br />
+If there’s any fault of the dependencies, it’s apparently that they happened to previously be lenient enough to run bad code.</p>
+<p>I’d put this frustrating experience up to the difficulty of embedded development.</p>
+<p>That said, I will say I also ended up replacing the dependency of the USB HID keyboard from Keyberon’s implementation to <a href="https://docs.rs/usbd-human-interface-device/latest/usbd_human_interface_device/">usbd-human-interface-device</a>’s.<br />
+For one, <code>usbd-human-interface-device</code> implemented support for media keys (play/pause, next track, etc.) which Keyberon didn’t.<br />
+But I’d ran into a bug related to sending USB HID reports when using Keyberon’s implementation, which went away when using <code>usbd-human-interface-device</code>’s.</p>
+<h2 id="things-i-found-difficult-about-embedded-development">Things I Found Difficult about Embedded Development</h2>
+<h3 id="deploying-the-program-is-harder">Deploying the Program is Harder</h3>
+<p>The easiest kind of deployment action is to run software on some Linux machine that you control. e.g. To deploy a web server, copy the program over, and then run the program there.</p>
+<p>Running a program on an embedded device is somewhat more involved.</p>
+<p>For a newbie, there are many things about this which are quite confusing.</p>
+<p>Fortunately, it has become much easier in the time since I started. With UF2 bootloaders, flashing the firmware onto a device is as simple as copying a file to a thumbdrive. – Albeit, compiling the UF2 file is not totally trivial; and you still have to flash a UF2 bootloader onto the device.</p>
+<h3 id="printf-debugging-harder-to-set-up">Printf Debugging Harder to Set Up</h3>
+<p>A staple of debugging is “printf debugging”. You put a bunch of <code>print</code> statements in your code, and use those as evidence to lead you to a better understanding of how a system works.</p>
+<p>With embedded devices (even very powerful ones), it’s … not quite that simple.</p>
+<p>Ideally, with USB devices, you can somehow set up some kind of CDC serial console and output messages over that. But, if you’re at the level of copy-paste coding, this isn’t so simple to set up. (… and doesn’t help if you mess up something in the firmware before it gets to that point).</p>
+<p>I saw <a href="https://probe.rs/">probe-rs</a> puts in a bunch of effort to make debugging embedded software much easier, to the extent where you can just run <code>cargo embed</code> and you <em>can</em> have this printf debugging. – But, you still have to figure out how to setup a probe device, and connect that to your device, etc.</p>
+<h3 id="the-small-details-might-really-matter">The Small Details Might Really Matter</h3>
+<p>In one sense, programming is about structuring complexity so that you only need to pay attention to the things that are important to you (and can ignore the things that aren’t).</p>
+<p>But I’d say with embedded development, it’s more likely that small details will be significant, compared to writing an HTTP API server.</p>
+<p>One mistake I made was constructing a USB class after I’d constructed a USB device; this caused the program to crash, and it wasn’t obvious to me as to why. (Well, once I got the SWD connected and printf debugging working, <em>then</em> it was obvious what was happening).</p>
+<h3 id="getting-a-good-mental-model-of-rust">Getting a Good Mental Model of Rust</h3>
+<p>I think it’s widely accepted that when learning Rust, you’ll be struggling to get code to compile. (Even code which would be acceptable in memory-managed languages like TypeScript or Python). Especially with concepts related to ownership and lifetimes.</p>
+<p>More than once, I’d encounter difficulty trying to convince the compiler that my code was fine; or I might have some intuition that what I wanted to try was okay, but would have difficulty expressing that in how Rust actually worked. – I do believe many experienced Rust developers will try and avoid having to fight the compiler when they get into these situations.</p>
+<h2 id="fancy-tech-that-helped">Fancy Tech that Helped</h2>
+<h3 id="llms">LLMs</h3>
+<p>I used LLMs both for code-assistance in the IDE, as well as asking questions to a chat bot.</p>
+<h4 id="code-suggestions-in-the-editor">Code Suggestions in the Editor</h4>
+<p>Because the code for keyboard firmware so naturally reflected the structure of the keyboard’s schematic, the kind of code I was writing was very easy for GitHub’s CoPilot to predict. – e.g. you might leave a comment saying “the column pins are PA3, PB7, PB8, PA13, …”, and then GitHub CoPilot is able to predict what you’ll want <code>let col_pins =</code> to match against. This effectively removes a lot of drudge; rather than having to type 30-50 chars of what you know, you only have to type about 5 or so.</p>
+<p>CoPilot didn’t get it right 100% of the time; but, with a nudge in the right direction, it was able to suggest exactly the code I wanted to write. – Even with having to check the output &amp; adjust, overall, it was beneficial to use CoPilot.</p>
+<p>CoPilot was also very useful for writing rote bits of code which I’d describe as “the kind of stuff you’d seach ‘how do I do this’ and copy-paste” (if you’re new to the language/library) or perhaps “the kind of thing you’d write without thought” (if you’re familiar with the language/library).<br />
+– Perhaps a <em>downside</em> being, if you’re not familiar with best practices, nor idioms of what the code <em>should</em> be, then maybe you’re just writing bad code.</p>
+<p>(I also ran into some tooling problems: there were some contexts where CoPilot didn’t make suggestions, and some contexts where “use CoPilot’s completion” conflicted with other bindings).</p>
+<h4 id="asking-llms-for-help">Asking LLMs for Help</h4>
+<p>I liked the idea that Go-lang made for a good language to use for side-projects, since the language strives to be simple to write. This reduces the cost of coming back to the project after months of not having touched the technology; whereas with a more complicated language, you have more to recall.</p>
+<p>Rust is a complex language. There are going to be things that won’t be obvious.</p>
+<p>This is the kind of problem StackOverflow is good for. You’re likely to have the same questions as other people, and ask “how can I…?” or “why can’t I combine this and that…?”.</p>
+<p>I tried asking ChatGPT for help whenever I was stuck with something.</p>
+<p>The results were hit and miss.</p>
+<p>When I got a good result, it would provide code snippets tailored closely to what I’d asked for.</p>
+<p>When I got bad results, the LLM would confidently tell me “oh, this is how this works”, and it felt the <a href="https://www.youtube.com/watch?v=oN2_NarcM8c">Abbott and Costello joke about 7x13 = 28</a>. – The joke is funny because I know basic multiplication; but I wonder what the joke is like if you have no understanding of the domain.</p>
+<p>Ultimately, at the moment, I think this leaves only a few places where I’m comfortable asking LLMs stuff: domains where inaccuracy leaves me no-worse-off than the average person; and domains where I know enough to verify the LLM output to make use of it.</p>
+<h3 id="nix">Nix</h3>
+<p>Probably <code>rustup</code> with a toolchain file and <code>Cargo.lock</code> are sufficient to reproduce the same binaries/behaviour that had worked before. I used Nix to take care of this, instead.</p>
+<p>The additional benefits I got from Nix:</p>
+<ul>
+<li><p>By declaring the tools I used as part of a nix shell, I didn’t have to worry about how to install these programs.
+With embedded development, there were several tools which were useful for working with the binaries (such as <code>probe-rs</code> or <code>st-write</code>).</p></li>
+<li><p>I found it nice to have the outputs I wanted declared as a package.</p></li>
+</ul>
+<p>I’m able to trust that a Nix package isn’t affected by a dirty environment in a way that’s difficult to achieve with a Makefile.</p>
+<h3 id="just-task-runner">Just (Task Runner)</h3>
+<p>One thing I don’t see eye to eye on with QMK is it has its own bespoke <code>qmk</code> CLI (which both depends on, and is intended for use within the qmk_firmware repository; you can’t use <code>make</code> without having <code>qmk</code> installed).</p>
+<p>One DX improvement I value from the <code>qmk</code> cli is its <code>qmk flash</code>, which has a “do what I mean” feel to it, in that it waits for the expected device to become available, and then will flash the firmware appropriately.</p>
+<p>While <code>Makefile</code>s are suitable for describing how files are to be built, <code>justfile</code>s are suitable for describing tasks to be run. So, I added a <code>justfile</code> with a convenience command to help me flash the firmware. It’s a small thing, but it improved the DX.</p>
+<h3 id="lsp">LSP</h3>
+<p>https://grugbrain.dev/#grug-on-type-systems</p>
+<blockquote>
+<p>grug very like type systems make programming easier. for grug, type systems most value when grug hit dot on keyboard and list of things grug can do pop up magic. this 90% of value of type system or more to grug</p>
+</blockquote>
+<p>LSP means it’s easier for “hit dot on keyboard and list of things grug can do pop up magic”.</p>
+<p>Also useful is: being able to show the type, and being able to show the documentation for the type.</p>
+<p>(Albeit, for some reason, the LSP in Helix was better able to find information in the RTIC framework’s tasks than the LSP I used with Emacs could. Perhaps this has to do with proc macros or some other thing.).</p>
+
+<hr />
+
+<div>
+    
+    <a href="../../posts/programming/2023-11-15-experience-with-the-tweag-configuration-language-as-an-end-user.html" style="float:left;">Newer post</a>
+    
+    
+    <a href="../../posts/narrative/2023-09-27-john-wick-4-is-good-fun.html" style="float:right; text-align: right;">Older post</a>
+    
+</div>
+<br style="clear: both;" />
+
+<hr />
+
+<!-- Load highlight.js for Syntax Highlighting. -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/bash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/c.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/gherkin.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/haskell.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/lisp.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/nix.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js"></script>
+<script>hljs.highlightAll();</script>
+
+            </div>
+
+            <hr style="margin-bottom: 0px; border-top: 2px solid black;" />
+
+            <div id="footer" class="pull-right" style="padding-right: 10px;">
+                Site proudly generated by
+                <a href="http://jaspervdj.be/hakyll">Hakyll</a>
+            </div>
+        </div>
+
+        <script>
+            // The callbacks we wanna use
+            // Phone-home, telling Google Analytics various metrics/dimensions
+
+            // Use custom dimensions & metrics
+            var AnalyticDimensionReaderKind = 'dimension1';
+            var AnalyticMetricActiveTime      = 'metric1';
+            var AnalyticMetricLongestIdleTime = 'metric2';
+            var AnalyticMetricReadCount       = 'metric3';
+
+            var gaCallbacks = {
+                "scrollPercent": function(ms, perc) {
+                    if (perc > 85) {
+                        // EVENT: Page read
+                        ga('send', {
+                            hitType:       'event',
+                            eventCategory: 'Scrolling',
+                            eventAction:   'atBottom',
+                            eventValue:    String(ms)
+                        });
+                    }
+                },
+                "read": function(ms, ct, timeToReach) {
+                    // Use this to set DIMENSION
+                    // timeToReach < 5s ==> Skim (default = Visitor)
+                    if (timeToReach < 5 * 1000) {
+                        // dimension1 = ReaderKind
+                        ga('set', AnalyticDimensionReaderKind, "skimmer");
+                    }
+
+                    // timeToReach > 30s ==> Reader
+                    if (timeToReach > 30 * 1000) {
+                        // dimension1 = ReaderKind
+                        ga('set', AnalyticDimensionReaderKind, "reader");
+                    }
+
+                    // EVENT: Page read
+                    ga('send', {
+                        hitType:       'event',
+                        eventCategory: 'Reading',
+                        eventAction:   'read',
+                        eventValue:    String(timeToReach)
+                    });
+
+                    // METRIC
+                    ga('set', AnalyticMetricReadCount, String(ct));
+                },
+                "initialIdle": function(ms) {
+                    // EVENT: Started Reading
+                    ga('send', {
+                        hitType:       'event',
+                        eventCategory: 'Scrolling',
+                        eventAction:   'begun',
+                        eventValue:    String(ms)
+                    });
+                },
+                "timeSpent": function(total, active, curIdle, initIdle, longestIdle) {
+                    // Update METRIC(S)?
+                    ga('set', AnalyticMetricActiveTime, String(active));
+                    ga('set', AnalyticMetricLongestIdleTime, String(longestIdle));
+                },
+                "idle": function(ms) {
+                },
+                "longestIdle": function(ms) {
+                }
+            }
+
+            window.onload = function() {
+                myAnalyticsInit(gaCallbacks);
+
+                //
+                // Initial dimensions & metrics
+                //
+
+                ga('set', AnalyticMetricReadCount, String(0));
+
+                // EVENT: Page load
+                ga('send', {
+                    hitType:       'event',
+                    eventCategory: 'pageLoad',
+                    eventAction:   'begun',
+                    eventValue:    String(ms)
+                });
+
+                // DIMENSION: visitor
+                ga('set', AnalyticDimensionReaderKind, "visitor");
+            }
+        </script>
+    </body>
+</html>

@@ -1,0 +1,332 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Classic Lara Croft is Back, Huh - Richard Goulter's Blog</title>
+
+        <!-- My (Old) CSS theme -->
+        <link rel="stylesheet" type="text/css" href="../../css/default.css" />
+
+        <!--
+            jQuery & jQueryUI
+        -->
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css" />
+
+        <!--
+            Pandoc Style CSS
+            (for syntax highlighted snippets)
+        -->
+        <link rel="stylesheet" type="text/css" href="../../css/syntax.css" />
+
+        <!--
+            Bootstrap
+        -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+        <style>
+            /*
+             * Bootstrap defines blockquote as 17px,
+             * so it looks stupidly large in my blogposts. */
+            blockquote {
+                font-size: 14px;
+            }
+        </style>
+
+        <!--
+            Waypoints, and Waypoints-Sticky,
+            so we can do this:
+            http://imakewebthings.com/waypoints/shortcuts/sticky-elements/
+        -->
+        <script src="../../js/jquery.waypoints.min.js"></script>
+        <script src="../../js/sticky.min.js"></script>
+
+        <!-- My analytics stuff -->
+        <script src="../../js/my_analytics.js"></script>
+        <script src="../../js/my_analytics_debug.js"></script>
+
+        <!--
+            TOCify
+        -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js"></script>
+
+        <!--
+            Patched TOCify css file.
+            (Don't want fixed `.tocify`).
+        -->
+        <link rel="stylesheet" type="text/css" href="../../css/jquery.tocify.css" />
+
+        <style>
+        .navbar {
+            margin-bottom: 0px;
+        }
+
+        .banner-image {
+            width:100%;
+        }
+
+        .banner {
+            margin-left: 0px;
+            margin-right: 0px;
+        }
+
+        body {
+            background-color: #e2e2e2;
+        }
+
+        #page {
+            padding-left:0;
+            padding-right:0;
+            background-color: #ffffff;
+        }
+        </style>
+
+        <!-- Google Analytics -->
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-H13NWYDX0G"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'G-H13NWYDX0G');
+        </script>
+    </head>
+    <body>
+        <div id="page" class="container">
+            <!-- This, with no padding on left/right -->
+            <div class="banner">
+                <nav class="navbar navbar-default">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+
+            <!-- The Hamburger -->
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../../">Richard Goulter's Blog</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="../../">Home</a></li>
+            <li><a href="../../yi.html">Yi</a></li>
+            <li><a href="../../emacs.html">Emacs</a></li>
+            <li><a href="../../what-i-wish-i-knew-when-i-started-using-nix.html">Nixpkgs</a></li>
+            <li><a href="../../archive.html">Archive</a></li>
+        </ul>
+    </div>
+</nav>
+
+            </div>
+
+            <hr style="margin: 0px; border-top: 5px solid black;" />
+
+            <div id="content" class="container">
+                <h1>Classic Lara Croft is Back, Huh</h1>
+                <div class="info">
+    Posted on September 19, 2023
+    
+        by Richard Goulter
+    <br />
+    
+    Tags: 
+    
+</div>
+
+<p><a href="https://twitter.com/tombraider/status/1702355960809812035">A remaster of the first three Tomb Raider games has been announced</a>.</p>
+<h3 id="remastered-games">Remastered Games</h3>
+<p>This continues a trend of classic games receiving touch ups and being sold as new.</p>
+<p>For gamers, this has the advantage of making these remastered games easy to play on modern systems. Without such remasters, you’d either have to play the game on a console with physical media, or perhaps fiddle with compatibility mechanisms to get the game to play on PC.</p>
+<p>This seems to have gone quite well for the “Age of Empires” series.<br />
+I remember a decade ago or so, the idea of polishing AoE2 and re-releasing it was quite popular.<br />
+In the end, they re-released it twice: with an “HD” edition, and then with a “Definitive” edition. I suspect the “HD” edition was more of a pilot to gauge response; and “Definitive” was more of a continuation.</p>
+<p>Another remaster I was excited for was for “Commandos 2”.<br />
+Unfortunately, here the remaster altered some of the iconic graphics from the original. The game removed nazi swastikas, but also some of the Japanese “rising sun” icons. (Although I disagree with their removal from the game, I can at least understand why you’d want to remove nazi swastikas; I find removing big red circles a bit too much, though). – The game doesn’t depict brutal realities of war; but it does depict situations where a small crew of Allied commandos go and beat up a bunch of the bad guys (including situations where enemies occupy towns, and use prisoners of war for labour).<br />
+So, the argument of “the removed symbols may remind people of the bad things done in war” is bizarre, since you’re playing as <em>the good guys stopping the bad guys</em>.</p>
+<p>Other old classics like Crash Bandicoot and Spyro have had faithful re-releases.</p>
+<h3 id="different-laras">Different Laras</h3>
+<p>The “Tomb Raider” series has had several different generations of its series:</p>
+<p>The original, classic “Tomb Raider” was developed by Core Design; these Tomb Raider games still have numbers after the title. By “Tomb Raider IV”, the developers were a somewhat burnt out, and so killed off Lara at the end of the game. TR5 was told as flashbacks. – TR6 was an attempt at making a new game for the next generation of consoles; but the game was released in an unfinished state and wasn’t all that good.</p>
+<p>Crystal Dynamics picked up “Tomb Raider” with a reboot with a more dramatic “Lara Croft”; these games “Tomb Raider: Legend”, “Tomb Raider: Anniversary” (a remake of TR1), and “Tomb Raider: Underworld” were quite different than the classics: the controls were for twin-stick controllers, giving players control of the camera; and Lara had a different look (replacing the classic green tank top with a khaki top).</p>
+<p>This Lara then gets ditched in the 2013 reboot “Tomb Raider”, and its sequels “Rise of the Tomb Raider” (2015) and “Shadow of the Tomb Raider” (2018).<br />
+This Lara is called “Survivor Lara”.<br />
+The gameplay in the games changes again, now closer to an open-world action game. Lara’s looks have changed too (I recall it being described as: the devs made her boobs smaller until play testers stopped looking at them). Lara here is <em>very</em> dramatic; where the story’s excuse for this is each of these games are an origin story telling <em>how</em> Lara comes to be such a badass.</p>
+<p>The best discussion of this I’ve seen is in <a href="https://www.youtube.com/watch?v=kJMj3B1BFko">Liana Kerzner’s Lady Bits series</a>.<br />
+Kerzner describes classic Lara as a Byronic heroine (passionate and heroic, but unlikable/antisocial), whose exaggerated figure reflects the exaggerated gameplay; whereas Survivor Lara is more down to earth as a character, with a relatively more realistic figure, but more of a damsel-in-distress in a game with mass-market accessibility.</p>
+<p>(The ways in which Survivor Lara is less-than-ideal is also interesting: the more action-oriented gameplay leads to this ‘realistic’ Lara killing <em>way</em> more people than the classic Lara ever did; and although the new look is more ‘realistic’, it’s still the same Megan-Fox-in-Transformers glamorous with a thin layer of dirt on top despite the brutal adventuring).</p>
+<p>Kerzner also describes the current zeitgeist’s attitude to big boobs as “eww, icky”, as a response to negative sexual attention many women receive; that the big boobs get removed so as to reduce repulsiveness (as opposed to adding other stuff, to add appeal elsewhere). – This leads to the notion that the title of Kerzner’s video responds to: that Survivor Lara is presumed to be ‘more feminist’.</p>
+<h3 id="classic-lara-is-back">Classic Lara is Back</h3>
+<p>And so it’s quite surprising to see that these remastered games feature a Lara that retains the look of the original.</p>
+<p>Or as <a href="https://www.youtube.com/watch?v=-4HX0fXY8yo">Melonie Mac</a> puts it:</p>
+<p>“[I wanted a remaster, but was worried they] would mess it up … the design would look bad, they would change Lara’s proportions, they would change the controls. That’s a huge thing: the controls!”</p>
+<p>I find it funny that the way Lara looks is coupled to the gameplay.</p>
+<p>Mac reacts to the idea of making the games more accessible the same way many reacted to Netflix’s 2022 “Persuasion”: significantly simplifying the original removes a lot of the depth that brought quality to the original.</p>
+<p>I suppose it makes sense. Both “reducing the aggressively-attractive features” and “making the gameplay easier” intend to make the game reach a broader audience. – But a part of me still wonders what it’d be like if the gameplay remained, but the looks were toned down.</p>
+<p>My favourite part of Mac’s video is this:</p>
+<p>“[if you don’t like the classic controls] spend 30 minutes learning them and then it’ll be all worth it. Here’s the thing, classic Tomb Raiders were built on a grid based system…”</p>
+<p>It’s just such unadulterated nerd talk.</p>
+<p>Watching some of Mac’s other thoughts:</p>
+<ul>
+<li><p>There’s the idea that ‘attractive female character’ is only for men, attractive female characters make women feel bad. – Mac reckons that in similar way that super tough male character is a male power fantasy, an attractive (female) character is a female power fantasy. https://www.youtube.com/watch?v=AotyaLxqMmk – When women <em>do</em> get the chance to customise their character, you’ll see women play as attractive characters.</p></li>
+<li><p>And in this video: https://www.youtube.com/watch?v=uqOn9w-OrqY Mac discusses “classic Lara Croft was sexist”.</p>
+<ul>
+<li><p>Mac’s not fussed about Lara wearing short-shorts in the snowy Tibetan foothills. Mac argues the other outfits Lara wears aren’t more revealing than what you’d see at the gym. Mac reckons that the classic Lara had a figure only slightly exaggerated from that of a gym rat;</p></li>
+<li><p>whereas Legend Lara is too stretched out (&amp; it’s Legend Lara has the sexy revealing dress, and the option to dress Lara in a bikini in-game);</p></li>
+<li><p>and by Shadow of the Tomb Raider, the outfits are extremely muted, and Lara’s body is unathletic (and legs are very short).</p></li>
+</ul></li>
+</ul>
+<p>Overall.. short-shorts in the snow is a bit silly; but, as is someone carrying around an arsenal of weapons, leaping acrobatics around in gunfights, going 1-on-1 against a T-Rex!, and dodging around ancient traps. – Short-shorts in snow is silly, but I don’t think it weighs significantly so as to degrade the character.</p>
+<h3 id="hashtag-representation">Hashtag Representation</h3>
+<p>I find it striking that a number of the people reacting on social media to the announcement of the TR Remaster were women.</p>
+<p>As always: generally, you can’t say “this group of people all think the same way”. It’s frustrating for people to feel left out or rejected.<br />
+Kerzner’s video does a good job discussing why some women don’t love the classic Lara look.<br />
+But it’s also clear to see that the women who do love the way classic Lara looks feel <em>really</em> rejected when classic Lara is denegrated.</p>
+<p>The assumption “people want to see characters that look like themselves” is obnoxious…<br />
+and I don’t doubt many of the women who enjoyed Tomb Raider enjoy other games too,<br />
+I’d say Tomb Raider’s protagonist being a woman brought more women to the game. Or, probably there’d be significantly fewer female fans of Tomb Raider if its main protagonist was a man.</p>
+<p>And <em>maybe</em> it’s a bit presumptuous, but.. Mac describes the Shiva statues in TR3 as scary for her when she was a young girl. Those TR3 levels <em>are</em> scary. –</p>
+<p>Above, both Kerzner and Mac discuss that the newer games feature significantly easier gameplay, and a more dramatic Lara with a more down to earth look. – I get the feeling that if the Tomb Raider games had kept the hardcore difficulty, and still made the changes to Lara’s appearance from “aggressively, conspicuously attractive” to a more muted everyday look, there’d still be some women upset.<br />
+– The games aren’t really realistic: having a stunningly feminine protagonist in such wild environments is silly. I can see why toning down the feminine aspects of Lara’s character, but retaining unrealistic action in the gameplay would come across as “femininity not welcome”.</p>
+<p>Related, but in contrast: e.g. <a href="https://www.youtube.com/watch?v=AGql5ay5TVY">Angel Eduardo discusses how he likes Superman</a> despite that he doesn’t share skin colour with Superman. Eduardo is disagreeing with “making superman non-white would make him more accessible to non-white people”.<br />
+(Eduardo argues: diversity requires more depth than just skin colour;
+it’s absurd to say “superman is just for whites” just because his skin is white, &amp; seeing superman as “white” is regressive, changing his skin colour validates that; superman is an immigrant, an orphan, and an outsider, so it ought to be easy for many to relate to him).</p>
+<p>(Now I’m wondering if they race-swapped Lara, but kept the hardcore gameplay, and the aggressively attractive looks…).</p>
+<p>In both cases above, the fans of a classic character don’t like the idea of changing the character’s appearance (at least) for the sake of ‘representation’.<br />
+– Although <em>surely</em> women being upset at a character’s femininity being diminished relates to ‘representation’?</p>
+<p>In Eduardo’s argument, race-swapping-as-representation undermines the value of a character that people should otherwise all be able to see themselves in. By ‘race swapping’, it emphasises differences rather than similarities.<br />
+In Mac’s discussion that classic Lara’s appearance is significant, by reducing the character’s aggressive beauty, it at least mutes the character from something distinct into something bland (and perhaps is ashamed of the femininity).</p>
+
+<hr />
+
+<div>
+    
+    <a href="../../posts/games/2023-09-20-so-i-just-finished-tomb-raider-2.html" style="float:left;">Newer post</a>
+    
+    
+    <a href="../../posts/programming/2023-09-09-using-nixos-on-an-openstack-public-cloud.html" style="float:right; text-align: right;">Older post</a>
+    
+</div>
+<br style="clear: both;" />
+
+<hr />
+
+<!-- Load highlight.js for Syntax Highlighting. -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/bash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/c.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/gherkin.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/haskell.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/lisp.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/nix.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js"></script>
+<script>hljs.highlightAll();</script>
+
+            </div>
+
+            <hr style="margin-bottom: 0px; border-top: 2px solid black;" />
+
+            <div id="footer" class="pull-right" style="padding-right: 10px;">
+                Site proudly generated by
+                <a href="http://jaspervdj.be/hakyll">Hakyll</a>
+            </div>
+        </div>
+
+        <script>
+            // The callbacks we wanna use
+            // Phone-home, telling Google Analytics various metrics/dimensions
+
+            // Use custom dimensions & metrics
+            var AnalyticDimensionReaderKind = 'dimension1';
+            var AnalyticMetricActiveTime      = 'metric1';
+            var AnalyticMetricLongestIdleTime = 'metric2';
+            var AnalyticMetricReadCount       = 'metric3';
+
+            var gaCallbacks = {
+                "scrollPercent": function(ms, perc) {
+                    if (perc > 85) {
+                        // EVENT: Page read
+                        ga('send', {
+                            hitType:       'event',
+                            eventCategory: 'Scrolling',
+                            eventAction:   'atBottom',
+                            eventValue:    String(ms)
+                        });
+                    }
+                },
+                "read": function(ms, ct, timeToReach) {
+                    // Use this to set DIMENSION
+                    // timeToReach < 5s ==> Skim (default = Visitor)
+                    if (timeToReach < 5 * 1000) {
+                        // dimension1 = ReaderKind
+                        ga('set', AnalyticDimensionReaderKind, "skimmer");
+                    }
+
+                    // timeToReach > 30s ==> Reader
+                    if (timeToReach > 30 * 1000) {
+                        // dimension1 = ReaderKind
+                        ga('set', AnalyticDimensionReaderKind, "reader");
+                    }
+
+                    // EVENT: Page read
+                    ga('send', {
+                        hitType:       'event',
+                        eventCategory: 'Reading',
+                        eventAction:   'read',
+                        eventValue:    String(timeToReach)
+                    });
+
+                    // METRIC
+                    ga('set', AnalyticMetricReadCount, String(ct));
+                },
+                "initialIdle": function(ms) {
+                    // EVENT: Started Reading
+                    ga('send', {
+                        hitType:       'event',
+                        eventCategory: 'Scrolling',
+                        eventAction:   'begun',
+                        eventValue:    String(ms)
+                    });
+                },
+                "timeSpent": function(total, active, curIdle, initIdle, longestIdle) {
+                    // Update METRIC(S)?
+                    ga('set', AnalyticMetricActiveTime, String(active));
+                    ga('set', AnalyticMetricLongestIdleTime, String(longestIdle));
+                },
+                "idle": function(ms) {
+                },
+                "longestIdle": function(ms) {
+                }
+            }
+
+            window.onload = function() {
+                myAnalyticsInit(gaCallbacks);
+
+                //
+                // Initial dimensions & metrics
+                //
+
+                ga('set', AnalyticMetricReadCount, String(0));
+
+                // EVENT: Page load
+                ga('send', {
+                    hitType:       'event',
+                    eventCategory: 'pageLoad',
+                    eventAction:   'begun',
+                    eventValue:    String(ms)
+                });
+
+                // DIMENSION: visitor
+                ga('set', AnalyticDimensionReaderKind, "visitor");
+            }
+        </script>
+    </body>
+</html>
