@@ -8,8 +8,58 @@
         <name>Richard Goulter</name>
         <email>richard.goulter+blog@gmail.com</email>
     </author>
-    <updated>2023-11-15T00:00:00Z</updated>
+    <updated>2023-11-26T00:00:00Z</updated>
     <entry>
+    <title>Experience Designing a Keyboard PCB</title>
+    <link href="http://www.rgoulter.com/blog//posts/programming/2023-11-26-experience-designing-a-keyboard-pcb.html" />
+    <id>http://www.rgoulter.com/blog//posts/programming/2023-11-26-experience-designing-a-keyboard-pcb.html</id>
+    <published>2023-11-26T00:00:00Z</published>
+    <updated>2023-11-26T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<p>I designed a <a href="https://github.com/rgoulter/keyboard-labs/releases/tag/ch552_48-rev2023.1">keyboard PCB</a>, which I’m calling “CH552-48”. (It uses the CH552 MCU, and it has 48 keys).</p>
+<p>This was
+I have designed <a href="https://github.com/rgoulter/keyboard-labs#keyboards">other keyboard PCBs</a>,
+but I’m particularly pleased with this one.<br />
+The keyboard PCBs I’ve designed fall into two kinds: those that use a development board (and are relatively easy to solder by hand), and those that are intended to be manufactured with “PCBA”.<br />
+However, the devboard-based designs were pretty easy to design; and while I found the PyKey40 tricky to design (I found it quite tricky to fit the MCU between the keyboard switches; an ortholinear keyboard doesn’t allow for much space!), I was more/less modifying an existing PCB design.</p>
+<p>To be honest.. the keyboard PCB designs I’ve done aren’t really aiming for “great keyboard” so much as they’re aiming for “interesting PCB to design”.<br />
+e.g. designing a split keyboard where each half is smaller than 10x10cm may not make for a ‘great’ keyboard, but the design constraint made it really fun to design.<br />
+The “X-2 Lumberjack Arm” is a pretty good keyboard. I think it’s visually very striking. At the time I designed it, there weren’t many Arm-powered (ortholinear) keyboards that could be bought off-the-shelf.<br />
+And PyKey40 is also a good keyboard.. but, I had thought it’d be an interesting challenge to try and cram the fully-featured PyKey60 into the smaller 4x12 grid.<br />
+– I do like that idea “first time you do something, it’s as a scientist; the second time, as an engineer, but by the third time it’s as a technician”.</p>
+<p>I wanted to design the CH552-48 after I came across the <a href="https://github.com/semickolon/fak">fak firmware</a>. Fak firmware was written for the CH552, which has the advantage of being much cheaper than the RP2040 (even if it’s not as powerful).</p>
+<p>Something that made this an interesting or constrained PCB to design was that the CH552T MCU only has 14 GPIO pins.<br />
+A keyboard uses the GPIO pins for scanning which keys have been pressed. Typically, 1 pin is used for each row and each column of the keyboard matrix. e.g. a 60-key keyboard arranged in 5 rows of 12 columns would typically use 17 pins.<br />
+I have seen other projects use the CH552 for keyboards, but these tend to be keyboards with a very low number of keys, such as using it for a numpad, or using a CH552 for one half of a small split keyboard.<br />
+I figured that 14 pins allows for 7 rows of 7 columns, or about 49 keys.</p>
+<p>Obviously, a square keyboard wouldn’t make for a useful desktop computer keyboard.. but instead, the 7x7 matrix could be the ‘logical’ matrix, and I could arrange the 48 keys in 4 rows of 12 columns. I thought this was pretty neat.</p>
+<p>I designed the <a href="https://github.com/rgoulter/keyboard-labs/releases/tag/ch552_44-rev2023.1">CH552-44</a> first, which more/less takes the same shape as the <a href="https://github.com/rgoulter/keyboard-labs/releases/tag/pico42-rev2023.1">Pico42 keyboard</a> which I had designed earlier as a workaround to make use of keyboard cases I borked the design for. (The Pico42 in turn does itself bear close resemblance to the <a href="https://github.com/rgoulter/keyboard-labs#x-2-5x12-ortholinear-arm-powered-adaptation-of-peejs-lumberjack-pcb">X-2 “Lumberjack Arm”</a> keyboard I’d designed earlier..).</p>
+<p>It made sense to start with CH552-44 as a proof-of-concept since it would be solderable with only through-hole components, which are <em>very</em> easy to solder.</p>
+<p>In designing the CH552-44, I had to come up with some scheme to actually route this logical 7x7 matrix laid out on a physical 4x12 grid.<br />
+When the logical matrix is the same size as the physical matrix, it’s straightforward to connect each of the column pins together.<br />
+But with a mismatch between the logical matrix and the physical matrix, some complexity was inevitable.</p>
+<p>Keyboard designs, especially ortholinear keyboard designs, involve a lot of patterns and repetition.
+My experience is that early on when routing the traces for the PCB, it might not be clear what the patterns for the traces <em>should</em> be; but once it does become clear, then routing the traces does become straightforward.</p>
+<p>This part of PCB design can be very fun. – In a way, it tickles the same part of the brain that some parts of Factorio do: in Factorio, you need to connect certain outputs to certain inputs, and the challenge is in how to physically arrange the systems as part of a larger factory; ideally in an organised manner, without too much spaghetti. Hobbyist PCB design is exactly the same.</p>
+<p>Compare the traces for the Pico42:</p>
+<p><img src="https://raw.githubusercontent.com/rgoulter/keyboard-labs/master/docs/images/keyboards/pico42/keyboard-pico42-2023.2-bottom.svg" width=600 /></p>
+<p>with those of the CH552-44:</p>
+<p><img src="https://raw.githubusercontent.com/rgoulter/keyboard-labs/master/docs/images/keyboards/ch552-44/keyboard-ch552-44-2023.1a-bottom.svg" width=600 /></p>
+<p>It’s not an <em>extreme</em> difference, but the CH552-44 does feel like it’s got busier streets and city blocks.</p>
+<p>Anyway. Once I’d received these CH552-44 PCBs, and checked that they worked with the CH552 devboard I was using, the next step I wanted to try was to make a PCBA version of the design.</p>
+<p>This itself wasn’t too hard, either.</p>
+<p>I looked at the devboard’s schematic, saw what parts of that I was using, and replaced the devboard in my schematic with those parts.</p>
+<p>Overall, not too much needed to be changed for the PCBA design:</p>
+<p><img src="https://raw.githubusercontent.com/rgoulter/keyboard-labs/master/docs/images/keyboards/ch552-48/keyboard-ch552-48-2023.1-bottom.svg" width=600 /></p>
+<p>I haven’t done much with PCBA.<br />
+I found JLCPCB’s most accessible; since you can search what components they have, and they provide some documentation for the files you need to give them so they can assemble the keyboard for you.<br />
+(Whereas, for other places, you have to send them the components?).</p>
+<p>But, since this PCBA project was similar enough to the PCBA project I had done before, it wasn’t too much effort to figure out how to set this part up.</p>
+<p>The main effort was figuring out how to reduce the PCBA costs. Some of the components that JLCPCB uses are “basic parts”, some are “extended parts”, and it costs a few dollars extra for each “extended part” you use. – So, the goal is to find and use the “basic parts” when you can.</p>
+<p>I wasn’t 100% sure that the PCBA design would work. So, it was a relief to find that it worked without issue.</p>
+<p>And with the CH552 being a low-budget MCU, the cost to get it manufactured was relatively low.</p>
+<p>Overall, it might be that no particular step of this was far beyond my experience. But, it was a satisfying use of the PCB designing I’d been doing before, with a PCB design that had some interesting constraints.</p>]]></summary>
+</entry>
+<entry>
     <title>Experience with the Tweag Configuration Language as an End User</title>
     <link href="http://www.rgoulter.com/blog//posts/programming/2023-11-15-experience-with-the-tweag-configuration-language-as-an-end-user.html" />
     <id>http://www.rgoulter.com/blog//posts/programming/2023-11-15-experience-with-the-tweag-configuration-language-as-an-end-user.html</id>
@@ -1088,38 +1138,6 @@ Surely it <em>is</em> fine for a story about a woman to end without her finding 
 I get the impression that there’s animosity towards the latter from the sense that there’s an overwhelming default expectation for the former? (And vice versa!). I don’t generally get the sense that society would only respect a female character if she ends up married.<br />
 The Barbie movie ends without Barbie and Ken having a romantic relationship. For Barbie, there’s no romance in the film; for Ken, it’s unrequited attention, and he doesn’t end up with a partner.<br />
 Romantic plotlines which don’t end up with a happy ending are kindof a bummer.</p>]]></summary>
-</entry>
-<entry>
-    <title>So I Played Some Battlebit Remastered</title>
-    <link href="http://www.rgoulter.com/blog//posts/games/2023-07-20-so-i-played-some-battlebit-remastered.html" />
-    <id>http://www.rgoulter.com/blog//posts/games/2023-07-20-so-i-played-some-battlebit-remastered.html</id>
-    <published>2023-07-20T00:00:00Z</published>
-    <updated>2023-07-20T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<p>“Battlebit Remastered” is trending on YouTube at the moment.</p>
-<p>At a glance, it has low-poly graphics, and is touted to have a lot of the charm that older Battlefield games had. (Maybe a lot of that is just nostalgia?).</p>
-<p>I don’t tend to play multiplayer games. I did watch a video that pointed out the game had voice-chat enabled, a feature which relies on trusting the community to not be full of assholes; and puts it in contrast to high-budget multiplayer games where the playerbase is restricted from even using text chat.</p>
-<p>So, it sounded friendly enough to try out.</p>
-<p>I played it quite a bit.<br />
-I found the players are mostly friendly.<br />
-The gameplay was mostly pretty fun.<br />
-But, overall, I’m not inclined to think I’m missing out on tonnes of fun by only playing single player games.</p>
-<h3 id="games-are-fun-when-theyre-competitive">Games Are Fun When They’re Competitive</h3>
-<p>I do play chess online against others.<br />
-Chess.com and lichess both allow chat; most games won’t result in a chat. The most common interaction is “good game” (which is often more polite than sincere), sometimes people get a bit rude, and very rarely will someone compliment.</p>
-<p>But, since in chess there’s only one person in control of the moves, then chess is ultimately quite personal. Winning is good, losing sucks; but one of the better feelings is reaching a stalemate position when you’re in a completely losing position. – In one game, my opponent had taken all of my pieces, had my king trapped on the side of the board, had three queens on the board, and wanted to gloat by promoting the rest of his queens; fortunately for me, he made the one move which led to a stalemate.</p>
-<p>One of the things that’s fun about that, with so many people playing chess online, it’s easy to have a game with someone who has about the same skill level as you.</p>
-<p>With Battlebit.. I’m not very good at it. My experience was that “I saw the enemy, and we both shot at each other” happened 5% of the time. For the rest, I’d either get shot by a sniper some distance away (fair, I guess?, since these can often be avoided), or I’d get shot 0.1 seconds after seeing the enemy.</p>
-<p>Perhaps there were times where I was the guy the enemy saw for only 0.1s before dying; but I ended up doing a lot more dying than shooting.</p>
-<p>But my point is: if I were playing with people who sucked just as much as I did, I think it’d be more fun.</p>
-<p>I guess having balanced teams is supposed to have the same effect. Coursely, it does.. in that whether a game is ‘won’ or ‘lost’ will be closer with a balanced team. – One of the least fun matches I played in ended up with one side completely dominating the other side, such that the losing side couldn’t make any progress beyond the spawn point.</p>
-<p>At the individual level, there are roles to play other than shooting enemies up close (or from a distance). It’s reasonably fun to play the medic in Battlebit; being able to heal others and revive them if they’re shot.</p>
-<p>I wonder about other solutions for making the game fun for people who suck at it (without depriving the fun for those who are good at it). – I’d heard that TitanFall 2’s multiplayer includes a bunch of weak bots in the game, which sounds like it would allow for players like me to have some gratification from helping out by killing those bots.</p>
-<h3 id="social-good-and-the-bad">Social: Good and the Bad</h3>
-<p>I liked Zero Punctuation’s reply to “playing games with other people is more fun” with “watching paint dry is more fun with other people”.</p>
-<p>I think some of the most fun while playing Battlebit was the random messing around in the peaceful pre-match preparation period. It was also fun when people goofed around in character when attacking an enemy’s defense.</p>
-<p>Less-fun was people expressing their frustration about how they thought their teammates suck. (It’s a casual game; chill out).</p>
-<p>There were also accusations of cheating.. and, eh… idk. – With chess, it’s easier to tell if someone’s cheating, because you can look through the game and see if the moves are moves a human would make. But generally, accusing others of cheating makes you look butthurt about losing.</p>
-<p>Overall, I felt a lot of the gameplay involved following your squad or your team up until you encountered the enemy, and then either keeping the enemy back or following on whoever made a successful push.</p>]]></summary>
 </entry>
 
 </feed>
