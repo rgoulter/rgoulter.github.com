@@ -8,8 +8,105 @@
         <name>Richard Goulter</name>
         <email>richard.goulter+blog@gmail.com</email>
     </author>
-    <updated>2023-11-26T00:00:00Z</updated>
+    <updated>2023-12-21T00:00:00Z</updated>
     <entry>
+    <title>2023-12-21-notes-on-building-wch-ble-ch592-evt-exam-with-bare-makefile</title>
+    <link href="http://www.rgoulter.com/blog//posts/programming/2023-12-21-notes-on-building-wch-ble-ch592-evt-exam-with-bare-makefile.html" />
+    <id>http://www.rgoulter.com/blog//posts/programming/2023-12-21-notes-on-building-wch-ble-ch592-evt-exam-with-bare-makefile.html</id>
+    <published>2023-12-21T00:00:00Z</published>
+    <updated>2023-12-21T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<p>Here are some notes from tinkering with the <a href="https://github.com/WeActStudio/WeActStudio.WCH-BLE-Core">WeAct Studio BLE Core Board</a>.</p>
+<h3 id="its-not-used-in-many-designs">It’s Not Used in Many Designs</h3>
+<p>My interest in the board comes from my interest in custom mechanical keyboard designs.<br />
+– The best part of ‘free and open source’ is the “gratis” part.<br />
+But the “libre” part is neat, too: it’s much easier to realize an interesting keyboard design if all you need to do is iterate on a keyboard design someone else has made.</p>
+<p>I’ve never tried designing a Bluetooth keyboard.<br />
+The sour grapes explanation is that Bluetooth devices are finicky to use. (Which is true).<br />
+What most hobbyists do for Bluetooth keyboards is use Bluetooth-powered devboards like the nice!nano, and use ZMK firmware. – TBH part of why I’m not interested in this devboard is it costs over 20 USD. (And it’s most common in split keyboards, which’d need one for each side!).</p>
+<p>I recently picked up a WeAct Studio BLE Core board, ordered from AliExpress.<br />
+(I’ve used a few different devboards from WeAct Studio in several of my keyboard PCB designs; including WCH MCUs).<br />
+The BLE core board has designs for the different MCUs: CH573, CH582, CH592.<br />
+In contrast, this devboard costs $2.</p>
+<p>But despite it being such a cheap board, I can’t find any designs which use this board.</p>
+<p>Some notes on what I could find:</p>
+<p>The <a href="https://github.com/joric/nrfmicro/wiki/Alternatives#ch582">Alternatives wiki page on joric’s nrfmicro repo</a>
+describes the CH582 as:</p>
+<blockquote>
+<p>QMK has a CH582 port! It has BLE and there’s a dev board for it on Aliexpress for about 2 bucks. That is, if you’re willing to experiment since, as far as I’m aware, no keyboard has been designed with it and there’s not a lot of users yet. [ZMK not supported.]
+… Last I looked, datasheets were basically “sorry, not documented” on the registers for BLE hardware. And 32KB of RAM on the CH582F would definitely be a challenge.</p>
+</blockquote>
+<p>Regarding “low RAM an issue” semickolon (who authored FAK firmware for the CH552 MCU) <a href="https://www.reddit.com/r/ErgoMechKeyboards/comments/18aekwm/comment/kbz35tc/">commented that the chip’s BLE only uses 4KB RAM, and that FAK had about 1KB RAM</a>. (He also mentions he’s got a keyboard working with some firmware he’s building for the chips).</p>
+<p>The datasheets indeed omit documentation for the registers for the BLE hardware.</p>
+<p>FWIW, I did see some BLE keyboards using these WCH chips on OSHWHub such as <a href="https://oshwhub.com/cansong/ch579_keyboard_v0-1">cansong’s ch579 keyboard</a>, which points to <a href="https://oshwhub.com/JokerAlon/ch579m-64keyboard">JokerAlon’s ch579m</a>. Albeit, the readmes for these aren’t in English. – The schematics are available, at least.</p>
+<p>Albeit, at the time of writing, there really aren’t many English search engine results for CH592. Nor CH58x. Nor CH57x.<br />
+The keyboards above seem to be row-stagger, and with big spacebars. (The big spacebars make it easier to design a PCB, but don’t make for a good keyboard. – I do recall seeing boardsource.xyz’s solution to this for their <a href="https://www.reddit.com/r/MechanicalKeyboards/comments/t1c5pl/technikable_gb_is_live_on_boardsourcexyz_wireless/">technikable ble ortho</a> was to omit the 2 keys in the bottom corners of each side..).</p>
+<p>I wasn’t aware of it before, but both the wiki page above (and the reddit comment) point to <a href="https://github.com/O-H-M2/qmk_port_ch582">O-H-M2’s port of QMK for CH582</a>. (Looking at the port a bit: it retains upstream QMK’s codebase unchanged, and adds some platform-specific code for CH582).<br />
+(There are keyboards listed in this; one seems to be a giant handwired ortho, the others are either macropads/numpads, or row-staggered with big spacebars).<br />
+The default branch name is <code>via</code>; the readme mentions via functionality is implemented. (I don’t use via/vial, but seems it’s useful for many).</p>
+<p>On GitHub, <a href="https://github.com/openwch/ch592">OpenWCH provides EVTs with Examples and SDKs for CH592</a> (and other chips). (Whereas, <a href="https://github.com/SoCXin/CH552.git">CH552 is in the SoCXin org</a>). – These examples include a BLE HID “keyboard” (it periodically sends a HID keyboard report, but doesn’t read GPIO pins).<br />
+– So, there is working code, and a README PDF(!) describing how to run the example.. this PDF describes to use <a href="http://www.mounriver.com/download">MounRiver Studio</a>.</p>
+<p>Using MounRiver Studio works (at least for building these EVT Examples; I didn’t try flashing from MounRiver).</p>
+<p>I saw that the <a href="https://github.com/WeActStudio/WeActStudio.WCH-BLE-Core">WeAct BLE repo</a> included <code>Makefile</code>s for its code (copied from the EVT).<br />
+Copy-pasting the comment at the header of the file into a translate service: “generated, do not modify”.<br />
+Oh no.</p>
+<p>That’s … not a promising sign.</p>
+<p>Fortunately, the <a href="https://github.com/O-H-M2/qmk_port_ch582/blob/via/README.md#developers">QMK port to CH582’s readme</a> has instructions which mention downloading the MounRiver Studio toolchain and using <code>cmake</code>/<code>make</code>.</p>
+<h2 id="toolchain-building-the-ch582-port-of-qmk">Toolchain: Building the CH582 Port of QMK</h2>
+<p>I’m running NixOS, and one of the downsides of using NixOS is it can be difficult to run binaries distributed in tarballs.</p>
+<p>MounRiver Studio and its toolchain is distributed as binaries in a tarball.</p>
+<p>I was able to come up with some Nix packages for the <code>libmcuupdate.so</code> distributed in the toolchain tarball, and the GCC toolchain:<br />
+https://github.com/O-H-M2/qmk_port_ch582/commit/40828b8361bbc711fb7c7af00374eea565f75d2f<br />
+(I <a href="https://github.com/NixOS/nixpkgs/blob/54aac082a4d9bb5bbc5c4e899603abfb76a3f6d6/pkgs/development/compilers/gcc-arm-embedded/12/default.nix">adapted another Nix package which downloads GCC in a tarball</a>).</p>
+<p>With that, I was able to build the QMK port for CH582 built.</p>
+<p>Oh. Wait. Taking a look at the <code>--version</code> for the toolchain MounRiver Studio distributes:</p>
+<pre><code>$ riscv-none-embed-gcc --version
+riscv-none-embed-gcc (xPack GNU RISC-V Embedded GCC, 64-bit) 8.2.0
+Copyright (C) 2018 Free Software Foundation, Inc.</code></pre>
+<h2 id="risc-v-toolchain">Risc-V Toolchain</h2>
+<p>Links to things:</p>
+<p>The old <a href="https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack">riscv-none-embed-gcc-xpack</a>,
+and <a href="https://github.com/sifive/riscv-gcc">SiFive’s riscv-gcc</a>.</p>
+<p>And the newer <a href="https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack">riscv-none-elf-gcc-xpack</a>.
+And this seems related:
+https://github.com/riscv-collab/riscv-gnu-toolchain.</p>
+<p>The change from <code>riscv-none-embed-gcc</code> to <code>riscv-none-elf-gcc</code> is mentioned in the <a href="https://xpack.github.io/blog/2022/05/14/riscv-none-elf-gcc-v11-3-0-1-released/">xPack riscv gcc 11.3 release notes</a>.</p>
+<p>Trying these upstream xpack riscv toolchains with the qmk port for ch582.. for one, <code>TOOLCHAIN_PREFIX</code> needs to be set to <code>risc-none-embed</code> if using the older GCCs. But, I did need to make a couple of other changes:</p>
+<p>The MounRiver toolchain has an extra param <code>highcode-gen-section-name</code> that the xpack toolchains don’t have:
+https://github.com/O-H-M2/qmk_port_ch582/commit/347e15458be15a714494d0088fa77243f62e7009</p>
+<p>And, as the <a href="https://xpack.github.io/blog/2022/05/15/riscv-none-elf-gcc-v12-1-0-1-released/#risc-v-isa-updates">xPack riscv gcc 12.1 release notes explain</a>, errors like <code>extension</code>zicsr’ required<code>can be fixed by adding</code>_zicsr` to the arch: https://github.com/O-H-M2/qmk_port_ch582/commit/dafb73132b6642ac70322239673060fe56d0b9b9</p>
+<p>(I didn’t try <a href="https://github.com/O-H-M2/qmk_port_ch582/tree/2dde4b4777d2e91abe0b96c91b64f3fea5cd7ecb/utils">the toolchain that’s checked into the git repo</a>; but seeing stuff like that makes me wonder if the embedded developers are doing okay).</p>
+<h2 id="building-the-examples-outside-mounriver-studio">Building the Examples Outside MounRiver Studio</h2>
+<p>The EVT Examples are supplied with only a MounRiver Studio project file.</p>
+<p>Since I’m not sure what works and what doesn’t work (in terms of how to compile the examples outside of MounRiver), it’s easiest to start from something that works. – Building it in MounRiver works, which generates some Makefiles.</p>
+<p>Using that, I adapted a Makefile with the same compiler flags to get a Makefile which produced a working build.<br />
+(Or, honestly: I’d copied the makefile from the broadcaster example, but that set different <code>-D</code> defines, which didn’t play nicely with the BLE HID example, and it took me some time to notice why my Makefile wasn’t producing a working build of the example).</p>
+<p>Anyway.</p>
+<p>I copied the BLE HID_Example example, put it together with a standalone Makefile, and some Nix files to provide the toolchain, and shared it in this repo: https://github.com/rgoulter/ch592-ble-hid-keyboard-example</p>
+<h2 id="flashing-the-firmware">Flashing the Firmware</h2>
+<p>Flashing the CH592 is the same as flashing the CH552. You can enter the bootloader by holding the BOOT button when plugging the board into the computer, and then use <a href="https://github.com/ch32-rs/wchisp">ch32-rs’ wchisp</a> to flash the firmware. (On Windows, I’d had difficulty using <code>wchisp</code>; but the official programs from WCH worked on Windows when I tried with the CH552).</p>]]></summary>
+</entry>
+<entry>
+    <title>Die Another Day not as Bad as I Remembered</title>
+    <link href="http://www.rgoulter.com/blog//posts/narrative/2023-12-14-die-another-day-not-as-bad-as-i-remembered.html" />
+    <id>http://www.rgoulter.com/blog//posts/narrative/2023-12-14-die-another-day-not-as-bad-as-i-remembered.html</id>
+    <published>2023-12-14T00:00:00Z</published>
+    <updated>2023-12-14T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<p>Still slowly re-watching through the James Bond movies.</p>
+<p>Just finished “Die Another Day”, Pierce Brosnan’s last Bond movie.
+My wife likes him as Bond as he’s the most handsome James Bond.</p>
+<p>I was surprised that the movie wasn’t as bad as I had remembered it.<br />
+Perhaps partly that’s because upon rewatching the other Brosnan movies, I realise they’re not as good as I remember them.</p>
+<p>I had pretty much remembered the broad plot: something about Bond in North Korea, at some fancy medical clinic in Cuba, fencing in England, and then in some icy location with an orbital beam of death, and somehow the climax of the movie is on a plane. And something about the bad guy being “DNA swapped” of a Korean guy.</p>
+<p>It’d be a bad idea to judge the Bond films by the worst moments (seeing as how I think what lingers is generally the positive parts), but “Die Another Day”’s worst parts are definitely its early-2000s CGI.<br />
+The CGI happens to work for the invisible car.. but it <em>really</em> doesn’t work for a part in the movie where Bond is para-surfing away on the waves from a collapsing ice shelf. – It’s stupid, but not fun.</p>
+<p>Whereas what I didn’t remember all that much was the spy-car-vs-spy-car car chase.. I think maybe in the open tundra this car chase was a bit dull; but I thought it surpassed the bar for “rule of cool” by the time the chase went through the hallways of the ice hotel.</p>
+<p>Putting it that way.. I think the film’s premise sounds pretty cool: James Bond has to face off against a villain who has transformed himself into a mirror image of James Bond (gadgets and spy car included).</p>
+<p>I think the Bond films are the at their most engaging when there’s some tangible threat that Bond has to track down and stop. (Whereas, without a known threat, it just feels like ‘stuff happens’, and Bond moves from one place to the next). – In “Die Another Day”.. although the supervillain’s doom weapon comes as a late surprise, throughout the film Bond always has a clear target and makes progress towards it. Good.</p>
+<p>That said, there’s something very cringeworthy about the film’s premise, too. The bad guy race-swaps himself from Korean to being British. … It’s just really weird.</p>
+<p>Some parts of the film are fun. I love the gag where Moneypenny finally gets to make out with Bond.. only for it to be revealed that this was just in the computer simulation. (The gag doesn’t really fit well in the plot; but it’s such a great gag).</p>
+<p>Halle Berry’s character is pretty cool in this. She competently does a bunch of spy stuff, doesn’t overshadow Bond, and doesn’t mess things up. – My wife’s usual disapproval for the way Bond women are written is “they’ll have sex with Bond and then turn stupid” (where perhaps the best example of this was the Bond girl in “License to Kill”; if not “Diamonds are Forever”).</p>]]></summary>
+</entry>
+<entry>
     <title>Experience Designing a Keyboard PCB</title>
     <link href="http://www.rgoulter.com/blog//posts/programming/2023-11-26-experience-designing-a-keyboard-pcb.html" />
     <id>http://www.rgoulter.com/blog//posts/programming/2023-11-26-experience-designing-a-keyboard-pcb.html</id>
@@ -1036,108 +1133,6 @@ This is more/less like a Macbook keyboard.</p>
 <h4 id="key-takeaway-from-the-examples">Key Takeaway from the Examples</h4>
 <p>Most of the traditional small keyboards really only allowed the thumbs to use one or two keys total, whereas the ergonomic ones allowed at least two thumb keys each.</p>
 <p>Most of the traditional small keyboards made strong use of the pinky finger, whereas many of the ergonomic keyboards lacked an extra outer column for the pinky fingers to use.</p>]]></summary>
-</entry>
-<entry>
-    <title>Re-watching James Bond</title>
-    <link href="http://www.rgoulter.com/blog//posts/narrative/2023-08-14-rewatching-james-bond.html" />
-    <id>http://www.rgoulter.com/blog//posts/narrative/2023-08-14-rewatching-james-bond.html</id>
-    <published>2023-08-14T00:00:00Z</published>
-    <updated>2023-08-14T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<p>I’ve been watching through the James Bond films with my wife.
-I’d seen the films many years ago, whereas this is my wife’s first watch through.</p>
-<p>Overall I’m getting a similar sense to what I got when I watched through Columbo with my wife: The lingering taste and cultural impact of these shows is the formula of these at their best.<br />
-With Columbo, the formula involved this bumbling-detective increasingly annoying the bad guy until a ‘gotcha’, but I felt the show never quite manages to settle on a perfect execution. Each kindof meanders and experiments, not quite sure how to best fill its runtime.<br />
-With Bond, it seems like most of the formula is settled after a few tries.</p>
-<p>At the time of writing, it feels like James Bond hasn’t had such a good run these last couple of decades. With three new films in the fourteen years since 2009 (or four films in fifteen years, I guess) feels infrequent. – Albeit, Mission Impossible is a similarly slow pace; there are too many Fast and the Furious movies. John Wick did a good job getting its four films out from in the nine years from 2014 to 2023, although was probably too rushed by the end.</p>
-<p>I think one thing which seems striking about James Bond is that the character seems defined by his actor, where it’s always the same character in the present day. I find it difficult to think of other media which have quite the same scheme. Superhero movies have the same-character-different-actor.</p>
-<h2 id="dr-no">Dr No</h2>
-<p>In this one, James Bond goes to Jamaica to investigate why MI6 has lost contact with its agents there. Tracking down clues leads him to a nearby off-limits island, where he is captured and brought into the villain’s lair. Then he escapes and saves the day.</p>
-<p>This one’s relatively straightforward, but its still easy to see how many of the films elements get picked up into this stereotype of suave playboy secret agent.<br />
-You still get action scenes involving fist fighting, gunfights, car chases; the location is exotic; the villain has a dastardly plan, a fantastic secret lair, and works for an evil secret organisation; there are fancy clothes, and beautiful women.</p>
-<p>In this, somewhat more than the others, James Bond is a total babe magnet. Like catnip for beautiful women. (Charming a woman at the casino, who then sneaks into his hotel room; charming a professor’s secretary, who tries to lure him into a trap (which he defeats, and then sleeps with her); and of course, with the famous Ryder woman by the end of the movie).<br />
-I think in later movies, Bond’s screwing around is rearranged to only at the start and at the end. Probably helps keep the story flow along better that way.</p>
-<p>One thing which strikes me (perhaps as underdeveloped?) from this movie is the local guide mentions there’s a dragon on the island. When they visit the island, Ryder confirms she’s heard of the dragon too, somehow. Then they venture further into the island, they see the dragon, and quickly see that it’s just an armoured vehice with flame throwers. – I feel there wasn’t much tension built up by this; and what tension there was gets collapsed pretty quickly once it’s revealed the dragon is just a tank. I mean, the scene where they see the tank would feel pretty much the same if there’d been no previous mention of a dragon.</p>
-<h2 id="from-russia-with-love">From Russia with Love</h2>
-<p>This time, to Turkey. The evil organisation have a plan to lure Bond into a trap to kill him, by way of a beautiful defecting Russian clerk. So the adventure involves Bond going to Turkey and escaping the trap.</p>
-<p>This movie introduces fantasy covert gadgets and the badass henchman to the formula; and we get to see more of this evil organisation.</p>
-<p>Despite the fancy gadgetry and the stronger-than-bond henchman, this movie lacks a save-the-world urgency. There’s no supervillain with an underground lair that Bond has to infiltrate to thwart. – It essentially feels relatively grounded.</p>
-<h2 id="goldfinger">Goldfinger</h2>
-<p>It seems clear that there must have been many clones and imitations of James Bond following Dr No. – Because in Goldfinger, much of the story “subverts expectations”. Bond hardly even saves the day in this one!</p>
-<p>But, damn, I feel this is distinctive than the other ones.</p>
-<p>I did remember the gist of the plot. The Goldfinger villain wanted to make his gold worth much more by nuking the US gold supply in Fort Knox.</p>
-<p>What I didn’t remember was that Bond spends the majority of the film captured. (He manages to escape once or twice, but is captured again).<br />
-Though we do get the very famous “no, Mr Bond, I expect you to die!” from Goldfinger, this inevitably leads to the trope of “villain keeps hero alive (for no good reason)”.</p>
-<p>Bonds main tangible contribution to saving the world in this is that he manages to defeat the terrifying henchman Oddjob.</p>
-<p>Bond not saving the world himself (and all his plans failing) does very much ‘subvert my expectations’.<br />
-I gotta wonder why it works here, and doesn’t work so well for media these days.<br />
-I think part of it is that there are a couple of prominent cases where this ‘subverting expectations’ ends up making fun of the legacy characters. Although Bond rarely succeeds in Goldfinger, he’s not the butt of jokes.<br />
-Another part is the focus seems to be on the Goldfinger villain being a compelling villain. Our expectations are subverted here, too. We significantly expect he plans to steal the gold from Fort Knox.</p>
-<p>The majority of the world-saving is done by the henchwoman with a really stupid name. (Austin Powers parodies it as “Alotta Vagina”).<br />
-She’s just as tough as Bond, and can hold her own in a fight with him.<br />
-– She changes her mind and decides to save America, due to the power of James Bond’s penis, after he forces himself on her. … Ehhhh.</p>
-<p>On the other hand, Bond’s disregard for other people is shown in a scene at the start where, as he’s kissing a woman he’s ambushed by some bad guy; Bond quickly spins around and uses this lover as a human shield to take most of the blow! Ooof. I thought it was pretty funny.</p>
-<p>All that aside, this one is a lot of fun.</p>
-<h2 id="thunderball">Thunderball</h2>
-<p>This time, Bond travels to Nassau. The bad guys have managed to steal two nuclear bombs, and they threaten to use them. Bond figures out who the bad guy is, tracks down the bombs, and guides the paratrooping divers to the right place in order to stop the bombs.</p>
-<p>It’s laaaaaaame.<br />
-So, so lame.</p>
-<p>The big pre-climactic fight takes place underwater.<br />
-But no one thinks Aquaman is as cool as Batman or Superman.</p>
-<p>A couple of lines of dialogue explain James Bonds sexuality in the movie a bit more.<br />
-I tend to think most commentary which says anything like “those were different times” is part of the “no fun allowed” camp, which would rather remove things than add things.<br />
-Still, in this movie at the start, Bond is sexually harassing the nurse who is treating him. She rebukes him with the same tone of voice you’d use when someone’s trying to eat their dessert before they’ve eaten their vegetables. Later, Bond has sex with a villainess. When she betrays him, she mocks the idea that having sex with him was supposed to convert her to his side. (Which, I guess has been part of the plot of one or two of the previous movies). And after Bond has sex with the Bond girl and he asks something of her, she sighs and says “oh, you only wanted to have sex with me because you want me to do something”.<br />
-– So… while I think the sex scenes would be improved if the non-consent was replaced with more explicit consent, James Bond’s penis is still otherwise treated as superhuman catnip.</p>
-<h2 id="you-only-live-twice">You Only Live Twice</h2>
-<p>Japan! Secret evil villain lair in a volcano! Stopping a war between the US and the USSR!</p>
-<p>I vaguely remember watching parts of this. I remember that Bond wondered whether the secret agent he contacts is actually an enemy secret agent.</p>
-<p>Perhaps the other movies had a foot in the door with regards to being grounded. This one’s firmly over the top.<br />
-The starting sequence has Bond killed (again betrayed while with a lover… this just keeps happening to him, huh); there’s a funeral, his body is dumped into the ocean; but this is shown to be a ruse as he’s brought aboard a submarine.<br />
-Later in Japan, he’s given a bath, where he’s bathed by several scantily clad beautiful women.<br />
-Bond goes to investigate the forbidden-to-visit island with his conveniently-dressed-in-a-bikini side kick. The latter is eventually able to send for reinforcements, and so we get an iconic battle between a bunch of Japanese ninjas and an army of evil henchmen in a secret volcano lair.</p>
-<h2 id="evaluating-these-ones-so-far">Evaluating These Ones So Far</h2>
-<p>I’d say Thunderball lacks the most.<br />
-Or, rather, what Goldfinger has that the others (mostly) lack is an escalating tension where you feel something bad will happen if Bond doesn’t save the day in time.<br />
-In Goldfinger, we see quite clearly what Goldfinger will do and when.<br />
-Whereas, in the others, there’s a sense that maybe something bad could happen at some point, but the tension isn’t made clear. This might make thematic sense in terms of the looming threat of nuclear war as part of the cold war; or how espionage is a game of hidden information… but, story-wise, it’s hard to feel tension if the threat is not known.</p>
-<p>So, I’d say Goldfinger is the best so far.</p>
-<p>They’re all pretty good films. But, again, it still doesn’t feel like the full James Bond formula has been settled on by this point; so it feels like each has its share of good parts, but also a share of uninteresting fluff.</p>]]></summary>
-</entry>
-<entry>
-    <title>The Barbie Movie is Silly Fun</title>
-    <link href="http://www.rgoulter.com/blog//posts/narrative/2023-08-01-the-barbie-movie-is-silly-fun.html" />
-    <id>http://www.rgoulter.com/blog//posts/narrative/2023-08-01-the-barbie-movie-is-silly-fun.html</id>
-    <published>2023-08-01T00:00:00Z</published>
-    <updated>2023-08-01T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<p>I went to go see the Barbie movie when I was visiting Malaysia with my wife.</p>
-<p>We wouldn’t have been able to see the movie in cinemas in Vietnam.</p>
-<h2 id="nine-dash-line">Nine Dash Line</h2>
-<p>It’s banned in Vietnam because, in one scene where a childlike depicition of a world map is shown,
-China’s <a href="https://en.wikipedia.org/wiki/Nine-dash_line">nine dash line</a> is represented.
-<a href="https://maritime-executive.com/index.php/article/vietnam-bans-barbie-movie-over-depiction-of-chinese-maritime-claims">maritime-executive</a> has an article with a screencap of the map.</p>
-<p>In that Wikipedia article, Warner Bros’ defense is that the lines have no intended meaning.</p>
-<p>I’m not sure why the dashes would need to be on the map. If they really are meaningless, and come across as offensive to some market, then surely it’s worth more money to quickly edit out the lines. (The maritime-executive link also provides a couple of examples: movies have been banned from Vietnam before for showing the nine-dash line; and Top Gun: Maverick was going to remove the Taiwanese and Japanese flags from Maverick’s jacket until the US military frowned upon that. With these examples in mind, it <em>really</em> looks like the Barbie movie map is pushing it). – I find it hard to read Warner Bros’ response as sincere.</p>
-<h2 id="the-movie-and-its-plot">The Movie and Its Plot</h2>
-<p>That aside, I did generally enjoy the movie.</p>
-<p>I wouldn’t say it’s a <em>great</em> movie. The plot is passable. The sincere-moral-messaging of the movie is pretty ‘eh’. I enjoyed many of the films jokes. – I’d say what brought many to the theatre was the idea of getting to have fun by wearing something pink.</p>
-<p>The story involves Barbie visiting the real world to find out why she’s been having negative thoughts. Ken goes with her, sees that men hold important positions in the real world, and imports this idea of Partriarchy (tm) back to Barbieland. Barbie then has to rescue Barbieland &amp; restore the status quo. – There’s also a subplot where Ken has unrequited feelings for Barbie.</p>
-<p>Ryan Gosling as this silly, air-headed, juvenile villain Ken is delightful to watch.</p>
-<p>A point I thought was quite astute pointed out that the film is quite like Pinocchio: an animated doll wants to become a real human, starts off in innocence, and needs to learn the moral lessons as to what that means.</p>
-<h2 id="the-movie-and-the-discussion-around-its-gender-politics">The Movie and the Discussion Around its Gender Politics</h2>
-<p>Much of the discussion online that I saw about the Barbie movie was focused on the gender-politics commentary of the movie. I saw opinions from “eww, gross, feminism” to “of course a Barbie movie would talk about gender politics, you dweebs”.</p>
-<p>I do agree with “it’s a silly movie; you ought to be able to just ignore the dumb parts and enjoy the fun parts”.</p>
-<p>But it also does make sense to me that there are people who are upset at the film’s gender-politics stuff, see the movie’s messaging as less than ideal, and try to discuss all sorts of “gotchas” about the film.</p>
-<p>It makes sense to me that people have strong feelings on gender politics; and I think I’d rather people had a good foundation or set of tools with which to discuss their views. – Indeed, that’s one of the things I love about <a href="https://www.youtube.com/playlist?list=PLf9ZVzFaBzHkEmkTeJGwmp7XkMJW6ZSU5">Liana Kerzner’s Lady Bits series</a>. Kerzner is intelligent and articulate, and does a fantastic job at communicating feminist concepts and how they apply to videogames.</p>
-<p>In any case, considering “the Barbie movie’s gender politics is silly”, I’m reminded of <a href="https://www.youtube.com/watch?v=t3zNCg55kiw">a joke in Yes, Minister about the six diplomatic options</a>. (“We could do nothing, which implies we agree; we could protest, but they’ll ignore us; we can’t withdraw support, because we’re not providing any; if we went to war with them, it might look like we’re overreacting”). – So even though you can say the Barbie movie is silly and dumb, it is annoying if in <em>every</em> insignificant case things go against you.</p>
-<p>I think a lot of the upset is around how Barbieland isn’t what anyone would think of as an egalitarian utopia. Barbieland has women all holding high status jobs, and all the men standing around doing nothing. I’d guess a thesis/antithesis/sythesis going from “girls rule”/“boyz rule”/“50-50” would be more conventional. – Or I think many are upset that the film seems to take more jabs (with more sincerity) at men than it does at women.</p>
-<h2 id="okay-but-about">Okay, But About…</h2>
-<p>I will say it does seem like Ken gets to have a lot more fun in the Barbie movie than Barbie does. – In the movie, Barbie’s motivation is having experienced imperfect thoughts; and the movie discusses that of course it’s tough to live up to a standard of perfection and that it’s fine for people to be ordinary. Whereas Ken visits the real world, feels very proud someone respected him enough to ask him for the time, and believes in a utopic vision which involves men and horses ruling the world. Barbie spends the climax of the movie enacting strategic espionage, whereas Ken spends the climax of the movie in a Grease-themed dance off.</p>
-<p>I was surprised by the lines of dialogue from the young college student. She’s not a fan of Barbie, and says abrasive things like “but Barbie’s main purpose is to make money” (which sounds like a coherent thing to argue), or “Barbie is fascist” (…which does not). No one in the film ever really disagrees with her, which just feels weird to me. – Although, I’ve also heard this character is a director’s insert for someone speaking truth to power…?</p>
-<p>There’s a line early on in the movie where, when Barbie’s feet transform to human-shaped feet rather than angled-for-high-heels, Barbie says “I’d never wear high heels if my feet were shaped like this”. – I guess it’s a throwaway joke, sure, but it does feel like “girls stuff is dumb”.</p>
-<p>And in a similar vein to “girls stuff is dumb”… in Gerwig’s “Little Women” film, the film seems to mock the idea of giving a story a happy ending, or that for a ending to be ‘happy’ the woman has to find a romantic partner.<br />
-Surely it <em>is</em> fine for a story about a woman to end without her finding a partner; and surely it is also fine if the story ends with her finding a partner.<br />
-I get the impression that there’s animosity towards the latter from the sense that there’s an overwhelming default expectation for the former? (And vice versa!). I don’t generally get the sense that society would only respect a female character if she ends up married.<br />
-The Barbie movie ends without Barbie and Ken having a romantic relationship. For Barbie, there’s no romance in the film; for Ken, it’s unrequited attention, and he doesn’t end up with a partner.<br />
-Romantic plotlines which don’t end up with a happy ending are kindof a bummer.</p>]]></summary>
 </entry>
 
 </feed>
