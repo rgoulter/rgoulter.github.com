@@ -1,0 +1,340 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Experience Writing Firmware with the CH582 Port of QMK - Richard Goulter's Blog</title>
+
+        <!-- My (Old) CSS theme -->
+        <link rel="stylesheet" type="text/css" href="../../css/default.css" />
+
+        <!--
+            jQuery & jQueryUI
+        -->
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css" />
+
+        <!--
+            Pandoc Style CSS
+            (for syntax highlighted snippets)
+        -->
+        <link rel="stylesheet" type="text/css" href="../../css/syntax.css" />
+
+        <!--
+            Bootstrap
+        -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+        <style>
+            /*
+             * Bootstrap defines blockquote as 17px,
+             * so it looks stupidly large in my blogposts. */
+            blockquote {
+                font-size: 14px;
+            }
+        </style>
+
+        <!--
+            Waypoints, and Waypoints-Sticky,
+            so we can do this:
+            http://imakewebthings.com/waypoints/shortcuts/sticky-elements/
+        -->
+        <script src="../../js/jquery.waypoints.min.js"></script>
+        <script src="../../js/sticky.min.js"></script>
+
+        <!-- My analytics stuff -->
+        <script src="../../js/my_analytics.js"></script>
+        <script src="../../js/my_analytics_debug.js"></script>
+
+        <!--
+            TOCify
+        -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js"></script>
+
+        <!--
+            Patched TOCify css file.
+            (Don't want fixed `.tocify`).
+        -->
+        <link rel="stylesheet" type="text/css" href="../../css/jquery.tocify.css" />
+
+        <style>
+        .navbar {
+            margin-bottom: 0px;
+        }
+
+        .banner-image {
+            width:100%;
+        }
+
+        .banner {
+            margin-left: 0px;
+            margin-right: 0px;
+        }
+
+        body {
+            background-color: #e2e2e2;
+        }
+
+        #page {
+            padding-left:0;
+            padding-right:0;
+            background-color: #ffffff;
+        }
+        </style>
+
+        <!-- Google Analytics -->
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-H13NWYDX0G"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'G-H13NWYDX0G');
+        </script>
+    </head>
+    <body>
+        <div id="page" class="container">
+            <!-- This, with no padding on left/right -->
+            <div class="banner">
+                <nav class="navbar navbar-default">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+
+            <!-- The Hamburger -->
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../../">Richard Goulter's Blog</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="../../">Home</a></li>
+            <li><a href="../../yi.html">Yi</a></li>
+            <li><a href="../../emacs.html">Emacs</a></li>
+            <li><a href="../../what-i-wish-i-knew-when-i-started-using-nix.html">Nixpkgs</a></li>
+            <li><a href="../../archive.html">Archive</a></li>
+        </ul>
+    </div>
+</nav>
+
+            </div>
+
+            <hr style="margin: 0px; border-top: 5px solid black;" />
+
+            <div id="content" class="container">
+                <h1>Experience Writing Firmware with the CH582 Port of QMK</h1>
+                <div class="info">
+    Posted on December 27, 2023
+    
+        by Richard Goulter
+    <br />
+    
+    Tags: 
+    
+</div>
+
+<p><a href="../../posts/programming/2023-12-21-notes-on-building-wch-ble-ch592-evt-exam-with-bare-makefile.html">As noted previously</a>,
+WeAct Studio have a BLE devboard that costs about $2 (which is MUCH cheaper than the BLE devboards popular in custom mechanical keyboard designs), but there isn’t much community attention for this board; there aren’t many (any?) keyboards designed to use this devboard, and there aren’t many people using firmware for it. There is a port of QMK to use the CH582.</p>
+<p>And it’s been announced that <a href="https://www.reddit.com/r/ErgoMechKeyboards/comments/18p99d9/fak_firmware_adds_macros_sticky_mods_mouse_keys/">FAK support for the CH58x/CH59x is planned</a>.</p>
+<p>I designed a keyboard to use WeAct Studio’s BLE devboard.<br />
+In a sense, this somewhat puts the cart before the horse, since I hadn’t tried proper keyboard firmware with the devboard before designing the keyboard.</p>
+<p>The good news is, I was able to get working keyboard firmware for my keyboard using the <a href="https://github.com/O-H-M2/qmk_port_ch582">QMK port for CH582</a>.</p>
+<p>Unfortunately, this wasn’t without frustration.</p>
+<h2 id="initial-impression">Initial Impression</h2>
+<p>I have experience writing keyboard firmware, by way of making use of what others have written.
+e.g. I’ve written keyboard definitions for QMK (including before the move to data-driven configuration), implemented the game Snake using QMK’s RGB Matrix effects system; I’ve written keyboard firmware in Rust; I’ve implemented CapsWord functionality for FAK.</p>
+<p>My initial impression of the CH582 port of QMK is it feels fragile and finicky.</p>
+<p>The structure of the repo wraps CMake lists around the QMK codebase. – To me, this seems like additional effort, for marginal benefit. It’s not clear to me that it’s necessary, either. – This leads to (as noted below) requiring additional effort to use features which QMK implements, &amp; it took significant additional effort to figure out how to re-use the keymap code I had written in QMK.</p>
+<p>In terms of QMK, it felt like writing qmk before the data driven configuration. (In order to make use of QMK’s data driven configuration, more CMake code would need to be added to support using the autogenerated keymap code).</p>
+<h2 id="obstacles">Obstacles</h2>
+<h3 id="didnt-produce-working-firmware-with-the-open-source-risc-v-toolchain">Didn’t Produce Working Firmware with the Open-Source Risc-V Toolchain</h3>
+<p>When I build the EVT examples for the CH592, I was able to build and run the examples with either the ‘public’ risc-v gcc distributed by xpack, or the toolchain distributed by MounRiver Studio.</p>
+<p>Although I noticed I <a href="https://github.com/O-H-M2/qmk_port_ch582/commit/9f1aa898a913b1bc0af873443c75abc0083fa98e">had to make changes to the CMake lists</a> in order to build the QMK fork for CH582 with the ‘public’ xpack toolchain, I had been able to <em>build</em> the firmware.</p>
+<p>Unfortunately, when I was finally able to try running this firmware on a CH582 devboard, only the firmware built by the MounRiver toolchain worked when I ran it.<br />
+I don’t know why.</p>
+<h3 id="ble-is-still-wip">BLE is Still WIP</h3>
+<p>The README currently has the line: “Support wired, Bluetooth, and triple mode 2.4G (WIP)”. I understood this to mean “Supports wired, Bluetooth” and “triple mode 2.4G” is WIP.</p>
+<p>But, <a href="https://github.com/O-H-M2/qmk_port_ch582/issues/154">as others have observed</a>, e.g. the TychePad keyboard (which uses BLE) doesn’t build.</p>
+<p><a href="https://github.com/O-H-M2/qmk_port_ch582/blob/2dde4b4777d2e91abe0b96c91b64f3fea5cd7ecb/CMakeLists.txt#L312">Enabling BLE requires the wireless lib</a>, but in order to build the wireless lib, <a href="https://github.com/O-H-M2/qmk_port_ch582/blob/2dde4b4777d2e91abe0b96c91b64f3fea5cd7ecb/CMakeLists.txt#L200">the required files aren’t provided in the repo</a>.</p>
+<p>Hence, BLE isn’t available with the publicly provided code.</p>
+<p>I don’t mind the work being WIP; but I assess it as sloppy to have WIP code that doesn’t build on a release branch.</p>
+<p>And $2 for a risc-v devboard is pretty neat, even if for keyboard firmware it’s USB only at the moment.</p>
+<h3 id="getting-my-keymap-to-build">Getting My Keymap to Build</h3>
+<h5 id="the-cmake-files-dont-support-community-layouts">The CMake Files Don’t Support Community Layouts</h5>
+<p>The <code>qmk_firmware</code> repository supports putting keymap definitions in <code>layouts/community</code>. This allows you to define the keymap for some layout (such as <code>ortho_4x12</code> or <code>split_3x5_3</code>), rather than only defining a keymap specific to a keyboard.</p>
+<p>At the time of writing, the CMake lists in the CH582 port don’t support using this feature.<br />
+Perhaps it could, but it doesn’t at the time of writing.</p>
+<h5 id="false-friends-config.h">False Friends: config.h</h5>
+<p>This confused me for some time:</p>
+<p>Both <a href="https://github.com/O-H-M2/qmk_port_ch582/tree/via/sdk/HAL/include"><code>sdk/HAL/include</code></a> and QMK use header files called <code>config.h</code>.</p>
+<p>So, by adding a CMake statement <code>include_directories(...)</code> pointing to a QMK keyboard or keymap directory (which has <code>config.h</code>), this breaks the build since then the CH582 HAL doesn’t correctly include its <code>config.h</code>.</p>
+<p>This is more of a -1 to C than to anything else.</p>
+<p>I worked around this by using more of the path when including; e.g. rather than <code>#include "rgoulter.h"</code>, I use <code>#include "users/rgoulter/rgoulter.h"</code>.</p>
+<h5 id="some-qmk-features-not-implemented">Some QMK Features Not Implemented</h5>
+<p>The CH582 port of QMK uses CMake to manage its build.</p>
+<p>So, QMK features are enabled <a href="https://github.com/O-H-M2/qmk_port_ch582/blob/via/qmk_porting/common_features.cmake">by checking CMake variables</a>.</p>
+<p>Turns out, some of the features I use weren’t described there. <a href="https://github.com/O-H-M2/qmk_port_ch582/commit/27aba0c570a48c0a479b21ef83940ac08abca1c7">I was able to add them</a>.</p>
+<p>While for other QMK features (such as the haptic feedback feature) which depend on driving hardware peripherals, it makes more sense that the CH582 platform for QMK lacks the implementation.. for stuff like the leader key or combos, I felt “not implemented” was more due to it needing to be declared in CMake.</p>
+<h5 id="custom-keycodes-safe-range">Custom Keycodes: Safe Range</h5>
+<p>I also ran into problems where my keymap defined new keycodes.</p>
+<p>Again, this is more of a -1 to C, and that it doesn’t necessarily compose things like this well.</p>
+<p>The QMK interface for <a href="https://docs.qmk.fm/#/custom_quantum_functions?id=custom-keycodes">defining new keycodes is to use <code>NEW_SAFE_RANGE</code></a>.</p>
+<p><a href="https://github.com/O-H-M2/qmk_port_ch582/blob/2dde4b4777d2e91abe0b96c91b64f3fea5cd7ecb/qmk_porting/protocol/extra_keycode.h#L51">This port declares its own <code>NEW_SAFE_RANGE</code></a>.</p>
+<p>So, my code needed to untangle a bit from that; and it’d take some care to be aware of whether the codebase I’m building against defines its own <code>NEW_SAFE_RANGE</code> or not.</p>
+<h5 id="mirroring-my-community-layout">Mirroring my Community Layout</h5>
+<p>Initially I’d tried copying the C files across in order to get my layout on the keyboard. This works, but isn’t the most maintenance friendly approach. (I’d need to re-copy each time I changed my layout).</p>
+<p>Once I figured the stuff above out (about <code>config.h</code>, etc.), I was able to come up with a way of using my community layout without too much fuss: <a href="https://github.com/O-H-M2/qmk_port_ch582/commit/67795a2beb647276d30bdf3da771584e6465465f" class="uri">https://github.com/O-H-M2/qmk_port_ch582/commit/67795a2beb647276d30bdf3da771584e6465465f</a></p>
+<p>The <code>keymap.c</code> just includes the <code>keymap.c</code> from the community layout:</p>
+<pre><code>#include &quot;layouts/community/ortho_5x12/rgoulter/keymap.c&quot;</code></pre>
+<p>The <code>qmk_config.h</code> includes the <code>config.h</code> from the community layout dir, and the user dir:</p>
+<pre><code>#pragma once
+
+#include &quot;users/rgoulter/config.h&quot;
+#include &quot;layouts/community/ortho_5x12/rgoulter/config.h&quot;</code></pre>
+<p>and the <code>rules.cmake</code> ports the <code>rules.mk</code> functionality over:</p>
+<pre><code>set(COMBO_ENABLE ON CACHE BOOL &quot;KB&quot; FORCE)
+set(LEADER_ENABLE ON CACHE BOOL &quot;KB&quot; FORCE)
+set(DYNAMIC_MACRO_ENABLE ON CACHE BOOL &quot;KB&quot; FORCE)
+
+list(APPEND QMK_PORTING_SOURCES
+    &quot;${QMK_BASE_DIR}/users/rgoulter/rgoulter.c&quot;
+)</code></pre>
+<h2 id="conclusion">Conclusion</h2>
+<p>I feel more sour about the above than I should, because it took a bunch of effort to figure this stuff out.</p>
+<p>I don’t love the use of CMake. (e.g. my re-implementing stuff from <code>rules.mk</code>, it feels like there are multiple sources of truth for describing the same thing).<br />
+I wish it implemented support for QMK’s community layouts, or for QMK’s data driven configuration.</p>
+<p>I was disappointed to realise the BLE code wasn’t publicly available, and that the code somehow relies on the proprietary MounRiver distribution of the risc-v toolchain.</p>
+<p>But, for the moment, I don’t think there’s any other publicly available keyboard firmware for CH582.</p>
+
+<hr />
+
+<div>
+    
+    
+    <a href="../../posts/programming/2023-12-21-notes-on-building-wch-ble-ch592-evt-exam-with-bare-makefile.html" style="float:right; text-align: right;">Older post</a>
+    
+</div>
+<br style="clear: both;" />
+
+<hr />
+
+<!-- Load highlight.js for Syntax Highlighting. -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/bash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/c.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/gherkin.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/haskell.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/lisp.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/nix.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js"></script>
+<script>hljs.highlightAll();</script>
+
+            </div>
+
+            <hr style="margin-bottom: 0px; border-top: 2px solid black;" />
+
+            <div id="footer" class="pull-right" style="padding-right: 10px;">
+                Site proudly generated by
+                <a href="http://jaspervdj.be/hakyll">Hakyll</a>
+            </div>
+        </div>
+
+        <script>
+            // The callbacks we wanna use
+            // Phone-home, telling Google Analytics various metrics/dimensions
+
+            // Use custom dimensions & metrics
+            var AnalyticDimensionReaderKind = 'dimension1';
+            var AnalyticMetricActiveTime      = 'metric1';
+            var AnalyticMetricLongestIdleTime = 'metric2';
+            var AnalyticMetricReadCount       = 'metric3';
+
+            var gaCallbacks = {
+                "scrollPercent": function(ms, perc) {
+                    if (perc > 85) {
+                        // EVENT: Page read
+                        ga('send', {
+                            hitType:       'event',
+                            eventCategory: 'Scrolling',
+                            eventAction:   'atBottom',
+                            eventValue:    String(ms)
+                        });
+                    }
+                },
+                "read": function(ms, ct, timeToReach) {
+                    // Use this to set DIMENSION
+                    // timeToReach < 5s ==> Skim (default = Visitor)
+                    if (timeToReach < 5 * 1000) {
+                        // dimension1 = ReaderKind
+                        ga('set', AnalyticDimensionReaderKind, "skimmer");
+                    }
+
+                    // timeToReach > 30s ==> Reader
+                    if (timeToReach > 30 * 1000) {
+                        // dimension1 = ReaderKind
+                        ga('set', AnalyticDimensionReaderKind, "reader");
+                    }
+
+                    // EVENT: Page read
+                    ga('send', {
+                        hitType:       'event',
+                        eventCategory: 'Reading',
+                        eventAction:   'read',
+                        eventValue:    String(timeToReach)
+                    });
+
+                    // METRIC
+                    ga('set', AnalyticMetricReadCount, String(ct));
+                },
+                "initialIdle": function(ms) {
+                    // EVENT: Started Reading
+                    ga('send', {
+                        hitType:       'event',
+                        eventCategory: 'Scrolling',
+                        eventAction:   'begun',
+                        eventValue:    String(ms)
+                    });
+                },
+                "timeSpent": function(total, active, curIdle, initIdle, longestIdle) {
+                    // Update METRIC(S)?
+                    ga('set', AnalyticMetricActiveTime, String(active));
+                    ga('set', AnalyticMetricLongestIdleTime, String(longestIdle));
+                },
+                "idle": function(ms) {
+                },
+                "longestIdle": function(ms) {
+                }
+            }
+
+            window.onload = function() {
+                myAnalyticsInit(gaCallbacks);
+
+                //
+                // Initial dimensions & metrics
+                //
+
+                ga('set', AnalyticMetricReadCount, String(0));
+
+                // EVENT: Page load
+                ga('send', {
+                    hitType:       'event',
+                    eventCategory: 'pageLoad',
+                    eventAction:   'begun',
+                    eventValue:    String(ms)
+                });
+
+                // DIMENSION: visitor
+                ga('set', AnalyticDimensionReaderKind, "visitor");
+            }
+        </script>
+    </body>
+</html>

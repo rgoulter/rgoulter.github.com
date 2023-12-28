@@ -180,7 +180,7 @@ Oh no.</p>
 <p>I’m running NixOS, and one of the downsides of using NixOS is it can be difficult to run binaries distributed in tarballs.</p>
 <p>MounRiver Studio and its toolchain is distributed as binaries in a tarball.</p>
 <p>I was able to come up with some Nix packages for the <code>libmcuupdate.so</code> distributed in the toolchain tarball, and the GCC toolchain:<br />
-https://github.com/O-H-M2/qmk_port_ch582/commit/40828b8361bbc711fb7c7af00374eea565f75d2f<br />
+<a href="https://github.com/O-H-M2/qmk_port_ch582/commit/40828b8361bbc711fb7c7af00374eea565f75d2f" class="uri">https://github.com/O-H-M2/qmk_port_ch582/commit/40828b8361bbc711fb7c7af00374eea565f75d2f</a><br />
 (I <a href="https://github.com/NixOS/nixpkgs/blob/54aac082a4d9bb5bbc5c4e899603abfb76a3f6d6/pkgs/development/compilers/gcc-arm-embedded/12/default.nix">adapted another Nix package which downloads GCC in a tarball</a>).</p>
 <p>With that, I was able to build the QMK port for CH582 built.</p>
 <p>Oh. Wait. Taking a look at the <code>--version</code> for the toolchain MounRiver Studio distributes:</p>
@@ -197,8 +197,8 @@ https://github.com/riscv-collab/riscv-gnu-toolchain.</p>
 <p>The change from <code>riscv-none-embed-gcc</code> to <code>riscv-none-elf-gcc</code> is mentioned in the <a href="https://xpack.github.io/blog/2022/05/14/riscv-none-elf-gcc-v11-3-0-1-released/">xPack riscv gcc 11.3 release notes</a>.</p>
 <p>Trying these upstream xpack riscv toolchains with the qmk port for ch582.. for one, <code>TOOLCHAIN_PREFIX</code> needs to be set to <code>risc-none-embed</code> if using the older GCCs. But, I did need to make a couple of other changes:</p>
 <p>The MounRiver toolchain has an extra param <code>highcode-gen-section-name</code> that the xpack toolchains don’t have:
-https://github.com/O-H-M2/qmk_port_ch582/commit/347e15458be15a714494d0088fa77243f62e7009</p>
-<p>And, as the <a href="https://xpack.github.io/blog/2022/05/15/riscv-none-elf-gcc-v12-1-0-1-released/#risc-v-isa-updates">xPack riscv gcc 12.1 release notes explain</a>, errors like <code>extension</code>zicsr’ required<code>can be fixed by adding</code>_zicsr` to the arch: https://github.com/O-H-M2/qmk_port_ch582/commit/dafb73132b6642ac70322239673060fe56d0b9b9</p>
+<a href="https://github.com/O-H-M2/qmk_port_ch582/commit/347e15458be15a714494d0088fa77243f62e7009" class="uri">https://github.com/O-H-M2/qmk_port_ch582/commit/347e15458be15a714494d0088fa77243f62e7009</a></p>
+<p>And, as the <a href="https://xpack.github.io/blog/2022/05/15/riscv-none-elf-gcc-v12-1-0-1-released/#risc-v-isa-updates">xPack riscv gcc 12.1 release notes explain</a>, errors like <code>extension</code>zicsr’ required<code>can be fixed by adding</code>_zicsr` to the arch: <a href="https://github.com/O-H-M2/qmk_port_ch582/commit/dafb73132b6642ac70322239673060fe56d0b9b9" class="uri">https://github.com/O-H-M2/qmk_port_ch582/commit/dafb73132b6642ac70322239673060fe56d0b9b9</a></p>
 <p>(I didn’t try <a href="https://github.com/O-H-M2/qmk_port_ch582/tree/2dde4b4777d2e91abe0b96c91b64f3fea5cd7ecb/utils">the toolchain that’s checked into the git repo</a>; but seeing stuff like that makes me wonder if the embedded developers are doing okay).</p>
 <h2 id="building-the-examples-outside-mounriver-studio">Building the Examples Outside MounRiver Studio</h2>
 <p>The EVT Examples are supplied with only a MounRiver Studio project file.</p>
@@ -206,13 +206,15 @@ https://github.com/O-H-M2/qmk_port_ch582/commit/347e15458be15a714494d0088fa77243
 <p>Using that, I adapted a Makefile with the same compiler flags to get a Makefile which produced a working build.<br />
 (Or, honestly: I’d copied the makefile from the broadcaster example, but that set different <code>-D</code> defines, which didn’t play nicely with the BLE HID example, and it took me some time to notice why my Makefile wasn’t producing a working build of the example).</p>
 <p>Anyway.</p>
-<p>I copied the BLE HID_Example example, put it together with a standalone Makefile, and some Nix files to provide the toolchain, and shared it in this repo: https://github.com/rgoulter/ch592-ble-hid-keyboard-example</p>
+<p>I copied the BLE HID_Example example, put it together with a standalone Makefile, and some Nix files to provide the toolchain, and shared it in this repo: <a href="https://github.com/rgoulter/ch592-ble-hid-keyboard-example" class="uri">https://github.com/rgoulter/ch592-ble-hid-keyboard-example</a></p>
 <h2 id="flashing-the-firmware">Flashing the Firmware</h2>
 <p>Flashing the CH592 is the same as flashing the CH552. You can enter the bootloader by holding the BOOT button when plugging the board into the computer, and then use <a href="https://github.com/ch32-rs/wchisp">ch32-rs’ wchisp</a> to flash the firmware. (On Windows, I’d had difficulty using <code>wchisp</code>; but the official programs from WCH worked on Windows when I tried with the CH552).</p>
 
 <hr />
 
 <div>
+    
+    <a href="../../posts/programming/2023-12-27-experience-writing-firmware-with-the-ch582-port-of-qmk.html" style="float:left;">Newer post</a>
     
     
     <a href="../../posts/narrative/2023-12-14-die-another-day-not-as-bad-as-i-remembered.html" style="float:right; text-align: right;">Older post</a>
