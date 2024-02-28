@@ -1,0 +1,309 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Tomb Raider 3 - Richard Goulter's Blog</title>
+
+        <!-- My (Old) CSS theme -->
+        <link rel="stylesheet" type="text/css" href="../../css/default.css" />
+
+        <!--
+            jQuery & jQueryUI
+        -->
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css" />
+
+        <!--
+            Pandoc Style CSS
+            (for syntax highlighted snippets)
+        -->
+        <link rel="stylesheet" type="text/css" href="../../css/syntax.css" />
+
+        <!--
+            Bootstrap
+        -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+        <style>
+            /*
+             * Bootstrap defines blockquote as 17px,
+             * so it looks stupidly large in my blogposts. */
+            blockquote {
+                font-size: 14px;
+            }
+        </style>
+
+        <!--
+            Waypoints, and Waypoints-Sticky,
+            so we can do this:
+            http://imakewebthings.com/waypoints/shortcuts/sticky-elements/
+        -->
+        <script src="../../js/jquery.waypoints.min.js"></script>
+        <script src="../../js/sticky.min.js"></script>
+
+        <!-- My analytics stuff -->
+        <script src="../../js/my_analytics.js"></script>
+        <script src="../../js/my_analytics_debug.js"></script>
+
+        <!--
+            TOCify
+        -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js"></script>
+
+        <!--
+            Patched TOCify css file.
+            (Don't want fixed `.tocify`).
+        -->
+        <link rel="stylesheet" type="text/css" href="../../css/jquery.tocify.css" />
+
+        <style>
+        .navbar {
+            margin-bottom: 0px;
+        }
+
+        .banner-image {
+            width:100%;
+        }
+
+        .banner {
+            margin-left: 0px;
+            margin-right: 0px;
+        }
+
+        body {
+            background-color: #e2e2e2;
+        }
+
+        #page {
+            padding-left:0;
+            padding-right:0;
+            background-color: #ffffff;
+        }
+        </style>
+
+        <!-- Google Analytics -->
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-H13NWYDX0G"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'G-H13NWYDX0G');
+        </script>
+    </head>
+    <body>
+        <div id="page" class="container">
+            <!-- This, with no padding on left/right -->
+            <div class="banner">
+                <nav class="navbar navbar-default">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+
+            <!-- The Hamburger -->
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../../">Richard Goulter's Blog</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="../../">Home</a></li>
+            <li><a href="../../yi.html">Yi</a></li>
+            <li><a href="../../emacs.html">Emacs</a></li>
+            <li><a href="../../what-i-wish-i-knew-when-i-started-using-nix.html">Nixpkgs</a></li>
+            <li><a href="../../archive.html">Archive</a></li>
+        </ul>
+    </div>
+</nav>
+
+            </div>
+
+            <hr style="margin: 0px; border-top: 5px solid black;" />
+
+            <div id="content" class="container">
+                <h1>Tomb Raider 3</h1>
+                <div class="info">
+    Posted on January 13, 2024
+    
+        by Richard Goulter
+    <br />
+    
+    Tags: 
+    
+</div>
+
+<p>I just finished re-playing Tomb Raider 3.</p>
+<p>I’d played it many years ago, but almost certainly with cheats, as well as closely following a walkthrough.</p>
+<p>This time, I didn’t lean so hard on the walkthrough, and at least gave an honest try through most areas before looking up the walkthrough.</p>
+<p>Overall, I think I can stand by my opinion that Tomb Raider 2 is the better game. TR2’s challenging levels at the end are demanding but not over the top. It’s satisfying to complete the TR2 levels.</p>
+<p>I rate TR3 a bit lower since at its worst it’s more obnoxious and less fun than the bad bits of TR2.</p>
+<p>Overall, the stuff I found really-not-fun was where the game is unreasonably difficult.</p>
+<p>To give a couple of examples of where TR3 was really-not-fun:</p>
+<ul>
+<li><p>The level “Lud’s Gate” features an obnoxious underwater segment with obfuscated navigation steps. There’s an underwater vehicle, but it’s clunky to control, and your air supply is limited. – The difficulty is obnoxious without being rewarding to complete.</p></li>
+<li><p>One part where I got stuck was in the London level “Aldwych”. Aldwych is wonderfully themed, taking place in an abandoned tube station. But.. I recall I was stuck because I couldn’t find two keys.. I had found the old penny (a key item), but to use the old penny, I had been unable to figure out that I was supposed to use it in one of the ticket machines. (The ticket machines all looked the same, and the first few I interacted with did nothing). – Another contributing cause, I had overlooked and gone past an area to get one of the keys. The level was a bit too non-linear.</p></li>
+<li><p>I recall being stuck on the level “Crash Site” due to being unable to figure out how to climb on top of the airplane. You can only get up from one spot, and that spot looks very similar to nearby spots where you can’t climb up from.</p></li>
+<li><p>On the penultimate level, there are some enemy spawns which seem infinite. (They’re infinite spawners on the Playstation version, and spawn over one or two dozen enemies on PC). That’s .. just lame.</p></li>
+</ul>
+<p>“Getting stuck” is part of a good adventure game. – In an action game, the obstacles you have to overcome are the enemies you face. In adventure games, you have to figure out how the level you’re exploring “works” (where you’re allowed to go, what ‘locked doors’ are preventing you from reaching other places, how you might get the keys for these), and work your way through the puzzles.</p>
+<p>But, whereas, say, I recall in the TR2 level “Living Quarters” when I was stuck.. the area I was stuck in was limited enough that by re-treading all the locations, I was able to find which places I had overlooked. The same is true for many parts of TR3’s levels.</p>
+<p>In terms of what the game does well? Kinda the opposite: being challenging enough that you feel good for solving it, but still being easy enough to solve. Some examples of what I liked:</p>
+<ul>
+<li><p>The training level that is Lara’s Home is great. There’s a surprising amount to do here. You get to have fun with the mechanics in an environment without hostiles or traps. The indoor gym area has a step-by-step introduction to the game’s somewhat idiosyncratic grid-system that the game’s “tank controls” are built around. – I saw someone say that one sample to see how good a shooter game will be is to try just taking a gun and shooting at a wall. If that’s satisfying, the game will be fun to play. Lara’s Home is like that: the area lacks plot or hostile challenges, so you know that since the bare-bones of the game is fun to play with, the game itself ought to be fun.</p></li>
+<li><p>The iconic ‘Shiva statues’ in the second level are excellent. There’s tension building up to the fights. The fight isn’t trivial, but it’s also not too difficult. (The animated statues block your bullets when you point your guns at them, so you have to figure out how to defeat them while also not getting killed by them).</p></li>
+<li><p>As an example of a puzzle I liked: in the level “Thames Wharf”, there’s a room where there’s some kind of cleaning robot going around the floor. It will kill you if it runs over you, but otherwise isn’t an active threat. You also see there’s a movable block, and a spot in the middle of the room with some kind of console. – There aren’t too many things to try out here, it’s not too difficult to execute any plan you might have. It feels non-trivial, but it’s also not too difficult.</p></li>
+<li><p>e.g. The level “Antarctica” is a well design adventure level. It’s non-linear enough that you’ll sometimes be wondering where to go next, but not so non-linear as to be obnoxiously confusing.</p></li>
+<li><p>Boss fights: I think these work well. They’re threatening enough that it takes time to figure out what you’re supposed to do.. you can either use your powerful weapons, but the fights aren’t completely obnoxious with pistols, either.</p>
+<ul>
+<li>The London boss fight in “City” is really short and sweet. You’re kinda rushing through the level under fire from the enemy boss, but it’s not so obnoxious.</li>
+</ul></li>
+<li><p>The additional platforming elements (ducking/crawling, and monkey-swinging) feel like natural additions to the grid-based navigation.</p></li>
+</ul>
+<p>Any long-running series is going to have an identity.. things which work with that identity or things which maybe didn’t work so well.</p>
+<p>Tomb Raider was the definitive action adventure game of the 90’s, with its gameplay built upon its tank-controls and its grid system, with all sorts of platforming, exploration, puzzles, traps, and combat.<br />
+Of these, the combat of the classic games is what feels most archaic. Tank controls are unpopular in the era of twin-stick controllers and WASD+mouse gameplay. And while removing all friction/difficulty from games would ruin the fun.. that the classic Tomb Raider games don’t allow Lara to strafe-around a target she’s locked onto feels limited. – For me, a lot of the combat involved flipping around to get behind where the enemy is. Strafing would make that much easier, and wouldn’t feel out of place.</p>
+<p>That said.. the combat itself was never quite the strongest part of Tomb Raider’s gameplay. It provides good pushback so that there’s tangible benefits for exploring: you explore and you find ammo for the good weapons you have, so then you can use the good weapons and take care of enemies easily. And it keeps you on your toes: you’ve gotta be prepared to fight an enemy when you enter a new area (or re-enter an area after solving a puzzle!).<br />
+The recent and related-only-in-name Tomb Raider games opted for third person combat … but also lacks an identity. I think the combat in the classic Tomb Raider games at least fits with the rest of the game’s over-the-top acrobatics. I don’t think the classic games’ combat is inherently boring; but I think an extra feature or two could go a long way to making it more dynamic. (e.g. like how Halo at least has energy weapons vs bullet weapons, or how Doom 2016 has the idea of getting health/ammo from enemies directly).</p>
+<p>Tomb Raider 3’s Story?<br />
+I’d say it doesn’t do much, but that it doesn’t need to do much.<br />
+Lara’s exploring for some artifacts. Gets told that there’s more/similar artifacts. Surprise twist that the guy asking her to collect the artifacts has turned crazy. Boss fight. The end.<br />
+The game does feature some cutscenes with dialogue, otherwise it’d maybe be a bit too bland.<br />
+I guess the story archetype to compare to is Indiana Jones.. “hey, there’s this powerful mystical artefact; let’s find it, and stop the bad guys from finding it”.<br />
+The recent big budget games with the title “Tomb Raider” have put much more emphasis on the story (although notably without having such a kickass Lara Croft).. but, focused on drama and relatability, that just didn’t seem all that interesting. – In contrast, I think TR3’s story is simple.<br />
+I’m not sure what it’d take to make such a game story “good”. Interesting lore? Compelling villains? Compelling side characters? Stories which really drive the setting? Interesting settings?</p>
+
+<hr />
+
+<div>
+    
+    <a href="../../posts/games/2024-02-14-another-factorio-post-game-ramble.html" style="float:left;">Newer post</a>
+    
+    
+    <a href="../../posts/programming/2023-12-27-experience-writing-firmware-with-the-ch582-port-of-qmk.html" style="float:right; text-align: right;">Older post</a>
+    
+</div>
+<br style="clear: both;" />
+
+<hr />
+
+<!-- Load highlight.js for Syntax Highlighting. -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/bash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/c.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/gherkin.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/haskell.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/lisp.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/nix.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js"></script>
+<script>hljs.highlightAll();</script>
+
+            </div>
+
+            <hr style="margin-bottom: 0px; border-top: 2px solid black;" />
+
+            <div id="footer" class="pull-right" style="padding-right: 10px;">
+                Site proudly generated by
+                <a href="http://jaspervdj.be/hakyll">Hakyll</a>
+            </div>
+        </div>
+
+        <script>
+            // The callbacks we wanna use
+            // Phone-home, telling Google Analytics various metrics/dimensions
+
+            // Use custom dimensions & metrics
+            var AnalyticDimensionReaderKind = 'dimension1';
+            var AnalyticMetricActiveTime      = 'metric1';
+            var AnalyticMetricLongestIdleTime = 'metric2';
+            var AnalyticMetricReadCount       = 'metric3';
+
+            var gaCallbacks = {
+                "scrollPercent": function(ms, perc) {
+                    if (perc > 85) {
+                        // EVENT: Page read
+                        ga('send', {
+                            hitType:       'event',
+                            eventCategory: 'Scrolling',
+                            eventAction:   'atBottom',
+                            eventValue:    String(ms)
+                        });
+                    }
+                },
+                "read": function(ms, ct, timeToReach) {
+                    // Use this to set DIMENSION
+                    // timeToReach < 5s ==> Skim (default = Visitor)
+                    if (timeToReach < 5 * 1000) {
+                        // dimension1 = ReaderKind
+                        ga('set', AnalyticDimensionReaderKind, "skimmer");
+                    }
+
+                    // timeToReach > 30s ==> Reader
+                    if (timeToReach > 30 * 1000) {
+                        // dimension1 = ReaderKind
+                        ga('set', AnalyticDimensionReaderKind, "reader");
+                    }
+
+                    // EVENT: Page read
+                    ga('send', {
+                        hitType:       'event',
+                        eventCategory: 'Reading',
+                        eventAction:   'read',
+                        eventValue:    String(timeToReach)
+                    });
+
+                    // METRIC
+                    ga('set', AnalyticMetricReadCount, String(ct));
+                },
+                "initialIdle": function(ms) {
+                    // EVENT: Started Reading
+                    ga('send', {
+                        hitType:       'event',
+                        eventCategory: 'Scrolling',
+                        eventAction:   'begun',
+                        eventValue:    String(ms)
+                    });
+                },
+                "timeSpent": function(total, active, curIdle, initIdle, longestIdle) {
+                    // Update METRIC(S)?
+                    ga('set', AnalyticMetricActiveTime, String(active));
+                    ga('set', AnalyticMetricLongestIdleTime, String(longestIdle));
+                },
+                "idle": function(ms) {
+                },
+                "longestIdle": function(ms) {
+                }
+            }
+
+            window.onload = function() {
+                myAnalyticsInit(gaCallbacks);
+
+                //
+                // Initial dimensions & metrics
+                //
+
+                ga('set', AnalyticMetricReadCount, String(0));
+
+                // EVENT: Page load
+                ga('send', {
+                    hitType:       'event',
+                    eventCategory: 'pageLoad',
+                    eventAction:   'begun',
+                    eventValue:    String(ms)
+                });
+
+                // DIMENSION: visitor
+                ga('set', AnalyticDimensionReaderKind, "visitor");
+            }
+        </script>
+    </body>
+</html>

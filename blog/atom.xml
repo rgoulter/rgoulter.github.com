@@ -8,8 +8,156 @@
         <name>Richard Goulter</name>
         <email>richard.goulter+blog@gmail.com</email>
     </author>
-    <updated>2023-12-27T00:00:00Z</updated>
+    <updated>2024-02-14T00:00:00Z</updated>
     <entry>
+    <title>Another Factorio Post-Game Ramble</title>
+    <link href="http://www.rgoulter.com/blog//posts/games/2024-02-14-another-factorio-post-game-ramble.html" />
+    <id>http://www.rgoulter.com/blog//posts/games/2024-02-14-another-factorio-post-game-ramble.html</id>
+    <published>2024-02-14T00:00:00Z</published>
+    <updated>2024-02-14T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<p>Factorio is such an enthralling game to play.</p>
+<p>If you’ve somehow found this post but don’t know Factorio:
+It’s a 2D game which starts out similar to many ‘survival’ games (e.g. you chop wood, mine stone and iron, etc.), but progressively build up ways to automate these tasks away. The eventual goal is to build and launch a rocket; although many players find fun in seeing how big a factory they can build.<br />
+Ultimately, the whole ‘challenge’ of Factorio is finding a way to arrange the factory so that all the inputs can get to the right places.. so it’s encouraged to do a first playthrough ‘blind’.</p>
+<p>I had been meaning to play some other games on my Nintendo Switch, but after starting a new Factorio playthrough, ended up spending a lot of time on that.</p>
+<p>This time, I played on a “ribbon world”. I also set the resource patches to be more frequent and richer (although didn’t change them to be bigger than normal). I decided to play on non-peaceful; but, disabled enemy expansion.</p>
+<p>“Ribbon world” limits the height of the map. – This adds some challenge to laying out the base. e.g. the limited vertical space constrains how ‘vertical’ any part of the factory can be; whereas horizontal space has to be cleared (especially on non-peaceful, where enemies have to be cleared), and inputs will end up <em>really far</em> from where they need to be.<br />
+On the flipside, the limited height makes defending from the enemies trivial: the enemies can only come from the left or the right, so you only need to worry about defending a tiny perimeter to the left and to the right.</p>
+<h2 id="compared-to-previous-playthroughs">Compared to Previous Playthroughs</h2>
+<p>On my previous Factorio runs: I mostly stuck to peaceful, and have tried out different strategies for organising the factory.<br />
+I did complete a game of non-peaceful.. I’d say that the enemy attacks add some pushback and constraints. e.g. you need to supply defenses, and in order to expand the factory, you somewhat need to clear enemy bases.<br />
+In terms of strategies I’ve tried: I’ve tried the game without trains or even bots(!), I tried the game where I used trains to augment a ‘main bus’. I tried a game where I had the whole factory covered with the same bot network, and used this to supplement a main bus (albeit, resource patches were frequent, rich, and big).</p>
+<p>Recall.. the “main bus” idea is to put a bunch of common resources on belts in parallel. This makes the “gather inputs” part of the equation much simpler: to assemble an item with inputs “steel, copper, green circuits”, you just branch these resources off from the main bus.<br />
+One inevitable problem is that the input requirements for your inputs might be larger than the bandwidth of the bus. (e.g. you’d ideally consume 1000 resources from the bus, but the bus only supplies 500).</p>
+<p>Having a factory covered with bots “solves” the problem of getting uncommon items around; and also makes it easy to build up parts of the factory without needing the player around.<br />
+I’d hoped for a ‘stacking’ design which automatically could build itself (since the roboports from one part would be able to then build more roboports and other buildings, expanding the factory).<br />
+In hindsight, it was excessive to build roboports that covered the whole of the map. It didn’t really help with moving resources around great distances.</p>
+<p>For this ribbon world, for moving resources great distances, I opted to go for a train-based approach.</p>
+<h3 id="overview-of-the-strategy">Overview of the Strategy</h3>
+<p>Generally the strategy I wanted to take for this factory was: use trains to move resources around.</p>
+<p>I aimed to have four lanes of rails at the edge of the map: two on the top, two on the bottom. The idea being, train stations can branch-off from the inner pair of rails, whereas the outer pair of rails only ever has junctions to/from the inner pair of rails; trains need to slow down in order to stop, so hopefully this would reduce the need for trains to slow down before reaching their destination.</p>
+<p>Using trains then means: have train stations which load resources from mines, and then have groups of train stations which consume those resources (and provide more complex resources in turn).</p>
+<p>I hadn’t been against the idea of then using train stations to start off a “main bus”. However, I never ended up doing this. (I did build the same “mall” that I’d used in previous builds, which uses a bus of inputs). – It would take a lot of horizontal space to gather so many inputs, and would take a lot of horizontal space to extend the bus, and there’s not much vertical space to build off of the bus.</p>
+<p>Militarily, the game was quite straightforward.<br />
+In the early game, the enemy bases are quite far away. The enemy AI is passive, and only attacks in reaction to pollution from your factory reaching their base. It was easy for pace of conquest to outspeed pace of pollution, since the height of the map is limited.<br />
+However, it doesn’t take too long until conquering enemy bases become too formidable for the player to take on by themselves. Enemy defenses get so strong that it takes a lot of effort to make incremental progress against them. (Although part of the problem is the tank doesn’t control so well on the Nintendo Switch, I reckon).<br />
+In the late game, artillery outreaches the enemy.. so expanding the factory involves building up a wall &amp; some turrets, building out the railway to the wall, then using an artillery train to blast the enemy bases. – Notably, construction bots can be used to build out these, so it can be done without needing the player nearby.</p>
+<h3 id="what-went-well-scale">What Went Well: Scale</h3>
+<p>One of the challenges of Factorio’s late game is that high-tier items are really expensive, requiring many inputs.<br />
+e.g. The simple green circuits require a few iron and copper pieces. The more advanced red circuits then require a few green circuits, a few copper pieces, and a few bits of plastic. The most advanced blue circuits require <em>twenty</em> green circuits, and some red circuits, and some sulfuric acid. – Many of the late game items require hundreds of blue circuits to build.<br />
+As noted above, even if it’s not difficult to get inputs connected to a system, one of the problems using belts is hitting bandwidth limits.</p>
+<p>Using trains to move resources around allows for huge scale.<br />
+I suppose there must be a bandwidth limit on how many resources a rail allows, too. But, with trains only using rails when carrying a bulk of resources at great speed, it’s not really an easy limit to hit.</p>
+<p>Trains then allow for ‘decoupling’ where an input is gathered from where it’s consumed.<br />
+– With belts, you need a belt that runs all the way from a particular input to where it’s consumed. More resources can be fed into the belt, but resources need to be fed into the belt <em>before</em> where they’re consumed from a belt.<br />
+With rail, there’s not this constraint. Resources loaded anywhere on a rail network will find their way to where they need to be unloaded in the rail network.</p>
+<p>This ends up making “scaling” relatively straightforward: getting more resources essentially either involves building up how many resources are produced at a particular location (e.g. adding more miners to an ore patch) i.e. “scaling vertically”, or by adding more stations to the rail network which produce that resource i.e. “scaling horizontally”.</p>
+<h3 id="practical-differences-between-belt-based-and-rail-based">Practical Differences Between Belt-Based and Rail-Based</h3>
+<p>I did run into some practical problems trying a rail-based factory.</p>
+<p>There is some edge case stuff.<br />
+In rare cases, maybe a train runs out of fuel.<br />
+When I tried to be fancy and programatically enable/disable a train station (e.g. “disable this stationn, because it has enough resources”), sometimes a train might stop in the middle of the rail because it suddenly gets disallowed from visiting its destination.<br />
+etc.</p>
+<p>One downside to the rail-based approach is there is additional overhead to deal with.</p>
+<p>One overhead cost is that there may be a longer lead time between when an input is added to a network, and when it can be consumed by the network.<br />
+e.g. A simple approach to take is to have a cargo train wait at a loading station until it is full, and then move to a deposit station until it is empty. (Anything more frequent than this would be an ‘inefficiency’). – This means opting to wait the full length of time for a cargo train’s worth of resources to be produced before it meaningfully enters the network. (This increases the delay in the feedback loop for how much some resource is demanded, for better and for worse).</p>
+<p>Compared to belts, distribution of resources is more of a problem whenever inputs don’t fully saturate demand.<br />
+With belts, splitting resources off of a belt does so in a 50-50 manner. So for a factory with 1000 units of some resource needed by A, B, and C.. 500 will reach A, 250 will reach B, 125 will reach C, leaving 125 to continue to be available on the bus (splitting off into 64, 32, etc.). – Eventually, at least <em>some</em> of the resource will reach even the end of the bus, even before inputs at the start are saturated.<br />
+With rails, by default, you don’t get this behaviour. A train will go to the closest station that it can visit. – So while it’s still true that “producing more inputs than is consumed” <em>eventually</em> satiates demand, it takes more care to get expensive resources where they need to be before all inputs are satiated.</p>
+<p>I’d say one mistake I made was using big buffers at resource unloading stations for expensive resources. – i.e. Each unloading station would have a buffer which could receive six or seven trains’ worth of cargo. For simple resources, this isn’t much of an issue, since it’s easy to build more stations which provide that resource. For more complex resources, since the time to produce the resource is greater than the time to load the resource onto the train, this meant that a significant amount of time was spent depositing the resource into filling up a buffer, when that resource was starved in other parts of the rail network.</p>
+<p>Another overhead cost is space. This perhaps is “different” rather than “worse” than belts.<br />
+With belts, moving resources over a long distance is tedious but possible. Moving rare/expensive resources long distances (at worst) involves snaking the belt through the rest of your factory.<br />
+With trains, building a ‘block’ of stations for a resource which takes 5 inputs requires taking up a reasonable chunk of horizontal space on the map. (This is mostly more annoying with frequent resource patches, since you might want to avoid building on top of a resource patch).</p>
+<p>One decision to make is “what resources to put on the rail network”.<br />
+If building up the rail network before electric smelting, then coal is required to turn the ore into plates that get used by most recipes. (Which is why it’s a bad idea to build up a rail network before getting electric smelting).<br />
+Yellow Science in particular has complex input requirements, and there are different trade-offs for putting its intermediate input requirements on the bus or assembling them in the same block.</p>
+<h3 id="new-to-me-circuit-network-combinators">New to Me: Circuit Network Combinators</h3>
+<p>The circuit network allows for programmability with Factorio’s machines.</p>
+<p>I had used it before for simple things like “if ammo below certain amount, send an alarm signal” or “only take stuff out from this storage if there are at least 1000 items”.</p>
+<p>The circuit network logic complements the rail network nicely.</p>
+<p>I was able to use the circuit network to describe a couple of things:</p>
+<ul>
+<li><p>Dynamically set how many trains are allowed to visit a station, based on how much remaining capacity the storage buffer for the station had. (e.g. if it would only take two trains to fill the storage buffer, limit the number of trains that would visit the station to two).</p></li>
+<li><p>Dynamically enable or disable the station based on how full the buffer was. Once the buffer was less than 20% (or whatever) full, then enable the station so that resources would be unloaded there; but once it reached 90% or so, then disable the station until the buffer was back down to only 20% full.</p></li>
+</ul>
+<p>The problem above of “starving stations not being filled, while buffers elsewhere were being filled” surely could have been mitigated using the circuit network. (The logic is a bit ‘come-from’: rather than saying where trains go <em>to</em>, you’d say which destinations should receive resources. I’m guessing something like: if any stations are ‘starved’, then limit or disable any stations which have at least some resources in their buffer).</p>
+<h3 id="what-went-less-than-well-slow-progress-to-reach-late-game">What Went Less Than Well: Slow Progress to Reach Late Game</h3>
+<p>Kinda like how playing Sudoku can be fun even though Sudoku solvers exist, playing Factorio can be fun even if you’re not building the best factory ever.<br />
+Factorio is essentially just a toy.. and the game’s goal of ‘launch a rocket’ is a decent objective to aim for with Factorio’s systems.</p>
+<p>It’d obviously be less fun if I just used console commands to provide infinite resources, or to instantly provide the rocket silo &amp; launch the rocket effortlessly.</p>
+<p>I imagine it’d be less fun if I only used blueprints other people created.</p>
+<p>I find Factorio fun even without the enemies, or with non-aggressive enemies.</p>
+<p>Unfortunately, in this ribbon world playthrough on the Nintendo Switch, I took a long time before getting to the late game.<br />
+What I ‘should’ have done was to aim to quickly build a factory which would (even at a trickle’s pace) research towards the late game technologies.<br />
+Instead, I meandered and did things I thought were more interesting. Which is fine, but it meant it took a long time before I reached the late game.</p>
+<p>The friction is that the problems you face in the early game get solved by the late game:<br />
+Routing train rails is difficult when the map has cliffs and water. The cliffs can be blown up, and the water can be filled with later technology.<br />
+A busy factory will use a lot of electricity. Nuclear power provides an abundance of electricity.<br />
+Enemies block expansion.. and late game artillery ‘solves’ this, and laser turrets ‘solve’ the problem of supplying the defence.<br />
+Building the same pattern of buildings repeatedly is slow; bots trivialise this.<br />
+– But in order to use these technologies, you have to have researched them.<br />
+Aiming to use a train-based factory before the late game ultimately ends up being a bad idea. You don’t have the capacity to expand the factory fast enough to meet the input requirements for the kind of scale that a train-based factory needs.</p>
+<h3 id="a-follow-up-playthrough">A Follow-Up Playthrough</h3>
+<p>As I was writing the above up, I just <em>had to</em> try again to see if I could do better.</p>
+<p>I took time to pre-plan the ‘blocks’ of train stations that I would use. I used the sandbox mode so that this could be done in a safe way.</p>
+<p>On the PC, I played using the default ribbon-world settings. (So, compared to my Nintendo Switch playthrough, resources were less frequent, and not quite as rich; plus, enemy expansion was enabled).</p>
+<p>Overall, from a second playthrough:</p>
+<ul>
+<li><p>The gameplay was significantly more difficult with enemy expansion enabled than disabled. With enemy expansion, I very quickly hit a point where clearing enemy bases was impractical without artillery.</p></li>
+<li><p>I used a much more compact approach when designing the blocks of train stations. This meant I was better able to utilise space.</p></li>
+<li><p>In my first playthrough, I had opted to have each station allow for ‘stacking’ trains. This wasn’t really necessary for the scale I was operating at. (It would be useful if the factory were so large that “time to consume all of trains input” was shorter than “time for another train to arrive”).</p></li>
+<li><p>I took the time to ensure my blueprints for “use roboports to expand the factory’s frontier” (place laser turrets, place rail so the artillery train can move further out) could more easily snap-to a course grid. This made it much easier to instruct the bots when expanding the frontier.</p></li>
+<li><p>I <em>really</em> felt the contrast between ‘mid game’ and ‘late game’. With ‘mid game’, I was essentially boxed in until I could research artillery. I wasn’t able to easily expand in order to acquire more resource inputs. (Hence.. using a rail-based factory has more disadvantages than advantages). – Probably, though, the lategame alone wouldn’t feel so satisfying without having faced the obstacles in the mid-game.</p></li>
+</ul>
+<p>For now, that’s enough Factorio, though.</p>]]></summary>
+</entry>
+<entry>
+    <title>Tomb Raider 3</title>
+    <link href="http://www.rgoulter.com/blog//posts/games/2024-01-13-tomb-raider-3.html" />
+    <id>http://www.rgoulter.com/blog//posts/games/2024-01-13-tomb-raider-3.html</id>
+    <published>2024-01-13T00:00:00Z</published>
+    <updated>2024-01-13T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<p>I just finished re-playing Tomb Raider 3.</p>
+<p>I’d played it many years ago, but almost certainly with cheats, as well as closely following a walkthrough.</p>
+<p>This time, I didn’t lean so hard on the walkthrough, and at least gave an honest try through most areas before looking up the walkthrough.</p>
+<p>Overall, I think I can stand by my opinion that Tomb Raider 2 is the better game. TR2’s challenging levels at the end are demanding but not over the top. It’s satisfying to complete the TR2 levels.</p>
+<p>I rate TR3 a bit lower since at its worst it’s more obnoxious and less fun than the bad bits of TR2.</p>
+<p>Overall, the stuff I found really-not-fun was where the game is unreasonably difficult.</p>
+<p>To give a couple of examples of where TR3 was really-not-fun:</p>
+<ul>
+<li><p>The level “Lud’s Gate” features an obnoxious underwater segment with obfuscated navigation steps. There’s an underwater vehicle, but it’s clunky to control, and your air supply is limited. – The difficulty is obnoxious without being rewarding to complete.</p></li>
+<li><p>One part where I got stuck was in the London level “Aldwych”. Aldwych is wonderfully themed, taking place in an abandoned tube station. But.. I recall I was stuck because I couldn’t find two keys.. I had found the old penny (a key item), but to use the old penny, I had been unable to figure out that I was supposed to use it in one of the ticket machines. (The ticket machines all looked the same, and the first few I interacted with did nothing). – Another contributing cause, I had overlooked and gone past an area to get one of the keys. The level was a bit too non-linear.</p></li>
+<li><p>I recall being stuck on the level “Crash Site” due to being unable to figure out how to climb on top of the airplane. You can only get up from one spot, and that spot looks very similar to nearby spots where you can’t climb up from.</p></li>
+<li><p>On the penultimate level, there are some enemy spawns which seem infinite. (They’re infinite spawners on the Playstation version, and spawn over one or two dozen enemies on PC). That’s .. just lame.</p></li>
+</ul>
+<p>“Getting stuck” is part of a good adventure game. – In an action game, the obstacles you have to overcome are the enemies you face. In adventure games, you have to figure out how the level you’re exploring “works” (where you’re allowed to go, what ‘locked doors’ are preventing you from reaching other places, how you might get the keys for these), and work your way through the puzzles.</p>
+<p>But, whereas, say, I recall in the TR2 level “Living Quarters” when I was stuck.. the area I was stuck in was limited enough that by re-treading all the locations, I was able to find which places I had overlooked. The same is true for many parts of TR3’s levels.</p>
+<p>In terms of what the game does well? Kinda the opposite: being challenging enough that you feel good for solving it, but still being easy enough to solve. Some examples of what I liked:</p>
+<ul>
+<li><p>The training level that is Lara’s Home is great. There’s a surprising amount to do here. You get to have fun with the mechanics in an environment without hostiles or traps. The indoor gym area has a step-by-step introduction to the game’s somewhat idiosyncratic grid-system that the game’s “tank controls” are built around. – I saw someone say that one sample to see how good a shooter game will be is to try just taking a gun and shooting at a wall. If that’s satisfying, the game will be fun to play. Lara’s Home is like that: the area lacks plot or hostile challenges, so you know that since the bare-bones of the game is fun to play with, the game itself ought to be fun.</p></li>
+<li><p>The iconic ‘Shiva statues’ in the second level are excellent. There’s tension building up to the fights. The fight isn’t trivial, but it’s also not too difficult. (The animated statues block your bullets when you point your guns at them, so you have to figure out how to defeat them while also not getting killed by them).</p></li>
+<li><p>As an example of a puzzle I liked: in the level “Thames Wharf”, there’s a room where there’s some kind of cleaning robot going around the floor. It will kill you if it runs over you, but otherwise isn’t an active threat. You also see there’s a movable block, and a spot in the middle of the room with some kind of console. – There aren’t too many things to try out here, it’s not too difficult to execute any plan you might have. It feels non-trivial, but it’s also not too difficult.</p></li>
+<li><p>e.g. The level “Antarctica” is a well design adventure level. It’s non-linear enough that you’ll sometimes be wondering where to go next, but not so non-linear as to be obnoxiously confusing.</p></li>
+<li><p>Boss fights: I think these work well. They’re threatening enough that it takes time to figure out what you’re supposed to do.. you can either use your powerful weapons, but the fights aren’t completely obnoxious with pistols, either.</p>
+<ul>
+<li>The London boss fight in “City” is really short and sweet. You’re kinda rushing through the level under fire from the enemy boss, but it’s not so obnoxious.</li>
+</ul></li>
+<li><p>The additional platforming elements (ducking/crawling, and monkey-swinging) feel like natural additions to the grid-based navigation.</p></li>
+</ul>
+<p>Any long-running series is going to have an identity.. things which work with that identity or things which maybe didn’t work so well.</p>
+<p>Tomb Raider was the definitive action adventure game of the 90’s, with its gameplay built upon its tank-controls and its grid system, with all sorts of platforming, exploration, puzzles, traps, and combat.<br />
+Of these, the combat of the classic games is what feels most archaic. Tank controls are unpopular in the era of twin-stick controllers and WASD+mouse gameplay. And while removing all friction/difficulty from games would ruin the fun.. that the classic Tomb Raider games don’t allow Lara to strafe-around a target she’s locked onto feels limited. – For me, a lot of the combat involved flipping around to get behind where the enemy is. Strafing would make that much easier, and wouldn’t feel out of place.</p>
+<p>That said.. the combat itself was never quite the strongest part of Tomb Raider’s gameplay. It provides good pushback so that there’s tangible benefits for exploring: you explore and you find ammo for the good weapons you have, so then you can use the good weapons and take care of enemies easily. And it keeps you on your toes: you’ve gotta be prepared to fight an enemy when you enter a new area (or re-enter an area after solving a puzzle!).<br />
+The recent and related-only-in-name Tomb Raider games opted for third person combat … but also lacks an identity. I think the combat in the classic Tomb Raider games at least fits with the rest of the game’s over-the-top acrobatics. I don’t think the classic games’ combat is inherently boring; but I think an extra feature or two could go a long way to making it more dynamic. (e.g. like how Halo at least has energy weapons vs bullet weapons, or how Doom 2016 has the idea of getting health/ammo from enemies directly).</p>
+<p>Tomb Raider 3’s Story?<br />
+I’d say it doesn’t do much, but that it doesn’t need to do much.<br />
+Lara’s exploring for some artifacts. Gets told that there’s more/similar artifacts. Surprise twist that the guy asking her to collect the artifacts has turned crazy. Boss fight. The end.<br />
+The game does feature some cutscenes with dialogue, otherwise it’d maybe be a bit too bland.<br />
+I guess the story archetype to compare to is Indiana Jones.. “hey, there’s this powerful mystical artefact; let’s find it, and stop the bad guys from finding it”.<br />
+The recent big budget games with the title “Tomb Raider” have put much more emphasis on the story (although notably without having such a kickass Lara Croft).. but, focused on drama and relatability, that just didn’t seem all that interesting. – In contrast, I think TR3’s story is simple.<br />
+I’m not sure what it’d take to make such a game story “good”. Interesting lore? Compelling villains? Compelling side characters? Stories which really drive the setting? Interesting settings?</p>]]></summary>
+</entry>
+<entry>
     <title>Experience Writing Firmware with the CH582 Port of QMK</title>
     <link href="http://www.rgoulter.com/blog//posts/programming/2023-12-27-experience-writing-firmware-with-the-ch582-port-of-qmk.html" />
     <id>http://www.rgoulter.com/blog//posts/programming/2023-12-27-experience-writing-firmware-with-the-ch582-port-of-qmk.html</id>
@@ -648,398 +796,6 @@ But, the design of the levels is fun. At one part, you’re in an upside-down oc
 <p>In the Tibetan mountains, there’s a dark room filled with the growls of yetis. Lara can’t light the room and shoot at the same time. Although, yeah, turns out the yetis are safely in cages, until you flip the switch that lights the room a bit.</p>
 <p>The ancient temple near the end, where we once again hunt down the titular Dagger of Xian.. it’s a trap-heavy level, it feels a little mean, but it’s got such a fascinating feel to it.</p>
 <p>The epilogue strikes me as special. Yeah, sure, it’s got Lara wearing a bathrobe. But, it’s also got gameplay where you’re fighting off a bunch of goons from what was otherwise an iconic training area outside of the main game.</p>]]></summary>
-</entry>
-<entry>
-    <title>Classic Lara Croft is Back, Huh</title>
-    <link href="http://www.rgoulter.com/blog//posts/games/2023-09-19-classic-lara-croft-is-back-huh.html" />
-    <id>http://www.rgoulter.com/blog//posts/games/2023-09-19-classic-lara-croft-is-back-huh.html</id>
-    <published>2023-09-19T00:00:00Z</published>
-    <updated>2023-09-19T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<p><a href="https://twitter.com/tombraider/status/1702355960809812035">A remaster of the first three Tomb Raider games has been announced</a>.</p>
-<h3 id="remastered-games">Remastered Games</h3>
-<p>This continues a trend of classic games receiving touch ups and being sold as new.</p>
-<p>For gamers, this has the advantage of making these remastered games easy to play on modern systems. Without such remasters, you’d either have to play the game on a console with physical media, or perhaps fiddle with compatibility mechanisms to get the game to play on PC.</p>
-<p>This seems to have gone quite well for the “Age of Empires” series.<br />
-I remember a decade ago or so, the idea of polishing AoE2 and re-releasing it was quite popular.<br />
-In the end, they re-released it twice: with an “HD” edition, and then with a “Definitive” edition. I suspect the “HD” edition was more of a pilot to gauge response; and “Definitive” was more of a continuation.</p>
-<p>Another remaster I was excited for was for “Commandos 2”.<br />
-Unfortunately, here the remaster altered some of the iconic graphics from the original. The game removed nazi swastikas, but also some of the Japanese “rising sun” icons. (Although I disagree with their removal from the game, I can at least understand why you’d want to remove nazi swastikas; I find removing big red circles a bit too much, though). – The game doesn’t depict brutal realities of war; but it does depict situations where a small crew of Allied commandos go and beat up a bunch of the bad guys (including situations where enemies occupy towns, and use prisoners of war for labour).<br />
-So, the argument of “the removed symbols may remind people of the bad things done in war” is bizarre, since you’re playing as <em>the good guys stopping the bad guys</em>.</p>
-<p>Other old classics like Crash Bandicoot and Spyro have had faithful re-releases.</p>
-<h3 id="different-laras">Different Laras</h3>
-<p>The “Tomb Raider” series has had several different generations of its series:</p>
-<p>The original, classic “Tomb Raider” was developed by Core Design; these Tomb Raider games still have numbers after the title. By “Tomb Raider IV”, the developers were a somewhat burnt out, and so killed off Lara at the end of the game. TR5 was told as flashbacks. – TR6 was an attempt at making a new game for the next generation of consoles; but the game was released in an unfinished state and wasn’t all that good.</p>
-<p>Crystal Dynamics picked up “Tomb Raider” with a reboot with a more dramatic “Lara Croft”; these games “Tomb Raider: Legend”, “Tomb Raider: Anniversary” (a remake of TR1), and “Tomb Raider: Underworld” were quite different than the classics: the controls were for twin-stick controllers, giving players control of the camera; and Lara had a different look (replacing the classic green tank top with a khaki top).</p>
-<p>This Lara then gets ditched in the 2013 reboot “Tomb Raider”, and its sequels “Rise of the Tomb Raider” (2015) and “Shadow of the Tomb Raider” (2018).<br />
-This Lara is called “Survivor Lara”.<br />
-The gameplay in the games changes again, now closer to an open-world action game. Lara’s looks have changed too (I recall it being described as: the devs made her boobs smaller until play testers stopped looking at them). Lara here is <em>very</em> dramatic; where the story’s excuse for this is each of these games are an origin story telling <em>how</em> Lara comes to be such a badass.</p>
-<p>The best discussion of this I’ve seen is in <a href="https://www.youtube.com/watch?v=kJMj3B1BFko">Liana Kerzner’s Lady Bits series</a>.<br />
-Kerzner describes classic Lara as a Byronic heroine (passionate and heroic, but unlikable/antisocial), whose exaggerated figure reflects the exaggerated gameplay; whereas Survivor Lara is more down to earth as a character, with a relatively more realistic figure, but more of a damsel-in-distress in a game with mass-market accessibility.</p>
-<p>(The ways in which Survivor Lara is less-than-ideal is also interesting: the more action-oriented gameplay leads to this ‘realistic’ Lara killing <em>way</em> more people than the classic Lara ever did; and although the new look is more ‘realistic’, it’s still the same Megan-Fox-in-Transformers glamorous with a thin layer of dirt on top despite the brutal adventuring).</p>
-<p>Kerzner also describes the current zeitgeist’s attitude to big boobs as “eww, icky”, as a response to negative sexual attention many women receive; that the big boobs get removed so as to reduce repulsiveness (as opposed to adding other stuff, to add appeal elsewhere). – This leads to the notion that the title of Kerzner’s video responds to: that Survivor Lara is presumed to be ‘more feminist’.</p>
-<h3 id="classic-lara-is-back">Classic Lara is Back</h3>
-<p>And so it’s quite surprising to see that these remastered games feature a Lara that retains the look of the original.</p>
-<p>Or as <a href="https://www.youtube.com/watch?v=-4HX0fXY8yo">Melonie Mac</a> puts it:</p>
-<p>“[I wanted a remaster, but was worried they] would mess it up … the design would look bad, they would change Lara’s proportions, they would change the controls. That’s a huge thing: the controls!”</p>
-<p>I find it funny that the way Lara looks is coupled to the gameplay.</p>
-<p>Mac reacts to the idea of making the games more accessible the same way many reacted to Netflix’s 2022 “Persuasion”: significantly simplifying the original removes a lot of the depth that brought quality to the original.</p>
-<p>I suppose it makes sense. Both “reducing the aggressively-attractive features” and “making the gameplay easier” intend to make the game reach a broader audience. – But a part of me still wonders what it’d be like if the gameplay remained, but the looks were toned down.</p>
-<p>My favourite part of Mac’s video is this:</p>
-<p>“[if you don’t like the classic controls] spend 30 minutes learning them and then it’ll be all worth it. Here’s the thing, classic Tomb Raiders were built on a grid based system…”</p>
-<p>It’s just such unadulterated nerd talk.</p>
-<p>Watching some of Mac’s other thoughts:</p>
-<ul>
-<li><p>There’s the idea that ‘attractive female character’ is only for men, attractive female characters make women feel bad. – Mac reckons that in similar way that super tough male character is a male power fantasy, an attractive (female) character is a female power fantasy. https://www.youtube.com/watch?v=AotyaLxqMmk – When women <em>do</em> get the chance to customise their character, you’ll see women play as attractive characters.</p></li>
-<li><p>And in this video: https://www.youtube.com/watch?v=uqOn9w-OrqY Mac discusses “classic Lara Croft was sexist”.</p>
-<ul>
-<li><p>Mac’s not fussed about Lara wearing short-shorts in the snowy Tibetan foothills. Mac argues the other outfits Lara wears aren’t more revealing than what you’d see at the gym. Mac reckons that the classic Lara had a figure only slightly exaggerated from that of a gym rat;</p></li>
-<li><p>whereas Legend Lara is too stretched out (&amp; it’s Legend Lara has the sexy revealing dress, and the option to dress Lara in a bikini in-game);</p></li>
-<li><p>and by Shadow of the Tomb Raider, the outfits are extremely muted, and Lara’s body is unathletic (and legs are very short).</p></li>
-</ul></li>
-</ul>
-<p>Overall.. short-shorts in the snow is a bit silly; but, as is someone carrying around an arsenal of weapons, leaping acrobatics around in gunfights, going 1-on-1 against a T-Rex!, and dodging around ancient traps. – Short-shorts in snow is silly, but I don’t think it weighs significantly so as to degrade the character.</p>
-<h3 id="hashtag-representation">Hashtag Representation</h3>
-<p>I find it striking that a number of the people reacting on social media to the announcement of the TR Remaster were women.</p>
-<p>As always: generally, you can’t say “this group of people all think the same way”. It’s frustrating for people to feel left out or rejected.<br />
-Kerzner’s video does a good job discussing why some women don’t love the classic Lara look.<br />
-But it’s also clear to see that the women who do love the way classic Lara looks feel <em>really</em> rejected when classic Lara is denegrated.</p>
-<p>The assumption “people want to see characters that look like themselves” is obnoxious…<br />
-and I don’t doubt many of the women who enjoyed Tomb Raider enjoy other games too,<br />
-I’d say Tomb Raider’s protagonist being a woman brought more women to the game. Or, probably there’d be significantly fewer female fans of Tomb Raider if its main protagonist was a man.</p>
-<p>And <em>maybe</em> it’s a bit presumptuous, but.. Mac describes the Shiva statues in TR3 as scary for her when she was a young girl. Those TR3 levels <em>are</em> scary. –</p>
-<p>Above, both Kerzner and Mac discuss that the newer games feature significantly easier gameplay, and a more dramatic Lara with a more down to earth look. – I get the feeling that if the Tomb Raider games had kept the hardcore difficulty, and still made the changes to Lara’s appearance from “aggressively, conspicuously attractive” to a more muted everyday look, there’d still be some women upset.<br />
-– The games aren’t really realistic: having a stunningly feminine protagonist in such wild environments is silly. I can see why toning down the feminine aspects of Lara’s character, but retaining unrealistic action in the gameplay would come across as “femininity not welcome”.</p>
-<p>Related, but in contrast: e.g. <a href="https://www.youtube.com/watch?v=AGql5ay5TVY">Angel Eduardo discusses how he likes Superman</a> despite that he doesn’t share skin colour with Superman. Eduardo is disagreeing with “making superman non-white would make him more accessible to non-white people”.<br />
-(Eduardo argues: diversity requires more depth than just skin colour;
-it’s absurd to say “superman is just for whites” just because his skin is white, &amp; seeing superman as “white” is regressive, changing his skin colour validates that; superman is an immigrant, an orphan, and an outsider, so it ought to be easy for many to relate to him).</p>
-<p>(Now I’m wondering if they race-swapped Lara, but kept the hardcore gameplay, and the aggressively attractive looks…).</p>
-<p>In both cases above, the fans of a classic character don’t like the idea of changing the character’s appearance (at least) for the sake of ‘representation’.<br />
-– Although <em>surely</em> women being upset at a character’s femininity being diminished relates to ‘representation’?</p>
-<p>In Eduardo’s argument, race-swapping-as-representation undermines the value of a character that people should otherwise all be able to see themselves in. By ‘race swapping’, it emphasises differences rather than similarities.<br />
-In Mac’s discussion that classic Lara’s appearance is significant, by reducing the character’s aggressive beauty, it at least mutes the character from something distinct into something bland (and perhaps is ashamed of the femininity).</p>]]></summary>
-</entry>
-<entry>
-    <title>Using NixOS on an OpenStack Public Cloud</title>
-    <link href="http://www.rgoulter.com/blog//posts/programming/2023-09-09-using-nixos-on-an-openstack-public-cloud.html" />
-    <id>http://www.rgoulter.com/blog//posts/programming/2023-09-09-using-nixos-on-an-openstack-public-cloud.html</id>
-    <published>2023-09-09T00:00:00Z</published>
-    <updated>2023-09-09T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<p>Here are some notes on using NixOS in an OpenStack public cloud.</p>
-<p>Recall, NixOS is an operating system which makes use of the Nix package manager to manage its system configuration.<br />
-That NixOS allows declarative configuration of a system lends itself to building cloud VM images.</p>
-<p>OpenStack is a standard cloud computing platform. It offers services broadly similar to AWS’ EC2, S3, etc..</p>
-<p>One option for deploying NixOS configurations to a cloud VM is to run a NixOS VM, and then switch that VM to the configuration you want. – If the cloud provider doesn’t have a NixOS VM image to run, you’ll have to build your own image.</p>
-<h3 id="general-approach">General Approach</h3>
-<p>The most ‘challenging’ part of this is wanting to run a NixOS VM, but the cloud provider not having a public NixOS image.</p>
-<p>It’s possible to build a your own image in a format the cloud provider wants.</p>
-<p>The <a href="https://github.com/nix-community/nixos-generators">nix-community’s nixos-generators</a> is a good place to start for this.<br />
-Many popular image formats are supported.</p>
-<p>In the case of OpenStack images, there’s a generator specifically for that.<br />
-I guess for other cloud providers, some customisation may be required; I’d dig through the
-code within <a href="https://github.com/NixOS/nixpkgs/tree/master/nixos/maintainers/scripts/">nixos’ maintainers/scripts/</a> and <a href="https://github.com/NixOS/nixpkgs/tree/master/nixos/modules/virtualisation">modules/virtualisation/</a> to get an idea of what was done for the ones which are supported.</p>
-<h3 id="using-terraform-to-launch-a-vm-on-an-openstack-public-cloud">Using Terraform to Launch a VM on an OpenStack Public Cloud</h3>
-<p>I was doing this from a rather weak Macbook Air (Intel). I figured it’d be easier to build Linux images using Linux; so the first thing to do is launch a linux VM in the cloud.</p>
-<p>My experience with using OpenStack on public clouds is that the networking may be handled slightly differently from one public cloud and another.<br />
-(The related “used to hope this would work” is the idea of “Terraform works with different clouds” translating to “plenty of Terraform code can be reused in order to easily support a multi-cloud deployment; e.g. have the same service in both AWS and GCP”. Maybe for OpenStack public clouds this could be largely true; but, it’s unlikely Terraform code for networking resources can be reused).</p>
-<p>With AWS, I would think that an example of a simple Terraform task is “launch a VM with a publicly accessible IP”.<br />
-From what I’ve tried, it’s slightly trickier with OpenStack public clouds.</p>
-<p>I had some spare credits with <a href="https://cleura.com/">Cleura</a> to use, and they offer a public cloud with an OpenStack API.</p>
-<p>Managing OpenStack resources from outside the cloud console requires an OpenStack user.
-I found it convenient to download the RC file for the user, and use <a href="https://direnv.net/">direnv</a> to load those credentials.</p>
-<p>Here’s the code listing for a <code>main.tf</code> to achieve this (with some notes below):</p>
-<pre><code>terraform {
-  required_providers {
-    openstack = {
-      source  = &quot;terraform-provider-openstack/openstack&quot;
-      version = &quot;~&gt; 1.49.0&quot;
-    }
-  }
-}
-
-provider &quot;openstack&quot; {}
-
-# Variables
-
-variable &quot;default_user_name&quot; {
-  description = &quot;the name of the default user&quot;
-  type        = string
-  default     = &quot;debian&quot;
-}
-
-variable &quot;ssh_public_key&quot; {
-  description = &quot;the SSH public key used to access the VM&quot;
-  type        = string
-  default     = &quot;ssh-ed25519 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA&quot;
-}
-
-variable &quot;allow_ssh_access_cidr&quot; {
-  description = &quot;the CIDR to allow SSH access to. Defaults to 0.0.0.0/0 (unrestricted)&quot;
-  type        = string
-  default     = &quot;0.0.0.0/0&quot;
-}
-
-variable &quot;flavor&quot; {
-  description = &quot;the compute flavor to use&quot;
-  type        = string
-  default     = &quot;1C-2GB-20GB&quot;
-}
-
-variable &quot;image_name&quot; {
-  description = &quot;the name of the image the VM uses&quot;
-  type        = string
-  default     = &quot;Debian 11 Bullseye x86_64&quot;
-}
-
-variable &quot;instance_name&quot; {
-  description = &quot;the name of the VM&quot;
-  type        = string
-  default     = &quot;debian&quot;
-}
-
-# OpenStack Server flavor &amp; image
-
-data &quot;openstack_compute_flavor_v2&quot; &quot;self&quot; {
-  name = var.flavor
-}
-
-data &quot;openstack_images_image_v2&quot; &quot;self&quot; {
-  name        = var.image_name
-  most_recent = true
-}
-
-# Networking
-
-data &quot;openstack_networking_network_v2&quot; &quot;ext&quot; {
-  name = &quot;ext-net&quot;
-}
-
-resource &quot;openstack_networking_network_v2&quot; &quot;self&quot; {
-  name           = &quot;terraform_vm_network&quot;
-  admin_state_up = &quot;true&quot;
-}
-
-resource &quot;openstack_networking_subnet_v2&quot; &quot;self&quot; {
-  name       = &quot;terraform_vm_subnet&quot;
-  network_id = openstack_networking_network_v2.self.id
-  cidr       = &quot;192.168.199.0/24&quot;
-  ip_version = 4
-}
-
-resource &quot;openstack_networking_router_v2&quot; &quot;self&quot; {
-  name                = &quot;terraform_vm_router&quot;
-  external_network_id = data.openstack_networking_network_v2.ext.id
-}
-
-resource &quot;openstack_networking_router_interface_v2&quot; &quot;self&quot; {
-  router_id = openstack_networking_router_v2.self.id
-  subnet_id = openstack_networking_subnet_v2.self.id
-}
-
-resource &quot;openstack_networking_floatingip_v2&quot; &quot;self&quot; {
-  pool = data.openstack_networking_network_v2.ext.name
-}
-
-# Security
-
-resource &quot;openstack_compute_secgroup_v2&quot; &quot;allow_ssh&quot; {
-  name        = &quot;allow_ssh&quot;
-  description = &quot;allow SSH from the given CIDR&quot;
-
-  rule {
-    from_port   = 22
-    to_port     = 22
-    ip_protocol = &quot;tcp&quot;
-    cidr        = var.allow_ssh_access_cidr
-  }
-}
-
-resource &quot;openstack_compute_keypair_v2&quot; &quot;self&quot; {
-  name       = &quot;terraform_keypair&quot;
-  public_key = var.ssh_public_key
-}
-
-# Instance
-
-resource &quot;openstack_compute_instance_v2&quot; &quot;self&quot; {
-  name            = var.instance_name
-  flavor_id       = data.openstack_compute_flavor_v2.self.id
-  key_pair        = openstack_compute_keypair_v2.self.name
-  security_groups = [openstack_compute_secgroup_v2.allow_ssh.name]
-  user_data       = &lt;&lt;-USER
-  #cloud-config
-  system_info:
-   default_user:
-    name: ${var.default_user_name}
-  chpasswd: { expire: false }
-  ssh_pwauth: false
-  package_upgrade: true
-  manage_etc_hosts: localhost
-  runcmd:
-    - &quot;curl --proto &#39;=https&#39; --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install --no-confirm&quot;
-  USER
-
-  block_device {
-    uuid                  = data.openstack_images_image_v2.self.id
-    source_type           = &quot;image&quot;
-    volume_size           = 20 # GBs
-    boot_index            = 0
-    destination_type      = &quot;volume&quot;
-    delete_on_termination = true
-  }
-}
-
-resource &quot;openstack_compute_floatingip_associate_v2&quot; &quot;self&quot; {
-  floating_ip = openstack_networking_floatingip_v2.self.address
-  instance_id = openstack_compute_instance_v2.self.id
-}
-
-# Outputs
-
-output &quot;public_ipv4&quot; {
-  value = openstack_networking_floatingip_v2.self.address
-}</code></pre>
-<p>Again, I found the networking details to be a quite complicated.<br />
-The details were found by observing what resources were created when creating a VM with a public IP in the console.<br />
-Cleara uses the public network <code>ext-net</code>.<br />
-I’m not sure on the exact details, but I create a private network with a subnet, and to get a public IP (i.e. a floating ip in <code>ext-net</code>) to route to the VM, I create a router for the <code>ext-net</code> and a router interface which routes that to the private subnet. That public IP then gets associated with the VM.</p>
-<p>Another part that can be annoying with OpenStack is specifying the VM resources (CPU/memory/storage).<br />
-It’s more flexible than AWS’ “c5.small/medium/large”.<br />
-One thing I found annoying it it’s not quite so freeform as <code>"xC-yGB-zGB"</code> for arbitrary x,y,z; I had to list the flavors to find one.<br />
-(The impression I got was that the console lets you choose the number of cpu/mem/disk, so the flavor is created on demand for that).</p>
-<p>Idiosyncracies of OpenStack clouds aside, I think the other details are relatively straightforward.<br />
-The name <code>"Debian 11 Bullseye x86_64"</code> comes from running <code>openstack images list</code>.<br />
-(An easy way to get the <code>openstack</code> client is to run <code>nix shell nixpkgs#openstackclient</code>).</p>
-<p>Looking at the user data passed to the VM…</p>
-<pre><code>#cloud-config
-system_info:
- default_user:
-  name: ${var.default_user_name}
-chpasswd: { expire: false }
-ssh_pwauth: false
-package_upgrade: true
-manage_etc_hosts: localhost
-runcmd:
-  - &quot;curl --proto &#39;=https&#39; --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install --no-confirm&quot;</code></pre>
-<p>…this uses <a href="https://cloud-init.io/">cloud-init</a>, which declares some things we want set up in the VM.<br />
-The <code>curl ... | sh</code> installs the <a href="https://github.com/DeterminateSystems/nix-installer">determinate-systems nix installer</a>.<br />
-This means the VM will have <code>nix</code> available shortly after the VM launches. (Running the command <code>cloud-init status</code> on the launched VM shows whether cloud-init has finished).</p>
-<p>Running the Terraform file involves (as is usual):</p>
-<pre><code>terraform apply</code></pre>
-<p>(and removing these resources with <code>terraform destroy</code>).</p>
-<p>The public IP is an <code>output</code>, which allows SSH’ing into the VM with a command like:</p>
-<pre><code>ssh debian@(terraform output -json public_ipv4 | jq -r)</code></pre>
-<h3 id="building-the-nixos-image-for-openstack">Building the NixOS Image for OpenStack</h3>
-<p>This is the <code>flake.nix</code> file. Below, some implementation notes, and the commands for building/uploading.</p>
-<pre><code>{
-  inputs = {
-    nixos-generators = {
-      url = &quot;github:nix-community/nixos-generators&quot;;
-      inputs.nixpkgs.follows = &quot;nixpkgs&quot;;
-    };
-    nixpkgs.url = &quot;github:NixOS/nixpkgs/nixos-22.11&quot;;
-    rgoulter.url = &quot;github:rgoulter/nix-user-repository&quot;;
-  };
-
-  outputs = {
-    self,
-    nixos-generators,
-    nixpkgs,
-    rgoulter,
-    ...
-  }: {
-    packages.&quot;x86_64-linux&quot;.small-openstack = nixos-generators.nixosGenerate {
-      pkgs = nixpkgs.legacyPackages.&quot;x86_64-linux&quot;;
-      format = &quot;openstack&quot;;
-      modules = [
-        rgoulter.nixosModules.cloud-interactive
-        rgoulter.nixosModules.ssh
-        rgoulter.nixosModules.ssh-users
-        rgoulter.nixosModules.tailscale
-      ];
-    };
-  };
-}</code></pre>
-<p>Recall, a <code>flake.nix</code> file is more/less equivalent to a <code>package.json</code>/<code>Cargo.toml</code>/etc. project file,
-and is a standard entry point into a Nix codebase.</p>
-<p>Here, the OpenStack image is declared as a package, using <a href="https://github.com/nix-community/nixos-generators">nixos-generators</a>
-and its <code>nixosGenerate</code> package. (The OpenStack specific part is the <code>format = "openstack";</code> attribute. As mentioned above, you can dig into the details in <code>nixos/</code>, which <code>nixos-generators</code> makes use of).</p>
-<p>The <code>rgoulter.nixosModules</code> refers to the <a href="https://github.com/rgoulter/nix-user-repository/tree/95968968d32f7a6754978f099e975ca56b916977/modules">modules</a> in my <code>nix-user-repository</code>. (Though, you could just inline these all as one module in this <code>flake.nix</code> file, etc.).</p>
-<p>e.g. cloud-interactive ensures that some CLI tools I like are installed:</p>
-<pre><code>{
-  config,
-  lib,
-  pkgs,
-  ...
-}: {
-  environment.systemPackages = with pkgs; [
-    direnv
-    fd
-    fish
-    git
-    helix
-    jq
-    ripgrep
-    starship
-    tmux
-  ];
-  nix = {
-    extraOptions = &#39;&#39;
-      experimental-features = nix-command flakes
-    &#39;&#39;;
-  };
-  security.sudo.wheelNeedsPassword = false;
-}</code></pre>
-<p>and <code>ssh-users</code> declares the user I log in with:</p>
-<pre><code>{
-  config,
-  lib,
-  pkgs,
-  ...
-}:
-{
-  users.users.rgoulter = {
-    isNormalUser = true;
-    extraGroups = [
-      &quot;wheel&quot;
-    ];
-    openssh.authorizedKeys.keys = [
-      &quot;ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOmQ9/u9qV9Vvy2pbcPtGiAmIrhXdi/vY6IesJ5RYpS4&quot;
-    ];
-  };
-}</code></pre>
-<p>(This doesn’t necessarily need to be hard coded into the image; but, for this use case, doing it this way is simple).</p>
-<p>With this <code>flake.nix</code>, on a Linux computer with <code>nix</code> installed (and flakes, nix-command enabled, as the determinate-systems does),
-the image is built by running a command like:</p>
-<pre><code>nix build .#small-openstack</code></pre>
-<p>(A quick &amp; dirty approach is to just copy the <code>flake.nix</code> file to the Linux VM we’re running. But, it’d also be possible to have a <code>nixosGenerate</code> package in a <code>flake.nix</code> in a repository else &amp; refer to it using the appropriate flake URI).</p>
-<p>The resulting file is linked to by <code>./result/nixos.qcow2</code>.</p>
-<h3 id="uploading-the-image">Uploading the Image</h3>
-<p>With the <code>openstack</code> client (use <code>nix shell nixpkgs#openstackclient</code> to make it available to the shell),
-and appropriate openstack credentials (e.g. copying the openstack user RC file over and <code>source</code>’ing it),
-the built image can be uploaded with:</p>
-<pre><code>openstack image create \
-  --private \
-  --disk-format qcow2 \
-  --container-format bare \
-  --file ./result/nixos.qcow2 \
-  my-nixos</code></pre>
-<p>which creates the OpenStack image <code>my-nixos</code>.</p>
-<h3 id="launching-a-vm-with-our-private-nixos-image">Launching a VM with Our Private NixOS Image</h3>
-<p>This is straightforward, by re-using the code from “Using Terraform to Launch a VM”.</p>
-<p>Simply change the <code>name</code> of the image in the <code>data.openstack_images_image_v2</code> block to <code>"my-nixos"</code>. (e.g. change the value of the Terraform variable <code>image_name</code>). – The NixOS image ignores the user data.</p>
-<h3 id="switching-configuration-after-launch">Switching Configuration After Launch</h3>
-<p>There are uses cases where it makes sense to ‘switch’ the NixOS configuration after the VM has launched.</p>
-<p>There are plenty of options for doing this.</p>
-<p>I liked using a command like:</p>
-<pre><code>ssh -A &quot;rgoulter@${IP}&quot; -- &quot; \
-  sudo sh -c &#39;mkdir -p ~/.ssh &amp;&amp; \
-  chmod 700 ~/.ssh &amp;&amp; \
-  ssh-keyscan github.com &gt;&gt; ~/.ssh/known_hosts &amp;&amp; \
-  echo switch to ${FLAKE_URI} &amp;&amp; \
-  nixos-rebuild switch --flake ${FLAKE_URI}&#39; \
-&quot;</code></pre>
-<p>I think another option instead of doing the <code>ssh-keyscan</code> here is to add it to
-<a href="https://search.nixos.org/options?channel=23.05&amp;from=0&amp;size=50&amp;sort=relevance&amp;type=packages&amp;query=services.openssh.knownHosts">services.openssh.knownHosts</a>.</p>]]></summary>
 </entry>
 
 </feed>

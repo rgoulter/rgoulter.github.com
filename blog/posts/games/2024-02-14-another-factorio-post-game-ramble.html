@@ -1,0 +1,363 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Another Factorio Post-Game Ramble - Richard Goulter's Blog</title>
+
+        <!-- My (Old) CSS theme -->
+        <link rel="stylesheet" type="text/css" href="../../css/default.css" />
+
+        <!--
+            jQuery & jQueryUI
+        -->
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css" />
+
+        <!--
+            Pandoc Style CSS
+            (for syntax highlighted snippets)
+        -->
+        <link rel="stylesheet" type="text/css" href="../../css/syntax.css" />
+
+        <!--
+            Bootstrap
+        -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+        <style>
+            /*
+             * Bootstrap defines blockquote as 17px,
+             * so it looks stupidly large in my blogposts. */
+            blockquote {
+                font-size: 14px;
+            }
+        </style>
+
+        <!--
+            Waypoints, and Waypoints-Sticky,
+            so we can do this:
+            http://imakewebthings.com/waypoints/shortcuts/sticky-elements/
+        -->
+        <script src="../../js/jquery.waypoints.min.js"></script>
+        <script src="../../js/sticky.min.js"></script>
+
+        <!-- My analytics stuff -->
+        <script src="../../js/my_analytics.js"></script>
+        <script src="../../js/my_analytics_debug.js"></script>
+
+        <!--
+            TOCify
+        -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js"></script>
+
+        <!--
+            Patched TOCify css file.
+            (Don't want fixed `.tocify`).
+        -->
+        <link rel="stylesheet" type="text/css" href="../../css/jquery.tocify.css" />
+
+        <style>
+        .navbar {
+            margin-bottom: 0px;
+        }
+
+        .banner-image {
+            width:100%;
+        }
+
+        .banner {
+            margin-left: 0px;
+            margin-right: 0px;
+        }
+
+        body {
+            background-color: #e2e2e2;
+        }
+
+        #page {
+            padding-left:0;
+            padding-right:0;
+            background-color: #ffffff;
+        }
+        </style>
+
+        <!-- Google Analytics -->
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-H13NWYDX0G"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'G-H13NWYDX0G');
+        </script>
+    </head>
+    <body>
+        <div id="page" class="container">
+            <!-- This, with no padding on left/right -->
+            <div class="banner">
+                <nav class="navbar navbar-default">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+
+            <!-- The Hamburger -->
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../../">Richard Goulter's Blog</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="../../">Home</a></li>
+            <li><a href="../../yi.html">Yi</a></li>
+            <li><a href="../../emacs.html">Emacs</a></li>
+            <li><a href="../../what-i-wish-i-knew-when-i-started-using-nix.html">Nixpkgs</a></li>
+            <li><a href="../../archive.html">Archive</a></li>
+        </ul>
+    </div>
+</nav>
+
+            </div>
+
+            <hr style="margin: 0px; border-top: 5px solid black;" />
+
+            <div id="content" class="container">
+                <h1>Another Factorio Post-Game Ramble</h1>
+                <div class="info">
+    Posted on February 14, 2024
+    
+        by Richard Goulter
+    <br />
+    
+    Tags: 
+    
+</div>
+
+<p>Factorio is such an enthralling game to play.</p>
+<p>If you’ve somehow found this post but don’t know Factorio:
+It’s a 2D game which starts out similar to many ‘survival’ games (e.g. you chop wood, mine stone and iron, etc.), but progressively build up ways to automate these tasks away. The eventual goal is to build and launch a rocket; although many players find fun in seeing how big a factory they can build.<br />
+Ultimately, the whole ‘challenge’ of Factorio is finding a way to arrange the factory so that all the inputs can get to the right places.. so it’s encouraged to do a first playthrough ‘blind’.</p>
+<p>I had been meaning to play some other games on my Nintendo Switch, but after starting a new Factorio playthrough, ended up spending a lot of time on that.</p>
+<p>This time, I played on a “ribbon world”. I also set the resource patches to be more frequent and richer (although didn’t change them to be bigger than normal). I decided to play on non-peaceful; but, disabled enemy expansion.</p>
+<p>“Ribbon world” limits the height of the map. – This adds some challenge to laying out the base. e.g. the limited vertical space constrains how ‘vertical’ any part of the factory can be; whereas horizontal space has to be cleared (especially on non-peaceful, where enemies have to be cleared), and inputs will end up <em>really far</em> from where they need to be.<br />
+On the flipside, the limited height makes defending from the enemies trivial: the enemies can only come from the left or the right, so you only need to worry about defending a tiny perimeter to the left and to the right.</p>
+<h2 id="compared-to-previous-playthroughs">Compared to Previous Playthroughs</h2>
+<p>On my previous Factorio runs: I mostly stuck to peaceful, and have tried out different strategies for organising the factory.<br />
+I did complete a game of non-peaceful.. I’d say that the enemy attacks add some pushback and constraints. e.g. you need to supply defenses, and in order to expand the factory, you somewhat need to clear enemy bases.<br />
+In terms of strategies I’ve tried: I’ve tried the game without trains or even bots(!), I tried the game where I used trains to augment a ‘main bus’. I tried a game where I had the whole factory covered with the same bot network, and used this to supplement a main bus (albeit, resource patches were frequent, rich, and big).</p>
+<p>Recall.. the “main bus” idea is to put a bunch of common resources on belts in parallel. This makes the “gather inputs” part of the equation much simpler: to assemble an item with inputs “steel, copper, green circuits”, you just branch these resources off from the main bus.<br />
+One inevitable problem is that the input requirements for your inputs might be larger than the bandwidth of the bus. (e.g. you’d ideally consume 1000 resources from the bus, but the bus only supplies 500).</p>
+<p>Having a factory covered with bots “solves” the problem of getting uncommon items around; and also makes it easy to build up parts of the factory without needing the player around.<br />
+I’d hoped for a ‘stacking’ design which automatically could build itself (since the roboports from one part would be able to then build more roboports and other buildings, expanding the factory).<br />
+In hindsight, it was excessive to build roboports that covered the whole of the map. It didn’t really help with moving resources around great distances.</p>
+<p>For this ribbon world, for moving resources great distances, I opted to go for a train-based approach.</p>
+<h3 id="overview-of-the-strategy">Overview of the Strategy</h3>
+<p>Generally the strategy I wanted to take for this factory was: use trains to move resources around.</p>
+<p>I aimed to have four lanes of rails at the edge of the map: two on the top, two on the bottom. The idea being, train stations can branch-off from the inner pair of rails, whereas the outer pair of rails only ever has junctions to/from the inner pair of rails; trains need to slow down in order to stop, so hopefully this would reduce the need for trains to slow down before reaching their destination.</p>
+<p>Using trains then means: have train stations which load resources from mines, and then have groups of train stations which consume those resources (and provide more complex resources in turn).</p>
+<p>I hadn’t been against the idea of then using train stations to start off a “main bus”. However, I never ended up doing this. (I did build the same “mall” that I’d used in previous builds, which uses a bus of inputs). – It would take a lot of horizontal space to gather so many inputs, and would take a lot of horizontal space to extend the bus, and there’s not much vertical space to build off of the bus.</p>
+<p>Militarily, the game was quite straightforward.<br />
+In the early game, the enemy bases are quite far away. The enemy AI is passive, and only attacks in reaction to pollution from your factory reaching their base. It was easy for pace of conquest to outspeed pace of pollution, since the height of the map is limited.<br />
+However, it doesn’t take too long until conquering enemy bases become too formidable for the player to take on by themselves. Enemy defenses get so strong that it takes a lot of effort to make incremental progress against them. (Although part of the problem is the tank doesn’t control so well on the Nintendo Switch, I reckon).<br />
+In the late game, artillery outreaches the enemy.. so expanding the factory involves building up a wall &amp; some turrets, building out the railway to the wall, then using an artillery train to blast the enemy bases. – Notably, construction bots can be used to build out these, so it can be done without needing the player nearby.</p>
+<h3 id="what-went-well-scale">What Went Well: Scale</h3>
+<p>One of the challenges of Factorio’s late game is that high-tier items are really expensive, requiring many inputs.<br />
+e.g. The simple green circuits require a few iron and copper pieces. The more advanced red circuits then require a few green circuits, a few copper pieces, and a few bits of plastic. The most advanced blue circuits require <em>twenty</em> green circuits, and some red circuits, and some sulfuric acid. – Many of the late game items require hundreds of blue circuits to build.<br />
+As noted above, even if it’s not difficult to get inputs connected to a system, one of the problems using belts is hitting bandwidth limits.</p>
+<p>Using trains to move resources around allows for huge scale.<br />
+I suppose there must be a bandwidth limit on how many resources a rail allows, too. But, with trains only using rails when carrying a bulk of resources at great speed, it’s not really an easy limit to hit.</p>
+<p>Trains then allow for ‘decoupling’ where an input is gathered from where it’s consumed.<br />
+– With belts, you need a belt that runs all the way from a particular input to where it’s consumed. More resources can be fed into the belt, but resources need to be fed into the belt <em>before</em> where they’re consumed from a belt.<br />
+With rail, there’s not this constraint. Resources loaded anywhere on a rail network will find their way to where they need to be unloaded in the rail network.</p>
+<p>This ends up making “scaling” relatively straightforward: getting more resources essentially either involves building up how many resources are produced at a particular location (e.g. adding more miners to an ore patch) i.e. “scaling vertically”, or by adding more stations to the rail network which produce that resource i.e. “scaling horizontally”.</p>
+<h3 id="practical-differences-between-belt-based-and-rail-based">Practical Differences Between Belt-Based and Rail-Based</h3>
+<p>I did run into some practical problems trying a rail-based factory.</p>
+<p>There is some edge case stuff.<br />
+In rare cases, maybe a train runs out of fuel.<br />
+When I tried to be fancy and programatically enable/disable a train station (e.g. “disable this stationn, because it has enough resources”), sometimes a train might stop in the middle of the rail because it suddenly gets disallowed from visiting its destination.<br />
+etc.</p>
+<p>One downside to the rail-based approach is there is additional overhead to deal with.</p>
+<p>One overhead cost is that there may be a longer lead time between when an input is added to a network, and when it can be consumed by the network.<br />
+e.g. A simple approach to take is to have a cargo train wait at a loading station until it is full, and then move to a deposit station until it is empty. (Anything more frequent than this would be an ‘inefficiency’). – This means opting to wait the full length of time for a cargo train’s worth of resources to be produced before it meaningfully enters the network. (This increases the delay in the feedback loop for how much some resource is demanded, for better and for worse).</p>
+<p>Compared to belts, distribution of resources is more of a problem whenever inputs don’t fully saturate demand.<br />
+With belts, splitting resources off of a belt does so in a 50-50 manner. So for a factory with 1000 units of some resource needed by A, B, and C.. 500 will reach A, 250 will reach B, 125 will reach C, leaving 125 to continue to be available on the bus (splitting off into 64, 32, etc.). – Eventually, at least <em>some</em> of the resource will reach even the end of the bus, even before inputs at the start are saturated.<br />
+With rails, by default, you don’t get this behaviour. A train will go to the closest station that it can visit. – So while it’s still true that “producing more inputs than is consumed” <em>eventually</em> satiates demand, it takes more care to get expensive resources where they need to be before all inputs are satiated.</p>
+<p>I’d say one mistake I made was using big buffers at resource unloading stations for expensive resources. – i.e. Each unloading station would have a buffer which could receive six or seven trains’ worth of cargo. For simple resources, this isn’t much of an issue, since it’s easy to build more stations which provide that resource. For more complex resources, since the time to produce the resource is greater than the time to load the resource onto the train, this meant that a significant amount of time was spent depositing the resource into filling up a buffer, when that resource was starved in other parts of the rail network.</p>
+<p>Another overhead cost is space. This perhaps is “different” rather than “worse” than belts.<br />
+With belts, moving resources over a long distance is tedious but possible. Moving rare/expensive resources long distances (at worst) involves snaking the belt through the rest of your factory.<br />
+With trains, building a ‘block’ of stations for a resource which takes 5 inputs requires taking up a reasonable chunk of horizontal space on the map. (This is mostly more annoying with frequent resource patches, since you might want to avoid building on top of a resource patch).</p>
+<p>One decision to make is “what resources to put on the rail network”.<br />
+If building up the rail network before electric smelting, then coal is required to turn the ore into plates that get used by most recipes. (Which is why it’s a bad idea to build up a rail network before getting electric smelting).<br />
+Yellow Science in particular has complex input requirements, and there are different trade-offs for putting its intermediate input requirements on the bus or assembling them in the same block.</p>
+<h3 id="new-to-me-circuit-network-combinators">New to Me: Circuit Network Combinators</h3>
+<p>The circuit network allows for programmability with Factorio’s machines.</p>
+<p>I had used it before for simple things like “if ammo below certain amount, send an alarm signal” or “only take stuff out from this storage if there are at least 1000 items”.</p>
+<p>The circuit network logic complements the rail network nicely.</p>
+<p>I was able to use the circuit network to describe a couple of things:</p>
+<ul>
+<li><p>Dynamically set how many trains are allowed to visit a station, based on how much remaining capacity the storage buffer for the station had. (e.g. if it would only take two trains to fill the storage buffer, limit the number of trains that would visit the station to two).</p></li>
+<li><p>Dynamically enable or disable the station based on how full the buffer was. Once the buffer was less than 20% (or whatever) full, then enable the station so that resources would be unloaded there; but once it reached 90% or so, then disable the station until the buffer was back down to only 20% full.</p></li>
+</ul>
+<p>The problem above of “starving stations not being filled, while buffers elsewhere were being filled” surely could have been mitigated using the circuit network. (The logic is a bit ‘come-from’: rather than saying where trains go <em>to</em>, you’d say which destinations should receive resources. I’m guessing something like: if any stations are ‘starved’, then limit or disable any stations which have at least some resources in their buffer).</p>
+<h3 id="what-went-less-than-well-slow-progress-to-reach-late-game">What Went Less Than Well: Slow Progress to Reach Late Game</h3>
+<p>Kinda like how playing Sudoku can be fun even though Sudoku solvers exist, playing Factorio can be fun even if you’re not building the best factory ever.<br />
+Factorio is essentially just a toy.. and the game’s goal of ‘launch a rocket’ is a decent objective to aim for with Factorio’s systems.</p>
+<p>It’d obviously be less fun if I just used console commands to provide infinite resources, or to instantly provide the rocket silo &amp; launch the rocket effortlessly.</p>
+<p>I imagine it’d be less fun if I only used blueprints other people created.</p>
+<p>I find Factorio fun even without the enemies, or with non-aggressive enemies.</p>
+<p>Unfortunately, in this ribbon world playthrough on the Nintendo Switch, I took a long time before getting to the late game.<br />
+What I ‘should’ have done was to aim to quickly build a factory which would (even at a trickle’s pace) research towards the late game technologies.<br />
+Instead, I meandered and did things I thought were more interesting. Which is fine, but it meant it took a long time before I reached the late game.</p>
+<p>The friction is that the problems you face in the early game get solved by the late game:<br />
+Routing train rails is difficult when the map has cliffs and water. The cliffs can be blown up, and the water can be filled with later technology.<br />
+A busy factory will use a lot of electricity. Nuclear power provides an abundance of electricity.<br />
+Enemies block expansion.. and late game artillery ‘solves’ this, and laser turrets ‘solve’ the problem of supplying the defence.<br />
+Building the same pattern of buildings repeatedly is slow; bots trivialise this.<br />
+– But in order to use these technologies, you have to have researched them.<br />
+Aiming to use a train-based factory before the late game ultimately ends up being a bad idea. You don’t have the capacity to expand the factory fast enough to meet the input requirements for the kind of scale that a train-based factory needs.</p>
+<h3 id="a-follow-up-playthrough">A Follow-Up Playthrough</h3>
+<p>As I was writing the above up, I just <em>had to</em> try again to see if I could do better.</p>
+<p>I took time to pre-plan the ‘blocks’ of train stations that I would use. I used the sandbox mode so that this could be done in a safe way.</p>
+<p>On the PC, I played using the default ribbon-world settings. (So, compared to my Nintendo Switch playthrough, resources were less frequent, and not quite as rich; plus, enemy expansion was enabled).</p>
+<p>Overall, from a second playthrough:</p>
+<ul>
+<li><p>The gameplay was significantly more difficult with enemy expansion enabled than disabled. With enemy expansion, I very quickly hit a point where clearing enemy bases was impractical without artillery.</p></li>
+<li><p>I used a much more compact approach when designing the blocks of train stations. This meant I was better able to utilise space.</p></li>
+<li><p>In my first playthrough, I had opted to have each station allow for ‘stacking’ trains. This wasn’t really necessary for the scale I was operating at. (It would be useful if the factory were so large that “time to consume all of trains input” was shorter than “time for another train to arrive”).</p></li>
+<li><p>I took the time to ensure my blueprints for “use roboports to expand the factory’s frontier” (place laser turrets, place rail so the artillery train can move further out) could more easily snap-to a course grid. This made it much easier to instruct the bots when expanding the frontier.</p></li>
+<li><p>I <em>really</em> felt the contrast between ‘mid game’ and ‘late game’. With ‘mid game’, I was essentially boxed in until I could research artillery. I wasn’t able to easily expand in order to acquire more resource inputs. (Hence.. using a rail-based factory has more disadvantages than advantages). – Probably, though, the lategame alone wouldn’t feel so satisfying without having faced the obstacles in the mid-game.</p></li>
+</ul>
+<p>For now, that’s enough Factorio, though.</p>
+
+<hr />
+
+<div>
+    
+    
+    <a href="../../posts/games/2024-01-13-tomb-raider-3.html" style="float:right; text-align: right;">Older post</a>
+    
+</div>
+<br style="clear: both;" />
+
+<hr />
+
+<!-- Load highlight.js for Syntax Highlighting. -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/bash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/c.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/gherkin.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/haskell.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/lisp.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/nix.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js"></script>
+<script>hljs.highlightAll();</script>
+
+            </div>
+
+            <hr style="margin-bottom: 0px; border-top: 2px solid black;" />
+
+            <div id="footer" class="pull-right" style="padding-right: 10px;">
+                Site proudly generated by
+                <a href="http://jaspervdj.be/hakyll">Hakyll</a>
+            </div>
+        </div>
+
+        <script>
+            // The callbacks we wanna use
+            // Phone-home, telling Google Analytics various metrics/dimensions
+
+            // Use custom dimensions & metrics
+            var AnalyticDimensionReaderKind = 'dimension1';
+            var AnalyticMetricActiveTime      = 'metric1';
+            var AnalyticMetricLongestIdleTime = 'metric2';
+            var AnalyticMetricReadCount       = 'metric3';
+
+            var gaCallbacks = {
+                "scrollPercent": function(ms, perc) {
+                    if (perc > 85) {
+                        // EVENT: Page read
+                        ga('send', {
+                            hitType:       'event',
+                            eventCategory: 'Scrolling',
+                            eventAction:   'atBottom',
+                            eventValue:    String(ms)
+                        });
+                    }
+                },
+                "read": function(ms, ct, timeToReach) {
+                    // Use this to set DIMENSION
+                    // timeToReach < 5s ==> Skim (default = Visitor)
+                    if (timeToReach < 5 * 1000) {
+                        // dimension1 = ReaderKind
+                        ga('set', AnalyticDimensionReaderKind, "skimmer");
+                    }
+
+                    // timeToReach > 30s ==> Reader
+                    if (timeToReach > 30 * 1000) {
+                        // dimension1 = ReaderKind
+                        ga('set', AnalyticDimensionReaderKind, "reader");
+                    }
+
+                    // EVENT: Page read
+                    ga('send', {
+                        hitType:       'event',
+                        eventCategory: 'Reading',
+                        eventAction:   'read',
+                        eventValue:    String(timeToReach)
+                    });
+
+                    // METRIC
+                    ga('set', AnalyticMetricReadCount, String(ct));
+                },
+                "initialIdle": function(ms) {
+                    // EVENT: Started Reading
+                    ga('send', {
+                        hitType:       'event',
+                        eventCategory: 'Scrolling',
+                        eventAction:   'begun',
+                        eventValue:    String(ms)
+                    });
+                },
+                "timeSpent": function(total, active, curIdle, initIdle, longestIdle) {
+                    // Update METRIC(S)?
+                    ga('set', AnalyticMetricActiveTime, String(active));
+                    ga('set', AnalyticMetricLongestIdleTime, String(longestIdle));
+                },
+                "idle": function(ms) {
+                },
+                "longestIdle": function(ms) {
+                }
+            }
+
+            window.onload = function() {
+                myAnalyticsInit(gaCallbacks);
+
+                //
+                // Initial dimensions & metrics
+                //
+
+                ga('set', AnalyticMetricReadCount, String(0));
+
+                // EVENT: Page load
+                ga('send', {
+                    hitType:       'event',
+                    eventCategory: 'pageLoad',
+                    eventAction:   'begun',
+                    eventValue:    String(ms)
+                });
+
+                // DIMENSION: visitor
+                ga('set', AnalyticDimensionReaderKind, "visitor");
+            }
+        </script>
+    </body>
+</html>
