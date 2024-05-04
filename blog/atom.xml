@@ -8,8 +8,144 @@
         <name>Richard Goulter</name>
         <email>richard.goulter+blog@gmail.com</email>
     </author>
-    <updated>2024-02-14T00:00:00Z</updated>
+    <updated>2024-04-09T00:00:00Z</updated>
     <entry>
+    <title>Using Terraform to Manage an Object Stored in OpenStack Swift</title>
+    <link href="http://www.rgoulter.com/blog//posts/programming/2024-04-09-using-terraform-to-manage-an-object-stored-in-openstack-swift.html" />
+    <id>http://www.rgoulter.com/blog//posts/programming/2024-04-09-using-terraform-to-manage-an-object-stored-in-openstack-swift.html</id>
+    <published>2024-04-09T00:00:00Z</published>
+    <updated>2024-04-09T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<h2 id="technologies">Technologies</h2>
+<p><a href="https://www.openstack.org/">OpenStack</a> is a set of software that infrastructure providers can use to give users a user-experience similar to that of AWS or other cloud providers. e.g. <a href="https://cleura.com/">Cleura</a> provides a public cloud service which can be managed with OpenStack APIs. – I think the idea for OpenStack was to enable infrastructure providers to serve as a substitute for AWS.. albeit, even amongst OpenStack public clouds, there remain idiosyncracies such that a deployment in one OpenStack cloud might require effort to deploy to another OpenStack cloud.</p>
+<p><a href="https://docs.openstack.org/swift/latest/">OpenStack’s Swift</a> is an ‘object storage’ service. More/less the same thing as AWS’ S3 (or Google Cloud’s cloud storage).</p>
+<p><a href="https://www.terraform.io/">Terraform</a>, or its open source fork <a href="https://opentofu.org/">OpenTofu</a>, is a tool for managing declarations of cloud resources. There’s a <a href="https://registry.terraform.io/providers/terraform-provider-openstack/openstack/latest/docs">Terraform Provider for OpenStack</a>, so that Terraform can be used to work with OpenStack resources.</p>
+<h2 id="task">Task</h2>
+<p>Here are notes on using Terraform to manage an object in a ‘container’ on OpenStack Swift (‘bucket’ in AWS terms), and to create a (temporary) URL to access that object.</p>
+<p>The main advantage of this approach is reyling on Terraform to manage the setup/teardown, as opposed to having to use the web console to manage this, or use the CLI client to manage these. I prefer being able to run <code>terraform apply</code> to ensure things are there; and <code>terraform destroy</code> to ensure things are gone.</p>
+<h2 id="terraform-code-for-container-and-bucket">Terraform Code for Container and Bucket</h2>
+<p>Some boilerplate, using the openstack provider for Terraform:</p>
+<pre class="terraform"><code>terraform {
+  required_version = &quot;&gt;= 0.14.0&quot;
+  required_providers {
+    openstack = {
+      source  = &quot;terraform-provider-openstack/openstack&quot;
+      version = &quot;~&gt; 1.49.0&quot;
+    }
+  }
+}</code></pre>
+<p>As the provider documentation mentions, the Terraform OpenStack provider can pick up authentication credentials from <code>OS_</code> environment variables. I used the Cleura public OpenStack cloud, and downloaded an ‘rc’ file with the credentials for an OpenStack user to use with a project there.</p>
+<p>Then the Terraform code for creating a container <code>rgoulter-storage</code>, and an object named <code>test</code> in that container:</p>
+<pre class="terraform"><code>resource &quot;openstack_objectstorage_container_v1&quot; &quot;self&quot; {
+  name = &quot;rgoulter-storage&quot;
+  metadata = {
+    Temp-URL-Key = &quot;some-secret-value&quot;
+  }
+}
+
+resource &quot;openstack_objectstorage_object_v1&quot; &quot;self&quot; {
+  container_name = openstack_objectstorage_container_v1.self.name
+  name           = &quot;test&quot;
+  content        = &quot;Hello, world!&quot;
+}</code></pre>
+<p>Resources are named <code>self</code> out of convention. (There aren’t multiple containers, objects in this Terraform codebase).</p>
+<p>In this case, the content of the object is set with the <code>content</code> attribute to the object resource. The <code>source</code> attribute is more suitable when you want some file to be uploaded. (c.f. <a href="https://registry.terraform.io/providers/terraform-provider-openstack/openstack/latest/docs/resources/objectstorage_object_v1">the terraform provider documentation</a>).</p>
+<p><code>Temp-URL-Key</code> is set on the container’s metadata to allow creating temporary URLs to provide access. (c.f. <a href="https://docs.openstack.org/swift/latest/api/temporary_url_middleware.html">Swift’s temporary url middleware documentation</a>). – This value should be kept secret; this value is used to create temporary URLs to access objects in the container.</p>
+<h2 id="creating-temporary-urls-with-terraform">Creating Temporary URLs: with Terraform</h2>
+<pre class="terraform"><code>resource &quot;openstack_objectstorage_tempurl_v1&quot; &quot;self&quot; {
+  container  = openstack_objectstorage_container_v1.self.name
+  object     = openstack_objectstorage_object_v1.self.name
+  method     = &quot;get&quot;
+  ttl        = 900
+  regenerate = true
+}
+
+output &quot;tempurl&quot; {
+  value     = openstack_objectstorage_tempurl_v1.self.url
+  sensitive = true
+}</code></pre>
+<p>It’s possible to also use the Terraform OpenStack provider to manage tempurls.</p>
+<p>On the one hand, you might as well, if you’re using Terraform for the other parts.
+On the other hand, I think it smells a bit too much to ‘declare’ the existance of a tempurl with a time-to-live of 900 seconds.</p>
+<p>One nice thing about this approach is the output URL value is simple/easy to figure out. i.e. running <code>terraform output -raw tempurl</code> outputs something like:</p>
+<pre><code>https://swift-fra1.citycloud.com:8080/swift/v1/AUTH_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/rgoulter-storage/test?temp_url_sig=bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb&amp;temp_url_expires=1999999999</code></pre>
+<h2 id="creating-temporary-urls-with-command-line-client">Creating Temporary URLs: with Command Line Client</h2>
+<p>The <a href="https://docs.openstack.org/swift/latest/api/temporary_url_middleware.html">documentation about temporary url middleware</a> gives instructions on using the OpenStack Swift client to create a temporary URL.</p>
+<p>There are various ways to come up with the OpenStack Storage URL (<code>https://swift-cluster.example.com/v1/my_account/</code>), but here’s what I came up with for the container, object, and temp URL key above:</p>
+<pre class="sh"><code>OS_STORAGE_URL=$(openstack catalog show object-store --format=json | jq -r .endpoints[2].url)
+swift tempurl --digest=sha1 GET 900 ${OS_STORAGE_URL}/rgoulter-storage/test some-secret-value</code></pre>
+<p>The <code>jq</code> expression isn’t the cleanest. (The <code>[2]</code> is the index the “public” object-store endpoint happened to be in the output of <code>openstack catalog show object-store</code>; albeit, all the endpoints had the same URL).</p>
+<p>The URL from <code>swift tempurl</code> can be used for GET requests to access the storage.</p>]]></summary>
+</entry>
+<entry>
+    <title>Six Months of Going to the Gym</title>
+    <link href="http://www.rgoulter.com/blog//posts/2024-03-23-six-months-of-going-to-the-gym.html" />
+    <id>http://www.rgoulter.com/blog//posts/2024-03-23-six-months-of-going-to-the-gym.html</id>
+    <published>2024-03-23T00:00:00Z</published>
+    <updated>2024-03-23T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<p>I’ve been going to the gym consistently for the last six months or so.</p>
+<p>Some thoughts:</p>
+<h2 id="goals">Goals</h2>
+<p>I started going to the gym to improve my health; especially to lose fat.</p>
+<p>Alongside going to the gym, I’ve restricted the amount of soft drink I drink, &amp; limited the amount of fried food I eat.<br />
+Those changes alone had a significant impact on the progress I made.<br />
+– “Restriction” is an unhappy word. Perhaps “control” would be better. By my estimate, the effort it’d take to burn the calories from soft drinks far outweighs the reward from drinking them.</p>
+<p>The gym I attend has a fancy bioelectrical impedance analysis machine. This helps assess body composition; i.e. can be used to measure weight, muscle mass (sorta), and fat. – This makes it easier to track “fat loss” as a target, as distinct from “weight loss”. Without that distinction, building muscle (as a gym beginner) somewhat confounds the goal of losing weight; since it’s good to build muscle, but building muscle increases weight. (Although, sure, it’s easier to burn fat with a calorie deficit, and to build muscle with a calorie surplus[1]).</p>
+<p>I also recently started keeping a workout journal. It’s easy enough to keep track of progress when using a treadmill (e.g. “Last week I ran 5km. This week I ran 5.2km. Improvement!”). But, I found it difficult to keep track of progress when using weight machines (&amp; weights). I wanted to write down what I’d done, so then I’d have a reference point to compare against for the next session.</p>
+<p>In terms of progress?<br />
+Shorts which used to tightly hug my bum will now fall off if I don’t wear a belt.<br />
+My chess rating has improved online, which I mainly attribute to improved physical fitness.</p>
+<h2 id="start-small-then-work-up">Start Small then Work Up</h2>
+<p>When I first started going to the gym, I would go two or three times each week. Starting out, I focused exclusively on using the treadmill.</p>
+<p>Since starting out, I’ve increased the pace at which I run at, and increased the amount of time I run for.</p>
+<p>After developing that to a level I was happy with, I was then able to use the days between running to do whatever else at the gym.</p>
+<h2 id="regarding-initial-anxiety-and-such">Regarding Initial Anxiety and Such</h2>
+<p>I certainly felt anxious about going to the gym when I started going. I think pretty much everyone feels that way.</p>
+<p>I think what I was initially most anxious about was looking silly.. or feeling like some kind of imposter that didn’t belong at the gym.</p>
+<p>Part of that was surely thinking “oh, I don’t know what exercises to do; I don’t know how to use the weights or machines”.<br />
+There are ways to figure these things out, though.<br />
+For one.. since my goal has been ‘fat loss’, it wasn’t so bad to just focus on using the treadmill. For another, the weight machines at the gym are beginner friendly. There are plenty of videos on YouTube which demonstrate how each machine is used. – Though, I’ve seen some pretty compelling arguments that beginners should also make use of free weights.</p>
+<p>I think part of gym anxiety is fear of being judged.<br />
+Some people who go to the gym are fitter than others; it’d be silly (and rude) for the fitter people to judge others for being less fit at the gym, since by exercising at the gym is a reasonable way to improve fitness.<br />
+But, really I can take pride in putting in the effort to show up to the gym, and make each workout a good one that made progress towards my goals. (It takes a long time to lose a bunch of weight; it’s much quicker to change how many times you go to the gym. It’s easier to hit the target of “go to the gym twice a week” and improve that to “three times a week” than it is to hit the target “lose 10kg of fat”).</p>
+<p>People do look at what other people are doing in the gym.<br />
+Partly this is comparison.<br />
+But another reason is curiousity. I know that I’ll want to see what others are doing.<br />
+– I reckon not everyone knows everything. I often see the damper on the rowing machines set to a 10. I’m inclined to believe people set it to a 10 thinking “intense workout”, rather than “slow boat”[2].<br />
+– The gym I go to has a SkiErg machine. In my months of attending the gym, I hadn’t seen anyone use it. (Although after I used it, I saw PTs advise gym-goers to use it, where the Personal Trainer’s technique diverged unusually/weirdly from the recommended technique[3]).</p>
+<p>It varies from gym to gym, but my experience has been that the Personal Trainers are typically unpleasant to interact with. Ideally, PTs would be knowledgeable, friendly, supportive and encouraging. Somehow, commission-based incentives don’t necessarily lead to this. – I mean, dealing with these PTs is an unpleasant part of gym going.</p>
+<p>Positively: If you go to the gym routinely, you’ll recognise other people who follow an overlapping routine.</p>
+<h2 id="going-to-the-gym-can-be-fun">Going to the Gym Can be Fun</h2>
+<p>I became a gym member in order to improve my health, not for the fun of it. And I’m not always excited to go to the gym, and the gym isn’t always fun. Sure.<br />
+But I do think it’s kind of a shame that exercise is thought of as a burdensome chore, rather than something fun.</p>
+<p>I reckon in the same way that a dog likes going to the park, your body ought to appreciate the chance to exercise.</p>
+<p>For losing fat.. I think running at a high intensity for a long period of time is fun. I do get that “runner’s high”.<br />
+Some other things help:<br />
+While running, I listen to music. I use the Aftershokz headphones, they’re great, and well suited to exercise. (They don’t cover up the ears). – It’s <em>very</em> fun to listen to an upbeat song, and to be running at high speed to that song.<br />
+For endurance activities, part of what I find fun is demonstrating a consistent, high level of effort. <em>Of course</em> it’s boring to finish if a run is too easy. And giving up before the end is also not <em>fun</em>. But enduring to the point where you want to give up while still finishing is relieving.</p>
+<p>Some of the exercises that gym equipment allows can be pretty fun:</p>
+<p>The gym I go to has a ‘curved motorless treadmill’.<br />
+This is kinda like a hamster wheel, but for humans.<br />
+Since the machine’s tread goes as fast as you go, it allows you to speed up or slow down as you like. This is friendlier than on a motorised treadmill, which maintains whatever pace you set it, and so has very limited allowance for running slower (or faster) than that pace. It also provides instant feedback as to what pace you’re running. This makes it easy enough to try and keep to a certain pace. And, same as a motorised treadmill, you don’t have to worry about traffic or other obstacles.<br />
+By letting you run at whatever speed, this helps you get familiar with what running faster feels like, and is a friendlier way for feeling whether you can maintain a certain pace for some time.</p>
+<p>I also enjoy using the rowing machine.<br />
+At the gym I go to, the rowing machines are often unused. I think that’s a shame, since it’s a versatile piece of equipment: it can be useful for burning calories, or for building strength. Compared to the treadmill, a rowing machine will exercise more of the body (legs, core muscles, and arms); and unlike running, it’s low-impact. Compared to most weight machines, it engages a variety of muscles. Compared to free weights, it’s friendlier for beginners.<br />
+I recently found out there are metronome apps for rowing that give useful cues for stroke rate. These make it much easier to do a workout which aims for maintaining a stroke rate for some period of time.</p>
+<p>I recently started attending BodyPump group sessions.<br />
+I’ve found these to be pretty fun. It’s a good way of getting a good workout in a good amount of time. This is also a neat way to get familiar with free weights and some free weight exercises.</p>
+<h2 id="using-chatgpt-for-learning-basic-things">Using ChatGPT for Learning Basic Things</h2>
+<p>In addition to seeing demonstations in YouTube videos, I found it useful to ask ChatGPT about fitness things.<br />
+Of course, ChatGPT isn’t completely reliable; but.. it’s probably not worse than the blogposts that come up in search engine results (and not worse than a bad PT).
+Perhaps it’s comparable to what people say about Wikipedia: you ought to not rely too heavily on it, but it makes for a good starting point.</p>
+<p>One of the main faults (or ‘characteristics’?) with ChatGPT is these chatbots are decidedly unopinionated. – I mostly find this preferable over being told an unqualified opinion.<br />
+Similarly, the public chat-based LLMs are <em>pathologically</em> positive.<br />
+– Whereas, when reading articles or blogposts or watching videos, often these will include strong opinions that you have to evaluate.</p>
+<p>Another limitation is as the topic of discussion gets more precise, ChatGPT tends to be less useful.</p>
+<h2 id="footnotes">Footnotes</h2>
+<p>[1] <a href="https://www.youtube.com/watch?v=8QpjX2K-JY0">Dr. Mike Israetel’s discussion about ‘losing fat while building muscle’</a> seems coherent to me.</p>
+<p>[2] <a href="https://www.concept2.com/indoor-rowers/training/tips-and-general-info/damper-setting-101" class="uri">https://www.concept2.com/indoor-rowers/training/tips-and-general-info/damper-setting-101</a></p>
+<p>[3] <a href="https://www.youtube.com/watch?v=B0lIgT5PHc8">Concept2’s SkiErg technique demonstration</a></p>]]></summary>
+</entry>
+<entry>
     <title>Another Factorio Post-Game Ramble</title>
     <link href="http://www.rgoulter.com/blog//posts/games/2024-02-14-another-factorio-post-game-ramble.html" />
     <id>http://www.rgoulter.com/blog//posts/games/2024-02-14-another-factorio-post-game-ramble.html</id>
@@ -728,74 +864,6 @@ With embedded development, there were several tools which were useful for workin
 <p>LSP means it’s easier for “hit dot on keyboard and list of things grug can do pop up magic”.</p>
 <p>Also useful is: being able to show the type, and being able to show the documentation for the type.</p>
 <p>(Albeit, for some reason, the LSP in Helix was better able to find information in the RTIC framework’s tasks than the LSP I used with Emacs could. Perhaps this has to do with proc macros or some other thing.).</p>]]></summary>
-</entry>
-<entry>
-    <title>John Wick 4 is Good Fun</title>
-    <link href="http://www.rgoulter.com/blog//posts/narrative/2023-09-27-john-wick-4-is-good-fun.html" />
-    <id>http://www.rgoulter.com/blog//posts/narrative/2023-09-27-john-wick-4-is-good-fun.html</id>
-    <published>2023-09-27T00:00:00Z</published>
-    <updated>2023-09-27T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<p>I finally got around to watching John Wick 4.</p>
-<p>I hadn’t <em>loved</em> John Wick 3.<br />
-In JW3, Wick takes <em>a lot</em> of physical punishment and manages to keep fighting against all his enemies. What ruins the movie for me is scenes like where his enemies beat him, but they then don’t kill him; and so Wick is then able to keep fighting and kill them.</p>
-<p>Fortunately, I enjoyed John Wick 4 much better.</p>
-<p>Perhaps I went in with a more suitable mindset. – The films aren’t really good as a coherent “how would one super assassin survive against a horde of other assassins”.<br />
-Instead, I think films like JW4 are more like excuses for stringing a bunch of action scenes together that have all sorts of fantastic stunts.</p>
-<p>e.g. Extraction 2 is directed by a stuntman.. its first third has an unbelievably impressive fight scene in an open courtyard during a prison riot.</p>
-<p>In JW4.. does it make sense to have a fist fight in the middle of a busy street at night, in front of a muscle car that’s been turned on its side? No. Not one detail makes sense. (Traffic would stop, or the assassins would shoot Wick, or whatever). – But, it looks striking.</p>
-<p>Does it make sense for assassins to have tacti-cool models of old firearms like the WW2-era’s Thompson gun, or the Wild West era’s lever action? No, but it follows rule-of-cool.</p>
-<p>I reckon JW4 does a better job at integrating its ensemble of assassins and villains than the previous movies. The series has always had a set of heroes and villains.. but, I liked it in this one.<br />
-The fights are perhaps ‘accommodating’ for the sake of rule-of-cool.<br />
-One of the fun ideas that hasn’t been beaten to death is the idea of competing assassins protecting a target. – The anti-hero Mr Nobody in this movie wants to make lots of money off of killing John Wick, and so he kills the other assassins who are attacking Wick.</p>
-<p>Plot wise… it’s so “rule of cool” that it’s as if it’s been perfectly rendered from the mind of a 12 year old.</p>
-<p>I assume the series is going to continue.<br />
-I hope the next one is a bit more chilled out. The Fast and the Furious series is fun, but it’s a bit too over-the-top.</p>]]></summary>
-</entry>
-<entry>
-    <title>So I Just Finished Tomb Raider 2</title>
-    <link href="http://www.rgoulter.com/blog//posts/games/2023-09-20-so-i-just-finished-tomb-raider-2.html" />
-    <id>http://www.rgoulter.com/blog//posts/games/2023-09-20-so-i-just-finished-tomb-raider-2.html</id>
-    <published>2023-09-20T00:00:00Z</published>
-    <updated>2023-09-20T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<p>Well. I’d played it years ago. And I would’ve cheated when I played it last.</p>
-<p>I had fun playing it again now.</p>
-<p>I loved the adventure aspects of the game.<br />
-It’s satisfying to have enough of a grasp of how the level is designed so as to make your way through it!</p>
-<p>The designs of the levels themselves are interesting.<br />
-The levels themselves are laid out along an easily discernable grid.<br />
-This makes the navigation physics pretty easy to understand.<br />
-But, it’s also quite a constraint on the ability to design good looking levels.</p>
-<p>Despite that, there are many memorable moments throughout the game that leaves more of an impact than, say, a more spectacle-heavy game like Call of Duty.</p>
-<h3 id="the-gameplay-loop">The Gameplay Loop</h3>
-<p>At its moments of low friction, Tomb Raider II involves traversing through an area, dealing with any threats (e.g. enemies or traps), and perhaps collecting key items or interacting with switches in order to get to the next area. – e.g. you’ll notice there’s a switch, you’ll pull the switch, and this opens a door nearby where you’ll then proceed to the next area.</p>
-<p>When there’s more friction, often you’ll have overlooked some part of the area that allows you to proceed; or perhaps there’s some under-explained puzzle mechanic that you need to understand to continue.</p>
-<p>“Under-explained puzzle mechanic” is a good thing. A puzzle explained isn’t much of a puzzle.<br />
-It just means you’ll need to try different things.</p>
-<p>The “overlooked some part of the area” I have more mixed feelings about.<br />
-Most of the game, the area you need to look in isn’t all <em>that</em> large; and so it’s not too mean.<br />
-On the other hand, if they used guide paint to highlight the areas to go next, that’d take out most of the fun. – Often the level <em>does</em> have markers suggesting where to go next, but it’s typically very subtle.</p>
-<p>In terms of friction,<br />
-I’d say it’s “soft stuck” when you’re not fully certain how to proceed to the next area, but you still have plenty of things to try.<br />
-Whereas, you feel “hard stuck” if you still think you’ve checked everywhere, and you think you’ve tried everything that could possibly work.<br />
-– It’s <em>really</em> satisfying to think: “Hmm, okay, I’ll try this,” and for that to be the solution.</p>
-<p>I felt more stuck early on in the game. For the last two levels, the challenge shifted to the areas being trap-heavy.</p>
-<h3 id="the-controls">The Controls</h3>
-<p>These days, with twin stick controllers, the most common controls involve using the right stick for controlling the camera, and the left stick for movement.</p>
-<p>These classic Tomb Raider games use “tank controls”. i.e. up/down/left/right control Lara relative to <em>Lara’s body</em>, regardless of where the camera is looking.</p>
-<p>This works well with the grid system to have a navigation logic which works quite discretely. It’s something like: Lara can do a standing jump reaching 1 block away; or a running jump reaching 2 blocks away; or she can grab the edge of a block 3 blocks away after a running jump.</p>
-<p>Some people don’t like these controls somehow. I guess there’s a subtlety to the running jump, where Lara needs to run 1 block before will do a running jump.</p>
-<p>In terms of combat, Lara auto-aims her weapons.<br />
-This makes combat more about acrobatically dodging around enemies (and navigating the terrain while doing so) than about aiming with a mouse.<br />
-Two things I miss from twin-stick controls: the controls don’t support strafing around an enemy; and with the auto aim, it’s difficult to tell which target I’m aiming at (which is important for one level where there are friendly units).</p>
-<p>The tank controls are more direct, more raw, and ‘lower level’ than the twin-stick controls. – You can screw up and look stupid; but it’s satisfying to pull off an elegant maneouver.</p>
-<p>What <em>doesn’t</em> work well is that since the tank controls’ camera is automatically controlled, this can result in awkward situations where you can’t see what’s in front of you. This mostly impacts combat in some places.</p>
-<h3 id="memorable-moments">Memorable Moments</h3>
-<p>The start of the underwater missions sees Lara underwater, and the first thing we have to do is find a pocket of air to breathe in!<br />
-I don’t <em>love</em> the underwater levels; I think the underwater combat is lame.<br />
-But, the design of the levels is fun. At one part, you’re in an upside-down ocean liner.</p>
-<p>In the Tibetan mountains, there’s a dark room filled with the growls of yetis. Lara can’t light the room and shoot at the same time. Although, yeah, turns out the yetis are safely in cages, until you flip the switch that lights the room a bit.</p>
-<p>The ancient temple near the end, where we once again hunt down the titular Dagger of Xian.. it’s a trap-heavy level, it feels a little mean, but it’s got such a fascinating feel to it.</p>
-<p>The epilogue strikes me as special. Yeah, sure, it’s got Lara wearing a bathrobe. But, it’s also got gameplay where you’re fighting off a bunch of goons from what was otherwise an iconic training area outside of the main game.</p>]]></summary>
 </entry>
 
 </feed>

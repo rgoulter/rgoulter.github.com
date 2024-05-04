@@ -1,0 +1,328 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Using Terraform to Manage an Object Stored in OpenStack Swift - Richard Goulter's Blog</title>
+
+        <!-- My (Old) CSS theme -->
+        <link rel="stylesheet" type="text/css" href="../../css/default.css" />
+
+        <!--
+            jQuery & jQueryUI
+        -->
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css" />
+
+        <!--
+            Pandoc Style CSS
+            (for syntax highlighted snippets)
+        -->
+        <link rel="stylesheet" type="text/css" href="../../css/syntax.css" />
+
+        <!--
+            Bootstrap
+        -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+        <style>
+            /*
+             * Bootstrap defines blockquote as 17px,
+             * so it looks stupidly large in my blogposts. */
+            blockquote {
+                font-size: 14px;
+            }
+        </style>
+
+        <!--
+            Waypoints, and Waypoints-Sticky,
+            so we can do this:
+            http://imakewebthings.com/waypoints/shortcuts/sticky-elements/
+        -->
+        <script src="../../js/jquery.waypoints.min.js"></script>
+        <script src="../../js/sticky.min.js"></script>
+
+        <!-- My analytics stuff -->
+        <script src="../../js/my_analytics.js"></script>
+        <script src="../../js/my_analytics_debug.js"></script>
+
+        <!--
+            TOCify
+        -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js"></script>
+
+        <!--
+            Patched TOCify css file.
+            (Don't want fixed `.tocify`).
+        -->
+        <link rel="stylesheet" type="text/css" href="../../css/jquery.tocify.css" />
+
+        <style>
+        .navbar {
+            margin-bottom: 0px;
+        }
+
+        .banner-image {
+            width:100%;
+        }
+
+        .banner {
+            margin-left: 0px;
+            margin-right: 0px;
+        }
+
+        body {
+            background-color: #e2e2e2;
+        }
+
+        #page {
+            padding-left:0;
+            padding-right:0;
+            background-color: #ffffff;
+        }
+        </style>
+
+        <!-- Google Analytics -->
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-H13NWYDX0G"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'G-H13NWYDX0G');
+        </script>
+    </head>
+    <body>
+        <div id="page" class="container">
+            <!-- This, with no padding on left/right -->
+            <div class="banner">
+                <nav class="navbar navbar-default">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+
+            <!-- The Hamburger -->
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../../">Richard Goulter's Blog</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="../../">Home</a></li>
+            <li><a href="../../yi.html">Yi</a></li>
+            <li><a href="../../emacs.html">Emacs</a></li>
+            <li><a href="../../what-i-wish-i-knew-when-i-started-using-nix.html">Nixpkgs</a></li>
+            <li><a href="../../archive.html">Archive</a></li>
+        </ul>
+    </div>
+</nav>
+
+            </div>
+
+            <hr style="margin: 0px; border-top: 5px solid black;" />
+
+            <div id="content" class="container">
+                <h1>Using Terraform to Manage an Object Stored in OpenStack Swift</h1>
+                <div class="info">
+    Posted on April  9, 2024
+    
+        by Richard Goulter
+    <br />
+    
+    Tags: 
+    
+</div>
+
+<h2 id="technologies">Technologies</h2>
+<p><a href="https://www.openstack.org/">OpenStack</a> is a set of software that infrastructure providers can use to give users a user-experience similar to that of AWS or other cloud providers. e.g. <a href="https://cleura.com/">Cleura</a> provides a public cloud service which can be managed with OpenStack APIs. – I think the idea for OpenStack was to enable infrastructure providers to serve as a substitute for AWS.. albeit, even amongst OpenStack public clouds, there remain idiosyncracies such that a deployment in one OpenStack cloud might require effort to deploy to another OpenStack cloud.</p>
+<p><a href="https://docs.openstack.org/swift/latest/">OpenStack’s Swift</a> is an ‘object storage’ service. More/less the same thing as AWS’ S3 (or Google Cloud’s cloud storage).</p>
+<p><a href="https://www.terraform.io/">Terraform</a>, or its open source fork <a href="https://opentofu.org/">OpenTofu</a>, is a tool for managing declarations of cloud resources. There’s a <a href="https://registry.terraform.io/providers/terraform-provider-openstack/openstack/latest/docs">Terraform Provider for OpenStack</a>, so that Terraform can be used to work with OpenStack resources.</p>
+<h2 id="task">Task</h2>
+<p>Here are notes on using Terraform to manage an object in a ‘container’ on OpenStack Swift (‘bucket’ in AWS terms), and to create a (temporary) URL to access that object.</p>
+<p>The main advantage of this approach is reyling on Terraform to manage the setup/teardown, as opposed to having to use the web console to manage this, or use the CLI client to manage these. I prefer being able to run <code>terraform apply</code> to ensure things are there; and <code>terraform destroy</code> to ensure things are gone.</p>
+<h2 id="terraform-code-for-container-and-bucket">Terraform Code for Container and Bucket</h2>
+<p>Some boilerplate, using the openstack provider for Terraform:</p>
+<pre class="terraform"><code>terraform {
+  required_version = &quot;&gt;= 0.14.0&quot;
+  required_providers {
+    openstack = {
+      source  = &quot;terraform-provider-openstack/openstack&quot;
+      version = &quot;~&gt; 1.49.0&quot;
+    }
+  }
+}</code></pre>
+<p>As the provider documentation mentions, the Terraform OpenStack provider can pick up authentication credentials from <code>OS_</code> environment variables. I used the Cleura public OpenStack cloud, and downloaded an ‘rc’ file with the credentials for an OpenStack user to use with a project there.</p>
+<p>Then the Terraform code for creating a container <code>rgoulter-storage</code>, and an object named <code>test</code> in that container:</p>
+<pre class="terraform"><code>resource &quot;openstack_objectstorage_container_v1&quot; &quot;self&quot; {
+  name = &quot;rgoulter-storage&quot;
+  metadata = {
+    Temp-URL-Key = &quot;some-secret-value&quot;
+  }
+}
+
+resource &quot;openstack_objectstorage_object_v1&quot; &quot;self&quot; {
+  container_name = openstack_objectstorage_container_v1.self.name
+  name           = &quot;test&quot;
+  content        = &quot;Hello, world!&quot;
+}</code></pre>
+<p>Resources are named <code>self</code> out of convention. (There aren’t multiple containers, objects in this Terraform codebase).</p>
+<p>In this case, the content of the object is set with the <code>content</code> attribute to the object resource. The <code>source</code> attribute is more suitable when you want some file to be uploaded. (c.f. <a href="https://registry.terraform.io/providers/terraform-provider-openstack/openstack/latest/docs/resources/objectstorage_object_v1">the terraform provider documentation</a>).</p>
+<p><code>Temp-URL-Key</code> is set on the container’s metadata to allow creating temporary URLs to provide access. (c.f. <a href="https://docs.openstack.org/swift/latest/api/temporary_url_middleware.html">Swift’s temporary url middleware documentation</a>). – This value should be kept secret; this value is used to create temporary URLs to access objects in the container.</p>
+<h2 id="creating-temporary-urls-with-terraform">Creating Temporary URLs: with Terraform</h2>
+<pre class="terraform"><code>resource &quot;openstack_objectstorage_tempurl_v1&quot; &quot;self&quot; {
+  container  = openstack_objectstorage_container_v1.self.name
+  object     = openstack_objectstorage_object_v1.self.name
+  method     = &quot;get&quot;
+  ttl        = 900
+  regenerate = true
+}
+
+output &quot;tempurl&quot; {
+  value     = openstack_objectstorage_tempurl_v1.self.url
+  sensitive = true
+}</code></pre>
+<p>It’s possible to also use the Terraform OpenStack provider to manage tempurls.</p>
+<p>On the one hand, you might as well, if you’re using Terraform for the other parts.
+On the other hand, I think it smells a bit too much to ‘declare’ the existance of a tempurl with a time-to-live of 900 seconds.</p>
+<p>One nice thing about this approach is the output URL value is simple/easy to figure out. i.e. running <code>terraform output -raw tempurl</code> outputs something like:</p>
+<pre><code>https://swift-fra1.citycloud.com:8080/swift/v1/AUTH_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/rgoulter-storage/test?temp_url_sig=bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb&amp;temp_url_expires=1999999999</code></pre>
+<h2 id="creating-temporary-urls-with-command-line-client">Creating Temporary URLs: with Command Line Client</h2>
+<p>The <a href="https://docs.openstack.org/swift/latest/api/temporary_url_middleware.html">documentation about temporary url middleware</a> gives instructions on using the OpenStack Swift client to create a temporary URL.</p>
+<p>There are various ways to come up with the OpenStack Storage URL (<code>https://swift-cluster.example.com/v1/my_account/</code>), but here’s what I came up with for the container, object, and temp URL key above:</p>
+<pre class="sh"><code>OS_STORAGE_URL=$(openstack catalog show object-store --format=json | jq -r .endpoints[2].url)
+swift tempurl --digest=sha1 GET 900 ${OS_STORAGE_URL}/rgoulter-storage/test some-secret-value</code></pre>
+<p>The <code>jq</code> expression isn’t the cleanest. (The <code>[2]</code> is the index the “public” object-store endpoint happened to be in the output of <code>openstack catalog show object-store</code>; albeit, all the endpoints had the same URL).</p>
+<p>The URL from <code>swift tempurl</code> can be used for GET requests to access the storage.</p>
+
+<hr />
+
+<div>
+    
+    
+    <a href="../../posts/2024-03-23-six-months-of-going-to-the-gym.html" style="float:right; text-align: right;">Older post</a>
+    
+</div>
+<br style="clear: both;" />
+
+<hr />
+
+<!-- Load highlight.js for Syntax Highlighting. -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/bash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/c.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/gherkin.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/haskell.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/lisp.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/nix.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js"></script>
+<script>hljs.highlightAll();</script>
+
+            </div>
+
+            <hr style="margin-bottom: 0px; border-top: 2px solid black;" />
+
+            <div id="footer" class="pull-right" style="padding-right: 10px;">
+                Site proudly generated by
+                <a href="http://jaspervdj.be/hakyll">Hakyll</a>
+            </div>
+        </div>
+
+        <script>
+            // The callbacks we wanna use
+            // Phone-home, telling Google Analytics various metrics/dimensions
+
+            // Use custom dimensions & metrics
+            var AnalyticDimensionReaderKind = 'dimension1';
+            var AnalyticMetricActiveTime      = 'metric1';
+            var AnalyticMetricLongestIdleTime = 'metric2';
+            var AnalyticMetricReadCount       = 'metric3';
+
+            var gaCallbacks = {
+                "scrollPercent": function(ms, perc) {
+                    if (perc > 85) {
+                        // EVENT: Page read
+                        ga('send', {
+                            hitType:       'event',
+                            eventCategory: 'Scrolling',
+                            eventAction:   'atBottom',
+                            eventValue:    String(ms)
+                        });
+                    }
+                },
+                "read": function(ms, ct, timeToReach) {
+                    // Use this to set DIMENSION
+                    // timeToReach < 5s ==> Skim (default = Visitor)
+                    if (timeToReach < 5 * 1000) {
+                        // dimension1 = ReaderKind
+                        ga('set', AnalyticDimensionReaderKind, "skimmer");
+                    }
+
+                    // timeToReach > 30s ==> Reader
+                    if (timeToReach > 30 * 1000) {
+                        // dimension1 = ReaderKind
+                        ga('set', AnalyticDimensionReaderKind, "reader");
+                    }
+
+                    // EVENT: Page read
+                    ga('send', {
+                        hitType:       'event',
+                        eventCategory: 'Reading',
+                        eventAction:   'read',
+                        eventValue:    String(timeToReach)
+                    });
+
+                    // METRIC
+                    ga('set', AnalyticMetricReadCount, String(ct));
+                },
+                "initialIdle": function(ms) {
+                    // EVENT: Started Reading
+                    ga('send', {
+                        hitType:       'event',
+                        eventCategory: 'Scrolling',
+                        eventAction:   'begun',
+                        eventValue:    String(ms)
+                    });
+                },
+                "timeSpent": function(total, active, curIdle, initIdle, longestIdle) {
+                    // Update METRIC(S)?
+                    ga('set', AnalyticMetricActiveTime, String(active));
+                    ga('set', AnalyticMetricLongestIdleTime, String(longestIdle));
+                },
+                "idle": function(ms) {
+                },
+                "longestIdle": function(ms) {
+                }
+            }
+
+            window.onload = function() {
+                myAnalyticsInit(gaCallbacks);
+
+                //
+                // Initial dimensions & metrics
+                //
+
+                ga('set', AnalyticMetricReadCount, String(0));
+
+                // EVENT: Page load
+                ga('send', {
+                    hitType:       'event',
+                    eventCategory: 'pageLoad',
+                    eventAction:   'begun',
+                    eventValue:    String(ms)
+                });
+
+                // DIMENSION: visitor
+                ga('set', AnalyticDimensionReaderKind, "visitor");
+            }
+        </script>
+    </body>
+</html>
