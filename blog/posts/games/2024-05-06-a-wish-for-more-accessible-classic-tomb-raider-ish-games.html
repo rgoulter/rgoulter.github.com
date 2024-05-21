@@ -1,0 +1,367 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>A Wish for More Accessible Classic Tomb Raider-ish Games - Richard Goulter's Blog</title>
+
+        <!-- My (Old) CSS theme -->
+        <link rel="stylesheet" type="text/css" href="../../css/default.css" />
+
+        <!--
+            jQuery & jQueryUI
+        -->
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css" />
+
+        <!--
+            Pandoc Style CSS
+            (for syntax highlighted snippets)
+        -->
+        <link rel="stylesheet" type="text/css" href="../../css/syntax.css" />
+
+        <!--
+            Bootstrap
+        -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+        <style>
+            /*
+             * Bootstrap defines blockquote as 17px,
+             * so it looks stupidly large in my blogposts. */
+            blockquote {
+                font-size: 14px;
+            }
+        </style>
+
+        <!--
+            Waypoints, and Waypoints-Sticky,
+            so we can do this:
+            http://imakewebthings.com/waypoints/shortcuts/sticky-elements/
+        -->
+        <script src="../../js/jquery.waypoints.min.js"></script>
+        <script src="../../js/sticky.min.js"></script>
+
+        <!-- My analytics stuff -->
+        <script src="../../js/my_analytics.js"></script>
+        <script src="../../js/my_analytics_debug.js"></script>
+
+        <!--
+            TOCify
+        -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js"></script>
+
+        <!--
+            Patched TOCify css file.
+            (Don't want fixed `.tocify`).
+        -->
+        <link rel="stylesheet" type="text/css" href="../../css/jquery.tocify.css" />
+
+        <style>
+        .navbar {
+            margin-bottom: 0px;
+        }
+
+        .banner-image {
+            width:100%;
+        }
+
+        .banner {
+            margin-left: 0px;
+            margin-right: 0px;
+        }
+
+        body {
+            background-color: #e2e2e2;
+        }
+
+        #page {
+            padding-left:0;
+            padding-right:0;
+            background-color: #ffffff;
+        }
+        </style>
+
+        <!-- Google Analytics -->
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-H13NWYDX0G"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'G-H13NWYDX0G');
+        </script>
+    </head>
+    <body>
+        <div id="page" class="container">
+            <!-- This, with no padding on left/right -->
+            <div class="banner">
+                <nav class="navbar navbar-default">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+
+            <!-- The Hamburger -->
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../../">Richard Goulter's Blog</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="../../">Home</a></li>
+            <li><a href="../../yi.html">Yi</a></li>
+            <li><a href="../../emacs.html">Emacs</a></li>
+            <li><a href="../../what-i-wish-i-knew-when-i-started-using-nix.html">Nixpkgs</a></li>
+            <li><a href="../../archive.html">Archive</a></li>
+        </ul>
+    </div>
+</nav>
+
+            </div>
+
+            <hr style="margin: 0px; border-top: 5px solid black;" />
+
+            <div id="content" class="container">
+                <h1>A Wish for More Accessible Classic Tomb Raider-ish Games</h1>
+                <div class="info">
+    Posted on May  6, 2024
+    
+        by Richard Goulter
+    <br />
+    
+    Tags: 
+    
+</div>
+
+<p>I’ve been playing through the Tomb Raider I-III Remastered collection of games.</p>
+<h2 id="yay-remasters-of-old-games">Yay, Remasters of Old Games</h2>
+<p>The remaster fits in with a loose trend of some classic games being remade or remastered, and re-released.</p>
+<p>e.g. to my mind, the Age of Empires series did a good job with this: Age of Empires 2 got an HD re-release. After that succeeded, much effort was put into remastering Age of Empires 1, which got a “Definitive Edition” re-release. Then Age of Empires 2 got a subsequent “Definitive Edition” re-re-release, followed by several DLC expansions. Some of the changes to the game have been “Quality of Life” changes which have reduced the skill for for playing the game. (e.g. showing the build queue in the UI).<br />
+The publisher Nightdive Studios are an outstanding example of quality stewardship for remastering games. I played through Turok 1 and 2 that they remastered, and they did a good job polishing these games up so they can be played on modern systems.</p>
+<p>“Boomer shooters” have seen a resurgence in popularity in the last few years. The game “Cultic” is an absolutely <em>excellent</em> example of a new title which enhances the title. I think the YouTuber Civie described games like this as both respecting what made the genre popular, while also including enough to surprise and delight experienced fans of the genre.</p>
+<h2 id="the-tr-remastered-collection-is-faithful-to-a-fault">The TR Remastered Collection is Faithful to a Fault</h2>
+<p>Anyway.<br />
+Tomb Raider Remastered.<br />
+This polishes up the game so it can run on modern systems.<br />
+Although most of these changes could be described as superficial (e.g. Lara’s model now looks as gorgeous as she does in the marketing materials; and the game has many Achievements to get), the Remastered game did have some changes to improve quality of life: icons will show up to indicate when Lara can interact with an item, and the game supports using a more ‘modern’ control scheme, rather than the classic ‘tank’ controls.</p>
+<p>The classic Tomb Raider games are quite notorious for being hard.<br />
+Well, many classic games are. (e.g. some of the Turok 2 levels are convoluted mazes to navigate through, despite the gameplay otherwise mostly focusing on shooting).<br />
+But, certainly for the Tomb Raider games, I think pretty much everyone who collects all the secrets would have looked up a walkthrough at some point.</p>
+<p>It’s kindof a shame that the Remaster is <em>so</em> faithful to the original so as to not add <em>more</em> quality-of-life features. I suspect that’s mostly about time/budget constraints.<br />
+But, say, in the same way that there are games inspired by classic games which have good quality-of-life improvements, maybe there’s room for a similar treatment for classic Tomb Raider.</p>
+<p>What I mean is:</p>
+<ul>
+<li><p>Gameplay with the same <em>dynamic</em> as the original.</p></li>
+<li><p>Quality of life improvements.</p></li>
+<li><p>Ways of lowering the skill floor, so that the game has a friendlier introduction for beginners.</p></li>
+</ul>
+<h2 id="definitively-tomb-raider">Definitively Tomb Raider</h2>
+<p>The classic Tomb Raider games are a mix of adventure and action.<br />
+The classic games also get quite scary at times.<br />
+I guess different players are going to prefer different mixes of each of these.</p>
+<p>e.g. The Myst games are pure adventure: there’s no combat, and it’s pretty much exploring exotic locations and solving (sometimes purely) puzzles. – If you just put Lara Croft as the protagonist in these, it still wouldn’t be “Tomb Raider”.<br />
+There are some “Lara Croft” spin-off games which have twin-stick top-down shooter gameplay. These involve a lot of combat, and some puzzles. But, the level design is so smooth that you’re never going to feel lost or confused about how to make progress.</p>
+<p>I think a key dynamic of the adventuring is building an understanding of the map, and engaging the player’s understanding of that.<br />
+An example is TR2’s Venice level. The final half of the level involves the player having to figure out how to clear the mines to the exit, how to open the exit door, and how to raise two gates so as to be able to race from the “open exit” button to the exit. – When playing, if you’re missing any of these, you have to explore around and try different things.</p>
+<p>The most antiquated yet defining part of the classic Tomb Raider games is the grid-based level design, which pairs with the “tank” controls.<br />
+“Tank” controls are “pressing up moves the Player Character in the direction the Player Character is facing”. Whereas “modern” controls are more intuitive with twin-stick controllers: one stick controls the camera, the other directs the player character relative to the camera.<br />
+The grid-based levels is so antiquated because it feels like the level is made out of boxes.<br />
+But.. it allows for a clear set of navigation rules: Lara can reach so-and-so far by doing a standing jump, or further with a running jump. – In “modern” games like the Tomb Raider games after 2006, navigation is restricted to ledges which have been specially added onto the finely-crafted levels. These ledges stick out as relatively “shiny”, in contrast to uninteractable background details. I think that’s a step-down, since it limits the player having to reason about where to go.</p>
+<p>Though, I’d also heard the difference put as: the classic TR games have a protagonist who is exaggerated; in gameplay, she’s going to die a lot as the player experiments as to how to get through the level. (TR2’s the ultimate Floating Islands is very easy to die on!). Whereas, the modern TR games are big budget, and need to be mass appeal, so can’t be as frustrating; the player is encouraged to “protect” the protagonist, and take care to prevent the protagonist from dying.</p>
+<h2 id="that-sounds-like-itd-be-cool-wishlist">“That Sounds Like it’d be Cool” Wishlist</h2>
+<p>I reckon it’d be neat to see some things like this; either to bring the same gameplay of the classic Tomb Raider to more modern standards, or for making the game easier (for those who need that).</p>
+<p>For suggestions of things that’d make the game easier, I mostly mean in terms of “it’d be good to have an easier difficulty option”.</p>
+<h3 id="pickups-and-secrets">Pickups and Secrets</h3>
+<p>Some help-me quality of life features could be added to collectibles:</p>
+<p>In Just Cause 3, one gameplay mechanic involves having to destroy <em>all</em> the red-painted infrastructure in a military base. At the start, this is really easy; but as you destroy more of the infrastructure, it becomes harder to find the rest of what you need to destroy. The game map compensates for this: as you destroy more, then the remaining things progressively fade in on the map.. so by the time you’ve destroyed 95% of the infrastructure, the remaining few things to destroy are clearly marked on the map.</p>
+<p>Doom Eternal has several kinds of secrets and upgrades to collect.<br />
+You can even upgrade your character to make it easier to find secrets!<br />
+This enhances the replayability of the game: finding extra secrets makes you more powerful; and you can use that power to make it easier to get more secrets.<br />
+This included “cheat codes”.. which, while they couldn’t be used when playing through the levels for progressing through the story, could make for some cathartic replays of levels.</p>
+<p>In the playthroughs I’ve seen of the newer Resident Evil games, the map will colour-code whether an area has had all items picked up or not. This seems like a really neat way to guide the player.</p>
+<p>I reckon ideas like this would suit classic Tomb Raider gameplay.</p>
+<h3 id="combat">Combat</h3>
+<p>As I see it, classic Tomb Raider’s combat is .. clunky.<br />
+It works best when Lara is fighting animals (where the main ‘skill’ involves jumping around to avoid being hurt, while shooting back), and is more clumsy against armed opponents (there’s a large RNG element that dictates whether they shoot Lara or not; jumping around the level barely helps).<br />
+Meshing with this is the trade-off of whether to use the weak pistols which have unlimited ammo, or use a more powerful weapon (where you might need to preserve ammo).</p>
+<p>The “modern” Tomb Raider games got rid of tank controls and made the combat a somewhat typical third-person shooter; and it didn’t mix well with the rest of the game.</p>
+<p>For the classic Tomb Raider style combat, I reckon some ideas that’d fit with the rest of the gameplay:</p>
+<p>Halo does a good job of presenting other tradeoffs/constraints: limiting the player to choosing only two weapons, and having multiple kinds of enemies: laser guns are good vs the shields (that the enemies have), but bullet guns are better vs unshielded enemies.<br />
+– I mean, this makes the choice of weapon more tactical than just “use uzis until I run out of ammo”.</p>
+<p>Doom Eternal does an even better job at “action-puzzle gameplay”: you could replenish your ammo by using a chainsaw on enemies, and replenish health using ‘finisher’ moves on weak enemies. The notorious Marauder enemy would block shots, and require timing to take down.<br />
+– Again, here it adds a level of engagement to combat beyond “use the shotgun until the enemy disappears”.</p>
+<p>– Mechanics like these don’t coherently mesh with fighting wolves, tigers, and henchmen.. sure.<br />
+But, they might make sense if fighting robots or zombies or mythical creatures.</p>
+<h3 id="scares-and-horror">Scares and Horror</h3>
+<p>I don’t really like scary things!</p>
+<p>But on the other hand.. scary parts can be quite memorable in the Tomb Raider games.<br />
+There are parts of TR2’s “Ice Palace” level that are quite scary: there’s a pitch black room, and you can hear the growls of yeti monsters. – Yet, the Remaster ‘toned down’ how scary this part was, by using lighting which illuminated the room; that undermined the point of “scary because you can’t see the room”.</p>
+<p>There are parts of TR that are (deliberately) unpleasant to play because of this: threats like sharks in water sections, or there’s a dark cave full of spiders in the Temple of Xian level.</p>
+<p>I think it’d be kinda neat to have the option to ‘disable’ some of those scary parts.. or, an easier modes, give the player decent tools to couch the scary parts. – e.g. Make the player stronger in water combat (&amp; without the tension-building limited ammo), or give the player a decent flashlight.</p>
+<h3 id="adventure-and-puzzles">Adventure and Puzzles</h3>
+<p>In terms of adventure and puzzles:<br />
+IIRC, most of classic TR’s puzzles are more about ‘finding’ a key item (and so the level design ought to take you to the key and back), or are about <em>timing</em> / navigation.</p>
+<p>There are few puzzles that are ‘puzzles’ to the same degree of adventure games like Myst. (Albeit, in the recent TR games, there are side-quests/dungeons which feature fairly sophisticated puzzles in this sense).</p>
+<p>I think TR2’s first “Great Wall” level is a good demonstration of typical TR puzzles: the ‘challenge’ in the first area is to figure out where you’re supposed to go (&amp; the challenge of executing the jumps). The next challenge is how to get through a locked door: you dive into a small pond, find the key, get ambushed by a tiger, then make your way back up to the lock. There are secrets slightly off the main path that you can take the time to find.</p>
+<p>I think the best designed TR levels are those that appear to be non-linear, but allows for a somewhat linear flow. – e.g. TR2’s “Opera House” is a daunting maze where it can be confusing to know how to progress.. kindof like a hub-and-spoke; and each spoke is a small section that unlocks access to the next spoke of the hub.</p>
+<p>One of the reasons I think the grid-based level design is so central to the gameplay is you’ve got a clear, predictible, tangible logic for what the player can try to explore vs not.<br />
+At the lowest level, “can I make that jump?”;
+at a higher level, “have I exhausted all options in this area?”.</p>
+<p>One way to make this style of gameplay easier would be to have maps that ‘hint’ at navigatable areas the player hasn’t visited.<br />
+So, if a player is stuck, then looking at the map could hint at places the player can reach.<br />
+Mainly I’m thinking of cases where I got stuck, and how this might have helped:<br />
+e.g. one place I got stuck was TR2’s “Venice” level, where it wasn’t obvious to me that I was supposed to jump onto the bridge. The player has access to a big area, so it was easy to overlook. – I’m imagining that I could have opened a map, and seen the bridge with some kind of colour indication of “seen &amp; reachable, but not visited”.<br />
+Similarly, I got stuck in TR2’s “The Deck” in the big underwater lake, by forgetting about a corridor back to the deck that I had overlooked.<br />
+Or when I got stuck in TR3’s “Crash Site” by not figuring out how to get on top of the plane…
+etc.</p>
+<p>I mean.. sure, getting stuck is part of the experience; but “looking it up in a walthrough” is kindof a lame way of getting through, too.</p>
+<p>One quality-of-life suggestion, IMO, is that level design should be almost entirely ‘reversible’.<br />
+In TR, when you’re first playing a level, you’re never quite sure whether a path takes you to where you’re supposed to go, or to a secret, or to a pickup. Often in TR’s levels, once you go past some part, you can’t navigate back, which means you’d need to replay a level to get all the secrets.</p>
+<p>e.g. in Doom Eternal, each map is similar to a bunch of combat arenas with platforming sections in between. It’s always possible to get back to the start from the end; and once you’ve beaten the enemies, you can also “fast travel” around the map.</p>
+<h2 id="remarks">Remarks</h2>
+<p>I think, if you squint, the games from Crystal Dynamics do implement some of these things.<br />
+e.g. Rise of the Tomb Raider leaned into its combat, and had alternate modes which enhanced replayability.<br />
+Or the TRL/TRA had cheat codes.<br />
+e.g. TRU had a “Treasure Hunt” mode where you could explore through a level, after killing enemies.</p>
+<p>But, as I recall, it’s more about what they add that takes away from having the same feeling as classic TR.<br />
+e.g. by having a headset and chatting with others.. it detracts from “player mastering the level”, or really “player vs the environment”.<br />
+e.g. by having combat and navigation be such disparate systems, the player gets a feeling of when they’ll be fighting vs when they’ll be navigating ledges.<br />
+e.g. RotTR, SotTR were semi-open-world-ish at times, “as was the style at the time”.
+e.g. levels are linear enough that you rarely feel “stuck” in a large enough arena.</p>
+<p>Seems like the TRLE community has worked to keep the classic games alive.</p>
+<p>I also remember playing Indiana Jones and the Infernal Machine, which had gameplay kinda-sorta similar to the classic Tomb Raider games.</p>
+
+<hr />
+
+<div>
+    
+    <a href="../../posts/programming/2024-05-09-the-three-difficult-things-about-nix.html" style="float:left;">Newer post</a>
+    
+    
+    <a href="../../posts/programming/2024-04-09-using-terraform-to-manage-an-object-stored-in-openstack-swift.html" style="float:right; text-align: right;">Older post</a>
+    
+</div>
+<br style="clear: both;" />
+
+<hr />
+
+<!-- Load highlight.js for Syntax Highlighting. -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/bash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/c.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/gherkin.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/haskell.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/lisp.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/nix.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js"></script>
+<script>hljs.highlightAll();</script>
+
+            </div>
+
+            <hr style="margin-bottom: 0px; border-top: 2px solid black;" />
+
+            <div id="footer" class="pull-right" style="padding-right: 10px;">
+                Site proudly generated by
+                <a href="http://jaspervdj.be/hakyll">Hakyll</a>
+            </div>
+        </div>
+
+        <script>
+            // The callbacks we wanna use
+            // Phone-home, telling Google Analytics various metrics/dimensions
+
+            // Use custom dimensions & metrics
+            var AnalyticDimensionReaderKind = 'dimension1';
+            var AnalyticMetricActiveTime      = 'metric1';
+            var AnalyticMetricLongestIdleTime = 'metric2';
+            var AnalyticMetricReadCount       = 'metric3';
+
+            var gaCallbacks = {
+                "scrollPercent": function(ms, perc) {
+                    if (perc > 85) {
+                        // EVENT: Page read
+                        ga('send', {
+                            hitType:       'event',
+                            eventCategory: 'Scrolling',
+                            eventAction:   'atBottom',
+                            eventValue:    String(ms)
+                        });
+                    }
+                },
+                "read": function(ms, ct, timeToReach) {
+                    // Use this to set DIMENSION
+                    // timeToReach < 5s ==> Skim (default = Visitor)
+                    if (timeToReach < 5 * 1000) {
+                        // dimension1 = ReaderKind
+                        ga('set', AnalyticDimensionReaderKind, "skimmer");
+                    }
+
+                    // timeToReach > 30s ==> Reader
+                    if (timeToReach > 30 * 1000) {
+                        // dimension1 = ReaderKind
+                        ga('set', AnalyticDimensionReaderKind, "reader");
+                    }
+
+                    // EVENT: Page read
+                    ga('send', {
+                        hitType:       'event',
+                        eventCategory: 'Reading',
+                        eventAction:   'read',
+                        eventValue:    String(timeToReach)
+                    });
+
+                    // METRIC
+                    ga('set', AnalyticMetricReadCount, String(ct));
+                },
+                "initialIdle": function(ms) {
+                    // EVENT: Started Reading
+                    ga('send', {
+                        hitType:       'event',
+                        eventCategory: 'Scrolling',
+                        eventAction:   'begun',
+                        eventValue:    String(ms)
+                    });
+                },
+                "timeSpent": function(total, active, curIdle, initIdle, longestIdle) {
+                    // Update METRIC(S)?
+                    ga('set', AnalyticMetricActiveTime, String(active));
+                    ga('set', AnalyticMetricLongestIdleTime, String(longestIdle));
+                },
+                "idle": function(ms) {
+                },
+                "longestIdle": function(ms) {
+                }
+            }
+
+            window.onload = function() {
+                myAnalyticsInit(gaCallbacks);
+
+                //
+                // Initial dimensions & metrics
+                //
+
+                ga('set', AnalyticMetricReadCount, String(0));
+
+                // EVENT: Page load
+                ga('send', {
+                    hitType:       'event',
+                    eventCategory: 'pageLoad',
+                    eventAction:   'begun',
+                    eventValue:    String(ms)
+                });
+
+                // DIMENSION: visitor
+                ga('set', AnalyticDimensionReaderKind, "visitor");
+            }
+        </script>
+    </body>
+</html>

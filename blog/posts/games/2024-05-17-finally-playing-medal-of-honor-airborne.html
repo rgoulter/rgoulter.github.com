@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Using Terraform to Manage an Object Stored in OpenStack Swift - Richard Goulter's Blog</title>
+        <title>Finally Playing Medal of Honor Airborne - Richard Goulter's Blog</title>
 
         <!-- My (Old) CSS theme -->
         <link rel="stylesheet" type="text/css" href="../../css/default.css" />
@@ -129,9 +129,9 @@
             <hr style="margin: 0px; border-top: 5px solid black;" />
 
             <div id="content" class="container">
-                <h1>Using Terraform to Manage an Object Stored in OpenStack Swift</h1>
+                <h1>Finally Playing Medal of Honor Airborne</h1>
                 <div class="info">
-    Posted on April  9, 2024
+    Posted on May 17, 2024
     
         by Richard Goulter
     <br />
@@ -140,75 +140,78 @@
     
 </div>
 
-<h2 id="technologies">Technologies</h2>
-<p><a href="https://www.openstack.org/">OpenStack</a> is a set of software that infrastructure providers can use to give users a user-experience similar to that of AWS or other cloud providers. e.g. <a href="https://cleura.com/">Cleura</a> provides a public cloud service which can be managed with OpenStack APIs. – I think the idea for OpenStack was to enable infrastructure providers to serve as a substitute for AWS.. albeit, even amongst OpenStack public clouds, there remain idiosyncracies such that a deployment in one OpenStack cloud might require effort to deploy to another OpenStack cloud.</p>
-<p><a href="https://docs.openstack.org/swift/latest/">OpenStack’s Swift</a> is an ‘object storage’ service. More/less the same thing as AWS’ S3 (or Google Cloud’s cloud storage).</p>
-<p><a href="https://www.terraform.io/">Terraform</a>, or its open source fork <a href="https://opentofu.org/">OpenTofu</a>, is a tool for managing declarations of cloud resources. There’s a <a href="https://registry.terraform.io/providers/terraform-provider-openstack/openstack/latest/docs">Terraform Provider for OpenStack</a>, so that Terraform can be used to work with OpenStack resources.</p>
-<h2 id="task">Task</h2>
-<p>Here are notes on using Terraform to manage an object in a ‘container’ on OpenStack Swift (‘bucket’ in AWS terms), and to create a (temporary) URL to access that object.</p>
-<p>The main advantage of this approach is reyling on Terraform to manage the setup/teardown, as opposed to having to use the web console to manage this, or use the CLI client to manage these. I prefer being able to run <code>terraform apply</code> to ensure things are there; and <code>terraform destroy</code> to ensure things are gone.</p>
-<h2 id="terraform-code-for-container-and-bucket">Terraform Code for Container and Bucket</h2>
-<p>Some boilerplate, using the openstack provider for Terraform:</p>
-<pre class="terraform"><code>terraform {
-  required_version = &quot;&gt;= 0.14.0&quot;
-  required_providers {
-    openstack = {
-      source  = &quot;terraform-provider-openstack/openstack&quot;
-      version = &quot;~&gt; 1.49.0&quot;
-    }
-  }
-}</code></pre>
-<p>As the provider documentation mentions, the Terraform OpenStack provider can pick up authentication credentials from <code>OS_</code> environment variables. I used the Cleura public OpenStack cloud, and downloaded an ‘rc’ file with the credentials for an OpenStack user to use with a project there.</p>
-<p>Then the Terraform code for creating a container <code>rgoulter-storage</code>, and an object named <code>test</code> in that container:</p>
-<pre class="terraform"><code>resource &quot;openstack_objectstorage_container_v1&quot; &quot;self&quot; {
-  name = &quot;rgoulter-storage&quot;
-  metadata = {
-    Temp-URL-Key = &quot;some-secret-value&quot;
-  }
-}
-
-resource &quot;openstack_objectstorage_object_v1&quot; &quot;self&quot; {
-  container_name = openstack_objectstorage_container_v1.self.name
-  name           = &quot;test&quot;
-  content        = &quot;Hello, world!&quot;
-}</code></pre>
-<p>Resources are named <code>self</code> out of convention. (There aren’t multiple containers, objects in this Terraform codebase).</p>
-<p>In this case, the content of the object is set with the <code>content</code> attribute to the object resource. The <code>source</code> attribute is more suitable when you want some file to be uploaded. (c.f. <a href="https://registry.terraform.io/providers/terraform-provider-openstack/openstack/latest/docs/resources/objectstorage_object_v1">the terraform provider documentation</a>).</p>
-<p><code>Temp-URL-Key</code> is set on the container’s metadata to allow creating temporary URLs to provide access. (c.f. <a href="https://docs.openstack.org/swift/latest/api/temporary_url_middleware.html">Swift’s temporary url middleware documentation</a>). – This value should be kept secret; this value is used to create temporary URLs to access objects in the container.</p>
-<h2 id="creating-temporary-urls-with-terraform">Creating Temporary URLs: with Terraform</h2>
-<pre class="terraform"><code>resource &quot;openstack_objectstorage_tempurl_v1&quot; &quot;self&quot; {
-  container  = openstack_objectstorage_container_v1.self.name
-  object     = openstack_objectstorage_object_v1.self.name
-  method     = &quot;get&quot;
-  ttl        = 900
-  regenerate = true
-}
-
-output &quot;tempurl&quot; {
-  value     = openstack_objectstorage_tempurl_v1.self.url
-  sensitive = true
-}</code></pre>
-<p>It’s possible to also use the Terraform OpenStack provider to manage tempurls.</p>
-<p>On the one hand, you might as well, if you’re using Terraform for the other parts.
-On the other hand, I think it smells a bit too much to ‘declare’ the existance of a tempurl with a time-to-live of 900 seconds.</p>
-<p>One nice thing about this approach is the output URL value is simple/easy to figure out. i.e. running <code>terraform output -raw tempurl</code> outputs something like:</p>
-<pre><code>https://swift-fra1.citycloud.com:8080/swift/v1/AUTH_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/rgoulter-storage/test?temp_url_sig=bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb&amp;temp_url_expires=1999999999</code></pre>
-<h2 id="creating-temporary-urls-with-command-line-client">Creating Temporary URLs: with Command Line Client</h2>
-<p>The <a href="https://docs.openstack.org/swift/latest/api/temporary_url_middleware.html">documentation about temporary url middleware</a> gives instructions on using the OpenStack Swift client to create a temporary URL.</p>
-<p>There are various ways to come up with the OpenStack Storage URL (<code>https://swift-cluster.example.com/v1/my_account/</code>), but here’s what I came up with for the container, object, and temp URL key above:</p>
-<pre class="sh"><code>OS_STORAGE_URL=$(openstack catalog show object-store --format=json | jq -r .endpoints[2].url)
-swift tempurl --digest=sha1 GET 900 ${OS_STORAGE_URL}/rgoulter-storage/test some-secret-value</code></pre>
-<p>The <code>jq</code> expression isn’t the cleanest. (The <code>[2]</code> is the index the “public” object-store endpoint happened to be in the output of <code>openstack catalog show object-store</code>; albeit, all the endpoints had the same URL).</p>
-<p>The URL from <code>swift tempurl</code> can be used for GET requests to access the storage.</p>
+<p>I’d bought “Medal of Honor Airborne” on Steam many years ago, but had been unable to play it. Something about compatibility with my graphics card.<br />
+My desktop runs Linux these days; Valve’s Proton works pretty well for Windows games, and ProtonDB said that MoHA ran just fine. So, I was able to give it a go.<br />
+It more/less worked! Albeit, the game was frequently laggy (and occasionally crashed).</p>
+<p>Mostly I didn’t like the game. Here’s what I thought of it:</p>
+<h2 id="parachuting-and-its-effect-on-level-design">Parachuting and its Effect on Level Design</h2>
+<p>The game is set during WW2, and you play as an American paratrooper.<br />
+This enables the game’s key ‘gimmick’: when you start the mission, you parachute into the mission.</p>
+<p>The levels are then designed in two parts: the first half is a somewhat open map you parachute into, and the second half is a more traditional/linear experience.<br />
+Optimistically, this is a nice way to hedge a potentially risky game design choice: since the second half of each mission reverts to the traditional linear gameplay style, then at least there’s that if the parachuting mechanics don’t work well. (Pessimistically, it’s a conflict of design vision).</p>
+<p>The “parachute into the level” still feels relatively unique for mission-focused single-player shooter games.<br />
+e.g. multiplayer games like Battlefield feature parachuting.. and it’s a strategic aspect of the “battle royale” games like PUBG or Fortnite, etc.<br />
+The Just Cause series features the player being able to fly around; but Just Cause is an open world game through to its heart, and its missions are a light layer on top.</p>
+<p>To an extent, “well crafted experience” conflicts with “open world sandbox”.<br />
+Medal of Honor generally prefers to aim for the cinematic former.</p>
+<p>In MoHA, the level design ends up having a very open start, which branches off into more linear chunks where the player completes each objective. (e.g. “destroy the ammo cache” will be its own linear segment of a level; and “clear the anti air defenses” will be a separate linear segment).</p>
+<p>In some cases, the player can parachute right to the end of one of these segments; but, the mission objectives are heavily defended, and then you don’t get to parachute into the next objective either.</p>
+<p>Overall.. I thought this was a pretty neat game mechanic.<br />
+I don’t think it adds enough to the game to be worth implementing.</p>
+<h2 id="downsides-to-the-parachuting-as-implemented-checkpoints-and-progress">Downsides to the Parachuting as Implemented: Checkpoints and Progress</h2>
+<p>As it’s implemented in MoHA, the parachuting did lead to some frustrating gameplay, or at least how it interacted with checkpoints.</p>
+<p>Checkpoints are based on completing objectives.<br />
+If you die before completing the (initial) objectives, you’ll parachute into the level again.<br />
+And all the enemies on the map respawn.<br />
+AFAICT, enemies continuously spawn (up to a limit), based on ‘morale’.<br />
+– This wasn’t immediately clear to me, but it did frustrate me a bit. It meant that I might spend a significant amount of time killing enemies and making progress, only to have that all undone if I died before reaching an objective. (In contrast, if there are two objectives close together, you can get checkpoints very quickly).</p>
+<p>If there were a finite number of enemies, then this wouldn’t run into the same frustration. As is, it means that “turtling” is just the wrong way to play the game.<br />
+If checkpoints were more frequent, this wouldn’t run into the same frustration.</p>
+<h2 id="shooter-mechanics">Shooter Mechanics</h2>
+<p>These felt a bit clunky to me.</p>
+<p>The first thing that seemed clunky was the ammo.<br />
+In the earlier Medal of Honor Allied Assault, enemies drop ammo for the guns they use. An enemy with a rifle drops rifle ammo, an enemy with a submachine gun drops submachine gun ammo. You didn’t get to swap to use <em>their</em> rifle.<br />
+In MoHA, the drops from enemies seem random. They might drop their weapon, in which case you can swap to use that. You don’t pick up ammo for your rifle from their rifle. They might drop health. They probably don’t drop anything at all.</p>
+<p>But since the enemies continuously spawn (until pushed back), this meant my initial experience with the game was running out of ammo shooting at the enemies, and not being able to find ammo pickups.</p>
+<p>The game does compensate for this by giving your pistol infinite ammunition.</p>
+<p>You avoid these problems by taking a somewhat more aggressive approach:<br />
+By pushing up, the enemies will ‘retreat’; once pushed back to the objective, the enemies stop respawning.</p>
+<p>The most strikingly clunky thing about the game (compared to shooters since) is the “aim down sights” mechanic.. the intended use is for the player to use this behind cover, and then peek around cover to shoot enemies. For this, the game keeps the player standing, and the movement keys are used for ‘peek’.<br />
+In practice, players will want to move about while using this ADS. MoHA supports this, but it’s not the default, so it feels clunky.</p>
+<h2 id="the-flow-when-it-worked">The Flow, When it Worked</h2>
+<p>Once I figured out the idiosyncrasies.. the gameplay loop that ended up mostly working was reasonable: rush up to cover near an enemy (or ideally, to a position which flanks the enemy), do the shooting while trying to not get shot, rinse &amp; repeat.</p>
+<h2 id="rocket-spam-from-enemies-got-tiring-quickly">Rocket Spam from Enemies Got Tiring Quickly</h2>
+<p>There are enemies with rocket launchers.<br />
+These would spam rockets, which I found annoying.<br />
+I found this particularly obnoxious because there was such a high duration between checkpoints.</p>
+<h2 id="story">Story</h2>
+<p>The game has a weird mix of tone.</p>
+<p>Videogames are supposed to be fun. (Except maybe the pretentious artsy bullshit ones). War and history is horrible.<br />
+So, games with historical parts aren’t going to be fully realistic. Some games aim to be simulations, some aim to be more arcade-like.</p>
+<p>I reckon the game series that had a great balance between arcade and realistic is “Brothers in Arms”.<br />
+BiA’s is a tactical shooter.. in the sense that you can’t just run up and shoot the enemies; it’s ‘tactical’ in the sense that the levels are designed around the idea of using your squad’s fire team and assault teams to suppress and flank enemy positions.<br />
+Rather than “1 man vs 100 soldiers”, it’s closer to “6 soldiers vs 5 soldiers; then another 5 soldiers; and another 5 soldiers”.<br />
+Regarding history, the level design mimicks the after-action reports from the fight themselves. So reading the AAR feels familiar.<br />
+Regarding story.. by being very <em>subtle</em>, the game is much more impactful about your squadmates dying.</p>
+<p>The story of MoHA is very “cheesy war movie” in its tone.<br />
+It has no weight because the gameplay is so unrelated.<br />
+At the start of every mission, the plane you fly in gets shot and its engines are on fire. Because that’s what happens in war movies.<br />
+But there’s never any consequence to this.. so you get this “ludo-narrative dissonance”. The conflict between the game (where there’s no risk) vs the story (where it’s super risky).<br />
+– Whereas, there are ways to ‘marry’ the gameplay and the story. e.g. in Far Cry 5, as you progress through the story, you get kidnapped by the henchmen of the boss in each region. For the boss with the theme “illusion of control”, the gameplay allows you to (temporarily) defer the kidnapping; giving you the illusion that you have more control than you really have.</p>
+<p>MoHA’s battlefield is constantly filled with noisy combat; dozens of soldiers in every direction. NPC allies constantly getting gunned down, in game and in cutscenes.<br />
+It has no weight at all.<br />
+NPC allies just feel like “progress markers” more than anything else.</p>
+<p>I guess some would say MoHA is realistic in the sense that you can’t just run and gun here, either.<br />
+But, say, your pistol has infinite ammo, you can start missions with a loadout of German weapons, there are enemies which spam an endless stream of rockets at you, and enemies who carry MG42s and have ‘bulletproof’ gas masks or something.</p>
 
 <hr />
 
 <div>
     
-    <a href="../../posts/games/2024-05-06-a-wish-for-more-accessible-classic-tomb-raider-ish-games.html" style="float:left;">Newer post</a>
+    <a href="../../posts/programming/2024-05-18-experience-updating-the-c-worksheet-project.html" style="float:left;">Newer post</a>
     
     
-    <a href="../../posts/2024-03-23-six-months-of-going-to-the-gym.html" style="float:right; text-align: right;">Older post</a>
+    <a href="../../posts/programming/2024-05-09-the-three-difficult-things-about-nix.html" style="float:right; text-align: right;">Older post</a>
     
 </div>
 <br style="clear: both;" />

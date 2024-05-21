@@ -1,0 +1,381 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Experience Updating the C Worksheet Project - Richard Goulter's Blog</title>
+
+        <!-- My (Old) CSS theme -->
+        <link rel="stylesheet" type="text/css" href="../../css/default.css" />
+
+        <!--
+            jQuery & jQueryUI
+        -->
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css" />
+
+        <!--
+            Pandoc Style CSS
+            (for syntax highlighted snippets)
+        -->
+        <link rel="stylesheet" type="text/css" href="../../css/syntax.css" />
+
+        <!--
+            Bootstrap
+        -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+        <style>
+            /*
+             * Bootstrap defines blockquote as 17px,
+             * so it looks stupidly large in my blogposts. */
+            blockquote {
+                font-size: 14px;
+            }
+        </style>
+
+        <!--
+            Waypoints, and Waypoints-Sticky,
+            so we can do this:
+            http://imakewebthings.com/waypoints/shortcuts/sticky-elements/
+        -->
+        <script src="../../js/jquery.waypoints.min.js"></script>
+        <script src="../../js/sticky.min.js"></script>
+
+        <!-- My analytics stuff -->
+        <script src="../../js/my_analytics.js"></script>
+        <script src="../../js/my_analytics_debug.js"></script>
+
+        <!--
+            TOCify
+        -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js"></script>
+
+        <!--
+            Patched TOCify css file.
+            (Don't want fixed `.tocify`).
+        -->
+        <link rel="stylesheet" type="text/css" href="../../css/jquery.tocify.css" />
+
+        <style>
+        .navbar {
+            margin-bottom: 0px;
+        }
+
+        .banner-image {
+            width:100%;
+        }
+
+        .banner {
+            margin-left: 0px;
+            margin-right: 0px;
+        }
+
+        body {
+            background-color: #e2e2e2;
+        }
+
+        #page {
+            padding-left:0;
+            padding-right:0;
+            background-color: #ffffff;
+        }
+        </style>
+
+        <!-- Google Analytics -->
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-H13NWYDX0G"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'G-H13NWYDX0G');
+        </script>
+    </head>
+    <body>
+        <div id="page" class="container">
+            <!-- This, with no padding on left/right -->
+            <div class="banner">
+                <nav class="navbar navbar-default">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+
+            <!-- The Hamburger -->
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../../">Richard Goulter's Blog</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="../../">Home</a></li>
+            <li><a href="../../yi.html">Yi</a></li>
+            <li><a href="../../emacs.html">Emacs</a></li>
+            <li><a href="../../what-i-wish-i-knew-when-i-started-using-nix.html">Nixpkgs</a></li>
+            <li><a href="../../archive.html">Archive</a></li>
+        </ul>
+    </div>
+</nav>
+
+            </div>
+
+            <hr style="margin: 0px; border-top: 5px solid black;" />
+
+            <div id="content" class="container">
+                <h1>Experience Updating the C Worksheet Project</h1>
+                <div class="info">
+    Posted on May 18, 2024
+    
+        by Richard Goulter
+    <br />
+    
+    Tags: 
+    
+</div>
+
+<p>Around a decade ago, I made a <a href="https://github.com/rgoulter/c-worksheet.vim">pretty neat project</a>:
+a “worksheet” user interface for simple C programs. – By executing the worksheet, you get to see the program’s
+output annotated alongside the source code.</p>
+<p>An illustrative example:</p>
+<pre><code>int main(int argc, char* argv) {
+  int x = 5;                                      //&gt; x is int
+  int *px;                                        //&gt; px is pointer to int
+  px = &amp;x;                                        //&gt; px = 0x7ffc365efd5c = 5
+  *px = 3;                                        //&gt; (*px) = 3
+  x;                                              //&gt; 3
+  px = 0;                                         //&gt; px = (nil)
+  *px = 5;                                        //&gt; SEGFAULT
+  x;
+  printf(&quot;done.\n&quot;);
+}</code></pre>
+<p>The <code>//&gt;</code> comments are automatically generated by the worksheet program.</p>
+<p><a href="https://github.com/rgoulter/c-worksheet-instrumentor/?tab=readme-ov-file#worksheet-examples">More examples on the c-worksheet-instrumentor readme</a>.</p>
+<p>The project consists of a “c-worksheet” program which does all the heavy lifting of computing the C worksheet annotations, and a vim plugin which provides a nice UI for using the worksheet functionality.</p>
+<p>I recently performed some maintenance on it to bring it up to scratch, &amp; to check that it’s in working condition.</p>
+<p>You’d hope untouched code would stay working. – Nothing changed, so nothing should have broken.<br />
+In reality, since the project dependencies constantly get updated (e.g. library dependencies, and system tools), some code needed to change in order to build the code from source.</p>
+<p>Logging some thoughts here:</p>
+<h2 id="updating-the-c-worksheet-instrumentor-scala-project">Updating the C Worksheet Instrumentor (Scala Project)</h2>
+<p>The “C Worksheet Instrumentor” is the Scala part of the project which does the heavy work.</p>
+<p>Overall, the changes I made involved:</p>
+<ul>
+<li><p>Getting the project to build again:</p>
+<ul>
+<li><p>Updating the <code>build.gradle</code> file to work with recent gradle releases.</p></li>
+<li><p>Updating the dependency library versions from Scala 2.11 to Scala 2.12.</p></li>
+</ul></li>
+<li><p>Updating CI: Fixing mistakes in AppVeyor, removing TravisCI, and adding GitHub Actions support.</p></li>
+<li><p>Upon this foundation, some more minor polishing:</p>
+<ul>
+<li><p>Adding files to work with the Nix package manager.</p></li>
+<li><p>Tree-wide automated formatting of the codebase.</p></li>
+</ul></li>
+</ul>
+<p>Most of the project was written in 2015 as part of my undergraduate dissertation.<br />
+Since then, I did add CI/CD jobs to the project in 2018.</p>
+<p>Implementation-wise:<br />
+This “C worksheet instrumentor” project was implemented using Scala, &amp; a parser written with Antlr (which generates Java code from a grammar definition file). The tests were written using ScalaTest.</p>
+<p>This tech stack is different-enough from “only Scala files” so as to make setting up the build files annoying.</p>
+<p>For building this, I used gradle.</p>
+<p>For Scala, I think the SBT (Scala Build Tool) is more common. <a href="../programming/2015-01-19-gradle-or-sbt.html">I wrote about my frustrations trying to set up the project with either back then</a>. (Since then, I moved to use gradle; I think because I was able to add a ProGuard configuration to gradle, but didn’t for SBT).<br />
+– I wish I could say my conclusion of “they both suck” was sophomoric. Perhaps “they’re both painful to set up” would be a more precise and tactful way of expressing it.</p>
+<h3 id="updating-gradle">Updating Gradle</h3>
+<p>In this case, where the <a href="https://github.com/rgoulter/c-worksheet-instrumentor/commits/master/build.gradle">build.gradle file was written in mid-2015</a>, the up to date release of gradle <a href="https://gradle.org/releases/">would have been v2.3; whereas at the time of writing, it’s Gradle 8.7</a>.<br />
+– I wasn’t able to use gradle 8.7 to run this old gradle file.</p>
+<p>I’ve since learned Gradle tooling itself does have solutions for “different projects depend on different gradle versions”: gradle supports generating a <a href="https://docs.gradle.org/current/userguide/gradle_wrapper_basics.html">“gradle wrapper” script</a>. This wrapper script will download &amp; invoke the appropriate gradle version.<br />
+However, for my codebase, using a gradle wrapper generated by gradle 2.3 still ran into some problems:<br />
+I couldn’t successfully run the gradle 2.3 wrapper using jdk 21. Not a big deal.<br />
+Using jdk 8, I managed to at least build the project; but the tests failed due to a classpath error. (Presumably a transitive dependency updated with a requirement for a more recent Gradle version. – There wasn’t a lockfile of versions used; although <a href="https://docs.gradle.org/6.8/release-notes.html#dependency-management-improvements">Gradle apparently introduced this feature in Gradle 6.8</a>).</p>
+<p>Anyway.<br />
+Since the code didn’t build, I stripped the <code>build.gradle</code> file down to its basics in order to get <em>something</em> to build.<br />
+Previously, I had added code to the <code>build.gradle</code> related to shadowjar and proguard. (shadowjar would help to bundle dependency JARs all into one JAR file, and proguard could assemble a small JAR with stripped down dependencies). I recall adding these partly because I was frustrated with how slow the internet took to download a 20MiB JAR from GitHub Releases. And partly because I liked the idea of the distributed <code>lib/</code> dir having a single JAR.<br />
+– Distributing software is hard. I knew less about that back then than I do now, I feel.</p>
+<p>I was then able to get an LLM chatbot to help advise me on the changes I’d need to make to the <code>build.gradle</code> file for a more recent gradle.<br />
+e.g. it was able to explain to me to change from <code>jcenter()</code> to <code>mavenCentral()</code>, and syntax changes to the <code>dependencies {}</code> and <code>jar {}</code> blocks. This saves several minutes of time &amp; a search or two.</p>
+<p>And since Scala 2.11 didn’t run with a recent Java Runtime Environment, I updated the code (and matching dependencies) to Scala 2.12.</p>
+<p>In the end: <a href="https://github.com/rgoulter/c-worksheet-instrumentor/compare/cdd47b185df9690f9f5dde78d8f596b5c2af2296..74ceb4c1558450355488431bafe126641c0c480b">diff of changes to get the code to build</a>.</p>
+<h3 id="updating-ci">Updating CI</h3>
+<p>One thing I did do well with this project was to have a fairly good test suite.</p>
+<p>I’d left the project in a state where it had CI jobs running on Travis CI, and on Appveyor.</p>
+<p>I do appreciate that these CI services often will let you run jobs for free, if your repository is public.</p>
+<p>The CI jobs I have for this project are almost trivial: install dependencies &amp; check that <code>gradle build</code> runs.</p>
+<p>In the years since, Travis CI stopped running my jobs. So, I moved the builds for Linux/macOS to GitHub Actions.</p>
+<p>The builds failed AppVeyor due to Java version issues.<br />
+I got stuck for a moment since AppVeyor wasn’t reading the <code>appveyor.yml</code> file for build details. Deleting/recreating the AppVeyor sorted things out. (It had been something to do with AppVeyor’s behaviour for arbitrary git projects vs for GitHub-linked projects).</p>
+<h3 id="adding-nix">Adding Nix</h3>
+<p>The <a href="https://nixos.org/">nix package manager</a> has been a valuable tool to learn. It’s got a steep learning curve, but it’s very good at dealing with problems related to packaging. (Which, for developers, turns out to be <em>a lot</em>).</p>
+<p>One of the ways that writing CI/CD can be frustrating is for cases where something works locally, but figuring out how to run it on a fresh host can be frustrating.<br />
+With nix, this isn’t an issue. – Indeed, the CI/CD job I added which used nix really is trivial: it installs nix, and then runs <code>nix build .</code>.</p>
+<p>Another advantage with Nix is easy setup for isolated development environments. I remember reading blogposts like “my development setup for <lang>”. These days, it’s pretty much “a formatter, a linter, a language server”. Using a <code>shell.nix</code> means it’s easy to make these tools available (i.e. installed) when working on the project.</p>
+<p>The difficulty I ran into adding Nix support for the project was due to differences between how gradle wants to manage dependencies, vs how nix wants to. Searching through the nixpkgs codebase, a common approach is to use some kind of <a href="https://nixos.org/manual/nixpkgs/stable/#maven">Fixed Output Derivation deps pattern</a> in order to deal with the idiosyncracies of each. (Also, gradle uses <code>~/.gradle</code>, and nix builds its packages with <code>HOME</code> set to a non-existant directory, so the <code>gradle.user.home</code> had to be explicitly set to avoid issues).</p>
+<h3 id="minor-polishing">Minor Polishing</h3>
+<p>With the code building from source, and CI/CD in working state so as to run the build/tests for each commit, changes can be made with the confidence that if anything breaks, CI/CD will be able to catch problems.</p>
+<p>I spent time to add an “End to End” integration test: a test which called the command line program, and checked the results of the output. This was an improvement over the existing test suite, which ran the Scala code in-process.</p>
+<p>I also noticed that some tests failed when running on macOS where <code>cc</code> defaults to <code>clang</code>.<br />
+Turns out, some of the Worksheet functionality works with GCC but not Clang.<br />
+So, I refactored the tests so that the relevant parts of the test suite could be run with either GCC or with Clang.</p>
+<p>Another polish to add to the project was using <code>scalafmt</code> to ensure consistent code formatting across the project.</p>
+<h3 id="chatbot-llms-often-useful">Chatbot LLMs Often Useful</h3>
+<p>As mentioned, I found a chatbot LLM to be useful for helping to update the code.</p>
+<p>To be honest, tasks like “update CI/CD” or “update the build file” are not glamorous: they might require knowing a fair amount about the tools, but the tools provide limited value.<br />
+(Whereas e.g. Nix is a powerful tool which lends itself to use cases outside of just “build this project”, and so is worth taking the time to learn).<br />
+– For these tasks, using chatbot LLMs helps make progress without having to spend a long time learning the tool.</p>
+<p>e.g. Since gradle files are written with the Groovy language (a Ruby-ish JVM language), and this is the only use of Groovy I have, it’s quicker to ask a chatbot “please write the Groovy code to…” than to spend time looking up Groovy syntax, and what methods Groovy lists have.</p>
+<p>Where I found it limited, with the LLM I was chatting with, was when I was asking a dumb question (trying something that goes against the grain of a tool’s approach), the chatbot was more inclined to give me an answer that sounded helpful, than to push back and say “no, it doesn’t work that way”.</p>
+<h3 id="lost-context-and-knowledge">Lost Context and Knowledge</h3>
+<p>Working on a project so intermittently means you suffer from losing context/knowledge of various parts of it.</p>
+<p>Phrasing this in terms of risk and change: using something more unusual means there’s a higher risk that it’s more difficult to change if you need to.</p>
+<p>The more implicit and magical something is, the harder it is to identify.</p>
+<p>Scala is a complex language with a wide variety of sophisticated features.<br />
+I haven’t had to change the Scala codebase all that much. However, I do appreciate its ‘sophisticated’ features, such as the pattern matching, and named arguments.</p>
+<h2 id="updating-the-vim-plugin">Updating the Vim Plugin</h2>
+<p>The C Worksheet is a neat idea, but it only really sense for the UI to be part of a text editor (rather than just listing annotated output on the command line).</p>
+<p>I had written <a href="https://github.com/rgoulter/c-worksheet.vim">c-worksheet.vim</a> back in 2015.</p>
+<p>Implementation-wise:<br />
+The meat of the code was fairly straightforward: rather than leaning on vimscript, I used vim’s python commands in order to invoke Python code; and that Python code managed the interface between the Vim source and the c-worksheet output.</p>
+<p>The upside to using vim’s python integration was not having to wrangle with vimscript to figure out how to interface it with the Scala program.<br />
+The downside was that it was affected by Python’s less-than-smooth transition from Python 2 to Python 3.</p>
+<p>In 2015, it was fine to use the python2 <code>pyeval</code>. In 2024, I needed to use the python3 <code>py3eval</code>.</p>
+<p>Other than updating the Python code, the rest of the vimscript fortunately still worked. +1 to vim’s support backwards compatability.</p>
+<p>I saw that Vim has a new native package management functionality, with commands like <code>:packadd</code>.<br />
+However, I was using the <code>autoload</code> feature to defer loading much of my plugin’s loading, and using <code>ftplugin/c/</code> in order to provide my plugin functionality to C files.. – Using <code>:packadd</code> is also a way of deferring when code gets loaded; but by loading the package when opening a C file, it wouldn’t then also load my plugin.<br />
+– The intricacies of how vim loads its vimscript is something I didn’t entirely recall. (Albeit, I’ve moved on to using Doom Emacs as my primary editor).</p>
+<p>After updating the code, I took the time to write a few tests for the code.<br />
+In this case, integration tests that checked the plugin could run <code>c-worksheet</code> against a “Hello World” source file. (And some non-functional tests to check that the plugin behaves if the <code>c-worksheet</code> program isn’t available).</p>
+<p>The main trouble I had with this was trying to setup CI/CD with Windows.<br />
+The computer I use for day to day things is Linux. I happen to have Windows installed on another partition; but, I’m not very familiar with the Windows command line.<br />
+(And also, Vim’s batch mode didn’t behave well on Windows; I was able to set up the tests using Neovim, but not Vim).</p>
+<p>With hindsight, there are things I wish I’d done better. The code could have been written more defensively: e.g. <code>pyeval</code> is gated behind vim’s <code>python2</code> option. My code doesn’t guard against this. Nor does it guard against whether the <code>c-worksheet</code> command can be run. And its ‘service management’ is naive/sloppy; the interface with the C Worksheet Instrumentor is also naive/sloppy. – The code was clearly thrown together to the level of “it’s at least useful in some cases”, rather than “it’s cleanly and robustly useful in as many cases as it can be”.</p>
+
+<hr />
+
+<div>
+    
+    
+    <a href="../../posts/games/2024-05-17-finally-playing-medal-of-honor-airborne.html" style="float:right; text-align: right;">Older post</a>
+    
+</div>
+<br style="clear: both;" />
+
+<hr />
+
+<!-- Load highlight.js for Syntax Highlighting. -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/bash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/c.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/gherkin.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/haskell.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/lisp.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/nix.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js"></script>
+<script>hljs.highlightAll();</script>
+
+            </div>
+
+            <hr style="margin-bottom: 0px; border-top: 2px solid black;" />
+
+            <div id="footer" class="pull-right" style="padding-right: 10px;">
+                Site proudly generated by
+                <a href="http://jaspervdj.be/hakyll">Hakyll</a>
+            </div>
+        </div>
+
+        <script>
+            // The callbacks we wanna use
+            // Phone-home, telling Google Analytics various metrics/dimensions
+
+            // Use custom dimensions & metrics
+            var AnalyticDimensionReaderKind = 'dimension1';
+            var AnalyticMetricActiveTime      = 'metric1';
+            var AnalyticMetricLongestIdleTime = 'metric2';
+            var AnalyticMetricReadCount       = 'metric3';
+
+            var gaCallbacks = {
+                "scrollPercent": function(ms, perc) {
+                    if (perc > 85) {
+                        // EVENT: Page read
+                        ga('send', {
+                            hitType:       'event',
+                            eventCategory: 'Scrolling',
+                            eventAction:   'atBottom',
+                            eventValue:    String(ms)
+                        });
+                    }
+                },
+                "read": function(ms, ct, timeToReach) {
+                    // Use this to set DIMENSION
+                    // timeToReach < 5s ==> Skim (default = Visitor)
+                    if (timeToReach < 5 * 1000) {
+                        // dimension1 = ReaderKind
+                        ga('set', AnalyticDimensionReaderKind, "skimmer");
+                    }
+
+                    // timeToReach > 30s ==> Reader
+                    if (timeToReach > 30 * 1000) {
+                        // dimension1 = ReaderKind
+                        ga('set', AnalyticDimensionReaderKind, "reader");
+                    }
+
+                    // EVENT: Page read
+                    ga('send', {
+                        hitType:       'event',
+                        eventCategory: 'Reading',
+                        eventAction:   'read',
+                        eventValue:    String(timeToReach)
+                    });
+
+                    // METRIC
+                    ga('set', AnalyticMetricReadCount, String(ct));
+                },
+                "initialIdle": function(ms) {
+                    // EVENT: Started Reading
+                    ga('send', {
+                        hitType:       'event',
+                        eventCategory: 'Scrolling',
+                        eventAction:   'begun',
+                        eventValue:    String(ms)
+                    });
+                },
+                "timeSpent": function(total, active, curIdle, initIdle, longestIdle) {
+                    // Update METRIC(S)?
+                    ga('set', AnalyticMetricActiveTime, String(active));
+                    ga('set', AnalyticMetricLongestIdleTime, String(longestIdle));
+                },
+                "idle": function(ms) {
+                },
+                "longestIdle": function(ms) {
+                }
+            }
+
+            window.onload = function() {
+                myAnalyticsInit(gaCallbacks);
+
+                //
+                // Initial dimensions & metrics
+                //
+
+                ga('set', AnalyticMetricReadCount, String(0));
+
+                // EVENT: Page load
+                ga('send', {
+                    hitType:       'event',
+                    eventCategory: 'pageLoad',
+                    eventAction:   'begun',
+                    eventValue:    String(ms)
+                });
+
+                // DIMENSION: visitor
+                ga('set', AnalyticDimensionReaderKind, "visitor");
+            }
+        </script>
+    </body>
+</html>
