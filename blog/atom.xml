@@ -10,8 +10,490 @@
         <email>richard.goulter+blog@gmail.com</email>
         
     </author>
-    <updated>2024-05-18T00:00:00Z</updated>
+    <updated>2024-05-23T00:00:00Z</updated>
     <entry>
+    <title>Getting MounRiver Studio to Run on NixOS</title>
+    <link href="http://www.rgoulter.com/blog//posts/programming/2024-05-23-getting-mounriver-studio-to-run-on-nixos.html" />
+    <id>http://www.rgoulter.com/blog//posts/programming/2024-05-23-getting-mounriver-studio-to-run-on-nixos.html</id>
+    <published>2024-05-23T00:00:00Z</published>
+    <updated>2024-05-23T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<p>In <a href="../programming/2024-05-22-example-of-cannot-execute-required-file-not-found-on-nixos.html">the previous post</a>,
+I walked through a few different ways of how to get a pre-compiled binary running on NixOS.</p>
+<p>In this post, I’ll share some notes on what it took to get <a href="http://www.mounriver.com/download">MounRiver</a> running on NixOS.
+The basic idea is the same, but in practice it felt much more difficult.
+(MounRiver Studio is an IDE used for WCH MCUs. <a href="../programming/2023-12-21-notes-on-building-wch-ble-ch592-evt-exam-with-bare-makefile.html">I’ve discussed developing the EVT examples in a previous blogpost</a>).</p>
+<p>If the previous post was “draw a circle”, this post is “<a href="https://knowyourmeme.com/memes/how-to-draw-an-owl">draw the rest of the owl</a>”.</p>
+<p>These notes are mostly “here are the commands I ran, here was the output”:</p>
+<p>The Community RISC-V IDE can be downloaded from the MounRiver website. It’s a tarball with a <code>beforeinstall</code> (with some <code>.so</code> shared libraries to be copied into <code>/usr/lib</code>), and an <code>MRS_Community</code> directory which is a distribution of the <a href="https://eclipseide.org/">Eclipse IDE</a>.</p>
+<p>First thing to try: just running the executable directly:</p>
+<pre><code>$ ./MounRiver_Studio_Community_Linux_x64_V160/MRS_Community/MounRiver\ Studio_Community
+exec: Failed to execute process &#39;./MounRiver_Studio_Community_Linux_x64_V160/MRS_Community/MounRiver Studio_Community&#39;: The file exists and is executable. Check the interpreter or linker?</code></pre>
+<p>or with bash:</p>
+<pre><code>bash: ./MounRiver_Studio_Community_Linux_x64_V160/MRS_Community/MounRiver Studio_Community: cannot execute: required file not found</code></pre>
+<p>This “required file not found” should be familiar, having read the previous blogpost.</p>
+<p>So, checking what <code>ldd</code> says:</p>
+<pre><code>$ ldd ./MounRiver_Studio_Community_Linux_x64_V160/MRS_Community/MounRiver\ Studio_Community
+        linux-vdso.so.1 (0x00007ffd249d4000)
+        libpthread.so.0 =&gt; /nix/store/anlf335xlh41yjhm114swi87406mq5pw-glibc-2.38-44/lib/libpthread.so.0 (0x00007fc32c3d8000)
+        libdl.so.2 =&gt; /nix/store/anlf335xlh41yjhm114swi87406mq5pw-glibc-2.38-44/lib/libdl.so.2 (0x00007fc32c3d3000)
+        libc.so.6 =&gt; /nix/store/anlf335xlh41yjhm114swi87406mq5pw-glibc-2.38-44/lib/libc.so.6 (0x00007fc32c1ea000)
+        /lib64/ld-linux-x86-64.so.2 =&gt; /nix/store/anlf335xlh41yjhm114swi87406mq5pw-glibc-2.38-44/lib64/ld-linux-x86-64.so.2 (0x00007fc32c3df000)</code></pre>
+<p>Indeed, the dynamic linker is <code>/lib64/ld-linux-x86-64.so.2</code>. (So far, this is the same as the hello world example from the previous post).</p>
+<h2 id="approach-1-using-nix-alien">Approach 1: Using Nix Alien</h2>
+<p>In the previous post, we saw <a href="https://github.com/thiagokokada/nix-alien">nix-alien</a> could automatically work around some problems. Trying that:</p>
+<pre><code>$ nix-alien ./MounRiver_Studio_Community_Linux_x64_V160/MRS_Community/MounRiver\ Studio_Community
+/home/rgoulter/playground/nix-mounriver-studio/MounRiver_Studio_Community_Linux_x64_V160/MRS_Community//plugins/org.eclipse.justj.openjdk.hotspot.jre.full.linux.x86_64_14.0.2.v20200815-0932/jre/bin/java: error while loading shared libraries: libz.so.1: cannot open shared object file: No such file or directory
+MounRiver Studio_Community:
+JVM terminated. Exit code=127
+/home/rgoulter/playground/nix-mounriver-studio/MounRiver_Studio_Community_Linux_x64_V160/MRS_Community//plugins/org.eclipse.justj.openjdk.hotspot.jre.full.linux.x86_64_14.0.2.v20200815-0932/jre/bin/java
+-Dosgi.requiredJavaVersion=11
+-Dosgi.instance.area.default=@user.home/mrs_community-workspace
+....</code></pre>
+<p>The key detail of this output being <code>... libz.so.1: cannot open ...</code>:</p>
+<pre><code>plugins/org.eclipse.justj.openjdk.hotspot.jre.full.linux.x86_64_14.0.2.v20200815-0932/jre/bin/java: error while loading shared libraries: libz.so.1: cannot open shared object file: No such file or directory</code></pre>
+<p>Checking <code>ldd</code> on this <code>java</code> binary:</p>
+<pre><code>$ ldd ..../jre/bin/java
+        linux-vdso.so.1 (0x00007ffe3abb5000)
+        libz.so.1 =&gt; not found
+        libjli.so =&gt; /home/rgoulter/playground/nix-mounriver-studio/MounRiver_Studio_Community_Linux_x64_V160/MRS_Community//plugins/org.eclipse.justj.openjdk.hotspot.jre.full.linux.x86_64_14.0.2.v20200815-0932/jre/bin/../lib/libjli.so (0x00007ff14489c000)
+        libpthread.so.0 =&gt; /nix/store/anlf335xlh41yjhm114swi87406mq5pw-glibc-2.38-44/lib/libpthread.so.0 (0x00007ff144897000)
+        libdl.so.2 =&gt; /nix/store/anlf335xlh41yjhm114swi87406mq5pw-glibc-2.38-44/lib/libdl.so.2 (0x00007ff144892000)
+        libc.so.6 =&gt; /nix/store/anlf335xlh41yjhm114swi87406mq5pw-glibc-2.38-44/lib/libc.so.6 (0x00007ff1446a7000)
+        /lib64/ld-linux-x86-64.so.2 =&gt; /nix/store/anlf335xlh41yjhm114swi87406mq5pw-glibc-2.38-44/lib64/ld-linux-x86-64.so.2 (0x00007ff1448b3000)
+        libz.so.1 =&gt; not found</code></pre>
+<p>Indeed, <code>libz.so.1 =&gt; not found</code>.</p>
+<p>We can add <code>--additional-libs=libz.so.1</code>
+to the <code>nix-alien</code> call, which helpfully lets us pick the package <code>libz</code>. (We could instead use <code>--additional-packages=libz</code> if we already know <code>libz</code> is the name of the nix package with <code>libz.so.1</code>).</p>
+<pre><code>$ nix-alien --recreate --additional-libs=libz.so.1 ./MounRiver_Studio_Community_Linux_x64_V160/MRS_Community/MounRiver\ Studio_Community
+MounRiver Studio_Community:
+An error has occurred. See the log file
+/home/rgoulter/playground/nix-mounriver-studio/MounRiver_Studio_Community_Linux_x64_V160/MRS_Community/configuration/1716348838071.log.</code></pre>
+<p>and this log file has contents:</p>
+<pre><code>!SESSION 2024-05-22 03:33:57.978 -----------------------------------------------
+eclipse.buildId=4.17.0.I20200902-1800
+java.version=14.0.2
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.embedcdt.product
+Command-line arguments:  -os linux -ws gtk -arch x86_64 -product org.eclipse.epp.package.embedcdt.product
+
+!ENTRY org.eclipse.osgi 4 0 2024-05-22 03:33:59.069
+!MESSAGE Application error
+!STACK 1
+java.lang.UnsatisfiedLinkError: Could not load SWT library. Reasons:
+        no swt-pi4-gtk-4936r26 in java.library.path: [/run/opengl-driver/lib, /run/opengl-driver-32/lib, /usr/java/packages/lib, /usr/lib64, /lib64, /lib, /usr/lib]
+        no swt-pi4-gtk in java.library.path: [/run/opengl-driver/lib, /run/opengl-driver-32/lib, /usr/java/packages/lib, /usr/lib64, /lib64, /lib, /usr/lib]
+        Can&#39;t load library: /home/rgoulter/.swt/lib/linux/x86_64/libswt-pi4-gtk-4936r26.so
+        Can&#39;t load library: /home/rgoulter/.swt/lib/linux/x86_64/libswt-pi4-gtk.so
+....</code></pre>
+<p><code>~/.swt/lib/linux/x86_64/</code> doesn’t have the <code>pi4</code> lib, but it does have a <code>pi3</code> one:</p>
+<pre><code>$ ls /home/rgoulter/.swt/lib/linux/x86_64/
+libswt-pi3-gtk-4936r26.so*
+
+$ ldd /home/rgoulter/.swt/lib/linux/x86_64/libswt-pi3-gtk-4936r26.so
+
+        linux-vdso.so.1 (0x00007fffa2b60000)
+        libgtk-3.so.0 =&gt; not found
+        libgdk-3.so.0 =&gt; not found
+        libcairo.so.2 =&gt; not found
+        libgthread-2.0.so.0 =&gt; not found
+        libc.so.6 =&gt; /nix/store/anlf335xlh41yjhm114swi87406mq5pw-glibc-2.38-44/lib/libc.so.6 (0x00007fc0c9a17000)
+        /nix/store/anlf335xlh41yjhm114swi87406mq5pw-glibc-2.38-44/lib64/ld-linux-x86-64.so.2 (0x00007fc0ca004000)</code></pre>
+<p>Here, the <code>libswt</code> shared library can’t load, because shared libraries it links against aren’t there.</p>
+<p>With that, let’s add packages <code>cairo</code>, <code>glib</code>, <code>gtk3</code> to the <code>nix-alien</code> invocation.</p>
+<pre><code>$ nix-alien --recreate --additional-packages=libz -p cairo -p gtk3 -p glib ./MounRiver_Studio_Community_Linux_x64_V160/MRS_Community/MounRiver\ Studio_Community</code></pre>
+<p>And it runs!</p>
+<p>Further invocations of <code>nix-alien</code> can just run the binary directly:</p>
+<pre><code>$ nix-alien ./MounRiver_Studio_Community_Linux_x64_V160/MRS_Community/MounRiver\ Studio_Community</code></pre>
+<p>(or the <code>default.nix</code> that <code>nix-alien</code> produced can be copied to a <code>--destination</code>).</p>
+<h2 id="approach-2-using-patchelf-on-the-binaries-directly">Approach 2: Using patchelf on the Binaries Directly</h2>
+<p>Although using <code>nix-alien</code> works, I was curious to see what it would take to beat the thing into shape using <code>patchelf</code> directly. (This is obviously a more tedious way of approaching the problem).</p>
+<p>It’s possible to run <code>patchelf</code> against everything that looks like it could be an executable binary, and let <code>patchelf</code> sort out whether the interpreter needs to be set or not:</p>
+<pre><code>interpreter=/nix/store/....-glibc-2.39-5/lib64/ld-linux-x86-64.so.2
+
+find ./MounRiver_Studio_Community_Linux_x64_V160 -type f -executable -exec file {} \; \
+  | grep ELF \
+  | cut -d: -f1 \
+  | xargs -i sh -c &quot;patchelf --set-interpreter $interpreter \&quot;{}\&quot; || true&quot;</code></pre>
+<p>(Find files which are executable, and run <code>file</code> on them; filter the output to ELF files (binaries and libraries), take the output up till the first <code>:</code>, and run this against <code>patchelf</code>).</p>
+<p>This will take care of the interpreter being set to <code>/lib64/ld-linux-x86-64.so.2</code> in the binaries for running on this machine. (I’m not suggesting this is a clean approach to the problem).</p>
+<p>I had also tried running <code>patchelf --set-interpreter</code> against each each executable as it caused a problem. This lead to iteratively running the program, seeing what didn’t work, and then patching whatever binary couldn’t be executed due to its interpreter not being found.<br />
+This was a bit tedious, since it involved the eclipse binary, the JRE it uses, and the toolchains in the same distribution (<code>make</code>, and then the GCC components).</p>
+<p>I found the link between Eclipse and the toolchains in its distributions:<br />
+In the project settings, under Project -&gt; C/C++ Build -&gt; Settings -&gt; Toolchains tab, the toolchains are set to the binaries in this MounRiver distribution.</p>
+<p>I think plaintext files are simpler to understand than configuration via a UI. Eclipse seems to be oriented around configuration through the UI.</p>
+<p>As with the <code>nix-alien</code> solution above, of course the program also ran into problems with missing shared libraries when loading SWT.</p>
+<p>I opted to set <code>LD_LIBRARY_PATH</code> in a <code>shell.nix</code>, and so would open MounRiver wtih this <code>shell.nix</code> loaded:</p>
+<pre><code>{ pkgs ? import &lt;nixpkgs&gt; {} }:
+let
+  libs = with pkgs; [
+    libz
+
+    cairo
+    glib
+    gtk3
+  ];
+in
+pkgs.mkShell {
+  LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath libs;
+}</code></pre>
+<h2 id="using-the-mounriver-ide-for-wct-evt-examples">Using the MounRiver IDE for WCT EVT Examples</h2>
+<p>While trying the MounRiver IDE to build the CH592 EVT examples, I ran into a problem where it couldn’t find the <code>CH59xBLE</code> lib.</p>
+<pre><code>$ ls /home/rgoulter/github/ch592/EVT_V1.0/EXAM/BLE/LIB
+
+.... LIBCH59xBLE.a ....</code></pre>
+<p>This should be <code>libCH59xBLE.a</code>.</p>
+<p>Presumably the developers distributing the EVT are using a case-insensitive filesystem.</p>
+<p>Issues like that, and the distributed Eclipse containing whitespace in the executable/toolchain paths, smell sloppy to me.</p>
+<h2 id="attempting-to-package-this-in-nix">Attempting to Package this in Nix</h2>
+<p>I expect using the <code>buildFHSEnv</code> would likely result in a package which works. (Albeit, for distributing as a package, care would need to be taken for unpacking the binary).</p>
+<p>However, it’s cleaner to write a Nix package using <code>stdenv.mkDerivation</code>.<br />
+And by writing a package, it’s going to be easier for others to use, or for me to re-use without having to make assumptions about where I put different files.</p>
+<p>For the first attempt, we copy the approach as with the <code>autoPatchelfHook</code> example in the previous blogpost, e.g. <code>mounriver.nix</code>:</p>
+<pre><code>{ stdenv
+, autoPatchelfHook
+, libz
+, cairo
+, glib
+, gtk3
+}:
+
+stdenv.mkDerivation {
+  pname = &quot;mounriver studio community&quot;;
+  version = &quot;V160&quot;;
+  src = ./MounRiver_Studio_Community_Linux_x64_V160.tar.xz;
+  buildInputs = [
+    autoPatchelfHook
+
+    libz
+
+    cairo
+    glib
+    gtk3
+
+    libXtst
+    libsecret
+    alsa-lib
+  ];
+  # breaks on whitespace
+  dontUpdateAutotoolsGnuConfigScripts = true;
+  doBuild = false;
+  installPhase = &#39;&#39;
+    mkdir -p $out
+    cp -r ./MRS_Community/* $out
+  &#39;&#39;;
+}</code></pre>
+<p>and a <code>default.nix</code> with:</p>
+<pre><code>{ pkgs ? import &lt;nixpkgs&gt; {} }:
+
+pkgs.callPackage ./mounriver.nix {}</code></pre>
+<p>that we build with <code>nix-build</code>.</p>
+<p>This results in some errors:</p>
+<pre><code>error: auto-patchelf could not satisfy dependency libXtst.so.6 wanted by /nix/store/vhjxnm2ris1rnnc3zgwbi55z5f3ah9ak-mounriver-studio-community-V160/plugins/org.eclipse.justj.openjdk.hotspot.jre.full.linux.x86_64_14.0.2.v20200815-0932/jre/lib/libawt_xawt.so
+error: auto-patchelf could not satisfy dependency libasound.so.2 wanted by /nix/store/vhjxnm2ris1rnnc3zgwbi55z5f3ah9ak-mounriver-studio-community-V160/plugins/org.eclipse.justj.openjdk.hotspot.jre.full.linux.x86_64_14.0.2.v20200815-0932/jre/lib/libjsound.so
+error: auto-patchelf could not satisfy dependency libsecret-1.so.0 wanted by /nix/store/vhjxnm2ris1rnnc3zgwbi55z5f3ah9ak-mounriver-studio-community-V160/plugins/org.eclipse.equinox.security.linux.x86_64_1.1.300.v20190830-1238/libkeystorelinuxnative.so
+error: auto-patchelf could not satisfy dependency libusb-1.0.so.0 wanted by /nix/store/vhjxnm2ris1rnnc3zgwbi55z5f3ah9ak-mounriver-studio-community-V160/toolchain/OpenOCD/bin/openocd
+error: auto-patchelf could not satisfy dependency libhidapi-hidraw.so.0 wanted by /nix/store/vhjxnm2ris1rnnc3zgwbi55z5f3ah9ak-mounriver-studio-community-V160/toolchain/OpenOCD/bin/openocd
+error: auto-patchelf could not satisfy dependency libjaylink.so.0 wanted by /nix/store/vhjxnm2ris1rnnc3zgwbi55z5f3ah9ak-mounriver-studio-community-V160/toolchain/OpenOCD/bin/openocd
+error: auto-patchelf could not satisfy dependency libncurses.so.5 wanted by /nix/store/vhjxnm2ris1rnnc3zgwbi55z5f3ah9ak-mounriver-studio-community-V160/toolchain/arm-none-eabi-gcc/bin/arm-none-eabi-gdb
+error: auto-patchelf could not satisfy dependency libtinfo.so.5 wanted by /nix/store/vhjxnm2ris1rnnc3zgwbi55z5f3ah9ak-mounriver-studio-community-V160/toolchain/arm-none-eabi-gcc/bin/arm-none-eabi-gdb
+error: auto-patchelf could not satisfy dependency libncurses.so.5 wanted by /nix/store/vhjxnm2ris1rnnc3zgwbi55z5f3ah9ak-mounriver-studio-community-V160/toolchain/arm-none-eabi-gcc/bin/arm-none-eabi-gdb-py
+error: auto-patchelf could not satisfy dependency libtinfo.so.5 wanted by /nix/store/vhjxnm2ris1rnnc3zgwbi55z5f3ah9ak-mounriver-studio-community-V160/toolchain/arm-none-eabi-gcc/bin/arm-none-eabi-gdb-py</code></pre>
+<p>The <code>libusb-1.0.so.0</code>, <code>libhidapi</code>, <code>libjaylink</code>, etc. helps explain why these shared libraries were included in the <code>beforeinstall</code> directory. (They’re used by openocd and gdb).</p>
+<p>Anyway, adding the libraries for these to the <code>buildInputs</code></p>
+<pre><code>{ stdenv
+, autoPatchelfHook
+, libz
+, cairo
+, glib
+, gtk3
+, hidapi
+, libjaylink
+, libusb1
+, ncurses5
+, libXtst
+, alsa-lib
+, libsecret
+}:
+
+stdenv.mkDerivation {
+  pname = &quot;mounriver studio community&quot;;
+  version = &quot;V160&quot;;
+  src = ./MounRiver_Studio_Community_Linux_x64_V160.tar.xz;
+  buildInputs = [
+    autoPatchelfHook
+
+    libz
+
+    cairo
+    glib
+    gtk3
+
+    hidapi
+    libjaylink
+    libusb1
+    ncurses5
+
+    libXtst
+    libsecret
+    alsa-lib
+  ];
+  # breaks on whitespace
+  dontUpdateAutotoolsGnuConfigScripts = true;
+  doBuild = false;
+  installPhase = &#39;&#39;
+    mkdir -p $out
+    cp -r ./MRS_Community/* $out
+  &#39;&#39;;
+}</code></pre>
+<p>This package recipe is able to <em>build</em>, but the resulting Eclipse doesn’t successfully <em>run</em>.</p>
+<p>Unsurprisingly, it can’t load the shared libraries for the SWT library.<br />
+<code>nix-alien</code> solved this by adding <code>cairo glib gtk3</code> to its FHS env.<br />
+Replacing the interpreter fixed this by adjusting <code>LD_LIBRARY_PATH</code>.<br />
+Here, we can use <code>wrapProgram</code> to adjust the <code>LD_LIBRARY_PATH</code> with <code>lib.makeLibraryPath [ cairo glib gtk3 ]</code>. This ensures <code>LD_LIBRARY_PATH</code> runs with a value we want when we run the program.</p>
+<p>Hence:</p>
+<pre><code>{ lib
+, stdenv
+, autoPatchelfHook
+, makeWrapper
+, libz
+, cairo
+, glib
+, gtk3
+, hidapi
+, libjaylink
+, libusb1
+, ncurses5
+, libXtst
+, alsa-lib
+, libsecret
+}:
+
+stdenv.mkDerivation {
+  pname = &quot;mounriver studio community&quot;;
+  version = &quot;V160&quot;;
+  src = ./MounRiver_Studio_Community_Linux_x64_V160.tar.xz;
+  buildInputs = [
+    autoPatchelfHook
+    makeWrapper
+
+    libz
+
+    cairo
+    glib
+    gtk3
+
+    hidapi
+    libjaylink
+    libusb1
+    ncurses5
+
+    libXtst
+    libsecret
+    alsa-lib
+  ];
+  # breaks on whitespace
+  dontUpdateAutotoolsGnuConfigScripts = true;
+  doBuild = false;
+  installPhase = &#39;&#39;
+    mkdir -p $out
+    cp -r ./MRS_Community/* $out
+    wrapProgram &quot;$out/MounRiver Studio_Community&quot; --prefix LD_LIBRARY_PATH : ${lib.makeLibraryPath [ cairo glib gtk3 ]}
+  &#39;&#39;;
+}</code></pre>
+<p>This runs, but compared to the MounRiver run by <code>nix-alien</code>, the toolchains in the project settings are empty, and so the IDE doesn’t “just work” for building the WCH EVT examples.</p>
+<p>In the MounRiver which did build the WCT EVT examples, the toolchain paths were set to values like <code>${eclipse_home}toolchain/make-3.8/usr/local/bin</code> or <code>${eclipse_home}/toolchain/RISC-V Embedded GCC/bin</code>.</p>
+<p>Searching for these strings, in the <code>MRS_Community</code> folder:</p>
+<pre><code>$ rg --hidden --fixed-strings &#39;${eclipse_home}toolchain&#39;
+configuration/.settings/ilg.gnumcueclipse.managedbuild.cross.prefs</code></pre>
+<p>It’s not clear to me <em>why</em> the Eclipse running from this <code>mounriver.nix</code> Nix package doesn’t pick these settings up.<br />
+My guess is something to do with the <code>configuration/.settings</code> being read-only in the <code>/nix/store</code>.<br />
+I noticed that copying the <code>configuration</code> from the <code>/nix/store</code> (or just the extracted <code>MRS_Community</code> directory) to the directory in <code>~/.eclipse</code> did set the global toolchain paths; but I’m not sure where/how that directory in <code>~/.eclipse</code> comes into things, either. (Whereas, say, the <code>.ini</code> file in <code>MRS_Community</code> does define <code>osgi.instance.area.default=@user.home/mrs_community-workspace</code>).</p>
+<p>At this point, it’s worth looking at code in nixpkgs.
+<a href="https://search.nixos.org/packages?channel=23.11&amp;from=0&amp;size=50&amp;sort=relevance&amp;type=packages&amp;query=eclipse">Searching for packages named “eclipse”</a>, and then opening up <a href="https://github.com/NixOS/nixpkgs/blob/nixos-23.11/pkgs/applications/editors/eclipse/build-eclipse.nix">the source code</a>.<br />
+The build inputs &amp; wrapping with <code>LD_LIBRARY_PATH</code> looks familiar. This nixpkgs code has code to deal with <a href="https://nixos.org/manual/nixpkgs/stable/#ssec-gnome-packaging">packaging a gnome application</a>, among other things.</p>
+<p>The only thing that sticks out as related to <code>configuration</code> is the argument is <code>makeWrapper</code> <code>-add-flags "-configuration \$HOME/.eclipse/''${productId}_${productVersion}/configuration"</code>.</p>
+<p>My understanding of how Eclipse works is insufficient to figure out how I would write a Nix package this MounRiver distribution &amp; also have the <code>configuation/.settings</code> it provides get used, without requiring the user to just copy these files.</p>
+<p>At this point, it’s enough for me to say that the approach taken by this distributed tarball is different enough from the way Nix prefers to package things. e.g. the tarball includes a java runtime, as well as toolchain binaries for <code>make</code> and the RISC-V GCC toolchain; whereas Nix would package these separately.<br />
+For myself, getting MounRiver to run is mostly a curiosity. It would have been useful for checking the WCH EVT examples. <a href="../programming/2023-12-21-notes-on-building-wch-ble-ch592-evt-exam-with-bare-makefile.html">In another blogpost, I discussed building this outside of MounRiver</a>, and in that I linked to an example with a nix-shell provided.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>Okay, so in the end, I was able to run the MounRiver Studio binary on NixOS. This required using <code>nix-alien</code>, and figuring out which shared libraries were required to run the precompiled binaries. – This was a bit annoying, but not insurmountable. Getting it to run with <code>nix-alien</code> was essentially no more difficult than the hello-world example in the previous blogpost.</p>
+<p>I was not able to successfully write a nix package for MounRiver Studio such that the user experience was the same “just works” as is intended. The point here seems to be:</p>
+<ul>
+<li><p>It seems the idiosyncracy of the eclipse home being read only caused issues reading the settings.</p></li>
+<li><p>Understanding of how to work around issues like these may require a deep understanding of what the program is doing in order to work around them.</p></li>
+</ul>
+<p>In my experience, cases like this are not common on NixOS, and it doesn’t dissuade me at all from using NixOS. However, this is also additional effort that you probably don’t have to expend on other Linux distributions.</p>]]></summary>
+</entry>
+<entry>
+    <title>Example of Cannot Execute Required File Not Found on NixOS</title>
+    <link href="http://www.rgoulter.com/blog//posts/programming/2024-05-22-example-of-cannot-execute-required-file-not-found-on-nixos.html" />
+    <id>http://www.rgoulter.com/blog//posts/programming/2024-05-22-example-of-cannot-execute-required-file-not-found-on-nixos.html</id>
+    <published>2024-05-22T00:00:00Z</published>
+    <updated>2024-05-22T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<p>One of the problems many NixOS users encounter is difficulty running binaries which have been compiled on other Linux systems.</p>
+<p>The error message from trying is typically:</p>
+<pre><code>cannot execute: required file not found</code></pre>
+<p>which is confusing because the file is right there.</p>
+<p>In this post, I’ll walk through a “hello world” example, which hopefully illustrates what’s going on.</p>
+<h3 id="quickly-entering-non-nixos-from-nixos">Quickly Entering non-NixOS from NixOS</h3>
+<p>A simple example of this is a “hello world” C program compiled on a non-NixOS system.</p>
+<p>From NixOS, we can still enter a non-NixOS system easily using <a href="https://github.com/89luca89/distrobox">distrobox</a>.
+(Distrobox is similar to <a href="https://docs.fedoraproject.org/en-US/fedora-silverblue/toolbox/">Fedora’s toolbox</a>; it lets you easily work with your HOME directory from within a container, which can be useful for OSs like NixOS or Fedora Silverblue).</p>
+<p>Distrobox requires docker or podman; so, ensure that’s enabled:</p>
+<pre><code>virtualisation.podman.enable = true;</code></pre>
+<p>e.g. should be able to run:</p>
+<pre><code>podman version</code></pre>
+<p>Then we can run distrobox &amp; create an ubuntu distrobox with:</p>
+<pre><code>$ nix shell nixpkgs#distrobox
+
+$ distrobox create ubuntu  --image ubuntu:latest</code></pre>
+<p>And enter this with <code>distrobox enter ubuntu</code>.</p>
+<h3 id="building-hello-world-in-the-ubuntu-distrobox">Building Hello World in the Ubuntu Distrobox</h3>
+<p>Within the ubuntu distrobox, we install <code>build-essential</code> (since we want to compile a simple C program):</p>
+<pre><code>$ sudo apt update
+$ sudo apt install build-essential</code></pre>
+<p>then e.g. <code>hello.c</code> (unintuitively, you can use the text editor from the host system, such as helix or neovim, even within the ubuntu distrobox):</p>
+<pre><code>#include &lt;stdio.h&gt;
+
+int main(int argc, char **argv) {
+  printf(&quot;hello world\n&quot;);
+}</code></pre>
+<p>And then compile this (<code>gcc hello.c</code>). And run it, if you like: <code>./a.out</code>.</p>
+<h3 id="examining-a.out">Examining a.out</h3>
+<p>Checking what <code>ldd</code> says about the compiled <code>hello.c</code>, from within the ubuntu distrobox:</p>
+<pre><code>$ ldd ./a.out
+        linux-vdso.so.1 (0x00007ffe04ff9000)
+        libc.so.6 =&gt; /lib/x86_64-linux-gnu/libc.so.6 (0x00007fcda5200000)
+        /lib64/ld-linux-x86-64.so.2 (0x00007fcda561d000)</code></pre>
+<p>and then leaving the ubuntu distrobox (e.g. <code>^D</code>), from the NixOS host we see a different result:</p>
+<pre><code>$ ldd ./a.out
+        linux-vdso.so.1 (0x00007ffe06e36000)
+        libc.so.6 =&gt; /nix/store/anlf335xlh41yjhm114swi87406mq5pw-glibc-2.38-44/lib/libc.so.6 (0x00007f6dd47d1000)
+        /lib64/ld-linux-x86-64.so.2 =&gt; /nix/store/anlf335xlh41yjhm114swi87406mq5pw-glibc-2.38-44/lib64/ld-linux-x86-64.so.2 (0x00007f6dd49c1000)
+</code></pre>
+<p>Trying to run this on the NixOS host results in an error:</p>
+<pre><code>$ ./a.out
+bash: ./a.out: cannot execute: required file not found</code></pre>
+<p>Using <code>fish</code> shell, the error is more useful:</p>
+<pre><code>$ ./a.out
+exec: Failed to execute process &#39;./a.out&#39;: The file exists and is executable. Check the interpreter or linker?</code></pre>
+<h3 id="a-bash-script-analogy">A Bash Script Analogy</h3>
+<p><code>ld-linux</code> is the <a href="https://linux.die.net/man/8/ld-linux">dynamic-linker</a>.</p>
+<p>What’s going on is comparable to executing a shell script with a <a href="https://en.wikipedia.org/wiki/Shebang_(Unix)">shebang</a>:</p>
+<pre><code>#!/usr/bin/env bash
+echo moo | cowsay</code></pre>
+<p>If we have an executable script with a bad interpreter, e.g. <code>badinterp</code>:</p>
+<pre><code>#!/nonexist
+echo &quot;hello&quot;</code></pre>
+<p>Then trying to run this with <code>bash</code> yields the same “required file not found” error:</p>
+<pre><code>$ ./badinterp
+bash: ./badinterp: cannot execute: required file not found</code></pre>
+<p>although <code>fish</code> shell once again is more useful:</p>
+<pre><code>$ ./badinterp
+exec: Failed to execute process &#39;./badinterp&#39;: The file specified the interpreter &#39;/nonexist&#39;, which is not an executable command.</code></pre>
+<p>If running the above executable script (e.g. <code>cowsay-moo</code>) without <code>cowsay</code> on <code>PATH</code>, we get a different error:</p>
+<pre><code>$ ./cowsay-moo
+./cowsay-moo: line 2: cowsay: command not found</code></pre>
+<p>That the executable isn’t on the PATH is a much easier to understand.</p>
+<p>The other most common kind of linker error is analogous to that:</p>
+<pre><code>error while loading shared libraries: libz.so.1: cannot open shared object file: No such file or directory</code></pre>
+<p>whereas a shell uses <code>PATH</code> to find exectuables, the dynamic linker uses <code>LD_LIBRARY_PATH</code> to find dynamically linked libraries.</p>
+<p>This is also why setting <code>LD_LIBRARY_PATH</code> often results in problems related to “version GLIBCXX_ not found”. – By setting the <code>LD_LIBRARY_PATH</code>, the dynamic linker loads a glibc version that’s different than what the program expects, and so runs into problems.</p>
+<h3 id="working-around-the-problem-fhs-environments">Working Around the Problem: FHS Environments</h3>
+<p>One workaround provided by nixpkgs is <a href="https://nixos.org/manual/nixpkgs/stable/#sec-fhs-environments">FHS environments</a>.
+(These are implemented using <a href="https://github.com/containers/bubblewrap">bubblewrap</a>, which flatpak uses).</p>
+<p>e.g. in this case, we can write a simple <code>fhs.nix</code>:</p>
+<pre><code>{ pkgs ? import &lt;nixpkgs&gt; {} }:
+
+pkgs.buildFHSEnv {
+  name = &quot;hello&quot;;
+  runScript = ./a.out;
+}</code></pre>
+<p>and then build/run this with <code>nix-build ./fhs.nix</code>, and running <code>./result/bin/hello</code>.</p>
+<p>(FWIW, this FHS env would need to be re-built every time the binary changes).</p>
+<h3 id="automating-this-workaround-nix-alien">Automating this Workaround: nix-alien</h3>
+<p>This approach of “write an FHS env for the unpatched binary, and run that” has been automated by the tool <a href="https://github.com/thiagokokada/nix-alien">nix-alien</a>.</p>
+<p>We can add <code>nix-alien</code> to the shell with:</p>
+<pre><code>$ nix shell &quot;github:thiagokokada/nix-alien#nix-alien&quot;</code></pre>
+<p>and then run this with:</p>
+<pre><code>$ nix-alien ./a.out
+[nix-alien] File &#39;/home/rgoulter/.cache/nix-alien/f5127167-26a2-5c7d-89d0-fb363e223e43/fhs-env/default.nix&#39; created successfuly!
+....
+hello world</code></pre>
+<p>The thing to note is that it creates this <code>.cache/nix-alien/UUID/fhs-env/default.nix</code> file.</p>
+<p>NOTE: if you change the arguments to <code>nix-alien</code>, you may need to call <code>nix-alien</code> with <code>--recreate</code> to ensure it recreates the <code>default.nix</code>.</p>
+<p>Examining the <code>default.nix</code> it creates:</p>
+<pre><code>{ pkgs ? import
+    (builtins.fetchTarball {
+      name = &quot;nixpkgs-unstable-20240509145238&quot;;
+      url = &quot;https://github.com/NixOS/nixpkgs/archive/f1010e0469db743d14519a1efd37e23f8513d714.tar.gz&quot;;
+      sha256 = &quot;sha256-doPgfj+7FFe9rfzWo1siAV2mVCasW+Bh8I1cToAXEE4=&quot;;
+    })
+    { }
+}:
+
+let
+  inherit (pkgs) buildFHSUserEnv;
+in
+buildFHSUserEnv {
+  name = &quot;a.out-fhs&quot;;
+  targetPkgs = p: with p; [
+
+  ];
+  runScript = &quot;/home/rgoulter/playground/distrobox-build/a.out&quot;;
+}</code></pre>
+<p>The <code>builtins.fetchTarball</code> is essentially performing the same role as <code>&lt;nixpkgs&gt;</code>. (The latter uses <code>nixpkgs</code> on <code>NIX_PATH</code>, the former uses a particular revision of the <code>nixpkgs</code> repository).</p>
+<p><code>buildFHSUserEnv</code> is an alias for <code>buildFHSEnv</code>.</p>
+<p><code>targetPkgs</code> is empty (so doesn’t have any effect on this example), but it’s useful for additional dynamically linked libraries the precompiled binary may need.</p>
+<h3 id="a-universal-nixos-workaround">A Universal NixOS Workaround:</h3>
+<p>Another solution, which works in some cases where <code>buildFHSEnv</code> does not, is <a href="https://github.com/Mic92/nix-ld">nix-ld</a>.</p>
+<p>This can be enabled by updating your NixOS config with:</p>
+<pre><code>  programs.nix-ld.enable = true;</code></pre>
+<p>Directly running the same binary again leads to a different error message:</p>
+<pre><code>$ ./a.out
+cannot execute ./a.out: You are trying to run an unpatched binary on nixos, but you have not configured NIX_LD or NIX_LD_x86_64-linux. See https://github.com/Mic92/nix-ld for more details</code></pre>
+<p>As the nix-ld readme suggests, we can set <code>NIX_LD</code> with a <code>shell.nix</code>:</p>
+<pre><code>{ pkgs ? import &lt;nixpkgs&gt; {} }:
+pkgs.mkShell {
+  NIX_LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath [];
+  NIX_LD = pkgs.lib.fileContents &quot;${pkgs.stdenv.cc}/nix-support/dynamic-linker&quot;;
+}</code></pre>
+<p>entering this with <code>nix-shell</code>, and running this:</p>
+<pre><code>$ ./a.out
+hello world</code></pre>
+<h3 id="another-workaround-patchelf">Another Workaround: patchelf</h3>
+<p>Another way to work around the program is to just patch the binary directly.
+(This is typically how precompiled binaries are handled in nixpkgs packages).</p>
+<p>This can be done with <a href="https://github.com/NixOS/patchelf">patchelf</a>. Again, adding it to PATH with:</p>
+<pre><code>nix shell nixpkgs#patchelf</code></pre>
+<p>then e.g. copying the interpreter from the output of <code>ldd</code> above:</p>
+<pre><code>$ patchelf --set-interpreter /nix/store/anlf335xlh41yjhm114swi87406mq5pw-glibc-2.38-44/lib64/ld-linux-x86-64.so.2 ./a.out</code></pre>
+<p>and running the binary:</p>
+<pre><code>$ ./a.out
+hello world</code></pre>
+<h4 id="automatic-patchelf-in-nix-packaging-autopatchelfhook">Automatic patchelf in Nix Packaging: autoPatchelfHook</h4>
+<p>When writing Nix packages, nixpkgs has an <a href="https://nixos.org/manual/nixpkgs/stable/#setup-hook-autopatchelfhook">autoPatchelfHook</a> which can take care of automatically performing tasks like this.</p>
+<p>This makes more sense when packaging a prebuilt release of some program, but we can still apply it to this prebuilt <code>./a.out</code>:</p>
+<p>e.g. a <code>hello.nix</code> file with:</p>
+<pre><code>{ pkgs ? import &lt;nixpkgs&gt; {} }:
+
+pkgs.stdenv.mkDerivation {
+  pname = &quot;hello-world&quot;;
+  version = &quot;1.0.0&quot;;
+  buildInputs = [
+    pkgs.autoPatchelfHook
+  ];
+  dontUnpack=true;
+  installPhase=&#39;&#39;
+    mkdir -p $out/bin
+    cp ${./a.out} $out/bin/hello
+  &#39;&#39;;
+}</code></pre>
+<p>this can be built with <code>nix-build hello.nix</code> and the resulting patched binary run with <code>./result/bin/hello</code>.</p>
+<p>The <code>autoPatchelfHook</code> is invoked as part of the ‘fixup’ phase.</p>]]></summary>
+</entry>
+<entry>
     <title>Experience Updating the C Worksheet Project</title>
     <link href="http://www.rgoulter.com/blog//posts/programming/2024-05-18-experience-updating-the-c-worksheet-project.html" />
     <id>http://www.rgoulter.com/blog//posts/programming/2024-05-18-experience-updating-the-c-worksheet-project.html</id>
@@ -637,161 +1119,6 @@ The game does feature some cutscenes with dialogue, otherwise it’d maybe be a 
 I guess the story archetype to compare to is Indiana Jones.. “hey, there’s this powerful mystical artefact; let’s find it, and stop the bad guys from finding it”.<br />
 The recent big budget games with the title “Tomb Raider” have put much more emphasis on the story (although notably without having such a kickass Lara Croft).. but, focused on drama and relatability, that just didn’t seem all that interesting. – In contrast, I think TR3’s story is simple.<br />
 I’m not sure what it’d take to make such a game story “good”. Interesting lore? Compelling villains? Compelling side characters? Stories which really drive the setting? Interesting settings?</p>]]></summary>
-</entry>
-<entry>
-    <title>Experience Writing Firmware with the CH582 Port of QMK</title>
-    <link href="http://www.rgoulter.com/blog//posts/programming/2023-12-27-experience-writing-firmware-with-the-ch582-port-of-qmk.html" />
-    <id>http://www.rgoulter.com/blog//posts/programming/2023-12-27-experience-writing-firmware-with-the-ch582-port-of-qmk.html</id>
-    <published>2023-12-27T00:00:00Z</published>
-    <updated>2023-12-27T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<p><a href="../../posts/programming/2023-12-21-notes-on-building-wch-ble-ch592-evt-exam-with-bare-makefile.html">As noted previously</a>,
-WeAct Studio have a BLE devboard that costs about $2 (which is MUCH cheaper than the BLE devboards popular in custom mechanical keyboard designs), but there isn’t much community attention for this board; there aren’t many (any?) keyboards designed to use this devboard, and there aren’t many people using firmware for it. There is a port of QMK to use the CH582.</p>
-<p>And it’s been announced that <a href="https://www.reddit.com/r/ErgoMechKeyboards/comments/18p99d9/fak_firmware_adds_macros_sticky_mods_mouse_keys/">FAK support for the CH58x/CH59x is planned</a>.</p>
-<p>I designed a keyboard to use WeAct Studio’s BLE devboard.<br />
-In a sense, this somewhat puts the cart before the horse, since I hadn’t tried proper keyboard firmware with the devboard before designing the keyboard.</p>
-<p>The good news is, I was able to get working keyboard firmware for my keyboard using the <a href="https://github.com/O-H-M2/qmk_port_ch582">QMK port for CH582</a>.</p>
-<p>Unfortunately, this wasn’t without frustration.</p>
-<h2 id="initial-impression">Initial Impression</h2>
-<p>I have experience writing keyboard firmware, by way of making use of what others have written.
-e.g. I’ve written keyboard definitions for QMK (including before the move to data-driven configuration), implemented the game Snake using QMK’s RGB Matrix effects system; I’ve written keyboard firmware in Rust; I’ve implemented CapsWord functionality for FAK.</p>
-<p>My initial impression of the CH582 port of QMK is it feels fragile and finicky.</p>
-<p>The structure of the repo wraps CMake lists around the QMK codebase. – To me, this seems like additional effort, for marginal benefit. It’s not clear to me that it’s necessary, either. – This leads to (as noted below) requiring additional effort to use features which QMK implements, &amp; it took significant additional effort to figure out how to re-use the keymap code I had written in QMK.</p>
-<p>In terms of QMK, it felt like writing qmk before the data driven configuration. (In order to make use of QMK’s data driven configuration, more CMake code would need to be added to support using the autogenerated keymap code).</p>
-<h2 id="obstacles">Obstacles</h2>
-<h3 id="didnt-produce-working-firmware-with-the-open-source-risc-v-toolchain">Didn’t Produce Working Firmware with the Open-Source Risc-V Toolchain</h3>
-<p>When I build the EVT examples for the CH592, I was able to build and run the examples with either the ‘public’ risc-v gcc distributed by xpack, or the toolchain distributed by MounRiver Studio.</p>
-<p>Although I noticed I <a href="https://github.com/O-H-M2/qmk_port_ch582/commit/9f1aa898a913b1bc0af873443c75abc0083fa98e">had to make changes to the CMake lists</a> in order to build the QMK fork for CH582 with the ‘public’ xpack toolchain, I had been able to <em>build</em> the firmware.</p>
-<p>Unfortunately, when I was finally able to try running this firmware on a CH582 devboard, only the firmware built by the MounRiver toolchain worked when I ran it.<br />
-I don’t know why.</p>
-<h3 id="ble-is-still-wip">BLE is Still WIP</h3>
-<p>The README currently has the line: “Support wired, Bluetooth, and triple mode 2.4G (WIP)”. I understood this to mean “Supports wired, Bluetooth” and “triple mode 2.4G” is WIP.</p>
-<p>But, <a href="https://github.com/O-H-M2/qmk_port_ch582/issues/154">as others have observed</a>, e.g. the TychePad keyboard (which uses BLE) doesn’t build.</p>
-<p><a href="https://github.com/O-H-M2/qmk_port_ch582/blob/2dde4b4777d2e91abe0b96c91b64f3fea5cd7ecb/CMakeLists.txt#L312">Enabling BLE requires the wireless lib</a>, but in order to build the wireless lib, <a href="https://github.com/O-H-M2/qmk_port_ch582/blob/2dde4b4777d2e91abe0b96c91b64f3fea5cd7ecb/CMakeLists.txt#L200">the required files aren’t provided in the repo</a>.</p>
-<p>Hence, BLE isn’t available with the publicly provided code.</p>
-<p>I don’t mind the work being WIP; but I assess it as sloppy to have WIP code that doesn’t build on a release branch.</p>
-<p>And $2 for a risc-v devboard is pretty neat, even if for keyboard firmware it’s USB only at the moment.</p>
-<h3 id="getting-my-keymap-to-build">Getting My Keymap to Build</h3>
-<h5 id="the-cmake-files-dont-support-community-layouts">The CMake Files Don’t Support Community Layouts</h5>
-<p>The <code>qmk_firmware</code> repository supports putting keymap definitions in <code>layouts/community</code>. This allows you to define the keymap for some layout (such as <code>ortho_4x12</code> or <code>split_3x5_3</code>), rather than only defining a keymap specific to a keyboard.</p>
-<p>At the time of writing, the CMake lists in the CH582 port don’t support using this feature.<br />
-Perhaps it could, but it doesn’t at the time of writing.</p>
-<h5 id="false-friends-config.h">False Friends: config.h</h5>
-<p>This confused me for some time:</p>
-<p>Both <a href="https://github.com/O-H-M2/qmk_port_ch582/tree/via/sdk/HAL/include"><code>sdk/HAL/include</code></a> and QMK use header files called <code>config.h</code>.</p>
-<p>So, by adding a CMake statement <code>include_directories(...)</code> pointing to a QMK keyboard or keymap directory (which has <code>config.h</code>), this breaks the build since then the CH582 HAL doesn’t correctly include its <code>config.h</code>.</p>
-<p>This is more of a -1 to C than to anything else.</p>
-<p>I worked around this by using more of the path when including; e.g. rather than <code>#include "rgoulter.h"</code>, I use <code>#include "users/rgoulter/rgoulter.h"</code>.</p>
-<h5 id="some-qmk-features-not-implemented">Some QMK Features Not Implemented</h5>
-<p>The CH582 port of QMK uses CMake to manage its build.</p>
-<p>So, QMK features are enabled <a href="https://github.com/O-H-M2/qmk_port_ch582/blob/via/qmk_porting/common_features.cmake">by checking CMake variables</a>.</p>
-<p>Turns out, some of the features I use weren’t described there. <a href="https://github.com/O-H-M2/qmk_port_ch582/commit/27aba0c570a48c0a479b21ef83940ac08abca1c7">I was able to add them</a>.</p>
-<p>While for other QMK features (such as the haptic feedback feature) which depend on driving hardware peripherals, it makes more sense that the CH582 platform for QMK lacks the implementation.. for stuff like the leader key or combos, I felt “not implemented” was more due to it needing to be declared in CMake.</p>
-<h5 id="custom-keycodes-safe-range">Custom Keycodes: Safe Range</h5>
-<p>I also ran into problems where my keymap defined new keycodes.</p>
-<p>Again, this is more of a -1 to C, and that it doesn’t necessarily compose things like this well.</p>
-<p>The QMK interface for <a href="https://docs.qmk.fm/#/custom_quantum_functions?id=custom-keycodes">defining new keycodes is to use <code>NEW_SAFE_RANGE</code></a>.</p>
-<p><a href="https://github.com/O-H-M2/qmk_port_ch582/blob/2dde4b4777d2e91abe0b96c91b64f3fea5cd7ecb/qmk_porting/protocol/extra_keycode.h#L51">This port declares its own <code>NEW_SAFE_RANGE</code></a>.</p>
-<p>So, my code needed to untangle a bit from that; and it’d take some care to be aware of whether the codebase I’m building against defines its own <code>NEW_SAFE_RANGE</code> or not.</p>
-<h5 id="mirroring-my-community-layout">Mirroring my Community Layout</h5>
-<p>Initially I’d tried copying the C files across in order to get my layout on the keyboard. This works, but isn’t the most maintenance friendly approach. (I’d need to re-copy each time I changed my layout).</p>
-<p>Once I figured the stuff above out (about <code>config.h</code>, etc.), I was able to come up with a way of using my community layout without too much fuss: <a href="https://github.com/O-H-M2/qmk_port_ch582/commit/67795a2beb647276d30bdf3da771584e6465465f" class="uri">https://github.com/O-H-M2/qmk_port_ch582/commit/67795a2beb647276d30bdf3da771584e6465465f</a></p>
-<p>The <code>keymap.c</code> just includes the <code>keymap.c</code> from the community layout:</p>
-<pre><code>#include &quot;layouts/community/ortho_5x12/rgoulter/keymap.c&quot;</code></pre>
-<p>The <code>qmk_config.h</code> includes the <code>config.h</code> from the community layout dir, and the user dir:</p>
-<pre><code>#pragma once
-
-#include &quot;users/rgoulter/config.h&quot;
-#include &quot;layouts/community/ortho_5x12/rgoulter/config.h&quot;</code></pre>
-<p>and the <code>rules.cmake</code> ports the <code>rules.mk</code> functionality over:</p>
-<pre><code>set(COMBO_ENABLE ON CACHE BOOL &quot;KB&quot; FORCE)
-set(LEADER_ENABLE ON CACHE BOOL &quot;KB&quot; FORCE)
-set(DYNAMIC_MACRO_ENABLE ON CACHE BOOL &quot;KB&quot; FORCE)
-
-list(APPEND QMK_PORTING_SOURCES
-    &quot;${QMK_BASE_DIR}/users/rgoulter/rgoulter.c&quot;
-)</code></pre>
-<h2 id="conclusion">Conclusion</h2>
-<p>I feel more sour about the above than I should, because it took a bunch of effort to figure this stuff out.</p>
-<p>I don’t love the use of CMake. (e.g. my re-implementing stuff from <code>rules.mk</code>, it feels like there are multiple sources of truth for describing the same thing).<br />
-I wish it implemented support for QMK’s community layouts, or for QMK’s data driven configuration.</p>
-<p>I was disappointed to realise the BLE code wasn’t publicly available, and that the code somehow relies on the proprietary MounRiver distribution of the risc-v toolchain.</p>
-<p>But, for the moment, I don’t think there’s any other publicly available keyboard firmware for CH582.</p>]]></summary>
-</entry>
-<entry>
-    <title>Notes on Building WCH BLE CH592 EVT Exam with Bare Makefile</title>
-    <link href="http://www.rgoulter.com/blog//posts/programming/2023-12-21-notes-on-building-wch-ble-ch592-evt-exam-with-bare-makefile.html" />
-    <id>http://www.rgoulter.com/blog//posts/programming/2023-12-21-notes-on-building-wch-ble-ch592-evt-exam-with-bare-makefile.html</id>
-    <published>2023-12-21T00:00:00Z</published>
-    <updated>2023-12-21T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<p>Here are some notes from tinkering with the <a href="https://github.com/WeActStudio/WeActStudio.WCH-BLE-Core">WeAct Studio BLE Core Board</a>.</p>
-<h3 id="its-not-used-in-many-designs">It’s Not Used in Many Designs</h3>
-<p>My interest in the board comes from my interest in custom mechanical keyboard designs.<br />
-– The best part of ‘free and open source’ is the “gratis” part.<br />
-But the “libre” part is neat, too: it’s much easier to realize an interesting keyboard design if all you need to do is iterate on a keyboard design someone else has made.</p>
-<p>I’ve never tried designing a Bluetooth keyboard.<br />
-The sour grapes explanation is that Bluetooth devices are finicky to use. (Which is true).<br />
-What most hobbyists do for Bluetooth keyboards is use Bluetooth-powered devboards like the nice!nano, and use ZMK firmware. – TBH part of why I’m not interested in this devboard is it costs over 20 USD. (And it’s most common in split keyboards, which’d need one for each side!).</p>
-<p>I recently picked up a WeAct Studio BLE Core board, ordered from AliExpress.<br />
-(I’ve used a few different devboards from WeAct Studio in several of my keyboard PCB designs; including WCH MCUs).<br />
-The BLE core board has designs for the different MCUs: CH573, CH582, CH592.<br />
-In contrast, this devboard costs $2.</p>
-<p>But despite it being such a cheap board, I can’t find any designs which use this board.</p>
-<p>Some notes on what I could find:</p>
-<p>The <a href="https://github.com/joric/nrfmicro/wiki/Alternatives#ch582">Alternatives wiki page on joric’s nrfmicro repo</a>
-describes the CH582 as:</p>
-<blockquote>
-<p>QMK has a CH582 port! It has BLE and there’s a dev board for it on Aliexpress for about 2 bucks. That is, if you’re willing to experiment since, as far as I’m aware, no keyboard has been designed with it and there’s not a lot of users yet. [ZMK not supported.]
-… Last I looked, datasheets were basically “sorry, not documented” on the registers for BLE hardware. And 32KB of RAM on the CH582F would definitely be a challenge.</p>
-</blockquote>
-<p>Regarding “low RAM an issue” semickolon (who authored FAK firmware for the CH552 MCU) <a href="https://www.reddit.com/r/ErgoMechKeyboards/comments/18aekwm/comment/kbz35tc/">commented that the chip’s BLE only uses 4KB RAM, and that FAK had about 1KB RAM</a>. (He also mentions he’s got a keyboard working with some firmware he’s building for the chips).</p>
-<p>The datasheets indeed omit documentation for the registers for the BLE hardware.</p>
-<p>FWIW, I did see some BLE keyboards using these WCH chips on OSHWHub such as <a href="https://oshwhub.com/cansong/ch579_keyboard_v0-1">cansong’s ch579 keyboard</a>, which points to <a href="https://oshwhub.com/JokerAlon/ch579m-64keyboard">JokerAlon’s ch579m</a>. Albeit, the readmes for these aren’t in English. – The schematics are available, at least.</p>
-<p>Albeit, at the time of writing, there really aren’t many English search engine results for CH592. Nor CH58x. Nor CH57x.<br />
-The keyboards above seem to be row-stagger, and with big spacebars. (The big spacebars make it easier to design a PCB, but don’t make for a good keyboard. – I do recall seeing boardsource.xyz’s solution to this for their <a href="https://www.reddit.com/r/MechanicalKeyboards/comments/t1c5pl/technikable_gb_is_live_on_boardsourcexyz_wireless/">technikable ble ortho</a> was to omit the 2 keys in the bottom corners of each side..).</p>
-<p>I wasn’t aware of it before, but both the wiki page above (and the reddit comment) point to <a href="https://github.com/O-H-M2/qmk_port_ch582">O-H-M2’s port of QMK for CH582</a>. (Looking at the port a bit: it retains upstream QMK’s codebase unchanged, and adds some platform-specific code for CH582).<br />
-(There are keyboards listed in this; one seems to be a giant handwired ortho, the others are either macropads/numpads, or row-staggered with big spacebars).<br />
-The default branch name is <code>via</code>; the readme mentions via functionality is implemented. (I don’t use via/vial, but seems it’s useful for many).</p>
-<p>On GitHub, <a href="https://github.com/openwch/ch592">OpenWCH provides EVTs with Examples and SDKs for CH592</a> (and other chips). (Whereas, <a href="https://github.com/SoCXin/CH552.git">CH552 is in the SoCXin org</a>). – These examples include a BLE HID “keyboard” (it periodically sends a HID keyboard report, but doesn’t read GPIO pins).<br />
-– So, there is working code, and a README PDF(!) describing how to run the example.. this PDF describes to use <a href="http://www.mounriver.com/download">MounRiver Studio</a>.</p>
-<p>Using MounRiver Studio works (at least for building these EVT Examples; I didn’t try flashing from MounRiver).</p>
-<p>I saw that the <a href="https://github.com/WeActStudio/WeActStudio.WCH-BLE-Core">WeAct BLE repo</a> included <code>Makefile</code>s for its code (copied from the EVT).<br />
-Copy-pasting the comment at the header of the file into a translate service: “generated, do not modify”.<br />
-Oh no.</p>
-<p>That’s … not a promising sign.</p>
-<p>Fortunately, the <a href="https://github.com/O-H-M2/qmk_port_ch582/blob/via/README.md#developers">QMK port to CH582’s readme</a> has instructions which mention downloading the MounRiver Studio toolchain and using <code>cmake</code>/<code>make</code>.</p>
-<h2 id="toolchain-building-the-ch582-port-of-qmk">Toolchain: Building the CH582 Port of QMK</h2>
-<p>I’m running NixOS, and one of the downsides of using NixOS is it can be difficult to run binaries distributed in tarballs.</p>
-<p>MounRiver Studio and its toolchain is distributed as binaries in a tarball.</p>
-<p>I was able to come up with some Nix packages for the <code>libmcuupdate.so</code> distributed in the toolchain tarball, and the GCC toolchain:<br />
-<a href="https://github.com/O-H-M2/qmk_port_ch582/commit/40828b8361bbc711fb7c7af00374eea565f75d2f" class="uri">https://github.com/O-H-M2/qmk_port_ch582/commit/40828b8361bbc711fb7c7af00374eea565f75d2f</a><br />
-(I <a href="https://github.com/NixOS/nixpkgs/blob/54aac082a4d9bb5bbc5c4e899603abfb76a3f6d6/pkgs/development/compilers/gcc-arm-embedded/12/default.nix">adapted another Nix package which downloads GCC in a tarball</a>).</p>
-<p>With that, I was able to build the QMK port for CH582 built.</p>
-<p>Oh. Wait. Taking a look at the <code>--version</code> for the toolchain MounRiver Studio distributes:</p>
-<pre><code>$ riscv-none-embed-gcc --version
-riscv-none-embed-gcc (xPack GNU RISC-V Embedded GCC, 64-bit) 8.2.0
-Copyright (C) 2018 Free Software Foundation, Inc.</code></pre>
-<h2 id="risc-v-toolchain">Risc-V Toolchain</h2>
-<p>Links to things:</p>
-<p>The old <a href="https://github.com/xpack-dev-tools/riscv-none-embed-gcc-xpack">riscv-none-embed-gcc-xpack</a>,
-and <a href="https://github.com/sifive/riscv-gcc">SiFive’s riscv-gcc</a>.</p>
-<p>And the newer <a href="https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack">riscv-none-elf-gcc-xpack</a>.
-And this seems related:
-https://github.com/riscv-collab/riscv-gnu-toolchain.</p>
-<p>The change from <code>riscv-none-embed-gcc</code> to <code>riscv-none-elf-gcc</code> is mentioned in the <a href="https://xpack.github.io/blog/2022/05/14/riscv-none-elf-gcc-v11-3-0-1-released/">xPack riscv gcc 11.3 release notes</a>.</p>
-<p>Trying these upstream xpack riscv toolchains with the qmk port for ch582.. for one, <code>TOOLCHAIN_PREFIX</code> needs to be set to <code>risc-none-embed</code> if using the older GCCs. But, I did need to make a couple of other changes:</p>
-<p>The MounRiver toolchain has an extra param <code>highcode-gen-section-name</code> that the xpack toolchains don’t have:
-<a href="https://github.com/O-H-M2/qmk_port_ch582/commit/347e15458be15a714494d0088fa77243f62e7009" class="uri">https://github.com/O-H-M2/qmk_port_ch582/commit/347e15458be15a714494d0088fa77243f62e7009</a></p>
-<p>And, as the <a href="https://xpack.github.io/blog/2022/05/15/riscv-none-elf-gcc-v12-1-0-1-released/#risc-v-isa-updates">xPack riscv gcc 12.1 release notes explain</a>, errors like <code>extension</code>zicsr’ required<code>can be fixed by adding</code>_zicsr` to the arch: <a href="https://github.com/O-H-M2/qmk_port_ch582/commit/dafb73132b6642ac70322239673060fe56d0b9b9" class="uri">https://github.com/O-H-M2/qmk_port_ch582/commit/dafb73132b6642ac70322239673060fe56d0b9b9</a></p>
-<p>(I didn’t try <a href="https://github.com/O-H-M2/qmk_port_ch582/tree/2dde4b4777d2e91abe0b96c91b64f3fea5cd7ecb/utils">the toolchain that’s checked into the git repo</a>; but seeing stuff like that makes me wonder if the embedded developers are doing okay).</p>
-<h2 id="building-the-examples-outside-mounriver-studio">Building the Examples Outside MounRiver Studio</h2>
-<p>The EVT Examples are supplied with only a MounRiver Studio project file.</p>
-<p>Since I’m not sure what works and what doesn’t work (in terms of how to compile the examples outside of MounRiver), it’s easiest to start from something that works. – Building it in MounRiver works, which generates some Makefiles.</p>
-<p>Using that, I adapted a Makefile with the same compiler flags to get a Makefile which produced a working build.<br />
-(Or, honestly: I’d copied the makefile from the broadcaster example, but that set different <code>-D</code> defines, which didn’t play nicely with the BLE HID example, and it took me some time to notice why my Makefile wasn’t producing a working build of the example).</p>
-<p>Anyway.</p>
-<p>I copied the BLE HID_Example example, put it together with a standalone Makefile, and some Nix files to provide the toolchain, and shared it in this repo: <a href="https://github.com/rgoulter/ch592-ble-hid-keyboard-example" class="uri">https://github.com/rgoulter/ch592-ble-hid-keyboard-example</a></p>
-<h2 id="flashing-the-firmware">Flashing the Firmware</h2>
-<p>Flashing the CH592 is the same as flashing the CH552. You can enter the bootloader by holding the BOOT button when plugging the board into the computer, and then use <a href="https://github.com/ch32-rs/wchisp">ch32-rs’ wchisp</a> to flash the firmware. (On Windows, I’d had difficulty using <code>wchisp</code>; but the official programs from WCH worked on Windows when I tried with the CH552).</p>]]></summary>
 </entry>
 
 </feed>

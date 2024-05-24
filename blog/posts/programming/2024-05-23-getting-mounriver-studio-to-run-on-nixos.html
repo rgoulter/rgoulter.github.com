@@ -1,0 +1,575 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Getting MounRiver Studio to Run on NixOS - Richard Goulter's Blog</title>
+
+        <!-- My (Old) CSS theme -->
+        <link rel="stylesheet" type="text/css" href="../../css/default.css" />
+
+        <!--
+            jQuery & jQueryUI
+        -->
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css" />
+
+        <!--
+            Pandoc Style CSS
+            (for syntax highlighted snippets)
+        -->
+        <link rel="stylesheet" type="text/css" href="../../css/syntax.css" />
+
+        <!--
+            Bootstrap
+        -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+        <style>
+            /*
+             * Bootstrap defines blockquote as 17px,
+             * so it looks stupidly large in my blogposts. */
+            blockquote {
+                font-size: 14px;
+            }
+        </style>
+
+        <!--
+            Waypoints, and Waypoints-Sticky,
+            so we can do this:
+            http://imakewebthings.com/waypoints/shortcuts/sticky-elements/
+        -->
+        <script src="../../js/jquery.waypoints.min.js"></script>
+        <script src="../../js/sticky.min.js"></script>
+
+        <!-- My analytics stuff -->
+        <script src="../../js/my_analytics.js"></script>
+        <script src="../../js/my_analytics_debug.js"></script>
+
+        <!--
+            TOCify
+        -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js"></script>
+
+        <!--
+            Patched TOCify css file.
+            (Don't want fixed `.tocify`).
+        -->
+        <link rel="stylesheet" type="text/css" href="../../css/jquery.tocify.css" />
+
+        <style>
+        .navbar {
+            margin-bottom: 0px;
+        }
+
+        .banner-image {
+            width:100%;
+        }
+
+        .banner {
+            margin-left: 0px;
+            margin-right: 0px;
+        }
+
+        body {
+            background-color: #e2e2e2;
+        }
+
+        #page {
+            padding-left:0;
+            padding-right:0;
+            background-color: #ffffff;
+        }
+        </style>
+
+        <!-- Google Analytics -->
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-H13NWYDX0G"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'G-H13NWYDX0G');
+        </script>
+    </head>
+    <body>
+        <div id="page" class="container">
+            <!-- This, with no padding on left/right -->
+            <div class="banner">
+                <nav class="navbar navbar-default">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+
+            <!-- The Hamburger -->
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../../">Richard Goulter's Blog</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="../../">Home</a></li>
+            <li><a href="../../yi.html">Yi</a></li>
+            <li><a href="../../emacs.html">Emacs</a></li>
+            <li><a href="../../what-i-wish-i-knew-when-i-started-using-nix.html">Nixpkgs</a></li>
+            <li><a href="../../archive.html">Archive</a></li>
+        </ul>
+    </div>
+</nav>
+
+            </div>
+
+            <hr style="margin: 0px; border-top: 5px solid black;" />
+
+            <div id="content" class="container">
+                <h1>Getting MounRiver Studio to Run on NixOS</h1>
+                <div class="info">
+    Posted on May 23, 2024
+    
+        by Richard Goulter
+    <br />
+    
+    Tags: 
+    
+</div>
+
+<p>In <a href="../programming/2024-05-22-example-of-cannot-execute-required-file-not-found-on-nixos.html">the previous post</a>,
+I walked through a few different ways of how to get a pre-compiled binary running on NixOS.</p>
+<p>In this post, I’ll share some notes on what it took to get <a href="http://www.mounriver.com/download">MounRiver</a> running on NixOS.
+The basic idea is the same, but in practice it felt much more difficult.
+(MounRiver Studio is an IDE used for WCH MCUs. <a href="../programming/2023-12-21-notes-on-building-wch-ble-ch592-evt-exam-with-bare-makefile.html">I’ve discussed developing the EVT examples in a previous blogpost</a>).</p>
+<p>If the previous post was “draw a circle”, this post is “<a href="https://knowyourmeme.com/memes/how-to-draw-an-owl">draw the rest of the owl</a>”.</p>
+<p>These notes are mostly “here are the commands I ran, here was the output”:</p>
+<p>The Community RISC-V IDE can be downloaded from the MounRiver website. It’s a tarball with a <code>beforeinstall</code> (with some <code>.so</code> shared libraries to be copied into <code>/usr/lib</code>), and an <code>MRS_Community</code> directory which is a distribution of the <a href="https://eclipseide.org/">Eclipse IDE</a>.</p>
+<p>First thing to try: just running the executable directly:</p>
+<pre><code>$ ./MounRiver_Studio_Community_Linux_x64_V160/MRS_Community/MounRiver\ Studio_Community
+exec: Failed to execute process './MounRiver_Studio_Community_Linux_x64_V160/MRS_Community/MounRiver Studio_Community': The file exists and is executable. Check the interpreter or linker?</code></pre>
+<p>or with bash:</p>
+<pre><code>bash: ./MounRiver_Studio_Community_Linux_x64_V160/MRS_Community/MounRiver Studio_Community: cannot execute: required file not found</code></pre>
+<p>This “required file not found” should be familiar, having read the previous blogpost.</p>
+<p>So, checking what <code>ldd</code> says:</p>
+<pre><code>$ ldd ./MounRiver_Studio_Community_Linux_x64_V160/MRS_Community/MounRiver\ Studio_Community
+        linux-vdso.so.1 (0x00007ffd249d4000)
+        libpthread.so.0 =&gt; /nix/store/anlf335xlh41yjhm114swi87406mq5pw-glibc-2.38-44/lib/libpthread.so.0 (0x00007fc32c3d8000)
+        libdl.so.2 =&gt; /nix/store/anlf335xlh41yjhm114swi87406mq5pw-glibc-2.38-44/lib/libdl.so.2 (0x00007fc32c3d3000)
+        libc.so.6 =&gt; /nix/store/anlf335xlh41yjhm114swi87406mq5pw-glibc-2.38-44/lib/libc.so.6 (0x00007fc32c1ea000)
+        /lib64/ld-linux-x86-64.so.2 =&gt; /nix/store/anlf335xlh41yjhm114swi87406mq5pw-glibc-2.38-44/lib64/ld-linux-x86-64.so.2 (0x00007fc32c3df000)</code></pre>
+<p>Indeed, the dynamic linker is <code>/lib64/ld-linux-x86-64.so.2</code>. (So far, this is the same as the hello world example from the previous post).</p>
+<h2 id="approach-1-using-nix-alien">Approach 1: Using Nix Alien</h2>
+<p>In the previous post, we saw <a href="https://github.com/thiagokokada/nix-alien">nix-alien</a> could automatically work around some problems. Trying that:</p>
+<pre><code>$ nix-alien ./MounRiver_Studio_Community_Linux_x64_V160/MRS_Community/MounRiver\ Studio_Community
+/home/rgoulter/playground/nix-mounriver-studio/MounRiver_Studio_Community_Linux_x64_V160/MRS_Community//plugins/org.eclipse.justj.openjdk.hotspot.jre.full.linux.x86_64_14.0.2.v20200815-0932/jre/bin/java: error while loading shared libraries: libz.so.1: cannot open shared object file: No such file or directory
+MounRiver Studio_Community:
+JVM terminated. Exit code=127
+/home/rgoulter/playground/nix-mounriver-studio/MounRiver_Studio_Community_Linux_x64_V160/MRS_Community//plugins/org.eclipse.justj.openjdk.hotspot.jre.full.linux.x86_64_14.0.2.v20200815-0932/jre/bin/java
+-Dosgi.requiredJavaVersion=11
+-Dosgi.instance.area.default=@user.home/mrs_community-workspace
+....</code></pre>
+<p>The key detail of this output being <code>... libz.so.1: cannot open ...</code>:</p>
+<pre><code>plugins/org.eclipse.justj.openjdk.hotspot.jre.full.linux.x86_64_14.0.2.v20200815-0932/jre/bin/java: error while loading shared libraries: libz.so.1: cannot open shared object file: No such file or directory</code></pre>
+<p>Checking <code>ldd</code> on this <code>java</code> binary:</p>
+<pre><code>$ ldd ..../jre/bin/java
+        linux-vdso.so.1 (0x00007ffe3abb5000)
+        libz.so.1 =&gt; not found
+        libjli.so =&gt; /home/rgoulter/playground/nix-mounriver-studio/MounRiver_Studio_Community_Linux_x64_V160/MRS_Community//plugins/org.eclipse.justj.openjdk.hotspot.jre.full.linux.x86_64_14.0.2.v20200815-0932/jre/bin/../lib/libjli.so (0x00007ff14489c000)
+        libpthread.so.0 =&gt; /nix/store/anlf335xlh41yjhm114swi87406mq5pw-glibc-2.38-44/lib/libpthread.so.0 (0x00007ff144897000)
+        libdl.so.2 =&gt; /nix/store/anlf335xlh41yjhm114swi87406mq5pw-glibc-2.38-44/lib/libdl.so.2 (0x00007ff144892000)
+        libc.so.6 =&gt; /nix/store/anlf335xlh41yjhm114swi87406mq5pw-glibc-2.38-44/lib/libc.so.6 (0x00007ff1446a7000)
+        /lib64/ld-linux-x86-64.so.2 =&gt; /nix/store/anlf335xlh41yjhm114swi87406mq5pw-glibc-2.38-44/lib64/ld-linux-x86-64.so.2 (0x00007ff1448b3000)
+        libz.so.1 =&gt; not found</code></pre>
+<p>Indeed, <code>libz.so.1 =&gt; not found</code>.</p>
+<p>We can add <code>--additional-libs=libz.so.1</code>
+to the <code>nix-alien</code> call, which helpfully lets us pick the package <code>libz</code>. (We could instead use <code>--additional-packages=libz</code> if we already know <code>libz</code> is the name of the nix package with <code>libz.so.1</code>).</p>
+<pre><code>$ nix-alien --recreate --additional-libs=libz.so.1 ./MounRiver_Studio_Community_Linux_x64_V160/MRS_Community/MounRiver\ Studio_Community
+MounRiver Studio_Community:
+An error has occurred. See the log file
+/home/rgoulter/playground/nix-mounriver-studio/MounRiver_Studio_Community_Linux_x64_V160/MRS_Community/configuration/1716348838071.log.</code></pre>
+<p>and this log file has contents:</p>
+<pre><code>!SESSION 2024-05-22 03:33:57.978 -----------------------------------------------
+eclipse.buildId=4.17.0.I20200902-1800
+java.version=14.0.2
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.embedcdt.product
+Command-line arguments:  -os linux -ws gtk -arch x86_64 -product org.eclipse.epp.package.embedcdt.product
+
+!ENTRY org.eclipse.osgi 4 0 2024-05-22 03:33:59.069
+!MESSAGE Application error
+!STACK 1
+java.lang.UnsatisfiedLinkError: Could not load SWT library. Reasons:
+        no swt-pi4-gtk-4936r26 in java.library.path: [/run/opengl-driver/lib, /run/opengl-driver-32/lib, /usr/java/packages/lib, /usr/lib64, /lib64, /lib, /usr/lib]
+        no swt-pi4-gtk in java.library.path: [/run/opengl-driver/lib, /run/opengl-driver-32/lib, /usr/java/packages/lib, /usr/lib64, /lib64, /lib, /usr/lib]
+        Can't load library: /home/rgoulter/.swt/lib/linux/x86_64/libswt-pi4-gtk-4936r26.so
+        Can't load library: /home/rgoulter/.swt/lib/linux/x86_64/libswt-pi4-gtk.so
+....</code></pre>
+<p><code>~/.swt/lib/linux/x86_64/</code> doesn’t have the <code>pi4</code> lib, but it does have a <code>pi3</code> one:</p>
+<pre><code>$ ls /home/rgoulter/.swt/lib/linux/x86_64/
+libswt-pi3-gtk-4936r26.so*
+
+$ ldd /home/rgoulter/.swt/lib/linux/x86_64/libswt-pi3-gtk-4936r26.so
+
+        linux-vdso.so.1 (0x00007fffa2b60000)
+        libgtk-3.so.0 =&gt; not found
+        libgdk-3.so.0 =&gt; not found
+        libcairo.so.2 =&gt; not found
+        libgthread-2.0.so.0 =&gt; not found
+        libc.so.6 =&gt; /nix/store/anlf335xlh41yjhm114swi87406mq5pw-glibc-2.38-44/lib/libc.so.6 (0x00007fc0c9a17000)
+        /nix/store/anlf335xlh41yjhm114swi87406mq5pw-glibc-2.38-44/lib64/ld-linux-x86-64.so.2 (0x00007fc0ca004000)</code></pre>
+<p>Here, the <code>libswt</code> shared library can’t load, because shared libraries it links against aren’t there.</p>
+<p>With that, let’s add packages <code>cairo</code>, <code>glib</code>, <code>gtk3</code> to the <code>nix-alien</code> invocation.</p>
+<pre><code>$ nix-alien --recreate --additional-packages=libz -p cairo -p gtk3 -p glib ./MounRiver_Studio_Community_Linux_x64_V160/MRS_Community/MounRiver\ Studio_Community</code></pre>
+<p>And it runs!</p>
+<p>Further invocations of <code>nix-alien</code> can just run the binary directly:</p>
+<pre><code>$ nix-alien ./MounRiver_Studio_Community_Linux_x64_V160/MRS_Community/MounRiver\ Studio_Community</code></pre>
+<p>(or the <code>default.nix</code> that <code>nix-alien</code> produced can be copied to a <code>--destination</code>).</p>
+<h2 id="approach-2-using-patchelf-on-the-binaries-directly">Approach 2: Using patchelf on the Binaries Directly</h2>
+<p>Although using <code>nix-alien</code> works, I was curious to see what it would take to beat the thing into shape using <code>patchelf</code> directly. (This is obviously a more tedious way of approaching the problem).</p>
+<p>It’s possible to run <code>patchelf</code> against everything that looks like it could be an executable binary, and let <code>patchelf</code> sort out whether the interpreter needs to be set or not:</p>
+<pre><code>interpreter=/nix/store/....-glibc-2.39-5/lib64/ld-linux-x86-64.so.2
+
+find ./MounRiver_Studio_Community_Linux_x64_V160 -type f -executable -exec file {} \; \
+  | grep ELF \
+  | cut -d: -f1 \
+  | xargs -i sh -c &quot;patchelf --set-interpreter $interpreter \&quot;{}\&quot; || true&quot;</code></pre>
+<p>(Find files which are executable, and run <code>file</code> on them; filter the output to ELF files (binaries and libraries), take the output up till the first <code>:</code>, and run this against <code>patchelf</code>).</p>
+<p>This will take care of the interpreter being set to <code>/lib64/ld-linux-x86-64.so.2</code> in the binaries for running on this machine. (I’m not suggesting this is a clean approach to the problem).</p>
+<p>I had also tried running <code>patchelf --set-interpreter</code> against each each executable as it caused a problem. This lead to iteratively running the program, seeing what didn’t work, and then patching whatever binary couldn’t be executed due to its interpreter not being found.<br />
+This was a bit tedious, since it involved the eclipse binary, the JRE it uses, and the toolchains in the same distribution (<code>make</code>, and then the GCC components).</p>
+<p>I found the link between Eclipse and the toolchains in its distributions:<br />
+In the project settings, under Project -&gt; C/C++ Build -&gt; Settings -&gt; Toolchains tab, the toolchains are set to the binaries in this MounRiver distribution.</p>
+<p>I think plaintext files are simpler to understand than configuration via a UI. Eclipse seems to be oriented around configuration through the UI.</p>
+<p>As with the <code>nix-alien</code> solution above, of course the program also ran into problems with missing shared libraries when loading SWT.</p>
+<p>I opted to set <code>LD_LIBRARY_PATH</code> in a <code>shell.nix</code>, and so would open MounRiver wtih this <code>shell.nix</code> loaded:</p>
+<pre><code>{ pkgs ? import &lt;nixpkgs&gt; {} }:
+let
+  libs = with pkgs; [
+    libz
+
+    cairo
+    glib
+    gtk3
+  ];
+in
+pkgs.mkShell {
+  LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath libs;
+}</code></pre>
+<h2 id="using-the-mounriver-ide-for-wct-evt-examples">Using the MounRiver IDE for WCT EVT Examples</h2>
+<p>While trying the MounRiver IDE to build the CH592 EVT examples, I ran into a problem where it couldn’t find the <code>CH59xBLE</code> lib.</p>
+<pre><code>$ ls /home/rgoulter/github/ch592/EVT_V1.0/EXAM/BLE/LIB
+
+.... LIBCH59xBLE.a ....</code></pre>
+<p>This should be <code>libCH59xBLE.a</code>.</p>
+<p>Presumably the developers distributing the EVT are using a case-insensitive filesystem.</p>
+<p>Issues like that, and the distributed Eclipse containing whitespace in the executable/toolchain paths, smell sloppy to me.</p>
+<h2 id="attempting-to-package-this-in-nix">Attempting to Package this in Nix</h2>
+<p>I expect using the <code>buildFHSEnv</code> would likely result in a package which works. (Albeit, for distributing as a package, care would need to be taken for unpacking the binary).</p>
+<p>However, it’s cleaner to write a Nix package using <code>stdenv.mkDerivation</code>.<br />
+And by writing a package, it’s going to be easier for others to use, or for me to re-use without having to make assumptions about where I put different files.</p>
+<p>For the first attempt, we copy the approach as with the <code>autoPatchelfHook</code> example in the previous blogpost, e.g. <code>mounriver.nix</code>:</p>
+<pre><code>{ stdenv
+, autoPatchelfHook
+, libz
+, cairo
+, glib
+, gtk3
+}:
+
+stdenv.mkDerivation {
+  pname = &quot;mounriver studio community&quot;;
+  version = &quot;V160&quot;;
+  src = ./MounRiver_Studio_Community_Linux_x64_V160.tar.xz;
+  buildInputs = [
+    autoPatchelfHook
+
+    libz
+
+    cairo
+    glib
+    gtk3
+
+    libXtst
+    libsecret
+    alsa-lib
+  ];
+  # breaks on whitespace
+  dontUpdateAutotoolsGnuConfigScripts = true;
+  doBuild = false;
+  installPhase = ''
+    mkdir -p $out
+    cp -r ./MRS_Community/* $out
+  '';
+}</code></pre>
+<p>and a <code>default.nix</code> with:</p>
+<pre><code>{ pkgs ? import &lt;nixpkgs&gt; {} }:
+
+pkgs.callPackage ./mounriver.nix {}</code></pre>
+<p>that we build with <code>nix-build</code>.</p>
+<p>This results in some errors:</p>
+<pre><code>error: auto-patchelf could not satisfy dependency libXtst.so.6 wanted by /nix/store/vhjxnm2ris1rnnc3zgwbi55z5f3ah9ak-mounriver-studio-community-V160/plugins/org.eclipse.justj.openjdk.hotspot.jre.full.linux.x86_64_14.0.2.v20200815-0932/jre/lib/libawt_xawt.so
+error: auto-patchelf could not satisfy dependency libasound.so.2 wanted by /nix/store/vhjxnm2ris1rnnc3zgwbi55z5f3ah9ak-mounriver-studio-community-V160/plugins/org.eclipse.justj.openjdk.hotspot.jre.full.linux.x86_64_14.0.2.v20200815-0932/jre/lib/libjsound.so
+error: auto-patchelf could not satisfy dependency libsecret-1.so.0 wanted by /nix/store/vhjxnm2ris1rnnc3zgwbi55z5f3ah9ak-mounriver-studio-community-V160/plugins/org.eclipse.equinox.security.linux.x86_64_1.1.300.v20190830-1238/libkeystorelinuxnative.so
+error: auto-patchelf could not satisfy dependency libusb-1.0.so.0 wanted by /nix/store/vhjxnm2ris1rnnc3zgwbi55z5f3ah9ak-mounriver-studio-community-V160/toolchain/OpenOCD/bin/openocd
+error: auto-patchelf could not satisfy dependency libhidapi-hidraw.so.0 wanted by /nix/store/vhjxnm2ris1rnnc3zgwbi55z5f3ah9ak-mounriver-studio-community-V160/toolchain/OpenOCD/bin/openocd
+error: auto-patchelf could not satisfy dependency libjaylink.so.0 wanted by /nix/store/vhjxnm2ris1rnnc3zgwbi55z5f3ah9ak-mounriver-studio-community-V160/toolchain/OpenOCD/bin/openocd
+error: auto-patchelf could not satisfy dependency libncurses.so.5 wanted by /nix/store/vhjxnm2ris1rnnc3zgwbi55z5f3ah9ak-mounriver-studio-community-V160/toolchain/arm-none-eabi-gcc/bin/arm-none-eabi-gdb
+error: auto-patchelf could not satisfy dependency libtinfo.so.5 wanted by /nix/store/vhjxnm2ris1rnnc3zgwbi55z5f3ah9ak-mounriver-studio-community-V160/toolchain/arm-none-eabi-gcc/bin/arm-none-eabi-gdb
+error: auto-patchelf could not satisfy dependency libncurses.so.5 wanted by /nix/store/vhjxnm2ris1rnnc3zgwbi55z5f3ah9ak-mounriver-studio-community-V160/toolchain/arm-none-eabi-gcc/bin/arm-none-eabi-gdb-py
+error: auto-patchelf could not satisfy dependency libtinfo.so.5 wanted by /nix/store/vhjxnm2ris1rnnc3zgwbi55z5f3ah9ak-mounriver-studio-community-V160/toolchain/arm-none-eabi-gcc/bin/arm-none-eabi-gdb-py</code></pre>
+<p>The <code>libusb-1.0.so.0</code>, <code>libhidapi</code>, <code>libjaylink</code>, etc. helps explain why these shared libraries were included in the <code>beforeinstall</code> directory. (They’re used by openocd and gdb).</p>
+<p>Anyway, adding the libraries for these to the <code>buildInputs</code></p>
+<pre><code>{ stdenv
+, autoPatchelfHook
+, libz
+, cairo
+, glib
+, gtk3
+, hidapi
+, libjaylink
+, libusb1
+, ncurses5
+, libXtst
+, alsa-lib
+, libsecret
+}:
+
+stdenv.mkDerivation {
+  pname = &quot;mounriver studio community&quot;;
+  version = &quot;V160&quot;;
+  src = ./MounRiver_Studio_Community_Linux_x64_V160.tar.xz;
+  buildInputs = [
+    autoPatchelfHook
+
+    libz
+
+    cairo
+    glib
+    gtk3
+
+    hidapi
+    libjaylink
+    libusb1
+    ncurses5
+
+    libXtst
+    libsecret
+    alsa-lib
+  ];
+  # breaks on whitespace
+  dontUpdateAutotoolsGnuConfigScripts = true;
+  doBuild = false;
+  installPhase = ''
+    mkdir -p $out
+    cp -r ./MRS_Community/* $out
+  '';
+}</code></pre>
+<p>This package recipe is able to <em>build</em>, but the resulting Eclipse doesn’t successfully <em>run</em>.</p>
+<p>Unsurprisingly, it can’t load the shared libraries for the SWT library.<br />
+<code>nix-alien</code> solved this by adding <code>cairo glib gtk3</code> to its FHS env.<br />
+Replacing the interpreter fixed this by adjusting <code>LD_LIBRARY_PATH</code>.<br />
+Here, we can use <code>wrapProgram</code> to adjust the <code>LD_LIBRARY_PATH</code> with <code>lib.makeLibraryPath [ cairo glib gtk3 ]</code>. This ensures <code>LD_LIBRARY_PATH</code> runs with a value we want when we run the program.</p>
+<p>Hence:</p>
+<pre><code>{ lib
+, stdenv
+, autoPatchelfHook
+, makeWrapper
+, libz
+, cairo
+, glib
+, gtk3
+, hidapi
+, libjaylink
+, libusb1
+, ncurses5
+, libXtst
+, alsa-lib
+, libsecret
+}:
+
+stdenv.mkDerivation {
+  pname = &quot;mounriver studio community&quot;;
+  version = &quot;V160&quot;;
+  src = ./MounRiver_Studio_Community_Linux_x64_V160.tar.xz;
+  buildInputs = [
+    autoPatchelfHook
+    makeWrapper
+
+    libz
+
+    cairo
+    glib
+    gtk3
+
+    hidapi
+    libjaylink
+    libusb1
+    ncurses5
+
+    libXtst
+    libsecret
+    alsa-lib
+  ];
+  # breaks on whitespace
+  dontUpdateAutotoolsGnuConfigScripts = true;
+  doBuild = false;
+  installPhase = ''
+    mkdir -p $out
+    cp -r ./MRS_Community/* $out
+    wrapProgram &quot;$out/MounRiver Studio_Community&quot; --prefix LD_LIBRARY_PATH : ${lib.makeLibraryPath [ cairo glib gtk3 ]}
+  '';
+}</code></pre>
+<p>This runs, but compared to the MounRiver run by <code>nix-alien</code>, the toolchains in the project settings are empty, and so the IDE doesn’t “just work” for building the WCH EVT examples.</p>
+<p>In the MounRiver which did build the WCT EVT examples, the toolchain paths were set to values like <code>${eclipse_home}toolchain/make-3.8/usr/local/bin</code> or <code>${eclipse_home}/toolchain/RISC-V Embedded GCC/bin</code>.</p>
+<p>Searching for these strings, in the <code>MRS_Community</code> folder:</p>
+<pre><code>$ rg --hidden --fixed-strings '${eclipse_home}toolchain'
+configuration/.settings/ilg.gnumcueclipse.managedbuild.cross.prefs</code></pre>
+<p>It’s not clear to me <em>why</em> the Eclipse running from this <code>mounriver.nix</code> Nix package doesn’t pick these settings up.<br />
+My guess is something to do with the <code>configuration/.settings</code> being read-only in the <code>/nix/store</code>.<br />
+I noticed that copying the <code>configuration</code> from the <code>/nix/store</code> (or just the extracted <code>MRS_Community</code> directory) to the directory in <code>~/.eclipse</code> did set the global toolchain paths; but I’m not sure where/how that directory in <code>~/.eclipse</code> comes into things, either. (Whereas, say, the <code>.ini</code> file in <code>MRS_Community</code> does define <code>osgi.instance.area.default=@user.home/mrs_community-workspace</code>).</p>
+<p>At this point, it’s worth looking at code in nixpkgs.
+<a href="https://search.nixos.org/packages?channel=23.11&amp;from=0&amp;size=50&amp;sort=relevance&amp;type=packages&amp;query=eclipse">Searching for packages named “eclipse”</a>, and then opening up <a href="https://github.com/NixOS/nixpkgs/blob/nixos-23.11/pkgs/applications/editors/eclipse/build-eclipse.nix">the source code</a>.<br />
+The build inputs &amp; wrapping with <code>LD_LIBRARY_PATH</code> looks familiar. This nixpkgs code has code to deal with <a href="https://nixos.org/manual/nixpkgs/stable/#ssec-gnome-packaging">packaging a gnome application</a>, among other things.</p>
+<p>The only thing that sticks out as related to <code>configuration</code> is the argument is <code>makeWrapper</code> <code>-add-flags "-configuration \$HOME/.eclipse/''${productId}_${productVersion}/configuration"</code>.</p>
+<p>My understanding of how Eclipse works is insufficient to figure out how I would write a Nix package this MounRiver distribution &amp; also have the <code>configuation/.settings</code> it provides get used, without requiring the user to just copy these files.</p>
+<p>At this point, it’s enough for me to say that the approach taken by this distributed tarball is different enough from the way Nix prefers to package things. e.g. the tarball includes a java runtime, as well as toolchain binaries for <code>make</code> and the RISC-V GCC toolchain; whereas Nix would package these separately.<br />
+For myself, getting MounRiver to run is mostly a curiosity. It would have been useful for checking the WCH EVT examples. <a href="../programming/2023-12-21-notes-on-building-wch-ble-ch592-evt-exam-with-bare-makefile.html">In another blogpost, I discussed building this outside of MounRiver</a>, and in that I linked to an example with a nix-shell provided.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>Okay, so in the end, I was able to run the MounRiver Studio binary on NixOS. This required using <code>nix-alien</code>, and figuring out which shared libraries were required to run the precompiled binaries. – This was a bit annoying, but not insurmountable. Getting it to run with <code>nix-alien</code> was essentially no more difficult than the hello-world example in the previous blogpost.</p>
+<p>I was not able to successfully write a nix package for MounRiver Studio such that the user experience was the same “just works” as is intended. The point here seems to be:</p>
+<ul>
+<li><p>It seems the idiosyncracy of the eclipse home being read only caused issues reading the settings.</p></li>
+<li><p>Understanding of how to work around issues like these may require a deep understanding of what the program is doing in order to work around them.</p></li>
+</ul>
+<p>In my experience, cases like this are not common on NixOS, and it doesn’t dissuade me at all from using NixOS. However, this is also additional effort that you probably don’t have to expend on other Linux distributions.</p>
+
+<hr />
+
+<div>
+    
+    
+    <a href="../../posts/programming/2024-05-22-example-of-cannot-execute-required-file-not-found-on-nixos.html" style="float:right; text-align: right;">Older post</a>
+    
+</div>
+<br style="clear: both;" />
+
+<hr />
+
+<!-- Load highlight.js for Syntax Highlighting. -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/bash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/c.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/gherkin.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/haskell.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/lisp.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/nix.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js"></script>
+<script>hljs.highlightAll();</script>
+
+            </div>
+
+            <hr style="margin-bottom: 0px; border-top: 2px solid black;" />
+
+            <div id="footer" class="pull-right" style="padding-right: 10px;">
+                Site proudly generated by
+                <a href="http://jaspervdj.be/hakyll">Hakyll</a>
+            </div>
+        </div>
+
+        <script>
+            // The callbacks we wanna use
+            // Phone-home, telling Google Analytics various metrics/dimensions
+
+            // Use custom dimensions & metrics
+            var AnalyticDimensionReaderKind = 'dimension1';
+            var AnalyticMetricActiveTime      = 'metric1';
+            var AnalyticMetricLongestIdleTime = 'metric2';
+            var AnalyticMetricReadCount       = 'metric3';
+
+            var gaCallbacks = {
+                "scrollPercent": function(ms, perc) {
+                    if (perc > 85) {
+                        // EVENT: Page read
+                        ga('send', {
+                            hitType:       'event',
+                            eventCategory: 'Scrolling',
+                            eventAction:   'atBottom',
+                            eventValue:    String(ms)
+                        });
+                    }
+                },
+                "read": function(ms, ct, timeToReach) {
+                    // Use this to set DIMENSION
+                    // timeToReach < 5s ==> Skim (default = Visitor)
+                    if (timeToReach < 5 * 1000) {
+                        // dimension1 = ReaderKind
+                        ga('set', AnalyticDimensionReaderKind, "skimmer");
+                    }
+
+                    // timeToReach > 30s ==> Reader
+                    if (timeToReach > 30 * 1000) {
+                        // dimension1 = ReaderKind
+                        ga('set', AnalyticDimensionReaderKind, "reader");
+                    }
+
+                    // EVENT: Page read
+                    ga('send', {
+                        hitType:       'event',
+                        eventCategory: 'Reading',
+                        eventAction:   'read',
+                        eventValue:    String(timeToReach)
+                    });
+
+                    // METRIC
+                    ga('set', AnalyticMetricReadCount, String(ct));
+                },
+                "initialIdle": function(ms) {
+                    // EVENT: Started Reading
+                    ga('send', {
+                        hitType:       'event',
+                        eventCategory: 'Scrolling',
+                        eventAction:   'begun',
+                        eventValue:    String(ms)
+                    });
+                },
+                "timeSpent": function(total, active, curIdle, initIdle, longestIdle) {
+                    // Update METRIC(S)?
+                    ga('set', AnalyticMetricActiveTime, String(active));
+                    ga('set', AnalyticMetricLongestIdleTime, String(longestIdle));
+                },
+                "idle": function(ms) {
+                },
+                "longestIdle": function(ms) {
+                }
+            }
+
+            window.onload = function() {
+                myAnalyticsInit(gaCallbacks);
+
+                //
+                // Initial dimensions & metrics
+                //
+
+                ga('set', AnalyticMetricReadCount, String(0));
+
+                // EVENT: Page load
+                ga('send', {
+                    hitType:       'event',
+                    eventCategory: 'pageLoad',
+                    eventAction:   'begun',
+                    eventValue:    String(ms)
+                });
+
+                // DIMENSION: visitor
+                ga('set', AnalyticDimensionReaderKind, "visitor");
+            }
+        </script>
+    </body>
+</html>

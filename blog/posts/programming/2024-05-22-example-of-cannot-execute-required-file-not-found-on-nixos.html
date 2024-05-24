@@ -1,0 +1,431 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Example of Cannot Execute Required File Not Found on NixOS - Richard Goulter's Blog</title>
+
+        <!-- My (Old) CSS theme -->
+        <link rel="stylesheet" type="text/css" href="../../css/default.css" />
+
+        <!--
+            jQuery & jQueryUI
+        -->
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css" />
+
+        <!--
+            Pandoc Style CSS
+            (for syntax highlighted snippets)
+        -->
+        <link rel="stylesheet" type="text/css" href="../../css/syntax.css" />
+
+        <!--
+            Bootstrap
+        -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+        <style>
+            /*
+             * Bootstrap defines blockquote as 17px,
+             * so it looks stupidly large in my blogposts. */
+            blockquote {
+                font-size: 14px;
+            }
+        </style>
+
+        <!--
+            Waypoints, and Waypoints-Sticky,
+            so we can do this:
+            http://imakewebthings.com/waypoints/shortcuts/sticky-elements/
+        -->
+        <script src="../../js/jquery.waypoints.min.js"></script>
+        <script src="../../js/sticky.min.js"></script>
+
+        <!-- My analytics stuff -->
+        <script src="../../js/my_analytics.js"></script>
+        <script src="../../js/my_analytics_debug.js"></script>
+
+        <!--
+            TOCify
+        -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js"></script>
+
+        <!--
+            Patched TOCify css file.
+            (Don't want fixed `.tocify`).
+        -->
+        <link rel="stylesheet" type="text/css" href="../../css/jquery.tocify.css" />
+
+        <style>
+        .navbar {
+            margin-bottom: 0px;
+        }
+
+        .banner-image {
+            width:100%;
+        }
+
+        .banner {
+            margin-left: 0px;
+            margin-right: 0px;
+        }
+
+        body {
+            background-color: #e2e2e2;
+        }
+
+        #page {
+            padding-left:0;
+            padding-right:0;
+            background-color: #ffffff;
+        }
+        </style>
+
+        <!-- Google Analytics -->
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-H13NWYDX0G"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'G-H13NWYDX0G');
+        </script>
+    </head>
+    <body>
+        <div id="page" class="container">
+            <!-- This, with no padding on left/right -->
+            <div class="banner">
+                <nav class="navbar navbar-default">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+
+            <!-- The Hamburger -->
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../../">Richard Goulter's Blog</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="../../">Home</a></li>
+            <li><a href="../../yi.html">Yi</a></li>
+            <li><a href="../../emacs.html">Emacs</a></li>
+            <li><a href="../../what-i-wish-i-knew-when-i-started-using-nix.html">Nixpkgs</a></li>
+            <li><a href="../../archive.html">Archive</a></li>
+        </ul>
+    </div>
+</nav>
+
+            </div>
+
+            <hr style="margin: 0px; border-top: 5px solid black;" />
+
+            <div id="content" class="container">
+                <h1>Example of Cannot Execute Required File Not Found on NixOS</h1>
+                <div class="info">
+    Posted on May 22, 2024
+    
+        by Richard Goulter
+    <br />
+    
+    Tags: 
+    
+</div>
+
+<p>One of the problems many NixOS users encounter is difficulty running binaries which have been compiled on other Linux systems.</p>
+<p>The error message from trying is typically:</p>
+<pre><code>cannot execute: required file not found</code></pre>
+<p>which is confusing because the file is right there.</p>
+<p>In this post, I’ll walk through a “hello world” example, which hopefully illustrates what’s going on.</p>
+<h3 id="quickly-entering-non-nixos-from-nixos">Quickly Entering non-NixOS from NixOS</h3>
+<p>A simple example of this is a “hello world” C program compiled on a non-NixOS system.</p>
+<p>From NixOS, we can still enter a non-NixOS system easily using <a href="https://github.com/89luca89/distrobox">distrobox</a>.
+(Distrobox is similar to <a href="https://docs.fedoraproject.org/en-US/fedora-silverblue/toolbox/">Fedora’s toolbox</a>; it lets you easily work with your HOME directory from within a container, which can be useful for OSs like NixOS or Fedora Silverblue).</p>
+<p>Distrobox requires docker or podman; so, ensure that’s enabled:</p>
+<pre><code>virtualisation.podman.enable = true;</code></pre>
+<p>e.g. should be able to run:</p>
+<pre><code>podman version</code></pre>
+<p>Then we can run distrobox &amp; create an ubuntu distrobox with:</p>
+<pre><code>$ nix shell nixpkgs#distrobox
+
+$ distrobox create ubuntu  --image ubuntu:latest</code></pre>
+<p>And enter this with <code>distrobox enter ubuntu</code>.</p>
+<h3 id="building-hello-world-in-the-ubuntu-distrobox">Building Hello World in the Ubuntu Distrobox</h3>
+<p>Within the ubuntu distrobox, we install <code>build-essential</code> (since we want to compile a simple C program):</p>
+<pre><code>$ sudo apt update
+$ sudo apt install build-essential</code></pre>
+<p>then e.g. <code>hello.c</code> (unintuitively, you can use the text editor from the host system, such as helix or neovim, even within the ubuntu distrobox):</p>
+<pre><code>#include &lt;stdio.h&gt;
+
+int main(int argc, char **argv) {
+  printf(&quot;hello world\n&quot;);
+}</code></pre>
+<p>And then compile this (<code>gcc hello.c</code>). And run it, if you like: <code>./a.out</code>.</p>
+<h3 id="examining-a.out">Examining a.out</h3>
+<p>Checking what <code>ldd</code> says about the compiled <code>hello.c</code>, from within the ubuntu distrobox:</p>
+<pre><code>$ ldd ./a.out
+        linux-vdso.so.1 (0x00007ffe04ff9000)
+        libc.so.6 =&gt; /lib/x86_64-linux-gnu/libc.so.6 (0x00007fcda5200000)
+        /lib64/ld-linux-x86-64.so.2 (0x00007fcda561d000)</code></pre>
+<p>and then leaving the ubuntu distrobox (e.g. <code>^D</code>), from the NixOS host we see a different result:</p>
+<pre><code>$ ldd ./a.out
+        linux-vdso.so.1 (0x00007ffe06e36000)
+        libc.so.6 =&gt; /nix/store/anlf335xlh41yjhm114swi87406mq5pw-glibc-2.38-44/lib/libc.so.6 (0x00007f6dd47d1000)
+        /lib64/ld-linux-x86-64.so.2 =&gt; /nix/store/anlf335xlh41yjhm114swi87406mq5pw-glibc-2.38-44/lib64/ld-linux-x86-64.so.2 (0x00007f6dd49c1000)
+</code></pre>
+<p>Trying to run this on the NixOS host results in an error:</p>
+<pre><code>$ ./a.out
+bash: ./a.out: cannot execute: required file not found</code></pre>
+<p>Using <code>fish</code> shell, the error is more useful:</p>
+<pre><code>$ ./a.out
+exec: Failed to execute process './a.out': The file exists and is executable. Check the interpreter or linker?</code></pre>
+<h3 id="a-bash-script-analogy">A Bash Script Analogy</h3>
+<p><code>ld-linux</code> is the <a href="https://linux.die.net/man/8/ld-linux">dynamic-linker</a>.</p>
+<p>What’s going on is comparable to executing a shell script with a <a href="https://en.wikipedia.org/wiki/Shebang_(Unix)">shebang</a>:</p>
+<pre><code>#!/usr/bin/env bash
+echo moo | cowsay</code></pre>
+<p>If we have an executable script with a bad interpreter, e.g. <code>badinterp</code>:</p>
+<pre><code>#!/nonexist
+echo &quot;hello&quot;</code></pre>
+<p>Then trying to run this with <code>bash</code> yields the same “required file not found” error:</p>
+<pre><code>$ ./badinterp
+bash: ./badinterp: cannot execute: required file not found</code></pre>
+<p>although <code>fish</code> shell once again is more useful:</p>
+<pre><code>$ ./badinterp
+exec: Failed to execute process './badinterp': The file specified the interpreter '/nonexist', which is not an executable command.</code></pre>
+<p>If running the above executable script (e.g. <code>cowsay-moo</code>) without <code>cowsay</code> on <code>PATH</code>, we get a different error:</p>
+<pre><code>$ ./cowsay-moo
+./cowsay-moo: line 2: cowsay: command not found</code></pre>
+<p>That the executable isn’t on the PATH is a much easier to understand.</p>
+<p>The other most common kind of linker error is analogous to that:</p>
+<pre><code>error while loading shared libraries: libz.so.1: cannot open shared object file: No such file or directory</code></pre>
+<p>whereas a shell uses <code>PATH</code> to find exectuables, the dynamic linker uses <code>LD_LIBRARY_PATH</code> to find dynamically linked libraries.</p>
+<p>This is also why setting <code>LD_LIBRARY_PATH</code> often results in problems related to “version GLIBCXX_ not found”. – By setting the <code>LD_LIBRARY_PATH</code>, the dynamic linker loads a glibc version that’s different than what the program expects, and so runs into problems.</p>
+<h3 id="working-around-the-problem-fhs-environments">Working Around the Problem: FHS Environments</h3>
+<p>One workaround provided by nixpkgs is <a href="https://nixos.org/manual/nixpkgs/stable/#sec-fhs-environments">FHS environments</a>.
+(These are implemented using <a href="https://github.com/containers/bubblewrap">bubblewrap</a>, which flatpak uses).</p>
+<p>e.g. in this case, we can write a simple <code>fhs.nix</code>:</p>
+<pre><code>{ pkgs ? import &lt;nixpkgs&gt; {} }:
+
+pkgs.buildFHSEnv {
+  name = &quot;hello&quot;;
+  runScript = ./a.out;
+}</code></pre>
+<p>and then build/run this with <code>nix-build ./fhs.nix</code>, and running <code>./result/bin/hello</code>.</p>
+<p>(FWIW, this FHS env would need to be re-built every time the binary changes).</p>
+<h3 id="automating-this-workaround-nix-alien">Automating this Workaround: nix-alien</h3>
+<p>This approach of “write an FHS env for the unpatched binary, and run that” has been automated by the tool <a href="https://github.com/thiagokokada/nix-alien">nix-alien</a>.</p>
+<p>We can add <code>nix-alien</code> to the shell with:</p>
+<pre><code>$ nix shell &quot;github:thiagokokada/nix-alien#nix-alien&quot;</code></pre>
+<p>and then run this with:</p>
+<pre><code>$ nix-alien ./a.out
+[nix-alien] File '/home/rgoulter/.cache/nix-alien/f5127167-26a2-5c7d-89d0-fb363e223e43/fhs-env/default.nix' created successfuly!
+....
+hello world</code></pre>
+<p>The thing to note is that it creates this <code>.cache/nix-alien/UUID/fhs-env/default.nix</code> file.</p>
+<p>NOTE: if you change the arguments to <code>nix-alien</code>, you may need to call <code>nix-alien</code> with <code>--recreate</code> to ensure it recreates the <code>default.nix</code>.</p>
+<p>Examining the <code>default.nix</code> it creates:</p>
+<pre><code>{ pkgs ? import
+    (builtins.fetchTarball {
+      name = &quot;nixpkgs-unstable-20240509145238&quot;;
+      url = &quot;https://github.com/NixOS/nixpkgs/archive/f1010e0469db743d14519a1efd37e23f8513d714.tar.gz&quot;;
+      sha256 = &quot;sha256-doPgfj+7FFe9rfzWo1siAV2mVCasW+Bh8I1cToAXEE4=&quot;;
+    })
+    { }
+}:
+
+let
+  inherit (pkgs) buildFHSUserEnv;
+in
+buildFHSUserEnv {
+  name = &quot;a.out-fhs&quot;;
+  targetPkgs = p: with p; [
+
+  ];
+  runScript = &quot;/home/rgoulter/playground/distrobox-build/a.out&quot;;
+}</code></pre>
+<p>The <code>builtins.fetchTarball</code> is essentially performing the same role as <code>&lt;nixpkgs&gt;</code>. (The latter uses <code>nixpkgs</code> on <code>NIX_PATH</code>, the former uses a particular revision of the <code>nixpkgs</code> repository).</p>
+<p><code>buildFHSUserEnv</code> is an alias for <code>buildFHSEnv</code>.</p>
+<p><code>targetPkgs</code> is empty (so doesn’t have any effect on this example), but it’s useful for additional dynamically linked libraries the precompiled binary may need.</p>
+<h3 id="a-universal-nixos-workaround">A Universal NixOS Workaround:</h3>
+<p>Another solution, which works in some cases where <code>buildFHSEnv</code> does not, is <a href="https://github.com/Mic92/nix-ld">nix-ld</a>.</p>
+<p>This can be enabled by updating your NixOS config with:</p>
+<pre><code>  programs.nix-ld.enable = true;</code></pre>
+<p>Directly running the same binary again leads to a different error message:</p>
+<pre><code>$ ./a.out
+cannot execute ./a.out: You are trying to run an unpatched binary on nixos, but you have not configured NIX_LD or NIX_LD_x86_64-linux. See https://github.com/Mic92/nix-ld for more details</code></pre>
+<p>As the nix-ld readme suggests, we can set <code>NIX_LD</code> with a <code>shell.nix</code>:</p>
+<pre><code>{ pkgs ? import &lt;nixpkgs&gt; {} }:
+pkgs.mkShell {
+  NIX_LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath [];
+  NIX_LD = pkgs.lib.fileContents &quot;${pkgs.stdenv.cc}/nix-support/dynamic-linker&quot;;
+}</code></pre>
+<p>entering this with <code>nix-shell</code>, and running this:</p>
+<pre><code>$ ./a.out
+hello world</code></pre>
+<h3 id="another-workaround-patchelf">Another Workaround: patchelf</h3>
+<p>Another way to work around the program is to just patch the binary directly.
+(This is typically how precompiled binaries are handled in nixpkgs packages).</p>
+<p>This can be done with <a href="https://github.com/NixOS/patchelf">patchelf</a>. Again, adding it to PATH with:</p>
+<pre><code>nix shell nixpkgs#patchelf</code></pre>
+<p>then e.g. copying the interpreter from the output of <code>ldd</code> above:</p>
+<pre><code>$ patchelf --set-interpreter /nix/store/anlf335xlh41yjhm114swi87406mq5pw-glibc-2.38-44/lib64/ld-linux-x86-64.so.2 ./a.out</code></pre>
+<p>and running the binary:</p>
+<pre><code>$ ./a.out
+hello world</code></pre>
+<h4 id="automatic-patchelf-in-nix-packaging-autopatchelfhook">Automatic patchelf in Nix Packaging: autoPatchelfHook</h4>
+<p>When writing Nix packages, nixpkgs has an <a href="https://nixos.org/manual/nixpkgs/stable/#setup-hook-autopatchelfhook">autoPatchelfHook</a> which can take care of automatically performing tasks like this.</p>
+<p>This makes more sense when packaging a prebuilt release of some program, but we can still apply it to this prebuilt <code>./a.out</code>:</p>
+<p>e.g. a <code>hello.nix</code> file with:</p>
+<pre><code>{ pkgs ? import &lt;nixpkgs&gt; {} }:
+
+pkgs.stdenv.mkDerivation {
+  pname = &quot;hello-world&quot;;
+  version = &quot;1.0.0&quot;;
+  buildInputs = [
+    pkgs.autoPatchelfHook
+  ];
+  dontUnpack=true;
+  installPhase=''
+    mkdir -p $out/bin
+    cp ${./a.out} $out/bin/hello
+  '';
+}</code></pre>
+<p>this can be built with <code>nix-build hello.nix</code> and the resulting patched binary run with <code>./result/bin/hello</code>.</p>
+<p>The <code>autoPatchelfHook</code> is invoked as part of the ‘fixup’ phase.</p>
+
+<hr />
+
+<div>
+    
+    <a href="../../posts/programming/2024-05-23-getting-mounriver-studio-to-run-on-nixos.html" style="float:left;">Newer post</a>
+    
+    
+    <a href="../../posts/programming/2024-05-18-experience-updating-the-c-worksheet-project.html" style="float:right; text-align: right;">Older post</a>
+    
+</div>
+<br style="clear: both;" />
+
+<hr />
+
+<!-- Load highlight.js for Syntax Highlighting. -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/bash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/c.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/gherkin.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/haskell.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/lisp.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/nix.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js"></script>
+<script>hljs.highlightAll();</script>
+
+            </div>
+
+            <hr style="margin-bottom: 0px; border-top: 2px solid black;" />
+
+            <div id="footer" class="pull-right" style="padding-right: 10px;">
+                Site proudly generated by
+                <a href="http://jaspervdj.be/hakyll">Hakyll</a>
+            </div>
+        </div>
+
+        <script>
+            // The callbacks we wanna use
+            // Phone-home, telling Google Analytics various metrics/dimensions
+
+            // Use custom dimensions & metrics
+            var AnalyticDimensionReaderKind = 'dimension1';
+            var AnalyticMetricActiveTime      = 'metric1';
+            var AnalyticMetricLongestIdleTime = 'metric2';
+            var AnalyticMetricReadCount       = 'metric3';
+
+            var gaCallbacks = {
+                "scrollPercent": function(ms, perc) {
+                    if (perc > 85) {
+                        // EVENT: Page read
+                        ga('send', {
+                            hitType:       'event',
+                            eventCategory: 'Scrolling',
+                            eventAction:   'atBottom',
+                            eventValue:    String(ms)
+                        });
+                    }
+                },
+                "read": function(ms, ct, timeToReach) {
+                    // Use this to set DIMENSION
+                    // timeToReach < 5s ==> Skim (default = Visitor)
+                    if (timeToReach < 5 * 1000) {
+                        // dimension1 = ReaderKind
+                        ga('set', AnalyticDimensionReaderKind, "skimmer");
+                    }
+
+                    // timeToReach > 30s ==> Reader
+                    if (timeToReach > 30 * 1000) {
+                        // dimension1 = ReaderKind
+                        ga('set', AnalyticDimensionReaderKind, "reader");
+                    }
+
+                    // EVENT: Page read
+                    ga('send', {
+                        hitType:       'event',
+                        eventCategory: 'Reading',
+                        eventAction:   'read',
+                        eventValue:    String(timeToReach)
+                    });
+
+                    // METRIC
+                    ga('set', AnalyticMetricReadCount, String(ct));
+                },
+                "initialIdle": function(ms) {
+                    // EVENT: Started Reading
+                    ga('send', {
+                        hitType:       'event',
+                        eventCategory: 'Scrolling',
+                        eventAction:   'begun',
+                        eventValue:    String(ms)
+                    });
+                },
+                "timeSpent": function(total, active, curIdle, initIdle, longestIdle) {
+                    // Update METRIC(S)?
+                    ga('set', AnalyticMetricActiveTime, String(active));
+                    ga('set', AnalyticMetricLongestIdleTime, String(longestIdle));
+                },
+                "idle": function(ms) {
+                },
+                "longestIdle": function(ms) {
+                }
+            }
+
+            window.onload = function() {
+                myAnalyticsInit(gaCallbacks);
+
+                //
+                // Initial dimensions & metrics
+                //
+
+                ga('set', AnalyticMetricReadCount, String(0));
+
+                // EVENT: Page load
+                ga('send', {
+                    hitType:       'event',
+                    eventCategory: 'pageLoad',
+                    eventAction:   'begun',
+                    eventValue:    String(ms)
+                });
+
+                // DIMENSION: visitor
+                ga('set', AnalyticDimensionReaderKind, "visitor");
+            }
+        </script>
+    </body>
+</html>
