@@ -163,11 +163,11 @@ $ distrobox create ubuntu --image ubuntu:latest</code></pre>
 <pre><code>$ sudo apt update
 $ sudo apt install build-essential</code></pre>
 <p>then e.g. <code>hello.c</code> (unintuitively, you can use the text editor from the host system, such as helix or neovim, even within the ubuntu distrobox):</p>
-<pre><code>#include &lt;stdio.h&gt;
-
-int main(int argc, char **argv) {
-  printf(&quot;hello world\n&quot;);
-}</code></pre>
+<div class="sourceCode" id="cb6"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">int</span> argc<span class="op">,</span> <span class="dt">char</span> <span class="op">**</span>argv<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  printf<span class="op">(</span><span class="st">&quot;hello world</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>And then compile this (<code>gcc hello.c</code>). And run it, if you like: <code>./a.out</code>.</p>
 <h3 id="examining-a.out">Examining a.out</h3>
 <p>Checking what <code>ldd</code> says about the compiled <code>hello.c</code>, from within the ubuntu distrobox:</p>
@@ -190,11 +190,11 @@ exec: Failed to execute process './a.out': The file exists and is executable. Ch
 <h3 id="a-bash-script-analogy">A Bash Script Analogy</h3>
 <p><code>ld-linux</code> is the <a href="https://linux.die.net/man/8/ld-linux">dynamic-linker</a>.</p>
 <p>What’s going on is comparable to executing a shell script with a <a href="https://en.wikipedia.org/wiki/Shebang_(Unix)">shebang</a>:</p>
-<pre><code>#!/usr/bin/env bash
-echo moo | cowsay</code></pre>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/usr/bin/env bash</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> moo <span class="kw">|</span> <span class="ex">cowsay</span></span></code></pre></div>
 <p>If we have an executable script with a bad interpreter, e.g. <code>badinterp</code>:</p>
-<pre><code>#!/nonexist
-echo &quot;hello&quot;</code></pre>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/nonexist</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">&quot;hello&quot;</span></span></code></pre></div>
 <p>Then trying to run this with <code>bash</code> yields the same “required file not found” error:</p>
 <pre><code>$ ./badinterp
 bash: ./badinterp: cannot execute: required file not found</code></pre>
@@ -213,12 +213,12 @@ exec: Failed to execute process './badinterp': The file specified the interprete
 <p>One workaround provided by nixpkgs is <a href="https://nixos.org/manual/nixpkgs/stable/#sec-fhs-environments">FHS environments</a>.
 (These are implemented using <a href="https://github.com/containers/bubblewrap">bubblewrap</a>, which flatpak uses).</p>
 <p>e.g. in this case, we can write a simple <code>fhs.nix</code>:</p>
-<pre><code>{ pkgs ? import &lt;nixpkgs&gt; {} }:
-
-pkgs.buildFHSEnv {
-  name = &quot;hello&quot;;
-  runScript = ./a.out;
-}</code></pre>
+<div class="sourceCode" id="cb17"><pre class="sourceCode nix"><code class="sourceCode nix"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="op">{</span> <span class="va">pkgs</span> <span class="op">?</span> <span class="bu">import</span> &lt;nixpkgs&gt; <span class="op">{}</span> <span class="op">}</span>:</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>pkgs.buildFHSEnv <span class="op">{</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="va">name</span> <span class="op">=</span> <span class="st">&quot;hello&quot;</span><span class="op">;</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="va">runScript</span> <span class="op">=</span> <span class="ss">./a.out</span><span class="op">;</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>and then build/run this with <code>nix-build ./fhs.nix</code>, and running <code>./result/bin/hello</code>.</p>
 <p>(FWIW, this FHS env would need to be re-built every time the binary changes).</p>
 <h3 id="automating-this-workaround-nix-alien">Automating this Workaround: nix-alien</h3>
@@ -233,25 +233,25 @@ hello world</code></pre>
 <p>The thing to note is that it creates this <code>.cache/nix-alien/UUID/fhs-env/default.nix</code> file.</p>
 <p>NOTE: if you change the arguments to <code>nix-alien</code>, you may need to call <code>nix-alien</code> with <code>--recreate</code> to ensure it recreates the <code>default.nix</code>.</p>
 <p>Examining the <code>default.nix</code> it creates:</p>
-<pre><code>{ pkgs ? import
-    (builtins.fetchTarball {
-      name = &quot;nixpkgs-unstable-20240509145238&quot;;
-      url = &quot;https://github.com/NixOS/nixpkgs/archive/f1010e0469db743d14519a1efd37e23f8513d714.tar.gz&quot;;
-      sha256 = &quot;sha256-doPgfj+7FFe9rfzWo1siAV2mVCasW+Bh8I1cToAXEE4=&quot;;
-    })
-    { }
-}:
-
-let
-  inherit (pkgs) buildFHSUserEnv;
-in
-buildFHSUserEnv {
-  name = &quot;a.out-fhs&quot;;
-  targetPkgs = p: with p; [
-
-  ];
-  runScript = &quot;/home/rgoulter/playground/distrobox-build/a.out&quot;;
-}</code></pre>
+<div class="sourceCode" id="cb20"><pre class="sourceCode nix"><code class="sourceCode nix"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="op">{</span> <span class="va">pkgs</span> <span class="op">?</span> <span class="bu">import</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>    <span class="op">(</span><span class="bu">builtins</span>.<span class="bu">fetchTarball</span> <span class="op">{</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>      <span class="va">name</span> <span class="op">=</span> <span class="st">&quot;nixpkgs-unstable-20240509145238&quot;</span><span class="op">;</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>      <span class="va">url</span> <span class="op">=</span> <span class="st">&quot;https://github.com/NixOS/nixpkgs/archive/f1010e0469db743d14519a1efd37e23f8513d714.tar.gz&quot;</span><span class="op">;</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>      <span class="va">sha256</span> <span class="op">=</span> <span class="st">&quot;sha256-doPgfj+7FFe9rfzWo1siAV2mVCasW+Bh8I1cToAXEE4=&quot;</span><span class="op">;</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>    <span class="op">})</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">{</span> <span class="op">}</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span>:</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>  <span class="va">inherit</span> (<span class="va">pkgs</span>) <span class="va">buildFHSUserEnv</span>;</span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a><span class="kw">in</span></span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>buildFHSUserEnv <span class="op">{</span></span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>  <span class="va">name</span> <span class="op">=</span> <span class="st">&quot;a.out-fhs&quot;</span><span class="op">;</span></span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>  <span class="va">targetPkgs</span> <span class="op">=</span> <span class="va">p</span><span class="op">:</span> <span class="kw">with</span> p<span class="op">;</span> <span class="op">[</span></span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>  <span class="op">];</span></span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>  <span class="va">runScript</span> <span class="op">=</span> <span class="st">&quot;/home/rgoulter/playground/distrobox-build/a.out&quot;</span><span class="op">;</span></span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>The <code>builtins.fetchTarball</code> is essentially performing the same role as <code>&lt;nixpkgs&gt;</code>. (The latter uses <code>nixpkgs</code> on <code>NIX_PATH</code>, the former uses a particular revision of the <code>nixpkgs</code> repository).</p>
 <p><code>buildFHSUserEnv</code> is an alias for <code>buildFHSEnv</code>.</p>
 <p><code>targetPkgs</code> is empty (so doesn’t have any effect on this example), but it’s useful for additional dynamically linked libraries the precompiled binary may need.</p>
@@ -263,11 +263,11 @@ buildFHSUserEnv {
 <pre><code>$ ./a.out
 cannot execute ./a.out: You are trying to run an unpatched binary on nixos, but you have not configured NIX_LD or NIX_LD_x86_64-linux. See https://github.com/Mic92/nix-ld for more details</code></pre>
 <p>As the nix-ld readme suggests, we can set <code>NIX_LD</code> with a <code>shell.nix</code>:</p>
-<pre><code>{ pkgs ? import &lt;nixpkgs&gt; {} }:
-pkgs.mkShell {
-  NIX_LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath [];
-  NIX_LD = pkgs.lib.fileContents &quot;${pkgs.stdenv.cc}/nix-support/dynamic-linker&quot;;
-}</code></pre>
+<div class="sourceCode" id="cb23"><pre class="sourceCode nix"><code class="sourceCode nix"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="op">{</span> <span class="va">pkgs</span> <span class="op">?</span> <span class="bu">import</span> &lt;nixpkgs&gt; <span class="op">{}</span> <span class="op">}</span>:</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>pkgs.mkShell <span class="op">{</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="va">NIX_LD_LIBRARY_PATH</span> <span class="op">=</span> pkgs.lib.makeLibraryPath <span class="op">[];</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="va">NIX_LD</span> <span class="op">=</span> pkgs.lib.fileContents <span class="st">&quot;</span><span class="sc">${</span>pkgs.stdenv.cc<span class="sc">}</span><span class="st">/nix-support/dynamic-linker&quot;</span><span class="op">;</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>entering this with <code>nix-shell</code>, and running this:</p>
 <pre><code>$ ./a.out
 hello world</code></pre>
@@ -285,20 +285,20 @@ hello world</code></pre>
 <p>When writing Nix packages, nixpkgs has an <a href="https://nixos.org/manual/nixpkgs/stable/#setup-hook-autopatchelfhook">autoPatchelfHook</a> which can take care of automatically performing tasks like this.</p>
 <p>This makes more sense when packaging a prebuilt release of some program, but we can still apply it to this prebuilt <code>./a.out</code>:</p>
 <p>e.g. a <code>hello.nix</code> file with:</p>
-<pre><code>{ pkgs ? import &lt;nixpkgs&gt; {} }:
-
-pkgs.stdenv.mkDerivation {
-  pname = &quot;hello-world&quot;;
-  version = &quot;1.0.0&quot;;
-  buildInputs = [
-    pkgs.autoPatchelfHook
-  ];
-  dontUnpack=true;
-  installPhase=''
-    mkdir -p $out/bin
-    cp ${./a.out} $out/bin/hello
-  '';
-}</code></pre>
+<div class="sourceCode" id="cb28"><pre class="sourceCode nix"><code class="sourceCode nix"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="op">{</span> <span class="va">pkgs</span> <span class="op">?</span> <span class="bu">import</span> &lt;nixpkgs&gt; <span class="op">{}</span> <span class="op">}</span>:</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>pkgs.stdenv.mkDerivation <span class="op">{</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  <span class="va">pname</span> <span class="op">=</span> <span class="st">&quot;hello-world&quot;</span><span class="op">;</span></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>  <span class="va">version</span> <span class="op">=</span> <span class="st">&quot;1.0.0&quot;</span><span class="op">;</span></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>  <span class="va">buildInputs</span> <span class="op">=</span> <span class="op">[</span></span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>    pkgs.autoPatchelfHook</span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>  <span class="op">];</span></span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>  <span class="va">dontUnpack</span><span class="op">=</span><span class="cn">true</span><span class="op">;</span></span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>  <span class="va">installPhase</span><span class="op">=</span><span class="st">''</span></span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a><span class="st">    mkdir -p $out/bin</span></span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a><span class="st">    cp </span><span class="sc">${</span><span class="ss">./a.out</span><span class="sc">}</span><span class="st"> $out/bin/hello</span></span>
+<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a><span class="st">  ''</span><span class="op">;</span></span>
+<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>this can be built with <code>nix-build hello.nix</code> and the resulting patched binary run with <code>./result/bin/hello</code>.</p>
 <p>The <code>autoPatchelfHook</code> is invoked as part of the ‘fixup’ phase.</p>
 
@@ -315,19 +315,6 @@ pkgs.stdenv.mkDerivation {
 <br style="clear: both;" />
 
 <hr />
-
-<!-- Load highlight.js for Syntax Highlighting. -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/bash.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/c.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/gherkin.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/haskell.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/lisp.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/nix.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/python.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js"></script>
-<script>hljs.highlightAll();</script>
 
             </div>
 
@@ -420,7 +407,7 @@ pkgs.stdenv.mkDerivation {
                     hitType:       'event',
                     eventCategory: 'pageLoad',
                     eventAction:   'begun',
-                    eventValue:    String(ms)
+                    eventValue:    String(0)
                 });
 
                 // DIMENSION: visitor

@@ -239,16 +239,16 @@ output &quot;vm_public_ip&quot; {
   value = aws_instance.ubuntu.public_ip
 }</code></pre>
 <p>and a <code>shell.nix</code> with contents:</p>
-<pre class="nix"><code>{ pkgs ? import &lt;nixpkgs&gt; {} }:
-
-with pkgs;
-mkShell {
-  buildInputs = [
-    terraform
-    terraform-ls
-    tflint
-  ];
-}</code></pre>
+<div class="sourceCode" id="cb2"><pre class="sourceCode nix"><code class="sourceCode nix"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="op">{</span> <span class="va">pkgs</span> <span class="op">?</span> <span class="bu">import</span> &lt;nixpkgs&gt; <span class="op">{}</span> <span class="op">}</span>:</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="kw">with</span> pkgs<span class="op">;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>mkShell <span class="op">{</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="va">buildInputs</span> <span class="op">=</span> <span class="op">[</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    terraform</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    terraform-ls</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    tflint</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="op">];</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>(In this case, the shell includes the packages: <code>terraform</code> which is what
 interprets/runs the <code>main.tf</code>, <code>terraform-ls</code> as the Language Server for LSP,
 and <code>tflint</code> as the linting tool).</p>
@@ -295,19 +295,6 @@ replit, gitpod, or GitHub’s codespaces.</p>
 <br style="clear: both;" />
 
 <hr />
-
-<!-- Load highlight.js for Syntax Highlighting. -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/bash.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/c.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/gherkin.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/haskell.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/lisp.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/nix.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/python.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js"></script>
-<script>hljs.highlightAll();</script>
 
             </div>
 
@@ -400,7 +387,7 @@ replit, gitpod, or GitHub’s codespaces.</p>
                     hitType:       'event',
                     eventCategory: 'pageLoad',
                     eventAction:   'begun',
-                    eventValue:    String(ms)
+                    eventValue:    String(0)
                 });
 
                 // DIMENSION: visitor

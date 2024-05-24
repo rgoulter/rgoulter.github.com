@@ -207,10 +207,10 @@ fun. (How many kids continue working on their FYP after they’ve presented in
 their free time?). You’ll also get <em>very</em> good at the language; I got somewhat
 familiar with the C99 language standard, and certainly stumbled upon the more
 esoteric aspects of (simple) C99, my favourite being:</p>
-<pre class="c"><code>int isWhitespace[256] = { [' '] = 1, ['\t'] = 1, ['\n'] = 1 };
-isWhitespace['a'];  //&gt; 0
-isWhitespace[' '];  //&gt; 1
-isWhitespace['\t']; //&gt; 1</code></pre>
+<div class="sourceCode" id="cb1"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> isWhitespace<span class="op">[</span><span class="dv">256</span><span class="op">]</span> <span class="op">=</span> <span class="op">{</span> <span class="op">[</span><span class="ch">' '</span><span class="op">]</span> <span class="op">=</span> <span class="dv">1</span><span class="op">,</span> <span class="op">[</span><span class="ch">'</span><span class="sc">\t</span><span class="ch">'</span><span class="op">]</span> <span class="op">=</span> <span class="dv">1</span><span class="op">,</span> <span class="op">[</span><span class="ch">'</span><span class="sc">\n</span><span class="ch">'</span><span class="op">]</span> <span class="op">=</span> <span class="dv">1</span> <span class="op">};</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>isWhitespace<span class="op">[</span><span class="ch">'a'</span><span class="op">];</span>  <span class="co">//&gt; 0</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>isWhitespace<span class="op">[</span><span class="ch">' '</span><span class="op">];</span>  <span class="co">//&gt; 1</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>isWhitespace<span class="op">[</span><span class="ch">'</span><span class="sc">\t</span><span class="ch">'</span><span class="op">];</span> <span class="co">//&gt; 1</span></span></code></pre></div>
 <h2 id="whats-in-it-for-you-motivation-for-caring-about-the-presentation">“What’s In It For You” / Motivation For Caring About the Presentation</h2>
 <p>Something like ‘Example of a cool Programming-Language Application project you
 can make, once you have knowledge of how to make a parser &amp; roughly you could
@@ -298,16 +298,16 @@ i.e. insert statements into the C program so that I can run the program to get
 the output.</p>
 <p><img src="http://i.imgur.com/P3KHZzK.png" /></p>
 <p>Roughly like:</p>
-<pre class="c"><code>int main() {
-  int x;
-  x = 3;
-}</code></pre>
+<div class="sourceCode" id="cb2"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span> x<span class="op">;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  x <span class="op">=</span> <span class="dv">3</span><span class="op">;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>becomes</p>
-<pre class="c"><code>int main() {
-  int x;
-  x = 3;
-  OUTPUT(x, STRING_OF(3))
-}</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span> x<span class="op">;</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  x <span class="op">=</span> <span class="dv">3</span><span class="op">;</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  OUTPUT<span class="op">(</span>x<span class="op">,</span> STRING_OF<span class="op">(</span><span class="dv">3</span><span class="op">))</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>and as-if compiled with a pre-processor which handles <code>OUTPUT</code>, <code>STRING_OF</code>.
 <code>OUTPUT</code> outputs in a format my Scala program intercepts. (I just use <code>STDOUT</code>;
 it could also be done using, say, sockets, or using something like Apache
@@ -351,12 +351,12 @@ congratulations. (If not, you probably haven’t heard of ADTs.).</p>
            | Struct    of String * String * ((String, CType) List)
            | Function  of String * CType * ((String, CType) List)</code></pre>
 <p>In Scala, the code (simplified) is something like:</p>
-<pre class="scala"><code>sealed trait CType;
-case class PrimitiveType(id: String, type: String) extends CType;
-case class PointerType(id: String, to: CType) extends CType;
-case class ArrayType(id: String, of: CType) extends CType;
-case class StructType(id: String, tag: String, members: List[(String, CType)]) extends CType;
-case class FunctionType(id: String, rtnType: CType, params: List[(String, CType)]) extends CType;</code></pre>
+<div class="sourceCode" id="cb6"><pre class="sourceCode scala"><code class="sourceCode scala"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">sealed</span> <span class="kw">trait</span> CType<span class="op">;</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="cf">case</span> <span class="kw">class</span> <span class="ex">PrimitiveType</span><span class="op">(</span>id<span class="op">:</span> <span class="ex">String</span><span class="op">,</span> <span class="kw">type</span><span class="op">:</span> <span class="ex">String</span><span class="op">)</span> <span class="kw">extends</span> CType<span class="op">;</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="cf">case</span> <span class="kw">class</span> <span class="fu">PointerType</span><span class="op">(</span>id<span class="op">:</span> <span class="ex">String</span><span class="op">,</span> to<span class="op">:</span> CType<span class="op">)</span> <span class="kw">extends</span> CType<span class="op">;</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="cf">case</span> <span class="kw">class</span> <span class="ex">ArrayType</span><span class="op">(</span>id<span class="op">:</span> <span class="ex">String</span><span class="op">,</span> of<span class="op">:</span> CType<span class="op">)</span> <span class="kw">extends</span> CType<span class="op">;</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="cf">case</span> <span class="kw">class</span> <span class="fu">StructType</span><span class="op">(</span>id<span class="op">:</span> <span class="ex">String</span><span class="op">,</span> tag<span class="op">:</span> <span class="ex">String</span><span class="op">,</span> members<span class="op">:</span> <span class="ex">List</span><span class="op">[(</span><span class="ex">String</span><span class="op">,</span> CType<span class="op">)])</span> <span class="kw">extends</span> CType<span class="op">;</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="cf">case</span> <span class="kw">class</span> <span class="fu">FunctionType</span><span class="op">(</span>id<span class="op">:</span> <span class="ex">String</span><span class="op">,</span> rtnType<span class="op">:</span> CType<span class="op">,</span> params<span class="op">:</span> <span class="ex">List</span><span class="op">[(</span><span class="ex">String</span><span class="op">,</span> CType<span class="op">)])</span> <span class="kw">extends</span> CType<span class="op">;</span></span></code></pre></div>
 <p>(See <a href="https://github.com/rgoulter/c-worksheet-instrumentor/blob/master/src/main/scala/edu/nus/worksheet/instrumentor/CType.scala">CType.scala</a>).</p>
 <p>In Java … ha ha ha, just kidding. (Just because you <em>can</em>, doesn’t mean you
 <em>should</em>.).</p>
@@ -421,9 +421,9 @@ tokens).</p>
 <h2 id="cool-stuff-segfault-handling">Cool stuff: Segfault Handling</h2>
 <p>That’s all ‘nice’, but something I’m quite proud of (&amp; in terms of ‘useful for
 a C beginner’) is it catches <code>SEGFAULT</code>s, and marks the output there:</p>
-<pre class="c"><code>  int *px;     //&gt; px is pointer to int
-  px = 0;      //&gt; px = (nil)
-  *px = 5;     //&gt; SEGFAULT</code></pre>
+<div class="sourceCode" id="cb7"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span> <span class="op">*</span>px<span class="op">;</span>     <span class="co">//&gt; px is pointer to int</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  px <span class="op">=</span> <span class="dv">0</span><span class="op">;</span>      <span class="co">//&gt; px = (nil)</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="op">*</span>px <span class="op">=</span> <span class="dv">5</span><span class="op">;</span>     <span class="co">//&gt; SEGFAULT</span></span></code></pre></div>
 <p>‘How’ involves a bit of knowledge about C99:</p>
 <ul>
 <li><p><code>setjmp</code>/<code>longjmp</code> are kinda like a <code>GOTO</code> statement, can be used to simulate
@@ -531,19 +531,6 @@ would be needed),</li>
 
 <hr />
 
-<!-- Load highlight.js for Syntax Highlighting. -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/bash.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/c.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/gherkin.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/haskell.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/lisp.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/nix.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/python.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js"></script>
-<script>hljs.highlightAll();</script>
-
             </div>
 
             <hr style="margin-bottom: 0px; border-top: 2px solid black;" />
@@ -635,7 +622,7 @@ would be needed),</li>
                     hitType:       'event',
                     eventCategory: 'pageLoad',
                     eventAction:   'begun',
-                    eventValue:    String(ms)
+                    eventValue:    String(0)
                 });
 
                 // DIMENSION: visitor

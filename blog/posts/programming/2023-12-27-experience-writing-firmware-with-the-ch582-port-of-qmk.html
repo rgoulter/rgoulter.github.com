@@ -194,10 +194,10 @@ Perhaps it could, but it doesn’t at the time of writing.</p>
 <p>The <code>keymap.c</code> just includes the <code>keymap.c</code> from the community layout:</p>
 <pre><code>#include &quot;layouts/community/ortho_5x12/rgoulter/keymap.c&quot;</code></pre>
 <p>The <code>qmk_config.h</code> includes the <code>config.h</code> from the community layout dir, and the user dir:</p>
-<pre><code>#pragma once
-
-#include &quot;users/rgoulter/config.h&quot;
-#include &quot;layouts/community/ortho_5x12/rgoulter/config.h&quot;</code></pre>
+<div class="sourceCode" id="cb2"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#pragma once</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;users/rgoulter/config.h&quot;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&quot;layouts/community/ortho_5x12/rgoulter/config.h&quot;</span></span></code></pre></div>
 <p>and the <code>rules.cmake</code> ports the <code>rules.mk</code> functionality over:</p>
 <pre><code>set(COMBO_ENABLE ON CACHE BOOL &quot;KB&quot; FORCE)
 set(LEADER_ENABLE ON CACHE BOOL &quot;KB&quot; FORCE)
@@ -226,19 +226,6 @@ I wish it implemented support for QMK’s community layouts, or for QMK’s data
 <br style="clear: both;" />
 
 <hr />
-
-<!-- Load highlight.js for Syntax Highlighting. -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/bash.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/c.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/gherkin.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/haskell.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/lisp.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/nix.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/python.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js"></script>
-<script>hljs.highlightAll();</script>
 
             </div>
 
@@ -331,7 +318,7 @@ I wish it implemented support for QMK’s community layouts, or for QMK’s data
                     hitType:       'event',
                     eventCategory: 'pageLoad',
                     eventAction:   'begun',
-                    eventValue:    String(ms)
+                    eventValue:    String(0)
                 });
 
                 // DIMENSION: visitor

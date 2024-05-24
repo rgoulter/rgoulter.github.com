@@ -146,7 +146,7 @@ grabbed it from said it was from
 tiimgreen’s
 <a href="https://github.com/tiimgreen/github-cheat-sheet#styled-git-log">github-cheat-sheet</a>.
 In any case, The Git one is like:</p>
-<pre class="bash"><code>alias gl=&quot;git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)&lt;%an&gt;%Creset' --abbrev-commit&quot;</code></pre>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">alias</span> gl=<span class="st">&quot;git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)&lt;%an&gt;%Creset' --abbrev-commit&quot;</span></span></code></pre></div>
 <p>Consulting <a href="http://git-scm.com/docs/pretty-formats">the docs</a>, (who does that,
 right?), it’s not insane to figure out what this is doing:</p>
 <ul>
@@ -163,7 +163,7 @@ Sources:</p>
 <li><p><a href="http://stackoverflow.com/questions/3575189/mercurial-log-with-one-liners">S/O: “Mercurial Log with One-Liners”</a>
 Because one-liner logs themselves can be useful.<br />
 This one has:</p>
-<pre class="bash"><code>alias hl=&quot;hg log --template '{node|short} | {date|isodatesec} | {author|user}: {desc|strip|firstline}\n'&quot;</code></pre></li>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="bu">alias</span> hl=<span class="st">&quot;hg log --template '{node|short} | {date|isodatesec} | {author|user}: {desc|strip|firstline}\n'&quot;</span></span></code></pre></div></li>
 <li><p><a href="hgbook.red-bean.com/read/customizing-the-output-of-mercurial.html">HG Book: Customizing Output</a></p></li>
 <li><p><a href="https://www.selenic.com/hg/help/templates">HG Help / Manpages</a></p></li>
 </ul>
@@ -184,15 +184,15 @@ So, note that when building the template, this is the stuff to put within the
 <li><code>author|person</code> - Richard from Richard <a href="mailto:richard.goulter@gmail.com" class="email">richard.goulter@gmail.com</a></li>
 </ul>
 <p>So, my <code>.hgrc</code> has:</p>
-<pre class="ini"><code>[color]
-custom.rev = red
-custom.decorate = yellow
-custom.date = green
-custom.author = blue bold</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode ini"><code class="sourceCode ini"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">[color]</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="dt">custom.rev </span><span class="ot">=</span><span class="st"> red</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="dt">custom.decorate </span><span class="ot">=</span><span class="st"> yellow</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="dt">custom.date </span><span class="ot">=</span><span class="st"> green</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="dt">custom.author </span><span class="ot">=</span><span class="st"> blue bold</span></span></code></pre></div>
 <p>With the hg alias: <code>alias hl="hg log --style ~/.hgrc.d/fancy.style"</code>. (Or do
 this from your shell, whatever).</p>
 <p>And, finally, <code>~/.hgrc.d/fancy.style</code> is:</p>
-<pre class="ini"><code>changeset = &quot;* {label('custom.rev', node|short)} - ({label('custom.decorate', branch)}) {desc|strip|firstline} ({label('custom.date', date|age)}) &lt;{label('custom.author' , author)}&gt;\n&quot;</code></pre>
+<div class="sourceCode" id="cb4"><pre class="sourceCode ini"><code class="sourceCode ini"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="dt">changeset </span><span class="ot">=</span><span class="st"> &quot;* {label('custom.rev', node|short)} - ({label('custom.decorate', branch)}) {desc|strip|firstline} ({label('custom.date', date|age)}) &lt;{label('custom.author' , author)}&gt;\n&quot;</span></span></code></pre></div>
 <p>Screenshot:<br />
 <img src="http://i.imgur.com/OWImYAS.png" /></p>
 <p>(The repo is old, because I don’t use HG so much, okay?).</p>
@@ -210,19 +210,6 @@ this from your shell, whatever).</p>
 <br style="clear: both;" />
 
 <hr />
-
-<!-- Load highlight.js for Syntax Highlighting. -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/bash.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/c.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/gherkin.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/haskell.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/lisp.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/nix.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/python.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js"></script>
-<script>hljs.highlightAll();</script>
 
             </div>
 
@@ -315,7 +302,7 @@ this from your shell, whatever).</p>
                     hitType:       'event',
                     eventCategory: 'pageLoad',
                     eventAction:   'begun',
-                    eventValue:    String(ms)
+                    eventValue:    String(0)
                 });
 
                 // DIMENSION: visitor

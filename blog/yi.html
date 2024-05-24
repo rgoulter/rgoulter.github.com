@@ -237,22 +237,22 @@ The changelist (<code>g;</code>, <code>g,</code>) also doesn’t appear to be im
 <li><p><em>How to write in some extra function and bind it with a keymap?</em></p>
 <p>The sample user configs have an example of this. e.g.
 <a href="https://github.com/yi-editor/yi/blob/master/yi-contrib/src/Yi/Config/Users/Amy.hs">yi-contrib’s Amy.hs</a>,</p>
-<pre class="haskell"><code>myConfig = defaultCuaConfig {
-    -- Keymap Configuration
-    defaultKm = extendedCuaKeymapSet,
-    ....
-}
-
--- Add M-x (which is probably Alt-x on your system) to the default
--- keyset, and have it launch our custom macro.
-extendedCuaKeymapSet = customizedCuaKeymapSet $
-    choice [
-        metaCh 'x' ?&gt;&gt;! helloWorld
-    ]
-
--- A custom macro
-helloWorld :: YiM ()
-helloWorld = withBuffer $ insertN &quot;Hello, world!&quot;</code></pre>
+<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>myConfig <span class="ot">=</span> defaultCuaConfig {</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- Keymap Configuration</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    defaultKm <span class="ot">=</span> extendedCuaKeymapSet,</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">....</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">-- Add M-x (which is probably Alt-x on your system) to the default</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">-- keyset, and have it launch our custom macro.</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>extendedCuaKeymapSet <span class="ot">=</span> customizedCuaKeymapSet <span class="op">$</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    choice [</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>        metaCh <span class="ch">'x'</span> <span class="op">?&gt;&gt;!</span> helloWorld</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    ]</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co">-- A custom macro</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="ot">helloWorld ::</span> <span class="dt">YiM</span> ()</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>helloWorld <span class="ot">=</span> withBuffer <span class="op">$</span> insertN <span class="st">&quot;Hello, world!&quot;</span></span></code></pre></div>
 <p>Unfortunately, this is specifically for the CUA bindings. (Emacs, Vim don’t
 get the equivalent of <code>customizedCuaKeymapSet</code>).<br />
 Fortunately, there are multiple ways to customize bindings for Vim. See
@@ -274,8 +274,8 @@ mentions <code>$HOME/.config/yi/local/Env.hs</code>. Trying to put my
 (as of 2014-07-08).</p>
 <p>If you really want to have an Ex command <code>:helloWorld</code>, then you need to
 implement an Ex command parser, and your code would look like:</p>
-<pre class="haskell"><code>        defaultKM = mkKeymapSet $ defVimConfig `override` \ super self -&gt; super
-            { vimExCommandParsers = myExCmdParsers ++ vimExCommandParsers super }</code></pre>
+<div class="sourceCode" id="cb2"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>        defaultKM <span class="ot">=</span> mkKeymapSet <span class="op">$</span> defVimConfig <span class="ot">`override`</span> \ super self <span class="ot">-&gt;</span> super</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>            { vimExCommandParsers <span class="ot">=</span> myExCmdParsers <span class="op">++</span> vimExCommandParsers super }</span></code></pre></div>
 <p>where <code>myExCmdParsers</code> is of type <code>[String -&gt; Maybe ExCommand]</code>, something
 like <code>[helloWorldEC.parser, ...]</code>. While none of the samples have a custom
 Ex command,
@@ -315,7 +315,7 @@ to have a cabal package like <code>yi-config-rgoulter</code>; if this acts as th
 installing this package. (Well, and adding the sources for the other
 dependencies, but a package typically updates more often than it’s moved).</p>
 <p>At the extreme, you could have a one-liner <code>yi.hs</code> like:</p>
-<pre class="haskell"><code>    import Yi.Config.Rgoulter</code></pre>
+<div class="sourceCode" id="cb5"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>    <span class="kw">import</span> <span class="dt">Yi.Config.Rgoulter</span></span></code></pre></div>
 <p>because of how Haskell’s packages work; the disadvantage of <em>that</em> is the
 need to constantly <code>cabal build</code> as it updates, in contrast
 to just having Yi recompile a modified <code>yi.hs</code>.</p>
@@ -392,20 +392,6 @@ Creative Commons Attribution 4.0 International License
   border-left: 2px solid #563d7c;
 }
 </style>
-
-<!-- Load highlight.js for Syntax Highlighting. -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/bash.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/c.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/gherkin.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/haskell.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/lisp.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/nix.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/python.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js"></script>
-<script>hljs.highlightAll();</script>
-
 
             </div>
 
@@ -498,7 +484,7 @@ Creative Commons Attribution 4.0 International License
                     hitType:       'event',
                     eventCategory: 'pageLoad',
                     eventAction:   'begun',
-                    eventValue:    String(ms)
+                    eventValue:    String(0)
                 });
 
                 // DIMENSION: visitor

@@ -159,26 +159,26 @@ solution</a> isn’t
 this means building opencascade, but with cmake flags: <code>-D USE_RAPIDJSON:BOOL="ON"</code>.</p>
 <p>It turns out Nixpkgs allows for doing this in a concise way:</p>
 <p>e.g. with a file <code>freecad.nix</code>:</p>
-<pre class="nix"><code># By convention: this file declares function
-# which takes in a set of arguments;
-# 'pkgs' has a default value of 'import &lt;nixpkgs&gt; {}'
-{ pkgs ? import &lt;nixpkgs&gt; {} }:
-
-let
-  # declare a package opencascade-occt, but with rapidjson support
-  opencascade-occt-with-rapidjson =
-    pkgs.opencascade-occt.overrideAttrs(oldAttrs: {
-      # opencascade-occt depends on rapidjson if built with USE_RAPIDJSON
-      nativeBuildInputs = oldAttrs.nativeBuildInputs ++ [ pkgs.rapidjson ];
-      # and change which extra cmakeFlags are passed to the configuration.
-      cmakeFlags = ''-D USE_RAPIDJSON:bool=&quot;ON&quot;'';
-    });
-in
-# The result of the function is the freecad package,
-# but using the opencascade package we declared above.
-pkgs.freecad.override {
-  opencascade-occt = opencascade-occt-with-rapidjson;
-}</code></pre>
+<div class="sourceCode" id="cb1"><pre class="sourceCode nix"><code class="sourceCode nix"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># By convention: this file declares function</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># which takes in a set of arguments;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 'pkgs' has a default value of 'import &lt;nixpkgs&gt; {}'</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="op">{</span> <span class="va">pkgs</span> <span class="op">?</span> <span class="bu">import</span> &lt;nixpkgs&gt; <span class="op">{}</span> <span class="op">}</span>:</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># declare a package opencascade-occt, but with rapidjson support</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="va">opencascade-occt-with-rapidjson</span> <span class="op">=</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    pkgs.opencascade<span class="op">-</span>occt.overrideAttrs<span class="op">(</span><span class="va">oldAttrs</span><span class="op">:</span> <span class="op">{</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>      <span class="co"># opencascade-occt depends on rapidjson if built with USE_RAPIDJSON</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>      <span class="va">nativeBuildInputs</span> <span class="op">=</span> oldAttrs.nativeBuildInputs <span class="op">++</span> <span class="op">[</span> pkgs.rapidjson <span class="op">];</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>      <span class="co"># and change which extra cmakeFlags are passed to the configuration.</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>      <span class="va">cmakeFlags</span> <span class="op">=</span> <span class="st">''-D USE_RAPIDJSON:bool=&quot;ON&quot;''</span><span class="op">;</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    <span class="op">});</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="kw">in</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co"># The result of the function is the freecad package,</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co"># but using the opencascade package we declared above.</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>pkgs.freecad.override <span class="op">{</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>  <span class="va">opencascade-occt</span> <span class="op">=</span> opencascade<span class="op">-</span>occt<span class="op">-</span><span class="kw">with</span><span class="op">-</span>rapidjson<span class="op">;</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="er">}</span></span></code></pre></div>
 <p>The syntax may look esoteric, but it’s hardly more intimidating
 than the fancy parts of ECMAScript syntax.</p>
 <p>The code declares a function for building a package for freecad.
@@ -204,16 +204,16 @@ e.g. running <code>nix-build freecad.nix</code> then running the <code>./result
 which results.. or using the footgun that is <code>nix-env --install</code> and running
 <code>nix-env --install --file freecad.nix</code>, among others.</p>
 <p>The code is more concise without the comments; or without the <code>let</code>:</p>
-<pre class="nix"><code>{ pkgs ? import &lt;nixpkgs&gt; {} }:
-
-with pkgs;
-freecad.override {
-  opencascade-occt =
-    opencascade-occt.overrideAttrs(oldAttrs: {
-      nativeBuildInputs = oldAttrs.nativeBuildInputs ++ [ rapidjson ];
-      cmakeFlags = ''-D USE_RAPIDJSON:bool=&quot;ON&quot;'';
-    });
-}</code></pre>
+<div class="sourceCode" id="cb2"><pre class="sourceCode nix"><code class="sourceCode nix"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="op">{</span> <span class="va">pkgs</span> <span class="op">?</span> <span class="bu">import</span> &lt;nixpkgs&gt; <span class="op">{}</span> <span class="op">}</span>:</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="kw">with</span> pkgs<span class="op">;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>freecad.override <span class="op">{</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="va">opencascade-occt</span> <span class="op">=</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    opencascade<span class="op">-</span>occt.overrideAttrs<span class="op">(</span><span class="va">oldAttrs</span><span class="op">:</span> <span class="op">{</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>      <span class="va">nativeBuildInputs</span> <span class="op">=</span> oldAttrs.nativeBuildInputs <span class="op">++</span> <span class="op">[</span> rapidjson <span class="op">];</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>      <span class="va">cmakeFlags</span> <span class="op">=</span> <span class="st">''-D USE_RAPIDJSON:bool=&quot;ON&quot;''</span><span class="op">;</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="op">});</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>That said, I don’t know whether anyone would write code like that
 without having written similar code previously.</p>
 <p>I arrived at the above code through refactoring. The naive approach is to
@@ -249,19 +249,6 @@ I’ll have to try that at some point.</p>
 <br style="clear: both;" />
 
 <hr />
-
-<!-- Load highlight.js for Syntax Highlighting. -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/bash.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/c.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/gherkin.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/haskell.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/lisp.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/nix.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/python.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js"></script>
-<script>hljs.highlightAll();</script>
 
             </div>
 
@@ -354,7 +341,7 @@ I’ll have to try that at some point.</p>
                     hitType:       'event',
                     eventCategory: 'pageLoad',
                     eventAction:   'begun',
-                    eventValue:    String(ms)
+                    eventValue:    String(0)
                 });
 
                 // DIMENSION: visitor

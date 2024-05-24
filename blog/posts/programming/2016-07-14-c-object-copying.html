@@ -157,45 +157,45 @@ earlier</a>.
 (The gist program contains a good output listing for the snippets below).</p>
 <h2 id="a-custom-object">A Custom Object</h2>
 <p>Consider a custom object <code>MyObj</code>:</p>
-<pre class="cpp"><code>class MyObj {
- public:
-     MyObj(int x) {
-         cout &lt;&lt; &quot;    CONS MyObj(&quot; &lt;&lt; x &lt;&lt; &quot;)&quot; &lt;&lt; endl;
-         x_ = x;
-     }
-
-     ~MyObj() {
-         cout &lt;&lt; &quot;    DEST MyObj(&quot; &lt;&lt; x_ &lt;&lt; &quot;)&quot; &lt;&lt; endl;
-     }
-
-     MyObj(const MyObj&amp; other) {
-         x_ = other.x();
-         cout &lt;&lt; &quot;    CPY  Copying from &quot; &lt;&lt; x_&lt;&lt; endl;
-     }
-
-     MyObj&amp; operator=(const MyObj&amp; rhs) {
-         cout &lt;&lt; &quot;    ASSG Assigning from &quot; &lt;&lt; rhs.x() &lt;&lt; &quot; to &quot; &lt;&lt; x_ &lt;&lt; endl;
-         if (this == &amp;rhs) return *this;
-
-         x_ = rhs.x();
-
-         return *this;
-     }
-
-     void setX(int x) { x_ = x; }
-
-     int x() const { return x_; }
-
- private:
-    int x_;
-};</code></pre>
+<div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MyObj <span class="op">{</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a> <span class="kw">public</span><span class="op">:</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>     MyObj<span class="op">(</span><span class="dt">int</span> x<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>         cout <span class="op">&lt;&lt;</span> <span class="st">&quot;    CONS MyObj(&quot;</span> <span class="op">&lt;&lt;</span> x <span class="op">&lt;&lt;</span> <span class="st">&quot;)&quot;</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>         <span class="va">x_</span> <span class="op">=</span> x<span class="op">;</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>     <span class="op">}</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>     <span class="op">~</span>MyObj<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>         cout <span class="op">&lt;&lt;</span> <span class="st">&quot;    DEST MyObj(&quot;</span> <span class="op">&lt;&lt;</span> <span class="va">x_</span> <span class="op">&lt;&lt;</span> <span class="st">&quot;)&quot;</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>     <span class="op">}</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>     MyObj<span class="op">(</span><span class="at">const</span> MyObj<span class="op">&amp;</span> other<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>         <span class="va">x_</span> <span class="op">=</span> other<span class="op">.</span>x<span class="op">();</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>         cout <span class="op">&lt;&lt;</span> <span class="st">&quot;    CPY  Copying from &quot;</span> <span class="op">&lt;&lt;</span> <span class="va">x_</span><span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>     <span class="op">}</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>     MyObj<span class="op">&amp;</span> <span class="kw">operator</span><span class="op">=(</span><span class="at">const</span> MyObj<span class="op">&amp;</span> rhs<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>         cout <span class="op">&lt;&lt;</span> <span class="st">&quot;    ASSG Assigning from &quot;</span> <span class="op">&lt;&lt;</span> rhs<span class="op">.</span>x<span class="op">()</span> <span class="op">&lt;&lt;</span> <span class="st">&quot; to &quot;</span> <span class="op">&lt;&lt;</span> <span class="va">x_</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>         <span class="cf">if</span> <span class="op">(</span><span class="kw">this</span> <span class="op">==</span> <span class="op">&amp;</span>rhs<span class="op">)</span> <span class="cf">return</span> <span class="op">*</span><span class="kw">this</span><span class="op">;</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>         <span class="va">x_</span> <span class="op">=</span> rhs<span class="op">.</span>x<span class="op">();</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>         <span class="cf">return</span> <span class="op">*</span><span class="kw">this</span><span class="op">;</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>     <span class="op">}</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>     <span class="dt">void</span> setX<span class="op">(</span><span class="dt">int</span> x<span class="op">)</span> <span class="op">{</span> <span class="va">x_</span> <span class="op">=</span> x<span class="op">;</span> <span class="op">}</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>     <span class="dt">int</span> x<span class="op">()</span> <span class="at">const</span> <span class="op">{</span> <span class="cf">return</span> <span class="va">x_</span><span class="op">;</span> <span class="op">}</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a> <span class="kw">private</span><span class="op">:</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> <span class="va">x_</span><span class="op">;</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div>
 <p><code>MyObj</code> is a straightforward class; we provide a constructor, destructor,
 copy-constructor and assignment operator which each output when they’re called.</p>
 <h2 id="in-initialisation">In Initialisation</h2>
-<pre class="cpp"><code>  MyObj x0 = MyObj(10);  // A1
-  MyObj x1(5);           // A2
-  MyObj x2(x1);          // A3
-  MyObj x3 = x1;         // A4</code></pre>
+<div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>  MyObj x0 <span class="op">=</span> MyObj<span class="op">(</span><span class="dv">10</span><span class="op">);</span>  <span class="co">// A1</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  MyObj x1<span class="op">(</span><span class="dv">5</span><span class="op">);</span>           <span class="co">// A2</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  MyObj x2<span class="op">(</span>x1<span class="op">);</span>          <span class="co">// A3</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  MyObj x3 <span class="op">=</span> x1<span class="op">;</span>         <span class="co">// A4</span></span></code></pre></div>
 <ul>
 <li><p><code>A1</code> Only calls the constructor; not the copy-constructor or assignment
 operator.</p></li>
@@ -204,7 +204,7 @@ operator.</p></li>
 <li><p><code>A4</code> is also a call to the copy-constructor. (i.e. same as (<code>A3</code>)).</p></li>
 </ul>
 <h2 id="in-assignment">In Assignment</h2>
-<pre class="cpp"><code>  x2 = x3;  // B1</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>  x2 <span class="op">=</span> x3<span class="op">;</span>  <span class="co">// B1</span></span></code></pre></div>
 <ul>
 <li><code>B1</code> is a call to the assignment operator.<br />
 The copy-constructor isn’t invoked in the assignment operator (in this
@@ -212,23 +212,23 @@ example).</li>
 </ul>
 <h2 id="in-function-calls">In Function Calls</h2>
 <p>Consider functions:</p>
-<pre class="cpp"><code>void outp(MyObj o) {
-    cout &lt;&lt; &quot;   Output MyObj(&quot; &lt;&lt; o.x() &lt;&lt; &quot;)&quot; &lt;&lt; endl;
-}
-
-void outpC(const MyObj&amp; o) {
-    cout &lt;&lt; &quot;   Output MyObj(&quot; &lt;&lt; o.x() &lt;&lt; &quot;)&quot; &lt;&lt; endl;
-}</code></pre>
+<div class="sourceCode" id="cb4"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> outp<span class="op">(</span>MyObj o<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    cout <span class="op">&lt;&lt;</span> <span class="st">&quot;   Output MyObj(&quot;</span> <span class="op">&lt;&lt;</span> o<span class="op">.</span>x<span class="op">()</span> <span class="op">&lt;&lt;</span> <span class="st">&quot;)&quot;</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> outpC<span class="op">(</span><span class="at">const</span> MyObj<span class="op">&amp;</span> o<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    cout <span class="op">&lt;&lt;</span> <span class="st">&quot;   Output MyObj(&quot;</span> <span class="op">&lt;&lt;</span> o<span class="op">.</span>x<span class="op">()</span> <span class="op">&lt;&lt;</span> <span class="st">&quot;)&quot;</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>and the snippet:</p>
-<pre class="cpp"><code>  outp(x1);   // C1
-  outpC(x1);  // C2</code></pre>
+<div class="sourceCode" id="cb5"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>  outp<span class="op">(</span>x1<span class="op">);</span>   <span class="co">// C1</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  outpC<span class="op">(</span>x1<span class="op">);</span>  <span class="co">// C2</span></span></code></pre></div>
 <ul>
 <li><p><code>C1</code>, a call to <code>outp</code> invokes a copy.</p></li>
 <li><p><code>C2</code>, where <code>outpC</code> takes a constant-reference, does not invoke a copy.</p></li>
 </ul>
 <h2 id="assigning-to-references">Assigning to References</h2>
-<pre class="cpp"><code>  const MyObj&amp; crx0 = x0;  // D1
-  MyObj&amp; rx0 = x0;         // D2</code></pre>
+<div class="sourceCode" id="cb6"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>  <span class="at">const</span> MyObj<span class="op">&amp;</span> crx0 <span class="op">=</span> x0<span class="op">;</span>  <span class="co">// D1</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  MyObj<span class="op">&amp;</span> rx0 <span class="op">=</span> x0<span class="op">;</span>         <span class="co">// D2</span></span></code></pre></div>
 <ul>
 <li><p><code>D1</code> doesn’t invoke a copy.</p></li>
 <li><p><code>D2</code> doesn’t invoke a copy.</p></li>
@@ -236,14 +236,14 @@ void outpC(const MyObj&amp; o) {
 <p>Assigning to references doesn’t invoke copies.</p>
 <h2 id="results-of-functions">Results of Functions</h2>
 <p>Consider the function:</p>
-<pre class="cpp"><code>MyObj f1() {
-    cout &lt;&lt; &quot;  f1():&quot; &lt;&lt; endl;
-    return MyObj(7);
-}</code></pre>
+<div class="sourceCode" id="cb7"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>MyObj f1<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    cout <span class="op">&lt;&lt;</span> <span class="st">&quot;  f1():&quot;</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> MyObj<span class="op">(</span><span class="dv">7</span><span class="op">);</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>and the snippet:</p>
-<pre class="cpp"><code>  MyObj x4 = f1();          // E1
-  const MyObj&amp; crx4 = f1(); // E2
-  MyObj&amp; xr4 = f1();        // E3</code></pre>
+<div class="sourceCode" id="cb8"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>  MyObj x4 <span class="op">=</span> f1<span class="op">();</span>          <span class="co">// E1</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">const</span> MyObj<span class="op">&amp;</span> crx4 <span class="op">=</span> f1<span class="op">();</span> <span class="co">// E2</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  MyObj<span class="op">&amp;</span> xr4 <span class="op">=</span> f1<span class="op">();</span>        <span class="co">// E3</span></span></code></pre></div>
 <p>both CONS no cpy, except 3 which doesn’t compile</p>
 <ul>
 <li><p><code>E1</code> doesn’t invoke a copy.</p>
@@ -260,11 +260,11 @@ semantics’.</li>
 </ul></li>
 </ul>
 <h2 id="pointer-dereferencing">Pointer Dereferencing</h2>
-<pre class="cpp"><code>  MyObj* ptr = new MyObj(13);  // F1
-  MyObj deref = *ptr;          // F2
-  MyObj&amp; derefRef = *ptr;      // F3
-  const MyObj&amp; constDeref = *ptr;  // F4
-  delete ptr;                  // F5</code></pre>
+<div class="sourceCode" id="cb9"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>  MyObj<span class="op">*</span> ptr <span class="op">=</span> <span class="kw">new</span> MyObj<span class="op">(</span><span class="dv">13</span><span class="op">);</span>  <span class="co">// F1</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  MyObj deref <span class="op">=</span> <span class="op">*</span>ptr<span class="op">;</span>          <span class="co">// F2</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  MyObj<span class="op">&amp;</span> derefRef <span class="op">=</span> <span class="op">*</span>ptr<span class="op">;</span>      <span class="co">// F3</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">const</span> MyObj<span class="op">&amp;</span> constDeref <span class="op">=</span> <span class="op">*</span>ptr<span class="op">;</span>  <span class="co">// F4</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">delete</span> ptr<span class="op">;</span>                  <span class="co">// F5</span></span></code></pre></div>
 <ul>
 <li><p><code>F1</code> is a call to the constructor, (and <code>F5</code> to the destructor).</p></li>
 <li><p><code>F2</code> <em>invokes the copy constructor</em>.</p></li>
@@ -290,19 +290,6 @@ that.</li>
 <br style="clear: both;" />
 
 <hr />
-
-<!-- Load highlight.js for Syntax Highlighting. -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/bash.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/c.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/gherkin.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/haskell.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/lisp.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/nix.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/python.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js"></script>
-<script>hljs.highlightAll();</script>
 
             </div>
 
@@ -395,7 +382,7 @@ that.</li>
                     hitType:       'event',
                     eventCategory: 'pageLoad',
                     eventAction:   'begun',
-                    eventValue:    String(ms)
+                    eventValue:    String(0)
                 });
 
                 // DIMENSION: visitor

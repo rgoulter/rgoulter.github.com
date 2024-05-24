@@ -196,8 +196,8 @@ On the other hand, I think it smells a bit too much to ‘declare’ the existan
 <h2 id="creating-temporary-urls-with-command-line-client">Creating Temporary URLs: with Command Line Client</h2>
 <p>The <a href="https://docs.openstack.org/swift/latest/api/temporary_url_middleware.html">documentation about temporary url middleware</a> gives instructions on using the OpenStack Swift client to create a temporary URL.</p>
 <p>There are various ways to come up with the OpenStack Storage URL (<code>https://swift-cluster.example.com/v1/my_account/</code>), but here’s what I came up with for the container, object, and temp URL key above:</p>
-<pre class="sh"><code>OS_STORAGE_URL=$(openstack catalog show object-store --format=json | jq -r .endpoints[2].url)
-swift tempurl --digest=sha1 GET 900 ${OS_STORAGE_URL}/rgoulter-storage/test some-secret-value</code></pre>
+<div class="sourceCode" id="cb5"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="va">OS_STORAGE_URL</span><span class="op">=</span><span class="va">$(</span><span class="ex">openstack</span> catalog show object-store <span class="at">--format</span><span class="op">=</span>json <span class="kw">|</span> <span class="ex">jq</span> <span class="at">-r</span> .endpoints<span class="pp">[</span><span class="ss">2</span><span class="pp">]</span>.url<span class="va">)</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ex">swift</span> tempurl <span class="at">--digest</span><span class="op">=</span>sha1 GET 900 <span class="va">${OS_STORAGE_URL}</span>/rgoulter-storage/test some-secret-value</span></code></pre></div>
 <p>The <code>jq</code> expression isn’t the cleanest. (The <code>[2]</code> is the index the “public” object-store endpoint happened to be in the output of <code>openstack catalog show object-store</code>; albeit, all the endpoints had the same URL).</p>
 <p>The URL from <code>swift tempurl</code> can be used for GET requests to access the storage.</p>
 
@@ -214,19 +214,6 @@ swift tempurl --digest=sha1 GET 900 ${OS_STORAGE_URL}/rgoulter-storage/test some
 <br style="clear: both;" />
 
 <hr />
-
-<!-- Load highlight.js for Syntax Highlighting. -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/bash.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/c.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/gherkin.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/haskell.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/lisp.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/nix.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/python.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js"></script>
-<script>hljs.highlightAll();</script>
 
             </div>
 
@@ -319,7 +306,7 @@ swift tempurl --digest=sha1 GET 900 ${OS_STORAGE_URL}/rgoulter-storage/test some
                     hitType:       'event',
                     eventCategory: 'pageLoad',
                     eventAction:   'begun',
-                    eventValue:    String(ms)
+                    eventValue:    String(0)
                 });
 
                 // DIMENSION: visitor

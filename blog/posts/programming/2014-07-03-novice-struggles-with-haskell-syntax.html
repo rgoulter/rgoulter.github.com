@@ -152,46 +152,46 @@ But the trouble I ran into due to lack of experience, or understanding, of
 some (fundamental) Haskell concepts.</p>
 <p>Ugh.</p>
 <p>In this excerpt, <code>postContext</code> is out of scope:</p>
-<pre class="haskell"><code>    match postsGlob $ do
-        route $ setExtension &quot;html&quot;
-        compile $ do 
-            -- Cyclic dependencies here here:
-            identifiers &lt;- getMatches postsGlob
-            urls &lt;- urlsOfPosts =&lt;&lt; recentFirst =&lt;&lt; return [Item identifier &quot;&quot; | identifier &lt;- identifiers]
-
-            let postContext =
-                    field &quot;nextPost&quot; (nextPostUrl urls) `mappend`
-                    postCtxWithTags tags
-
-            pandocCompiler
-            &gt;&gt;= saveSnapshot &quot;teaser&quot;
-            &gt;&gt;= loadAndApplyTemplate &quot;templates/post.html&quot;    postContext
-            &gt;&gt;= loadAndApplyTemplate &quot;templates/default.html&quot; postContext
-            &gt;&gt;= relativizeUrls</code></pre>
+<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>    match postsGlob <span class="op">$</span> <span class="kw">do</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>        route <span class="op">$</span> setExtension <span class="st">&quot;html&quot;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>        compile <span class="op">$</span> <span class="kw">do</span> </span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>            <span class="co">-- Cyclic dependencies here here:</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>            identifiers <span class="ot">&lt;-</span> getMatches postsGlob</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>            urls <span class="ot">&lt;-</span> urlsOfPosts <span class="op">=&lt;&lt;</span> recentFirst <span class="op">=&lt;&lt;</span> <span class="fu">return</span> [<span class="dt">Item</span> identifier <span class="st">&quot;&quot;</span> <span class="op">|</span> identifier <span class="ot">&lt;-</span> identifiers]</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>            <span class="kw">let</span> postContext <span class="ot">=</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>                    field <span class="st">&quot;nextPost&quot;</span> (nextPostUrl urls) <span class="ot">`mappend`</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>                    postCtxWithTags tags</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>            pandocCompiler</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>            <span class="op">&gt;&gt;=</span> saveSnapshot <span class="st">&quot;teaser&quot;</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>            <span class="op">&gt;&gt;=</span> loadAndApplyTemplate <span class="st">&quot;templates/post.html&quot;</span>    postContext</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>            <span class="op">&gt;&gt;=</span> loadAndApplyTemplate <span class="st">&quot;templates/default.html&quot;</span> postContext</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>            <span class="op">&gt;&gt;=</span> relativizeUrls</span></code></pre></div>
 <p>(Yeah, I know, it’s a heinously long line).<br />
 Whereas in this excerpt, it’s in scope:</p>
-<pre class="haskell"><code>    match postsGlob $ do
-        route $ setExtension &quot;html&quot;
-        compile $ do 
-            -- Cyclic dependencies here here:
-            identifiers &lt;- getMatches postsGlob
-            urls &lt;- urlsOfPosts =&lt;&lt; recentFirst =&lt;&lt; return [Item identifier &quot;&quot; | identifier &lt;- identifiers]
-
-            let postContext =
-                    field &quot;nextPost&quot; (nextPostUrl urls) `mappend`
-                    postCtxWithTags tags
-
-            pandocCompiler
-                &gt;&gt;= saveSnapshot &quot;teaser&quot;
-                &gt;&gt;= loadAndApplyTemplate &quot;templates/post.html&quot;    postContext
-                &gt;&gt;= loadAndApplyTemplate &quot;templates/default.html&quot; postContext
-                &gt;&gt;= relativizeUrls</code></pre>
+<div class="sourceCode" id="cb2"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>    match postsGlob <span class="op">$</span> <span class="kw">do</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>        route <span class="op">$</span> setExtension <span class="st">&quot;html&quot;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>        compile <span class="op">$</span> <span class="kw">do</span> </span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>            <span class="co">-- Cyclic dependencies here here:</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>            identifiers <span class="ot">&lt;-</span> getMatches postsGlob</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>            urls <span class="ot">&lt;-</span> urlsOfPosts <span class="op">=&lt;&lt;</span> recentFirst <span class="op">=&lt;&lt;</span> <span class="fu">return</span> [<span class="dt">Item</span> identifier <span class="st">&quot;&quot;</span> <span class="op">|</span> identifier <span class="ot">&lt;-</span> identifiers]</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>            <span class="kw">let</span> postContext <span class="ot">=</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>                    field <span class="st">&quot;nextPost&quot;</span> (nextPostUrl urls) <span class="ot">`mappend`</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>                    postCtxWithTags tags</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>            pandocCompiler</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>                <span class="op">&gt;&gt;=</span> saveSnapshot <span class="st">&quot;teaser&quot;</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>                <span class="op">&gt;&gt;=</span> loadAndApplyTemplate <span class="st">&quot;templates/post.html&quot;</span>    postContext</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>                <span class="op">&gt;&gt;=</span> loadAndApplyTemplate <span class="st">&quot;templates/default.html&quot;</span> postContext</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>                <span class="op">&gt;&gt;=</span> relativizeUrls</span></code></pre></div>
 <p>I guess this is why people don’t like Python or other non-C syntaxes
 where indentation matters.<br />
 I was able to figure that out, and considering this excerpt:</p>
-<pre class="haskell"><code>    urlOfPost :: Item String -&gt; Compiler String
-    urlOfPost =
-        fmap (maybe empty $ toUrl) . getRoute . itemIdentifier</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ot">    urlOfPost ::</span> <span class="dt">Item</span> <span class="dt">String</span> <span class="ot">-&gt;</span> <span class="dt">Compiler</span> <span class="dt">String</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    urlOfPost <span class="ot">=</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>        <span class="fu">fmap</span> (<span class="fu">maybe</span> empty <span class="op">$</span> toUrl) <span class="op">.</span> getRoute <span class="op">.</span> itemIdentifier</span></code></pre></div>
 <p>But <code>urlsOfPosts</code> (used in above excerpt) has type
 <code>urlsOfPosts :: [Item String] -&gt; Compiler [String]</code>.<br />
 While it’s possible to understand <code>urlOfPost</code> by looking at the
@@ -211,19 +211,6 @@ documentation of each part, it’s not clear to me the implementation of
 <br style="clear: both;" />
 
 <hr />
-
-<!-- Load highlight.js for Syntax Highlighting. -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/bash.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/c.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/gherkin.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/haskell.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/lisp.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/nix.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/python.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js"></script>
-<script>hljs.highlightAll();</script>
 
             </div>
 
@@ -316,7 +303,7 @@ documentation of each part, it’s not clear to me the implementation of
                     hitType:       'event',
                     eventCategory: 'pageLoad',
                     eventAction:   'begun',
-                    eventValue:    String(ms)
+                    eventValue:    String(0)
                 });
 
                 // DIMENSION: visitor

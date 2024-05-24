@@ -154,7 +154,7 @@ naturally I ran into difficulties with <code>cabal install -fpango</code>. (For 
 I had issues with GTK; <code>gtk-demo</code> failed to load.
 <a href="http://stackoverflow.com/questions/22631026/dyld-library-not-loaded-usr-local-lib-libpng16-16-dylib-with-anything-php-rel">Similar to this</a>).
 Word to the wise,</p>
-<pre class="bash"><code>cabal install --with-gcc=gcc-4.8 -fvty -fpango</code></pre>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">cabal</span> install <span class="at">--with-gcc</span><span class="op">=</span>gcc-4.8 <span class="at">-fvty</span> <span class="at">-fpango</span></span></code></pre></div>
 <p>would be how to install it. (Alas, I’m
 <a href="https://gist.github.com/rgoulter/d1e94a05dd93abaa078d">plagued by errors</a>
 when I try to install the Pango frontend. I was able to install it earlier..).</p>
@@ -172,19 +172,6 @@ when I try to install the Pango frontend. I was able to install it earlier..).</
 <br style="clear: both;" />
 
 <hr />
-
-<!-- Load highlight.js for Syntax Highlighting. -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/bash.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/c.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/gherkin.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/haskell.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/lisp.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/nix.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/python.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js"></script>
-<script>hljs.highlightAll();</script>
 
             </div>
 
@@ -277,7 +264,7 @@ when I try to install the Pango frontend. I was able to install it earlier..).</
                     hitType:       'event',
                     eventCategory: 'pageLoad',
                     eventAction:   'begun',
-                    eventValue:    String(ms)
+                    eventValue:    String(0)
                 });
 
                 // DIMENSION: visitor

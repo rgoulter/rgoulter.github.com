@@ -157,32 +157,32 @@ full, working example, but for the code itself, the highlights would be:</p>
 <ul>
 <li>The transformation itself, adding “hello world” into the buffer:</li>
 </ul>
-<pre class="haskell"><code>helloWorld :: YiM ()
-helloWorld = withCurrentBuffer $ insertN &quot;Hello, world!&quot;</code></pre>
+<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ot">helloWorld ::</span> <span class="dt">YiM</span> ()</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>helloWorld <span class="ot">=</span> withCurrentBuffer <span class="op">$</span> insertN <span class="st">&quot;Hello, world!&quot;</span></span></code></pre></div>
 <ul>
 <li>The parser for the ex command, in the <code>HelloWorld</code> module, under the <code>lib/</code>
 folder (which is used by <code>dyre</code> for dependencies for the config) in
 <code>~/.config/yi</code>:</li>
 </ul>
-<pre class="haskell"><code>parse :: EventString -&gt; Maybe ExCommand
-parse &quot;helloWorld&quot; = Just $ impureExCommand {
-    cmdShow = &quot;helloWorld&quot;
-  , cmdAction = YiA $ helloWorld
-  }
-parse _ = Nothing</code></pre>
+<div class="sourceCode" id="cb2"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ot">parse ::</span> <span class="dt">EventString</span> <span class="ot">-&gt;</span> <span class="dt">Maybe</span> <span class="dt">ExCommand</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>parse <span class="st">&quot;helloWorld&quot;</span> <span class="ot">=</span> <span class="dt">Just</span> <span class="op">$</span> impureExCommand {</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    cmdShow <span class="ot">=</span> <span class="st">&quot;helloWorld&quot;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  , cmdAction <span class="ot">=</span> <span class="dt">YiA</span> <span class="op">$</span> helloWorld</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>parse _ <span class="ot">=</span> <span class="dt">Nothing</span></span></code></pre></div>
 <ul>
 <li>The config in <code>yi.hs</code>, to make use of the above <code>parse</code> function:</li>
 </ul>
-<pre class="haskell"><code>import qualified HelloWorld as HelloWorld
-
-...
-
-main = yi $ defaultVimConfig {
-    defaultKm = mkKeymapSet $ defVimConfig `override` \ super self -&gt; super
-            { vimExCommandParsers = myExCmdParsers ++ vimExCommandParsers super }
- }
-
-myExCmdParsers = [HelloWorld.parse]</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="kw">qualified</span> <span class="dt">HelloWorld</span> <span class="kw">as</span> <span class="dt">HelloWorld</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="op">...</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>main <span class="ot">=</span> yi <span class="op">$</span> defaultVimConfig {</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    defaultKm <span class="ot">=</span> mkKeymapSet <span class="op">$</span> defVimConfig <span class="ot">`override`</span> \ super self <span class="ot">-&gt;</span> super</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>            { vimExCommandParsers <span class="ot">=</span> myExCmdParsers <span class="op">++</span> vimExCommandParsers super }</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a> }</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>myExCmdParsers <span class="ot">=</span> [HelloWorld.parse]</span></code></pre></div>
 <p>This is enough to get a “Hello World” example going.<br />
 For more sophisticated efforts, I’m guessing one would want to:</p>
 <ul>
@@ -207,19 +207,6 @@ good place to start.</p></li>
 <br style="clear: both;" />
 
 <hr />
-
-<!-- Load highlight.js for Syntax Highlighting. -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/bash.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/c.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/gherkin.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/haskell.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/lisp.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/nix.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/python.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js"></script>
-<script>hljs.highlightAll();</script>
 
             </div>
 
@@ -312,7 +299,7 @@ good place to start.</p></li>
                     hitType:       'event',
                     eventCategory: 'pageLoad',
                     eventAction:   'begun',
-                    eventValue:    String(ms)
+                    eventValue:    String(0)
                 });
 
                 // DIMENSION: visitor

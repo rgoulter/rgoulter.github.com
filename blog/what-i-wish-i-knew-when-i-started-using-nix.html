@@ -241,11 +241,11 @@ footgun-prone.</p>
 <p>Using <code>nix-env</code> can almost be a drop-in replacement for how you might otherwise
 use a package manager.</p>
 <p>Instead of:</p>
-<pre class="bash"><code>sudo apt-update
-sudo apt install vim</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt-update</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install vim</span></code></pre></div>
 <p>you’d run:</p>
-<pre class="bash"><code>nix-channel --update
-nix-env --install --attr nixpkgs.vim</code></pre>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nix-channel</span> <span class="at">--update</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="ex">nix-env</span> <span class="at">--install</span> <span class="at">--attr</span> nixpkgs.vim</span></code></pre></div>
 <p>(Perhaps unexpectedly: <em>not</em> using <code>sudo</code>).</p>
 <p>There’s only a marginal benefit to Nix compared to the system package
 manager. (You get the same versions of software on each system, rather
@@ -272,23 +272,23 @@ occuring.</p>
 <li><p><a href="https://search.nixos.org/packages" class="uri">https://search.nixos.org/packages</a></p></li>
 <li><p>To search the <code>nixpkgs</code>:</p></li>
 </ol>
-<pre class="bash"><code>nix search nixpkgs &lt;search term&gt;</code></pre>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nix</span> search nixpkgs <span class="op">&lt;</span>search term<span class="op">&gt;</span></span></code></pre></div>
 <h2 id="declarative-package-management">Declarative Package Management</h2>
 <p>“Declarative Package Management” is the easiest non-trivial thing to do with Nix.</p>
 <p>The Nixpkgs manual has a section describing <a href="https://nixos.org/manual/nixpkgs/stable/#sec-declarative-package-management">“declarative package
 management”</a>.</p>
 <p>This at least should be appealing to yak-shavers.</p>
 <p>It gives an example using the expression:</p>
-<pre class="nix"><code>pkgs.buildEnv {
-    name = &quot;my-packages&quot;;
-    paths = [
-      bc
-      coreutils
-      jq
-      silver-searcher
-    ];
-  };
-}</code></pre>
+<div class="sourceCode" id="cb6"><pre class="sourceCode nix"><code class="sourceCode nix"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>pkgs.buildEnv <span class="op">{</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="va">name</span> <span class="op">=</span> <span class="st">&quot;my-packages&quot;</span><span class="op">;</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="va">paths</span> <span class="op">=</span> <span class="op">[</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>      bc</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>      coreutils</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>      jq</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>      silver-searcher</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="op">];</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span>;</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <p>(If you’re persuaded against using <code>nix-env</code>, nix.dev’s tutorial on
 <a href="https://nix.dev/tutorials/ad-hoc-developer-environments">ad hoc developer
 environments</a>
@@ -300,100 +300,100 @@ to install this package.</p>
 <p>At the time of writing, the manual suggests the way to use this
 expression is to override the list of packages in nixpkgs and add
 <code>myPackages</code>, by using <code>~/.config/nixpkgs/config.nix</code> with contents:</p>
-<pre class="nix"><code>{
-  packageOverrides = pkgs: with pkgs; {
-    myPackages = pkgs.buildEnv {
-      name = &quot;my-packages&quot;;
-      paths = [
-        bc
-        coreutils
-        jq
-        silver-searcher
-      ];
-    };
-  };
-}</code></pre>
+<div class="sourceCode" id="cb7"><pre class="sourceCode nix"><code class="sourceCode nix"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="va">packageOverrides</span> <span class="op">=</span> <span class="va">pkgs</span><span class="op">:</span> <span class="kw">with</span> pkgs<span class="op">;</span> <span class="op">{</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="va">myPackages</span> <span class="op">=</span> pkgs.buildEnv <span class="op">{</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>      <span class="va">name</span> <span class="op">=</span> <span class="st">&quot;my-packages&quot;</span><span class="op">;</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>      <span class="va">paths</span> <span class="op">=</span> <span class="op">[</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>        bc</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>        coreutils</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>        jq</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>        silver-searcher</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>      <span class="op">];</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    <span class="op">};</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>  <span class="op">};</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>And then installing this by running:</p>
-<pre class="bash"><code>nix-env --install --attr nixpkgs.myPackages</code></pre>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nix-env</span> <span class="at">--install</span> <span class="at">--attr</span> nixpkgs.myPackages</span></code></pre></div>
 <h3 id="installing-with-an-overlay">Installing with an Overlay</h3>
 <p>The chapter immediately following the Declarative Package Management
 in the nixpkgs manual is <a href="https://nixos.org/manual/nixpkgs/stable/#chap-overlays">about overlays</a>.</p>
 <p>Which seems like a nicer solution than the <code>packageOverrides</code> in <code>config.nix</code>.</p>
 <p>I used this approach for a long time.</p>
 <p>I did this by having <code>~/.config/nixpkgs/overlays/myOverlays.nix</code> with:</p>
-<pre class="nix"><code>self: super:
-
-{
-  myPackages = self.buildEnv {
-    name = &quot;my-packages&quot;;
-    paths = with self; [
-      bc
-      coreutils
-      jq
-      silver-searcher
-    ];
-  };
-}</code></pre>
+<div class="sourceCode" id="cb9"><pre class="sourceCode nix"><code class="sourceCode nix"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="va">self</span><span class="op">:</span> <span class="va">super</span><span class="op">:</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="va">myPackages</span> <span class="op">=</span> self.buildEnv <span class="op">{</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="va">name</span> <span class="op">=</span> <span class="st">&quot;my-packages&quot;</span><span class="op">;</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    <span class="va">paths</span> <span class="op">=</span> <span class="kw">with</span> self<span class="op">;</span> <span class="op">[</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>      bc</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>      coreutils</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>      jq</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>      silver-searcher</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>    <span class="op">];</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>  <span class="op">};</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>And then installing this by running:</p>
-<pre class="bash"><code>nix-env --install --attr nixpkgs.myPackages</code></pre>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nix-env</span> <span class="at">--install</span> <span class="at">--attr</span> nixpkgs.myPackages</span></code></pre></div>
 <p>And just re-running that each time <code>myPackages</code> is changed.</p>
 <p>e.g. here’s <a href="https://github.com/rgoulter/dotfiles/blob/1edb8db8345fe6eb11ebc401f20587499d30c086/nixpkgs/overlays/myPackages.nix">the overlay I was using</a>.</p>
 <h3 id="installing-with-vanilla-flake.nix">Installing with Vanilla <code>flake.nix</code></h3>
 <p>For x86-64 Linux, with the following <code>flake.nix</code>:</p>
-<pre class="nix"><code>{
-  description = &quot;A basic flake with declaratively managed packages&quot;;
-
-  inputs.nixpkgs.url = &quot;github:NixOS/nixpkgs/nixpkgs-unstable&quot;;
-
-  outputs = { self, nixpkgs, flake-utils }: {
-    packages = let
-      pkgs = nixpkgs.legacyPackages.x86_64-linux;
-    in {
-      x86_64-linux.myPackages = pkgs.buildEnv {
-        name = &quot;my-packages&quot;;
-        paths = with pkgs; [
-          bc
-          coreutils
-          jq
-          silver-searcher
-        ];
-      };
-    };
-  };
-}</code></pre>
+<div class="sourceCode" id="cb11"><pre class="sourceCode nix"><code class="sourceCode nix"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="va">description</span> <span class="op">=</span> <span class="st">&quot;A basic flake with declaratively managed packages&quot;</span><span class="op">;</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="va">inputs</span>.<span class="va">nixpkgs</span>.<span class="va">url</span> <span class="op">=</span> <span class="st">&quot;github:NixOS/nixpkgs/nixpkgs-unstable&quot;</span><span class="op">;</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="va">outputs</span> <span class="op">=</span> <span class="op">{</span> <span class="va">self</span><span class="op">,</span> <span class="va">nixpkgs</span><span class="op">,</span> <span class="va">flake-utils</span> <span class="op">}</span>: <span class="op">{</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    <span class="va">packages</span> <span class="op">=</span> <span class="kw">let</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>      <span class="va">pkgs</span> <span class="op">=</span> nixpkgs.legacyPackages.x86_64<span class="op">-</span>linux<span class="op">;</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">in</span> <span class="op">{</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>      <span class="va">x86_64-linux</span>.<span class="va">myPackages</span> <span class="op">=</span> pkgs.buildEnv <span class="op">{</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>        <span class="va">name</span> <span class="op">=</span> <span class="st">&quot;my-packages&quot;</span><span class="op">;</span></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>        <span class="va">paths</span> <span class="op">=</span> <span class="kw">with</span> pkgs<span class="op">;</span> <span class="op">[</span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>          bc</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>          coreutils</span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>          jq</span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>          silver-searcher</span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>        <span class="op">];</span></span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>      <span class="op">};</span></span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>    <span class="op">};</span></span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>  <span class="op">};</span></span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>(If you put this in a git repository, the file will need to be checked
 into the repository).</p>
 <p>Then, you can install this by running (in the same directory as the
 <code>flake.nix</code>):</p>
-<pre class="bash"><code>nix profile install .#myPackages</code></pre>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nix</span> profile install .#myPackages</span></code></pre></div>
 <p>A more complex <code>flake.nix</code>, but with <code>"x86_64-linux"</code> factored out:</p>
-<pre class="nix"><code>{
-  description = &quot;A basic flake with declaratively managed packages&quot;;
-
-  inputs.nixpkgs.url = &quot;github:NixOS/nixpkgs/nixpkgs-unstable&quot;;
-
-  outputs = { self, nixpkgs, flake-utils }: let
-    systems = [
-      &quot;x86_64-linux&quot;
-      &quot;x86_64-darwin&quot;
-    ];
-    forAllSystems = f: nixpkgs.lib.genAttrs systems (system: f system);
-  in {
-    packages = forAllSystems (system: let
-      pkgs = nixpkgs.legacyPackages.${system};
-    in {
-      myPackages = pkgs.buildEnv {
-        name = &quot;my-packages&quot;;
-        paths = with pkgs; [
-          bc
-          coreutils
-          jq
-          silver-searcher
-        ];
-      };
-    });
-  };
-}</code></pre>
+<div class="sourceCode" id="cb13"><pre class="sourceCode nix"><code class="sourceCode nix"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="va">description</span> <span class="op">=</span> <span class="st">&quot;A basic flake with declaratively managed packages&quot;</span><span class="op">;</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="va">inputs</span>.<span class="va">nixpkgs</span>.<span class="va">url</span> <span class="op">=</span> <span class="st">&quot;github:NixOS/nixpkgs/nixpkgs-unstable&quot;</span><span class="op">;</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="va">outputs</span> <span class="op">=</span> <span class="op">{</span> <span class="va">self</span><span class="op">,</span> <span class="va">nixpkgs</span><span class="op">,</span> <span class="va">flake-utils</span> <span class="op">}</span>: <span class="kw">let</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    <span class="va">systems</span> <span class="op">=</span> <span class="op">[</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;x86_64-linux&quot;</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;x86_64-darwin&quot;</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>    <span class="op">];</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>    <span class="va">forAllSystems</span> <span class="op">=</span> <span class="va">f</span><span class="op">:</span> nixpkgs.lib.genAttrs systems <span class="op">(</span><span class="va">system</span><span class="op">:</span> f system<span class="op">);</span></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>  <span class="kw">in</span> <span class="op">{</span></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>    <span class="va">packages</span> <span class="op">=</span> forAllSystems <span class="op">(</span><span class="va">system</span><span class="op">:</span> <span class="kw">let</span></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>      <span class="va">pkgs</span> <span class="op">=</span> nixpkgs.legacyPackages.$<span class="op">{</span><span class="va">system</span><span class="op">};</span></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>    <span class="kw">in</span> <span class="op">{</span></span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>      <span class="va">myPackages</span> <span class="op">=</span> pkgs.buildEnv <span class="op">{</span></span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>        <span class="va">name</span> <span class="op">=</span> <span class="st">&quot;my-packages&quot;</span><span class="op">;</span></span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>        <span class="va">paths</span> <span class="op">=</span> <span class="kw">with</span> pkgs<span class="op">;</span> <span class="op">[</span></span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>          bc</span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>          coreutils</span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>          jq</span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>          silver-searcher</span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>        <span class="op">];</span></span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>      <span class="op">};</span></span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>    <span class="op">});</span></span>
+<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a>  <span class="op">};</span></span>
+<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <h3 id="installing-with-flakes-nix-user-repository">Installing with Flakes (Nix User Repository)</h3>
 <p>Probably the tidiest way in the long term may be to organise your Nix code into
 its own repository.</p>
@@ -402,24 +402,24 @@ template</a>
 (i.e. cloning it and pushing to your own fork/repository):</p>
 <p>Although maybe not the nicest way of doing it, I’d change <code>default.nix</code>
 to have:</p>
-<pre class="nix"><code>{ pkgs ? import &lt;nixpkgs&gt; { } }:
-
-{
-  myPackages = import ./pkgs/myPackages { pkgs = pkgs; };
-}</code></pre>
+<div class="sourceCode" id="cb14"><pre class="sourceCode nix"><code class="sourceCode nix"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="op">{</span> <span class="va">pkgs</span> <span class="op">?</span> <span class="bu">import</span> &lt;nixpkgs&gt; <span class="op">{</span> <span class="op">}</span> <span class="op">}</span>:</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="va">myPackages</span> <span class="op">=</span> <span class="bu">import</span> <span class="ss">./pkgs/myPackages</span> <span class="op">{</span> <span class="va">pkgs</span> <span class="op">=</span> pkgs<span class="op">;</span> <span class="op">};</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>And I add a file <code>pkgs/myPackages/default.nix</code> with:</p>
-<pre class="nix"><code>{ pkgs }:
-
-pkgs.buildEnv {
-    name = &quot;my-packages&quot;;
-    paths = with pkgs; [
-      bc
-      coreutils
-      jq
-      silver-searcher
-    ];
-  };
-}</code></pre>
+<div class="sourceCode" id="cb15"><pre class="sourceCode nix"><code class="sourceCode nix"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="op">{</span> <span class="va">pkgs</span> <span class="op">}</span>:</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>pkgs.buildEnv <span class="op">{</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    <span class="va">name</span> <span class="op">=</span> <span class="st">&quot;my-packages&quot;</span><span class="op">;</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    <span class="va">paths</span> <span class="op">=</span> <span class="kw">with</span> pkgs<span class="op">;</span> <span class="op">[</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>      bc</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>      coreutils</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>      jq</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>      silver-searcher</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>    <span class="op">];</span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span>;</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <p>And then this can be installed with <code>nix profile .#myPackages</code>, or
 <code>nix profile install github:&lt;username&gt;/&lt;repo&gt;#myPackages</code> or whatever
 URL. (The files have to be checked into a <code>git</code> repository).</p>
@@ -452,14 +452,14 @@ or to various “X version managers” like Ruby Version Manager or Node
 Version Manager or <a href="https://asdf-vm.com/">asdf</a>.</p>
 <p>Running the command <code>nix-shell</code> will make use of a <code>shell.nix</code> file in
 the current directory. A simple <code>shell.nix</code> file is:</p>
-<pre class="nix"><code>{ pkgs ? import &lt;nixpkgs&gt; {} }:
-
-with pkgs;
-mkShell {
-  packages = [
-    neovim
-  ];
-}</code></pre>
+<div class="sourceCode" id="cb16"><pre class="sourceCode nix"><code class="sourceCode nix"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="op">{</span> <span class="va">pkgs</span> <span class="op">?</span> <span class="bu">import</span> &lt;nixpkgs&gt; <span class="op">{}</span> <span class="op">}</span>:</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="kw">with</span> pkgs<span class="op">;</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>mkShell <span class="op">{</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="va">packages</span> <span class="op">=</span> <span class="op">[</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    neovim</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>  <span class="op">];</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <h2 id="shells-with-nix-flakes">Shells with Nix Flakes</h2>
 <p>“But <code>nix-shell</code> with a <code>shell.nix</code> like the above uses nix channels,
 not the fancy new flakes”.</p>
@@ -469,24 +469,24 @@ e.g. to use <a href="https://github.com/nix-community/nix-direnv"><code>nix-dir
 <p>The equivalent of <code>shell.nix</code>, with flakes? Well…</p>
 <p>The nix-direnv project links to the <a href="https://github.com/nix-community/nix-direnv/blob/master/template/flake.nix">following template
 flake.nix</a>:</p>
-<pre class="nix"><code>{
-  description = &quot;A basic flake with a shell&quot;;
-  inputs.nixpkgs.url = &quot;github:NixOS/nixpkgs/nixpkgs-unstable&quot;;
-  inputs.flake-utils.url = &quot;github:numtide/flake-utils&quot;;
-
-  outputs = { self, nixpkgs, flake-utils }:
-    flake-utils.lib.eachDefaultSystem (system:
-      let
-        pkgs = nixpkgs.legacyPackages.${system};
-      in {
-        devShell = pkgs.mkShell {
-          packages = [ pkgs.neovim ];
-        };
-      });
-}</code></pre>
+<div class="sourceCode" id="cb17"><pre class="sourceCode nix"><code class="sourceCode nix"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="va">description</span> <span class="op">=</span> <span class="st">&quot;A basic flake with a shell&quot;</span><span class="op">;</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="va">inputs</span>.<span class="va">nixpkgs</span>.<span class="va">url</span> <span class="op">=</span> <span class="st">&quot;github:NixOS/nixpkgs/nixpkgs-unstable&quot;</span><span class="op">;</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="va">inputs</span>.<span class="va">flake-utils</span>.<span class="va">url</span> <span class="op">=</span> <span class="st">&quot;github:numtide/flake-utils&quot;</span><span class="op">;</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  <span class="va">outputs</span> <span class="op">=</span> <span class="op">{</span> <span class="va">self</span><span class="op">,</span> <span class="va">nixpkgs</span><span class="op">,</span> <span class="va">flake-utils</span> <span class="op">}</span>:</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>    flake<span class="op">-</span>utils.lib.eachDefaultSystem <span class="op">(</span><span class="va">system</span><span class="op">:</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>      <span class="kw">let</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>        <span class="va">pkgs</span> <span class="op">=</span> nixpkgs.legacyPackages.$<span class="op">{</span><span class="va">system</span><span class="op">};</span></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>      <span class="kw">in</span> <span class="op">{</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>        <span class="va">devShell</span> <span class="op">=</span> pkgs.mkShell <span class="op">{</span></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>          <span class="va">packages</span> <span class="op">=</span> <span class="op">[</span> pkgs.neovim <span class="op">];</span></span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>        <span class="op">};</span></span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>      <span class="op">});</span></span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>which can be generated (along with a <code>.envrc</code> which makes use of the
 flake’s devShell) by running:</p>
-<pre class="bash"><code>nix flake new -t github:nix-community/nix-direnv .</code></pre>
+<div class="sourceCode" id="cb18"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nix</span> flake new <span class="at">-t</span> github:nix-community/nix-direnv .</span></code></pre></div>
 <p>With the <code>.envrc</code> generated from this template, the flake’s devshell
 is automatically built, and its packages made available to the current
 shell.</p>
@@ -495,27 +495,27 @@ shell.</p>
 expression</a>;
 how to write a Nix package for gnu <code>hello</code>.</p>
 <p>This guides us with a <code>default.nix</code>:</p>
-<pre class="nix"><code>{ stdenv, fetchurl, perl }:
-
-stdenv.mkDerivation {
-  name = &quot;hello-2.1.1&quot;;
-  builder = ./builder.sh;
-  src = fetchurl {
-    url = &quot;ftp://ftp.nluug.nl/pub/gnu/hello/hello-2.1.1.tar.gz&quot;;
-    sha256 = &quot;1md7jsfd8pa45z73bz1kszpp01yw6x5ljkjk2hx7wl800any6465&quot;;
-  };
-  inherit perl;
-}</code></pre>
+<div class="sourceCode" id="cb19"><pre class="sourceCode nix"><code class="sourceCode nix"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="op">{</span> <span class="va">stdenv</span><span class="op">,</span> <span class="va">fetchurl</span><span class="op">,</span> <span class="va">perl</span> <span class="op">}</span>:</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>stdenv.mkDerivation <span class="op">{</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="va">name</span> <span class="op">=</span> <span class="st">&quot;hello-2.1.1&quot;</span><span class="op">;</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  <span class="va">builder</span> <span class="op">=</span> <span class="ss">./builder.sh</span><span class="op">;</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>  <span class="va">src</span> <span class="op">=</span> fetchurl <span class="op">{</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>    <span class="va">url</span> <span class="op">=</span> <span class="st">&quot;ftp://ftp.nluug.nl/pub/gnu/hello/hello-2.1.1.tar.gz&quot;</span><span class="op">;</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>    <span class="va">sha256</span> <span class="op">=</span> <span class="st">&quot;1md7jsfd8pa45z73bz1kszpp01yw6x5ljkjk2hx7wl800any6465&quot;</span><span class="op">;</span></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>  <span class="op">};</span></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>  <span class="kw">inherit</span> perl<span class="op">;</span></span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>and a <code>builder.sh</code>:</p>
-<pre class="bash"><code>source $stdenv/setup
-
-PATH=$perl/bin:$PATH
-
-tar xvfz $src
-cd hello-*
-./configure --prefix=$out
-make
-make install</code></pre>
+<div class="sourceCode" id="cb20"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> <span class="va">$stdenv</span>/setup</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="va">PATH</span><span class="op">=</span><span class="va">$perl</span>/bin:<span class="va">$PATH</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="fu">tar</span> xvfz <span class="va">$src</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> hello-<span class="pp">*</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="ex">./configure</span> <span class="at">--prefix</span><span class="op">=</span><span class="va">$out</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="fu">make</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="fu">make</span> install</span></code></pre></div>
 <p>The tutorial apparently suggests to this within the <code>nixpkgs</code>
 repository itself, which seems a little impractical, and quite
 unintuitive to me.</p>
@@ -525,31 +525,31 @@ people wondering the same thing.<br />
 Because you’ll try running <code>nix-build</code> and it won’t “just work” with
 the above <code>default.nix</code>.</p>
 <p>The easiest “well, this works” <code>default.nix</code> to stumble across is suggested as:</p>
-<pre class="nix"><code>let
-  pkgs = import &lt;nixpkgs&gt; {};
-in
-pkgs.stdenv.mkDerivation {
-  name = &quot;hello-2.1.1&quot;;
-  builder = ./builder.sh;
-  src = pkgs.fetchurl {
-    url = ftp://ftp.nluug.nl/pub/gnu/hello/hello-2.1.1.tar.gz;
-    sha256 = &quot;1md7jsfd8pa45z73bz1kszpp01yw6x5ljkjk2hx7wl800any6465&quot;;
-  };
-  perl = pkgs.perl;
-}</code></pre>
+<div class="sourceCode" id="cb21"><pre class="sourceCode nix"><code class="sourceCode nix"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="va">pkgs</span> <span class="op">=</span> <span class="bu">import</span> &lt;nixpkgs&gt; <span class="op">{};</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="kw">in</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>pkgs.stdenv.mkDerivation <span class="op">{</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  <span class="va">name</span> <span class="op">=</span> <span class="st">&quot;hello-2.1.1&quot;</span><span class="op">;</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>  <span class="va">builder</span> <span class="op">=</span> <span class="ss">./builder.sh</span><span class="op">;</span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>  <span class="va">src</span> <span class="op">=</span> pkgs.fetchurl <span class="op">{</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>    <span class="va">url</span> <span class="op">=</span> <span class="va">ftp</span><span class="op">://</span><span class="ss">ftp.nluug.nl/pub/gnu/hello/hello-2.1.1.tar.gz</span><span class="op">;</span></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>    <span class="va">sha256</span> <span class="op">=</span> <span class="st">&quot;1md7jsfd8pa45z73bz1kszpp01yw6x5ljkjk2hx7wl800any6465&quot;</span><span class="op">;</span></span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>  <span class="op">};</span></span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>  <span class="va">perl</span> <span class="op">=</span> pkgs.perl<span class="op">;</span></span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>though now I’d suggest a closer “well, this works” <code>default.nix</code> file would instead be:</p>
-<pre class="nix"><code>{ pkgs ? import &lt;nixpkgs&gt; {} }:
-
-with pkgs;
-stdenv.mkDerivation {
-  name = &quot;hello-2.1.1&quot;;
-  builder = ./builder.sh;
-  src = fetchurl {
-    url = &quot;ftp://ftp.nluug.nl/pub/gnu/hello/hello-2.1.1.tar.gz&quot;;
-    sha256 = &quot;1md7jsfd8pa45z73bz1kszpp01yw6x5ljkjk2hx7wl800any6465&quot;;
-  };
-  inherit perl;
-}</code></pre>
+<div class="sourceCode" id="cb22"><pre class="sourceCode nix"><code class="sourceCode nix"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="op">{</span> <span class="va">pkgs</span> <span class="op">?</span> <span class="bu">import</span> &lt;nixpkgs&gt; <span class="op">{}</span> <span class="op">}</span>:</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="kw">with</span> pkgs<span class="op">;</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>stdenv.mkDerivation <span class="op">{</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>  <span class="va">name</span> <span class="op">=</span> <span class="st">&quot;hello-2.1.1&quot;</span><span class="op">;</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>  <span class="va">builder</span> <span class="op">=</span> <span class="ss">./builder.sh</span><span class="op">;</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>  <span class="va">src</span> <span class="op">=</span> fetchurl <span class="op">{</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>    <span class="va">url</span> <span class="op">=</span> <span class="st">&quot;ftp://ftp.nluug.nl/pub/gnu/hello/hello-2.1.1.tar.gz&quot;</span><span class="op">;</span></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>    <span class="va">sha256</span> <span class="op">=</span> <span class="st">&quot;1md7jsfd8pa45z73bz1kszpp01yw6x5ljkjk2hx7wl800any6465&quot;</span><span class="op">;</span></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>  <span class="op">};</span></span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>  <span class="kw">inherit</span> perl<span class="op">;</span></span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>A helpful commenter in the GitHub issue above links to <a href="https://stackoverflow.com/questions/44088192/when-and-how-should-default-nix-shell-nix-and-release-nix-be-used">a
 StackOverflow
 answer</a>
@@ -562,18 +562,18 @@ typically in a format for a “callPackage derivation”.</p>
 <p>Or perhaps another way of putting it: if we instead renamed the
 <code>default.nix</code> from the tutorial as <code>hello.nix</code>, a <code>default.nix</code> file
 which could be built with just <code>nix-build</code> would be:</p>
-<pre class="nix"><code>{ pkgs ? import &lt;nixpkgs&gt; {} }:
-
-pkgs.callPackage ./hello.nix {}</code></pre>
+<div class="sourceCode" id="cb24"><pre class="sourceCode nix"><code class="sourceCode nix"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="op">{</span> <span class="va">pkgs</span> <span class="op">?</span> <span class="bu">import</span> &lt;nixpkgs&gt; <span class="op">{}</span> <span class="op">}</span>:</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>pkgs.callPackage <span class="ss">./hello.nix</span> <span class="op">{}</span></span></code></pre></div>
 <p>or in a more explicit way:</p>
-<pre class="nix"><code>let
-  pkgs = import &lt;nixpkgs&gt; {};
-in
-import ./hello.nix {
-  stdenv   = pkgs.stdenv;
-  fetchurl = pkgs.fetchurl;
-  perl     = pkgs.perl;
-}</code></pre>
+<div class="sourceCode" id="cb25"><pre class="sourceCode nix"><code class="sourceCode nix"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="va">pkgs</span> <span class="op">=</span> <span class="bu">import</span> &lt;nixpkgs&gt; <span class="op">{};</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="kw">in</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="bu">import</span> <span class="ss">./hello.nix</span> <span class="op">{</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>  <span class="va">stdenv</span>   <span class="op">=</span> pkgs.stdenv<span class="op">;</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>  <span class="va">fetchurl</span> <span class="op">=</span> pkgs.fetchurl<span class="op">;</span></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>  <span class="va">perl</span>     <span class="op">=</span> pkgs.perl<span class="op">;</span></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>This … is clearly a bit more involved than you’d expect for “hello world”.</p>
 <p>But at this point, the nix pills explain the rationale and the
 mechanisms: <a href="https://nixos.org/guides/nix-pills/inputs-design-pattern.html">pill 12 explains the input design
@@ -631,37 +631,37 @@ what the advantages and difficulties will be.</p>
 <p><a href="https://github.com/NixOS/nix/issues/2208" class="uri">https://github.com/NixOS/nix/issues/2208</a></p>
 <h2 id="the-sha256-hash-is-used-to-identify-the-source-for-fetchfromgithub-etc.">The <code>sha256</code> Hash is Used to <em>Identify the Source</em> for fetchFromGitHub, etc.</h2>
 <p>e.g. in the Nix expression:</p>
-<pre class="nix"><code>fetchFromGitHub {
-  owner = &quot;istio&quot;;
-  repo = &quot;istio&quot;;
-  rev = &quot;1.8.5&quot;;
-  sha256 = &quot;1mmhiasq2brzhrnklxzxykmannv84wgzpbnqwz40sb8c1n67qzb0&quot;;
-}</code></pre>
+<div class="sourceCode" id="cb26"><pre class="sourceCode nix"><code class="sourceCode nix"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>fetchFromGitHub <span class="op">{</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="va">owner</span> <span class="op">=</span> <span class="st">&quot;istio&quot;</span><span class="op">;</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="va">repo</span> <span class="op">=</span> <span class="st">&quot;istio&quot;</span><span class="op">;</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="va">rev</span> <span class="op">=</span> <span class="st">&quot;1.8.5&quot;</span><span class="op">;</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>  <span class="va">sha256</span> <span class="op">=</span> <span class="st">&quot;1mmhiasq2brzhrnklxzxykmannv84wgzpbnqwz40sb8c1n67qzb0&quot;</span><span class="op">;</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>The <code>sha256</code> value is used by Nix to identify the source. Which means
 if you copy paste this, and change the <code>owner</code> and <code>repo</code>:</p>
-<pre class="nix"><code>fetchFromGitHub {
-  owner = &quot;rgoulter&quot;;
-  repo = &quot;my-hakyll-blog&quot;;
-  rev = &quot;v1.0&quot;;
-  sha256 = &quot;1mmhiasq2brzhrnklxzxykmannv84wgzpbnqwz40sb8c1n67qzb0&quot;;
-}</code></pre>
+<div class="sourceCode" id="cb27"><pre class="sourceCode nix"><code class="sourceCode nix"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>fetchFromGitHub <span class="op">{</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="va">owner</span> <span class="op">=</span> <span class="st">&quot;rgoulter&quot;</span><span class="op">;</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="va">repo</span> <span class="op">=</span> <span class="st">&quot;my-hakyll-blog&quot;</span><span class="op">;</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>  <span class="va">rev</span> <span class="op">=</span> <span class="st">&quot;v1.0&quot;</span><span class="op">;</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>  <span class="va">sha256</span> <span class="op">=</span> <span class="st">&quot;1mmhiasq2brzhrnklxzxykmannv84wgzpbnqwz40sb8c1n67qzb0&quot;</span><span class="op">;</span></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>then nix will see the <code>sha256</code> is already the same as <code>istio/istio</code>
 rev <code>1.8.5</code> and use that repository instead.</p>
 <p>Instead, the laziest thing to do is just replace the <code>sha256</code> with an
 incorrect value:</p>
-<pre class="nix"><code>fetchFromGitHub {
-  owner = &quot;rgoulter&quot;;
-  repo = &quot;my-hakyll-blog&quot;;
-  rev = &quot;v1.0&quot;;
-  sha256 = &quot;0000000000000000000000000000000000000000000000000000&quot;;
-}</code></pre>
+<div class="sourceCode" id="cb28"><pre class="sourceCode nix"><code class="sourceCode nix"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>fetchFromGitHub <span class="op">{</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="va">owner</span> <span class="op">=</span> <span class="st">&quot;rgoulter&quot;</span><span class="op">;</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="va">repo</span> <span class="op">=</span> <span class="st">&quot;my-hakyll-blog&quot;</span><span class="op">;</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  <span class="va">rev</span> <span class="op">=</span> <span class="st">&quot;v1.0&quot;</span><span class="op">;</span></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>  <span class="va">sha256</span> <span class="op">=</span> <span class="st">&quot;0000000000000000000000000000000000000000000000000000&quot;</span><span class="op">;</span></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>And then replace the <code>sha256</code> with whatever the value is expected to
 be. (<code>lib.fakeSha256</code> can be used instead of however many <code>0</code>s that
 is).</p>
 <p>Another way to find the <code>sha256</code> value is to use a program like
 <a href="https://github.com/msteen/nix-prefetch/">nix-prefetch</a>.</p>
 <p>e.g. running:</p>
-<pre class="bash"><code>nix-prefetch fetchFromGitHub --owner istio --repo istio --rev 1.8.5</code></pre>
+<div class="sourceCode" id="cb29"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nix-prefetch</span> fetchFromGitHub <span class="at">--owner</span> istio <span class="at">--repo</span> istio <span class="at">--rev</span> 1.8.5</span></code></pre></div>
 <p>will give the correct <code>sha256</code> value to use.</p>
     </div>
     <div class="col-md-3">
@@ -700,20 +700,6 @@ is).</p>
   border-left: 2px solid #563d7c;
 }
 </style>
-
-<!-- Load highlight.js for Syntax Highlighting. -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/bash.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/c.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/gherkin.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/haskell.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/lisp.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/nix.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/python.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js"></script>
-<script>hljs.highlightAll();</script>
-
 
             </div>
 
@@ -806,7 +792,7 @@ is).</p>
                     hitType:       'event',
                     eventCategory: 'pageLoad',
                     eventAction:   'begun',
-                    eventValue:    String(ms)
+                    eventValue:    String(0)
                 });
 
                 // DIMENSION: visitor

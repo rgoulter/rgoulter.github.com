@@ -183,14 +183,14 @@ still.</p>
 this is kindof-sortof morally equivalent to <code>Optional[Value]</code> also; the benefit
 being that a value isn’t going to be <code>null</code>, the drawback being it’s difficult
 to tell what the program is doing:</p>
-<pre class="scala"><code>try {
-  x = dict.get(keyX);
-  doTask1(x);
-  y = dict.get(keyY);
-  doTask2(x, y);
-} catch KeyNotPresent ex {
-  //...
-}</code></pre>
+<div class="sourceCode" id="cb1"><pre class="sourceCode scala"><code class="sourceCode scala"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="cf">try</span> <span class="op">{</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  x <span class="op">=</span> dict<span class="op">.</span><span class="fu">get</span><span class="op">(</span>keyX<span class="op">);</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">doTask1</span><span class="op">(</span>x<span class="op">);</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  y <span class="op">=</span> dict<span class="op">.</span><span class="fu">get</span><span class="op">(</span>keyY<span class="op">);</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">doTask2</span><span class="op">(</span>x<span class="op">,</span> y<span class="op">);</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> <span class="cf">catch</span> KeyNotPresent ex <span class="op">{</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="co">//...</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>– Obviously if an exception is thrown above, it’s not clear whether it came
 before or after <code>doTask1(x)</code>; perhaps less clear is that <code>y = dict.get</code> onwards
 ‘needs’ its own <code>try-catch</code> block. It doesn’t make sense to have
@@ -216,13 +216,13 @@ on what went wrong). These are more explicit than nullable values or Error
 Codes.</p>
 <p>The bigger challenge is how well functions-which-may-fail compose with other
 functions-which-may-fail.</p>
-<pre class="scala"><code>fun importantComputation() {
-  x = mayFailX()
-  stmt1;
-  y = mayFailY()
-  stmt2;
-  return g(x, y);
-}</code></pre>
+<div class="sourceCode" id="cb2"><pre class="sourceCode scala"><code class="sourceCode scala"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>fun <span class="fu">importantComputation</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  x <span class="op">=</span> <span class="fu">mayFailX</span><span class="op">()</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  stmt1<span class="op">;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  y <span class="op">=</span> <span class="fu">mayFailY</span><span class="op">()</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  stmt2<span class="op">;</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="fu">g</span><span class="op">(</span>x<span class="op">,</span> y<span class="op">);</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>With stateful code, one needs to be careful about assumptions about what
 <code>stmt1</code>, <code>mayFailY</code> mutate. – <em>Implicitly</em>, you also mustn’t assume <code>stmt2</code>,
 <code>g</code> are executed (&amp; so must consider state when they are executed, aren’t
@@ -231,10 +231,10 @@ executed).<br />
 more cognitive-load required to keep the above in mind while scrolling through
 code.</p>
 <p>Functional code also isn’t necessarily so cumbersome. <code>Optional.map</code> allows:</p>
-<pre class="scala"><code>optional match {
-  Some(x) =&gt; doSomething(x)
-  None =&gt; None
-}</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode scala"><code class="sourceCode scala"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>optional <span class="cf">match</span> <span class="op">{</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="bu">Some</span><span class="op">(</span>x<span class="op">)</span> <span class="op">=&gt;</span> <span class="fu">doSomething</span><span class="op">(</span>x<span class="op">)</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="bu">None</span> <span class="op">=&gt;</span> <span class="bu">None</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>to be written as <code>optional.map({ x =&gt; doSomething(x) })</code> (or
 <code>.map(doSomething)</code> if you literally have a function).</p>
 <hr />
@@ -258,19 +258,6 @@ advantage.</p>
 <br style="clear: both;" />
 
 <hr />
-
-<!-- Load highlight.js for Syntax Highlighting. -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/bash.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/c.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/gherkin.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/haskell.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/lisp.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/nix.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/python.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js"></script>
-<script>hljs.highlightAll();</script>
 
             </div>
 
@@ -363,7 +350,7 @@ advantage.</p>
                     hitType:       'event',
                     eventCategory: 'pageLoad',
                     eventAction:   'begun',
-                    eventValue:    String(ms)
+                    eventValue:    String(0)
                 });
 
                 // DIMENSION: visitor

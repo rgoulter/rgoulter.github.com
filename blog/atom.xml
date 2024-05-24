@@ -63,12 +63,12 @@ JVM terminated. Exit code=127
         libz.so.1 =&gt; not found</code></pre>
 <p>Indeed, <code>libz.so.1 =&gt; not found</code>.</p>
 <p>We can add <code>--additional-libs=libz.so.1</code>
-to the <code>nix-alien</code> call, which helpfully lets us pick the package <code>libz</code>. (We could instead use <code>--additional-packages=libz</code> if we already know <code>libz</code> is the name of the nix package with <code>libz.so.1</code>).</p>
+to the <code>nix-alien</code> call, which helpfully lets us pick the package <code>libz</code>. (We could instead use <code>--additional-packages=libz</code> if we already know <code>libz</code> is the name of the nix package with <code>libz.so.1</code>). Re-running <code>nix-alien</code> with this still runs into problems:</p>
 <pre><code>$ nix-alien --recreate --additional-libs=libz.so.1 ./MounRiver_Studio_Community_Linux_x64_V160/MRS_Community/MounRiver\ Studio_Community
 MounRiver Studio_Community:
 An error has occurred. See the log file
 /home/rgoulter/playground/nix-mounriver-studio/MounRiver_Studio_Community_Linux_x64_V160/MRS_Community/configuration/1716348838071.log.</code></pre>
-<p>and this log file has contents:</p>
+<p>Checking the contents of that log file:</p>
 <pre><code>!SESSION 2024-05-22 03:33:57.978 -----------------------------------------------
 eclipse.buildId=4.17.0.I20200902-1800
 java.version=14.0.2
@@ -105,7 +105,6 @@ $ ldd /home/rgoulter/.swt/lib/linux/x86_64/libswt-pi3-gtk-4936r26.so
 <p>And it runs!</p>
 <p>Further invocations of <code>nix-alien</code> can just run the binary directly:</p>
 <pre><code>$ nix-alien ./MounRiver_Studio_Community_Linux_x64_V160/MRS_Community/MounRiver\ Studio_Community</code></pre>
-<p>(or the <code>default.nix</code> that <code>nix-alien</code> produced can be copied to a <code>--destination</code>).</p>
 <h2 id="approach-2-using-patchelf-on-the-binaries-directly">Approach 2: Using patchelf on the Binaries Directly</h2>
 <p>Although using <code>nix-alien</code> works, I was curious to see what it would take to beat the thing into shape using <code>patchelf</code> directly. (This is obviously a more tedious way of approaching the problem).</p>
 <p>It’s possible to run <code>patchelf</code> against everything that looks like it could be an executable binary, and let <code>patchelf</code> sort out whether the interpreter needs to be set or not:</p>
@@ -124,25 +123,25 @@ In the project settings, under Project -&gt; C/C++ Build -&gt; Settings -&gt; To
 <p>I think plaintext files are simpler to understand than configuration via a UI. Eclipse seems to be oriented around configuration through the UI.</p>
 <p>As with the <code>nix-alien</code> solution above, of course the program also ran into problems with missing shared libraries when loading SWT.</p>
 <p>I opted to set <code>LD_LIBRARY_PATH</code> in a <code>shell.nix</code>, and so would open MounRiver wtih this <code>shell.nix</code> loaded:</p>
-<pre><code>{ pkgs ? import &lt;nixpkgs&gt; {} }:
-let
-  libs = with pkgs; [
-    libz
-
-    cairo
-    glib
-    gtk3
-  ];
-in
-pkgs.mkShell {
-  LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath libs;
-}</code></pre>
+<div class="sourceCode" id="cb13"><pre class="sourceCode nix"><code class="sourceCode nix"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="op">{</span> <span class="va">pkgs</span> <span class="op">?</span> <span class="bu">import</span> &lt;nixpkgs&gt; <span class="op">{}</span> <span class="op">}</span>:</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="va">libs</span> <span class="op">=</span> <span class="kw">with</span> pkgs<span class="op">;</span> <span class="op">[</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    libz</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    cairo</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    glib</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>    gtk3</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>  <span class="op">];</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="kw">in</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>pkgs.mkShell <span class="op">{</span></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>  <span class="va">LD_LIBRARY_PATH</span> <span class="op">=</span> pkgs.lib.makeLibraryPath libs<span class="op">;</span></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <h2 id="using-the-mounriver-ide-for-wct-evt-examples">Using the MounRiver IDE for WCT EVT Examples</h2>
 <p>While trying the MounRiver IDE to build the CH592 EVT examples, I ran into a problem where it couldn’t find the <code>CH59xBLE</code> lib.</p>
 <pre><code>$ ls /home/rgoulter/github/ch592/EVT_V1.0/EXAM/BLE/LIB
 
 .... LIBCH59xBLE.a ....</code></pre>
-<p>This should be <code>libCH59xBLE.a</code>.</p>
+<p>This should be renamed to <code>libCH59xBLE.a</code> in order for the linker to find it.</p>
 <p>Presumably the developers distributing the EVT are using a case-insensitive filesystem.</p>
 <p>Issues like that, and the distributed Eclipse containing whitespace in the executable/toolchain paths, smell sloppy to me.</p>
 <h2 id="attempting-to-package-this-in-nix">Attempting to Package this in Nix</h2>
@@ -150,43 +149,43 @@ pkgs.mkShell {
 <p>However, it’s cleaner to write a Nix package using <code>stdenv.mkDerivation</code>.<br />
 And by writing a package, it’s going to be easier for others to use, or for me to re-use without having to make assumptions about where I put different files.</p>
 <p>For the first attempt, we copy the approach as with the <code>autoPatchelfHook</code> example in the previous blogpost, e.g. <code>mounriver.nix</code>:</p>
-<pre><code>{ stdenv
-, autoPatchelfHook
-, libz
-, cairo
-, glib
-, gtk3
-}:
-
-stdenv.mkDerivation {
-  pname = &quot;mounriver studio community&quot;;
-  version = &quot;V160&quot;;
-  src = ./MounRiver_Studio_Community_Linux_x64_V160.tar.xz;
-  buildInputs = [
-    autoPatchelfHook
-
-    libz
-
-    cairo
-    glib
-    gtk3
-
-    libXtst
-    libsecret
-    alsa-lib
-  ];
-  # breaks on whitespace
-  dontUpdateAutotoolsGnuConfigScripts = true;
-  doBuild = false;
-  installPhase = &#39;&#39;
-    mkdir -p $out
-    cp -r ./MRS_Community/* $out
-  &#39;&#39;;
-}</code></pre>
+<div class="sourceCode" id="cb15"><pre class="sourceCode nix"><code class="sourceCode nix"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="op">{</span> <span class="va">stdenv</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="op">,</span> <span class="va">autoPatchelfHook</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="op">,</span> <span class="va">libz</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="op">,</span> <span class="va">cairo</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="op">,</span> <span class="va">glib</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="op">,</span> <span class="va">gtk3</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span>:</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>stdenv.mkDerivation <span class="op">{</span></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>  <span class="va">pname</span> <span class="op">=</span> <span class="st">&quot;mounriver studio community&quot;</span><span class="op">;</span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>  <span class="va">version</span> <span class="op">=</span> <span class="st">&quot;V160&quot;</span><span class="op">;</span></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>  <span class="va">src</span> <span class="op">=</span> <span class="ss">./MounRiver_Studio_Community_Linux_x64_V160.tar.xz</span><span class="op">;</span></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>  <span class="va">buildInputs</span> <span class="op">=</span> <span class="op">[</span></span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>    autoPatchelfHook</span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>    libz</span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>    cairo</span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>    glib</span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>    gtk3</span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>    libXtst</span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>    libsecret</span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a>    alsa-lib</span>
+<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a>  <span class="op">];</span></span>
+<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a>  <span class="co"># breaks on whitespace</span></span>
+<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a>  <span class="va">dontUpdateAutotoolsGnuConfigScripts</span> <span class="op">=</span> <span class="cn">true</span><span class="op">;</span></span>
+<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a>  <span class="va">doBuild</span> <span class="op">=</span> <span class="cn">false</span><span class="op">;</span></span>
+<span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a>  <span class="va">installPhase</span> <span class="op">=</span> <span class="st">&#39;&#39;</span></span>
+<span id="cb15-30"><a href="#cb15-30" aria-hidden="true" tabindex="-1"></a><span class="st">    mkdir -p $out</span></span>
+<span id="cb15-31"><a href="#cb15-31" aria-hidden="true" tabindex="-1"></a><span class="st">    cp -r ./MRS_Community/* $out</span></span>
+<span id="cb15-32"><a href="#cb15-32" aria-hidden="true" tabindex="-1"></a><span class="st">  &#39;&#39;</span><span class="op">;</span></span>
+<span id="cb15-33"><a href="#cb15-33" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>and a <code>default.nix</code> with:</p>
-<pre><code>{ pkgs ? import &lt;nixpkgs&gt; {} }:
-
-pkgs.callPackage ./mounriver.nix {}</code></pre>
+<div class="sourceCode" id="cb16"><pre class="sourceCode nix"><code class="sourceCode nix"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="op">{</span> <span class="va">pkgs</span> <span class="op">?</span> <span class="bu">import</span> &lt;nixpkgs&gt; <span class="op">{}</span> <span class="op">}</span>:</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>pkgs.callPackage <span class="ss">./mounriver.nix</span> <span class="op">{}</span></span></code></pre></div>
 <p>that we build with <code>nix-build</code>.</p>
 <p>This results in some errors:</p>
 <pre><code>error: auto-patchelf could not satisfy dependency libXtst.so.6 wanted by /nix/store/vhjxnm2ris1rnnc3zgwbi55z5f3ah9ak-mounriver-studio-community-V160/plugins/org.eclipse.justj.openjdk.hotspot.jre.full.linux.x86_64_14.0.2.v20200815-0932/jre/lib/libawt_xawt.so
@@ -201,106 +200,106 @@ error: auto-patchelf could not satisfy dependency libncurses.so.5 wanted by /nix
 error: auto-patchelf could not satisfy dependency libtinfo.so.5 wanted by /nix/store/vhjxnm2ris1rnnc3zgwbi55z5f3ah9ak-mounriver-studio-community-V160/toolchain/arm-none-eabi-gcc/bin/arm-none-eabi-gdb-py</code></pre>
 <p>The <code>libusb-1.0.so.0</code>, <code>libhidapi</code>, <code>libjaylink</code>, etc. helps explain why these shared libraries were included in the <code>beforeinstall</code> directory. (They’re used by openocd and gdb).</p>
 <p>Anyway, adding the libraries for these to the <code>buildInputs</code></p>
-<pre><code>{ stdenv
-, autoPatchelfHook
-, libz
-, cairo
-, glib
-, gtk3
-, hidapi
-, libjaylink
-, libusb1
-, ncurses5
-, libXtst
-, alsa-lib
-, libsecret
-}:
-
-stdenv.mkDerivation {
-  pname = &quot;mounriver studio community&quot;;
-  version = &quot;V160&quot;;
-  src = ./MounRiver_Studio_Community_Linux_x64_V160.tar.xz;
-  buildInputs = [
-    autoPatchelfHook
-
-    libz
-
-    cairo
-    glib
-    gtk3
-
-    hidapi
-    libjaylink
-    libusb1
-    ncurses5
-
-    libXtst
-    libsecret
-    alsa-lib
-  ];
-  # breaks on whitespace
-  dontUpdateAutotoolsGnuConfigScripts = true;
-  doBuild = false;
-  installPhase = &#39;&#39;
-    mkdir -p $out
-    cp -r ./MRS_Community/* $out
-  &#39;&#39;;
-}</code></pre>
+<div class="sourceCode" id="cb18"><pre class="sourceCode nix"><code class="sourceCode nix"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="op">{</span> <span class="va">stdenv</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="op">,</span> <span class="va">autoPatchelfHook</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="op">,</span> <span class="va">libz</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="op">,</span> <span class="va">cairo</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="op">,</span> <span class="va">glib</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="op">,</span> <span class="va">gtk3</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="op">,</span> <span class="va">hidapi</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="op">,</span> <span class="va">libjaylink</span></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="op">,</span> <span class="va">libusb1</span></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a><span class="op">,</span> <span class="va">ncurses5</span></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a><span class="op">,</span> <span class="va">libXtst</span></span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a><span class="op">,</span> <span class="va">alsa-lib</span></span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a><span class="op">,</span> <span class="va">libsecret</span></span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a><span class="op">}</span>:</span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>stdenv.mkDerivation <span class="op">{</span></span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>  <span class="va">pname</span> <span class="op">=</span> <span class="st">&quot;mounriver studio community&quot;</span><span class="op">;</span></span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>  <span class="va">version</span> <span class="op">=</span> <span class="st">&quot;V160&quot;</span><span class="op">;</span></span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a>  <span class="va">src</span> <span class="op">=</span> <span class="ss">./MounRiver_Studio_Community_Linux_x64_V160.tar.xz</span><span class="op">;</span></span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a>  <span class="va">buildInputs</span> <span class="op">=</span> <span class="op">[</span></span>
+<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a>    autoPatchelfHook</span>
+<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a>    libz</span>
+<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a>    cairo</span>
+<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a>    glib</span>
+<span id="cb18-27"><a href="#cb18-27" aria-hidden="true" tabindex="-1"></a>    gtk3</span>
+<span id="cb18-28"><a href="#cb18-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-29"><a href="#cb18-29" aria-hidden="true" tabindex="-1"></a>    hidapi</span>
+<span id="cb18-30"><a href="#cb18-30" aria-hidden="true" tabindex="-1"></a>    libjaylink</span>
+<span id="cb18-31"><a href="#cb18-31" aria-hidden="true" tabindex="-1"></a>    libusb1</span>
+<span id="cb18-32"><a href="#cb18-32" aria-hidden="true" tabindex="-1"></a>    ncurses5</span>
+<span id="cb18-33"><a href="#cb18-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-34"><a href="#cb18-34" aria-hidden="true" tabindex="-1"></a>    libXtst</span>
+<span id="cb18-35"><a href="#cb18-35" aria-hidden="true" tabindex="-1"></a>    libsecret</span>
+<span id="cb18-36"><a href="#cb18-36" aria-hidden="true" tabindex="-1"></a>    alsa-lib</span>
+<span id="cb18-37"><a href="#cb18-37" aria-hidden="true" tabindex="-1"></a>  <span class="op">];</span></span>
+<span id="cb18-38"><a href="#cb18-38" aria-hidden="true" tabindex="-1"></a>  <span class="co"># breaks on whitespace</span></span>
+<span id="cb18-39"><a href="#cb18-39" aria-hidden="true" tabindex="-1"></a>  <span class="va">dontUpdateAutotoolsGnuConfigScripts</span> <span class="op">=</span> <span class="cn">true</span><span class="op">;</span></span>
+<span id="cb18-40"><a href="#cb18-40" aria-hidden="true" tabindex="-1"></a>  <span class="va">doBuild</span> <span class="op">=</span> <span class="cn">false</span><span class="op">;</span></span>
+<span id="cb18-41"><a href="#cb18-41" aria-hidden="true" tabindex="-1"></a>  <span class="va">installPhase</span> <span class="op">=</span> <span class="st">&#39;&#39;</span></span>
+<span id="cb18-42"><a href="#cb18-42" aria-hidden="true" tabindex="-1"></a><span class="st">    mkdir -p $out</span></span>
+<span id="cb18-43"><a href="#cb18-43" aria-hidden="true" tabindex="-1"></a><span class="st">    cp -r ./MRS_Community/* $out</span></span>
+<span id="cb18-44"><a href="#cb18-44" aria-hidden="true" tabindex="-1"></a><span class="st">  &#39;&#39;</span><span class="op">;</span></span>
+<span id="cb18-45"><a href="#cb18-45" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>This package recipe is able to <em>build</em>, but the resulting Eclipse doesn’t successfully <em>run</em>.</p>
 <p>Unsurprisingly, it can’t load the shared libraries for the SWT library.<br />
 <code>nix-alien</code> solved this by adding <code>cairo glib gtk3</code> to its FHS env.<br />
 Replacing the interpreter fixed this by adjusting <code>LD_LIBRARY_PATH</code>.<br />
 Here, we can use <code>wrapProgram</code> to adjust the <code>LD_LIBRARY_PATH</code> with <code>lib.makeLibraryPath [ cairo glib gtk3 ]</code>. This ensures <code>LD_LIBRARY_PATH</code> runs with a value we want when we run the program.</p>
 <p>Hence:</p>
-<pre><code>{ lib
-, stdenv
-, autoPatchelfHook
-, makeWrapper
-, libz
-, cairo
-, glib
-, gtk3
-, hidapi
-, libjaylink
-, libusb1
-, ncurses5
-, libXtst
-, alsa-lib
-, libsecret
-}:
-
-stdenv.mkDerivation {
-  pname = &quot;mounriver studio community&quot;;
-  version = &quot;V160&quot;;
-  src = ./MounRiver_Studio_Community_Linux_x64_V160.tar.xz;
-  buildInputs = [
-    autoPatchelfHook
-    makeWrapper
-
-    libz
-
-    cairo
-    glib
-    gtk3
-
-    hidapi
-    libjaylink
-    libusb1
-    ncurses5
-
-    libXtst
-    libsecret
-    alsa-lib
-  ];
-  # breaks on whitespace
-  dontUpdateAutotoolsGnuConfigScripts = true;
-  doBuild = false;
-  installPhase = &#39;&#39;
-    mkdir -p $out
-    cp -r ./MRS_Community/* $out
-    wrapProgram &quot;$out/MounRiver Studio_Community&quot; --prefix LD_LIBRARY_PATH : ${lib.makeLibraryPath [ cairo glib gtk3 ]}
-  &#39;&#39;;
-}</code></pre>
+<div class="sourceCode" id="cb19"><pre class="sourceCode nix"><code class="sourceCode nix"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="op">{</span> <span class="va">lib</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="op">,</span> <span class="va">stdenv</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="op">,</span> <span class="va">autoPatchelfHook</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="op">,</span> <span class="va">makeWrapper</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="op">,</span> <span class="va">libz</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="op">,</span> <span class="va">cairo</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="op">,</span> <span class="va">glib</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="op">,</span> <span class="va">gtk3</span></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a><span class="op">,</span> <span class="va">hidapi</span></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a><span class="op">,</span> <span class="va">libjaylink</span></span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a><span class="op">,</span> <span class="va">libusb1</span></span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a><span class="op">,</span> <span class="va">ncurses5</span></span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a><span class="op">,</span> <span class="va">libXtst</span></span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a><span class="op">,</span> <span class="va">alsa-lib</span></span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a><span class="op">,</span> <span class="va">libsecret</span></span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a><span class="op">}</span>:</span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>stdenv.mkDerivation <span class="op">{</span></span>
+<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a>  <span class="va">pname</span> <span class="op">=</span> <span class="st">&quot;mounriver studio community&quot;</span><span class="op">;</span></span>
+<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a>  <span class="va">version</span> <span class="op">=</span> <span class="st">&quot;V160&quot;</span><span class="op">;</span></span>
+<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a>  <span class="va">src</span> <span class="op">=</span> <span class="ss">./MounRiver_Studio_Community_Linux_x64_V160.tar.xz</span><span class="op">;</span></span>
+<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a>  <span class="va">buildInputs</span> <span class="op">=</span> <span class="op">[</span></span>
+<span id="cb19-23"><a href="#cb19-23" aria-hidden="true" tabindex="-1"></a>    autoPatchelfHook</span>
+<span id="cb19-24"><a href="#cb19-24" aria-hidden="true" tabindex="-1"></a>    makeWrapper</span>
+<span id="cb19-25"><a href="#cb19-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-26"><a href="#cb19-26" aria-hidden="true" tabindex="-1"></a>    libz</span>
+<span id="cb19-27"><a href="#cb19-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-28"><a href="#cb19-28" aria-hidden="true" tabindex="-1"></a>    cairo</span>
+<span id="cb19-29"><a href="#cb19-29" aria-hidden="true" tabindex="-1"></a>    glib</span>
+<span id="cb19-30"><a href="#cb19-30" aria-hidden="true" tabindex="-1"></a>    gtk3</span>
+<span id="cb19-31"><a href="#cb19-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-32"><a href="#cb19-32" aria-hidden="true" tabindex="-1"></a>    hidapi</span>
+<span id="cb19-33"><a href="#cb19-33" aria-hidden="true" tabindex="-1"></a>    libjaylink</span>
+<span id="cb19-34"><a href="#cb19-34" aria-hidden="true" tabindex="-1"></a>    libusb1</span>
+<span id="cb19-35"><a href="#cb19-35" aria-hidden="true" tabindex="-1"></a>    ncurses5</span>
+<span id="cb19-36"><a href="#cb19-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-37"><a href="#cb19-37" aria-hidden="true" tabindex="-1"></a>    libXtst</span>
+<span id="cb19-38"><a href="#cb19-38" aria-hidden="true" tabindex="-1"></a>    libsecret</span>
+<span id="cb19-39"><a href="#cb19-39" aria-hidden="true" tabindex="-1"></a>    alsa-lib</span>
+<span id="cb19-40"><a href="#cb19-40" aria-hidden="true" tabindex="-1"></a>  <span class="op">];</span></span>
+<span id="cb19-41"><a href="#cb19-41" aria-hidden="true" tabindex="-1"></a>  <span class="co"># breaks on whitespace</span></span>
+<span id="cb19-42"><a href="#cb19-42" aria-hidden="true" tabindex="-1"></a>  <span class="va">dontUpdateAutotoolsGnuConfigScripts</span> <span class="op">=</span> <span class="cn">true</span><span class="op">;</span></span>
+<span id="cb19-43"><a href="#cb19-43" aria-hidden="true" tabindex="-1"></a>  <span class="va">doBuild</span> <span class="op">=</span> <span class="cn">false</span><span class="op">;</span></span>
+<span id="cb19-44"><a href="#cb19-44" aria-hidden="true" tabindex="-1"></a>  <span class="va">installPhase</span> <span class="op">=</span> <span class="st">&#39;&#39;</span></span>
+<span id="cb19-45"><a href="#cb19-45" aria-hidden="true" tabindex="-1"></a><span class="st">    mkdir -p $out</span></span>
+<span id="cb19-46"><a href="#cb19-46" aria-hidden="true" tabindex="-1"></a><span class="st">    cp -r ./MRS_Community/* $out</span></span>
+<span id="cb19-47"><a href="#cb19-47" aria-hidden="true" tabindex="-1"></a><span class="st">    wrapProgram &quot;$out/MounRiver Studio_Community&quot; --prefix LD_LIBRARY_PATH : </span><span class="sc">${</span>lib.makeLibraryPath <span class="op">[</span> cairo glib gtk3 <span class="op">]</span><span class="sc">}</span></span>
+<span id="cb19-48"><a href="#cb19-48" aria-hidden="true" tabindex="-1"></a><span class="st">  &#39;&#39;</span><span class="op">;</span></span>
+<span id="cb19-49"><a href="#cb19-49" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>This runs, but compared to the MounRiver run by <code>nix-alien</code>, the toolchains in the project settings are empty, and so the IDE doesn’t “just work” for building the WCH EVT examples.</p>
 <p>In the MounRiver which did build the WCT EVT examples, the toolchain paths were set to values like <code>${eclipse_home}toolchain/make-3.8/usr/local/bin</code> or <code>${eclipse_home}/toolchain/RISC-V Embedded GCC/bin</code>.</p>
 <p>Searching for these strings, in the <code>MRS_Community</code> folder:</p>
@@ -354,11 +353,11 @@ $ distrobox create ubuntu --image ubuntu:latest</code></pre>
 <pre><code>$ sudo apt update
 $ sudo apt install build-essential</code></pre>
 <p>then e.g. <code>hello.c</code> (unintuitively, you can use the text editor from the host system, such as helix or neovim, even within the ubuntu distrobox):</p>
-<pre><code>#include &lt;stdio.h&gt;
-
-int main(int argc, char **argv) {
-  printf(&quot;hello world\n&quot;);
-}</code></pre>
+<div class="sourceCode" id="cb6"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">int</span> argc<span class="op">,</span> <span class="dt">char</span> <span class="op">**</span>argv<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  printf<span class="op">(</span><span class="st">&quot;hello world</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>And then compile this (<code>gcc hello.c</code>). And run it, if you like: <code>./a.out</code>.</p>
 <h3 id="examining-a.out">Examining a.out</h3>
 <p>Checking what <code>ldd</code> says about the compiled <code>hello.c</code>, from within the ubuntu distrobox:</p>
@@ -381,11 +380,11 @@ exec: Failed to execute process &#39;./a.out&#39;: The file exists and is execut
 <h3 id="a-bash-script-analogy">A Bash Script Analogy</h3>
 <p><code>ld-linux</code> is the <a href="https://linux.die.net/man/8/ld-linux">dynamic-linker</a>.</p>
 <p>What’s going on is comparable to executing a shell script with a <a href="https://en.wikipedia.org/wiki/Shebang_(Unix)">shebang</a>:</p>
-<pre><code>#!/usr/bin/env bash
-echo moo | cowsay</code></pre>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/usr/bin/env bash</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> moo <span class="kw">|</span> <span class="ex">cowsay</span></span></code></pre></div>
 <p>If we have an executable script with a bad interpreter, e.g. <code>badinterp</code>:</p>
-<pre><code>#!/nonexist
-echo &quot;hello&quot;</code></pre>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/nonexist</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">&quot;hello&quot;</span></span></code></pre></div>
 <p>Then trying to run this with <code>bash</code> yields the same “required file not found” error:</p>
 <pre><code>$ ./badinterp
 bash: ./badinterp: cannot execute: required file not found</code></pre>
@@ -404,12 +403,12 @@ exec: Failed to execute process &#39;./badinterp&#39;: The file specified the in
 <p>One workaround provided by nixpkgs is <a href="https://nixos.org/manual/nixpkgs/stable/#sec-fhs-environments">FHS environments</a>.
 (These are implemented using <a href="https://github.com/containers/bubblewrap">bubblewrap</a>, which flatpak uses).</p>
 <p>e.g. in this case, we can write a simple <code>fhs.nix</code>:</p>
-<pre><code>{ pkgs ? import &lt;nixpkgs&gt; {} }:
-
-pkgs.buildFHSEnv {
-  name = &quot;hello&quot;;
-  runScript = ./a.out;
-}</code></pre>
+<div class="sourceCode" id="cb17"><pre class="sourceCode nix"><code class="sourceCode nix"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="op">{</span> <span class="va">pkgs</span> <span class="op">?</span> <span class="bu">import</span> &lt;nixpkgs&gt; <span class="op">{}</span> <span class="op">}</span>:</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>pkgs.buildFHSEnv <span class="op">{</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="va">name</span> <span class="op">=</span> <span class="st">&quot;hello&quot;</span><span class="op">;</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="va">runScript</span> <span class="op">=</span> <span class="ss">./a.out</span><span class="op">;</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>and then build/run this with <code>nix-build ./fhs.nix</code>, and running <code>./result/bin/hello</code>.</p>
 <p>(FWIW, this FHS env would need to be re-built every time the binary changes).</p>
 <h3 id="automating-this-workaround-nix-alien">Automating this Workaround: nix-alien</h3>
@@ -424,25 +423,25 @@ hello world</code></pre>
 <p>The thing to note is that it creates this <code>.cache/nix-alien/UUID/fhs-env/default.nix</code> file.</p>
 <p>NOTE: if you change the arguments to <code>nix-alien</code>, you may need to call <code>nix-alien</code> with <code>--recreate</code> to ensure it recreates the <code>default.nix</code>.</p>
 <p>Examining the <code>default.nix</code> it creates:</p>
-<pre><code>{ pkgs ? import
-    (builtins.fetchTarball {
-      name = &quot;nixpkgs-unstable-20240509145238&quot;;
-      url = &quot;https://github.com/NixOS/nixpkgs/archive/f1010e0469db743d14519a1efd37e23f8513d714.tar.gz&quot;;
-      sha256 = &quot;sha256-doPgfj+7FFe9rfzWo1siAV2mVCasW+Bh8I1cToAXEE4=&quot;;
-    })
-    { }
-}:
-
-let
-  inherit (pkgs) buildFHSUserEnv;
-in
-buildFHSUserEnv {
-  name = &quot;a.out-fhs&quot;;
-  targetPkgs = p: with p; [
-
-  ];
-  runScript = &quot;/home/rgoulter/playground/distrobox-build/a.out&quot;;
-}</code></pre>
+<div class="sourceCode" id="cb20"><pre class="sourceCode nix"><code class="sourceCode nix"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="op">{</span> <span class="va">pkgs</span> <span class="op">?</span> <span class="bu">import</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>    <span class="op">(</span><span class="bu">builtins</span>.<span class="bu">fetchTarball</span> <span class="op">{</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>      <span class="va">name</span> <span class="op">=</span> <span class="st">&quot;nixpkgs-unstable-20240509145238&quot;</span><span class="op">;</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>      <span class="va">url</span> <span class="op">=</span> <span class="st">&quot;https://github.com/NixOS/nixpkgs/archive/f1010e0469db743d14519a1efd37e23f8513d714.tar.gz&quot;</span><span class="op">;</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>      <span class="va">sha256</span> <span class="op">=</span> <span class="st">&quot;sha256-doPgfj+7FFe9rfzWo1siAV2mVCasW+Bh8I1cToAXEE4=&quot;</span><span class="op">;</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>    <span class="op">})</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">{</span> <span class="op">}</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span>:</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>  <span class="va">inherit</span> (<span class="va">pkgs</span>) <span class="va">buildFHSUserEnv</span>;</span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a><span class="kw">in</span></span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>buildFHSUserEnv <span class="op">{</span></span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>  <span class="va">name</span> <span class="op">=</span> <span class="st">&quot;a.out-fhs&quot;</span><span class="op">;</span></span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>  <span class="va">targetPkgs</span> <span class="op">=</span> <span class="va">p</span><span class="op">:</span> <span class="kw">with</span> p<span class="op">;</span> <span class="op">[</span></span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>  <span class="op">];</span></span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>  <span class="va">runScript</span> <span class="op">=</span> <span class="st">&quot;/home/rgoulter/playground/distrobox-build/a.out&quot;</span><span class="op">;</span></span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>The <code>builtins.fetchTarball</code> is essentially performing the same role as <code>&lt;nixpkgs&gt;</code>. (The latter uses <code>nixpkgs</code> on <code>NIX_PATH</code>, the former uses a particular revision of the <code>nixpkgs</code> repository).</p>
 <p><code>buildFHSUserEnv</code> is an alias for <code>buildFHSEnv</code>.</p>
 <p><code>targetPkgs</code> is empty (so doesn’t have any effect on this example), but it’s useful for additional dynamically linked libraries the precompiled binary may need.</p>
@@ -454,11 +453,11 @@ buildFHSUserEnv {
 <pre><code>$ ./a.out
 cannot execute ./a.out: You are trying to run an unpatched binary on nixos, but you have not configured NIX_LD or NIX_LD_x86_64-linux. See https://github.com/Mic92/nix-ld for more details</code></pre>
 <p>As the nix-ld readme suggests, we can set <code>NIX_LD</code> with a <code>shell.nix</code>:</p>
-<pre><code>{ pkgs ? import &lt;nixpkgs&gt; {} }:
-pkgs.mkShell {
-  NIX_LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath [];
-  NIX_LD = pkgs.lib.fileContents &quot;${pkgs.stdenv.cc}/nix-support/dynamic-linker&quot;;
-}</code></pre>
+<div class="sourceCode" id="cb23"><pre class="sourceCode nix"><code class="sourceCode nix"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="op">{</span> <span class="va">pkgs</span> <span class="op">?</span> <span class="bu">import</span> &lt;nixpkgs&gt; <span class="op">{}</span> <span class="op">}</span>:</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>pkgs.mkShell <span class="op">{</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="va">NIX_LD_LIBRARY_PATH</span> <span class="op">=</span> pkgs.lib.makeLibraryPath <span class="op">[];</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="va">NIX_LD</span> <span class="op">=</span> pkgs.lib.fileContents <span class="st">&quot;</span><span class="sc">${</span>pkgs.stdenv.cc<span class="sc">}</span><span class="st">/nix-support/dynamic-linker&quot;</span><span class="op">;</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>entering this with <code>nix-shell</code>, and running this:</p>
 <pre><code>$ ./a.out
 hello world</code></pre>
@@ -476,20 +475,20 @@ hello world</code></pre>
 <p>When writing Nix packages, nixpkgs has an <a href="https://nixos.org/manual/nixpkgs/stable/#setup-hook-autopatchelfhook">autoPatchelfHook</a> which can take care of automatically performing tasks like this.</p>
 <p>This makes more sense when packaging a prebuilt release of some program, but we can still apply it to this prebuilt <code>./a.out</code>:</p>
 <p>e.g. a <code>hello.nix</code> file with:</p>
-<pre><code>{ pkgs ? import &lt;nixpkgs&gt; {} }:
-
-pkgs.stdenv.mkDerivation {
-  pname = &quot;hello-world&quot;;
-  version = &quot;1.0.0&quot;;
-  buildInputs = [
-    pkgs.autoPatchelfHook
-  ];
-  dontUnpack=true;
-  installPhase=&#39;&#39;
-    mkdir -p $out/bin
-    cp ${./a.out} $out/bin/hello
-  &#39;&#39;;
-}</code></pre>
+<div class="sourceCode" id="cb28"><pre class="sourceCode nix"><code class="sourceCode nix"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="op">{</span> <span class="va">pkgs</span> <span class="op">?</span> <span class="bu">import</span> &lt;nixpkgs&gt; <span class="op">{}</span> <span class="op">}</span>:</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>pkgs.stdenv.mkDerivation <span class="op">{</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  <span class="va">pname</span> <span class="op">=</span> <span class="st">&quot;hello-world&quot;</span><span class="op">;</span></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>  <span class="va">version</span> <span class="op">=</span> <span class="st">&quot;1.0.0&quot;</span><span class="op">;</span></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>  <span class="va">buildInputs</span> <span class="op">=</span> <span class="op">[</span></span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>    pkgs.autoPatchelfHook</span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>  <span class="op">];</span></span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>  <span class="va">dontUnpack</span><span class="op">=</span><span class="cn">true</span><span class="op">;</span></span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>  <span class="va">installPhase</span><span class="op">=</span><span class="st">&#39;&#39;</span></span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a><span class="st">    mkdir -p $out/bin</span></span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a><span class="st">    cp </span><span class="sc">${</span><span class="ss">./a.out</span><span class="sc">}</span><span class="st"> $out/bin/hello</span></span>
+<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a><span class="st">  &#39;&#39;</span><span class="op">;</span></span>
+<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>this can be built with <code>nix-build hello.nix</code> and the resulting patched binary run with <code>./result/bin/hello</code>.</p>
 <p>The <code>autoPatchelfHook</code> is invoked as part of the ‘fixup’ phase.</p>]]></summary>
 </entry>
@@ -503,17 +502,17 @@ pkgs.stdenv.mkDerivation {
 a “worksheet” user interface for simple C programs. – By executing the worksheet, you get to see the program’s
 output annotated alongside the source code.</p>
 <p>An illustrative example:</p>
-<pre><code>int main(int argc, char* argv) {
-  int x = 5;                                      //&gt; x is int
-  int *px;                                        //&gt; px is pointer to int
-  px = &amp;x;                                        //&gt; px = 0x7ffc365efd5c = 5
-  *px = 3;                                        //&gt; (*px) = 3
-  x;                                              //&gt; 3
-  px = 0;                                         //&gt; px = (nil)
-  *px = 5;                                        //&gt; SEGFAULT
-  x;
-  printf(&quot;done.\n&quot;);
-}</code></pre>
+<div class="sourceCode" id="cb1"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">int</span> argc<span class="op">,</span> <span class="dt">char</span><span class="op">*</span> argv<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span> x <span class="op">=</span> <span class="dv">5</span><span class="op">;</span>                                      <span class="co">//&gt; x is int</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span> <span class="op">*</span>px<span class="op">;</span>                                        <span class="co">//&gt; px is pointer to int</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  px <span class="op">=</span> <span class="op">&amp;</span>x<span class="op">;</span>                                        <span class="co">//&gt; px = 0x7ffc365efd5c = 5</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="op">*</span>px <span class="op">=</span> <span class="dv">3</span><span class="op">;</span>                                        <span class="co">//&gt; (*px) = 3</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  x<span class="op">;</span>                                              <span class="co">//&gt; 3</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  px <span class="op">=</span> <span class="dv">0</span><span class="op">;</span>                                         <span class="co">//&gt; px = (nil)</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="op">*</span>px <span class="op">=</span> <span class="dv">5</span><span class="op">;</span>                                        <span class="co">//&gt; SEGFAULT</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  x<span class="op">;</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  printf<span class="op">(</span><span class="st">&quot;done.</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>The <code>//&gt;</code> comments are automatically generated by the worksheet program.</p>
 <p><a href="https://github.com/rgoulter/c-worksheet-instrumentor/?tab=readme-ov-file#worksheet-examples">More examples on the c-worksheet-instrumentor readme</a>.</p>
 <p>The project consists of a “c-worksheet” program which does all the heavy lifting of computing the C worksheet annotations, and a vim plugin which provides a nice UI for using the worksheet functionality.</p>
@@ -898,8 +897,8 @@ On the other hand, I think it smells a bit too much to ‘declare’ the existan
 <h2 id="creating-temporary-urls-with-command-line-client">Creating Temporary URLs: with Command Line Client</h2>
 <p>The <a href="https://docs.openstack.org/swift/latest/api/temporary_url_middleware.html">documentation about temporary url middleware</a> gives instructions on using the OpenStack Swift client to create a temporary URL.</p>
 <p>There are various ways to come up with the OpenStack Storage URL (<code>https://swift-cluster.example.com/v1/my_account/</code>), but here’s what I came up with for the container, object, and temp URL key above:</p>
-<pre class="sh"><code>OS_STORAGE_URL=$(openstack catalog show object-store --format=json | jq -r .endpoints[2].url)
-swift tempurl --digest=sha1 GET 900 ${OS_STORAGE_URL}/rgoulter-storage/test some-secret-value</code></pre>
+<div class="sourceCode" id="cb5"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="va">OS_STORAGE_URL</span><span class="op">=</span><span class="va">$(</span><span class="ex">openstack</span> catalog show object-store <span class="at">--format</span><span class="op">=</span>json <span class="kw">|</span> <span class="ex">jq</span> <span class="at">-r</span> .endpoints<span class="pp">[</span><span class="ss">2</span><span class="pp">]</span>.url<span class="va">)</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ex">swift</span> tempurl <span class="at">--digest</span><span class="op">=</span>sha1 GET 900 <span class="va">${OS_STORAGE_URL}</span>/rgoulter-storage/test some-secret-value</span></code></pre></div>
 <p>The <code>jq</code> expression isn’t the cleanest. (The <code>[2]</code> is the index the “public” object-store endpoint happened to be in the output of <code>openstack catalog show object-store</code>; albeit, all the endpoints had the same URL).</p>
 <p>The URL from <code>swift tempurl</code> can be used for GET requests to access the storage.</p>]]></summary>
 </entry>

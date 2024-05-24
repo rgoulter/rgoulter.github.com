@@ -163,7 +163,7 @@ From what I’ve tried, it’s slightly trickier with OpenStack public clouds.</
 <p>Managing OpenStack resources from outside the cloud console requires an OpenStack user.
 I found it convenient to download the RC file for the user, and use <a href="https://direnv.net/">direnv</a> to load those credentials.</p>
 <p>Here’s the code listing for a <code>main.tf</code> to achieve this (with some notes below):</p>
-<pre><code>terraform {
+<pre class="terraform"><code>terraform {
   required_providers {
     openstack = {
       source  = &quot;terraform-provider-openstack/openstack&quot;
@@ -326,16 +326,16 @@ One thing I found annoying it it’s not quite so freeform as <code>"xC-yGB-zGB"
 The name <code>"Debian 11 Bullseye x86_64"</code> comes from running <code>openstack images list</code>.<br />
 (An easy way to get the <code>openstack</code> client is to run <code>nix shell nixpkgs#openstackclient</code>).</p>
 <p>Looking at the user data passed to the VM…</p>
-<pre><code>#cloud-config
-system_info:
- default_user:
-  name: ${var.default_user_name}
-chpasswd: { expire: false }
-ssh_pwauth: false
-package_upgrade: true
-manage_etc_hosts: localhost
-runcmd:
-  - &quot;curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install --no-confirm&quot;</code></pre>
+<div class="sourceCode" id="cb2"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#cloud-config</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">system_info</span><span class="kw">:</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="at"> </span><span class="fu">default_user</span><span class="kw">:</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">name</span><span class="kw">:</span><span class="at"> ${var.default_user_name}</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">chpasswd</span><span class="kw">:</span><span class="at"> </span><span class="kw">{</span><span class="at"> </span><span class="fu">expire</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span><span class="at"> </span><span class="kw">}</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh_pwauth</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">package_upgrade</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="fu">manage_etc_hosts</span><span class="kw">:</span><span class="at"> localhost</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="fu">runcmd</span><span class="kw">:</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="st">&quot;curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install --no-confirm&quot;</span></span></code></pre></div>
 <p>…this uses <a href="https://cloud-init.io/">cloud-init</a>, which declares some things we want set up in the VM.<br />
 The <code>curl ... | sh</code> installs the <a href="https://github.com/DeterminateSystems/nix-installer">determinate-systems nix installer</a>.<br />
 This means the VM will have <code>nix</code> available shortly after the VM launches. (Running the command <code>cloud-init status</code> on the launched VM shows whether cloud-init has finished).</p>
@@ -346,83 +346,83 @@ This means the VM will have <code>nix</code> available shortly after the VM laun
 <pre><code>ssh debian@(terraform output -json public_ipv4 | jq -r)</code></pre>
 <h3 id="building-the-nixos-image-for-openstack">Building the NixOS Image for OpenStack</h3>
 <p>This is the <code>flake.nix</code> file. Below, some implementation notes, and the commands for building/uploading.</p>
-<pre><code>{
-  inputs = {
-    nixos-generators = {
-      url = &quot;github:nix-community/nixos-generators&quot;;
-      inputs.nixpkgs.follows = &quot;nixpkgs&quot;;
-    };
-    nixpkgs.url = &quot;github:NixOS/nixpkgs/nixos-22.11&quot;;
-    rgoulter.url = &quot;github:rgoulter/nix-user-repository&quot;;
-  };
-
-  outputs = {
-    self,
-    nixos-generators,
-    nixpkgs,
-    rgoulter,
-    ...
-  }: {
-    packages.&quot;x86_64-linux&quot;.small-openstack = nixos-generators.nixosGenerate {
-      pkgs = nixpkgs.legacyPackages.&quot;x86_64-linux&quot;;
-      format = &quot;openstack&quot;;
-      modules = [
-        rgoulter.nixosModules.cloud-interactive
-        rgoulter.nixosModules.ssh
-        rgoulter.nixosModules.ssh-users
-        rgoulter.nixosModules.tailscale
-      ];
-    };
-  };
-}</code></pre>
+<div class="sourceCode" id="cb5"><pre class="sourceCode nix"><code class="sourceCode nix"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="va">inputs</span> <span class="op">=</span> <span class="op">{</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="va">nixos-generators</span> <span class="op">=</span> <span class="op">{</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>      <span class="va">url</span> <span class="op">=</span> <span class="st">&quot;github:nix-community/nixos-generators&quot;</span><span class="op">;</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>      <span class="va">inputs</span>.<span class="va">nixpkgs</span>.<span class="va">follows</span> <span class="op">=</span> <span class="st">&quot;nixpkgs&quot;</span><span class="op">;</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="op">};</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="va">nixpkgs</span>.<span class="va">url</span> <span class="op">=</span> <span class="st">&quot;github:NixOS/nixpkgs/nixos-22.11&quot;</span><span class="op">;</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    <span class="va">rgoulter</span>.<span class="va">url</span> <span class="op">=</span> <span class="st">&quot;github:rgoulter/nix-user-repository&quot;</span><span class="op">;</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="op">};</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  <span class="va">outputs</span> <span class="op">=</span> <span class="op">{</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span><span class="op">,</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    <span class="va">nixos-generators</span><span class="op">,</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    <span class="va">nixpkgs</span><span class="op">,</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>    <span class="va">rgoulter</span><span class="op">,</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>    <span class="op">...</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span>: <span class="op">{</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>    <span class="va">packages</span>.<span class="st">&quot;</span>x86_64-linux<span class="st">&quot;</span>.<span class="va">small-openstack</span> <span class="op">=</span> nixos<span class="op">-</span>generators.nixosGenerate <span class="op">{</span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>      <span class="va">pkgs</span> <span class="op">=</span> nixpkgs.legacyPackages.<span class="st">&quot;x86_64-linux&quot;</span><span class="op">;</span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>      <span class="va">format</span> <span class="op">=</span> <span class="st">&quot;openstack&quot;</span><span class="op">;</span></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>      <span class="va">modules</span> <span class="op">=</span> <span class="op">[</span></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>        rgoulter.nixosModules.cloud-interactive</span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>        rgoulter.nixosModules.ssh</span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>        rgoulter.nixosModules.ssh-users</span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>        rgoulter.nixosModules.tailscale</span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>      <span class="op">];</span></span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>    <span class="op">};</span></span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>  <span class="op">};</span></span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>Recall, a <code>flake.nix</code> file is more/less equivalent to a <code>package.json</code>/<code>Cargo.toml</code>/etc. project file,
 and is a standard entry point into a Nix codebase.</p>
 <p>Here, the OpenStack image is declared as a package, using <a href="https://github.com/nix-community/nixos-generators">nixos-generators</a>
 and its <code>nixosGenerate</code> package. (The OpenStack specific part is the <code>format = "openstack";</code> attribute. As mentioned above, you can dig into the details in <code>nixos/</code>, which <code>nixos-generators</code> makes use of).</p>
 <p>The <code>rgoulter.nixosModules</code> refers to the <a href="https://github.com/rgoulter/nix-user-repository/tree/95968968d32f7a6754978f099e975ca56b916977/modules">modules</a> in my <code>nix-user-repository</code>. (Though, you could just inline these all as one module in this <code>flake.nix</code> file, etc.).</p>
 <p>e.g. cloud-interactive ensures that some CLI tools I like are installed:</p>
-<pre><code>{
-  config,
-  lib,
-  pkgs,
-  ...
-}: {
-  environment.systemPackages = with pkgs; [
-    direnv
-    fd
-    fish
-    git
-    helix
-    jq
-    ripgrep
-    starship
-    tmux
-  ];
-  nix = {
-    extraOptions = ''
-      experimental-features = nix-command flakes
-    '';
-  };
-  security.sudo.wheelNeedsPassword = false;
-}</code></pre>
+<div class="sourceCode" id="cb6"><pre class="sourceCode nix"><code class="sourceCode nix"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="va">config</span><span class="op">,</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="va">lib</span><span class="op">,</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="va">pkgs</span><span class="op">,</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="op">...</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span>: <span class="op">{</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="va">environment</span>.<span class="va">systemPackages</span> <span class="op">=</span> <span class="kw">with</span> pkgs<span class="op">;</span> <span class="op">[</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    direnv</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    fd</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    fish</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    git</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    helix</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    jq</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    ripgrep</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>    starship</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>    tmux</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>  <span class="op">];</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>  <span class="va">nix</span> <span class="op">=</span> <span class="op">{</span></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>    <span class="va">extraOptions</span> <span class="op">=</span> <span class="st">''</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="st">      experimental-features = nix-command flakes</span></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a><span class="st">    ''</span><span class="op">;</span></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>  <span class="op">};</span></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>  <span class="va">security</span>.<span class="va">sudo</span>.<span class="va">wheelNeedsPassword</span> <span class="op">=</span> <span class="cn">false</span><span class="op">;</span></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>and <code>ssh-users</code> declares the user I log in with:</p>
-<pre><code>{
-  config,
-  lib,
-  pkgs,
-  ...
-}:
-{
-  users.users.rgoulter = {
-    isNormalUser = true;
-    extraGroups = [
-      &quot;wheel&quot;
-    ];
-    openssh.authorizedKeys.keys = [
-      &quot;ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOmQ9/u9qV9Vvy2pbcPtGiAmIrhXdi/vY6IesJ5RYpS4&quot;
-    ];
-  };
-}</code></pre>
+<div class="sourceCode" id="cb7"><pre class="sourceCode nix"><code class="sourceCode nix"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="va">config</span><span class="op">,</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="va">lib</span><span class="op">,</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="va">pkgs</span><span class="op">,</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="op">...</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span>:</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="va">users</span>.<span class="va">users</span>.<span class="va">rgoulter</span> <span class="op">=</span> <span class="op">{</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    <span class="va">isNormalUser</span> <span class="op">=</span> <span class="cn">true</span><span class="op">;</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    <span class="va">extraGroups</span> <span class="op">=</span> <span class="op">[</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;wheel&quot;</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>    <span class="op">];</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>    <span class="va">openssh</span>.<span class="va">authorizedKeys</span>.<span class="va">keys</span> <span class="op">=</span> <span class="op">[</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOmQ9/u9qV9Vvy2pbcPtGiAmIrhXdi/vY6IesJ5RYpS4&quot;</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>    <span class="op">];</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>  <span class="op">};</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>(This doesn’t necessarily need to be hard coded into the image; but, for this use case, doing it this way is simple).</p>
 <p>With this <code>flake.nix</code>, on a Linux computer with <code>nix</code> installed (and flakes, nix-command enabled, as the determinate-systems does),
 the image is built by running a command like:</p>
@@ -470,19 +470,6 @@ the built image can be uploaded with:</p>
 <br style="clear: both;" />
 
 <hr />
-
-<!-- Load highlight.js for Syntax Highlighting. -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/bash.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/c.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/gherkin.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/haskell.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/lisp.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/nix.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/python.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js"></script>
-<script>hljs.highlightAll();</script>
 
             </div>
 
@@ -575,7 +562,7 @@ the built image can be uploaded with:</p>
                     hitType:       'event',
                     eventCategory: 'pageLoad',
                     eventAction:   'begun',
-                    eventValue:    String(ms)
+                    eventValue:    String(0)
                 });
 
                 // DIMENSION: visitor
