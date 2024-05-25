@@ -171,73 +171,73 @@ general <a href="https://asdf-vm.com/">asdf-vm</a>).</p>
 and VSCode can have its Docker containers.</p>
 <p>Here’s an example of trying the same trick with Emacs.</p>
 <p>e.g. for a Terraform file like <code>main.tf</code>:</p>
-<pre class="terraform"><code>terraform {
-  required_providers {
-    aws = {
-      source  = &quot;hashicorp/aws&quot;
-      version = &quot;~&gt; 3.0&quot;
-    }
-  }
-}
-
-provider &quot;aws&quot; {
-}
-
-variable &quot;ssh_authorized_key&quot; {
-  type = string
-}
-
-resource &quot;aws_key_pair&quot; &quot;key&quot; {
-  key_name_prefix = &quot;ubuntu-vm&quot;
-  public_key      = var.ssh_authorized_key
-}
-
-resource &quot;aws_security_group&quot; &quot;allow_ssh&quot; {
-  name        = &quot;allow_ssh&quot;
-  description = &quot;Allow SSH inbound traffic&quot;
-
-  ingress {
-    from_port   = 22
-    to_port     = 22
-    protocol    = &quot;tcp&quot;
-    cidr_blocks = [&quot;0.0.0.0/0&quot;]
-  }
-}
-
-data &quot;aws_ami&quot; &quot;ubuntu&quot; {
-  most_recent = true
-
-  filter {
-    name   = &quot;name&quot;
-    values = [&quot;ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-*&quot;]
-  }
-
-  filter {
-    name   = &quot;virtualization-type&quot;
-    values = [&quot;hvm&quot;]
-  }
-
-  owners = [&quot;099720109477&quot;] # Canonical
-}
-
-resource &quot;aws_instance&quot; &quot;ubuntu&quot; {
-  ami           = data.aws_ami.ubuntu.id
-  instance_type = &quot;t3.small&quot;
-
-  key_name = aws_key_pair.key.key_name
-
-  vpc_security_group_ids = [aws_security_group.allow_ssh.id]
-
-  associate_public_ip_address = true
-
-  root_block_device {
-    volume_size = 20
-  }
-}
-
-output &quot;vm_public_ip&quot; {
-  value = aws_instance.ubuntu.public_ip
-}</code></pre>
+<div class="sourceCode" id="cb1"><pre class="sourceCode terraform"><code class="sourceCode terraform"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">terraform</span> {</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">required_providers</span> {</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    aws <span class="op">=</span> {</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>      <span class="kw">source</span>  <span class="op">=</span> <span class="st">&quot;hashicorp/aws&quot;</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>      version <span class="op">=</span> <span class="st">&quot;~&gt; 3.0&quot;</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="kw">provider</span> <span class="st">&quot;aws&quot;</span> {</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="kw">variable</span> <span class="st">&quot;ssh_authorized_key&quot;</span> {</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  type <span class="op">=</span> <span class="dt">string</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="kw">resource</span> <span class="st">&quot;aws_key_pair&quot;</span> <span class="st">&quot;key&quot;</span> {</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>  key_name_prefix <span class="op">=</span> <span class="st">&quot;ubuntu-vm&quot;</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>  public_key      <span class="op">=</span> <span class="va">var</span>.ssh_authorized_key</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="kw">resource</span> <span class="st">&quot;aws_security_group&quot;</span> <span class="st">&quot;allow_ssh&quot;</span> {</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>  name        <span class="op">=</span> <span class="st">&quot;allow_ssh&quot;</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>  description <span class="op">=</span> <span class="st">&quot;Allow SSH inbound traffic&quot;</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>  ingress {</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>    from_port   <span class="op">=</span> <span class="dv">22</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>    to_port     <span class="op">=</span> <span class="dv">22</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>    protocol    <span class="op">=</span> <span class="st">&quot;tcp&quot;</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>    cidr_blocks <span class="op">=</span> [<span class="st">&quot;0.0.0.0/0&quot;</span>]</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="kw">data</span> <span class="st">&quot;aws_ami&quot;</span> <span class="st">&quot;ubuntu&quot;</span> {</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>  most_recent <span class="op">=</span> <span class="va">true</span></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>  filter {</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>    name   <span class="op">=</span> <span class="st">&quot;name&quot;</span></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>    <span class="bu">values</span> <span class="op">=</span> [<span class="st">&quot;ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-*&quot;</span>]</span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>  filter {</span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>    name   <span class="op">=</span> <span class="st">&quot;virtualization-type&quot;</span></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>    <span class="bu">values</span> <span class="op">=</span> [<span class="st">&quot;hvm&quot;</span>]</span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>  owners <span class="op">=</span> [<span class="st">&quot;099720109477&quot;</span>] <span class="co"># Canonical</span></span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a><span class="kw">resource</span> <span class="st">&quot;aws_instance&quot;</span> <span class="st">&quot;ubuntu&quot;</span> {</span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>  ami           <span class="op">=</span> <span class="kw">data</span>.aws_ami.ubuntu.id</span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>  instance_type <span class="op">=</span> <span class="st">&quot;t3.small&quot;</span></span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>  key_name <span class="op">=</span> aws_key_pair.key.key_name</span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>  vpc_security_group_ids <span class="op">=</span> [aws_security_group.allow_ssh.id]</span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>  associate_public_ip_address <span class="op">=</span> <span class="va">true</span></span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a>  root_block_device {</span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a>    volume_size <span class="op">=</span> <span class="dv">20</span></span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a><span class="kw">output</span> <span class="st">&quot;vm_public_ip&quot;</span> {</span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a>  value <span class="op">=</span> aws_instance.ubuntu.public_ip</span>
+<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <p>and a <code>shell.nix</code> with contents:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode nix"><code class="sourceCode nix"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="op">{</span> <span class="va">pkgs</span> <span class="op">?</span> <span class="bu">import</span> &lt;nixpkgs&gt; <span class="op">{}</span> <span class="op">}</span>:</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
