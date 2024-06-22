@@ -175,7 +175,7 @@ This means you have to remember anything that’s not on the keycaps.</p>
 <p>Anything that’s frequently used will be easy to recall.<br />
 What requires more consideration is trying to make recall easier for stuff
 that’s used infrequently.</p>
-<p>A small keyboard (like the ortholinear 4x12 keyboards, or split 36-key
+<p>Small keyboards (like the ortholinear 4x12 keyboards, or split 36-key
 keyboards) have keymaps which bring the full functionality of a typical keyboard
 to within easy reach of the hands on home row.<br />
 In my experience, it’s fairly straightforward to recall the “standard keyboard”
@@ -190,9 +190,10 @@ Number/Symbol layers are different than a traditional keyboard, but it’s
 <code>_</code> is often used as a placeholder for “space”.<br />
 (I personally prefer to amend it by having <code>/</code> complement <code>\</code>, and by moving <code>~</code>
 to home row’s pinkie finger).</p>
-<p>Examples of bringing functionality to within reach of the hands (in contrast to
-leader key sequences):</p>
+<p>Examples of how functionality is brought to within reach of the hands:</p>
 <ul>
+<li><p>Modifier keys Shift/Ctrl/Gui/Alt can be used with tap-hold using the keys on
+home row. (“Home Row Mods”).</p></li>
 <li><p>Miryoku puts the <code>CapsLock</code> key on a layer.</p></li>
 <li><p>Miryoku has some “Additional Features”, such as switching between a Base and
 an Extra keymap. These keys are on a layer, with additional intention gated
@@ -212,7 +213,7 @@ placed than where the “change RGB hue” key is. (The arrow keys are placed on
 home row, or in a vi-style hjkl position).</p>
 <p>Using QMK leader key sequences for “fancy keycodes” might be complex, but the
 effort to remember the key sequence doesn’t rely on finding a position for it on
-a layer (nor having to recall that position later).</p>
+a layer, nor having to recall that position later.</p>
 <h2 id="leader-key-sequence-cost-multiple-key-presses">Leader Key Sequence Cost: Multiple Key Presses</h2>
 <p>Another obvious cost to using QMK leader sequences like suggested is the
 sequence is not very quick to type out.</p>
@@ -233,6 +234,9 @@ few such keyboards</a>).</p>
 <p>Without having to worry about “where do I position these keys”, I reckon it’s
 easier to add additional functionality to a keymap by adding a leader key
 sequence which invokes it.</p>
+<p>The point is less “it’s good to use leader key sequences for everything”, and
+more “it’s a low cost to add it to the keymap, and will hopefully be easy to
+recall if it’s needed”.</p>
 <p>Here are some thoughts as to leader key sequences I think I might add to my
 keymap:</p>
 <ul>
@@ -284,11 +288,13 @@ mods.</li>
 <ul>
 <li><p>e.g. on a web browser, Ctrl+T opens a new tab, Ctrl+Shift+T re-opens a closed
 tab.</p></li>
-<li><p>e.g. in Emacs and macOS, shortcuts like Ctrl+a or Ctrl+e navigate in text, again
-operating by holding down a modifier key.</p></li>
+<li><p>e.g. in Emacs and macOS, shortcuts like Ctrl+a or Ctrl+e navigate in text.</p></li>
 <li><p>on laptop keyboards, you hold down the Fn key to change the behaviour of some
-other keys; or on small custom keyboards, you might access different keyboard
-layers by holding down one or more Fn keys.</p></li>
+other keys.</p>
+<ul>
+<li>or on small custom keyboards, you might access different keyboard layers by
+holding down one or more Fn keys.</li>
+</ul></li>
 </ul>
 <p>Modifier keys allow re-using the same set of physical keys for more actions.</p>
 <p>Key sequences are another way of mapping functionality onto a set of keys.
