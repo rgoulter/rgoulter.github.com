@@ -1,0 +1,520 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Further Notes on Gym Going - Richard Goulter's Blog</title>
+
+        <!-- My (Old) CSS theme -->
+        <link rel="stylesheet" type="text/css" href="../css/default.css" />
+
+        <!--
+            jQuery & jQueryUI
+        -->
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css" />
+
+        <!--
+            Pandoc Style CSS
+            (for syntax highlighted snippets)
+        -->
+        <link rel="stylesheet" type="text/css" href="../css/syntax.css" />
+
+        <!--
+            Bootstrap
+        -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+        <style>
+            /*
+             * Bootstrap defines blockquote as 17px,
+             * so it looks stupidly large in my blogposts. */
+            blockquote {
+                font-size: 14px;
+            }
+        </style>
+
+        <!--
+            Waypoints, and Waypoints-Sticky,
+            so we can do this:
+            http://imakewebthings.com/waypoints/shortcuts/sticky-elements/
+        -->
+        <script src="../js/jquery.waypoints.min.js"></script>
+        <script src="../js/sticky.min.js"></script>
+
+        <!-- My analytics stuff -->
+        <script src="../js/my_analytics.js"></script>
+        <script src="../js/my_analytics_debug.js"></script>
+
+        <!--
+            TOCify
+        -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js"></script>
+
+        <!--
+            Patched TOCify css file.
+            (Don't want fixed `.tocify`).
+        -->
+        <link rel="stylesheet" type="text/css" href="../css/jquery.tocify.css" />
+
+        <style>
+        .navbar {
+            margin-bottom: 0px;
+        }
+
+        .banner-image {
+            width:100%;
+        }
+
+        .banner {
+            margin-left: 0px;
+            margin-right: 0px;
+        }
+
+        body {
+            background-color: #e2e2e2;
+        }
+
+        #page {
+            padding-left:0;
+            padding-right:0;
+            background-color: #ffffff;
+        }
+        </style>
+
+        <!-- Google Analytics -->
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-H13NWYDX0G"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'G-H13NWYDX0G');
+        </script>
+    </head>
+    <body>
+        <div id="page" class="container">
+            <!-- This, with no padding on left/right -->
+            <div class="banner">
+                <nav class="navbar navbar-default">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+
+            <!-- The Hamburger -->
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../">Richard Goulter's Blog</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="../">Home</a></li>
+            <li><a href="../yi.html">Yi</a></li>
+            <li><a href="../emacs.html">Emacs</a></li>
+            <li><a href="../what-i-wish-i-knew-when-i-started-using-nix.html">Nixpkgs</a></li>
+            <li><a href="../archive.html">Archive</a></li>
+        </ul>
+    </div>
+</nav>
+
+            </div>
+
+            <hr style="margin: 0px; border-top: 5px solid black;" />
+
+            <div id="content" class="container">
+                <h1>Further Notes on Gym Going</h1>
+                <div class="info">
+    Posted on June 12, 2024
+    
+        by Richard Goulter
+    <br />
+    
+    Tags: 
+    
+</div>
+
+<p>I have continued going to the gym in the time <a href="2024-03-23-six-months-of-going-to-the-gym.html">since I wrote a blogpost with thoughts about going there for six months</a>.<br />
+That post logged that I’d made good progress on fat loss goals, enjoyed going to the gym, thought some of the machines in the gym were neat.</p>
+<p>Since then, I’ve paid more attention to resistance training.</p>
+<p>Here are some scattered notes and links to things I’ve found interesting:</p>
+<ul>
+<li><p>I use ChatGPT less than I was using it before.</p>
+<ul>
+<li>I’ve since found resources which I find reputable.
+Whereas, before, I’d at least found ChatGPT to be better than random blogspam.</li>
+</ul></li>
+<li><p>Great resource: <a href="https://exrx.net/" class="uri">https://exrx.net/</a></p>
+<ul>
+<li>This has many great pages on topics related to exercise.</li>
+<li>I constantly refer to this website for its exercise library,
+which lists exercises grouped by what muscle the exercise targets.
+(e.g. if you want to know what exercises target the hamstrings, you can find a list there).</li>
+<li>The exercises each have a video demonstrating how to perform the exercise,
+as well as a description and comments.
+<ul>
+<li>You can often find similar exercises done with a barbell, dumbbells, cable machine, plate-loaded machine, selectorized.. or with a smith machine, or bodyweight. – Some exercises are locked behind a premium paywall, but <em>most</em> can be read for free.</li>
+</ul></li>
+</ul></li>
+<li><p>Caveats about content creators:</p>
+<ul>
+<li>IMO: There are perverse incentives with YouTube channels and blogs:
+<ul>
+<li>There’s a conflict between “put out quality information” and “get discovered
+by a recommendation algorithm”.
+<ul>
+<li>Recommendation algorithms tend to favour things that are fresh/new.</li>
+<li>In health/fitness, it’s likely that good information is already well known
+(by some people somewhere).</li>
+</ul></li>
+<li>I reckon that, especially for YouTube channels or blogs with high production value,
+this leads to pushing out repeats of content, in order to stay ‘fresh’.</li>
+</ul></li>
+<li>Audience / context.
+<ul>
+<li>Beginners have a lot of room to grow/improve; for advanced practitioners, marginal increases can be expensive.
+So, advice targeted at an intermediate or advanced level might not be necessary for a beginner level.
+<ul>
+<li>For beginners and for casual practitioners, it’s not necessarily worth pursuing 100% efficiency.</li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li><p>Great resources: Dr Mike Israetel’s <a href="https://www.youtube.com/@RenaissancePeriodization/videos">RenaissancePeriodization</a> (RP).</p>
+<ul>
+<li>Especially the channel’s <a href="https://www.youtube.com/@RenaissancePeriodization/playlists">playlists</a>, and its “made simple” series.</li>
+<li>On the whole.. the channel’s content is geared towards intermediate and advanced lifters.</li>
+</ul></li>
+<li><p><a href="https://www.youtube.com/watch?v=dvYgXOFCeGM">Alexander Bromley’s video on exercise science</a> is an interesting “cold shower”.</p>
+<ul>
+<li>“Science” is catchy in video titles.
+But the field Exercise Science as a field hasn’t made an impact on powerlifting or bodybuilding competitors.</li>
+<li>Exercise Science suffers same factors as other soft sciences:
+<ul>
+<li>Issues with reproducibility (sometimes due to fraud).</li>
+<li>Many variables to consider deal with, which makes it easy to confound results/understanding.</li>
+</ul></li>
+<li>Exercise science content often has to hedge with weasel words like “but if that works for you, it works for you”;
+this undermines its prescriptive value.</li>
+</ul></li>
+<li><p>The LesMills BodyPump sessions that the gym holds have been an excellent way to build confidence with weights. It’s a good exercise.</p></li>
+<li><p>Bioelectrical Impedance Analysis:</p>
+<ul>
+<li>The results I get from day to day vary. I like to think that by taking a frequent number of measurements,
+(e.g. once for each session), overall the impact of the variation evens out.</li>
+<li>e.g. <a href="https://www.youtube.com/watch?v=fQezbeaDXIc">Video from RP discussing ways to estimate Percentage Body Fat</a> discusses that using BIA is not as effective as that judging by weight &amp; strength performance. (e.g. “weight goes down &amp; strength stays same” would be positive; “weight up, strength down” would be negative).</li>
+</ul></li>
+<li><p><a href="https://www.youtube.com/watch?v=DupQfkoI-Sc">RP’s video on Rep Ranges</a></p>
+<ul>
+<li>This is basic/fundamental.</li>
+<li>“Working set” is a set of repetitions (reps) that is challenging enough that you’re near the limit of what you can do.
+<ul>
+<li>e.g. ideally, you’re unable to do 15 reps with a weight which you plan to use for a set of 10. (If you could do 15 reps, the weight is too light).</li>
+</ul></li>
+<li>Lower reps = heavier weight = better for building strength. (Typically 3-6).</li>
+<li>Higher reps = lighter weight = better for building muscle. (Anything up to 30 reps).</li>
+<li>e.g. “Starting Strength” uses sets of 5 reps. (For beginners, 3 sets of 5 reps).</li>
+</ul></li>
+<li><p><a href="https://www.youtube.com/watch?v=UU2dpLFIOHU">Menno Henselman has a video discussing key ideas for strength/muscle development</a>.</p>
+<ul>
+<li>Doing more ‘volume’ of work (more sets, more reps) will result in more muscle.</li>
+<li>For strength: short term, intensity is good. (Low reps).
+<ul>
+<li>However, since there’s a limit to how strong a muscle mass can get,
+in the long term, more strength would require more muscle.</li>
+<li>Menno describes the relationship between strength/muscle size using an analogy of a race car: a race car might go faster by the driver improving his skills, or by improving the car’s engine.</li>
+</ul></li>
+</ul></li>
+<li><p>I liked RP’s “made simple” series, particularly its playlists about <a href="https://www.youtube.com/playlist?list=PLyqKj7LwU2RulAjHczohbx5OyJQ8TaFM0">fat loss</a> and <a href="https://www.youtube.com/playlist?list=PLyqKj7LwU2RvZhQ739Mg9v8cLotbX_qE3">cardio</a>:</p>
+<ul>
+<li>Fat loss:
+<ul>
+<li>The key factor is “calorie deficit” (calories in &lt; calories out).
+<ul>
+<li>Diet (in the sense of “what food you eat”) plays a much more significant role than exercise.
+<ul>
+<li>There’s a limit to the amount of energy you can expend in a day.
+<ul>
+<li>If you perform too much exercise, your body will conserve energy for the remaining part of the day.
+(e.g. you’ll not get up &amp; do things).</li>
+</ul></li>
+<li>Exercise also accumulates fatigue and risk of injury, so can’t be done to excess.</li>
+<li>To an extent: reaching (or increasing) calorie deficit involves doing what’s least awful of reducing what you eat or exercising more.</li>
+</ul></li>
+<li>An often touted goal of keto diet (low carb) is to burn fat for energy by;
+but, this doesn’t supersede “calories in, calories out”.
+<ul>
+<li>Excess calories will still get stored as fat;
+calorie deficit will still burn fat.</li>
+<li>However, high-carb food is often not satiating;
+(e.g. chips; you’d have to eat many potato chips to feel full).
+So, avoiding high-carb food is a good idea.</li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li>Cardio:
+<ul>
+<li>“Stimulus to Fatigue” needs to be considered.
+<ul>
+<li>e.g. Sprinting burns many calories per second, but is too fatiguing to sustain for some time.</li>
+<li>Dr Mike rates elliptical machine highly.</li>
+<li>Dr Mike rates using step-counter and aiming to reach 8k/10k/12k steps per day highly.
+<ul>
+<li>Good energy expenditure; very low disruption to day’s activities.</li>
+<li>Very low fatigue / risk of injury.</li>
+<li>Not ‘fun’, but walking around is an ubiquitous part of the day.</li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li><p>Nutrition:</p>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=oCDqqVwYMa4">Discussion of Diet Soda and Aspartame</a>.
+<ul>
+<li>Although “Diet soda cancer” makes headlines,
+it’d be foolishly inaccurate to think “diet soda unhealthy; regular soda is healthier”.</li>
+</ul></li>
+<li>A few key ideas Dr Mike repeats in various places:
+So long as you’re getting a certain minimum of macronutrients/micronutrients,
+the overall composition of where calories come from is not important.
+<ul>
+<li>c.f. <a href="https://edition.cnn.com/2010/HEALTH/11/08/twinkie.diet.professor/index.html">Mark Haub’s Twinkie study</a>,
+where he was able to reduce fat from a caloric deficit, while two thirds of the calories he ate came from twinkies</li>
+</ul></li>
+</ul></li>
+<li><p>Machines vs free weights:</p>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=iIcWxvplE6Y">Menno Henselman</a> cites papers which compared training with free weights against training with machines.
+<ul>
+<li>Supposed thoughts: Since machines are stable, should be able to get more strength out of them; machines worse for joints and muscle growth.</li>
+<li>The studies show:
+<ul>
+<li>Due to specificity: you’ll do slightly better on the one you train with.</li>
+<li>But for health benefits: do whatever you prefer.</li>
+<li>For machines: it’s slightly better to use plate-loaded machines with a free range of motion, than lever selectorized machines with a fixed range of motion.</li>
+</ul></li>
+</ul></li>
+<li>e.g. I recall seeing that Nassim didn’t like weight machines and thought they’re stupid.</li>
+<li><a href="https://www.youtube.com/watch?v=qIFYgb7Mvu0">RP discusses that “gotta use barbells!” overstates it</a>.
+<ul>
+<li>Barbell lifts (especially heavy compound exercises) are great; but, it would be wrong to assert they’re the best for all cases.</li>
+</ul></li>
+</ul></li>
+<li><p>Doing cardio and resistance training in the same session:</p>
+<ul>
+<li>I’ve seen that doing cardio after doing resistance leads to an “interference effect” where the muscle won’t gain as much since the body’s recovering from cardio.</li>
+<li>This seems plausible to me. But, “no interference effect” also seems plausible.</li>
+<li>At least, it does seem “trade Peter for Paul”: time spent on cardio is time spent not doing resistance training, and vice versa. It’s easier to perform well when starting fresh.</li>
+<li>As such, I do split up my gym sessions between “focus on cardio” and “focus on resistance training”.</li>
+</ul></li>
+<li><p>RP’s <a href="https://www.youtube.com/watch?v=a5Yzg5K5EPE">Definition of Beginner (from the Hypertrophy Made Simple series): “when improvement is automatic”</a>.</p>
+<ul>
+<li>I reckon this is a reasonable and interesting use of the word “beginner”.
+For beginners, improvement is easy.
+<ul>
+<li>As opposed to “beginner is someone who has been lifting for up to 6 months” or whatever.</li>
+</ul></li>
+<li>The <a href="https://www.youtube.com/watch?v=-8Sgczn4VsM">Strength Made Simple series’ equivalent video concurs</a>:
+it defines beginner as “sees improvement from adhering to basics”.</li>
+</ul></li>
+<li><p>ExRx’s <a href="https://exrx.net/ExInfo/Etiquette">page about Gym Etiquette</a>.</p>
+<ul>
+<li>This is all mostly obvious. Don’t make things unpleasant for others.</li>
+<li>I’ve noticed that in practice, “unrack weights from the machine you’re using” isn’t intuitive.</li>
+</ul></li>
+<li><p>ExRx discussing <a href="https://exrx.net/Questions/LegPressLockOut">Locking out on leg press machine</a>.</p>
+<ul>
+<li>There are some nasty “gym fails” videos which feature injuries on leg press machines.</li>
+<li>ExRx discusses that the problem is putting the knee under stress it’s not adapted to.</li>
+<li>This risk of injury can be prevented by always controlling the weight of the leg press.
+(e.g. don’t lock out in an uncontrolled manner), and don’t use more weight than your legs can handle.</li>
+</ul></li>
+<li><p><a href="https://www.youtube.com/watch?v=kW8KP-rlKTk">Alexander Bromley’s Bench Press (“for no gains” series)</a>.</p>
+<ul>
+<li>An interesting point: the two most popular YouTube videos about bench pressing
+recommend different techniques: Bromley explains that one technique is optimal for powerlifting (where the focus is strength),
+the other is optimal for hypertrophy (building muscle).</li>
+</ul></li>
+<li><p>Fatigue &amp; Recovery:</p>
+<ul>
+<li>Obvious constraints to exercise are “time available” and “effort you’re willing to put in”.</li>
+<li>Less obvious to me was that fatigue is an important constraint.
+<ul>
+<li>Working beyond what the body can recover from risks injury.</li>
+<li>This also indicates: rest and <em>sleep</em> are important for improvement.</li>
+</ul></li>
+</ul></li>
+<li><p>Number of sets:</p>
+<ul>
+<li>RP’s discussions
+<ul>
+<li><a href="https://www.youtube.com/watch?v=Nh4qa-Y1CIo">for hypertrophy</a>,
+<ul>
+<li>Per muscle:
+<ul>
+<li>Aim for muscle to be pumped, and muscle disrupted. (&amp; should feel burn, if using a low enough weight).</li>
+<li>For beginners, 1-5 sets targetting the muscle can be enough.</li>
+<li>If can’t recover for the next session, you’re doing too much.</li>
+</ul></li>
+<li>Per session:
+<ul>
+<li>If too fatigued, it’s difficult to push target muscle to failure.</li>
+<li>15-25 sets per session.</li>
+</ul></li>
+</ul></li>
+<li><a href="https://www.youtube.com/watch?v=b9RcebQyG0A&amp;t=147s">for strength</a>
+<ul>
+<li>Per movement:
+<ul>
+<li>At least 1 heavy working set. Higher intensity is better.</li>
+<li>If you can’t recover for next session, you’re doing too much.</li>
+</ul></li>
+<li>Per session:
+<ul>
+<li>Probably not worth the effort if can’t lift sufficiently heavy weight.</li>
+<li>If you’re tired, anything will ‘feel’ heavy/difficult.
+<ul>
+<li>IMO: Seems unlikely that “get tired, then lift light weights” would lead to strength gains.</li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li><p>RP on <a href="https://www.youtube.com/watch?v=eadyCiB0G3A">rounding the back during exercises</a>:</p>
+<ul>
+<li>Rounding the back risks injury. Lifting should be done with a neutral back.</li>
+<li>On the other hand, rounding the back builds resiliency.</li>
+<li>Synthesising these: keep the back neutral for heavy lifts; train the lower back with suitable exercises (&amp; light enough weight).</li>
+</ul></li>
+<li><p><a href="https://exrx.net/Lists/WorkoutMenu">ExRx Workout Templates</a>.</p>
+<ul>
+<li>These are great.
+<ul>
+<li>Provides a guide on what kinds of exercises are useful to aim for at the gym.
+<ul>
+<li>This is useful for more direction than just “uh, I’ll use whatever machines are available”.</li>
+</ul></li>
+</ul></li>
+<li>The pages mention useful qualifiers like “don’t do these kinds of exercises on the same day”.</li>
+</ul></li>
+</ul>
+
+<hr />
+
+<div>
+    
+    <a href="../posts/programming/2024-06-16-using-the-qmk-leader-key-for-fancy-keyboard-functionality.html" style="float:left;">Newer post</a>
+    
+    
+    <a href="../posts/romance/2024-05-27-bridgerton-season-3.html" style="float:right; text-align: right;">Older post</a>
+    
+</div>
+<br style="clear: both;" />
+
+<hr />
+
+            </div>
+
+            <hr style="margin-bottom: 0px; border-top: 2px solid black;" />
+
+            <div id="footer" class="pull-right" style="padding-right: 10px;">
+                Site proudly generated by
+                <a href="http://jaspervdj.be/hakyll">Hakyll</a>
+            </div>
+        </div>
+
+        <script>
+            // The callbacks we wanna use
+            // Phone-home, telling Google Analytics various metrics/dimensions
+
+            // Use custom dimensions & metrics
+            var AnalyticDimensionReaderKind = 'dimension1';
+            var AnalyticMetricActiveTime      = 'metric1';
+            var AnalyticMetricLongestIdleTime = 'metric2';
+            var AnalyticMetricReadCount       = 'metric3';
+
+            var gaCallbacks = {
+                "scrollPercent": function(ms, perc) {
+                    if (perc > 85) {
+                        // EVENT: Page read
+                        ga('send', {
+                            hitType:       'event',
+                            eventCategory: 'Scrolling',
+                            eventAction:   'atBottom',
+                            eventValue:    String(ms)
+                        });
+                    }
+                },
+                "read": function(ms, ct, timeToReach) {
+                    // Use this to set DIMENSION
+                    // timeToReach < 5s ==> Skim (default = Visitor)
+                    if (timeToReach < 5 * 1000) {
+                        // dimension1 = ReaderKind
+                        ga('set', AnalyticDimensionReaderKind, "skimmer");
+                    }
+
+                    // timeToReach > 30s ==> Reader
+                    if (timeToReach > 30 * 1000) {
+                        // dimension1 = ReaderKind
+                        ga('set', AnalyticDimensionReaderKind, "reader");
+                    }
+
+                    // EVENT: Page read
+                    ga('send', {
+                        hitType:       'event',
+                        eventCategory: 'Reading',
+                        eventAction:   'read',
+                        eventValue:    String(timeToReach)
+                    });
+
+                    // METRIC
+                    ga('set', AnalyticMetricReadCount, String(ct));
+                },
+                "initialIdle": function(ms) {
+                    // EVENT: Started Reading
+                    ga('send', {
+                        hitType:       'event',
+                        eventCategory: 'Scrolling',
+                        eventAction:   'begun',
+                        eventValue:    String(ms)
+                    });
+                },
+                "timeSpent": function(total, active, curIdle, initIdle, longestIdle) {
+                    // Update METRIC(S)?
+                    ga('set', AnalyticMetricActiveTime, String(active));
+                    ga('set', AnalyticMetricLongestIdleTime, String(longestIdle));
+                },
+                "idle": function(ms) {
+                },
+                "longestIdle": function(ms) {
+                }
+            }
+
+            window.onload = function() {
+                myAnalyticsInit(gaCallbacks);
+
+                //
+                // Initial dimensions & metrics
+                //
+
+                ga('set', AnalyticMetricReadCount, String(0));
+
+                // EVENT: Page load
+                ga('send', {
+                    hitType:       'event',
+                    eventCategory: 'pageLoad',
+                    eventAction:   'begun',
+                    eventValue:    String(0)
+                });
+
+                // DIMENSION: visitor
+                ga('set', AnalyticDimensionReaderKind, "visitor");
+            }
+        </script>
+    </body>
+</html>

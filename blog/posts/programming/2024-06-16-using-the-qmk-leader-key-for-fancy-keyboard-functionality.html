@@ -1,0 +1,557 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Using the QMK Leader Key for Fancy Keyboard Functionality - Richard Goulter's Blog</title>
+
+        <!-- My (Old) CSS theme -->
+        <link rel="stylesheet" type="text/css" href="../../css/default.css" />
+
+        <!--
+            jQuery & jQueryUI
+        -->
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css" />
+
+        <!--
+            Pandoc Style CSS
+            (for syntax highlighted snippets)
+        -->
+        <link rel="stylesheet" type="text/css" href="../../css/syntax.css" />
+
+        <!--
+            Bootstrap
+        -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+        <style>
+            /*
+             * Bootstrap defines blockquote as 17px,
+             * so it looks stupidly large in my blogposts. */
+            blockquote {
+                font-size: 14px;
+            }
+        </style>
+
+        <!--
+            Waypoints, and Waypoints-Sticky,
+            so we can do this:
+            http://imakewebthings.com/waypoints/shortcuts/sticky-elements/
+        -->
+        <script src="../../js/jquery.waypoints.min.js"></script>
+        <script src="../../js/sticky.min.js"></script>
+
+        <!-- My analytics stuff -->
+        <script src="../../js/my_analytics.js"></script>
+        <script src="../../js/my_analytics_debug.js"></script>
+
+        <!--
+            TOCify
+        -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js"></script>
+
+        <!--
+            Patched TOCify css file.
+            (Don't want fixed `.tocify`).
+        -->
+        <link rel="stylesheet" type="text/css" href="../../css/jquery.tocify.css" />
+
+        <style>
+        .navbar {
+            margin-bottom: 0px;
+        }
+
+        .banner-image {
+            width:100%;
+        }
+
+        .banner {
+            margin-left: 0px;
+            margin-right: 0px;
+        }
+
+        body {
+            background-color: #e2e2e2;
+        }
+
+        #page {
+            padding-left:0;
+            padding-right:0;
+            background-color: #ffffff;
+        }
+        </style>
+
+        <!-- Google Analytics -->
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-H13NWYDX0G"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'G-H13NWYDX0G');
+        </script>
+    </head>
+    <body>
+        <div id="page" class="container">
+            <!-- This, with no padding on left/right -->
+            <div class="banner">
+                <nav class="navbar navbar-default">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+
+            <!-- The Hamburger -->
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../../">Richard Goulter's Blog</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="../../">Home</a></li>
+            <li><a href="../../yi.html">Yi</a></li>
+            <li><a href="../../emacs.html">Emacs</a></li>
+            <li><a href="../../what-i-wish-i-knew-when-i-started-using-nix.html">Nixpkgs</a></li>
+            <li><a href="../../archive.html">Archive</a></li>
+        </ul>
+    </div>
+</nav>
+
+            </div>
+
+            <hr style="margin: 0px; border-top: 5px solid black;" />
+
+            <div id="content" class="container">
+                <h1>Using the QMK Leader Key for Fancy Keyboard Functionality</h1>
+                <div class="info">
+    Posted on June 16, 2024
+    
+        by Richard Goulter
+    <br />
+    
+    Tags: 
+    
+</div>
+
+<p><a href="https://qmk.fm/">QMK</a> keyboards are keyboards where the functionality can be
+customized.</p>
+<p>Customising keyboard functionality goes hand in hand with non-traditional
+keyboards, like ortholinear or split keyboards, which seek to improve upon the
+traditional keyboard’s pretty awful design. (<a href="https://github.com/rgoulter/keyboard-labs">I’ve designed a few such
+keyboards</a>).</p>
+<p>There are some QMK features where it’s fairly clear how to make effective use of
+the feature, such as <a href="https://docs.qmk.fm/feature_layers">layers</a>, <a href="https://docs.qmk.fm/tap_hold">tap
+hold</a> or <a href="https://docs.qmk.fm/features/caps_word">caps
+word</a>.</p>
+<p>One feature that I had not found an effective use for was the <a href="https://docs.qmk.fm/features/leader_key">“leader
+key”</a> feature. This feature
+is named after Vim’s <a href="https://vimhelp.org/map.txt.html#%3CLeader%3E">leader
+key</a>.</p>
+<h2 id="vim-and-key-sequences">Vim and Key Sequences</h2>
+<p>In vim, the leader key is a placeholder, and can be used for the start of <a href="https://vimhelp.org/map.txt.html#key-mapping">a
+sequences of keys which maps to some
+command</a>.</p>
+<p>Generally, sequences of keys are fundamental to vim’s keybindings, especially for its
+<a href="http://www.robertames.com/blog.cgi/entries/physics-of-vim.html">verb-motion
+idiom</a>.<br />
+e.g. the key sequence <code>d$</code> commands the editor to “delete until the end of
+line”, or <code>yi"</code> commands the editor to yank (copy) the text inside the <code>"</code> marks
+the cursor is inside of.</p>
+<p>I first came across heavy use of the space-as-leader idiom in
+<a href="https://www.spacemacs.org/">spacemacs</a>, which uses vim-keybindings, and space
+as its leader key.</p>
+<p>My main text editing environment is <a href="https://github.com/doomemacs/">Doom Emacs</a>,
+which also uses space-as-leader for its command map.<br />
+e.g. <code>spc t b</code> to Toggles the font to a Big size. <code>spc f s</code> Saves the File.</p>
+<p>VSCode, to a lesser extent, also uses sequences in its keyboard shortcuts.<br />
+e.g. Ctrl+K Ctrl+C adds a line comment.</p>
+<p>In QMK, the leader key is used to start listening for a sequence of keypresses,
+which can then be handled by custom functionality.</p>
+<h2 id="typical-uses-of-the-qmk-leader-key">Typical Uses of the QMK Leader Key</h2>
+<p>What to use QMK’s leader key for?</p>
+<p>QMK’s <a href="https://docs.qmk.fm/features/leader_key">documentation for the leader
+key</a> gives examples of sequences which
+map to <code>SEND_STRING</code>. i.e. using it as a way to trigger macros.</p>
+<p>I had previously tried that, but didn’t end up making much use of it.<br />
+I reckon the effort to recognise I could use the leader sequence (&amp; recall how
+to invoke it) was higher than just typing out my email or username or hostname
+or whatever.</p>
+<p>But also, I think there are other ways to avoid having to type the same thing
+out frequently:<br />
+On the command line, using fzf with shell history is a great way to find
+previously typed commands, which is close enough to “save typing the same thing
+out” for me; <a href="https://fishshell.com/docs/current/cmds/abbr.html">fish shell’s
+abbr</a> seems a useful way of
+“save typing the same thing out”. This is similar to typical shell aliases,
+except it expands the abbreviation before executing it.</p>
+<h2 id="another-idea-for-qmk-leader-key-sequences">Another Idea for QMK Leader Key Sequences</h2>
+<p>Putting 2 and 2 together, I had another idea of what to use the QMK leader functionality for:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> leader_end_user<span class="op">(</span><span class="dt">void</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>leader_sequence_two_keys<span class="op">(</span>KC_Q<span class="op">,</span> KC_B<span class="op">))</span> <span class="op">{</span> <span class="co">// mnemonic: QMK Boot</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>        reset_keyboard<span class="op">();</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>leader_sequence_two_keys<span class="op">(</span>KC_C<span class="op">,</span> KC_C<span class="op">))</span> <span class="op">{</span> <span class="co">// mnemonic: Caps DWIM (capslock)</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        tap_code<span class="op">(</span>KC_CAPS<span class="op">);</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="pp">#ifdef CAPS_WORD_ENABLE</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>leader_sequence_two_keys<span class="op">(</span>KC_C<span class="op">,</span> KC_W<span class="op">))</span> <span class="op">{</span> <span class="co">// mnemonic: Caps capsWord</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        caps_word_on<span class="op">();</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="pp">#endif</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="pp">#ifdef HAPTIC_ENABLE</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>leader_sequence_two_keys<span class="op">(</span>KC_H<span class="op">,</span> KC_H<span class="op">))</span> <span class="op">{</span> <span class="co">// mnemonic: Haptic DWIM (toggle)</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>      haptic_toggle<span class="op">();</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>leader_sequence_two_keys<span class="op">(</span>KC_H<span class="op">,</span> KC_E<span class="op">))</span> <span class="op">{</span> <span class="co">// mnemonic: Haptic Enable</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>      haptic_enable<span class="op">();</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>leader_sequence_two_keys<span class="op">(</span>KC_H<span class="op">,</span> KC_D<span class="op">))</span> <span class="op">{</span> <span class="co">// mnemonic: Haptic Disable</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>      haptic_disable<span class="op">();</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="pp">#endif</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>leader_sequence_two_keys<span class="op">(</span>KC_K<span class="op">,</span> KC_K<span class="op">))</span> <span class="op">{</span> <span class="co">// mnemonic: Keymap DWIM (set to default)</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>        default_layer_set_dvorak_keymap<span class="op">();</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>leader_sequence_two_keys<span class="op">(</span>KC_K<span class="op">,</span> KC_D<span class="op">))</span> <span class="op">{</span> <span class="co">// mnemonic: Keymap Dvorak</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>        default_layer_set_dvorak_keymap<span class="op">();</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>leader_sequence_two_keys<span class="op">(</span>KC_K<span class="op">,</span> KC_Q<span class="op">))</span> <span class="op">{</span> <span class="co">// mnemonic: Keymap Qwerty</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>        default_layer_set_qwerty_keymap<span class="op">();</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>leader_sequence_two_keys<span class="op">(</span>KC_K<span class="op">,</span> KC_G<span class="op">))</span> <span class="op">{</span> <span class="co">// mnemonic: Keymap Gaming</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>        default_layer_set_gaming_keymap<span class="op">();</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>leader_sequence_two_keys<span class="op">(</span>KC_K<span class="op">,</span> KC_H<span class="op">))</span> <span class="op">{</span> <span class="co">// mnemonic: Keymap Gaming (alt)</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>        default_layer_set_gaming_alt_keymap<span class="op">();</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>leader_sequence_two_keys<span class="op">(</span>KC_O<span class="op">,</span> KC_W<span class="op">))</span> <span class="op">{</span> <span class="co">// mnemonic: OS Windows</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>        current_os <span class="op">=</span> _OS_WIN<span class="op">;</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>leader_sequence_two_keys<span class="op">(</span>KC_O<span class="op">,</span> KC_L<span class="op">))</span> <span class="op">{</span> <span class="co">// mnemonic: OS Linux</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>        current_os <span class="op">=</span> _OS_LINUX<span class="op">;</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>leader_sequence_two_keys<span class="op">(</span>KC_O<span class="op">,</span> KC_M<span class="op">))</span> <span class="op">{</span> <span class="co">// mnemonic: OS MacOS</span></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>        current_os <span class="op">=</span> _OS_MACOS<span class="op">;</span></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="pp">#ifdef RGB_MATRIX_ENABLE</span></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>leader_sequence_two_keys<span class="op">(</span>KC_R<span class="op">,</span> KC_R<span class="op">))</span> <span class="op">{</span> <span class="co">// mnemonic: RGB DWIM (next effect)</span></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>        rgb_matrix_step_noeeprom<span class="op">();</span></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>leader_sequence_two_keys<span class="op">(</span>KC_R<span class="op">,</span> KC_J<span class="op">))</span> <span class="op">{</span> <span class="co">// mnemonic: RGB Jellybean</span></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>        rgb_matrix_mode_noeeprom<span class="op">(</span>RGB_MATRIX_JELLYBEAN_RAINDROPS<span class="op">);</span></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>leader_sequence_two_keys<span class="op">(</span>KC_R<span class="op">,</span> KC_T<span class="op">))</span> <span class="op">{</span> <span class="co">// mnemonic: RGB Toggle</span></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>        rgb_matrix_toggle_noeeprom<span class="op">();</span></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a><span class="pp">#endif</span></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>leader_sequence_one_key<span class="op">(</span>KC_L<span class="op">))</span> <span class="op">{</span></span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>        <span class="cf">switch</span> <span class="op">(</span>current_os<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>            <span class="cf">case</span> _OS_LINUX<span class="op">:</span></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>                tap_code16<span class="op">(</span>CODE16_LINUX_DESKTOP_LOCK<span class="op">);</span></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>                <span class="cf">break</span><span class="op">;</span></span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>            <span class="cf">case</span> _OS_MACOS<span class="op">:</span></span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>                tap_code16<span class="op">(</span>CODE16_MACOS_DESKTOP_LOCK<span class="op">);</span></span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>                <span class="cf">break</span><span class="op">;</span></span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>            <span class="cf">case</span> _OS_WIN<span class="op">:</span></span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>                tap_code16<span class="op">(</span>CODE16_WIN_DESKTOP_LOCK<span class="op">);</span></span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>                <span class="cf">break</span><span class="op">;</span></span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>    leader_end_keymap<span class="op">();</span></span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>This code implements the <code>leader_end_user</code> callback, which handles how QMK
+leader key sequences behave for a keymap.</p>
+<p>Example sequences:</p>
+<ul>
+<li><p><code>LEAD q b</code> enters the bootloader, which I hope to recall with “QMK -&gt; Bootloader”.</p></li>
+<li><p><code>LEAD r t</code> toggles whether RGB lighting is on/off, which I hope to recall with
+“RGB -&gt; Toggle”.</p></li>
+</ul>
+<p>“DWIM” means “Do What I Mean”.<br />
+In this case, I mean “what’s the most common functionality to expect (from
+tapping the same key twice)”.</p>
+<p>More concretely, the idea is that QMK leader key sequences seem like a natural
+interface for dynamic customisation of keyboard functionality.</p>
+<p>I like the idea of allowing both the standard CapsLock and the fancier caps word
+within the same keymap, but without needing to take the effort to remember which
+key I put where.</p>
+<p>I put my <code>leader_end_user</code> implementation in <a href="https://github.com/rgoulter/qmk_userspace">my
+userspace</a>.</p>
+<h2 id="downside-discoverability">Downside: Discoverability</h2>
+<p>One obvious downside to this approach is that a keyboard’s firmware is not easily discoverable.</p>
+<p>There’d be no easy way to discover what leader key sequences are implemented in a keymap.</p>
+<p>Whereas, say, in VSCode, the keyboard shortcuts are shown as part of the command
+palette.<br />
+Or in Emacs, <a href="https://github.com/justbur/emacs-which-key">which-key</a> will
+automatically show a map of keybindings (and the commands they’re bound to)
+after pressing some key.<br />
+e.g. pressing <code>spc f</code> presents a map of keybindings for next keys to press (such
+as <code>s</code> to save file, <code>C</code> to copy the file, <code>D</code> to delete the file).</p>
+<h2 id="similar-functionality-qmks-command">Similar Functionality: QMK’s Command</h2>
+<p>The idea of using the keyboard to dynamically configure the keyboard
+configuration is similar to what the <a href="https://docs.qmk.fm/features/command">Command
+feature</a> does. – Except these commands
+are invoked by holding down modifier keys, rather than by hitting a sequence of
+keys.</p>
+<p>The idea of using leader-key sequences for dynamically customising various
+features is more general (&amp; implemented by the keymap, rather than as part of
+QMK’s framework).</p>
+<p>Incidentally, this Command feature has a “print help to the console” keybinding,
+which is one way of addressing lack of discoverability.</p>
+<h2 id="recall-cost-for-custom-and-small-keyboard-keymaps">Recall Cost for Custom and Small Keyboard Keymaps</h2>
+<p>Maybe the idea of using leader key sequences seems complex; but I think it’s
+worth comparing the above idea to other techniques used in keymap
+implementations for custom (and small) keyboards:</p>
+<p>Custom keyboards tend to have more functionality than just what the legends on
+the keycaps denote.<br />
+This means you have to remember anything that’s not on the keycaps.</p>
+<p>Anything that’s frequently used will be easy to recall.<br />
+What requires more consideration is trying to make recall easier for stuff
+that’s used infrequently.</p>
+<p>A small keyboard (like the ortholinear 4x12 keyboards, or split 36-key
+keyboards) have keymaps which bring the full functionality of a typical keyboard
+to within easy reach of the hands on home row.<br />
+In my experience, it’s fairly straightforward to recall the “standard keyboard”
+keys (letters, numbers, symbols), since it’s easy to position the keys in a way
+that’s either familiar, or coherent.</p>
+<p>e.g. The popular <a href="https://github.com/manna-harbour/miryoku/tree/master/docs/reference">Miryoku
+keymap</a>
+demonstrates a few techniques for how this is commonly achieved:</p>
+<p>As an example of good key placement, where the positions are easy to recall: The
+Number/Symbol layers are different than a traditional keyboard, but it’s
+(mostly) coherent: the numbers resemble a numpad, the <code>[</code> key pairs with <code>]</code>.
+<code>_</code> is often used as a placeholder for “space”.<br />
+(I personally prefer to amend it by having <code>/</code> complement <code>\</code>, and by moving <code>~</code>
+to home row’s pinkie finger).</p>
+<p>Examples of bringing functionality to within reach of the hands (in contrast to
+leader key sequences):</p>
+<ul>
+<li><p>Miryoku puts the <code>CapsLock</code> key on a layer.</p></li>
+<li><p>Miryoku has some “Additional Features”, such as switching between a Base and
+an Extra keymap. These keys are on a layer, with additional intention gated
+by requiring these keys to be tapped twice. (QMK’s <a href="https://docs.qmk.fm/features/tap_dance">tap
+dance</a> feature).</p></li>
+</ul>
+<p>Putting the key on a layer comes with positional cost. – You have to be able to
+recall <em>where</em> the key is. – And you have to recall which modifier keys to hold
+down to activate the key. (Modifier-based shortcuts are more common than
+sequence-based shortcuts. e.g. Ctrl+S for “save”, Ctrl+N for “new”. If you
+squint, holding down Ctrl &amp; tapping S could be thought of as holding down a Fn
+key, and hitting the “Save” key).</p>
+<p>For “fancy keycodes” (keys that don’t appear on a typical keyboard), it can be
+difficult to come up with ways to make it easy to remember its position.<br />
+e.g. in the miryoku layout, it’s easier to recall where the arrow keys are
+placed than where the “change RGB hue” key is. (The arrow keys are placed on
+home row, or in a vi-style hjkl position).</p>
+<p>Using QMK leader key sequences for “fancy keycodes” might be complex, but the
+effort to remember the key sequence doesn’t rely on finding a position for it on
+a layer (nor having to recall that position later).</p>
+<h2 id="leader-key-sequence-cost-multiple-key-presses">Leader Key Sequence Cost: Multiple Key Presses</h2>
+<p>Another obvious cost to using QMK leader sequences like suggested is the
+sequence is not very quick to type out.</p>
+<p>It involves pressing the <code>LEAD</code> key, and then some sequence of keys.<br />
+That’s surely going to be slower than holding down some Fn keys and hitting a
+single key.</p>
+<p>This seems a reasonable trade-off to me: the cost of having to hit a sequence of
+keys comes with the benefit that it’s easier to recall how to invoke it.</p>
+<p>I’m optimistic that using leader key sequences are suitable for making it easier
+to invoke behaviour that’s otherwise not frequently invoked enough to be easy to
+position on a keyboard.</p>
+<h2 id="leader-key-sequence-cost-firmware-size-and-complexity">Leader Key Sequence Cost: Firmware Size and Complexity</h2>
+<p>I’m guessing a large number leader key sequences wouldn’t fit neatly on a
+keyboard with a weak atmega32u4 MCU.</p>
+<p>That’s probably another reason why getting an ARM-based custom keyboard. (Plugging again: <a href="https://github.com/rgoulter/keyboard-labs">I’ve designed a
+few such keyboards</a>).</p>
+<h2 id="other-possible-use-cases">Other Possible Use Cases</h2>
+<p>Without having to worry about “where do I position these keys”, I reckon it’s
+easier to add additional functionality to a keymap by adding a leader key
+sequence which invokes it.</p>
+<p>Here are some thoughts as to leader key sequences I think I might add to my
+keymap:</p>
+<ul>
+<li><p>Toggle/Enable/Disable for various features.</p>
+<ul>
+<li>Rather than just having “RGB toggle” or “Haptics Enable”, it’d make sense to
+provide all of “enable/disable/toggle” as part of leader key sequences.</li>
+</ul></li>
+<li><p>Dynamic Configuration: increase/decrease, default, min/max.</p>
+<ul>
+<li><p>RGB effects can have different hue, saturation, brightness (value), and the
+effects can run at different speeds.<br />
+It might make sense to provide the ability to increase/decrease these
+through leader key sequences.</p></li>
+<li><p>Tap Hold configuration supports <a href="https://docs.qmk.fm/tap_hold#dynamic-tapping-term">dynamic configuration of the tapping
+term</a>.</p></li>
+<li><p><a href="https://docs.qmk.fm/features/auto_shift">AutoShift</a> also has dynamic
+configuration of its tapping term.</p></li>
+</ul></li>
+<li><p><a href="https://getreuer.info/posts/keyboards/macros3/index.html">“case modes”</a></p>
+<ul>
+<li><p>“caps word” is a neat feature, since it makes it easier to type out a single
+word in all caps (e.g. variables with uppercase identifiers).</p></li>
+<li><p>“case modes” generalises this feature, which would aim to make it easier to
+write out <code>snake_case</code>, <code>kebab-case</code> or <code>./path/case</code> values.</p></li>
+</ul></li>
+<li><p><a href="https://docs.qmk.fm/features/dynamic_macros">Dynamic Macros</a></p>
+<ul>
+<li>Again, this is a neat feature, but I’m not quite sure where I’d position it
+on a layer in a keymap.</li>
+</ul></li>
+<li><p>Send String and other shortcuts.</p>
+<ul>
+<li><p>From searching for “qmk leader sequence”, most uses of the leader key I
+could find seem to be use of <code>SEND_STRING</code>, or as a convenient way to
+access modifier-heavy keyboard shortcuts.</p>
+<ul>
+<li>Vaguely, the idea of using sequences of taps instead of simultaneous holds
+of modifier keys resembles one shot mods, or <a href="https://github.com/qmk/qmk_firmware/blob/user-keymaps-still-present/users/callum/readme.md">callum-style
+mods</a>,
+which I’ve seen mentioned as a friendlier alternative to tap-hold home row
+mods.</li>
+</ul></li>
+</ul></li>
+</ul>
+<h2 id="a-new-kind-of-modifier">“A New Kind of Modifier”</h2>
+<p>The docs page for the QMK leader key has the subtitle “a new kind of modifier”.</p>
+<p>Most keyboard shortcuts operate with modifier keys that you have to hold down.</p>
+<ul>
+<li><p>e.g. on a web browser, Ctrl+T opens a new tab, Ctrl+Shift+T re-opens a closed
+tab.</p></li>
+<li><p>e.g. in Emacs and macOS, shortcuts like Ctrl+a or Ctrl+e navigate in text, again
+operating by holding down a modifier key.</p></li>
+<li><p>on laptop keyboards, you hold down the Fn key to change the behaviour of some
+other keys; or on small custom keyboards, you might access different keyboard
+layers by holding down one or more Fn keys.</p></li>
+</ul>
+<p>Modifier keys allow re-using the same set of physical keys for more actions.</p>
+<p>Key sequences are another way of mapping functionality onto a set of keys.
+(Although I’m not sure “modify key behaviour” is the best way to describe).</p>
+<h2 id="implementation-notes-qmk-lead-timeout">Implementation Notes: QMK Lead Timeout</h2>
+<p>I like defining <code>#define LEADER_NO_TIMEOUT</code> so that when inputting <code>LEAD r r</code>, I
+don’t have to rush after invoking <code>LEAD</code>.</p>
+<p>Setting <code>LEADER_PER_KEY_TIMING</code> also helps with long sequences. Maybe a
+<code>LEADER_TIMEOUT</code> longer than the default 350ms might help for leader key
+sequences same-finger bigrams.</p>
+<p>https://docs.qmk.fm/features/leader_key#disabling-initial-timeout</p>
+<h2 id="qmk-leader-key-sequence-idiosyncracies">QMK Leader Key Sequence Idiosyncracies</h2>
+<p>The behaviour of key sequences I’m used to in Doom Emacs is that each sequence
+must be unique and not the prefix of another sequence. (e.g. <code>spc f s</code> saves
+file, but <code>spc f</code> does not map to a command).</p>
+<p>QMK’s implementation is a bit more limited: the leader key sequence has a buffer
+of up to 5 keycodes; and then once the leader key sequence has timed out, then
+the <code>leader_end_user</code> can be used to check which leader key sequence was used.</p>
+<p>An advantage here is this allows for “one sequence can be a prefix of another”.</p>
+<p>The disadvantage is it imposes a delay after inputting the sequence. (Because
+the leader key command behaviour is checked in the callback after the timeout,
+there’s no way for the leader to end before the timeout).</p>
+<p>I suspect an alternative implementation could overcome those limitations
+(albeit, for different implementation costs).</p>
+<h2 id="implementation-notes-qmk-combo">Implementation Notes: QMK Combo</h2>
+<p>I have <code>LEAD</code> as a combo (chord) on my keymap.</p>
+<p>In order to still use <code>LEAD</code> (and other combo keys) with different base layers
+(e.g. qwerty instead of dvorak), I define:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#define COMBO_ONLY_FROM_LAYER </span><span class="dv">0</span></span></code></pre></div>
+<p>https://docs.qmk.fm/features/combo#layer-independent-combos</p>
+
+<hr />
+
+<div>
+    
+    
+    <a href="../../posts/2024-06-12-further-notes-on-gym-going.html" style="float:right; text-align: right;">Older post</a>
+    
+</div>
+<br style="clear: both;" />
+
+<hr />
+
+            </div>
+
+            <hr style="margin-bottom: 0px; border-top: 2px solid black;" />
+
+            <div id="footer" class="pull-right" style="padding-right: 10px;">
+                Site proudly generated by
+                <a href="http://jaspervdj.be/hakyll">Hakyll</a>
+            </div>
+        </div>
+
+        <script>
+            // The callbacks we wanna use
+            // Phone-home, telling Google Analytics various metrics/dimensions
+
+            // Use custom dimensions & metrics
+            var AnalyticDimensionReaderKind = 'dimension1';
+            var AnalyticMetricActiveTime      = 'metric1';
+            var AnalyticMetricLongestIdleTime = 'metric2';
+            var AnalyticMetricReadCount       = 'metric3';
+
+            var gaCallbacks = {
+                "scrollPercent": function(ms, perc) {
+                    if (perc > 85) {
+                        // EVENT: Page read
+                        ga('send', {
+                            hitType:       'event',
+                            eventCategory: 'Scrolling',
+                            eventAction:   'atBottom',
+                            eventValue:    String(ms)
+                        });
+                    }
+                },
+                "read": function(ms, ct, timeToReach) {
+                    // Use this to set DIMENSION
+                    // timeToReach < 5s ==> Skim (default = Visitor)
+                    if (timeToReach < 5 * 1000) {
+                        // dimension1 = ReaderKind
+                        ga('set', AnalyticDimensionReaderKind, "skimmer");
+                    }
+
+                    // timeToReach > 30s ==> Reader
+                    if (timeToReach > 30 * 1000) {
+                        // dimension1 = ReaderKind
+                        ga('set', AnalyticDimensionReaderKind, "reader");
+                    }
+
+                    // EVENT: Page read
+                    ga('send', {
+                        hitType:       'event',
+                        eventCategory: 'Reading',
+                        eventAction:   'read',
+                        eventValue:    String(timeToReach)
+                    });
+
+                    // METRIC
+                    ga('set', AnalyticMetricReadCount, String(ct));
+                },
+                "initialIdle": function(ms) {
+                    // EVENT: Started Reading
+                    ga('send', {
+                        hitType:       'event',
+                        eventCategory: 'Scrolling',
+                        eventAction:   'begun',
+                        eventValue:    String(ms)
+                    });
+                },
+                "timeSpent": function(total, active, curIdle, initIdle, longestIdle) {
+                    // Update METRIC(S)?
+                    ga('set', AnalyticMetricActiveTime, String(active));
+                    ga('set', AnalyticMetricLongestIdleTime, String(longestIdle));
+                },
+                "idle": function(ms) {
+                },
+                "longestIdle": function(ms) {
+                }
+            }
+
+            window.onload = function() {
+                myAnalyticsInit(gaCallbacks);
+
+                //
+                // Initial dimensions & metrics
+                //
+
+                ga('set', AnalyticMetricReadCount, String(0));
+
+                // EVENT: Page load
+                ga('send', {
+                    hitType:       'event',
+                    eventCategory: 'pageLoad',
+                    eventAction:   'begun',
+                    eventValue:    String(0)
+                });
+
+                // DIMENSION: visitor
+                ga('set', AnalyticDimensionReaderKind, "visitor");
+            }
+        </script>
+    </body>
+</html>

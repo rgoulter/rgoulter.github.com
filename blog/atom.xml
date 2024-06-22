@@ -10,8 +10,587 @@
         <email>richard.goulter+blog@gmail.com</email>
         
     </author>
-    <updated>2024-05-27T00:00:00Z</updated>
+    <updated>2024-06-16T00:00:00Z</updated>
     <entry>
+    <title>Using the QMK Leader Key for Fancy Keyboard Functionality</title>
+    <link href="http://www.rgoulter.com/blog//posts/programming/2024-06-16-using-the-qmk-leader-key-for-fancy-keyboard-functionality.html" />
+    <id>http://www.rgoulter.com/blog//posts/programming/2024-06-16-using-the-qmk-leader-key-for-fancy-keyboard-functionality.html</id>
+    <published>2024-06-16T00:00:00Z</published>
+    <updated>2024-06-16T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<p><a href="https://qmk.fm/">QMK</a> keyboards are keyboards where the functionality can be
+customized.</p>
+<p>Customising keyboard functionality goes hand in hand with non-traditional
+keyboards, like ortholinear or split keyboards, which seek to improve upon the
+traditional keyboard’s pretty awful design. (<a href="https://github.com/rgoulter/keyboard-labs">I’ve designed a few such
+keyboards</a>).</p>
+<p>There are some QMK features where it’s fairly clear how to make effective use of
+the feature, such as <a href="https://docs.qmk.fm/feature_layers">layers</a>, <a href="https://docs.qmk.fm/tap_hold">tap
+hold</a> or <a href="https://docs.qmk.fm/features/caps_word">caps
+word</a>.</p>
+<p>One feature that I had not found an effective use for was the <a href="https://docs.qmk.fm/features/leader_key">“leader
+key”</a> feature. This feature
+is named after Vim’s <a href="https://vimhelp.org/map.txt.html#%3CLeader%3E">leader
+key</a>.</p>
+<h2 id="vim-and-key-sequences">Vim and Key Sequences</h2>
+<p>In vim, the leader key is a placeholder, and can be used for the start of <a href="https://vimhelp.org/map.txt.html#key-mapping">a
+sequences of keys which maps to some
+command</a>.</p>
+<p>Generally, sequences of keys are fundamental to vim’s keybindings, especially for its
+<a href="http://www.robertames.com/blog.cgi/entries/physics-of-vim.html">verb-motion
+idiom</a>.<br />
+e.g. the key sequence <code>d$</code> commands the editor to “delete until the end of
+line”, or <code>yi"</code> commands the editor to yank (copy) the text inside the <code>"</code> marks
+the cursor is inside of.</p>
+<p>I first came across heavy use of the space-as-leader idiom in
+<a href="https://www.spacemacs.org/">spacemacs</a>, which uses vim-keybindings, and space
+as its leader key.</p>
+<p>My main text editing environment is <a href="https://github.com/doomemacs/">Doom Emacs</a>,
+which also uses space-as-leader for its command map.<br />
+e.g. <code>spc t b</code> to Toggles the font to a Big size. <code>spc f s</code> Saves the File.</p>
+<p>VSCode, to a lesser extent, also uses sequences in its keyboard shortcuts.<br />
+e.g. Ctrl+K Ctrl+C adds a line comment.</p>
+<p>In QMK, the leader key is used to start listening for a sequence of keypresses,
+which can then be handled by custom functionality.</p>
+<h2 id="typical-uses-of-the-qmk-leader-key">Typical Uses of the QMK Leader Key</h2>
+<p>What to use QMK’s leader key for?</p>
+<p>QMK’s <a href="https://docs.qmk.fm/features/leader_key">documentation for the leader
+key</a> gives examples of sequences which
+map to <code>SEND_STRING</code>. i.e. using it as a way to trigger macros.</p>
+<p>I had previously tried that, but didn’t end up making much use of it.<br />
+I reckon the effort to recognise I could use the leader sequence (&amp; recall how
+to invoke it) was higher than just typing out my email or username or hostname
+or whatever.</p>
+<p>But also, I think there are other ways to avoid having to type the same thing
+out frequently:<br />
+On the command line, using fzf with shell history is a great way to find
+previously typed commands, which is close enough to “save typing the same thing
+out” for me; <a href="https://fishshell.com/docs/current/cmds/abbr.html">fish shell’s
+abbr</a> seems a useful way of
+“save typing the same thing out”. This is similar to typical shell aliases,
+except it expands the abbreviation before executing it.</p>
+<h2 id="another-idea-for-qmk-leader-key-sequences">Another Idea for QMK Leader Key Sequences</h2>
+<p>Putting 2 and 2 together, I had another idea of what to use the QMK leader functionality for:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> leader_end_user<span class="op">(</span><span class="dt">void</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>leader_sequence_two_keys<span class="op">(</span>KC_Q<span class="op">,</span> KC_B<span class="op">))</span> <span class="op">{</span> <span class="co">// mnemonic: QMK Boot</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>        reset_keyboard<span class="op">();</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>leader_sequence_two_keys<span class="op">(</span>KC_C<span class="op">,</span> KC_C<span class="op">))</span> <span class="op">{</span> <span class="co">// mnemonic: Caps DWIM (capslock)</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        tap_code<span class="op">(</span>KC_CAPS<span class="op">);</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="pp">#ifdef CAPS_WORD_ENABLE</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>leader_sequence_two_keys<span class="op">(</span>KC_C<span class="op">,</span> KC_W<span class="op">))</span> <span class="op">{</span> <span class="co">// mnemonic: Caps capsWord</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        caps_word_on<span class="op">();</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="pp">#endif</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="pp">#ifdef HAPTIC_ENABLE</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>leader_sequence_two_keys<span class="op">(</span>KC_H<span class="op">,</span> KC_H<span class="op">))</span> <span class="op">{</span> <span class="co">// mnemonic: Haptic DWIM (toggle)</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>      haptic_toggle<span class="op">();</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>leader_sequence_two_keys<span class="op">(</span>KC_H<span class="op">,</span> KC_E<span class="op">))</span> <span class="op">{</span> <span class="co">// mnemonic: Haptic Enable</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>      haptic_enable<span class="op">();</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>leader_sequence_two_keys<span class="op">(</span>KC_H<span class="op">,</span> KC_D<span class="op">))</span> <span class="op">{</span> <span class="co">// mnemonic: Haptic Disable</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>      haptic_disable<span class="op">();</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="pp">#endif</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>leader_sequence_two_keys<span class="op">(</span>KC_K<span class="op">,</span> KC_K<span class="op">))</span> <span class="op">{</span> <span class="co">// mnemonic: Keymap DWIM (set to default)</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>        default_layer_set_dvorak_keymap<span class="op">();</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>leader_sequence_two_keys<span class="op">(</span>KC_K<span class="op">,</span> KC_D<span class="op">))</span> <span class="op">{</span> <span class="co">// mnemonic: Keymap Dvorak</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>        default_layer_set_dvorak_keymap<span class="op">();</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>leader_sequence_two_keys<span class="op">(</span>KC_K<span class="op">,</span> KC_Q<span class="op">))</span> <span class="op">{</span> <span class="co">// mnemonic: Keymap Qwerty</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>        default_layer_set_qwerty_keymap<span class="op">();</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>leader_sequence_two_keys<span class="op">(</span>KC_K<span class="op">,</span> KC_G<span class="op">))</span> <span class="op">{</span> <span class="co">// mnemonic: Keymap Gaming</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>        default_layer_set_gaming_keymap<span class="op">();</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>leader_sequence_two_keys<span class="op">(</span>KC_K<span class="op">,</span> KC_H<span class="op">))</span> <span class="op">{</span> <span class="co">// mnemonic: Keymap Gaming (alt)</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>        default_layer_set_gaming_alt_keymap<span class="op">();</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>leader_sequence_two_keys<span class="op">(</span>KC_O<span class="op">,</span> KC_W<span class="op">))</span> <span class="op">{</span> <span class="co">// mnemonic: OS Windows</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>        current_os <span class="op">=</span> _OS_WIN<span class="op">;</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>leader_sequence_two_keys<span class="op">(</span>KC_O<span class="op">,</span> KC_L<span class="op">))</span> <span class="op">{</span> <span class="co">// mnemonic: OS Linux</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>        current_os <span class="op">=</span> _OS_LINUX<span class="op">;</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>leader_sequence_two_keys<span class="op">(</span>KC_O<span class="op">,</span> KC_M<span class="op">))</span> <span class="op">{</span> <span class="co">// mnemonic: OS MacOS</span></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>        current_os <span class="op">=</span> _OS_MACOS<span class="op">;</span></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="pp">#ifdef RGB_MATRIX_ENABLE</span></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>leader_sequence_two_keys<span class="op">(</span>KC_R<span class="op">,</span> KC_R<span class="op">))</span> <span class="op">{</span> <span class="co">// mnemonic: RGB DWIM (next effect)</span></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>        rgb_matrix_step_noeeprom<span class="op">();</span></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>leader_sequence_two_keys<span class="op">(</span>KC_R<span class="op">,</span> KC_J<span class="op">))</span> <span class="op">{</span> <span class="co">// mnemonic: RGB Jellybean</span></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>        rgb_matrix_mode_noeeprom<span class="op">(</span>RGB_MATRIX_JELLYBEAN_RAINDROPS<span class="op">);</span></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>leader_sequence_two_keys<span class="op">(</span>KC_R<span class="op">,</span> KC_T<span class="op">))</span> <span class="op">{</span> <span class="co">// mnemonic: RGB Toggle</span></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>        rgb_matrix_toggle_noeeprom<span class="op">();</span></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a><span class="pp">#endif</span></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>leader_sequence_one_key<span class="op">(</span>KC_L<span class="op">))</span> <span class="op">{</span></span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>        <span class="cf">switch</span> <span class="op">(</span>current_os<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>            <span class="cf">case</span> _OS_LINUX<span class="op">:</span></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>                tap_code16<span class="op">(</span>CODE16_LINUX_DESKTOP_LOCK<span class="op">);</span></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>                <span class="cf">break</span><span class="op">;</span></span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>            <span class="cf">case</span> _OS_MACOS<span class="op">:</span></span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>                tap_code16<span class="op">(</span>CODE16_MACOS_DESKTOP_LOCK<span class="op">);</span></span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>                <span class="cf">break</span><span class="op">;</span></span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>            <span class="cf">case</span> _OS_WIN<span class="op">:</span></span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>                tap_code16<span class="op">(</span>CODE16_WIN_DESKTOP_LOCK<span class="op">);</span></span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>                <span class="cf">break</span><span class="op">;</span></span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>    leader_end_keymap<span class="op">();</span></span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>This code implements the <code>leader_end_user</code> callback, which handles how QMK
+leader key sequences behave for a keymap.</p>
+<p>Example sequences:</p>
+<ul>
+<li><p><code>LEAD q b</code> enters the bootloader, which I hope to recall with “QMK -&gt; Bootloader”.</p></li>
+<li><p><code>LEAD r t</code> toggles whether RGB lighting is on/off, which I hope to recall with
+“RGB -&gt; Toggle”.</p></li>
+</ul>
+<p>“DWIM” means “Do What I Mean”.<br />
+In this case, I mean “what’s the most common functionality to expect (from
+tapping the same key twice)”.</p>
+<p>More concretely, the idea is that QMK leader key sequences seem like a natural
+interface for dynamic customisation of keyboard functionality.</p>
+<p>I like the idea of allowing both the standard CapsLock and the fancier caps word
+within the same keymap, but without needing to take the effort to remember which
+key I put where.</p>
+<p>I put my <code>leader_end_user</code> implementation in <a href="https://github.com/rgoulter/qmk_userspace">my
+userspace</a>.</p>
+<h2 id="downside-discoverability">Downside: Discoverability</h2>
+<p>One obvious downside to this approach is that a keyboard’s firmware is not easily discoverable.</p>
+<p>There’d be no easy way to discover what leader key sequences are implemented in a keymap.</p>
+<p>Whereas, say, in VSCode, the keyboard shortcuts are shown as part of the command
+palette.<br />
+Or in Emacs, <a href="https://github.com/justbur/emacs-which-key">which-key</a> will
+automatically show a map of keybindings (and the commands they’re bound to)
+after pressing some key.<br />
+e.g. pressing <code>spc f</code> presents a map of keybindings for next keys to press (such
+as <code>s</code> to save file, <code>C</code> to copy the file, <code>D</code> to delete the file).</p>
+<h2 id="similar-functionality-qmks-command">Similar Functionality: QMK’s Command</h2>
+<p>The idea of using the keyboard to dynamically configure the keyboard
+configuration is similar to what the <a href="https://docs.qmk.fm/features/command">Command
+feature</a> does. – Except these commands
+are invoked by holding down modifier keys, rather than by hitting a sequence of
+keys.</p>
+<p>The idea of using leader-key sequences for dynamically customising various
+features is more general (&amp; implemented by the keymap, rather than as part of
+QMK’s framework).</p>
+<p>Incidentally, this Command feature has a “print help to the console” keybinding,
+which is one way of addressing lack of discoverability.</p>
+<h2 id="recall-cost-for-custom-and-small-keyboard-keymaps">Recall Cost for Custom and Small Keyboard Keymaps</h2>
+<p>Maybe the idea of using leader key sequences seems complex; but I think it’s
+worth comparing the above idea to other techniques used in keymap
+implementations for custom (and small) keyboards:</p>
+<p>Custom keyboards tend to have more functionality than just what the legends on
+the keycaps denote.<br />
+This means you have to remember anything that’s not on the keycaps.</p>
+<p>Anything that’s frequently used will be easy to recall.<br />
+What requires more consideration is trying to make recall easier for stuff
+that’s used infrequently.</p>
+<p>A small keyboard (like the ortholinear 4x12 keyboards, or split 36-key
+keyboards) have keymaps which bring the full functionality of a typical keyboard
+to within easy reach of the hands on home row.<br />
+In my experience, it’s fairly straightforward to recall the “standard keyboard”
+keys (letters, numbers, symbols), since it’s easy to position the keys in a way
+that’s either familiar, or coherent.</p>
+<p>e.g. The popular <a href="https://github.com/manna-harbour/miryoku/tree/master/docs/reference">Miryoku
+keymap</a>
+demonstrates a few techniques for how this is commonly achieved:</p>
+<p>As an example of good key placement, where the positions are easy to recall: The
+Number/Symbol layers are different than a traditional keyboard, but it’s
+(mostly) coherent: the numbers resemble a numpad, the <code>[</code> key pairs with <code>]</code>.
+<code>_</code> is often used as a placeholder for “space”.<br />
+(I personally prefer to amend it by having <code>/</code> complement <code>\</code>, and by moving <code>~</code>
+to home row’s pinkie finger).</p>
+<p>Examples of bringing functionality to within reach of the hands (in contrast to
+leader key sequences):</p>
+<ul>
+<li><p>Miryoku puts the <code>CapsLock</code> key on a layer.</p></li>
+<li><p>Miryoku has some “Additional Features”, such as switching between a Base and
+an Extra keymap. These keys are on a layer, with additional intention gated
+by requiring these keys to be tapped twice. (QMK’s <a href="https://docs.qmk.fm/features/tap_dance">tap
+dance</a> feature).</p></li>
+</ul>
+<p>Putting the key on a layer comes with positional cost. – You have to be able to
+recall <em>where</em> the key is. – And you have to recall which modifier keys to hold
+down to activate the key. (Modifier-based shortcuts are more common than
+sequence-based shortcuts. e.g. Ctrl+S for “save”, Ctrl+N for “new”. If you
+squint, holding down Ctrl &amp; tapping S could be thought of as holding down a Fn
+key, and hitting the “Save” key).</p>
+<p>For “fancy keycodes” (keys that don’t appear on a typical keyboard), it can be
+difficult to come up with ways to make it easy to remember its position.<br />
+e.g. in the miryoku layout, it’s easier to recall where the arrow keys are
+placed than where the “change RGB hue” key is. (The arrow keys are placed on
+home row, or in a vi-style hjkl position).</p>
+<p>Using QMK leader key sequences for “fancy keycodes” might be complex, but the
+effort to remember the key sequence doesn’t rely on finding a position for it on
+a layer (nor having to recall that position later).</p>
+<h2 id="leader-key-sequence-cost-multiple-key-presses">Leader Key Sequence Cost: Multiple Key Presses</h2>
+<p>Another obvious cost to using QMK leader sequences like suggested is the
+sequence is not very quick to type out.</p>
+<p>It involves pressing the <code>LEAD</code> key, and then some sequence of keys.<br />
+That’s surely going to be slower than holding down some Fn keys and hitting a
+single key.</p>
+<p>This seems a reasonable trade-off to me: the cost of having to hit a sequence of
+keys comes with the benefit that it’s easier to recall how to invoke it.</p>
+<p>I’m optimistic that using leader key sequences are suitable for making it easier
+to invoke behaviour that’s otherwise not frequently invoked enough to be easy to
+position on a keyboard.</p>
+<h2 id="leader-key-sequence-cost-firmware-size-and-complexity">Leader Key Sequence Cost: Firmware Size and Complexity</h2>
+<p>I’m guessing a large number leader key sequences wouldn’t fit neatly on a
+keyboard with a weak atmega32u4 MCU.</p>
+<p>That’s probably another reason why getting an ARM-based custom keyboard. (Plugging again: <a href="https://github.com/rgoulter/keyboard-labs">I’ve designed a
+few such keyboards</a>).</p>
+<h2 id="other-possible-use-cases">Other Possible Use Cases</h2>
+<p>Without having to worry about “where do I position these keys”, I reckon it’s
+easier to add additional functionality to a keymap by adding a leader key
+sequence which invokes it.</p>
+<p>Here are some thoughts as to leader key sequences I think I might add to my
+keymap:</p>
+<ul>
+<li><p>Toggle/Enable/Disable for various features.</p>
+<ul>
+<li>Rather than just having “RGB toggle” or “Haptics Enable”, it’d make sense to
+provide all of “enable/disable/toggle” as part of leader key sequences.</li>
+</ul></li>
+<li><p>Dynamic Configuration: increase/decrease, default, min/max.</p>
+<ul>
+<li><p>RGB effects can have different hue, saturation, brightness (value), and the
+effects can run at different speeds.<br />
+It might make sense to provide the ability to increase/decrease these
+through leader key sequences.</p></li>
+<li><p>Tap Hold configuration supports <a href="https://docs.qmk.fm/tap_hold#dynamic-tapping-term">dynamic configuration of the tapping
+term</a>.</p></li>
+<li><p><a href="https://docs.qmk.fm/features/auto_shift">AutoShift</a> also has dynamic
+configuration of its tapping term.</p></li>
+</ul></li>
+<li><p><a href="https://getreuer.info/posts/keyboards/macros3/index.html">“case modes”</a></p>
+<ul>
+<li><p>“caps word” is a neat feature, since it makes it easier to type out a single
+word in all caps (e.g. variables with uppercase identifiers).</p></li>
+<li><p>“case modes” generalises this feature, which would aim to make it easier to
+write out <code>snake_case</code>, <code>kebab-case</code> or <code>./path/case</code> values.</p></li>
+</ul></li>
+<li><p><a href="https://docs.qmk.fm/features/dynamic_macros">Dynamic Macros</a></p>
+<ul>
+<li>Again, this is a neat feature, but I’m not quite sure where I’d position it
+on a layer in a keymap.</li>
+</ul></li>
+<li><p>Send String and other shortcuts.</p>
+<ul>
+<li><p>From searching for “qmk leader sequence”, most uses of the leader key I
+could find seem to be use of <code>SEND_STRING</code>, or as a convenient way to
+access modifier-heavy keyboard shortcuts.</p>
+<ul>
+<li>Vaguely, the idea of using sequences of taps instead of simultaneous holds
+of modifier keys resembles one shot mods, or <a href="https://github.com/qmk/qmk_firmware/blob/user-keymaps-still-present/users/callum/readme.md">callum-style
+mods</a>,
+which I’ve seen mentioned as a friendlier alternative to tap-hold home row
+mods.</li>
+</ul></li>
+</ul></li>
+</ul>
+<h2 id="a-new-kind-of-modifier">“A New Kind of Modifier”</h2>
+<p>The docs page for the QMK leader key has the subtitle “a new kind of modifier”.</p>
+<p>Most keyboard shortcuts operate with modifier keys that you have to hold down.</p>
+<ul>
+<li><p>e.g. on a web browser, Ctrl+T opens a new tab, Ctrl+Shift+T re-opens a closed
+tab.</p></li>
+<li><p>e.g. in Emacs and macOS, shortcuts like Ctrl+a or Ctrl+e navigate in text, again
+operating by holding down a modifier key.</p></li>
+<li><p>on laptop keyboards, you hold down the Fn key to change the behaviour of some
+other keys; or on small custom keyboards, you might access different keyboard
+layers by holding down one or more Fn keys.</p></li>
+</ul>
+<p>Modifier keys allow re-using the same set of physical keys for more actions.</p>
+<p>Key sequences are another way of mapping functionality onto a set of keys.
+(Although I’m not sure “modify key behaviour” is the best way to describe).</p>
+<h2 id="implementation-notes-qmk-lead-timeout">Implementation Notes: QMK Lead Timeout</h2>
+<p>I like defining <code>#define LEADER_NO_TIMEOUT</code> so that when inputting <code>LEAD r r</code>, I
+don’t have to rush after invoking <code>LEAD</code>.</p>
+<p>Setting <code>LEADER_PER_KEY_TIMING</code> also helps with long sequences. Maybe a
+<code>LEADER_TIMEOUT</code> longer than the default 350ms might help for leader key
+sequences same-finger bigrams.</p>
+<p>https://docs.qmk.fm/features/leader_key#disabling-initial-timeout</p>
+<h2 id="qmk-leader-key-sequence-idiosyncracies">QMK Leader Key Sequence Idiosyncracies</h2>
+<p>The behaviour of key sequences I’m used to in Doom Emacs is that each sequence
+must be unique and not the prefix of another sequence. (e.g. <code>spc f s</code> saves
+file, but <code>spc f</code> does not map to a command).</p>
+<p>QMK’s implementation is a bit more limited: the leader key sequence has a buffer
+of up to 5 keycodes; and then once the leader key sequence has timed out, then
+the <code>leader_end_user</code> can be used to check which leader key sequence was used.</p>
+<p>An advantage here is this allows for “one sequence can be a prefix of another”.</p>
+<p>The disadvantage is it imposes a delay after inputting the sequence. (Because
+the leader key command behaviour is checked in the callback after the timeout,
+there’s no way for the leader to end before the timeout).</p>
+<p>I suspect an alternative implementation could overcome those limitations
+(albeit, for different implementation costs).</p>
+<h2 id="implementation-notes-qmk-combo">Implementation Notes: QMK Combo</h2>
+<p>I have <code>LEAD</code> as a combo (chord) on my keymap.</p>
+<p>In order to still use <code>LEAD</code> (and other combo keys) with different base layers
+(e.g. qwerty instead of dvorak), I define:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#define COMBO_ONLY_FROM_LAYER </span><span class="dv">0</span></span></code></pre></div>
+<p>https://docs.qmk.fm/features/combo#layer-independent-combos</p>]]></summary>
+</entry>
+<entry>
+    <title>Further Notes on Gym Going</title>
+    <link href="http://www.rgoulter.com/blog//posts/2024-06-12-further-notes-on-gym-going.html" />
+    <id>http://www.rgoulter.com/blog//posts/2024-06-12-further-notes-on-gym-going.html</id>
+    <published>2024-06-12T00:00:00Z</published>
+    <updated>2024-06-12T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<p>I have continued going to the gym in the time <a href="2024-03-23-six-months-of-going-to-the-gym.html">since I wrote a blogpost with thoughts about going there for six months</a>.<br />
+That post logged that I’d made good progress on fat loss goals, enjoyed going to the gym, thought some of the machines in the gym were neat.</p>
+<p>Since then, I’ve paid more attention to resistance training.</p>
+<p>Here are some scattered notes and links to things I’ve found interesting:</p>
+<ul>
+<li><p>I use ChatGPT less than I was using it before.</p>
+<ul>
+<li>I’ve since found resources which I find reputable.
+Whereas, before, I’d at least found ChatGPT to be better than random blogspam.</li>
+</ul></li>
+<li><p>Great resource: <a href="https://exrx.net/" class="uri">https://exrx.net/</a></p>
+<ul>
+<li>This has many great pages on topics related to exercise.</li>
+<li>I constantly refer to this website for its exercise library,
+which lists exercises grouped by what muscle the exercise targets.
+(e.g. if you want to know what exercises target the hamstrings, you can find a list there).</li>
+<li>The exercises each have a video demonstrating how to perform the exercise,
+as well as a description and comments.
+<ul>
+<li>You can often find similar exercises done with a barbell, dumbbells, cable machine, plate-loaded machine, selectorized.. or with a smith machine, or bodyweight. – Some exercises are locked behind a premium paywall, but <em>most</em> can be read for free.</li>
+</ul></li>
+</ul></li>
+<li><p>Caveats about content creators:</p>
+<ul>
+<li>IMO: There are perverse incentives with YouTube channels and blogs:
+<ul>
+<li>There’s a conflict between “put out quality information” and “get discovered
+by a recommendation algorithm”.
+<ul>
+<li>Recommendation algorithms tend to favour things that are fresh/new.</li>
+<li>In health/fitness, it’s likely that good information is already well known
+(by some people somewhere).</li>
+</ul></li>
+<li>I reckon that, especially for YouTube channels or blogs with high production value,
+this leads to pushing out repeats of content, in order to stay ‘fresh’.</li>
+</ul></li>
+<li>Audience / context.
+<ul>
+<li>Beginners have a lot of room to grow/improve; for advanced practitioners, marginal increases can be expensive.
+So, advice targeted at an intermediate or advanced level might not be necessary for a beginner level.
+<ul>
+<li>For beginners and for casual practitioners, it’s not necessarily worth pursuing 100% efficiency.</li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li><p>Great resources: Dr Mike Israetel’s <a href="https://www.youtube.com/@RenaissancePeriodization/videos">RenaissancePeriodization</a> (RP).</p>
+<ul>
+<li>Especially the channel’s <a href="https://www.youtube.com/@RenaissancePeriodization/playlists">playlists</a>, and its “made simple” series.</li>
+<li>On the whole.. the channel’s content is geared towards intermediate and advanced lifters.</li>
+</ul></li>
+<li><p><a href="https://www.youtube.com/watch?v=dvYgXOFCeGM">Alexander Bromley’s video on exercise science</a> is an interesting “cold shower”.</p>
+<ul>
+<li>“Science” is catchy in video titles.
+But the field Exercise Science as a field hasn’t made an impact on powerlifting or bodybuilding competitors.</li>
+<li>Exercise Science suffers same factors as other soft sciences:
+<ul>
+<li>Issues with reproducibility (sometimes due to fraud).</li>
+<li>Many variables to consider deal with, which makes it easy to confound results/understanding.</li>
+</ul></li>
+<li>Exercise science content often has to hedge with weasel words like “but if that works for you, it works for you”;
+this undermines its prescriptive value.</li>
+</ul></li>
+<li><p>The LesMills BodyPump sessions that the gym holds have been an excellent way to build confidence with weights. It’s a good exercise.</p></li>
+<li><p>Bioelectrical Impedance Analysis:</p>
+<ul>
+<li>The results I get from day to day vary. I like to think that by taking a frequent number of measurements,
+(e.g. once for each session), overall the impact of the variation evens out.</li>
+<li>e.g. <a href="https://www.youtube.com/watch?v=fQezbeaDXIc">Video from RP discussing ways to estimate Percentage Body Fat</a> discusses that using BIA is not as effective as that judging by weight &amp; strength performance. (e.g. “weight goes down &amp; strength stays same” would be positive; “weight up, strength down” would be negative).</li>
+</ul></li>
+<li><p><a href="https://www.youtube.com/watch?v=DupQfkoI-Sc">RP’s video on Rep Ranges</a></p>
+<ul>
+<li>This is basic/fundamental.</li>
+<li>“Working set” is a set of repetitions (reps) that is challenging enough that you’re near the limit of what you can do.
+<ul>
+<li>e.g. ideally, you’re unable to do 15 reps with a weight which you plan to use for a set of 10. (If you could do 15 reps, the weight is too light).</li>
+</ul></li>
+<li>Lower reps = heavier weight = better for building strength. (Typically 3-6).</li>
+<li>Higher reps = lighter weight = better for building muscle. (Anything up to 30 reps).</li>
+<li>e.g. “Starting Strength” uses sets of 5 reps. (For beginners, 3 sets of 5 reps).</li>
+</ul></li>
+<li><p><a href="https://www.youtube.com/watch?v=UU2dpLFIOHU">Menno Henselman has a video discussing key ideas for strength/muscle development</a>.</p>
+<ul>
+<li>Doing more ‘volume’ of work (more sets, more reps) will result in more muscle.</li>
+<li>For strength: short term, intensity is good. (Low reps).
+<ul>
+<li>However, since there’s a limit to how strong a muscle mass can get,
+in the long term, more strength would require more muscle.</li>
+<li>Menno describes the relationship between strength/muscle size using an analogy of a race car: a race car might go faster by the driver improving his skills, or by improving the car’s engine.</li>
+</ul></li>
+</ul></li>
+<li><p>I liked RP’s “made simple” series, particularly its playlists about <a href="https://www.youtube.com/playlist?list=PLyqKj7LwU2RulAjHczohbx5OyJQ8TaFM0">fat loss</a> and <a href="https://www.youtube.com/playlist?list=PLyqKj7LwU2RvZhQ739Mg9v8cLotbX_qE3">cardio</a>:</p>
+<ul>
+<li>Fat loss:
+<ul>
+<li>The key factor is “calorie deficit” (calories in &lt; calories out).
+<ul>
+<li>Diet (in the sense of “what food you eat”) plays a much more significant role than exercise.
+<ul>
+<li>There’s a limit to the amount of energy you can expend in a day.
+<ul>
+<li>If you perform too much exercise, your body will conserve energy for the remaining part of the day.
+(e.g. you’ll not get up &amp; do things).</li>
+</ul></li>
+<li>Exercise also accumulates fatigue and risk of injury, so can’t be done to excess.</li>
+<li>To an extent: reaching (or increasing) calorie deficit involves doing what’s least awful of reducing what you eat or exercising more.</li>
+</ul></li>
+<li>An often touted goal of keto diet (low carb) is to burn fat for energy by;
+but, this doesn’t supersede “calories in, calories out”.
+<ul>
+<li>Excess calories will still get stored as fat;
+calorie deficit will still burn fat.</li>
+<li>However, high-carb food is often not satiating;
+(e.g. chips; you’d have to eat many potato chips to feel full).
+So, avoiding high-carb food is a good idea.</li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li>Cardio:
+<ul>
+<li>“Stimulus to Fatigue” needs to be considered.
+<ul>
+<li>e.g. Sprinting burns many calories per second, but is too fatiguing to sustain for some time.</li>
+<li>Dr Mike rates elliptical machine highly.</li>
+<li>Dr Mike rates using step-counter and aiming to reach 8k/10k/12k steps per day highly.
+<ul>
+<li>Good energy expenditure; very low disruption to day’s activities.</li>
+<li>Very low fatigue / risk of injury.</li>
+<li>Not ‘fun’, but walking around is an ubiquitous part of the day.</li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li><p>Nutrition:</p>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=oCDqqVwYMa4">Discussion of Diet Soda and Aspartame</a>.
+<ul>
+<li>Although “Diet soda cancer” makes headlines,
+it’d be foolishly inaccurate to think “diet soda unhealthy; regular soda is healthier”.</li>
+</ul></li>
+<li>A few key ideas Dr Mike repeats in various places:
+So long as you’re getting a certain minimum of macronutrients/micronutrients,
+the overall composition of where calories come from is not important.
+<ul>
+<li>c.f. <a href="https://edition.cnn.com/2010/HEALTH/11/08/twinkie.diet.professor/index.html">Mark Haub’s Twinkie study</a>,
+where he was able to reduce fat from a caloric deficit, while two thirds of the calories he ate came from twinkies</li>
+</ul></li>
+</ul></li>
+<li><p>Machines vs free weights:</p>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=iIcWxvplE6Y">Menno Henselman</a> cites papers which compared training with free weights against training with machines.
+<ul>
+<li>Supposed thoughts: Since machines are stable, should be able to get more strength out of them; machines worse for joints and muscle growth.</li>
+<li>The studies show:
+<ul>
+<li>Due to specificity: you’ll do slightly better on the one you train with.</li>
+<li>But for health benefits: do whatever you prefer.</li>
+<li>For machines: it’s slightly better to use plate-loaded machines with a free range of motion, than lever selectorized machines with a fixed range of motion.</li>
+</ul></li>
+</ul></li>
+<li>e.g. I recall seeing that Nassim didn’t like weight machines and thought they’re stupid.</li>
+<li><a href="https://www.youtube.com/watch?v=qIFYgb7Mvu0">RP discusses that “gotta use barbells!” overstates it</a>.
+<ul>
+<li>Barbell lifts (especially heavy compound exercises) are great; but, it would be wrong to assert they’re the best for all cases.</li>
+</ul></li>
+</ul></li>
+<li><p>Doing cardio and resistance training in the same session:</p>
+<ul>
+<li>I’ve seen that doing cardio after doing resistance leads to an “interference effect” where the muscle won’t gain as much since the body’s recovering from cardio.</li>
+<li>This seems plausible to me. But, “no interference effect” also seems plausible.</li>
+<li>At least, it does seem “trade Peter for Paul”: time spent on cardio is time spent not doing resistance training, and vice versa. It’s easier to perform well when starting fresh.</li>
+<li>As such, I do split up my gym sessions between “focus on cardio” and “focus on resistance training”.</li>
+</ul></li>
+<li><p>RP’s <a href="https://www.youtube.com/watch?v=a5Yzg5K5EPE">Definition of Beginner (from the Hypertrophy Made Simple series): “when improvement is automatic”</a>.</p>
+<ul>
+<li>I reckon this is a reasonable and interesting use of the word “beginner”.
+For beginners, improvement is easy.
+<ul>
+<li>As opposed to “beginner is someone who has been lifting for up to 6 months” or whatever.</li>
+</ul></li>
+<li>The <a href="https://www.youtube.com/watch?v=-8Sgczn4VsM">Strength Made Simple series’ equivalent video concurs</a>:
+it defines beginner as “sees improvement from adhering to basics”.</li>
+</ul></li>
+<li><p>ExRx’s <a href="https://exrx.net/ExInfo/Etiquette">page about Gym Etiquette</a>.</p>
+<ul>
+<li>This is all mostly obvious. Don’t make things unpleasant for others.</li>
+<li>I’ve noticed that in practice, “unrack weights from the machine you’re using” isn’t intuitive.</li>
+</ul></li>
+<li><p>ExRx discussing <a href="https://exrx.net/Questions/LegPressLockOut">Locking out on leg press machine</a>.</p>
+<ul>
+<li>There are some nasty “gym fails” videos which feature injuries on leg press machines.</li>
+<li>ExRx discusses that the problem is putting the knee under stress it’s not adapted to.</li>
+<li>This risk of injury can be prevented by always controlling the weight of the leg press.
+(e.g. don’t lock out in an uncontrolled manner), and don’t use more weight than your legs can handle.</li>
+</ul></li>
+<li><p><a href="https://www.youtube.com/watch?v=kW8KP-rlKTk">Alexander Bromley’s Bench Press (“for no gains” series)</a>.</p>
+<ul>
+<li>An interesting point: the two most popular YouTube videos about bench pressing
+recommend different techniques: Bromley explains that one technique is optimal for powerlifting (where the focus is strength),
+the other is optimal for hypertrophy (building muscle).</li>
+</ul></li>
+<li><p>Fatigue &amp; Recovery:</p>
+<ul>
+<li>Obvious constraints to exercise are “time available” and “effort you’re willing to put in”.</li>
+<li>Less obvious to me was that fatigue is an important constraint.
+<ul>
+<li>Working beyond what the body can recover from risks injury.</li>
+<li>This also indicates: rest and <em>sleep</em> are important for improvement.</li>
+</ul></li>
+</ul></li>
+<li><p>Number of sets:</p>
+<ul>
+<li>RP’s discussions
+<ul>
+<li><a href="https://www.youtube.com/watch?v=Nh4qa-Y1CIo">for hypertrophy</a>,
+<ul>
+<li>Per muscle:
+<ul>
+<li>Aim for muscle to be pumped, and muscle disrupted. (&amp; should feel burn, if using a low enough weight).</li>
+<li>For beginners, 1-5 sets targetting the muscle can be enough.</li>
+<li>If can’t recover for the next session, you’re doing too much.</li>
+</ul></li>
+<li>Per session:
+<ul>
+<li>If too fatigued, it’s difficult to push target muscle to failure.</li>
+<li>15-25 sets per session.</li>
+</ul></li>
+</ul></li>
+<li><a href="https://www.youtube.com/watch?v=b9RcebQyG0A&amp;t=147s">for strength</a>
+<ul>
+<li>Per movement:
+<ul>
+<li>At least 1 heavy working set. Higher intensity is better.</li>
+<li>If you can’t recover for next session, you’re doing too much.</li>
+</ul></li>
+<li>Per session:
+<ul>
+<li>Probably not worth the effort if can’t lift sufficiently heavy weight.</li>
+<li>If you’re tired, anything will ‘feel’ heavy/difficult.
+<ul>
+<li>IMO: Seems unlikely that “get tired, then lift light weights” would lead to strength gains.</li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li><p>RP on <a href="https://www.youtube.com/watch?v=eadyCiB0G3A">rounding the back during exercises</a>:</p>
+<ul>
+<li>Rounding the back risks injury. Lifting should be done with a neutral back.</li>
+<li>On the other hand, rounding the back builds resiliency.</li>
+<li>Synthesising these: keep the back neutral for heavy lifts; train the lower back with suitable exercises (&amp; light enough weight).</li>
+</ul></li>
+<li><p><a href="https://exrx.net/Lists/WorkoutMenu">ExRx Workout Templates</a>.</p>
+<ul>
+<li>These are great.
+<ul>
+<li>Provides a guide on what kinds of exercises are useful to aim for at the gym.
+<ul>
+<li>This is useful for more direction than just “uh, I’ll use whatever machines are available”.</li>
+</ul></li>
+</ul></li>
+<li>The pages mention useful qualifiers like “don’t do these kinds of exercises on the same day”.</li>
+</ul></li>
+</ul>]]></summary>
+</entry>
+<entry>
     <title>Bridgerton Season 3</title>
     <link href="http://www.rgoulter.com/blog//posts/romance/2024-05-27-bridgerton-season-3.html" />
     <id>http://www.rgoulter.com/blog//posts/romance/2024-05-27-bridgerton-season-3.html</id>
@@ -1020,177 +1599,6 @@ On the other hand, I think it smells a bit too much to ‘declare’ the existan
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ex">swift</span> tempurl <span class="at">--digest</span><span class="op">=</span>sha1 GET 900 <span class="va">${OS_STORAGE_URL}</span>/rgoulter-storage/test some-secret-value</span></code></pre></div>
 <p>The <code>jq</code> expression isn’t the cleanest. (The <code>[2]</code> is the index the “public” object-store endpoint happened to be in the output of <code>openstack catalog show object-store</code>; albeit, all the endpoints had the same URL).</p>
 <p>The URL from <code>swift tempurl</code> can be used for GET requests to access the storage.</p>]]></summary>
-</entry>
-<entry>
-    <title>Six Months of Going to the Gym</title>
-    <link href="http://www.rgoulter.com/blog//posts/2024-03-23-six-months-of-going-to-the-gym.html" />
-    <id>http://www.rgoulter.com/blog//posts/2024-03-23-six-months-of-going-to-the-gym.html</id>
-    <published>2024-03-23T00:00:00Z</published>
-    <updated>2024-03-23T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<p>I’ve been going to the gym consistently for the last six months or so.</p>
-<p>Some thoughts:</p>
-<h2 id="goals">Goals</h2>
-<p>I started going to the gym to improve my health; especially to lose fat.</p>
-<p>Alongside going to the gym, I’ve restricted the amount of soft drink I drink, &amp; limited the amount of fried food I eat.<br />
-Those changes alone had a significant impact on the progress I made.<br />
-– “Restriction” is an unhappy word. Perhaps “control” would be better. By my estimate, the effort it’d take to burn the calories from soft drinks far outweighs the reward from drinking them.</p>
-<p>The gym I attend has a fancy bioelectrical impedance analysis machine. This helps assess body composition; i.e. can be used to measure weight, muscle mass (sorta), and fat. – This makes it easier to track “fat loss” as a target, as distinct from “weight loss”. Without that distinction, building muscle (as a gym beginner) somewhat confounds the goal of losing weight; since it’s good to build muscle, but building muscle increases weight. (Although, sure, it’s easier to burn fat with a calorie deficit, and to build muscle with a calorie surplus[1]).</p>
-<p>I also recently started keeping a workout journal. It’s easy enough to keep track of progress when using a treadmill (e.g. “Last week I ran 5km. This week I ran 5.2km. Improvement!”). But, I found it difficult to keep track of progress when using weight machines (&amp; weights). I wanted to write down what I’d done, so then I’d have a reference point to compare against for the next session.</p>
-<p>In terms of progress?<br />
-Shorts which used to tightly hug my bum will now fall off if I don’t wear a belt.<br />
-My chess rating has improved online, which I mainly attribute to improved physical fitness.</p>
-<h2 id="start-small-then-work-up">Start Small then Work Up</h2>
-<p>When I first started going to the gym, I would go two or three times each week. Starting out, I focused exclusively on using the treadmill.</p>
-<p>Since starting out, I’ve increased the pace at which I run at, and increased the amount of time I run for.</p>
-<p>After developing that to a level I was happy with, I was then able to use the days between running to do whatever else at the gym.</p>
-<h2 id="regarding-initial-anxiety-and-such">Regarding Initial Anxiety and Such</h2>
-<p>I certainly felt anxious about going to the gym when I started going. I think pretty much everyone feels that way.</p>
-<p>I think what I was initially most anxious about was looking silly.. or feeling like some kind of imposter that didn’t belong at the gym.</p>
-<p>Part of that was surely thinking “oh, I don’t know what exercises to do; I don’t know how to use the weights or machines”.<br />
-There are ways to figure these things out, though.<br />
-For one.. since my goal has been ‘fat loss’, it wasn’t so bad to just focus on using the treadmill. For another, the weight machines at the gym are beginner friendly. There are plenty of videos on YouTube which demonstrate how each machine is used. – Though, I’ve seen some pretty compelling arguments that beginners should also make use of free weights.</p>
-<p>I think part of gym anxiety is fear of being judged.<br />
-Some people who go to the gym are fitter than others; it’d be silly (and rude) for the fitter people to judge others for being less fit at the gym, since by exercising at the gym is a reasonable way to improve fitness.<br />
-But, really I can take pride in putting in the effort to show up to the gym, and make each workout a good one that made progress towards my goals. (It takes a long time to lose a bunch of weight; it’s much quicker to change how many times you go to the gym. It’s easier to hit the target of “go to the gym twice a week” and improve that to “three times a week” than it is to hit the target “lose 10kg of fat”).</p>
-<p>People do look at what other people are doing in the gym.<br />
-Partly this is comparison.<br />
-But another reason is curiousity. I know that I’ll want to see what others are doing.<br />
-– I reckon not everyone knows everything. I often see the damper on the rowing machines set to a 10. I’m inclined to believe people set it to a 10 thinking “intense workout”, rather than “slow boat”[2].<br />
-– The gym I go to has a SkiErg machine. In my months of attending the gym, I hadn’t seen anyone use it. (Although after I used it, I saw PTs advise gym-goers to use it, where the Personal Trainer’s technique diverged unusually/weirdly from the recommended technique[3]).</p>
-<p>It varies from gym to gym, but my experience has been that the Personal Trainers are typically unpleasant to interact with. Ideally, PTs would be knowledgeable, friendly, supportive and encouraging. Somehow, commission-based incentives don’t necessarily lead to this. – I mean, dealing with these PTs is an unpleasant part of gym going.</p>
-<p>Positively: If you go to the gym routinely, you’ll recognise other people who follow an overlapping routine.</p>
-<h2 id="going-to-the-gym-can-be-fun">Going to the Gym Can be Fun</h2>
-<p>I became a gym member in order to improve my health, not for the fun of it. And I’m not always excited to go to the gym, and the gym isn’t always fun. Sure.<br />
-But I do think it’s kind of a shame that exercise is thought of as a burdensome chore, rather than something fun.</p>
-<p>I reckon in the same way that a dog likes going to the park, your body ought to appreciate the chance to exercise.</p>
-<p>For losing fat.. I think running at a high intensity for a long period of time is fun. I do get that “runner’s high”.<br />
-Some other things help:<br />
-While running, I listen to music. I use the Aftershokz headphones, they’re great, and well suited to exercise. (They don’t cover up the ears). – It’s <em>very</em> fun to listen to an upbeat song, and to be running at high speed to that song.<br />
-For endurance activities, part of what I find fun is demonstrating a consistent, high level of effort. <em>Of course</em> it’s boring to finish if a run is too easy. And giving up before the end is also not <em>fun</em>. But enduring to the point where you want to give up while still finishing is relieving.</p>
-<p>Some of the exercises that gym equipment allows can be pretty fun:</p>
-<p>The gym I go to has a ‘curved motorless treadmill’.<br />
-This is kinda like a hamster wheel, but for humans.<br />
-Since the machine’s tread goes as fast as you go, it allows you to speed up or slow down as you like. This is friendlier than on a motorised treadmill, which maintains whatever pace you set it, and so has very limited allowance for running slower (or faster) than that pace. It also provides instant feedback as to what pace you’re running. This makes it easy enough to try and keep to a certain pace. And, same as a motorised treadmill, you don’t have to worry about traffic or other obstacles.<br />
-By letting you run at whatever speed, this helps you get familiar with what running faster feels like, and is a friendlier way for feeling whether you can maintain a certain pace for some time.</p>
-<p>I also enjoy using the rowing machine.<br />
-At the gym I go to, the rowing machines are often unused. I think that’s a shame, since it’s a versatile piece of equipment: it can be useful for burning calories, or for building strength. Compared to the treadmill, a rowing machine will exercise more of the body (legs, core muscles, and arms); and unlike running, it’s low-impact. Compared to most weight machines, it engages a variety of muscles. Compared to free weights, it’s friendlier for beginners.<br />
-I recently found out there are metronome apps for rowing that give useful cues for stroke rate. These make it much easier to do a workout which aims for maintaining a stroke rate for some period of time.</p>
-<p>I recently started attending BodyPump group sessions.<br />
-I’ve found these to be pretty fun. It’s a good way of getting a good workout in a good amount of time. This is also a neat way to get familiar with free weights and some free weight exercises.</p>
-<h2 id="using-chatgpt-for-learning-basic-things">Using ChatGPT for Learning Basic Things</h2>
-<p>In addition to seeing demonstations in YouTube videos, I found it useful to ask ChatGPT about fitness things.<br />
-Of course, ChatGPT isn’t completely reliable; but.. it’s probably not worse than the blogposts that come up in search engine results (and not worse than a bad PT).
-Perhaps it’s comparable to what people say about Wikipedia: you ought to not rely too heavily on it, but it makes for a good starting point.</p>
-<p>One of the main faults (or ‘characteristics’?) with ChatGPT is these chatbots are decidedly unopinionated. – I mostly find this preferable over being told an unqualified opinion.<br />
-Similarly, the public chat-based LLMs are <em>pathologically</em> positive.<br />
-– Whereas, when reading articles or blogposts or watching videos, often these will include strong opinions that you have to evaluate.</p>
-<p>Another limitation is as the topic of discussion gets more precise, ChatGPT tends to be less useful.</p>
-<h2 id="footnotes">Footnotes</h2>
-<p>[1] <a href="https://www.youtube.com/watch?v=8QpjX2K-JY0">Dr. Mike Israetel’s discussion about ‘losing fat while building muscle’</a> seems coherent to me.</p>
-<p>[2] <a href="https://www.concept2.com/indoor-rowers/training/tips-and-general-info/damper-setting-101" class="uri">https://www.concept2.com/indoor-rowers/training/tips-and-general-info/damper-setting-101</a></p>
-<p>[3] <a href="https://www.youtube.com/watch?v=B0lIgT5PHc8">Concept2’s SkiErg technique demonstration</a></p>]]></summary>
-</entry>
-<entry>
-    <title>Another Factorio Post-Game Ramble</title>
-    <link href="http://www.rgoulter.com/blog//posts/games/2024-02-14-another-factorio-post-game-ramble.html" />
-    <id>http://www.rgoulter.com/blog//posts/games/2024-02-14-another-factorio-post-game-ramble.html</id>
-    <published>2024-02-14T00:00:00Z</published>
-    <updated>2024-02-14T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<p>Factorio is such an enthralling game to play.</p>
-<p>If you’ve somehow found this post but don’t know Factorio:
-It’s a 2D game which starts out similar to many ‘survival’ games (e.g. you chop wood, mine stone and iron, etc.), but progressively build up ways to automate these tasks away. The eventual goal is to build and launch a rocket; although many players find fun in seeing how big a factory they can build.<br />
-Ultimately, the whole ‘challenge’ of Factorio is finding a way to arrange the factory so that all the inputs can get to the right places.. so it’s encouraged to do a first playthrough ‘blind’.</p>
-<p>I had been meaning to play some other games on my Nintendo Switch, but after starting a new Factorio playthrough, ended up spending a lot of time on that.</p>
-<p>This time, I played on a “ribbon world”. I also set the resource patches to be more frequent and richer (although didn’t change them to be bigger than normal). I decided to play on non-peaceful; but, disabled enemy expansion.</p>
-<p>“Ribbon world” limits the height of the map. – This adds some challenge to laying out the base. e.g. the limited vertical space constrains how ‘vertical’ any part of the factory can be; whereas horizontal space has to be cleared (especially on non-peaceful, where enemies have to be cleared), and inputs will end up <em>really far</em> from where they need to be.<br />
-On the flipside, the limited height makes defending from the enemies trivial: the enemies can only come from the left or the right, so you only need to worry about defending a tiny perimeter to the left and to the right.</p>
-<h2 id="compared-to-previous-playthroughs">Compared to Previous Playthroughs</h2>
-<p>On my previous Factorio runs: I mostly stuck to peaceful, and have tried out different strategies for organising the factory.<br />
-I did complete a game of non-peaceful.. I’d say that the enemy attacks add some pushback and constraints. e.g. you need to supply defenses, and in order to expand the factory, you somewhat need to clear enemy bases.<br />
-In terms of strategies I’ve tried: I’ve tried the game without trains or even bots(!), I tried the game where I used trains to augment a ‘main bus’. I tried a game where I had the whole factory covered with the same bot network, and used this to supplement a main bus (albeit, resource patches were frequent, rich, and big).</p>
-<p>Recall.. the “main bus” idea is to put a bunch of common resources on belts in parallel. This makes the “gather inputs” part of the equation much simpler: to assemble an item with inputs “steel, copper, green circuits”, you just branch these resources off from the main bus.<br />
-One inevitable problem is that the input requirements for your inputs might be larger than the bandwidth of the bus. (e.g. you’d ideally consume 1000 resources from the bus, but the bus only supplies 500).</p>
-<p>Having a factory covered with bots “solves” the problem of getting uncommon items around; and also makes it easy to build up parts of the factory without needing the player around.<br />
-I’d hoped for a ‘stacking’ design which automatically could build itself (since the roboports from one part would be able to then build more roboports and other buildings, expanding the factory).<br />
-In hindsight, it was excessive to build roboports that covered the whole of the map. It didn’t really help with moving resources around great distances.</p>
-<p>For this ribbon world, for moving resources great distances, I opted to go for a train-based approach.</p>
-<h3 id="overview-of-the-strategy">Overview of the Strategy</h3>
-<p>Generally the strategy I wanted to take for this factory was: use trains to move resources around.</p>
-<p>I aimed to have four lanes of rails at the edge of the map: two on the top, two on the bottom. The idea being, train stations can branch-off from the inner pair of rails, whereas the outer pair of rails only ever has junctions to/from the inner pair of rails; trains need to slow down in order to stop, so hopefully this would reduce the need for trains to slow down before reaching their destination.</p>
-<p>Using trains then means: have train stations which load resources from mines, and then have groups of train stations which consume those resources (and provide more complex resources in turn).</p>
-<p>I hadn’t been against the idea of then using train stations to start off a “main bus”. However, I never ended up doing this. (I did build the same “mall” that I’d used in previous builds, which uses a bus of inputs). – It would take a lot of horizontal space to gather so many inputs, and would take a lot of horizontal space to extend the bus, and there’s not much vertical space to build off of the bus.</p>
-<p>Militarily, the game was quite straightforward.<br />
-In the early game, the enemy bases are quite far away. The enemy AI is passive, and only attacks in reaction to pollution from your factory reaching their base. It was easy for pace of conquest to outspeed pace of pollution, since the height of the map is limited.<br />
-However, it doesn’t take too long until conquering enemy bases become too formidable for the player to take on by themselves. Enemy defenses get so strong that it takes a lot of effort to make incremental progress against them. (Although part of the problem is the tank doesn’t control so well on the Nintendo Switch, I reckon).<br />
-In the late game, artillery outreaches the enemy.. so expanding the factory involves building up a wall &amp; some turrets, building out the railway to the wall, then using an artillery train to blast the enemy bases. – Notably, construction bots can be used to build out these, so it can be done without needing the player nearby.</p>
-<h3 id="what-went-well-scale">What Went Well: Scale</h3>
-<p>One of the challenges of Factorio’s late game is that high-tier items are really expensive, requiring many inputs.<br />
-e.g. The simple green circuits require a few iron and copper pieces. The more advanced red circuits then require a few green circuits, a few copper pieces, and a few bits of plastic. The most advanced blue circuits require <em>twenty</em> green circuits, and some red circuits, and some sulfuric acid. – Many of the late game items require hundreds of blue circuits to build.<br />
-As noted above, even if it’s not difficult to get inputs connected to a system, one of the problems using belts is hitting bandwidth limits.</p>
-<p>Using trains to move resources around allows for huge scale.<br />
-I suppose there must be a bandwidth limit on how many resources a rail allows, too. But, with trains only using rails when carrying a bulk of resources at great speed, it’s not really an easy limit to hit.</p>
-<p>Trains then allow for ‘decoupling’ where an input is gathered from where it’s consumed.<br />
-– With belts, you need a belt that runs all the way from a particular input to where it’s consumed. More resources can be fed into the belt, but resources need to be fed into the belt <em>before</em> where they’re consumed from a belt.<br />
-With rail, there’s not this constraint. Resources loaded anywhere on a rail network will find their way to where they need to be unloaded in the rail network.</p>
-<p>This ends up making “scaling” relatively straightforward: getting more resources essentially either involves building up how many resources are produced at a particular location (e.g. adding more miners to an ore patch) i.e. “scaling vertically”, or by adding more stations to the rail network which produce that resource i.e. “scaling horizontally”.</p>
-<h3 id="practical-differences-between-belt-based-and-rail-based">Practical Differences Between Belt-Based and Rail-Based</h3>
-<p>I did run into some practical problems trying a rail-based factory.</p>
-<p>There is some edge case stuff.<br />
-In rare cases, maybe a train runs out of fuel.<br />
-When I tried to be fancy and programatically enable/disable a train station (e.g. “disable this stationn, because it has enough resources”), sometimes a train might stop in the middle of the rail because it suddenly gets disallowed from visiting its destination.<br />
-etc.</p>
-<p>One downside to the rail-based approach is there is additional overhead to deal with.</p>
-<p>One overhead cost is that there may be a longer lead time between when an input is added to a network, and when it can be consumed by the network.<br />
-e.g. A simple approach to take is to have a cargo train wait at a loading station until it is full, and then move to a deposit station until it is empty. (Anything more frequent than this would be an ‘inefficiency’). – This means opting to wait the full length of time for a cargo train’s worth of resources to be produced before it meaningfully enters the network. (This increases the delay in the feedback loop for how much some resource is demanded, for better and for worse).</p>
-<p>Compared to belts, distribution of resources is more of a problem whenever inputs don’t fully saturate demand.<br />
-With belts, splitting resources off of a belt does so in a 50-50 manner. So for a factory with 1000 units of some resource needed by A, B, and C.. 500 will reach A, 250 will reach B, 125 will reach C, leaving 125 to continue to be available on the bus (splitting off into 64, 32, etc.). – Eventually, at least <em>some</em> of the resource will reach even the end of the bus, even before inputs at the start are saturated.<br />
-With rails, by default, you don’t get this behaviour. A train will go to the closest station that it can visit. – So while it’s still true that “producing more inputs than is consumed” <em>eventually</em> satiates demand, it takes more care to get expensive resources where they need to be before all inputs are satiated.</p>
-<p>I’d say one mistake I made was using big buffers at resource unloading stations for expensive resources. – i.e. Each unloading station would have a buffer which could receive six or seven trains’ worth of cargo. For simple resources, this isn’t much of an issue, since it’s easy to build more stations which provide that resource. For more complex resources, since the time to produce the resource is greater than the time to load the resource onto the train, this meant that a significant amount of time was spent depositing the resource into filling up a buffer, when that resource was starved in other parts of the rail network.</p>
-<p>Another overhead cost is space. This perhaps is “different” rather than “worse” than belts.<br />
-With belts, moving resources over a long distance is tedious but possible. Moving rare/expensive resources long distances (at worst) involves snaking the belt through the rest of your factory.<br />
-With trains, building a ‘block’ of stations for a resource which takes 5 inputs requires taking up a reasonable chunk of horizontal space on the map. (This is mostly more annoying with frequent resource patches, since you might want to avoid building on top of a resource patch).</p>
-<p>One decision to make is “what resources to put on the rail network”.<br />
-If building up the rail network before electric smelting, then coal is required to turn the ore into plates that get used by most recipes. (Which is why it’s a bad idea to build up a rail network before getting electric smelting).<br />
-Yellow Science in particular has complex input requirements, and there are different trade-offs for putting its intermediate input requirements on the bus or assembling them in the same block.</p>
-<h3 id="new-to-me-circuit-network-combinators">New to Me: Circuit Network Combinators</h3>
-<p>The circuit network allows for programmability with Factorio’s machines.</p>
-<p>I had used it before for simple things like “if ammo below certain amount, send an alarm signal” or “only take stuff out from this storage if there are at least 1000 items”.</p>
-<p>The circuit network logic complements the rail network nicely.</p>
-<p>I was able to use the circuit network to describe a couple of things:</p>
-<ul>
-<li><p>Dynamically set how many trains are allowed to visit a station, based on how much remaining capacity the storage buffer for the station had. (e.g. if it would only take two trains to fill the storage buffer, limit the number of trains that would visit the station to two).</p></li>
-<li><p>Dynamically enable or disable the station based on how full the buffer was. Once the buffer was less than 20% (or whatever) full, then enable the station so that resources would be unloaded there; but once it reached 90% or so, then disable the station until the buffer was back down to only 20% full.</p></li>
-</ul>
-<p>The problem above of “starving stations not being filled, while buffers elsewhere were being filled” surely could have been mitigated using the circuit network. (The logic is a bit ‘come-from’: rather than saying where trains go <em>to</em>, you’d say which destinations should receive resources. I’m guessing something like: if any stations are ‘starved’, then limit or disable any stations which have at least some resources in their buffer).</p>
-<h3 id="what-went-less-than-well-slow-progress-to-reach-late-game">What Went Less Than Well: Slow Progress to Reach Late Game</h3>
-<p>Kinda like how playing Sudoku can be fun even though Sudoku solvers exist, playing Factorio can be fun even if you’re not building the best factory ever.<br />
-Factorio is essentially just a toy.. and the game’s goal of ‘launch a rocket’ is a decent objective to aim for with Factorio’s systems.</p>
-<p>It’d obviously be less fun if I just used console commands to provide infinite resources, or to instantly provide the rocket silo &amp; launch the rocket effortlessly.</p>
-<p>I imagine it’d be less fun if I only used blueprints other people created.</p>
-<p>I find Factorio fun even without the enemies, or with non-aggressive enemies.</p>
-<p>Unfortunately, in this ribbon world playthrough on the Nintendo Switch, I took a long time before getting to the late game.<br />
-What I ‘should’ have done was to aim to quickly build a factory which would (even at a trickle’s pace) research towards the late game technologies.<br />
-Instead, I meandered and did things I thought were more interesting. Which is fine, but it meant it took a long time before I reached the late game.</p>
-<p>The friction is that the problems you face in the early game get solved by the late game:<br />
-Routing train rails is difficult when the map has cliffs and water. The cliffs can be blown up, and the water can be filled with later technology.<br />
-A busy factory will use a lot of electricity. Nuclear power provides an abundance of electricity.<br />
-Enemies block expansion.. and late game artillery ‘solves’ this, and laser turrets ‘solve’ the problem of supplying the defence.<br />
-Building the same pattern of buildings repeatedly is slow; bots trivialise this.<br />
-– But in order to use these technologies, you have to have researched them.<br />
-Aiming to use a train-based factory before the late game ultimately ends up being a bad idea. You don’t have the capacity to expand the factory fast enough to meet the input requirements for the kind of scale that a train-based factory needs.</p>
-<h3 id="a-follow-up-playthrough">A Follow-Up Playthrough</h3>
-<p>As I was writing the above up, I just <em>had to</em> try again to see if I could do better.</p>
-<p>I took time to pre-plan the ‘blocks’ of train stations that I would use. I used the sandbox mode so that this could be done in a safe way.</p>
-<p>On the PC, I played using the default ribbon-world settings. (So, compared to my Nintendo Switch playthrough, resources were less frequent, and not quite as rich; plus, enemy expansion was enabled).</p>
-<p>Overall, from a second playthrough:</p>
-<ul>
-<li><p>The gameplay was significantly more difficult with enemy expansion enabled than disabled. With enemy expansion, I very quickly hit a point where clearing enemy bases was impractical without artillery.</p></li>
-<li><p>I used a much more compact approach when designing the blocks of train stations. This meant I was better able to utilise space.</p></li>
-<li><p>In my first playthrough, I had opted to have each station allow for ‘stacking’ trains. This wasn’t really necessary for the scale I was operating at. (It would be useful if the factory were so large that “time to consume all of trains input” was shorter than “time for another train to arrive”).</p></li>
-<li><p>I took the time to ensure my blueprints for “use roboports to expand the factory’s frontier” (place laser turrets, place rail so the artillery train can move further out) could more easily snap-to a course grid. This made it much easier to instruct the bots when expanding the frontier.</p></li>
-<li><p>I <em>really</em> felt the contrast between ‘mid game’ and ‘late game’. With ‘mid game’, I was essentially boxed in until I could research artillery. I wasn’t able to easily expand in order to acquire more resource inputs. (Hence.. using a rail-based factory has more disadvantages than advantages). – Probably, though, the lategame alone wouldn’t feel so satisfying without having faced the obstacles in the mid-game.</p></li>
-</ul>
-<p>For now, that’s enough Factorio, though.</p>]]></summary>
 </entry>
 
 </feed>
