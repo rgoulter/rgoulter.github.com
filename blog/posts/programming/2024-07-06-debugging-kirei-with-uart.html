@@ -1,0 +1,367 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Debugging Kirei with UART - Richard Goulter's Blog</title>
+
+        <!-- My (Old) CSS theme -->
+        <link rel="stylesheet" type="text/css" href="../../css/default.css" />
+
+        <!--
+            jQuery & jQueryUI
+        -->
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css" />
+
+        <!--
+            Pandoc Style CSS
+            (for syntax highlighted snippets)
+        -->
+        <link rel="stylesheet" type="text/css" href="../../css/syntax.css" />
+
+        <!--
+            Bootstrap
+        -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+        <style>
+            /*
+             * Bootstrap defines blockquote as 17px,
+             * so it looks stupidly large in my blogposts. */
+            blockquote {
+                font-size: 14px;
+            }
+        </style>
+
+        <!--
+            Waypoints, and Waypoints-Sticky,
+            so we can do this:
+            http://imakewebthings.com/waypoints/shortcuts/sticky-elements/
+        -->
+        <script src="../../js/jquery.waypoints.min.js"></script>
+        <script src="../../js/sticky.min.js"></script>
+
+        <!-- My analytics stuff -->
+        <script src="../../js/my_analytics.js"></script>
+        <script src="../../js/my_analytics_debug.js"></script>
+
+        <!--
+            TOCify
+        -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js"></script>
+
+        <!--
+            Patched TOCify css file.
+            (Don't want fixed `.tocify`).
+        -->
+        <link rel="stylesheet" type="text/css" href="../../css/jquery.tocify.css" />
+
+        <style>
+        .navbar {
+            margin-bottom: 0px;
+        }
+
+        .banner-image {
+            width:100%;
+        }
+
+        .banner {
+            margin-left: 0px;
+            margin-right: 0px;
+        }
+
+        body {
+            background-color: #e2e2e2;
+        }
+
+        #page {
+            padding-left:0;
+            padding-right:0;
+            background-color: #ffffff;
+        }
+        </style>
+
+        <!-- Google Analytics -->
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-H13NWYDX0G"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'G-H13NWYDX0G');
+        </script>
+    </head>
+    <body>
+        <div id="page" class="container">
+            <!-- This, with no padding on left/right -->
+            <div class="banner">
+                <nav class="navbar navbar-default">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+
+            <!-- The Hamburger -->
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../../">Richard Goulter's Blog</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="../../">Home</a></li>
+            <li><a href="../../yi.html">Yi</a></li>
+            <li><a href="../../emacs.html">Emacs</a></li>
+            <li><a href="../../what-i-wish-i-knew-when-i-started-using-nix.html">Nixpkgs</a></li>
+            <li><a href="../../archive.html">Archive</a></li>
+        </ul>
+    </div>
+</nav>
+
+            </div>
+
+            <hr style="margin: 0px; border-top: 5px solid black;" />
+
+            <div id="content" class="container">
+                <h1>Debugging Kirei with UART</h1>
+                <div class="info">
+    Posted on July  6, 2024
+    
+        by Richard Goulter
+    <br />
+    
+    Tags: 
+    
+</div>
+
+<p><a href="https://github.com/semickolon/kirei">Kirei</a> is nascent keyboard firmware, which
+at the time of writing supports CH58x and RP2040 microcontrollers.<br />
+It uses the same declarative approach to keyboards/keymaps that
+<a href="https://github.com/semickolon/fak">fak</a> uses; albeit, Kirei’s one step further
+around the <a href="https://mikehadlow.blogspot.com/2012/05/configuration-complexity-clock.html">configuration complexity
+clock</a>
+as it embeds a DSL into <a href="https://nickel-lang.org/">Nickel</a>.</p>
+<p>CH58x (and CH592) are MCUs which are both cheap and provide BLE (Bluetooth)
+functionality. For keyboard enthusiasts, they’re notable because <a href="https://github.com/WeActStudio/WeActStudio.WCH-BLE-Core">WeAct Studio
+has a core board for these
+MCUs</a> (for the
+<a href="https://aliexpress.com/item/1005004784988010.html">CH582F</a> and
+<a href="https://vi.aliexpress.com/item/1005006117859297.html">CH592F</a>).</p>
+<p>(There aren’t many keyboards using these core boards; <a href="https://www.youtube.com/watch?v=mc6wTqoDZe8">but I recently recorded a demonstration of a prototype I’ve been working on</a>; <a href="https://youtu.be/5eCvUGTr0aU">including tap-hold &amp; layers functionality</a>).</p>
+<p>For Kirei’s CH58x platform, <a href="https://github.com/semickolon/kirei/blob/27df23f37165d8a2b597134b32948745b8b1bee5/src/platforms/ch58x/debug.zig">it supports logging output to UART</a>.</p>
+<p>Here are some notes on viewing that output on a computer:</p>
+<h2 id="uart">UART</h2>
+<p>I see the terms “TTL” and “RS232” mentioned alongside “UART”.</p>
+<p>These StackExchange questions are relevant:</p>
+<ul>
+<li><a href="https://electronics.stackexchange.com/questions/274287/what-is-the-difference-between-rs-232-and-ttl-uart" class="uri">https://electronics.stackexchange.com/questions/274287/what-is-the-difference-between-rs-232-and-ttl-uart</a></li>
+<li><a href="https://electronics.stackexchange.com/questions/37814/usart-uart-rs232-usb-spi-i2c-ttl-etc-what-are-all-of-these-and-how-do-th" class="uri">https://electronics.stackexchange.com/questions/37814/usart-uart-rs232-usb-spi-i2c-ttl-etc-what-are-all-of-these-and-how-do-th</a></li>
+</ul>
+<h2 id="connecting-to-serial-consoles">Connecting to Serial Consoles</h2>
+<p>Some articles discussing how to connect to a serial console:</p>
+<ul>
+<li><p><a href="https://wiki.archlinux.org/title/Working_with_the_serial_console#Making_Connections">from Arch Wiki “Working with the serial console”</a></p>
+<ul>
+<li>I use <code>screen</code> or <code>tio</code>.</li>
+</ul></li>
+<li><p><a href="https://learn.adafruit.com/welcome-to-circuitpython/kattni-connecting-to-the-serial-console">from AdaFruid’s “Welcome to CircuitPython”</a></p></li>
+</ul>
+<h3 id="tio">TIO</h3>
+<p>The Arch Wiki article mentions that <code>tio</code> is intended to replace <code>screen</code> for
+this use case, for <code>tmux</code> users.</p>
+<p>With <a href="https://nixos.org/">the Nix package manager</a>, getting <code>tio</code> is as simple
+as <code>nix shell nixpkgs#tio</code>.</p>
+<p>To connect to the serial console, the command would be something like:</p>
+<pre><code>tio /dev/ttyUSB0 --baudrate 115200</code></pre>
+<p>(115200 is used as a baudrate, since that’s what the <code>debug.zig</code> sets).</p>
+<p>Helpfully, <code>tio</code> output includes the key sequence to quit:</p>
+<pre><code>[09:22:12.178] tio v2.8
+[09:22:12.178] Press ctrl-t q to quit
+[09:22:12.179] Connected</code></pre>
+<h3 id="screen">Screen</h3>
+<p>With <a href="https://nixos.org/">the Nix package manager</a>, getting <code>screen</code> is as
+simple as <code>nix shell nixpkgs#screen</code>; although I’d recommend opening a new
+terminal emulator window, and not running it within tmux or
+<a href="https://github.com/zellij-org/zellij/">zellij</a>.</p>
+<p>To connect to the serial console, the command would be something like:</p>
+<pre><code>screen /dev/ttyUSB0 115200</code></pre>
+<p>(115200 is used as a baudrate, since that’s what the <code>debug.zig</code> sets).</p>
+<p>Killing the session uses the sequence: <code>Ctrl-a k</code></p>
+<h2 id="connecting-to-ch58xs-uart">Connecting to CH58x’s UART</h2>
+<p>As the <code>debug.zig</code> code suggests, it’s using <code>A9</code> to transmit data.</p>
+<h3 id="connecting-using-ftdi-ft232rl-usb-adapter">Connecting using FTDI FT232RL USB Adapter</h3>
+<p>I happen to have an <a href="https://aliexpress.com/item/1005005857014294.html">FTDI FT232RL USB adapter</a>.</p>
+<p>This can be used to connect a serial console to the UART output.</p>
+<p>The jumper on the FTDI board should be changed to 3V3.</p>
+<p>Connect a cable from the TX of the CH58x TX (A9) to the RX on the FTDI board.</p>
+<p><img src="../../images/embedded/serial_uart_ftdi_weact_ch592.jpg" /></p>
+<p>Then, with the FTDI board connected to the computer, and the CH58x board
+powered, connecting to the serial console (<code>/dev/ttyUSB0</code> with baudrate 115200)
+should display output from Kirei:</p>
+<pre><code>$ tio /dev/ttyUSB0 --baudrate 115200
+[I] Kirei 🌸
+...</code></pre>
+<h3 id="connecting-using-circuitpython">Connecting using CircuitPython</h3>
+<p>Another way of connecting to the CH58x UART is with an Arduino board or a
+CircuitPython board.</p>
+<p>CircuitPython is much easier to use than Arduino.</p>
+<p>I have a <a href="https://github.com/WeActStudio/WeActStudio.RP2040CoreBoard">WeAct RP2040 core board</a>
+(which is similar to but not exactly a Raspberry Pi Pico).</p>
+<p>CircuitPython firmware can be <a href="https://circuitpython.org/downloads">downloaded from the CircuitPython
+website</a>. With the RP2040, flashing the uf2
+firmware onto the board is very easy. (Connect the device with the boot switch
+held, then copy the uf2 to the mass storage device).</p>
+<p><a href="https://learn.adafruit.com/circuitpython-essentials/circuitpython-uart-serial">AdaFruit’s “CircuitPython Essentials” page</a>
+has some code that’s close to what we want.</p>
+<p>Instead of using <code>print()</code>, we’ll <a href="https://docs.circuitpython.org/en/latest/shared-bindings/usb_cdc/index.html#usb_cdc.console">write the bytes to the CDC console directly</a>.</p>
+<p>Here’s the CircuitPython code for read the bytes from UART, and writing to the CDC console.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>`<span class="st">&quot;&quot;&quot;Relay UART to CDC console.&quot;&quot;&quot;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> board</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> busio</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> usb_cdc</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>uart <span class="op">=</span> busio.UART(<span class="va">None</span>, board.GP1, baudrate<span class="op">=</span><span class="dv">115200</span>)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> <span class="va">True</span>:</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> uart.read(<span class="dv">32</span>)</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> data <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span>:</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>        usb_cdc.console.write(data)</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>        usb_cdc.console.flush()</span></code></pre></div>
+<p>Connect a cable from the TX of the CH58x TX (A9) to the RX on the RP2040 board (GP1).</p>
+<p><img src="../../images/embedded/serial_uart_weact_rp2040_weact_ch592.jpg" /></p>
+<p>Then, with the RP2040 board connected to the computer, and the CH58x board powered,
+connecting to the serial console (<code>/dev/ttyACM0</code>) should display output from Kirei:</p>
+<pre><code>$ tio /dev/ttyACM0
+[09:41:43.156] tio v2.8
+[09:41:43.156] Press ctrl-t q to quit
+[09:41:43.157] Connected
+[I] Kirei 🌸
+...
+🐍Done | 9.0.5
+Code stopped by auto-reload. Reloading soon.
+soft reboot
+
+Auto-reload is on. Simply save files over USB to run them or enter REPL to disable.
+code.py output:
+
+...</code></pre>
+
+<hr />
+
+<div>
+    
+    
+    <a href="../../posts/programming/2024-06-23-indicating-success-on-qmk-keyboards.html" style="float:right; text-align: right;">Older post</a>
+    
+</div>
+<br style="clear: both;" />
+
+<hr />
+
+            </div>
+
+            <hr style="margin-bottom: 0px; border-top: 2px solid black;" />
+
+            <div id="footer" class="pull-right" style="padding-right: 10px;">
+                Site proudly generated by
+                <a href="http://jaspervdj.be/hakyll">Hakyll</a>
+            </div>
+        </div>
+
+        <script>
+            // The callbacks we wanna use
+            // Phone-home, telling Google Analytics various metrics/dimensions
+
+            // Use custom dimensions & metrics
+            var AnalyticDimensionReaderKind = 'dimension1';
+            var AnalyticMetricActiveTime      = 'metric1';
+            var AnalyticMetricLongestIdleTime = 'metric2';
+            var AnalyticMetricReadCount       = 'metric3';
+
+            var gaCallbacks = {
+                "scrollPercent": function(ms, perc) {
+                    if (perc > 85) {
+                        // EVENT: Page read
+                        ga('send', {
+                            hitType:       'event',
+                            eventCategory: 'Scrolling',
+                            eventAction:   'atBottom',
+                            eventValue:    String(ms)
+                        });
+                    }
+                },
+                "read": function(ms, ct, timeToReach) {
+                    // Use this to set DIMENSION
+                    // timeToReach < 5s ==> Skim (default = Visitor)
+                    if (timeToReach < 5 * 1000) {
+                        // dimension1 = ReaderKind
+                        ga('set', AnalyticDimensionReaderKind, "skimmer");
+                    }
+
+                    // timeToReach > 30s ==> Reader
+                    if (timeToReach > 30 * 1000) {
+                        // dimension1 = ReaderKind
+                        ga('set', AnalyticDimensionReaderKind, "reader");
+                    }
+
+                    // EVENT: Page read
+                    ga('send', {
+                        hitType:       'event',
+                        eventCategory: 'Reading',
+                        eventAction:   'read',
+                        eventValue:    String(timeToReach)
+                    });
+
+                    // METRIC
+                    ga('set', AnalyticMetricReadCount, String(ct));
+                },
+                "initialIdle": function(ms) {
+                    // EVENT: Started Reading
+                    ga('send', {
+                        hitType:       'event',
+                        eventCategory: 'Scrolling',
+                        eventAction:   'begun',
+                        eventValue:    String(ms)
+                    });
+                },
+                "timeSpent": function(total, active, curIdle, initIdle, longestIdle) {
+                    // Update METRIC(S)?
+                    ga('set', AnalyticMetricActiveTime, String(active));
+                    ga('set', AnalyticMetricLongestIdleTime, String(longestIdle));
+                },
+                "idle": function(ms) {
+                },
+                "longestIdle": function(ms) {
+                }
+            }
+
+            window.onload = function() {
+                myAnalyticsInit(gaCallbacks);
+
+                //
+                // Initial dimensions & metrics
+                //
+
+                ga('set', AnalyticMetricReadCount, String(0));
+
+                // EVENT: Page load
+                ga('send', {
+                    hitType:       'event',
+                    eventCategory: 'pageLoad',
+                    eventAction:   'begun',
+                    eventValue:    String(0)
+                });
+
+                // DIMENSION: visitor
+                ga('set', AnalyticDimensionReaderKind, "visitor");
+            }
+        </script>
+    </body>
+</html>
