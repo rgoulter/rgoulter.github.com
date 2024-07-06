@@ -10,8 +10,235 @@
         <email>richard.goulter+blog@gmail.com</email>
         
     </author>
-    <updated>2024-06-16T00:00:00Z</updated>
+    <updated>2024-07-06T00:00:00Z</updated>
     <entry>
+    <title>Debugging Kirei with UART</title>
+    <link href="http://www.rgoulter.com/blog//posts/programming/2024-07-06-debugging-kirei-with-uart.html" />
+    <id>http://www.rgoulter.com/blog//posts/programming/2024-07-06-debugging-kirei-with-uart.html</id>
+    <published>2024-07-06T00:00:00Z</published>
+    <updated>2024-07-06T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<p><a href="https://github.com/semickolon/kirei">Kirei</a> is nascent keyboard firmware, which
+at the time of writing supports CH58x and RP2040 microcontrollers.<br />
+It uses the same declarative approach to keyboards/keymaps that
+<a href="https://github.com/semickolon/fak">fak</a> uses; albeit, Kirei’s one step further
+around the <a href="https://mikehadlow.blogspot.com/2012/05/configuration-complexity-clock.html">configuration complexity
+clock</a>
+as it embeds a DSL into <a href="https://nickel-lang.org/">Nickel</a>.</p>
+<p>CH58x (and CH592) are MCUs which are both cheap and provide BLE (Bluetooth)
+functionality. For keyboard enthusiasts, they’re notable because <a href="https://github.com/WeActStudio/WeActStudio.WCH-BLE-Core">WeAct Studio
+has a core board for these
+MCUs</a> (for the
+<a href="https://aliexpress.com/item/1005004784988010.html">CH582F</a> and
+<a href="https://vi.aliexpress.com/item/1005006117859297.html">CH592F</a>).</p>
+<p>(There aren’t many keyboards using these core boards; <a href="https://www.youtube.com/watch?v=mc6wTqoDZe8">but I recently recorded a demonstration of a prototype I’ve been working on</a>; <a href="https://youtu.be/5eCvUGTr0aU">including tap-hold &amp; layers functionality</a>).</p>
+<p>For Kirei’s CH58x platform, <a href="https://github.com/semickolon/kirei/blob/27df23f37165d8a2b597134b32948745b8b1bee5/src/platforms/ch58x/debug.zig">it supports logging output to UART</a>.</p>
+<p>Here are some notes on viewing that output on a computer:</p>
+<h2 id="uart">UART</h2>
+<p>I see the terms “TTL” and “RS232” mentioned alongside “UART”.</p>
+<p>These StackExchange questions are relevant:</p>
+<ul>
+<li><a href="https://electronics.stackexchange.com/questions/274287/what-is-the-difference-between-rs-232-and-ttl-uart" class="uri">https://electronics.stackexchange.com/questions/274287/what-is-the-difference-between-rs-232-and-ttl-uart</a></li>
+<li><a href="https://electronics.stackexchange.com/questions/37814/usart-uart-rs232-usb-spi-i2c-ttl-etc-what-are-all-of-these-and-how-do-th" class="uri">https://electronics.stackexchange.com/questions/37814/usart-uart-rs232-usb-spi-i2c-ttl-etc-what-are-all-of-these-and-how-do-th</a></li>
+</ul>
+<h2 id="connecting-to-serial-consoles">Connecting to Serial Consoles</h2>
+<p>Some articles discussing how to connect to a serial console:</p>
+<ul>
+<li><p><a href="https://wiki.archlinux.org/title/Working_with_the_serial_console#Making_Connections">from Arch Wiki “Working with the serial console”</a></p>
+<ul>
+<li>I use <code>screen</code> or <code>tio</code>.</li>
+</ul></li>
+<li><p><a href="https://learn.adafruit.com/welcome-to-circuitpython/kattni-connecting-to-the-serial-console">from AdaFruid’s “Welcome to CircuitPython”</a></p></li>
+</ul>
+<h3 id="tio">TIO</h3>
+<p>The Arch Wiki article mentions that <code>tio</code> is intended to replace <code>screen</code> for
+this use case, for <code>tmux</code> users.</p>
+<p>With <a href="https://nixos.org/">the Nix package manager</a>, getting <code>tio</code> is as simple
+as <code>nix shell nixpkgs#tio</code>.</p>
+<p>To connect to the serial console, the command would be something like:</p>
+<pre><code>tio /dev/ttyUSB0 --baudrate 115200</code></pre>
+<p>(115200 is used as a baudrate, since that’s what the <code>debug.zig</code> sets).</p>
+<p>Helpfully, <code>tio</code> output includes the key sequence to quit:</p>
+<pre><code>[09:22:12.178] tio v2.8
+[09:22:12.178] Press ctrl-t q to quit
+[09:22:12.179] Connected</code></pre>
+<h3 id="screen">Screen</h3>
+<p>With <a href="https://nixos.org/">the Nix package manager</a>, getting <code>screen</code> is as
+simple as <code>nix shell nixpkgs#screen</code>; although I’d recommend opening a new
+terminal emulator window, and not running it within tmux or
+<a href="https://github.com/zellij-org/zellij/">zellij</a>.</p>
+<p>To connect to the serial console, the command would be something like:</p>
+<pre><code>screen /dev/ttyUSB0 115200</code></pre>
+<p>(115200 is used as a baudrate, since that’s what the <code>debug.zig</code> sets).</p>
+<p>Killing the session uses the sequence: <code>Ctrl-a k</code></p>
+<h2 id="connecting-to-ch58xs-uart">Connecting to CH58x’s UART</h2>
+<p>As the <code>debug.zig</code> code suggests, it’s using <code>A9</code> to transmit data.</p>
+<h3 id="connecting-using-ftdi-ft232rl-usb-adapter">Connecting using FTDI FT232RL USB Adapter</h3>
+<p>I happen to have an <a href="https://aliexpress.com/item/1005005857014294.html">FTDI FT232RL USB adapter</a>.</p>
+<p>This can be used to connect a serial console to the UART output.</p>
+<p>The jumper on the FTDI board should be changed to 3V3.</p>
+<p>Connect a cable from the TX of the CH58x TX (A9) to the RX on the FTDI board.</p>
+<p><img src="../../images/embedded/serial_uart_ftdi_weact_ch592.jpg" /></p>
+<p>Then, with the FTDI board connected to the computer, and the CH58x board
+powered, connecting to the serial console (<code>/dev/ttyUSB0</code> with baudrate 115200)
+should display output from Kirei:</p>
+<pre><code>$ tio /dev/ttyUSB0 --baudrate 115200
+[I] Kirei 🌸
+...</code></pre>
+<h3 id="connecting-using-circuitpython">Connecting using CircuitPython</h3>
+<p>Another way of connecting to the CH58x UART is with an Arduino board or a
+CircuitPython board.</p>
+<p>CircuitPython is much easier to use than Arduino.</p>
+<p>I have a <a href="https://github.com/WeActStudio/WeActStudio.RP2040CoreBoard">WeAct RP2040 core board</a>
+(which is similar to but not exactly a Raspberry Pi Pico).</p>
+<p>CircuitPython firmware can be <a href="https://circuitpython.org/downloads">downloaded from the CircuitPython
+website</a>. With the RP2040, flashing the uf2
+firmware onto the board is very easy. (Connect the device with the boot switch
+held, then copy the uf2 to the mass storage device).</p>
+<p><a href="https://learn.adafruit.com/circuitpython-essentials/circuitpython-uart-serial">AdaFruit’s “CircuitPython Essentials” page</a>
+has some code that’s close to what we want.</p>
+<p>Instead of using <code>print()</code>, we’ll <a href="https://docs.circuitpython.org/en/latest/shared-bindings/usb_cdc/index.html#usb_cdc.console">write the bytes to the CDC console directly</a>.</p>
+<p>Here’s the CircuitPython code for read the bytes from UART, and writing to the CDC console.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>`<span class="st">&quot;&quot;&quot;Relay UART to CDC console.&quot;&quot;&quot;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> board</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> busio</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> usb_cdc</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>uart <span class="op">=</span> busio.UART(<span class="va">None</span>, board.GP1, baudrate<span class="op">=</span><span class="dv">115200</span>)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> <span class="va">True</span>:</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> uart.read(<span class="dv">32</span>)</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> data <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span>:</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>        usb_cdc.console.write(data)</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>        usb_cdc.console.flush()</span></code></pre></div>
+<p>Connect a cable from the TX of the CH58x TX (A9) to the RX on the RP2040 board (GP1).</p>
+<p><img src="../../images/embedded/serial_uart_weact_rp2040_weact_ch592.jpg" /></p>
+<p>Then, with the RP2040 board connected to the computer, and the CH58x board powered,
+connecting to the serial console (<code>/dev/ttyACM0</code>) should display output from Kirei:</p>
+<pre><code>$ tio /dev/ttyACM0
+[09:41:43.156] tio v2.8
+[09:41:43.156] Press ctrl-t q to quit
+[09:41:43.157] Connected
+[I] Kirei 🌸
+...
+🐍Done | 9.0.5
+Code stopped by auto-reload. Reloading soon.
+soft reboot
+
+Auto-reload is on. Simply save files over USB to run them or enter REPL to disable.
+code.py output:
+
+...</code></pre>]]></summary>
+</entry>
+<entry>
+    <title>Indicating Success on QMK Keyboards</title>
+    <link href="http://www.rgoulter.com/blog//posts/programming/2024-06-23-indicating-success-on-qmk-keyboards.html" />
+    <id>http://www.rgoulter.com/blog//posts/programming/2024-06-23-indicating-success-on-qmk-keyboards.html</id>
+    <published>2024-06-23T00:00:00Z</published>
+    <updated>2024-06-23T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<p>In the previous post, I discussed ways of <a href="../programming/2024-06-16-using-the-qmk-leader-key-for-fancy-keyboard-functionality.html">using QMK leader key sequences in QMK keymaps</a>.</p>
+<p>One of the downsides with this is that QMK leader key sequences are handled only
+after a timeout (i.e. enter the key sequence, then wait a moment).</p>
+<p>One way of improving the UX of this is having the keyboard provide some feedback
+when a leader sequence is activated.</p>
+<p>The <a href="https://docs.qmk.fm/features/leader_key">QMK docs page for the Leader key
+sequences</a> gives an example using the
+<code>AUDIO</code> feature, with <code>PLAY_SONG</code>, and will play song indicating whether a
+leader key sequences was activated successfully or not.</p>
+<p>My keyboards don’t support the <code>AUDIO</code> feature.</p>
+<p>But, I do have keyboards with per-key RGB or with haptic feedback.</p>
+<p>The <code>leader_end_user</code> function (which handles leader key sequences after
+timeout) can be updated with:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> leader_end_user<span class="op">(</span><span class="dt">void</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">bool</span> did_leader_succeed <span class="op">=</span> <span class="kw">true</span><span class="op">;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>leader_sequence_two_keys<span class="op">(</span>KC_Q<span class="op">,</span> KC_B<span class="op">))</span> <span class="op">{</span> <span class="co">// mnemonic: QMK Boot</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        reset_keyboard<span class="op">();</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span><span class="co">/* ... */</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>        <span class="co">/* .... */</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        did_leader_succeed <span class="op">=</span> <span class="kw">false</span><span class="op">;</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    leader_end_notify<span class="op">(</span>did_leader_succeed<span class="op">);</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>i.e. call some <code>leader_end_notify</code> function, unless the leader key sequence
+wasn’t recognised. (It’s conceptually neater to initialize <code>did_leader_succeed</code> with
+<code>false</code>, and only set it to <code>true</code> when handling a key sequence.. but, that
+would take more lines of code for the same effect).</p>
+<p>The <code>leader_end_notify</code> can be written like this:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> leader_end_notify<span class="op">(</span><span class="dt">bool</span> succeeded<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#    ifdef HAPTIC_ENABLE</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>succeeded <span class="op">&amp;&amp;</span> haptic_get_enable<span class="op">())</span> <span class="op">{</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        haptic_play<span class="op">();</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="pp">#    endif</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="pp">#    ifdef RGB_MATRIX_ENABLE</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    rgb_matrix_blink_start<span class="op">(</span>succeeded<span class="op">);</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="pp">#    endif</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>The <code>rgb_matrix_blink_start</code> is a function can is a bit trickier.</p>
+<p>On a split keyboard, it’s a bit difficult to communicate state between the
+master half and the slave half. – My first attempt, I tried using the
+<code>rgb_matrix_set_color_all</code> function; but, this didn’t update the RGB LEDs
+on the slave half.</p>
+<p>I work with this limitation by using the RGB matrix effects. The QMK framework’s
+split keyboard transport protocol already handles syncing state for RGB effects.</p>
+<p>So, we “blink” the keyboard by:</p>
+<ul>
+<li>setting the effect to “solid color” (white).</li>
+<li>waiting a bit.</li>
+<li>restoring the effect/color to what it was before.</li>
+</ul>
+<p>Hence, the implmentation, we have some extra state to store:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#ifdef RGB_MATRIX_ENABLE</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="dt">uint8_t</span>  old_mode               <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>HSV      old_hsv                <span class="op">=</span> <span class="op">{</span>HSV_OFF<span class="op">};</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="dt">uint32_t</span> rgb_matrix_blink_timer <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="dt">bool</span>     blinking_active        <span class="op">=</span> <span class="kw">false</span><span class="op">;</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="pp">#endif</span></span></code></pre></div>
+<p>In <code>rgb_matrix_blink_start</code>, we store the current RGB effect and colour, and keep track of the time:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> rgb_matrix_blink_start<span class="op">(</span><span class="dt">bool</span> succeeded<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">/* impl. note: in order to get the &#39;blink&#39; to work across split keyboard,</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">     *  save the old mode &amp; hsv, then set to solid white.</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co">     * The old mode &amp; hsv are then restored after some time,</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co">     *  in the rgb_matrix_indicators_user callback.</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co">     */</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    old_mode <span class="op">=</span> rgb_matrix_get_mode<span class="op">();</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    old_hsv  <span class="op">=</span> rgb_matrix_get_hsv<span class="op">();</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    rgb_matrix_mode_noeeprom<span class="op">(</span>RGB_MATRIX_SOLID_COLOR<span class="op">);</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>succeeded<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>        rgb_matrix_sethsv_noeeprom<span class="op">(</span>HSV_WHITE<span class="op">);</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>        rgb_matrix_sethsv_noeeprom<span class="op">(</span>HSV_RED<span class="op">);</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>    rgb_matrix_blink_timer <span class="op">=</span> timer_read32<span class="op">();</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>    blinking_active        <span class="op">=</span> <span class="kw">true</span><span class="op">;</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> rgb_matrix_blink_end<span class="op">(</span><span class="dt">void</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>    rgb_matrix_mode_noeeprom<span class="op">(</span>old_mode<span class="op">);</span></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>    rgb_matrix_sethsv_noeeprom<span class="op">(</span>old_hsv<span class="op">.</span>h<span class="op">,</span> old_hsv<span class="op">.</span>s<span class="op">,</span> old_hsv<span class="op">.</span>v<span class="op">);</span></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>    blinking_active <span class="op">=</span> <span class="kw">false</span><span class="op">;</span></span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>and in <code>rgb_matrix_blink_end</code>, we restore the RGB effect and colour.</p>
+<p>This <code>rgb_matrix_blink_end</code> is called by a “housekeeping task”, which is called by QMK at the end of each scan loop.
+It simply checks the blink timer, and calls the blink end function if enough time has passed.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> housekeeping_task_user<span class="op">(</span><span class="dt">void</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>blinking_active <span class="op">&amp;&amp;</span> timer_elapsed32<span class="op">(</span>rgb_matrix_blink_timer<span class="op">)</span> <span class="op">&gt;=</span> RGB_MATRIX_BLINK_INTERVAL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>        rgb_matrix_blink_end<span class="op">();</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>With this, I can now confidently be notified that a leader sequence succeeded,
+using either haptic feedback, or RGB matrix functionality.</p>
+<p>I expect that code for the <code>RGBLIGHT</code> QMK feature would be similar to the RGB matrix implementation above.</p>
+<p>So, e.g., if I use a leader key sequence to enable caps word, I can be confident
+caps word has activated. Or if I invoke a sequence and don’t see the keyboard
+‘blink’ (or don’t receive haptic feedback), then I can understand that I failed
+to enter a leader key sequence.</p>]]></summary>
+</entry>
+<entry>
     <title>Using the QMK Leader Key for Fancy Keyboard Functionality</title>
     <link href="http://www.rgoulter.com/blog//posts/programming/2024-06-16-using-the-qmk-leader-key-for-fancy-keyboard-functionality.html" />
     <id>http://www.rgoulter.com/blog//posts/programming/2024-06-16-using-the-qmk-leader-key-for-fancy-keyboard-functionality.html</id>
@@ -1434,177 +1661,6 @@ There are several things about flakes that are not very ergonomic, and not all t
 And for many developers, there’s an expectation of being able to get pretty far without needing to spend a long time learning all the details. (Often this is a pretty good strategy!).</p>
 <p>I think to some extent, some of that difficulty is fundamental.<br />
 Nix provides benefits like “will work the same way next time you run it”, and this demands it comes with a level of strictness.</p>]]></summary>
-</entry>
-<entry>
-    <title>A Wish for More Accessible Classic Tomb Raider-ish Games</title>
-    <link href="http://www.rgoulter.com/blog//posts/games/2024-05-06-a-wish-for-more-accessible-classic-tomb-raider-ish-games.html" />
-    <id>http://www.rgoulter.com/blog//posts/games/2024-05-06-a-wish-for-more-accessible-classic-tomb-raider-ish-games.html</id>
-    <published>2024-05-06T00:00:00Z</published>
-    <updated>2024-05-06T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<p>I’ve been playing through the Tomb Raider I-III Remastered collection of games.</p>
-<h2 id="yay-remasters-of-old-games">Yay, Remasters of Old Games</h2>
-<p>The remaster fits in with a loose trend of some classic games being remade or remastered, and re-released.</p>
-<p>e.g. to my mind, the Age of Empires series did a good job with this: Age of Empires 2 got an HD re-release. After that succeeded, much effort was put into remastering Age of Empires 1, which got a “Definitive Edition” re-release. Then Age of Empires 2 got a subsequent “Definitive Edition” re-re-release, followed by several DLC expansions. Some of the changes to the game have been “Quality of Life” changes which have reduced the skill for for playing the game. (e.g. showing the build queue in the UI).<br />
-The publisher Nightdive Studios are an outstanding example of quality stewardship for remastering games. I played through Turok 1 and 2 that they remastered, and they did a good job polishing these games up so they can be played on modern systems.</p>
-<p>“Boomer shooters” have seen a resurgence in popularity in the last few years. The game “Cultic” is an absolutely <em>excellent</em> example of a new title which enhances the title. I think the YouTuber Civie described games like this as both respecting what made the genre popular, while also including enough to surprise and delight experienced fans of the genre.</p>
-<h2 id="the-tr-remastered-collection-is-faithful-to-a-fault">The TR Remastered Collection is Faithful to a Fault</h2>
-<p>Anyway.<br />
-Tomb Raider Remastered.<br />
-This polishes up the game so it can run on modern systems.<br />
-Although most of these changes could be described as superficial (e.g. Lara’s model now looks as gorgeous as she does in the marketing materials; and the game has many Achievements to get), the Remastered game did have some changes to improve quality of life: icons will show up to indicate when Lara can interact with an item, and the game supports using a more ‘modern’ control scheme, rather than the classic ‘tank’ controls.</p>
-<p>The classic Tomb Raider games are quite notorious for being hard.<br />
-Well, many classic games are. (e.g. some of the Turok 2 levels are convoluted mazes to navigate through, despite the gameplay otherwise mostly focusing on shooting).<br />
-But, certainly for the Tomb Raider games, I think pretty much everyone who collects all the secrets would have looked up a walkthrough at some point.</p>
-<p>It’s kindof a shame that the Remaster is <em>so</em> faithful to the original so as to not add <em>more</em> quality-of-life features. I suspect that’s mostly about time/budget constraints.<br />
-But, say, in the same way that there are games inspired by classic games which have good quality-of-life improvements, maybe there’s room for a similar treatment for classic Tomb Raider.</p>
-<p>What I mean is:</p>
-<ul>
-<li><p>Gameplay with the same <em>dynamic</em> as the original.</p></li>
-<li><p>Quality of life improvements.</p></li>
-<li><p>Ways of lowering the skill floor, so that the game has a friendlier introduction for beginners.</p></li>
-</ul>
-<h2 id="definitively-tomb-raider">Definitively Tomb Raider</h2>
-<p>The classic Tomb Raider games are a mix of adventure and action.<br />
-The classic games also get quite scary at times.<br />
-I guess different players are going to prefer different mixes of each of these.</p>
-<p>e.g. The Myst games are pure adventure: there’s no combat, and it’s pretty much exploring exotic locations and solving (sometimes purely) puzzles. – If you just put Lara Croft as the protagonist in these, it still wouldn’t be “Tomb Raider”.<br />
-There are some “Lara Croft” spin-off games which have twin-stick top-down shooter gameplay. These involve a lot of combat, and some puzzles. But, the level design is so smooth that you’re never going to feel lost or confused about how to make progress.</p>
-<p>I think a key dynamic of the adventuring is building an understanding of the map, and engaging the player’s understanding of that.<br />
-An example is TR2’s Venice level. The final half of the level involves the player having to figure out how to clear the mines to the exit, how to open the exit door, and how to raise two gates so as to be able to race from the “open exit” button to the exit. – When playing, if you’re missing any of these, you have to explore around and try different things.</p>
-<p>The most antiquated yet defining part of the classic Tomb Raider games is the grid-based level design, which pairs with the “tank” controls.<br />
-“Tank” controls are “pressing up moves the Player Character in the direction the Player Character is facing”. Whereas “modern” controls are more intuitive with twin-stick controllers: one stick controls the camera, the other directs the player character relative to the camera.<br />
-The grid-based levels is so antiquated because it feels like the level is made out of boxes.<br />
-But.. it allows for a clear set of navigation rules: Lara can reach so-and-so far by doing a standing jump, or further with a running jump. – In “modern” games like the Tomb Raider games after 2006, navigation is restricted to ledges which have been specially added onto the finely-crafted levels. These ledges stick out as relatively “shiny”, in contrast to uninteractable background details. I think that’s a step-down, since it limits the player having to reason about where to go.</p>
-<p>Though, I’d also heard the difference put as: the classic TR games have a protagonist who is exaggerated; in gameplay, she’s going to die a lot as the player experiments as to how to get through the level. (TR2’s the ultimate Floating Islands is very easy to die on!). Whereas, the modern TR games are big budget, and need to be mass appeal, so can’t be as frustrating; the player is encouraged to “protect” the protagonist, and take care to prevent the protagonist from dying.</p>
-<h2 id="that-sounds-like-itd-be-cool-wishlist">“That Sounds Like it’d be Cool” Wishlist</h2>
-<p>I reckon it’d be neat to see some things like this; either to bring the same gameplay of the classic Tomb Raider to more modern standards, or for making the game easier (for those who need that).</p>
-<p>For suggestions of things that’d make the game easier, I mostly mean in terms of “it’d be good to have an easier difficulty option”.</p>
-<h3 id="pickups-and-secrets">Pickups and Secrets</h3>
-<p>Some help-me quality of life features could be added to collectibles:</p>
-<p>In Just Cause 3, one gameplay mechanic involves having to destroy <em>all</em> the red-painted infrastructure in a military base. At the start, this is really easy; but as you destroy more of the infrastructure, it becomes harder to find the rest of what you need to destroy. The game map compensates for this: as you destroy more, then the remaining things progressively fade in on the map.. so by the time you’ve destroyed 95% of the infrastructure, the remaining few things to destroy are clearly marked on the map.</p>
-<p>Doom Eternal has several kinds of secrets and upgrades to collect.<br />
-You can even upgrade your character to make it easier to find secrets!<br />
-This enhances the replayability of the game: finding extra secrets makes you more powerful; and you can use that power to make it easier to get more secrets.<br />
-This included “cheat codes”.. which, while they couldn’t be used when playing through the levels for progressing through the story, could make for some cathartic replays of levels.</p>
-<p>In the playthroughs I’ve seen of the newer Resident Evil games, the map will colour-code whether an area has had all items picked up or not. This seems like a really neat way to guide the player.</p>
-<p>I reckon ideas like this would suit classic Tomb Raider gameplay.</p>
-<h3 id="combat">Combat</h3>
-<p>As I see it, classic Tomb Raider’s combat is .. clunky.<br />
-It works best when Lara is fighting animals (where the main ‘skill’ involves jumping around to avoid being hurt, while shooting back), and is more clumsy against armed opponents (there’s a large RNG element that dictates whether they shoot Lara or not; jumping around the level barely helps).<br />
-Meshing with this is the trade-off of whether to use the weak pistols which have unlimited ammo, or use a more powerful weapon (where you might need to preserve ammo).</p>
-<p>The “modern” Tomb Raider games got rid of tank controls and made the combat a somewhat typical third-person shooter; and it didn’t mix well with the rest of the game.</p>
-<p>For the classic Tomb Raider style combat, I reckon some ideas that’d fit with the rest of the gameplay:</p>
-<p>Halo does a good job of presenting other tradeoffs/constraints: limiting the player to choosing only two weapons, and having multiple kinds of enemies: laser guns are good vs the shields (that the enemies have), but bullet guns are better vs unshielded enemies.<br />
-– I mean, this makes the choice of weapon more tactical than just “use uzis until I run out of ammo”.</p>
-<p>Doom Eternal does an even better job at “action-puzzle gameplay”: you could replenish your ammo by using a chainsaw on enemies, and replenish health using ‘finisher’ moves on weak enemies. The notorious Marauder enemy would block shots, and require timing to take down.<br />
-– Again, here it adds a level of engagement to combat beyond “use the shotgun until the enemy disappears”.</p>
-<p>– Mechanics like these don’t coherently mesh with fighting wolves, tigers, and henchmen.. sure.<br />
-But, they might make sense if fighting robots or zombies or mythical creatures.</p>
-<h3 id="scares-and-horror">Scares and Horror</h3>
-<p>I don’t really like scary things!</p>
-<p>But on the other hand.. scary parts can be quite memorable in the Tomb Raider games.<br />
-There are parts of TR2’s “Ice Palace” level that are quite scary: there’s a pitch black room, and you can hear the growls of yeti monsters. – Yet, the Remaster ‘toned down’ how scary this part was, by using lighting which illuminated the room; that undermined the point of “scary because you can’t see the room”.</p>
-<p>There are parts of TR that are (deliberately) unpleasant to play because of this: threats like sharks in water sections, or there’s a dark cave full of spiders in the Temple of Xian level.</p>
-<p>I think it’d be kinda neat to have the option to ‘disable’ some of those scary parts.. or, an easier modes, give the player decent tools to couch the scary parts. – e.g. Make the player stronger in water combat (&amp; without the tension-building limited ammo), or give the player a decent flashlight.</p>
-<h3 id="adventure-and-puzzles">Adventure and Puzzles</h3>
-<p>In terms of adventure and puzzles:<br />
-IIRC, most of classic TR’s puzzles are more about ‘finding’ a key item (and so the level design ought to take you to the key and back), or are about <em>timing</em> / navigation.</p>
-<p>There are few puzzles that are ‘puzzles’ to the same degree of adventure games like Myst. (Albeit, in the recent TR games, there are side-quests/dungeons which feature fairly sophisticated puzzles in this sense).</p>
-<p>I think TR2’s first “Great Wall” level is a good demonstration of typical TR puzzles: the ‘challenge’ in the first area is to figure out where you’re supposed to go (&amp; the challenge of executing the jumps). The next challenge is how to get through a locked door: you dive into a small pond, find the key, get ambushed by a tiger, then make your way back up to the lock. There are secrets slightly off the main path that you can take the time to find.</p>
-<p>I think the best designed TR levels are those that appear to be non-linear, but allows for a somewhat linear flow. – e.g. TR2’s “Opera House” is a daunting maze where it can be confusing to know how to progress.. kindof like a hub-and-spoke; and each spoke is a small section that unlocks access to the next spoke of the hub.</p>
-<p>One of the reasons I think the grid-based level design is so central to the gameplay is you’ve got a clear, predictible, tangible logic for what the player can try to explore vs not.<br />
-At the lowest level, “can I make that jump?”;
-at a higher level, “have I exhausted all options in this area?”.</p>
-<p>One way to make this style of gameplay easier would be to have maps that ‘hint’ at navigatable areas the player hasn’t visited.<br />
-So, if a player is stuck, then looking at the map could hint at places the player can reach.<br />
-Mainly I’m thinking of cases where I got stuck, and how this might have helped:<br />
-e.g. one place I got stuck was TR2’s “Venice” level, where it wasn’t obvious to me that I was supposed to jump onto the bridge. The player has access to a big area, so it was easy to overlook. – I’m imagining that I could have opened a map, and seen the bridge with some kind of colour indication of “seen &amp; reachable, but not visited”.<br />
-Similarly, I got stuck in TR2’s “The Deck” in the big underwater lake, by forgetting about a corridor back to the deck that I had overlooked.<br />
-Or when I got stuck in TR3’s “Crash Site” by not figuring out how to get on top of the plane…
-etc.</p>
-<p>I mean.. sure, getting stuck is part of the experience; but “looking it up in a walthrough” is kindof a lame way of getting through, too.</p>
-<p>One quality-of-life suggestion, IMO, is that level design should be almost entirely ‘reversible’.<br />
-In TR, when you’re first playing a level, you’re never quite sure whether a path takes you to where you’re supposed to go, or to a secret, or to a pickup. Often in TR’s levels, once you go past some part, you can’t navigate back, which means you’d need to replay a level to get all the secrets.</p>
-<p>e.g. in Doom Eternal, each map is similar to a bunch of combat arenas with platforming sections in between. It’s always possible to get back to the start from the end; and once you’ve beaten the enemies, you can also “fast travel” around the map.</p>
-<h2 id="remarks">Remarks</h2>
-<p>I think, if you squint, the games from Crystal Dynamics do implement some of these things.<br />
-e.g. Rise of the Tomb Raider leaned into its combat, and had alternate modes which enhanced replayability.<br />
-Or the TRL/TRA had cheat codes.<br />
-e.g. TRU had a “Treasure Hunt” mode where you could explore through a level, after killing enemies.</p>
-<p>But, as I recall, it’s more about what they add that takes away from having the same feeling as classic TR.<br />
-e.g. by having a headset and chatting with others.. it detracts from “player mastering the level”, or really “player vs the environment”.<br />
-e.g. by having combat and navigation be such disparate systems, the player gets a feeling of when they’ll be fighting vs when they’ll be navigating ledges.<br />
-e.g. RotTR, SotTR were semi-open-world-ish at times, “as was the style at the time”.
-e.g. levels are linear enough that you rarely feel “stuck” in a large enough arena.</p>
-<p>Seems like the TRLE community has worked to keep the classic games alive.</p>
-<p>I also remember playing Indiana Jones and the Infernal Machine, which had gameplay kinda-sorta similar to the classic Tomb Raider games.</p>]]></summary>
-</entry>
-<entry>
-    <title>Using Terraform to Manage an Object Stored in OpenStack Swift</title>
-    <link href="http://www.rgoulter.com/blog//posts/programming/2024-04-09-using-terraform-to-manage-an-object-stored-in-openstack-swift.html" />
-    <id>http://www.rgoulter.com/blog//posts/programming/2024-04-09-using-terraform-to-manage-an-object-stored-in-openstack-swift.html</id>
-    <published>2024-04-09T00:00:00Z</published>
-    <updated>2024-04-09T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<h2 id="technologies">Technologies</h2>
-<p><a href="https://www.openstack.org/">OpenStack</a> is a set of software that infrastructure providers can use to give users a user-experience similar to that of AWS or other cloud providers. e.g. <a href="https://cleura.com/">Cleura</a> provides a public cloud service which can be managed with OpenStack APIs. – I think the idea for OpenStack was to enable infrastructure providers to serve as a substitute for AWS.. albeit, even amongst OpenStack public clouds, there remain idiosyncracies such that a deployment in one OpenStack cloud might require effort to deploy to another OpenStack cloud.</p>
-<p><a href="https://docs.openstack.org/swift/latest/">OpenStack’s Swift</a> is an ‘object storage’ service. More/less the same thing as AWS’ S3 (or Google Cloud’s cloud storage).</p>
-<p><a href="https://www.terraform.io/">Terraform</a>, or its open source fork <a href="https://opentofu.org/">OpenTofu</a>, is a tool for managing declarations of cloud resources. There’s a <a href="https://registry.terraform.io/providers/terraform-provider-openstack/openstack/latest/docs">Terraform Provider for OpenStack</a>, so that Terraform can be used to work with OpenStack resources.</p>
-<h2 id="task">Task</h2>
-<p>Here are notes on using Terraform to manage an object in a ‘container’ on OpenStack Swift (‘bucket’ in AWS terms), and to create a (temporary) URL to access that object.</p>
-<p>The main advantage of this approach is reyling on Terraform to manage the setup/teardown, as opposed to having to use the web console to manage this, or use the CLI client to manage these. I prefer being able to run <code>terraform apply</code> to ensure things are there; and <code>terraform destroy</code> to ensure things are gone.</p>
-<h2 id="terraform-code-for-container-and-bucket">Terraform Code for Container and Bucket</h2>
-<p>Some boilerplate, using the openstack provider for Terraform:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode terraform"><code class="sourceCode terraform"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">terraform</span> {</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">required_version</span> <span class="op">=</span> <span class="st">&quot;&gt;= 0.14.0&quot;</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">required_providers</span> {</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    openstack <span class="op">=</span> {</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>      <span class="kw">source</span>  <span class="op">=</span> <span class="st">&quot;terraform-provider-openstack/openstack&quot;</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>      version <span class="op">=</span> <span class="st">&quot;~&gt; 1.49.0&quot;</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
-<p>As the provider documentation mentions, the Terraform OpenStack provider can pick up authentication credentials from <code>OS_</code> environment variables. I used the Cleura public OpenStack cloud, and downloaded an ‘rc’ file with the credentials for an OpenStack user to use with a project there.</p>
-<p>Then the Terraform code for creating a container <code>rgoulter-storage</code>, and an object named <code>test</code> in that container:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode terraform"><code class="sourceCode terraform"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">resource</span> <span class="st">&quot;openstack_objectstorage_container_v1&quot;</span> <span class="st">&quot;self&quot;</span> {</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  name <span class="op">=</span> <span class="st">&quot;rgoulter-storage&quot;</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  metadata <span class="op">=</span> {</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    Temp<span class="op">-</span>URL<span class="op">-</span>Key <span class="op">=</span> <span class="st">&quot;some-secret-value&quot;</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="kw">resource</span> <span class="st">&quot;openstack_objectstorage_object_v1&quot;</span> <span class="st">&quot;self&quot;</span> {</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  container_name <span class="op">=</span> openstack_objectstorage_container_v1.<span class="va">self</span>.name</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  name           <span class="op">=</span> <span class="st">&quot;test&quot;</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="kw">content</span>        <span class="op">=</span> <span class="st">&quot;Hello, world!&quot;</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
-<p>Resources are named <code>self</code> out of convention. (There aren’t multiple containers, objects in this Terraform codebase).</p>
-<p>In this case, the content of the object is set with the <code>content</code> attribute to the object resource. The <code>source</code> attribute is more suitable when you want some file to be uploaded. (c.f. <a href="https://registry.terraform.io/providers/terraform-provider-openstack/openstack/latest/docs/resources/objectstorage_object_v1">the terraform provider documentation</a>).</p>
-<p><code>Temp-URL-Key</code> is set on the container’s metadata to allow creating temporary URLs to provide access. (c.f. <a href="https://docs.openstack.org/swift/latest/api/temporary_url_middleware.html">Swift’s temporary url middleware documentation</a>). – This value should be kept secret; this value is used to create temporary URLs to access objects in the container.</p>
-<h2 id="creating-temporary-urls-with-terraform">Creating Temporary URLs: with Terraform</h2>
-<div class="sourceCode" id="cb3"><pre class="sourceCode terraform"><code class="sourceCode terraform"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">resource</span> <span class="st">&quot;openstack_objectstorage_tempurl_v1&quot;</span> <span class="st">&quot;self&quot;</span> {</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  container  <span class="op">=</span> openstack_objectstorage_container_v1.<span class="va">self</span>.name</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">object</span>     <span class="op">=</span> openstack_objectstorage_object_v1.<span class="va">self</span>.name</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  method     <span class="op">=</span> <span class="st">&quot;get&quot;</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  ttl        <span class="op">=</span> <span class="dv">900</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  regenerate <span class="op">=</span> <span class="va">true</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="kw">output</span> <span class="st">&quot;tempurl&quot;</span> {</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  value     <span class="op">=</span> openstack_objectstorage_tempurl_v1.<span class="va">self</span>.url</span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="bu">sensitive</span> <span class="op">=</span> <span class="va">true</span></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
-<p>It’s possible to also use the Terraform OpenStack provider to manage tempurls.</p>
-<p>On the one hand, you might as well, if you’re using Terraform for the other parts.
-On the other hand, I think it smells a bit too much to ‘declare’ the existance of a tempurl with a time-to-live of 900 seconds.</p>
-<p>One nice thing about this approach is the output URL value is simple/easy to figure out. i.e. running <code>terraform output -raw tempurl</code> outputs something like:</p>
-<pre><code>https://swift-fra1.citycloud.com:8080/swift/v1/AUTH_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/rgoulter-storage/test?temp_url_sig=bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb&amp;temp_url_expires=1999999999</code></pre>
-<h2 id="creating-temporary-urls-with-command-line-client">Creating Temporary URLs: with Command Line Client</h2>
-<p>The <a href="https://docs.openstack.org/swift/latest/api/temporary_url_middleware.html">documentation about temporary url middleware</a> gives instructions on using the OpenStack Swift client to create a temporary URL.</p>
-<p>There are various ways to come up with the OpenStack Storage URL (<code>https://swift-cluster.example.com/v1/my_account/</code>), but here’s what I came up with for the container, object, and temp URL key above:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="va">OS_STORAGE_URL</span><span class="op">=</span><span class="va">$(</span><span class="ex">openstack</span> catalog show object-store <span class="at">--format</span><span class="op">=</span>json <span class="kw">|</span> <span class="ex">jq</span> <span class="at">-r</span> .endpoints<span class="pp">[</span><span class="ss">2</span><span class="pp">]</span>.url<span class="va">)</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ex">swift</span> tempurl <span class="at">--digest</span><span class="op">=</span>sha1 GET 900 <span class="va">${OS_STORAGE_URL}</span>/rgoulter-storage/test some-secret-value</span></code></pre></div>
-<p>The <code>jq</code> expression isn’t the cleanest. (The <code>[2]</code> is the index the “public” object-store endpoint happened to be in the output of <code>openstack catalog show object-store</code>; albeit, all the endpoints had the same URL).</p>
-<p>The URL from <code>swift tempurl</code> can be used for GET requests to access the storage.</p>]]></summary>
 </entry>
 
 </feed>
