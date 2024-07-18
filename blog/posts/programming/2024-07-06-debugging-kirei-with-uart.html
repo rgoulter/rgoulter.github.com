@@ -221,7 +221,7 @@ held, then copy the uf2 to the mass storage device).</p>
 has some code that’s close to what we want.</p>
 <p>Instead of using <code>print()</code>, we’ll <a href="https://docs.circuitpython.org/en/latest/shared-bindings/usb_cdc/index.html#usb_cdc.console">write the bytes to the CDC console directly</a>.</p>
 <p>Here’s the CircuitPython code for read the bytes from UART, and writing to the CDC console.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>`<span class="st">&quot;&quot;&quot;Relay UART to CDC console.&quot;&quot;&quot;</span></span>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">&quot;&quot;&quot;Relay UART to CDC console.&quot;&quot;&quot;</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> board</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> busio</span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> usb_cdc</span>
