@@ -6,7 +6,7 @@
         <title>Debugging Kirei with UART - Richard Goulter's Blog</title>
 
         <!-- My (Old) CSS theme -->
-        <link rel="stylesheet" type="text/css" href="../../css/default.css" />
+        <link rel="stylesheet" type="text/css" href="../../../css/default.css" />
 
         <!--
             jQuery & jQueryUI
@@ -19,7 +19,7 @@
             Pandoc Style CSS
             (for syntax highlighted snippets)
         -->
-        <link rel="stylesheet" type="text/css" href="../../css/syntax.css" />
+        <link rel="stylesheet" type="text/css" href="../../../css/syntax.css" />
 
         <!--
             Bootstrap
@@ -42,12 +42,12 @@
             so we can do this:
             http://imakewebthings.com/waypoints/shortcuts/sticky-elements/
         -->
-        <script src="../../js/jquery.waypoints.min.js"></script>
-        <script src="../../js/sticky.min.js"></script>
+        <script src="../../../js/jquery.waypoints.min.js"></script>
+        <script src="../../../js/sticky.min.js"></script>
 
         <!-- My analytics stuff -->
-        <script src="../../js/my_analytics.js"></script>
-        <script src="../../js/my_analytics_debug.js"></script>
+        <script src="../../../js/my_analytics.js"></script>
+        <script src="../../../js/my_analytics_debug.js"></script>
 
         <!--
             TOCify
@@ -58,7 +58,7 @@
             Patched TOCify css file.
             (Don't want fixed `.tocify`).
         -->
-        <link rel="stylesheet" type="text/css" href="../../css/jquery.tocify.css" />
+        <link rel="stylesheet" type="text/css" href="../../../css/jquery.tocify.css" />
 
         <style>
         .navbar {
@@ -110,16 +110,16 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="../../">Richard Goulter's Blog</a>
+        <a class="navbar-brand" href="../../../">Richard Goulter's Blog</a>
     </div>
 
     <div class="collapse navbar-collapse" id="navbar-collapse-1">
         <ul class="nav navbar-nav navbar-right">
-            <li><a href="../../">Home</a></li>
-            <li><a href="../../yi.html">Yi</a></li>
-            <li><a href="../../emacs.html">Emacs</a></li>
-            <li><a href="../../what-i-wish-i-knew-when-i-started-using-nix.html">Nixpkgs</a></li>
-            <li><a href="../../archive.html">Archive</a></li>
+            <li><a href="../../../">Home</a></li>
+            <li><a href="../../../blog/yi.html">Yi</a></li>
+            <li><a href="../../../blog/emacs.html">Emacs</a></li>
+            <li><a href="../../../blog/what-i-wish-i-knew-when-i-started-using-nix.html">Nixpkgs</a></li>
+            <li><a href="../../../blog/archive.html">Archive</a></li>
         </ul>
     </div>
 </nav>
@@ -136,7 +136,7 @@
         by Richard Goulter
     <br />
     
-    Tags: 
+    Tags: <a title="All pages tagged 'debugging'." href="../../../blog/tags/debugging.html" rel="tag">debugging</a>, <a title="All pages tagged 'firmware.kirei'." href="../../../blog/tags/firmware.kirei.html" rel="tag">firmware.kirei</a>, <a title="All pages tagged 'programming.ch58x'." href="../../../blog/tags/programming.ch58x.html" rel="tag">programming.ch58x</a>, <a title="All pages tagged 'programming.embedded'." href="../../../blog/tags/programming.embedded.html" rel="tag">programming.embedded</a>
     
 </div>
 
@@ -200,7 +200,7 @@ terminal emulator window, and not running it within tmux or
 <p>This can be used to connect a serial console to the UART output.</p>
 <p>The jumper on the FTDI board should be changed to 3V3.</p>
 <p>Connect a cable from the TX of the CH58x TX (A9) to the RX on the FTDI board.</p>
-<p><img src="../../images/embedded/serial_uart_ftdi_weact_ch592.jpg" /></p>
+<p><img src="../../../blog/images/embedded/serial_uart_ftdi_weact_ch592.jpg" /></p>
 <p>Then, with the FTDI board connected to the computer, and the CH58x board
 powered, connecting to the serial console (<code>/dev/ttyUSB0</code> with baudrate 115200)
 should display output from Kirei:</p>
@@ -235,7 +235,7 @@ has some code that’s close to what we want.</p>
 <span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>        usb_cdc.console.write(data)</span>
 <span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>        usb_cdc.console.flush()</span></code></pre></div>
 <p>Connect a cable from the TX of the CH58x TX (A9) to the RX on the RP2040 board (GP1).</p>
-<p><img src="../../images/embedded/serial_uart_weact_rp2040_weact_ch592.jpg" /></p>
+<p><img src="../../../blog/images/embedded/serial_uart_weact_rp2040_weact_ch592.jpg" /></p>
 <p>Then, with the RP2040 board connected to the computer, and the CH58x board powered,
 connecting to the serial console (<code>/dev/ttyACM0</code>) should display output from Kirei:</p>
 <pre><code>$ tio /dev/ttyACM0
@@ -258,7 +258,7 @@ code.py output:
 <div>
     
     
-    <a href="../../posts/programming/2024-06-23-indicating-success-on-qmk-keyboards.html" style="float:right; text-align: right;">Older post</a>
+    <a href="../../../blog/posts/programming/2024-06-23-indicating-success-on-qmk-keyboards.html" style="float:right; text-align: right;">Older post</a>
     
 </div>
 <br style="clear: both;" />

@@ -6,7 +6,7 @@
         <title>Experience Updating the C Worksheet Project - Richard Goulter's Blog</title>
 
         <!-- My (Old) CSS theme -->
-        <link rel="stylesheet" type="text/css" href="../../css/default.css" />
+        <link rel="stylesheet" type="text/css" href="../../../css/default.css" />
 
         <!--
             jQuery & jQueryUI
@@ -19,7 +19,7 @@
             Pandoc Style CSS
             (for syntax highlighted snippets)
         -->
-        <link rel="stylesheet" type="text/css" href="../../css/syntax.css" />
+        <link rel="stylesheet" type="text/css" href="../../../css/syntax.css" />
 
         <!--
             Bootstrap
@@ -42,12 +42,12 @@
             so we can do this:
             http://imakewebthings.com/waypoints/shortcuts/sticky-elements/
         -->
-        <script src="../../js/jquery.waypoints.min.js"></script>
-        <script src="../../js/sticky.min.js"></script>
+        <script src="../../../js/jquery.waypoints.min.js"></script>
+        <script src="../../../js/sticky.min.js"></script>
 
         <!-- My analytics stuff -->
-        <script src="../../js/my_analytics.js"></script>
-        <script src="../../js/my_analytics_debug.js"></script>
+        <script src="../../../js/my_analytics.js"></script>
+        <script src="../../../js/my_analytics_debug.js"></script>
 
         <!--
             TOCify
@@ -58,7 +58,7 @@
             Patched TOCify css file.
             (Don't want fixed `.tocify`).
         -->
-        <link rel="stylesheet" type="text/css" href="../../css/jquery.tocify.css" />
+        <link rel="stylesheet" type="text/css" href="../../../css/jquery.tocify.css" />
 
         <style>
         .navbar {
@@ -110,16 +110,16 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="../../">Richard Goulter's Blog</a>
+        <a class="navbar-brand" href="../../../">Richard Goulter's Blog</a>
     </div>
 
     <div class="collapse navbar-collapse" id="navbar-collapse-1">
         <ul class="nav navbar-nav navbar-right">
-            <li><a href="../../">Home</a></li>
-            <li><a href="../../yi.html">Yi</a></li>
-            <li><a href="../../emacs.html">Emacs</a></li>
-            <li><a href="../../what-i-wish-i-knew-when-i-started-using-nix.html">Nixpkgs</a></li>
-            <li><a href="../../archive.html">Archive</a></li>
+            <li><a href="../../../">Home</a></li>
+            <li><a href="../../../blog/yi.html">Yi</a></li>
+            <li><a href="../../../blog/emacs.html">Emacs</a></li>
+            <li><a href="../../../blog/what-i-wish-i-knew-when-i-started-using-nix.html">Nixpkgs</a></li>
+            <li><a href="../../../blog/archive.html">Archive</a></li>
         </ul>
     </div>
 </nav>
@@ -136,7 +136,7 @@
         by Richard Goulter
     <br />
     
-    Tags: 
+    Tags: <a title="All pages tagged 'programming.c'." href="../../../blog/tags/programming.c.html" rel="tag">programming.c</a>, <a title="All pages tagged 'project.c-worksheet'." href="../../../blog/tags/project.c-worksheet.html" rel="tag">project.c-worksheet</a>, <a title="All pages tagged 'programming.scala'." href="../../../blog/tags/programming.scala.html" rel="tag">programming.scala</a>, <a title="All pages tagged 'programming.gradle'." href="../../../blog/tags/programming.gradle.html" rel="tag">programming.gradle</a>
     
 </div>
 
@@ -184,7 +184,7 @@ Since then, I did add CI/CD jobs to the project in 2018.</p>
 This “C worksheet instrumentor” project was implemented using Scala, &amp; a parser written with Antlr (which generates Java code from a grammar definition file). The tests were written using ScalaTest.</p>
 <p>This tech stack is different-enough from “only Scala files” so as to make setting up the build files annoying.</p>
 <p>For building this, I used gradle.</p>
-<p>For Scala, I think the SBT (Scala Build Tool) is more common. <a href="../programming/2015-01-19-gradle-or-sbt.html">I wrote about my frustrations trying to set up the project with either back then</a>. (Since then, I moved to use gradle; I think because I was able to add a ProGuard configuration to gradle, but didn’t for SBT).<br />
+<p>For Scala, I think the SBT (Scala Build Tool) is more common. <a href="../../../blog/posts/programming/2015-01-19-gradle-or-sbt.html">I wrote about my frustrations trying to set up the project with either back then</a>. (Since then, I moved to use gradle; I think because I was able to add a ProGuard configuration to gradle, but didn’t for SBT).<br />
 – I wish I could say my conclusion of “they both suck” was sophomoric. Perhaps “they’re both painful to set up” would be a more precise and tactful way of expressing it.</p>
 <h3 id="updating-gradle">Updating Gradle</h3>
 <p>In this case, where the <a href="https://github.com/rgoulter/c-worksheet-instrumentor/commits/master/build.gradle">build.gradle file was written in mid-2015</a>, the up to date release of gradle <a href="https://gradle.org/releases/">would have been v2.3; whereas at the time of writing, it’s Gradle 8.7</a>.<br />
@@ -258,10 +258,10 @@ The computer I use for day to day things is Linux. I happen to have Windows inst
 
 <div>
     
-    <a href="../../posts/programming/2024-05-22-example-of-cannot-execute-required-file-not-found-on-nixos.html" style="float:left;">Newer post</a>
+    <a href="../../../blog/posts/programming/2024-05-22-example-of-cannot-execute-required-file-not-found-on-nixos.html" style="float:left;">Newer post</a>
     
     
-    <a href="../../posts/games/2024-05-17-finally-playing-medal-of-honor-airborne.html" style="float:right; text-align: right;">Older post</a>
+    <a href="../../../blog/posts/games/2024-05-17-finally-playing-medal-of-honor-airborne.html" style="float:right; text-align: right;">Older post</a>
     
 </div>
 <br style="clear: both;" />

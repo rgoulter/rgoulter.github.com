@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
     <title>Richard Goulter's Blog</title>
-    <link href="http://www.rgoulter.com/blog//atom.xml" rel="self" />
+    <link href="http://www.rgoulter.com/blog//blog/atom.xml" rel="self" />
     <link href="http://www.rgoulter.com/blog/" />
-    <id>http://www.rgoulter.com/blog//atom.xml</id>
+    <id>http://www.rgoulter.com/blog//blog/atom.xml</id>
     <author>
         <name>Richard Goulter</name>
         
@@ -13,8 +13,8 @@
     <updated>2024-07-06T00:00:00Z</updated>
     <entry>
     <title>Debugging Kirei with UART</title>
-    <link href="http://www.rgoulter.com/blog//posts/programming/2024-07-06-debugging-kirei-with-uart.html" />
-    <id>http://www.rgoulter.com/blog//posts/programming/2024-07-06-debugging-kirei-with-uart.html</id>
+    <link href="http://www.rgoulter.com/blog//blog/posts/programming/2024-07-06-debugging-kirei-with-uart.html" />
+    <id>http://www.rgoulter.com/blog//blog/posts/programming/2024-07-06-debugging-kirei-with-uart.html</id>
     <published>2024-07-06T00:00:00Z</published>
     <updated>2024-07-06T00:00:00Z</updated>
     <summary type="html"><![CDATA[<p><a href="https://github.com/semickolon/kirei">Kirei</a> is nascent keyboard firmware, which
@@ -77,7 +77,7 @@ terminal emulator window, and not running it within tmux or
 <p>This can be used to connect a serial console to the UART output.</p>
 <p>The jumper on the FTDI board should be changed to 3V3.</p>
 <p>Connect a cable from the TX of the CH58x TX (A9) to the RX on the FTDI board.</p>
-<p><img src="../../images/embedded/serial_uart_ftdi_weact_ch592.jpg" /></p>
+<p><img src="/blog/images/embedded/serial_uart_ftdi_weact_ch592.jpg" /></p>
 <p>Then, with the FTDI board connected to the computer, and the CH58x board
 powered, connecting to the serial console (<code>/dev/ttyUSB0</code> with baudrate 115200)
 should display output from Kirei:</p>
@@ -112,7 +112,7 @@ has some code that’s close to what we want.</p>
 <span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>        usb_cdc.console.write(data)</span>
 <span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>        usb_cdc.console.flush()</span></code></pre></div>
 <p>Connect a cable from the TX of the CH58x TX (A9) to the RX on the RP2040 board (GP1).</p>
-<p><img src="../../images/embedded/serial_uart_weact_rp2040_weact_ch592.jpg" /></p>
+<p><img src="/blog/images/embedded/serial_uart_weact_rp2040_weact_ch592.jpg" /></p>
 <p>Then, with the RP2040 board connected to the computer, and the CH58x board powered,
 connecting to the serial console (<code>/dev/ttyACM0</code>) should display output from Kirei:</p>
 <pre><code>$ tio /dev/ttyACM0
@@ -132,11 +132,11 @@ code.py output:
 </entry>
 <entry>
     <title>Indicating Success on QMK Keyboards</title>
-    <link href="http://www.rgoulter.com/blog//posts/programming/2024-06-23-indicating-success-on-qmk-keyboards.html" />
-    <id>http://www.rgoulter.com/blog//posts/programming/2024-06-23-indicating-success-on-qmk-keyboards.html</id>
+    <link href="http://www.rgoulter.com/blog//blog/posts/programming/2024-06-23-indicating-success-on-qmk-keyboards.html" />
+    <id>http://www.rgoulter.com/blog//blog/posts/programming/2024-06-23-indicating-success-on-qmk-keyboards.html</id>
     <published>2024-06-23T00:00:00Z</published>
     <updated>2024-06-23T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<p>In the previous post, I discussed ways of <a href="../programming/2024-06-16-using-the-qmk-leader-key-for-fancy-keyboard-functionality.html">using QMK leader key sequences in QMK keymaps</a>.</p>
+    <summary type="html"><![CDATA[<p>In the previous post, I discussed ways of <a href="/blog/posts/programming/2024-06-16-using-the-qmk-leader-key-for-fancy-keyboard-functionality.html">using QMK leader key sequences in QMK keymaps</a>.</p>
 <p>One of the downsides with this is that QMK leader key sequences are handled only
 after a timeout (i.e. enter the key sequence, then wait a moment).</p>
 <p>One way of improving the UX of this is having the keyboard provide some feedback
@@ -240,8 +240,8 @@ to enter a leader key sequence.</p>]]></summary>
 </entry>
 <entry>
     <title>Using the QMK Leader Key for Fancy Keyboard Functionality</title>
-    <link href="http://www.rgoulter.com/blog//posts/programming/2024-06-16-using-the-qmk-leader-key-for-fancy-keyboard-functionality.html" />
-    <id>http://www.rgoulter.com/blog//posts/programming/2024-06-16-using-the-qmk-leader-key-for-fancy-keyboard-functionality.html</id>
+    <link href="http://www.rgoulter.com/blog//blog/posts/programming/2024-06-16-using-the-qmk-leader-key-for-fancy-keyboard-functionality.html" />
+    <id>http://www.rgoulter.com/blog//blog/posts/programming/2024-06-16-using-the-qmk-leader-key-for-fancy-keyboard-functionality.html</id>
     <published>2024-06-16T00:00:00Z</published>
     <updated>2024-06-16T00:00:00Z</updated>
     <summary type="html"><![CDATA[<p><a href="https://qmk.fm/">QMK</a> keyboards are keyboards where the functionality can be
@@ -555,8 +555,8 @@ there’s no way for the leader to end before the timeout).</p>
 </entry>
 <entry>
     <title>Further Notes on Gym Going</title>
-    <link href="http://www.rgoulter.com/blog//posts/2024-06-12-further-notes-on-gym-going.html" />
-    <id>http://www.rgoulter.com/blog//posts/2024-06-12-further-notes-on-gym-going.html</id>
+    <link href="http://www.rgoulter.com/blog//blog/posts/2024-06-12-further-notes-on-gym-going.html" />
+    <id>http://www.rgoulter.com/blog//blog/posts/2024-06-12-further-notes-on-gym-going.html</id>
     <published>2024-06-12T00:00:00Z</published>
     <updated>2024-06-12T00:00:00Z</updated>
     <summary type="html"><![CDATA[<p>I have continued going to the gym in the time <a href="2024-03-23-six-months-of-going-to-the-gym.html">since I wrote a blogpost with thoughts about going there for six months</a>.<br />
@@ -825,8 +825,8 @@ the other is optimal for hypertrophy (building muscle).</li>
 </entry>
 <entry>
     <title>Bridgerton Season 3</title>
-    <link href="http://www.rgoulter.com/blog//posts/romance/2024-05-27-bridgerton-season-3.html" />
-    <id>http://www.rgoulter.com/blog//posts/romance/2024-05-27-bridgerton-season-3.html</id>
+    <link href="http://www.rgoulter.com/blog//blog/posts/romance/2024-05-27-bridgerton-season-3.html" />
+    <id>http://www.rgoulter.com/blog//blog/posts/romance/2024-05-27-bridgerton-season-3.html</id>
     <published>2024-05-27T00:00:00Z</published>
     <updated>2024-05-27T00:00:00Z</updated>
     <summary type="html"><![CDATA[<p>Finished watching Bridgerton Season 3.</p>
@@ -944,15 +944,15 @@ married to secure her future” is a key driver of plots in the story.</p>]]></s
 </entry>
 <entry>
     <title>Getting MounRiver Studio to Run on NixOS</title>
-    <link href="http://www.rgoulter.com/blog//posts/programming/2024-05-23-getting-mounriver-studio-to-run-on-nixos.html" />
-    <id>http://www.rgoulter.com/blog//posts/programming/2024-05-23-getting-mounriver-studio-to-run-on-nixos.html</id>
+    <link href="http://www.rgoulter.com/blog//blog/posts/programming/2024-05-23-getting-mounriver-studio-to-run-on-nixos.html" />
+    <id>http://www.rgoulter.com/blog//blog/posts/programming/2024-05-23-getting-mounriver-studio-to-run-on-nixos.html</id>
     <published>2024-05-23T00:00:00Z</published>
     <updated>2024-05-23T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<p>In <a href="../programming/2024-05-22-example-of-cannot-execute-required-file-not-found-on-nixos.html">the previous post</a>,
+    <summary type="html"><![CDATA[<p>In <a href="/blog/posts/programming/2024-05-22-example-of-cannot-execute-required-file-not-found-on-nixos.html">the previous post</a>,
 I walked through a few different ways of how to get a pre-compiled binary running on NixOS.</p>
 <p>In this post, I’ll share some notes on what it took to get <a href="http://www.mounriver.com/download">MounRiver</a> running on NixOS.
 The basic idea is the same, but in practice it felt much more difficult.
-(MounRiver Studio is an IDE used for WCH MCUs. <a href="../programming/2023-12-21-notes-on-building-wch-ble-ch592-evt-exam-with-bare-makefile.html">I’ve discussed developing the EVT examples in a previous blogpost</a>).</p>
+(MounRiver Studio is an IDE used for WCH MCUs. <a href="/blog/posts/programming/2023-12-21-notes-on-building-wch-ble-ch592-evt-exam-with-bare-makefile.html">I’ve discussed developing the EVT examples in a previous blogpost</a>).</p>
 <p>If the previous post was “draw a circle”, this post is “<a href="https://knowyourmeme.com/memes/how-to-draw-an-owl">draw the rest of the owl</a>”.</p>
 <p>These notes are mostly “here are the commands I ran, here was the output”:</p>
 <p>The Community RISC-V IDE can be downloaded from the MounRiver website. It’s a tarball with a <code>beforeinstall</code> (with some <code>.so</code> shared libraries to be copied into <code>/usr/lib</code>), and an <code>MRS_Community</code> directory which is a distribution of the <a href="https://eclipseide.org/">Eclipse IDE</a>.</p>
@@ -1245,7 +1245,7 @@ The build inputs &amp; wrapping with <code>LD_LIBRARY_PATH</code> looks familiar
 <p>The only thing that sticks out as related to <code>configuration</code> is the argument is <code>makeWrapper</code> <code>-add-flags "-configuration \$HOME/.eclipse/''${productId}_${productVersion}/configuration"</code>.</p>
 <p>My understanding of how Eclipse works is insufficient to figure out how I would write a Nix package this MounRiver distribution &amp; also have the <code>configuation/.settings</code> it provides get used, without requiring the user to just copy these files.</p>
 <p>At this point, it’s enough for me to say that the approach taken by this distributed tarball is different enough from the way Nix prefers to package things. e.g. the tarball includes a java runtime, as well as toolchain binaries for <code>make</code> and the RISC-V GCC toolchain; whereas Nix would package these separately.<br />
-For myself, getting MounRiver to run is mostly a curiosity. It would have been useful for checking the WCH EVT examples. <a href="../programming/2023-12-21-notes-on-building-wch-ble-ch592-evt-exam-with-bare-makefile.html">In another blogpost, I discussed building this outside of MounRiver</a>, and in that I linked to an example with a nix-shell provided.</p>
+For myself, getting MounRiver to run is mostly a curiosity. It would have been useful for checking the WCH EVT examples. <a href="/blog/posts/programming/2023-12-21-notes-on-building-wch-ble-ch592-evt-exam-with-bare-makefile.html">In another blogpost, I discussed building this outside of MounRiver</a>, and in that I linked to an example with a nix-shell provided.</p>
 <h2 id="conclusion">Conclusion</h2>
 <p>Okay, so in the end, I was able to run the MounRiver Studio binary on NixOS. This required using <code>nix-alien</code>, and figuring out which shared libraries were required to run the precompiled binaries. – This was a bit annoying, but not insurmountable. Getting it to run with <code>nix-alien</code> was essentially no more difficult than the hello-world example in the previous blogpost.</p>
 <p>I was not able to successfully write a nix package for MounRiver Studio such that the user experience was the same “just works” as is intended. The point here seems to be:</p>
@@ -1257,8 +1257,8 @@ For myself, getting MounRiver to run is mostly a curiosity. It would have been u
 </entry>
 <entry>
     <title>Example of Cannot Execute Required File Not Found on NixOS</title>
-    <link href="http://www.rgoulter.com/blog//posts/programming/2024-05-22-example-of-cannot-execute-required-file-not-found-on-nixos.html" />
-    <id>http://www.rgoulter.com/blog//posts/programming/2024-05-22-example-of-cannot-execute-required-file-not-found-on-nixos.html</id>
+    <link href="http://www.rgoulter.com/blog//blog/posts/programming/2024-05-22-example-of-cannot-execute-required-file-not-found-on-nixos.html" />
+    <id>http://www.rgoulter.com/blog//blog/posts/programming/2024-05-22-example-of-cannot-execute-required-file-not-found-on-nixos.html</id>
     <published>2024-05-22T00:00:00Z</published>
     <updated>2024-05-22T00:00:00Z</updated>
     <summary type="html"><![CDATA[<p>One of the problems many NixOS users encounter is difficulty running binaries which have been compiled on other Linux systems.</p>
@@ -1425,8 +1425,8 @@ hello world</code></pre>
 </entry>
 <entry>
     <title>Experience Updating the C Worksheet Project</title>
-    <link href="http://www.rgoulter.com/blog//posts/programming/2024-05-18-experience-updating-the-c-worksheet-project.html" />
-    <id>http://www.rgoulter.com/blog//posts/programming/2024-05-18-experience-updating-the-c-worksheet-project.html</id>
+    <link href="http://www.rgoulter.com/blog//blog/posts/programming/2024-05-18-experience-updating-the-c-worksheet-project.html" />
+    <id>http://www.rgoulter.com/blog//blog/posts/programming/2024-05-18-experience-updating-the-c-worksheet-project.html</id>
     <published>2024-05-18T00:00:00Z</published>
     <updated>2024-05-18T00:00:00Z</updated>
     <summary type="html"><![CDATA[<p>Around a decade ago, I made a <a href="https://github.com/rgoulter/c-worksheet.vim">pretty neat project</a>:
@@ -1473,7 +1473,7 @@ Since then, I did add CI/CD jobs to the project in 2018.</p>
 This “C worksheet instrumentor” project was implemented using Scala, &amp; a parser written with Antlr (which generates Java code from a grammar definition file). The tests were written using ScalaTest.</p>
 <p>This tech stack is different-enough from “only Scala files” so as to make setting up the build files annoying.</p>
 <p>For building this, I used gradle.</p>
-<p>For Scala, I think the SBT (Scala Build Tool) is more common. <a href="../programming/2015-01-19-gradle-or-sbt.html">I wrote about my frustrations trying to set up the project with either back then</a>. (Since then, I moved to use gradle; I think because I was able to add a ProGuard configuration to gradle, but didn’t for SBT).<br />
+<p>For Scala, I think the SBT (Scala Build Tool) is more common. <a href="/blog/posts/programming/2015-01-19-gradle-or-sbt.html">I wrote about my frustrations trying to set up the project with either back then</a>. (Since then, I moved to use gradle; I think because I was able to add a ProGuard configuration to gradle, but didn’t for SBT).<br />
 – I wish I could say my conclusion of “they both suck” was sophomoric. Perhaps “they’re both painful to set up” would be a more precise and tactful way of expressing it.</p>
 <h3 id="updating-gradle">Updating Gradle</h3>
 <p>In this case, where the <a href="https://github.com/rgoulter/c-worksheet-instrumentor/commits/master/build.gradle">build.gradle file was written in mid-2015</a>, the up to date release of gradle <a href="https://gradle.org/releases/">would have been v2.3; whereas at the time of writing, it’s Gradle 8.7</a>.<br />
@@ -1545,8 +1545,8 @@ The computer I use for day to day things is Linux. I happen to have Windows inst
 </entry>
 <entry>
     <title>Finally Playing Medal of Honor Airborne</title>
-    <link href="http://www.rgoulter.com/blog//posts/games/2024-05-17-finally-playing-medal-of-honor-airborne.html" />
-    <id>http://www.rgoulter.com/blog//posts/games/2024-05-17-finally-playing-medal-of-honor-airborne.html</id>
+    <link href="http://www.rgoulter.com/blog//blog/posts/games/2024-05-17-finally-playing-medal-of-honor-airborne.html" />
+    <id>http://www.rgoulter.com/blog//blog/posts/games/2024-05-17-finally-playing-medal-of-honor-airborne.html</id>
     <published>2024-05-17T00:00:00Z</published>
     <updated>2024-05-17T00:00:00Z</updated>
     <summary type="html"><![CDATA[<p>I’d bought “Medal of Honor Airborne” on Steam many years ago, but had been unable to play it. Something about compatibility with my graphics card.<br />
@@ -1615,8 +1615,8 @@ But, say, your pistol has infinite ammo, you can start missions with a loadout o
 </entry>
 <entry>
     <title>The Three Difficult Things about Nix</title>
-    <link href="http://www.rgoulter.com/blog//posts/programming/2024-05-09-the-three-difficult-things-about-nix.html" />
-    <id>http://www.rgoulter.com/blog//posts/programming/2024-05-09-the-three-difficult-things-about-nix.html</id>
+    <link href="http://www.rgoulter.com/blog//blog/posts/programming/2024-05-09-the-three-difficult-things-about-nix.html" />
+    <id>http://www.rgoulter.com/blog//blog/posts/programming/2024-05-09-the-three-difficult-things-about-nix.html</id>
     <published>2024-05-09T00:00:00Z</published>
     <updated>2024-05-09T00:00:00Z</updated>
     <summary type="html"><![CDATA[<p><a href="https://nixos.org/">Nix</a> is a fancy package manager, with a bunch of powerful features.</p>
