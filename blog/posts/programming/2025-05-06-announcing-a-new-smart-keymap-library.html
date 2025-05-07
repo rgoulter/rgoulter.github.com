@@ -1,0 +1,583 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Announcing a new Smart Keymap Library - Richard Goulter's Blog</title>
+
+        <!-- My (Old) CSS theme -->
+        <link rel="stylesheet" type="text/css" href="../../../css/default.css" />
+
+        <!--
+            jQuery & jQueryUI
+        -->
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css" />
+
+        <!--
+            Pandoc Style CSS
+            (for syntax highlighted snippets)
+        -->
+        <link rel="stylesheet" type="text/css" href="../../../css/syntax.css" />
+
+        <!--
+            Bootstrap
+        -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+        <style>
+            /*
+             * Bootstrap defines blockquote as 17px,
+             * so it looks stupidly large in my blogposts. */
+            blockquote {
+                font-size: 14px;
+            }
+        </style>
+
+        <!--
+            Waypoints, and Waypoints-Sticky,
+            so we can do this:
+            http://imakewebthings.com/waypoints/shortcuts/sticky-elements/
+        -->
+        <script src="../../../js/jquery.waypoints.min.js"></script>
+        <script src="../../../js/sticky.min.js"></script>
+
+        <!-- My analytics stuff -->
+        <script src="../../../js/my_analytics.js"></script>
+        <script src="../../../js/my_analytics_debug.js"></script>
+
+        <!--
+            TOCify
+        -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js"></script>
+
+        <!--
+            Patched TOCify css file.
+            (Don't want fixed `.tocify`).
+        -->
+        <link rel="stylesheet" type="text/css" href="../../../css/jquery.tocify.css" />
+
+        <style>
+        .navbar {
+            margin-bottom: 0px;
+        }
+
+        .banner-image {
+            width:100%;
+        }
+
+        .banner {
+            margin-left: 0px;
+            margin-right: 0px;
+        }
+
+        body {
+            background-color: #e2e2e2;
+        }
+
+        #page {
+            padding-left:0;
+            padding-right:0;
+            background-color: #ffffff;
+        }
+        </style>
+
+        <!-- Google Analytics -->
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-H13NWYDX0G"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'G-H13NWYDX0G');
+        </script>
+    </head>
+    <body>
+        <div id="page" class="container">
+            <!-- This, with no padding on left/right -->
+            <div class="banner">
+                <nav class="navbar navbar-default">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+
+            <!-- The Hamburger -->
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../../../">Richard Goulter's Blog</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="../../../">Home</a></li>
+            <li><a href="../../../blog/yi.html">Yi</a></li>
+            <li><a href="../../../blog/emacs.html">Emacs</a></li>
+            <li><a href="../../../blog/what-i-wish-i-knew-when-i-started-using-nix.html">Nixpkgs</a></li>
+            <li><a href="../../../blog/archive.html">Archive</a></li>
+        </ul>
+    </div>
+</nav>
+
+            </div>
+
+            <hr style="margin: 0px; border-top: 5px solid black;" />
+
+            <div id="content" class="container">
+                <h1>Announcing a new Smart Keymap Library</h1>
+                <div class="info">
+    Posted on May  6, 2025
+    
+        by Richard Goulter
+    <br />
+    
+    Tags: <a title="All pages tagged 'keyboards'." href="../../../blog/tags/keyboards.html" rel="tag">keyboards</a>, <a title="All pages tagged 'firmware.fak'." href="../../../blog/tags/firmware.fak.html" rel="tag">firmware.fak</a>, <a title="All pages tagged 'firmware.kirei'." href="../../../blog/tags/firmware.kirei.html" rel="tag">firmware.kirei</a>, <a title="All pages tagged 'programming.ch32x'." href="../../../blog/tags/programming.ch32x.html" rel="tag">programming.ch32x</a>, <a title="All pages tagged 'programming.ch58x'." href="../../../blog/tags/programming.ch58x.html" rel="tag">programming.ch58x</a>, <a title="All pages tagged 'programming.embedded'." href="../../../blog/tags/programming.embedded.html" rel="tag">programming.embedded</a>, <a title="All pages tagged 'programming.rust'." href="../../../blog/tags/programming.rust.html" rel="tag">programming.rust</a>
+    
+</div>
+
+<p>For the last few months, I’ve been working on a new “smart keymap” library.</p>
+<p>The code is published over at: <a href="https://github.com/rgoulter/smart-keymap" class="uri">https://github.com/rgoulter/smart-keymap</a>.</p>
+<p>This post is to introduce this, go over what it is, and why I’ve found it
+exciting to work on.</p>
+<h1 id="smart-keymap">“Smart Keymap”</h1>
+<p>By “smart keymap”, I mean the keymap behaviour for “smart keyboards”.</p>
+<p>And by “smart keyboards”, I mean keyboards like those which run QMK or ZMK firmware.<br />
+(I first saw the term used on the <a href="https://sites.google.com/alanreiser.com/handsdown">Hands Down
+Layout</a> webpage).</p>
+<p>Smart keyboards often provide functionality like “Layers” or “Tap-Hold” keys,
+which allow the keys to have sophisticated behaviour.</p>
+<p>For example, these features allow bringing the full functionality of the
+keyboard to within easy reach of the hands resting on home row. (e.g. <a href="https://www.youtube.com/watch?v=bQUx2KtJ6TA">here’s a
+video demonstrating how the miryoku layout does
+this</a>).</p>
+<h2 id="what-the-project-is">What the Project is</h2>
+<p>The smart keymap library allows declaring a “smart keymap” which can be used as
+part of a smart keyboard’s firmware.</p>
+<p>The keymap is declared using <a href="https://nickel-lang.org/">the Nickel configuration
+language</a>, a nifty “JSON + functions + types”
+language.<br />
+(If you’re familiar with the <a href="https://github.com/semickolon/fak">FAK keyboard
+firmware</a>, you can understand the smart
+keymap libary as like FAK, but targetting a broader set of MCUs than just the
+CH55x).</p>
+<h3 id="example-keymap">Example Keymap</h3>
+<p>To illustrate, here’s an example keymap declared in Nickel for a 5x15
+ortholinear keyboard:</p>
+<pre class="nickel"><code>let K = import &quot;keys.ncl&quot; in
+
+let DVORAK_  = 0 in
+let GAMING_  = 1 in
+let RAISE_   = 2 in
+let LOWER_   = RAISE_ + 1 in
+let ADJUST_  = RAISE_ + 2 in
+
+{
+  chords =
+    let K = import &quot;keys.ncl&quot; in
+    [
+        { indices = [48, 49], key = K.LeftGUI &amp; K.PageUp, },
+        { indices = [55, 56], key = K.LeftGUI &amp; K.PageDown, },
+    ],
+
+  config.tap_hold.interrupt_response = &quot;HoldOnKeyTap&quot;,
+
+  custom_keys = fun K =&gt;
+    let HoldLayerMod = fun layer_index =&gt; K.hold (K.layer_mod.hold layer_index) in
+    {
+      DVOR = K.layer_mod.set_default DVORAK_,
+      GAME = K.layer_mod.set_default GAMING_,
+
+      ENT_R = K.Return &amp; HoldLayerMod RAISE_,
+      ESC_L = K.Escape &amp; HoldLayerMod LOWER_,
+      ADJ   = K.layer_mod.hold ADJUST_,
+
+      # Tap-Hold Home Row Modifiers
+      A_A = K.A &amp; K.hold K.LeftAlt,
+      G_O = K.O &amp; K.hold K.LeftGUI,
+      C_E = K.E &amp; K.hold K.LeftCtrl,
+      S_U = K.U &amp; K.hold K.LeftShift,
+
+      S_H = K.H &amp; K.hold K.RightShift,
+      C_T = K.T &amp; K.hold K.LeftCtrl,
+      G_N = K.N &amp; K.hold K.RightGUI,
+      A_S = K.S &amp; K.hold K.LeftAlt,
+
+      # Sticky modifier keys
+      SK_S = K.sticky K.LeftShift,
+      SK_C = K.sticky K.LeftCtrl,
+      SK_G = K.sticky K.LeftGUI,
+      SK_A = K.sticky K.LeftAlt,
+    },
+
+  layers = [
+    # Base: Dvorak
+    m%&quot;
+      `    1    2    3   4     5   XXXX XXXX XXXX 6    7     8    9    0    DEL
+      TAB  '    ,    .   P     Y   7    8    9    F    G     C    R    L    BSPC
+      ESC  A_A  G_O  C_E S_U   I   4    5    6    D    S_H   C_T  G_N  A_S  /
+      LSFT ;    Q    J   K     X   1    2    3    B    M     W    V    Z    RSFT
+      LCTL LGUI LALT TAB ESC_L SPC SPC  0    BSPC BSPC ENT_R DEL  RALT RGUI RCTL
+    &quot;%,
+    # Base: Gaming
+    m%&quot;
+      `    1    2    3   4     5   XXXX XXXX XXXX 6    7     8    9    0    DEL
+      TAB  Q    W    E   R     T   XXXX XXXX XXXX Y    U     I    O    P    BSPC
+      ESC  A    S    D   F     G   XXXX XXXX XXXX H    J     K    L    ;    '
+      LSFT Z    X    C   V     B   XXXX XXXX XXXX N    M     ,    .    /    RSFT
+      LCTL LGUI LALT TAB ESC_L SPC XXXX XXXX XXXX BSPC ENT_R DEL  RALT RGUI RCTL
+    &quot;%,
+    # Raise
+    m%&quot;
+      TTTT TTTT TTTT TTTT TTTT TTTT TTTT TTTT TTTT TTTT TTTT TTTT TTTT TTTT TTTT
+      `    1    2    3    4    5    TTTT TTTT TTTT 6    7    8    9    0    \
+      DEL  F1   F2   F3   F4   F5   TTTT TTTT TTTT F6   -    =    [    ]    /
+      TTTT F7   F8   F9   F10  F11  TTTT TTTT TTTT F12  TTTT TTTT TTTT TTTT TTTT
+      TTTT TTTT TTTT TTTT ADJ  TTTT TTTT TTTT TTTT TTTT TTTT TTTT TTTT TTTT TTTT
+    &quot;%,
+    # Lower
+    m%&quot;
+      TTTT TTTT TTTT TTTT TTTT TTTT TTTT TTTT TTTT TTTT TTTT TTTT TTTT TTTT TTTT
+      ~    !    @    #    $    %    TTTT TTTT TTTT ^    &amp;    *    (    )    |
+      INS  F1   F2   F3   F4   F5   TTTT TTTT TTTT F6   _    +    {    }    ?
+      TTTT F7   F8   F9   F10  F11  TTTT TTTT TTTT F12  TTTT HOME PGDN PGUP END
+      TTTT TTTT TTTT TTTT TTTT TTTT TTTT TTTT TTTT TTTT ADJ  LEFT DOWN UP   RGHT
+    &quot;%,
+    # Adjust
+    m%&quot;
+      DVOR GAME TTTT TTTT TTTT TTTT TTTT TTTT TTTT TTTT TTTT TTTT TTTT TTTT TTTT
+      TTTT BOOT TTTT TTTT TTTT TTTT TTTT TTTT TTTT TTTT PSCR SCRL PAUS TTTT TTTT
+      CAPS SK_A SK_G SK_C SK_S TTTT TTTT TTTT TTTT TTTT SK_S SK_C SK_G SK_A CWTG
+      TTTT TTTT TTTT TTTT TTTT TTTT TTTT TTTT TTTT TTTT TTTT TTTT TTTT TTTT TTTT
+      TTTT TTTT TTTT TTTT TTTT TTTT TTTT TTTT TTTT TTTT TTTT TTTT TTTT TTTT TTTT
+    &quot;%,
+  ],
+}</code></pre>
+<p>Using an expressive language like Nickel has some compelling advantages for
+text-based or declarative keymap configuration, compared to what’s required
+to write keymaps for other keyboard firmware.</p>
+<p>e.g. QMK’s <a href="https://docs.qmk.fm/keymap">keymaps are written in C</a>, or a <code>keymap.json</code>
+<a href="https://docs.qmk.fm/newbs_building_firmware_workflow#add-a-json-keymap">as downloaded from the online QMK
+Configurator</a>.</p>
+<p>e.g. <a href="https://zmk.dev/docs/config">ZMK uses kconfig and devicetree files for its
+configuration</a>.</p>
+<p>Using C to write keymaps allows for a breadth and depth of custom implementation
+of behaviour.<br />
+C is relatively simple. C &amp; CPP are somewhat limited and cumbersome when it comes
+to making abstractions, such as re-using keymap functionality across keymaps.</p>
+<p>Using a configuration language to define a keymap limits what the keymap can configure
+to a smaller interface. But, Nickel’s highly expressive features allow it to construct
+abstractions and reuse/customization more elegantly than CPP. – A Nickel keymap
+configuration is going to be easier to maintain or re-use than code which makes heavy use
+of CPP.</p>
+<p>(Using Rust to write keymaps, as Keyberon does: it’s practically nicer to use
+Rust than to make use of CPP; but, Rust’s strictness make it practically much more
+difficult for Rust code to match how bespoke a keymap’s implementation can be.
+Certainly in the case of QMK keymaps vs keyberon keymaps. – <a href="https://github.com/rgoulter/keyboard-labs/tree/master/firmware/keyberon/src/layouts">My own keymaps written in
+Rust can be found here</a>).</p>
+<h3 id="context-and-motivation-the-keymap-abstraction">Context and Motivation: The Keymap Abstraction</h3>
+<p>From my experience <a href="https://github.com/rgoulter/keyboard-labs/tree/master/firmware/keyberon">writing firmware for different keyboards / MCUs with
+keyberon</a>,
+in order to best re-use code across those different firmware binaries, a fairly
+natural pair of abstractions emerged: the first was abstracting over the logic
+which produces input key press/release events from matrix scanning; the second,
+abstracting over the mechanism which produces HID keyboard reports from those
+key press/release events. – I’d describe the first as the “keyboard” or “keyboard
+frontend”, the second as the “keymap” or “keyboard backend”.</p>
+<p>Essentially, the smart keymap’s interface is along the lines of
+<code>Keymap { handle_event(InputEvent); tick() -&gt; Output; }</code>.</p>
+<p>Later, I made a prototype keyboard which used the CH58x MCU. The CH58x EVT
+provides example firmware code, including an example HID keyboard, and a BLE
+keyboard. – The keymap logic in these examples is essentially “in a loop, tap a
+b c d …”. – That is, to make a practical keyboard firmware from the EVT
+examples, you’d need to implement matrix scanning, and implement the keymap
+behaviour. So, the same abstraction which was useful for code-reuse in writing keyberon
+firmware would also be useful for writing keyboard firmware for the CH58x.</p>
+<h3 id="keymap-not-keyboard">Keymap, not Keyboard</h3>
+<p>The smart-keymap library’s scope is limited to “keymap functionality”, rather
+than the broader scope of “keyboard functionality”.</p>
+<p>This allows for the project to have a narrower focus on what it supports.</p>
+<p>‘Keymap features’ are the behaviours from manipulating inputs; ‘keyboard features’
+are related to physical parts of the keyboard.<br />
+e.g. “tap hold key” functionality is definitely a keymap feature.<br />
+Whereas e.g. “split keyboard” functionality is definitely a keyboard feature.
+(The keymap behaviour would be the same whether the keyboard is split or not).<br />
+For things like “change the RGB effect”, the keymap doesn’t need to know how the
+RGB system is implemented. – All the keymap needs to provide is a way of invoking things
+like “change the RGB effect”.</p>
+<h3 id="library-not-framework">Library, not Framework</h3>
+<p>Providing smart keymap functionality as a library also narrows the project’s
+scope compared to writing an entire (keyboard) firmware framework.</p>
+<p>Practically, I think it’s always going to be easier to bring up keyboard
+firmware for some unsupported MCU by integrating a library into the an HID
+keyboard example from an EVT, compared to the effort it’d take to adapt the EVT
+into the platform-supporting code of a framework.</p>
+<h1 id="why-this-has-been-exciting-to-write">Why This Has Been Exciting to Write</h1>
+<h2 id="nickel-is-a-powerful-config-language">Nickel is a Powerful Config Language</h2>
+<p>I first came across <a href="https://nickel-lang.org/">Nickel</a> in relation to
+the <a href="https://nixos.org/">Nix package manager</a>. – Nix is pretty neat;
+so Nix-related things are likely to be neat.</p>
+<p>Nickel, at a glance, is “JSON + functions (+ types)”.</p>
+<p>The smart-keymap library obviously draws a lot of inspiration from
+<a href="https://github.com/semickolon/fak">semickolon’s fak</a> and
+<a href="https://github.com/semickolon/kirei">kirei</a> projects; both of which are keyboard
+firmware which use Nickel for configuring the keymap.</p>
+<p>My initial experience working with fak can be found in my
+<a href="https://github.com/rgoulter/fak-config">fak-config</a>.</p>
+<p>After having written much more Nickel code for smart-keymap,
+a couple of things which stand out are its contracts,
+and its modular configuration.</p>
+<h3 id="nickel-contracts">Nickel Contracts</h3>
+<p><a href="https://nickel-lang.org/user-manual/correctness/">The Nickel manual discusses how the language helps write ‘correct’
+configurations</a>.</p>
+<p>It took me some time to build an intuition for use of contracts.</p>
+<p>Roughly, in Nickel, ‘types’ are only ever the concrete shape of the values.
+e.g. Number, String, Array of type, Record of type. Types are checked
+statically. Nickel doesn’t have user-defined types / aliases.</p>
+<p>Whereas, contracts are a more expressive mechanism for describing more abstract
+aspects of &amp; assertions about a value. Contracts are evaluated at runtime.
+Contracts can be user defined; and can even be constructed from predicate or
+validator functions on values.</p>
+<h3 id="nickel-modular-configuration">Nickel Modular Configuration</h3>
+<p><a href="https://nickel-lang.org/user-manual/modular-configurations/">The Nickel manual discusses how its record merging enables modular configuration</a>.</p>
+<p>In the Nix ecosystem, several tools make use of modules. e.g. NixOS
+configuration is done with modules, <a href="https://devenv.sh/">DevEnv</a> configuration
+modules, <a href="https://flake.parts/">flake-parts</a> provides an interface for writing
+flakes as modules.</p>
+<p>Modules provide a way of writing code as composable elements.</p>
+<p>Nickel’s records are evaluated lazily, &amp; can be combined, which allows Nickel
+records to be used as modules.</p>
+<p>In the smart-keymap codebase, the <a href="https://github.com/rgoulter/smart-keymap/tree/master/firmware/ch32x035-usb-device-compositekm-c/ncl/codegen">codegen for the CH32X
+firmware</a>
+is written in a modular style.<br />
+e.g. <code>keyboard_split.ncl</code> is a module which describes what its inputs are, what
+contracts it expects those inputs to satisfy, and its outputs.</p>
+<p>How might that apply to keymaps?<br />
+For example: a keymap might be defined using colemak by default, <code>{ alphas | default = colemak_dh, .. }</code>.
+Nickel syntax would then allow re-using this keymap and changing <code>alphas</code> with <code>other_keymap &amp; { alphas = qwerty }</code>.</p>
+<h2 id="inspirations-kirei-and-key-as-the-primary-keymap-abstraction">Inspirations: Kirei, and “Key as the primary keymap abstraction”</h2>
+<p>Aside from using Nickel as the configuration language, and targeting the CH58x
+MCU, smart-keymap also takes further inspiration from Kirei with its “key as the
+primary keymap abstraction” idea.</p>
+<p>Notice, it’s easy to consider generalisations of various smart keymap features.<br />
+e.g. <a href="https://docs.qmk.fm/features/tri_layer">QMK’s tri-layer feature</a> can be
+generalised as <a href="https://zmk.dev/docs/keymaps/conditional-layers">conditional
+layers</a>, <a href="https://docs.qmk.fm/features/grave_esc">QMK’s
+grave-esc</a> can be generalised as
+<a href="https://zmk.dev/docs/keymaps/behaviors/mod-morph">mod-morph</a>. QMK’s
+leader-sequences are kinda like its one-shot layers.</p>
+<p>Or, generally: smart keymap functionality is about using different techniques to
+modify what happens when a key is pressed &amp; released.</p>
+<p><a href="https://www.reddit.com/r/ErgoMechKeyboards/comments/18wrt2i/the_layers_are_a_lie_kinda_rethinking_the/">You can even consider that “layers” fit into this
+pattern</a>.</p>
+<p>I thought this made for an interesting design spec: a keymap implementation
+where “key behaviour” was the primary abstraction. (&amp; e.g. not “layers”).</p>
+<p>Similarly, a neat observation kirei’s author made on the fak discord that a
+smart keymap’s output (what keycodes get sent by a keymap, from a sequence of
+key presses &amp; releases) resembles parsing a grammar. (What AST is constructed
+from tokens for a grammar, from a sequence of input tokens).</p>
+<h2 id="cheap-powerful-mcus-ch32x-ch58x">Cheap, Powerful MCUs: CH32X, CH58x</h2>
+<p>One of the great things about the fak firmware is its support for low-cost MCUs.</p>
+<p><a href="https://www.wch-ic.com/products/CH552.html">WCH’s CH552T</a> has an MCU in
+TSSOP-20 for about $0.5, with 16KB flash, and about 1KB XRAM.</p>
+<p>(For more GPIO / a larger package, the
+<a href="https://www.wch-ic.com/products/CH559.html">CH559</a> has LQFP-48 for about $1.5,
+with 60KB flash and 6KB XRAM).</p>
+<p>Since smart-keymap is written in Rust, <a href="https://doc.rust-lang.org/nightly/rustc/platform-support.html">it can run on targets that Rust
+supports</a>.</p>
+<p>In my case, I care about CH32X and CH58x:</p>
+<h3 id="mcus-ch32x">MCUs: CH32X</h3>
+<p><a href="https://www.wch-ic.com/products/CH32X035.html">WCH’s CH32X</a> MCUs are about as
+cheap as the CH552, but have a more powerful processor.</p>
+<p>CH32X in the TSSOP-20 package costs around $0.45, its LQFP-48 package costs
+0.75.<br />
+The MCU has 62KB flash, 20KB SRAM.</p>
+<p>The CH32X is just as simple to use in PCBs as the CH55x is.</p>
+<p>The CH32X runs risc-v, and <a href="https://github.com/ch32-rs/ch32-hal/">can run Rust
+firmware</a>.</p>
+<h3 id="mcus-ch58x">MCUs: CH58X</h3>
+<p><a href="https://www.wch-ic.com/products/CH583.html">WCH’s CH58x</a> is notable for being
+relatively a BLE-capable MCU that’s relatively cheap.</p>
+<p>e.g. <a href="https://aliexpress.com/item/1005004784988010.html">WeAct Studio’s CH58x core
+board</a> costs about $2.5.</p>
+<p>It also <a href="https://github.com/ch32-rs/ch58x-hal/">can run Rust firmware</a>.</p>
+<h1 id="whats-been-done-so-far">What’s Been Done So Far</h1>
+<p>Quite a bit has been done! I’ve been using keyboards running smart-keymap-based
+firmware for quite some time.</p>
+<h2 id="smart-key-functionality">Smart Key functionality</h2>
+<p><a href="https://rgoulter.com/smart-keymap/features.html">A broad set of features have been
+implemented</a>.</p>
+<p>At the time of writing, the following have been implemented:</p>
+<ul>
+<li>basic keyboard keys,</li>
+<li>sticky modifier keys,</li>
+<li>caps word,</li>
+<li>tap hold keys,</li>
+<li>tap dance keys,</li>
+<li>layered keys,</li>
+<li>chorded keys.</li>
+</ul>
+<p>The implementation for tap-hold has some support for configuration, such as
+configuring the tap-hold resolution behaviour for key interrupts, or configuring
+a required idle time before a tap-hold key can resolve as its hold key.</p>
+<p>(Tap-hold was surprisingly difficult to implement!)</p>
+<h2 id="example-firmware">Example Firmware</h2>
+<p>I’ve written some basic firmware for some of the different keyboards I’ve made:</p>
+<ul>
+<li>Using Rust’s <a href="https://rtic.rs/1/book/en/">RTIC</a>, firmware for <a href="https://github.com/rgoulter/smart-keymap/tree/master/rp2040-rtic-smart-keyboard">the
+RP2040</a>
+and
+<a href="https://github.com/rgoulter/smart-keymap/tree/master/stm32f4-rtic-smart-keyboard">STM32F4</a>.</li>
+<li>Using Rust’s <a href="https://embassy.dev">embassy</a>, firmware for
+<a href="https://github.com/rgoulter/smart-keymap/tree/master/stm32-embassy-smart-keyboard">STM32</a>.</li>
+<li>For the WCH MCUs, firmware which makes small changes to the HID keyboard
+examples from the C EVT code, for
+<a href="https://github.com/rgoulter/smart-keymap/tree/master/firmware/ch32x035-usb-device-compositekm-c">CH32X</a>
+and for
+<a href="https://github.com/rgoulter/smart-keymap/tree/master/firmware/ch58x-ble-hid-keyboard-c">CH58x</a>.</li>
+</ul>
+<p>The Rust implementations cover examples of col-to-row and direct pins matrices,
+as well as split keyboards (both full-duplex usart, and 1-wire half-duplex
+usart).</p>
+<h2 id="ch32x-pcbs">CH32X PCBs</h2>
+<p>Previously, I had designed a couple of keyboards which used the CH552 and fak firmware.</p>
+<p>The CH32X’s TSSOP-20 pinout isn’t compatible with CH552T, but porting a PCB from
+using CH552T to CH32X is nevertheless straightforward.</p>
+<p>I was able to port over
+<a href="https://github.com/rgoulter/keyboard-labs#ch32x-36-low-budget-36-key-split-keyboard-with-smt-components">CH32X-36</a>,
+and
+<a href="https://github.com/rgoulter/keyboard-labs?tab=readme-ov-file#ch32x-48-low-budget-pcba-in-bm40jj40-form-factor">CH32X-48</a>,
+as well as making use of the LQFP-48 CH32X to make the
+<a href="https://github.com/rgoulter/keyboard-labs?tab=readme-ov-file#ch32x-75-lpr-low-budget-pcba-with-low-profile-redragon-switches">CH32X-75</a>.</p>
+<p>If you’re interested in designing a keyboard with the CH32X, the kicad sources
+for these PCBs are available.</p>
+<h1 id="getting-started">Getting Started</h1>
+<p>If that sounds interesting enough to give a try, I’d recommend digging through
+the firmware code in the
+<a href="https://github.com/rgoulter/smart-keymap">smart-keymap</a> repository to figure
+out how you might adapt that to your own keyboard.</p>
+<p>If you happen to not have a suitable fancy custom keyboard, the
+<a href="https://github.com/rgoulter/keyboard-labs#pico42-simple-hand-solderable-pcb-in-bm40jj40-form-factor">Pico42</a>
+would be relatively easy to find the parts for &amp; solder. Or, the cost of getting
+the PCB fabricated with PCBA for the
+<a href="https://github.com/rgoulter/keyboard-labs/releases/tag/ch32x-48-rev2025.4">CH32X-48</a>
+is about $5 per PCB, before S&amp;H. (You’d only need to solder the switches, which
+is easy to do).</p>
+<p>If you’ve already written keyboard firmware that uses keyberon, <a href="https://rgoulter.com/smart-keymap/doc/keyberon_smart_keyboard/index.html#migrating-from-keyberon">I wrote some notes on how migrating from keyberon-based code</a>.</p>
+
+<hr />
+
+<div>
+    
+    
+    <a href="../../../blog/posts/programming/2024-07-06-debugging-kirei-with-uart.html" style="float:right; text-align: right;">Older post</a>
+    
+</div>
+<br style="clear: both;" />
+
+<hr />
+
+            </div>
+
+            <hr style="margin-bottom: 0px; border-top: 2px solid black;" />
+
+            <div id="footer" class="pull-right" style="padding-right: 10px;">
+                Site proudly generated by
+                <a href="http://jaspervdj.be/hakyll">Hakyll</a>
+            </div>
+        </div>
+
+        <script>
+            // The callbacks we wanna use
+            // Phone-home, telling Google Analytics various metrics/dimensions
+
+            // Use custom dimensions & metrics
+            var AnalyticDimensionReaderKind = 'dimension1';
+            var AnalyticMetricActiveTime      = 'metric1';
+            var AnalyticMetricLongestIdleTime = 'metric2';
+            var AnalyticMetricReadCount       = 'metric3';
+
+            var gaCallbacks = {
+                "scrollPercent": function(ms, perc) {
+                    if (perc > 85) {
+                        // EVENT: Page read
+                        ga('send', {
+                            hitType:       'event',
+                            eventCategory: 'Scrolling',
+                            eventAction:   'atBottom',
+                            eventValue:    String(ms)
+                        });
+                    }
+                },
+                "read": function(ms, ct, timeToReach) {
+                    // Use this to set DIMENSION
+                    // timeToReach < 5s ==> Skim (default = Visitor)
+                    if (timeToReach < 5 * 1000) {
+                        // dimension1 = ReaderKind
+                        ga('set', AnalyticDimensionReaderKind, "skimmer");
+                    }
+
+                    // timeToReach > 30s ==> Reader
+                    if (timeToReach > 30 * 1000) {
+                        // dimension1 = ReaderKind
+                        ga('set', AnalyticDimensionReaderKind, "reader");
+                    }
+
+                    // EVENT: Page read
+                    ga('send', {
+                        hitType:       'event',
+                        eventCategory: 'Reading',
+                        eventAction:   'read',
+                        eventValue:    String(timeToReach)
+                    });
+
+                    // METRIC
+                    ga('set', AnalyticMetricReadCount, String(ct));
+                },
+                "initialIdle": function(ms) {
+                    // EVENT: Started Reading
+                    ga('send', {
+                        hitType:       'event',
+                        eventCategory: 'Scrolling',
+                        eventAction:   'begun',
+                        eventValue:    String(ms)
+                    });
+                },
+                "timeSpent": function(total, active, curIdle, initIdle, longestIdle) {
+                    // Update METRIC(S)?
+                    ga('set', AnalyticMetricActiveTime, String(active));
+                    ga('set', AnalyticMetricLongestIdleTime, String(longestIdle));
+                },
+                "idle": function(ms) {
+                },
+                "longestIdle": function(ms) {
+                }
+            }
+
+            window.onload = function() {
+                myAnalyticsInit(gaCallbacks);
+
+                //
+                // Initial dimensions & metrics
+                //
+
+                ga('set', AnalyticMetricReadCount, String(0));
+
+                // EVENT: Page load
+                ga('send', {
+                    hitType:       'event',
+                    eventCategory: 'pageLoad',
+                    eventAction:   'begun',
+                    eventValue:    String(0)
+                });
+
+                // DIMENSION: visitor
+                ga('set', AnalyticDimensionReaderKind, "visitor");
+            }
+        </script>
+    </body>
+</html>
