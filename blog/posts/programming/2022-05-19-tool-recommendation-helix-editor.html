@@ -181,18 +181,10 @@ a buffer. (Whereas, vim has netrw, and Emacs has dired).</p>
 <p>Overall, Helix’s keybindings seem consistent and well thought out.</p>
 <p>e.g. my current “rosetta stone” is:</p>
 <table>
-<colgroup>
-<col style="width: 11%" />
-<col style="width: 13%" />
-<col style="width: 13%" />
-<col style="width: 9%" />
-<col style="width: 51%" />
-</colgroup>
 <thead>
 <tr class="header">
 <th>vim mode</th>
 <th>vim</th>
-<th>helix mode</th>
 <th>helix</th>
 <th>note</th>
 </tr>
@@ -201,124 +193,106 @@ a buffer. (Whereas, vim has netrw, and Emacs has dired).</p>
 <tr class="odd">
 <td></td>
 <td>0</td>
-<td></td>
 <td>gh</td>
 <td></td>
 </tr>
 <tr class="even">
 <td></td>
 <td>^</td>
-<td></td>
 <td>gs</td>
 <td></td>
 </tr>
 <tr class="odd">
 <td></td>
 <td>$</td>
-<td></td>
 <td>gl</td>
 <td></td>
 </tr>
 <tr class="even">
 <td></td>
 <td>gq</td>
-<td></td>
 <td>=</td>
 <td>format. TBI in helix. Vim’s = is ‘indent’.</td>
 </tr>
 <tr class="odd">
 <td></td>
 <td>C-v i</td>
-<td></td>
 <td>C i</td>
 <td>Or Alt-s to split selection on newline.</td>
 </tr>
 <tr class="even">
 <td></td>
 <td>C</td>
-<td></td>
 <td>v gl c</td>
 <td></td>
 </tr>
 <tr class="odd">
 <td></td>
 <td>x</td>
-<td></td>
 <td>;d</td>
 <td></td>
 </tr>
 <tr class="even">
 <td></td>
 <td>V</td>
-<td></td>
 <td>X</td>
 <td></td>
 </tr>
 <tr class="odd">
 <td></td>
 <td>*</td>
-<td></td>
 <td>*n</td>
 <td></td>
 </tr>
 <tr class="even">
 <td></td>
 <td>G</td>
-<td></td>
 <td>ge</td>
 <td></td>
 </tr>
 <tr class="odd">
 <td></td>
 <td>:bprev, [b</td>
-<td></td>
 <td>gp</td>
 <td></td>
 </tr>
 <tr class="even">
 <td></td>
 <td>:bnext, ]b</td>
-<td></td>
 <td>gn</td>
 <td></td>
 </tr>
 <tr class="odd">
 <td></td>
 <td>`.</td>
-<td></td>
 <td>g.</td>
 <td></td>
 </tr>
 <tr class="even">
 <td></td>
 <td>H</td>
-<td></td>
 <td>gt</td>
 <td></td>
 </tr>
 <tr class="odd">
 <td></td>
 <td>M</td>
-<td></td>
 <td>gc</td>
 <td></td>
 </tr>
 <tr class="even">
 <td></td>
 <td>L</td>
-<td></td>
 <td>gb</td>
 <td></td>
 </tr>
 <tr class="odd">
 <td></td>
 <td>C-r</td>
-<td></td>
 <td>U</td>
 <td>redo</td>
 </tr>
 <tr class="even">
-<td></td>
 <td></td>
 <td></td>
 <td>ga</td>
@@ -327,21 +301,18 @@ a buffer. (Whereas, vim has netrw, and Emacs has dired).</p>
 <tr class="odd">
 <td></td>
 <td></td>
-<td></td>
 <td><SPC>R</td>
 <td>replace selection with clipboard</td>
 </tr>
 <tr class="even">
 <td></td>
 <td>%</td>
-<td></td>
 <td>mm</td>
 <td></td>
 </tr>
 <tr class="odd">
 <td></td>
 <td>ggVG</td>
-<td></td>
 <td>%</td>
 <td>select entire file</td>
 </tr>
@@ -350,19 +321,16 @@ a buffer. (Whereas, vim has netrw, and Emacs has dired).</p>
 <td>,</td>
 <td></td>
 <td></td>
-<td></td>
 </tr>
 <tr class="odd">
 <td></td>
 <td>;</td>
-<td></td>
 <td>Alt-.</td>
 <td></td>
 </tr>
 <tr class="even">
 <td>visual</td>
 <td>o</td>
-<td></td>
 <td>Alt-;</td>
 <td></td>
 </tr>
@@ -370,41 +338,41 @@ a buffer. (Whereas, vim has netrw, and Emacs has dired).</p>
 <td></td>
 <td>(/)</td>
 <td></td>
-<td></td>
 <td>left up to tree-sitter?</td>
 </tr>
 <tr class="even">
 <td></td>
 <td>{/}</td>
 <td></td>
-<td></td>
 <td>left up to tree-sitter?</td>
 </tr>
 <tr class="odd">
 <td></td>
 <td>gc</td>
-<td></td>
 <td>Ctrl-c</td>
 <td>Evil comment</td>
 </tr>
 <tr class="even">
 <td></td>
 <td>~</td>
-<td></td>
 <td>~</td>
 <td>(same in both) toggle case</td>
 </tr>
 <tr class="odd">
 <td></td>
 <td>gu</td>
-<td></td>
-<td><code>| to lowerlase                               | |          | gU         |            | Alt+</code></td>
-<td>to uppercase</td>
+<td>`</td>
+<td>to lowerlase</td>
 </tr>
 <tr class="even">
 <td></td>
-<td>vi”</td>
+<td>gU</td>
+<td>Alt+`</td>
+<td>to uppercase</td>
+</tr>
+<tr class="odd">
 <td></td>
+<td>vi”</td>
 <td>vmi”</td>
 <td>prefix sequence with <code>m</code> for things.</td>
 </tr>
