@@ -157,8 +157,8 @@ intuition.</p>
 has some nice diagrams.</p>
 <p>This itself should still be relatively straightforward, comparing with how SSH
 keys get used with git forges like GitHub, and with SSHing into servers:</p>
-<div style="text-align: center;">
-<p><img src="../../../blog/images/gpg/key_generation.png" /></p>
+<div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 1.5rem;">
+<img src="../../../blog/images/gpg/key_generation.png" class="img-responsive" />
 </div>
 <ul>
 <li><p>You have a key pair with a private key and public key,</p></li>
@@ -171,9 +171,8 @@ which matches the public keys will be granted access.</li>
 </ul></li>
 </ul>
 <p>So it makes sense: Encrypting;</p>
-<div style="text-align: center;">
-<p><img src="../../../blog/images/gpg/encrypt_document.png" />
-<img src="../../../blog/images/gpg/decrypt_document.png" /></p>
+<div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 1.5rem;">
+<img src="../../../blog/images/gpg/encrypt_document.png" class="img-responsive" /> <img src="../../../blog/images/gpg/decrypt_document.png" class="img-responsive" />
 </div>
 <ul>
 <li><p>You encrypt something for someone else using their public key.</p>
@@ -183,9 +182,8 @@ which matches the public keys will be granted access.</li>
 </ul></li>
 </ul>
 <p>Or signing:</p>
-<div style="text-align: center;">
-<p><img src="../../../blog/images/gpg/sign_document.png" />
-<img src="../../../blog/images/gpg/verify_signature.png" /></p>
+<div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 1.5rem;">
+<img src="../../../blog/images/gpg/sign_document.png" class="img-responsive" /> <img src="../../../blog/images/gpg/verify_signature.png" class="img-responsive" />
 </div>
 <ul>
 <li><p>You sign something with your private key.</p>
@@ -376,31 +374,29 @@ gpg: 2 good signatures
 <p>Going back over the rote commands again, now with a diagrams to illustrate
 subkeys at work:</p>
 <h3 id="key-generation">Key Generation</h3>
-<div style="text-align: center;">
-<p><img src="../../../blog/images/gpg/gpg_key_generation.png" /></p>
+<div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 1.5rem;">
+<img src="../../../blog/images/gpg/gpg_key_generation.png" class="img-responsive" />
 </div>
 <p>could be done by invoking a command like:</p>
 <pre><code>gpg --quick-generate-key &quot;Richard Goulter (NixOS Desktop) &lt;richard.goulter@rgoulter.com&gt;&quot;</code></pre>
 <h3 id="export-public-key">Export Public Key</h3>
 <p>Exporting the key to copy the public part to GitHub or whatever:</p>
-<div style="text-align: center;">
-<p><img src="../../../blog/images/gpg/gpg_export_key.png" /></p>
+<div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 1.5rem;">
+<img src="../../../blog/images/gpg/gpg_export_key.png" class="img-responsive" />
 </div>
 <p>could be done by invoking a command like:</p>
 <pre><code>gpg --export --armor &quot;Richard Goulter (NixOS Desktop)&quot;</code></pre>
 <h3 id="encryptingdecrypting-a-message">Encrypting/Decrypting a Message</h3>
-<div style="text-align: center;">
-<p><img src="../../../blog/images/gpg/gpg_encrypt_document.png" />
-<img src="../../../blog/images/gpg/gpg_decrypt_document.png" /></p>
+<div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 1.5rem;">
+<img src="../../../blog/images/gpg/gpg_encrypt_document.png" class="img-responsive" /> <img src="../../../blog/images/gpg/gpg_decrypt_document.png" class="img-responsive" />
 </div>
 <p>could be done by invoking a command like:</p>
 <pre><code>gpg --encrypt --recipient &quot;My Colleague&quot; document.txt</code></pre>
 <p>and the recipient could decrypt it with:</p>
 <pre><code>gpg --decrypt document.txt.gpg</code></pre>
 <h3 id="signing">Signing</h3>
-<div style="text-align: center;">
-<p><img src="../../../blog/images/gpg/gpg_sign_document.png" />
-<img src="../../../blog/images/gpg/gpg_verify_signature.png" /></p>
+<div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 1.5rem;">
+<img src="../../../blog/images/gpg/gpg_sign_document.png" class="img-responsive" /> <img src="../../../blog/images/gpg/gpg_verify_signature.png" class="img-responsive" />
 </div>
 <p>could be done by invoking a command like:</p>
 <pre><code>gpg --clearsign file.txt</code></pre>
@@ -429,8 +425,8 @@ the <code>SSH_AUTH_SOCK</code> and <code>SSH_AGENT_PID</code> to GPG.</p></li>
 <h2 id="visualisation-of-the-offline-master-key-setup">Visualisation of the Offline Master Key Setup</h2>
 <p>With the above in mind, a summary of the result of these tutorials for setting
 up master keys could be visualised as follows:</p>
-<div style="text-align: center;">
-<p><img src="../../../blog/images/gpg/gpg_offline_master_key.png" /></p>
+<div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 1.5rem;">
+<img src="../../../blog/images/gpg/gpg_offline_master_key.png" class="img-responsive" />
 </div>
 <p>Which seems less complex than all the confusion I had over it made it out to be.</p>
 <p>As the Debian wiki article pages discuss, because the private master key is used
@@ -439,8 +435,8 @@ other subkeys.</p>
 <h2 id="yubikey-as-a-gpg-smart-card">Yubikey as a GPG Smart Card</h2>
 <p>Yubikeys can then allow a nicer User Experience for using
 GPG keys. e.g. the Yubikey supports 3 slots for private keys: for signing, encryption, or authentication.</p>
-<div style="text-align: center;">
-<p><img src="../../../blog/images/gpg/gpg_smart_card_slots.png" /></p>
+<div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 1.5rem;">
+<img src="../../../blog/images/gpg/gpg_smart_card_slots.png" class="img-responsive" />
 </div>
 <p>e.g. <a href="https://developers.yubico.com/PGP/PGP_Walk-Through.html">Yubico’s PGP walkthrough</a>.</p>
 
