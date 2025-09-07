@@ -1,0 +1,588 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Factorio Space Age - Richard Goulter's Blog</title>
+
+        <!-- My (Old) CSS theme -->
+        <link rel="stylesheet" type="text/css" href="../../../css/default.css" />
+
+        <!--
+            jQuery & jQueryUI
+        -->
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css" />
+
+        <!--
+            Pandoc Style CSS
+            (for syntax highlighted snippets)
+        -->
+        <link rel="stylesheet" type="text/css" href="../../../css/syntax.css" />
+
+        <!--
+            Bootstrap
+        -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+        <style>
+            /*
+             * Bootstrap defines blockquote as 17px,
+             * so it looks stupidly large in my blogposts. */
+            blockquote {
+                font-size: 14px;
+            }
+        </style>
+
+        <!--
+            Waypoints, and Waypoints-Sticky,
+            so we can do this:
+            http://imakewebthings.com/waypoints/shortcuts/sticky-elements/
+        -->
+        <script src="../../../js/jquery.waypoints.min.js"></script>
+        <script src="../../../js/sticky.min.js"></script>
+
+        <!-- My analytics stuff -->
+        <script src="../../../js/my_analytics.js"></script>
+        <script src="../../../js/my_analytics_debug.js"></script>
+
+        <!--
+            TOCify
+        -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js"></script>
+
+        <!--
+            Patched TOCify css file.
+            (Don't want fixed `.tocify`).
+        -->
+        <link rel="stylesheet" type="text/css" href="../../../css/jquery.tocify.css" />
+
+        <style>
+        .navbar {
+            margin-bottom: 0px;
+        }
+
+        .banner-image {
+            width:100%;
+        }
+
+        .banner {
+            margin-left: 0px;
+            margin-right: 0px;
+        }
+
+        body {
+            background-color: #e2e2e2;
+        }
+
+        #page {
+            padding-left:0;
+            padding-right:0;
+            background-color: #ffffff;
+        }
+        </style>
+
+        <!-- Google Analytics -->
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-H13NWYDX0G"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'G-H13NWYDX0G');
+        </script>
+    </head>
+    <body>
+        <div id="page" class="container">
+            <!-- This, with no padding on left/right -->
+            <div class="banner">
+                <nav class="navbar navbar-default">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+
+            <!-- The Hamburger -->
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../../../">Richard Goulter's Blog</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="../../../">Home</a></li>
+            <li><a href="../../../blog/yi.html">Yi</a></li>
+            <li><a href="../../../blog/emacs.html">Emacs</a></li>
+            <li><a href="../../../blog/what-i-wish-i-knew-when-i-started-using-nix.html">Nixpkgs</a></li>
+            <li><a href="../../../blog/archive.html">Archive</a></li>
+        </ul>
+    </div>
+</nav>
+
+            </div>
+
+            <hr style="margin: 0px; border-top: 5px solid black;" />
+
+            <div id="content" class="container">
+                <h1>Factorio Space Age</h1>
+                <div class="info">
+    Posted on July 21, 2025
+    
+        by Richard Goulter
+    <br />
+    
+    Tags: 
+    
+</div>
+
+<p>I completed a playthrough of Factorio Space Age. Here are my thoughts on it:</p>
+<p>Factorio Space Age is an expansion-pack for Factorio.</p>
+<p>Factorio is a game which involves constructing automated systems which mine
+resources, and move/assemble these resources until ultimately constructing a
+rocket.</p>
+<p>Factorio stimulates the same creativity that programming or other engineering involves.<br />
+It’s an enthralling game to play.</p>
+<p>The Space Age expansion provides more content for the base game. The game adds
+different planets on which to build factories, as well as interplanetary travel.
+– Rather than building a rocket to win the game, you build a rocket to ferry
+you (or items) to a spaceship. You build up the systems on these spaceships, and
+have these spaceships take you (or items) to other planets. You build up more
+factories on these other planets. The goal of the game in Space Age is to have a
+sufficiently powerful spaceship which reaches the Solar System Edge.</p>
+<p>Each new environment (space, and each of the new planets) offers a twist to the Factorio formula.</p>
+<p>“First time as a scientist, second time as an engineer, third time as a
+technician.” – The experience with Space Age is like playing Factorio
+for the first time, for another few times.</p>
+<h2 id="the-factorio-formula-and-the-twists">The Factorio Formula, and the Twists</h2>
+<p>The planet you start out on plays out the same as a typical Factorio playthrough
+does. – Though, since launching rockets is a fundamental aspect of Space Age,
+launching rockets takes significantly fewer resources than it did in vanilla
+gameplay.<br />
+i.e.: The formula remains the same: your factory gathers inputs from ore patches
+(iron, copper, stone, coal, and later, uranium), as well as from fluids (water,
+crude oil), and processes these into increasingly complex intermediate products
+that are used to assemble items.</p>
+<p>Space Age’s new environments twist this formula a bit:</p>
+<p>In Space, you build up spaceships (called “space platforms”). The space
+platforms are loosely similar to Factorio’s trains: trains serve as a logistics
+method for transporting items between stations; the space platforms analogously
+transport items on fixed routes between planets.<br />
+When traveling through space, the space platforms will need to shoot down
+asteroids in their path. (This is the primary obstacle to reaching the game’s
+goal: at each stage, the asteroids in space become tougher, and practically
+require having unlocked another tier of automated weapons).<br />
+The space platforms are constructed through sending items up from the planet.
+(And the platforms can send items down to a planet).<br />
+The space platform’s systems require gathering resources by collecting chunks of
+asteroids, and processing these into fuel for the spaceship’s thrusters (as
+well as into ammunition, etc.).</p>
+<p>That’s already “Factorio, but different”: each platform needs to have the
+systems to sustain itself: to build up enough fuel to get places, to have enough
+ammunition to protect itself from asteroids, to have enough power to run those
+systems.</p>
+<p>The new planets vary the formula further. Space Age has four new planets; these
+can be grouped into the three new inner planets, and an ‘outer planet’.</p>
+<p>The inner planets can each be bootstrapped just with the resources you start
+with on that planet. – I initially thought a Landing Pad building was required
+for the space platforms to be able to send items down to the planet. But, it’s
+possible to just import the items you need from another planet first;
+bootstrapping the factory on each planet from scratch is not necessary!</p>
+<p>The new inner planets are: Vulcanus (the lava one), Gleba (the biological one), Fulgora (the lightning one).</p>
+<p>I started with Vulcanus.<br />
+Compared to the base game, the tech tree has been shuffled around a bit. Of
+course, some new toys are locked behind the technologies researched with science
+from each of these new planets. – But, Vulcanus has artillery and cliff
+explosives. (It’s somewhat frustrating that these can’t be unlocked on the
+starting planet!).</p>
+<p>Vulcanus does not twist the Factorio gameplay too much compared to vanilla.<br />
+With Vulcanus, rather than mining iron and copper ore, instead you forge iron
+and copper from lava. Rather than belts of iron and copper ore, you make use of
+molten iron and copper.<br />
+The oil-based product chain is also varied. Rather than processing crude oil,
+Vulcanus flips the production chain: you start with what’s typically and end
+product: sulfuric acid. The production chain for other oil-based products has a
+different start than on the starting planet.</p>
+<p>Gleba, the biological one, I’ve seen more mixed opinions about.<br />
+It’s my understanding that the planet’s difficulty has been softened since the
+initial release.<br />
+I played on a ‘railworld’ difficulty. (Enemies didn’t expand their bases after I
+destroyed their bases). With that, and the difficulty nerfing, I never faced any
+pushback from the Gleba enemies.<br />
+What I <em>did</em> face was significant confusion trying to figure Gleba out!<br />
+On Gleba, rather than mining from ore patches, all the resources come from
+growing and processing fruit.<br />
+Additionally, the assembly machines which process the fruit take in nutrients as
+fuel (i.e. they’re not powered by electricity).<br />
+What makes this more complicated is that each of these items (the fruit, the
+processed fruit, the nutrients) each spoil after some time. e.g. if a nutrient
+is not used within a couple of minutes, it becomes spoilage, which can’t be
+used. – Because spoilage can’t be used, your systems have to be able to deal
+with these spoilable inputs.<br />
+Somewhat dastardly, the Gleba science pack requires an alien egg as an input; if
+the alien egg ‘spoils’, it hatches into an enemy unit.<br />
+The Gleba science pack itself also spoils(!!).</p>
+<p>It took me a long time to figure Gleba out.<br />
+Ultimately, having just enough of a setup to construct <em>just</em> the Gleba science
+is itself quite straightforward.</p>
+<p>Fulgora, the lightning planet, is probably the most interesting new planet.<br />
+Rather than building up new items from mined ores, with Fulgora, you mine scrap
+items, and recycle the scrap down to intermediate products.<br />
+This results in a funny twist wherein the blue circuit board, which is typically
+a late-game intermediate product that’s complex to assemble, becomes relatively
+common on Fulgora; whereas the green circuit board, which is typically an early
+game intermediate product, becomes relatively difficult/expensive to acquire on
+Fulgora.<br />
+– But also.. because you’ll end up with an excess of items you don’t use from
+the recycled scrap, you’ll naturally end up having to dispose of these excess items
+in order to avoid blocking the factory’s production. This emphasises the <em>flow</em> of
+the factory, and emphasises <em>streams</em> of items.</p>
+<p>The final planet, Aquilo, is cold.<br />
+Unlike the other planets, Aquilo does not support bootstrapping a factory just
+from resources available on the planet. It requires using the space platforms to
+import items.<br />
+Aquilo’s gimmick is that, in addition to power, each building needs to be
+adjacent to a heated pipe. This puts <em>some</em> constraint on how the factory is
+arranged.<br />
+It also makes getting started on Aquilo really interesting: solar power is very
+limited on Aquilo, and it requires power to get water, and other power sources
+require water to provide power.</p>
+<h2 id="constrained-land">Constrained Land</h2>
+<p>A common denominator across these new enviroments is that the area you have to
+work with is relatively constrained.</p>
+<p>On the starting planet, cliffs restrict where you can build. (Cliffs can be
+cleared using cliff explosives, which require Vulcanus science packs to unlock).<br />
+Vulcanus is limited by its cliffs, and lava. (Lava can be paved over with a
+late-game item).<br />
+Gleba’s land is swampy, and so often requires landfill. On the other hand, the
+lack of cliffs/oceans means no chokepoints to serve as a defense.<br />
+Fulgora’s land is limited to islands. Each island needs to be self-sufficient in
+terms of power.<br />
+Aquilo’s land is extremely limited.</p>
+<p>I wouldn’t overstate this point. It’s not <em>too</em> complicated.<br />
+But.<br />
+Common advice to new players is to not condense the factory too much. By leaving
+plenty of space between buildings in your factory, you’ve got room to make
+adjustments and refinements to the factory. Whereas, a dense, compact factory
+risks being difficult to make changes to.</p>
+<h2 id="combat">Combat</h2>
+<p>Factorio is not a combat-oriented game.</p>
+<p>In the base game, combat plays a role as you expand your factory.<br />
+But by mid/late game, you’ve likely automated your factory’s defenses, turning
+defense into a logistic problem. The artillery unlocked in late game practically
+eliminates challenge from attacking (turning attack into a logistic problem).<br />
+– That is, it’s not like combat in Age of Empires or whatever, where combat is
+a strategic aspect of your macroeconomic considerations.</p>
+<p>With the new planets:
+- In space, your platforms <em>must</em> shoot down enemy asteroids.
+- Gleba’s enemies most closely resemble the enemies on the starting planet.
+They’ll attack your factory if you pollute too much, as such.
+- Vulcanus’s enemies are big and powerful, like mini-bosses. On Vulcanus, these
+mini-bosses each guard a region. Once killed, you’re able to build in that
+territory.
+- Fulgora doesn’t have any combat/enemies.
+- Aquilo doesn’t have any either.</p>
+<h2 id="new-toys">New Toys</h2>
+<p>In the base game, you unlock more powerful buildings which help make the game
+easier.<br />
+You unlock higher tiers of belts or assembling machines, which require more
+complex intermediate products to build, but provide more useful buildings.<br />
+e.g. At the start, your only option for power is burning coal to power steam
+engines. Later in the game, you unlock solar power or nuclear power.</p>
+<p>The Space Age expansion similarly provides more powerful items which make the
+game easier.</p>
+<p>Each of the inner planets has its own unique buildings which work well with
+other planets.<br />
+e.g. Vulcanus unlocks a big mining drill (which is a more efficient machine
+compared to the electric mining drill), and a foundry (which provides a powerful
+way to deal with smelting).</p>
+<p>Probably the coolest new piece of equipment is the mech armour.<br />
+In the base game, you upgrade your armour to the point where you can equip your
+armour with a power generator, shields, and roboports.<br />
+Mech Armour takes this one step further, giving you a jetpack. The jetpack has
+two big benefits: it lets you fly over all terrain (rather than being hindered
+by cliffs, or lava, or buildings), and it automatically flies if a train were to
+collide with you.<br />
+In the base game, trains were pretty much the deadliest threat to the character
+in the late game. So, having the armour as a way to avoid that is very cool.</p>
+<p>I liked the new military items.<br />
+You get to unlock a rocket turret, as well as a tesla turret, and a railgun
+turret.<br />
+For weapons the player gets to wield, there’s a tesla gun, and a rail gun.<br />
+The rail gun is a very fun late-game unlock which is <em>very powerful</em> against
+Vulcanus’ demolisher enemies.<br />
+The tesla gun is decidedly ‘meh’. It might be very good with some more bonus
+damage technologies researched.</p>
+<p>Late game also offers a new power generation method: fusion power.<br />
+Factorio’s nuclear power is already strong as-is.<br />
+Fusion Power is an even better power method. Nuclear power requires water, which
+is a limited resource in some Factorio settings. Fusion power’s only input
+requirements are its fuel cells.</p>
+<p>Late game (into post game) also allows for capturing the enemy nests &amp; using
+these. But, this wasn’t a system I made use of in game.</p>
+<h2 id="quality">Quality</h2>
+<p>The Space Age expansion also includes a “quality” mechanic. (“uncommon”, “rare”,
+“epic”, “legendary”).<br />
+Items can have a higher quality, which makes the item better. e.g. “rare
+ammunition” will do more damage than normal ammunition.</p>
+<p>I’ve seen on social media, this is not as loved as other parts of Factorio.<br />
+I’ve also seen people point out there are currently ways to cheese the quality
+mechanic; getting higher quality items in ways that’s obviously way easier than
+what’s intended.</p>
+<p>In my playthrough, I made slight use of the quality mechanic.<br />
+On Fulgora, land is somewhat limited, and so it’s useful to be able to have
+higher-quality buildings within the same restricted amount of land.</p>
+<p>Generally, the quality mechanic is not “over powered”. It’s not exciting.</p>
+<p>To me the biggest problem is that dealing with the quality is a big increase in
+complexity.</p>
+<p>To construct higher quality items, either the item must be constructed with
+higher quality inputs, and/or the assembly machine constructing it must be
+equipped with quality-enhancing modules.<br />
+Inputs to an assembly machine must all be of the same quality tier. You can make
+a rare item with rare-quality inputs; but, you can’t make an item with some
+normal inputs, and some rare inputs.<br />
+Quality-enhancing modules add non-determinism to the assembly machine’s output:
+there’s a chance that the item is made with higher quality.</p>
+<p>This results in a significant increase in complexity in factory layout.<br />
+Because qualities can’t be mixed in input, your factory needs to consider five
+times as many kinds of resources.</p>
+<p>Unlike other systems in factorio (the logistic network, circuit network, trains,
+space), quality does not feel exciting to design a factory for.<br />
+Unlike other new toys (rail gun, fusion power), quality doesn’t feel
+overpowered. (Although, well, I didn’t build many high quality items).<br />
+Unlike higher tier items in factorio, I don’t feel it’s worth going for quality
+items.</p>
+<p>Of course, I could be mistaken about the quality system.<br />
+Having even a marginal increase in value for buildings in a constrained space
+could be worth the increase in resources to build. (e.g. That’s the rationale
+behind the faster belts).<br />
+And, it does offer a nice post-game challenge for players who find that
+appealing.<br />
+But, in my playthrough, I wasn’t interested.</p>
+<h2 id="space-age-has-a-more-interesting-systems-sandbox">Space Age Has a More Interesting Systems Sandbox</h2>
+<p>As with the vanilla game, in Space Age, the challenges are intrinsic to the
+gameplay.<br />
+The game has a bunch of systems you use to build up a factory.</p>
+<p>The goal is somewhat arbitrary.<br />
+The goal in the vanilla game is “launch one rocket”. A common post-game measure
+was to see how much science-per-minute a factory could produce.<br />
+In the Space Age expansion: reach the Solar System Edge.</p>
+<p>I reckon the new planets that the Space Age expansion results in a more
+interesting post-game sandbox.</p>
+<p>Since each of the planets plays out slightly differently, there are different
+advantages and disadvantages to producing items on each of them. – Perhaps the
+player can aim for efficient trading by having each planet produce and export
+what that planet is most efficient at, and importing everything else.</p>
+<p>Fusion power is powerful. In my playthrough, my factory wasn’t large enough to
+require anything more than the simplest fusion reactor setup. In the post-game,
+it’s probably worth making use of fusion power everywhere.</p>
+<p>The quality system provides an added challenge, and a concrete goal to reach
+towards. The player can aim to scale up their factory by upgrading the
+buildings to higher tiers.</p>
+<h2 id="highlight-rescuing-a-spaceship-from-a-failure-cascade">Highlight: Rescuing a Spaceship from a Failure Cascade</h2>
+<p>One highlight of my playthrough was having to rescue a spaceship in Aquilo
+orbit:</p>
+<p>I had a space platform that lingered in Aquilo orbit.<br />
+Aquilo is the planet beyond the “inner planets”; the ultimate planet before the
+journey to solar system edge.</p>
+<p>In order to get to Aquio from the inner planets, your ship has to be quite
+capable. It practically has to be equipped with rocket turrets, in addition to
+the minigun turrets.<br />
+And, of course, these turrets need to be supplied with ammo.</p>
+<p>In designing the ship, I went with a simple modular design:<br />
+The outer shell of the spaceship was a belt with ammunition, as well as a belt
+of collected asteroid chunks.<br />
+Within this shell, was a simple factory: modular units with a common bus of
+input resources.</p>
+<p>The design worked well enough so long as it got a balanced variety of asteroid
+chunks. (i.e. all of metal, ice, and carbon).</p>
+<p>I didn’t realise that Aquilo’s asteroids are 80% ice.<br />
+This resulted in a case my design hadn’t considered; it was eventually starved
+of metal, and so was unable to craft bullets.</p>
+<p>(I thought I’d set up the space ship so that if it ran low on ammo, it’d make a
+journey back to the starting planet, where it’s safe even without ammo. Somehow,
+I hadn’t).</p>
+<p>I was in a situation where the ship was beginning to run out of ammo.<br />
+But, it’s also in Aquilo orbit, where it’s not safe to be out of ammo (&amp; also
+requires some hefty spaceships in order to get to Aquilo).</p>
+<p>It’s <em>usually</em> possible to play Factorio very conservatively in order to avoid
+unexpected problems.<br />
+Most of the time, the pressure is “I want to alleviate bottlenecks”.</p>
+<p>This challenge required me to consider resources at my disposal. In the end, I
+mitigated this by:</p>
+<ul>
+<li><p>Shipping over some laser turrets to Aquilo (so that these could be delivered
+to the platform). Laser turrets consume a significant amount of electricity
+(&amp; are not very effective vs anything larger than tiny asteroids), but, I
+figured “anything is better than nothing”.</p></li>
+<li><p>Tried shipping up some more bullets; but, by the game’s design, this isn’t an
+effective solution.</p></li>
+<li><p>Reduced how many thrusters the spaceship used. Before, the spaceship had a
+full breadth of thrusters &amp; could go quite fast. But, if it goes slower, then
+(per the game’s design), it doesn’t need as high a rate of ammo.</p></li>
+<li><p>Bodged/reworked the spaceship’s factory setup of asteroid reprocessing. I was
+able to get it to a state where it was recovering and (slowly) building up its
+ammo stockpile.</p></li>
+</ul>
+<p>In the end, I was able to rescue the ship and get it back to the safe, starting
+planet.</p>
+<p>It wouldn’t have been the end of the game to have lost the spaceship.</p>
+<p>But, the challenge provoked some creative problem solving, and made me consider
+things I otherwise wouldn’t have.</p>
+<h2 id="what-i-liked">What I Liked</h2>
+<p>Railgun goes <em>thwip-pew</em>.</p>
+<p>I mean. Yeah. The overpowered mechanics are great to unlock.</p>
+<p>It’s tense the first time you have a spaceship travel to a new destination. –
+So, the game’s goal of “reach the Solar System Edge” really does make you feel
+like you’re testing a scrappy prototype of a ship.</p>
+<p>I really enjoyed how the Space Age expansion tinkers with the Factorio formula,
+which puts emphasis on different aspects of factory designs, challenging your
+mental models for how you’ve approached problems before.</p>
+<p>Despite how long the game takes to play, it was constantly engaging.</p>
+<h2 id="what-i-disliked">What I Disliked</h2>
+<p>Uhhh.</p>
+<p>I did watch Dosh’s video on Space Age before playing the game. In that, he said
+that it’s a shame that the factory on each planet didn’t need to be all that
+large in order to beat the game.<br />
+Space Age takes a long time to play. – In this sense, each new planet feels
+like a puzzle. You have to figure out <em>how</em> to set up the factory on each of
+the new planets; but, you don’t <em>need</em> to then iterate on your factory design so
+that it’s much better than your initial setup.<br />
+– By the time I reached the Solar System Edge, I hadn’t scaled up my science
+production beyond my initial setup. On most planets, I had only one
+science-producing assembler.</p>
+<p>On the other hand, I think the weapons generally feel under-powered without
+research bonuses.<br />
+In the base game, you have tiered levels of bullets. Red, yellow, and
+uranium…. (each gated behind tech). This feels like a nice way to solve the
+problem: if you want more powerful stuff, you need a better factory. Passive
+bonuses gated behind research <em>would</em> motivate a larger factory; but, so does
+“build higher tier items”.</p>
+<p>And I still think combat on the planets feels backwards.<br />
+The endgame planet has no combat; whereas the starting planet faces the most pressing combat.<br />
+I think an ideal progression might be the other way: starting out with no
+combat, and progressing to increasingly hostile environments.</p>
+<p>And of my playthrough, I think I missed out on the True Gleba Experience by
+going for railworld.<br />
+Because I played with the Railworld settings, enemies didn’t expand.<br />
+And so, enemies didn’t get close enough to my farms on Gleba in order to be
+triggered to attack.</p>
+
+<hr />
+
+<div>
+    
+    <a href="../../../blog/posts/games/2025-09-02-brothers-in-arms.html" style="float:left;">Newer post</a>
+    
+    
+    <a href="../../../blog/posts/programming/2025-05-19-example-rust-confusion-iterating-over-ref.html" style="float:right; text-align: right;">Older post</a>
+    
+</div>
+<br style="clear: both;" />
+
+<hr />
+
+            </div>
+
+            <hr style="margin-bottom: 0px; border-top: 2px solid black;" />
+
+            <div id="footer" class="pull-right" style="padding-right: 10px;">
+                Site proudly generated by
+                <a href="http://jaspervdj.be/hakyll">Hakyll</a>
+            </div>
+        </div>
+
+        <script>
+            // The callbacks we wanna use
+            // Phone-home, telling Google Analytics various metrics/dimensions
+
+            // Use custom dimensions & metrics
+            var AnalyticDimensionReaderKind = 'dimension1';
+            var AnalyticMetricActiveTime      = 'metric1';
+            var AnalyticMetricLongestIdleTime = 'metric2';
+            var AnalyticMetricReadCount       = 'metric3';
+
+            var gaCallbacks = {
+                "scrollPercent": function(ms, perc) {
+                    if (perc > 85) {
+                        // EVENT: Page read
+                        ga('send', {
+                            hitType:       'event',
+                            eventCategory: 'Scrolling',
+                            eventAction:   'atBottom',
+                            eventValue:    String(ms)
+                        });
+                    }
+                },
+                "read": function(ms, ct, timeToReach) {
+                    // Use this to set DIMENSION
+                    // timeToReach < 5s ==> Skim (default = Visitor)
+                    if (timeToReach < 5 * 1000) {
+                        // dimension1 = ReaderKind
+                        ga('set', AnalyticDimensionReaderKind, "skimmer");
+                    }
+
+                    // timeToReach > 30s ==> Reader
+                    if (timeToReach > 30 * 1000) {
+                        // dimension1 = ReaderKind
+                        ga('set', AnalyticDimensionReaderKind, "reader");
+                    }
+
+                    // EVENT: Page read
+                    ga('send', {
+                        hitType:       'event',
+                        eventCategory: 'Reading',
+                        eventAction:   'read',
+                        eventValue:    String(timeToReach)
+                    });
+
+                    // METRIC
+                    ga('set', AnalyticMetricReadCount, String(ct));
+                },
+                "initialIdle": function(ms) {
+                    // EVENT: Started Reading
+                    ga('send', {
+                        hitType:       'event',
+                        eventCategory: 'Scrolling',
+                        eventAction:   'begun',
+                        eventValue:    String(ms)
+                    });
+                },
+                "timeSpent": function(total, active, curIdle, initIdle, longestIdle) {
+                    // Update METRIC(S)?
+                    ga('set', AnalyticMetricActiveTime, String(active));
+                    ga('set', AnalyticMetricLongestIdleTime, String(longestIdle));
+                },
+                "idle": function(ms) {
+                },
+                "longestIdle": function(ms) {
+                }
+            }
+
+            window.onload = function() {
+                myAnalyticsInit(gaCallbacks);
+
+                //
+                // Initial dimensions & metrics
+                //
+
+                ga('set', AnalyticMetricReadCount, String(0));
+
+                // EVENT: Page load
+                ga('send', {
+                    hitType:       'event',
+                    eventCategory: 'pageLoad',
+                    eventAction:   'begun',
+                    eventValue:    String(0)
+                });
+
+                // DIMENSION: visitor
+                ga('set', AnalyticDimensionReaderKind, "visitor");
+            }
+        </script>
+    </body>
+</html>

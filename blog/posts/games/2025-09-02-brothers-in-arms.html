@@ -1,0 +1,360 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Brothers in Arms - Richard Goulter's Blog</title>
+
+        <!-- My (Old) CSS theme -->
+        <link rel="stylesheet" type="text/css" href="../../../css/default.css" />
+
+        <!--
+            jQuery & jQueryUI
+        -->
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css" />
+
+        <!--
+            Pandoc Style CSS
+            (for syntax highlighted snippets)
+        -->
+        <link rel="stylesheet" type="text/css" href="../../../css/syntax.css" />
+
+        <!--
+            Bootstrap
+        -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+        <style>
+            /*
+             * Bootstrap defines blockquote as 17px,
+             * so it looks stupidly large in my blogposts. */
+            blockquote {
+                font-size: 14px;
+            }
+        </style>
+
+        <!--
+            Waypoints, and Waypoints-Sticky,
+            so we can do this:
+            http://imakewebthings.com/waypoints/shortcuts/sticky-elements/
+        -->
+        <script src="../../../js/jquery.waypoints.min.js"></script>
+        <script src="../../../js/sticky.min.js"></script>
+
+        <!-- My analytics stuff -->
+        <script src="../../../js/my_analytics.js"></script>
+        <script src="../../../js/my_analytics_debug.js"></script>
+
+        <!--
+            TOCify
+        -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js"></script>
+
+        <!--
+            Patched TOCify css file.
+            (Don't want fixed `.tocify`).
+        -->
+        <link rel="stylesheet" type="text/css" href="../../../css/jquery.tocify.css" />
+
+        <style>
+        .navbar {
+            margin-bottom: 0px;
+        }
+
+        .banner-image {
+            width:100%;
+        }
+
+        .banner {
+            margin-left: 0px;
+            margin-right: 0px;
+        }
+
+        body {
+            background-color: #e2e2e2;
+        }
+
+        #page {
+            padding-left:0;
+            padding-right:0;
+            background-color: #ffffff;
+        }
+        </style>
+
+        <!-- Google Analytics -->
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-H13NWYDX0G"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'G-H13NWYDX0G');
+        </script>
+    </head>
+    <body>
+        <div id="page" class="container">
+            <!-- This, with no padding on left/right -->
+            <div class="banner">
+                <nav class="navbar navbar-default">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+
+            <!-- The Hamburger -->
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../../../">Richard Goulter's Blog</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="../../../">Home</a></li>
+            <li><a href="../../../blog/yi.html">Yi</a></li>
+            <li><a href="../../../blog/emacs.html">Emacs</a></li>
+            <li><a href="../../../blog/what-i-wish-i-knew-when-i-started-using-nix.html">Nixpkgs</a></li>
+            <li><a href="../../../blog/archive.html">Archive</a></li>
+        </ul>
+    </div>
+</nav>
+
+            </div>
+
+            <hr style="margin: 0px; border-top: 5px solid black;" />
+
+            <div id="content" class="container">
+                <h1>Brothers in Arms</h1>
+                <div class="info">
+    Posted on September  2, 2025
+    
+        by Richard Goulter
+    <br />
+    
+    Tags: 
+    
+</div>
+
+<p>I recently played through the “Brothers in Arms” videogame series.</p>
+<p>I played through the first game, “Brothers in Arms: Road to Hill 30” (which I hadn’t played before),
+and replayed through its two sequels,
+“Brothers in Arms: Earned in Blood” and “Brothers in Arms: Hell’s Highway”.</p>
+<p>If you’ve never come across these before, then the quickest way of describing them is they’re like if “Band of Brothers” was a videogame. – The game takes place during WW2, and follows a squad from the 101st airbourne division through the 1944 invasion of France.</p>
+<p>Gameplay-wise, it’s ostensibly a first-person shooter, but the game places significant emphasis on squad-based tactics.</p>
+<p>What sets the first two games of the “Brothers in Arms” series apart from other first person shooters is its grounded realism. – The YouTube channel <a href="https://www.youtube.com/watch?v=Pl_SP9WHOsg">Animarchy History points out</a>, the missions closely resemble the after action reports from the historical events.</p>
+<p>I really enjoyed the first two games, and I think the third one is comparatively trash. Here’s some elaboration:</p>
+<h1 id="brothers-in-arms-road-to-hill-30">Brothers in Arms: Road to Hill 30</h1>
+<p>BiA released in 2005.</p>
+<p>For a comparison of tone, Medal of Honor’s Allied Assault (and its expansion packs) released in 2002-2003; Pacific Assault in 2004.
+Call of Duty released in 2003.<br />
+Tone-wise, these other games are all <em>very</em> action based, where you’re <em>the</em> hero who saves the day: Allied Assault has you almost entirely operating solo against hundreds of enemies (and tanks); Pacific Assault has you, an infantry soldier, pilot a dive-bomber and destroy a carrier and its destroyer; Call of Duty’s climax has you in a car chase as stuka bombers come after you.<br />
+– Point is, these other games heavily put emphasis on spectacle and how “cool” things would be.</p>
+<p>BiA, in contrast, is heavily focused on squad-based tactics, with a sombre story.<br />
+The climax of the story isn’t an action-packed dash escaping dozens of bombers, but instead your squad defending the titular Hill 30.</p>
+<p>Two things stick out about BiA: its good story, and its distinct, generally good gameplay.</p>
+<p>The story opens in medias res. – Your squad is in the middle of fending off Germans, when the radioman, Leggett, breaks, and stands up clear in the open yelling “You fucking want me? Come take me! TAKE ME!” (and he’s then promptly blasted to bits).</p>
+<p>The story then goes back to the chaotic air drop on June 6th, and follows Sgt Baker through his tour of France.<br />
+The story is quite ‘emo’. Baker is an emotional character; throughout the story, several of his men die. He’s affected by it.<br />
+The game does a good job at showing off just how young these characters are. At the start of the game, they’re giddily talking about how they shot some Germans, and talking about who’s a better superhero (Batman or Superman). By the end, they’re focused on the task they have to do.<br />
+When the cutscenes show deaths, the game doesn’t shy away from showing the gore of mutilated bodies.</p>
+<p>And the gameplay: again, to put in contrast with Medal of Honor or Call of Duty: in those games, pretty much you’re the engine of progress. You’ve got a gun, there are enemies, you shoot the enemies before they can shoot you.</p>
+<p>At a glance of BiA’s gameplay, it might appear the same: it’s a WW2 first person shooter.<br />
+But, BiA puts emphasis on squad based tactics. The enemies will be behind cover, you order your squad behind cover. Shooting at the enemy suppresses them.<br />
+The level design generally encourages this formula: you use your squad (from cover) to suppress the enemy squad, and then you move around to an enemy’s flank, where you can shoot the enemy from a position where they aren’t behind cover.</p>
+<p>As an example of how BiA varies from the FPS genre: In a typical FPS game, when there’s a tank, you either have no control of it; or, you’re driving the tank directly. In BiA, when you get a tank, you order it about without directly controlling it. The player character is able to mount the tank and use the machine-gun mounted on its turret.</p>
+<p>In terms of things that aren’t great about the game?<br />
+Well. The game is quite jank.<br />
+In order to emphasise the squad-based tactics, the gunplay is quite bad. As intended, this discourages playing BiA as you would a typical FPS game. But, it also frustrates the player carrying out the flanking maneouver.<br />
+The AI behaviour is also … rough. The ultimate section of the game gives you two tanks as the squads you order about. The tanks’ path finding is quite terrible, which somewhat undermines an otherwise satisfying denouement.<br />
+The game is ‘hard’; but, some of the difficulty comes from being unfair. On the last level in particular, often you’ll be behind cover and <em>still</em> get take damage by enemies. When you try the same checkpoint over and over again, taking the same actions often leads to different outcomes. (Sometimes you take no damage, sometimes you take lots of damage).</p>
+<h1 id="brothers-in-arms-earned-in-blood">Brothers in Arms: Earned in Blood</h1>
+<p>Brothers in Arms: Earned in Blood was the first of the series that I played.</p>
+<p>EiB released just 7 months after BiA. It’s best thought of as an expansion pack.</p>
+<p>It’s a better game than BiA: it’s less unfair, its levels are more challenging, and it’s got some quality of life improvements.</p>
+<p>In terms of what’s improved about its gameplay:</p>
+<ul>
+<li><p>The game has a “tactical view” which shows a bird’s eye view of the battlefield, and where units are. This further encourages tactical play. BiA had this; EiB improves upon it by letting you look around more, as well as zoom in/out on the units.</p></li>
+<li><p>The game allows for infinite ammo for your weapons, by asking your squad mates for ammo. Practically, this encourages you to keep your squad mates alive, encourages you to use your ammo to suppress the enemy (rather than just reserving ammo for flanking) and reduces the pressure on racing through the game. (BiA isn’t <em>terrible</em> without this; but, EiB gives you less ammo to start with than BiA does).</p></li>
+<li><p>New enemy type: the enemy’s 88mm artillery installation provides a very challenging threat to face! The 88 artillery can wipe out your whole squad in one shot, and can severly damage allied tanks before the tank can even get close.</p></li>
+<li><p>New weapons: the game does have scoped FG42 weapons near the end. (Weapons and gunplay aren’t <em>really</em> the focus of BiA, though).</p></li>
+<li><p>The AI is improved; I didn’t notice any jank pathfinding issues.</p></li>
+<li><p>Better difficulty, less unfair: the things that made BiA hard have been smoothed out. (It’s much rarer to take damage while in cover or while getting to cover, gameplay is more consistent). The level design, while still emphasising squad-based tactics, has more challenging puzzles.</p></li>
+</ul>
+<p>I liked the story more.<br />
+The story follows Sgt. Hartsock, who we saw as a side character in the first game, as he provides after action reports to Brigadier General S.L.A. Marshall. The story overlaps with BiA; showing BiA’s climactic battle from another perspective, and some battles afterwards.<br />
+The story is less emo (Hartsock is not as senior as Baker, and has a more pragmatic view of the death of soldiers, even though he is still affected by their deaths).</p>
+<p>If you had to play only one game from this series, this would be it.</p>
+<h1 id="brothers-in-arms-hells-highway">Brothers in Arms: Hell’s Highway</h1>
+<p>Brothers in Arms: Hell’s Highway released in 2008.</p>
+<p>The game is generally well liked.<br />
+But, in my opinion, compared to EiB or BiA, it’s relatively awful.</p>
+<p>Broadly, the HH takes what’s good and distinct about BiA &amp; EiB,
+and replaces it with a more casual, generic, and terrible game.</p>
+<p>BiA and EiB had grounded stories with simple storytelling.<br />
+HH emphasises spectacle and cinematic shots, with a dramatic and busy story full of intrigue.</p>
+<p>BiA and EiB had gameplay with emphasised squad based tactics.<br />
+HH frequently has you going solo throughout the maps, and simplifies level design so as to not need the supression and flanking from the previous games.</p>
+<p>I did like some things about the game:</p>
+<p>One thing I recall from its story, from when I played it years ago, was a scene where your squad is clearing out a factory in an industrial part of the city. They enter an elevator, then say to each other something like “oh, shit; the Germans <em>know</em> we’ll be coming; we’ll be met with an ambush”. Then the doors open … and there’s not a welcome party. It’s a tense scene, realistic, grounded.</p>
+<p>In terms of things I liked about its gameplay:</p>
+<ul>
+<li><p>You get to control more types of squads. In BiA and EiB, you had a squad with rifles, and a squad with submachine guns. HH adds a squad with a machine gun, and a squad with a bazooka. The squad with the bazooka can be used to clear out certain kinds of enemies. – To an extent (and with potential), this should allow for interesting tactical puzzles: having to get your MG team into a good spot and then having it suppress the battlefield, or getting a bazooka team to a good spot to clear out a hostile fortification.</p></li>
+<li><p>The health system is very clearly gamey, and well communicated. In BiA, you’d get hit randomly. HH has a slightly weird system where, if you’re out of cover, you increasingly risk getting killed, whereas when you’re behind cover, you won’t get hurt. – It’s <em>slightly</em> jank in that it requires you to be in “in cover” mode (rather than just “behind cover”); but, I think this complements the tactical gameplay.</p></li>
+</ul>
+<p>I think I’m more disappointed by the story than by the gameplay.<br />
+The gameplay is simpler and easier, but the game would still work if the story remained grounded.</p>
+<p>HH’s story doesn’t work for a number of reasons.</p>
+<p>Two give a couple of concrete, demonstrative parts of the story:</p>
+<p>Throughout HH, Leggett’s character appears almost like a ghost haunting Baker.<br />
+The story builds up intrigue and mystery around Leggett.<br />
+The story then has a <em>big reveal</em> about what <em>actually</em> happened with Leggett, Allen and Garnett.<br />
+– The thing is, in BiA, one of the most dramatic parts of the game is the end of a mission where Baker and his squad take a farm from one side, while Leggett, Allen and Garnett clear it from the other side. At the end of the mission (in BiA), we find Leggett distressed and the dead bodies of Allen and Garnett. “There were too many…”, Leggett says. (To be clear, it comes across as an inexperienced soldier leading when he wasn’t ready or suited to).<br />
+– HH revises this, and shows us that rather than being ‘too many’, instead the three of them were getting in a dumb argument, and a couple of Germans came along; Leggett didn’t do any fighting, and just (without any distress) let his squad mates die.</p>
+<p>Fucking. What.</p>
+<p>The game pairs this weird dramatization with a whole subplot about Baker’s pistol.<br />
+Rumour has it that it’s cursed, and that everyone who touches it dies.<br />
+I understand superstition in the army is absolutely a real thing, even to this day. But, HH portrays this in a tone out of line with its the more grounded storytelling of BiA/EiB.</p>
+<p>A second part of the story I’d point to as a comparison with BiA/EiB’s story:<br />
+Near the end of one of the penultimate mission in HH, you defend some railway station from an onslaught of soldiers and enemy tanks.<br />
+In BiA, in the final mission you get to ride on the tank and experience being the cavalry that saves the day.<br />
+In HH, you’re “saved” (well, you were doing fine anyway) by some friendly tanks showing up, and the camera shows the main guns firing with very cinematic shots.<br />
+– Where BiA, it felt relieving to come across these tanks, in HH it’s just a game cutscene. It feels like they wanted to make a Cool Action Game.</p>
+<p>As for why the gameplay doesn’t work?</p>
+<p>Again, pretty much everything that made BiA/EiB distinct and interesting games has been stripped away.<br />
+It feels like they wanted to make the game more appealing for a mainstream audience, but failed to preserve an interesting game for those who appreciated EiB.</p>
+<p>For example, BiA/EiB were distinct for discouraging “just hang back and shoot enemies when they pop up from cover”, the formula which describes other FPS games.<br />
+In HH, this is now a feasible way to play the game.</p>
+<p>In BiA/EiB, machine guns presented a difficult challenge: they’d kill you in one hit if they hit you, so you had to navigate around the machine gun and clear it from its flank.<br />
+In HH, you can just use your rifle to hit the machine gunner.</p>
+<p>HH also dramatically simplifies the squad based tactics: as soon as your squad gets close to the enemy (which HH’s level design encourages), your squad just throws grenades at the enemy. – The suppression/flanking mechanics that defined EiB’s excellent levels are not particularly emphasised.</p>
+<p>Keeping your squad alive is also not important.<br />
+In HH, your squad revive to full health each checkpoint.<br />
+What’s even the point?<br />
+With BiA and EiB, I frequently felt that checkpoints covered two or three sections; you’d have to struggle to figure out each section, so would be re-playing sections of a checkpoint till getting to the part you were stuck. In HH, checkpoints are generously given.</p>
+<p>88mm artillery, which was a HUGE, ultimate threat in EiB, is a joke in HH.<br />
+Overall, the game is much easier.<br />
+I played through all three games on difficult. BiA’s difficult is <em>hard</em>, quite unfair. EiB’s difficult is <em>hard</em>, and can take some time to find the right way to solve some problem. – I saw someone say they reckoned HH’s hardest difficulty was easier than BiA’s easiest (from someone who wasn’t great at games); I believe that.</p>
+<p>In BiA/EiB, a tank was a powerful support unit, but not invincible. You’d have to protect it, to ensure you didn’t leave it vulnerable to enemy units with panzerfausts, or enemy antitank guns or enemy tanks. This creates a dynamic where you used your tank to suppress the enemy while you cleared out antitank threats; or, you’d suppress the antitank units while your tank advanced. – Tactical gameplay.<br />
+In HH, you get to drive the tank, and the levels play out like arcadey gameplay. You play as the tank going solo. Zero tactical elements, since you can just blast enemy anti tank units, and you outmatch all enemy tanks. – It’s very action based, and plays out as any if in any generic action game.</p>
+<p>HH also frequently has you clear through buildings by yourself. Again, this is in the direction of an action-based, typical FPS game.</p>
+<p>I’m not sure what I’d think of HH if I’d not played BiA nor EiB.<br />
+I’d probably really appreciate its squad controls and the game’s emphasis on use of cover.<br />
+– It disappoints but doesn’t surprise that HH was the last BiA game they’ve made. I see on Wikipedia that they were going to make another one, but it was so divorced from what BiA was that they changed it to a different game. Wikipedia says another game is supposedly in development. – I’m not optimistic. If it’s taken years, that means it’s expensive; if it’s expensive, it will need to have mass market appeal. This means it’s unlikely to be distinct or different from any other FPS game.</p>
+
+<hr />
+
+<div>
+    
+    
+    <a href="../../../blog/posts/games/2025-07-21-factorio-space-age.html" style="float:right; text-align: right;">Older post</a>
+    
+</div>
+<br style="clear: both;" />
+
+<hr />
+
+            </div>
+
+            <hr style="margin-bottom: 0px; border-top: 2px solid black;" />
+
+            <div id="footer" class="pull-right" style="padding-right: 10px;">
+                Site proudly generated by
+                <a href="http://jaspervdj.be/hakyll">Hakyll</a>
+            </div>
+        </div>
+
+        <script>
+            // The callbacks we wanna use
+            // Phone-home, telling Google Analytics various metrics/dimensions
+
+            // Use custom dimensions & metrics
+            var AnalyticDimensionReaderKind = 'dimension1';
+            var AnalyticMetricActiveTime      = 'metric1';
+            var AnalyticMetricLongestIdleTime = 'metric2';
+            var AnalyticMetricReadCount       = 'metric3';
+
+            var gaCallbacks = {
+                "scrollPercent": function(ms, perc) {
+                    if (perc > 85) {
+                        // EVENT: Page read
+                        ga('send', {
+                            hitType:       'event',
+                            eventCategory: 'Scrolling',
+                            eventAction:   'atBottom',
+                            eventValue:    String(ms)
+                        });
+                    }
+                },
+                "read": function(ms, ct, timeToReach) {
+                    // Use this to set DIMENSION
+                    // timeToReach < 5s ==> Skim (default = Visitor)
+                    if (timeToReach < 5 * 1000) {
+                        // dimension1 = ReaderKind
+                        ga('set', AnalyticDimensionReaderKind, "skimmer");
+                    }
+
+                    // timeToReach > 30s ==> Reader
+                    if (timeToReach > 30 * 1000) {
+                        // dimension1 = ReaderKind
+                        ga('set', AnalyticDimensionReaderKind, "reader");
+                    }
+
+                    // EVENT: Page read
+                    ga('send', {
+                        hitType:       'event',
+                        eventCategory: 'Reading',
+                        eventAction:   'read',
+                        eventValue:    String(timeToReach)
+                    });
+
+                    // METRIC
+                    ga('set', AnalyticMetricReadCount, String(ct));
+                },
+                "initialIdle": function(ms) {
+                    // EVENT: Started Reading
+                    ga('send', {
+                        hitType:       'event',
+                        eventCategory: 'Scrolling',
+                        eventAction:   'begun',
+                        eventValue:    String(ms)
+                    });
+                },
+                "timeSpent": function(total, active, curIdle, initIdle, longestIdle) {
+                    // Update METRIC(S)?
+                    ga('set', AnalyticMetricActiveTime, String(active));
+                    ga('set', AnalyticMetricLongestIdleTime, String(longestIdle));
+                },
+                "idle": function(ms) {
+                },
+                "longestIdle": function(ms) {
+                }
+            }
+
+            window.onload = function() {
+                myAnalyticsInit(gaCallbacks);
+
+                //
+                // Initial dimensions & metrics
+                //
+
+                ga('set', AnalyticMetricReadCount, String(0));
+
+                // EVENT: Page load
+                ga('send', {
+                    hitType:       'event',
+                    eventCategory: 'pageLoad',
+                    eventAction:   'begun',
+                    eventValue:    String(0)
+                });
+
+                // DIMENSION: visitor
+                ga('set', AnalyticDimensionReaderKind, "visitor");
+            }
+        </script>
+    </body>
+</html>
