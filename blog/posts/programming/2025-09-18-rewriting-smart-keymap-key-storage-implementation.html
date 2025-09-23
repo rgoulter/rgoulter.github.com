@@ -1,0 +1,417 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Rewriting smart-keymap's Key Storage Implementation - Richard Goulter's Blog</title>
+
+        <!-- My (Old) CSS theme -->
+        <link rel="stylesheet" type="text/css" href="../../../css/default.css" />
+
+        <!--
+            jQuery & jQueryUI
+        -->
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css" />
+
+        <!--
+            Pandoc Style CSS
+            (for syntax highlighted snippets)
+        -->
+        <link rel="stylesheet" type="text/css" href="../../../css/syntax.css" />
+
+        <!--
+            Bootstrap
+        -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+        <style>
+            /*
+             * Bootstrap defines blockquote as 17px,
+             * so it looks stupidly large in my blogposts. */
+            blockquote {
+                font-size: 14px;
+            }
+        </style>
+
+        <!--
+            Waypoints, and Waypoints-Sticky,
+            so we can do this:
+            http://imakewebthings.com/waypoints/shortcuts/sticky-elements/
+        -->
+        <script src="../../../js/jquery.waypoints.min.js"></script>
+        <script src="../../../js/sticky.min.js"></script>
+
+        <!-- My analytics stuff -->
+        <script src="../../../js/my_analytics.js"></script>
+        <script src="../../../js/my_analytics_debug.js"></script>
+
+        <!--
+            TOCify
+        -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js"></script>
+
+        <!--
+            Patched TOCify css file.
+            (Don't want fixed `.tocify`).
+        -->
+        <link rel="stylesheet" type="text/css" href="../../../css/jquery.tocify.css" />
+
+        <style>
+        .navbar {
+            margin-bottom: 0px;
+        }
+
+        .banner-image {
+            width:100%;
+        }
+
+        .banner {
+            margin-left: 0px;
+            margin-right: 0px;
+        }
+
+        body {
+            background-color: #e2e2e2;
+        }
+
+        #page {
+            padding-left:0;
+            padding-right:0;
+            background-color: #ffffff;
+        }
+        </style>
+
+        <!-- Google Analytics -->
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-H13NWYDX0G"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'G-H13NWYDX0G');
+        </script>
+    </head>
+    <body>
+        <div id="page" class="container">
+            <!-- This, with no padding on left/right -->
+            <div class="banner">
+                <nav class="navbar navbar-default">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+
+            <!-- The Hamburger -->
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../../../">Richard Goulter's Blog</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="../../../">Home</a></li>
+            <li><a href="../../../blog/yi.html">Yi</a></li>
+            <li><a href="../../../blog/emacs.html">Emacs</a></li>
+            <li><a href="../../../blog/what-i-wish-i-knew-when-i-started-using-nix.html">Nixpkgs</a></li>
+            <li><a href="../../../blog/archive.html">Archive</a></li>
+        </ul>
+    </div>
+</nav>
+
+            </div>
+
+            <hr style="margin: 0px; border-top: 5px solid black;" />
+
+            <div id="content" class="container">
+                <h1>Rewriting smart-keymap's Key Storage Implementation</h1>
+                <div class="info">
+    Posted on September 18, 2025
+    
+        by Richard Goulter
+    <br />
+    
+    Tags: <a title="All pages tagged 'keyboards'." href="../../../blog/tags/keyboards.html" rel="tag">keyboards</a>, <a title="All pages tagged 'firmware.smart-keymap'." href="../../../blog/tags/firmware.smart-keymap.html" rel="tag">firmware.smart-keymap</a>, <a title="All pages tagged 'programming.ch32x'." href="../../../blog/tags/programming.ch32x.html" rel="tag">programming.ch32x</a>, <a title="All pages tagged 'programming.ch58x'." href="../../../blog/tags/programming.ch58x.html" rel="tag">programming.ch58x</a>, <a title="All pages tagged 'programming.embedded'." href="../../../blog/tags/programming.embedded.html" rel="tag">programming.embedded</a>, <a title="All pages tagged 'programming.rust'." href="../../../blog/tags/programming.rust.html" rel="tag">programming.rust</a>
+    
+</div>
+
+<p>I recently finished a <a href="https://github.com/rgoulter/smart-keymap/pull/381">big
+rewrite</a> of how the keys
+were stored in my <a href="https://github.com/rgoulter/smart-keymap">smart-keymap</a>
+keyboard firmware.</p>
+<h2 id="smart-keymap">Smart Keymap</h2>
+<p>In case you’ve found this blogpost and aren’t familiar with <code>smart-keymap</code>:</p>
+<p><code>smart-keymap</code> is a library for building keyboard firmware by declaring keymaps
+in <a href="https://nickel-lang.org/">Nickel</a>, powered by
+<a href="https://github.com/rgoulter/smart-keymap/blob/master/rust-lang.org">Rust</a>.</p>
+<p>A ‘smart keyboard’ is a keyboard with additional bells and whistles, such as
+alternate key functionality (layers, tap-hold keys, chords, etc.), or RGB
+effects, etc. – e.g. <a href="https://docs.qmk.fm/">QMK</a>, <a href="https://zmk.dev/docs/">ZMK</a>
+are popular smart keyboard firmware frameworks.</p>
+<p>This project provides a library which handles the keymap behaviour part of this.
+With <code>smart-keymap</code>, it’s easy to write keyboard firmware, in Rust <a href="https://github.com/rgoulter/smart-keymap/tree/master/stm32-embassy-smart-keyboard">using
+embassy</a>
+or
+<a href="https://github.com/rgoulter/smart-keymap/tree/master/stm32f4-rtic-smart-keyboard">RTIC</a>,
+or quickly provide powerful keymap functionality to <a href="https://github.com/rgoulter/smart-keymap/tree/master/firmware/ch32x035-usb-device-compositekm-c">EVT example code written in
+C</a>.</p>
+<h2 id="rewrite-motivation">Rewrite Motivation</h2>
+<p>I was asked in a <a href="https://github.com/rgoulter/smart-keymap/issues/357">GitHub
+issue</a> if was possible to
+implement the sophisticated <a href="https://artsey.io">artseyio</a> in <code>smart-keymap</code>.</p>
+<p>After brushing <code>smart-keymap</code>’s chording engine up a bit so that it supported
+overlapping chords, I found that the artseyio keymap barely fit on the
+low-budget CH32X035 MCU. (With a slightly older compiler version, I observed it
+didn’t even fit).</p>
+<p>I considered that the implementation (details discussed below) maybe wasn’t the
+most efficient; I wanted the artseyio keymap firmware to fit on the CH32X035.</p>
+<h2 id="the-numbers">The Numbers</h2>
+<p>The rewrite can be found at pull request <a href="https://github.com/rgoulter/smart-keymap/pull/381">#381 of
+smart-keymap</a>.</p>
+<p>Overall, the summary says +6,783 −8,730.</p>
+<p>The number added is smaller than the number deleted. I’m happy with that!</p>
+<p>Though, this large number of lines changed does include changes to automatically
+generated test snapshots.<br />
+For an example of code that I touched, the git summary indicates
+<code>ncl/keymap-codegen.ncl</code> had around 2000 lines of code changed.</p>
+<p>As for the goal of reducing firmware size?<br />
+For the example firmware built as a CI check, its size reduced from 78% of the
+CH32X’s flash size, down to 54% of the firmware’s flash size.<br />
+For the motivating artseyio keymap, its size reduced from 95% of the CH32X’s
+flash size, down to 60%.</p>
+<h2 id="rewrite-details-from-tree-based-key-storage-to-struct-of-arrays">Rewrite Details: from Tree-Based Key Storage, to Struct-of-Arrays</h2>
+<p>The inspiration for writing <code>smart-keymap</code> was <a href="https://github.com/semickolon/kirei">semickolon’s
+kirei</a>.
+Kirei emphasised the somewhat unusual “keys as the main abstraction of keymap behaviour”.<br />
+In the project’s discord channel, the author discussed all sorts of inspiring
+ideas, like how a keymap engine is bears resemblance to a parser.. or how, if
+you squint, various smart keyboard functionality (like tap hold, layers,
+chords) can be generalised as varying the functionality depending on recent key
+presses to the keymap.<br />
+(That’s why kirei didn’t directly implement layering).</p>
+<p>So.<br />
+<code>smart-keymap</code> takes this idea of “the key as the main abstraction of keymap behaviour”,
+and implements functionality like “tap hold keys” or “layered keys”.<br />
+It was really natural to describe these as tree structures: a tap-hold key is a
+key which acts like one key when tapped, as another key when held. It’s obvious
+to describe this with a struct like <code>{ tap, hold }</code>. Similarly, a layered key
+is a key which behaves differently depending on which layers are active; so, <code>{  base, layered: [...] }</code> is an obvious struct.</p>
+<p>In <code>smart-keymap</code>’s case, the keys themselves are conceptually something like:</p>
+<pre><code>   Key = Chorded { chord: Key, passthrough: Key }
+       | Layered { base: Key, layered: Key }
+       | TapHold { tap: Key, hold: Key }
+       | HidKeyCode
+       | LayerModifier
+       | ...</code></pre>
+<h4 id="tree-like-structs-on-the-stack">Tree-like Structs on the Stack</h4>
+<p>There were a couple of problems of directly implementing the structs like this,
+particularly for embedded firmware:</p>
+<p>Similar to how with a linked list <code>List&lt;x&gt; = Node&lt;x&gt; | Empty</code>, <code>enum&lt;T&gt; {  Node(T), Empty }</code> doesn’t work in Rust,
+a naive attempt at writing out these Key structs isn’t going to work.<br />
+Roughly, the code needs to know what size the values are in order to call the function
+(because the values are on the stack, not on the heap). And so it’s a problem if
+the structure doesn’t have a determined size.</p>
+<p>We can adjust the structure of the tree so that key values can’t be
+arbitrarily deep:</p>
+<pre><code>   Key = ChordedKey;
+   ChordedKey = Chorded { chord: LayeredKey, passthrough: LayeredKey } | LayeredKey;
+   LayeredKey = Layered { base: TapHoldKey, layered: TapHoldKey } | TapHoldKey;
+   TapHoldKey = TapHold { tap: BaseKey, hold: BaseKey } | BaseKey;
+   BaseKey = HidKeyCode | LayerModifier | ...`</code></pre>
+<p>In order to express <code>ChordedKey = Chorded { chord, passthrough } | Layered</code>
+without using the heap in Rust, I used <a href="https://github.com/rgoulter/smart-keymap/tree/46511224e803b3600e66d901799a593cdb0fde46/src/key/composite">a lot of ‘wrapping’
+code</a>
+to coerce the various values to be the same type (&amp; also indicate to the
+compiler that the struct has finite size).<br />
+<code>Chorded&lt;K&gt; { chord: K, passthrough: K }</code> requires that <code>chord</code> and <code>passthrough</code> have the same type;
+which is a bit annoying if <code>chord</code> is an <code>HidKeyCode</code>, and <code>passthrough</code> is a <code>TapHold&lt;HidKeyCode&gt;</code>.</p>
+<p>The size of each <code>key</code> value grows exponentially large, for the depth of this hierarchy of keys.<br />
+For the struct above: a TapHold key is going to be twice as large as a base key,
+a LayeredKey might be NumLayers times that.<br />
+A ChordedKey will be twice that. (And, if <code>smart-keymap</code> were to have another kind of smart key that nests ChordedKeys…).</p>
+<h4 id="flattening-the-tree-using-struct-of-arrays">Flattening the Tree using Struct-of-Arrays</h4>
+<p>The idea to reduce storage size: instead of <code>TapHold&lt;K&gt; { tap: K, hold: K }</code>, we
+have <code>TapHold { tap: Ref, hold: Ref }</code>, and a struct like <code>Keys { keyboard:  [...], tap_hold: [...], layered: [...], ... }</code>.</p>
+<p>That is, rather than nesting the key data inside each key, the key definitions
+are stored in a struct of arrays, and each key definition indirectly refers to
+other keys using a <code>Ref</code>.<br />
+e.g. a <code>Chorded</code> key’s <code>chord</code> might be <code>tap_hold::Ref(3)</code>; and looking up
+<code>keys.tap_hold[3]</code> then refers to some <code>TapHold { tap: Ref, hold: Ref }</code> value.</p>
+<p>Since each key definition only nests ‘references’, the size of the key data does
+not grow exponentially as a result of a deeper hierarchy of key implementations.<br />
+This also avoids all of the complicated fuss that was required for the previous nested
+tree structure implementation.</p>
+<p>:o) This is a very straightforward to change to make to the code.</p>
+<p>I think if you squint, this is comparable to going from an AST-based
+interpreter, to compiling the AST to instructions.</p>
+<h4 id="lesson-learned">Lesson Learned</h4>
+<p>Things you might be able to take away from this?</p>
+<ul>
+<li><p>For emdedded firmware, even low cost MCUs like the CH32X have enough flash
+space that you can run fairly sophisticated code without needing to fuss over
+having a particularly efficient implementation.</p></li>
+<li><p>If firmware size is an issue, having using tree-like structs on the stack is
+something to avoid.</p></li>
+</ul>
+<h2 id="rewrite-approach-a-pragmatic-all-in-one-go">Rewrite Approach: A Pragmatic All-in-One-Go</h2>
+<p>I was impatient to implement this change.</p>
+<p>It probably would have been possible to add indirection so that the old code
+still worked, add in the new code (&amp; make use of the common functionality),
+then shift over to the new code.</p>
+<p>Instead, I opted to just rewrite in place.</p>
+<p>The upside is: I wasn’t constrained by the old implementation.</p>
+<p>One downside to this: this meant most of the functionality wasn’t going to work
+until the rewrite was finished.</p>
+<p>Another downside was that, the rewrite can’t then be split up into discrete
+commits and have a working project. Because traits core to the implementation
+were written, the tests would fail (or not even compile) for practically
+everything more granular than the full rewrite.</p>
+<h2 id="positive-about-rust-frictionless-refactoring">Positive About Rust: Frictionless Refactoring</h2>
+<p>The rewrite basically involved smooshing two different traits (<code>key::Key</code> and
+<code>key::KeyState</code>) into one (<code>key::System</code>).</p>
+<p>Because the associated types and methods were similar, (and because I’d reshaped
+the code a bit with “use nested Refs, not nested key data” in mind), much of
+the rewrite was fairly straightforward.</p>
+<p>This meant I rarely to re-think the details. And having a comprehensive integration test suite helped provide
+confidence that the code was working as it should; or catch times when <a href="https://github.com/rgoulter/smart-keymap/pull/381#issuecomment-3296490855">I’d trip over Rust subtleties</a>.</p>
+<p>Rust’s enums make for a really clean way of expressing different Rust states
+some value might have. This made the rewrite flow.</p>
+<h4 id="typo-preventer">Typo-Preventer</h4>
+<p>Using Rust’s enums and pattern matching helps prevent typos.</p>
+<p>In the <code>smart-keymap</code> codebase, the various smart key implementations (keyboard,
+tap-hold, layered, etc.) get aggregated by a <code>composite</code> key. This composite
+type has a <code>Ref</code> type like <code>enum Ref{ Keyboard(keyboard::Ref), TapHold(tap_hold::Ref), .. }</code>.</p>
+<p>This sum type make it easier to retain type safety across code which dispatches
+method calls to the respective key system implementations, helping to catch
+typos from copy pasting.</p>
+<h4 id="rusts-enums-help-keep-code-small">Rust’s Enums Help Keep Code Small</h4>
+<p>The meat of this rewrite, where replacing <code>key::Key</code> and <code>key::KeyState</code> with
+<code>key::System</code> involved the most thought, was in the <code>keymap::Keymap</code>
+implementation itself.</p>
+<p>I feel that by using enums, this helped reduce the amount of code I had to keep in mind at once.</p>
+<p>For example, the <code>new_pressed_key</code> method returns a <code>PressedKeyResult</code> enum
+(indicating whether the key press resulted in a pending key state, a resolved
+key state, or the press of another key).<br />
+Because this method returns an enum value, as opposed to calling back to a
+method on <code>Keymap</code> or some other technique, I believe it’s easier to reason
+about assumptions about what goes <em>into</em> the enum value, and assumptions are
+made <em>from</em> using the enum value. – It’s easier to use correctly, and more
+difficult to use incorrectly than an arbitrary method call.</p>
+
+<hr />
+
+<div>
+    
+    
+    <a href="../../../blog/posts/games/2025-09-02-brothers-in-arms.html" style="float:right; text-align: right;">Older post</a>
+    
+</div>
+<br style="clear: both;" />
+
+<hr />
+
+            </div>
+
+            <hr style="margin-bottom: 0px; border-top: 2px solid black;" />
+
+            <div id="footer" class="pull-right" style="padding-right: 10px;">
+                Site proudly generated by
+                <a href="http://jaspervdj.be/hakyll">Hakyll</a>
+            </div>
+        </div>
+
+        <script>
+            // The callbacks we wanna use
+            // Phone-home, telling Google Analytics various metrics/dimensions
+
+            // Use custom dimensions & metrics
+            var AnalyticDimensionReaderKind = 'dimension1';
+            var AnalyticMetricActiveTime      = 'metric1';
+            var AnalyticMetricLongestIdleTime = 'metric2';
+            var AnalyticMetricReadCount       = 'metric3';
+
+            var gaCallbacks = {
+                "scrollPercent": function(ms, perc) {
+                    if (perc > 85) {
+                        // EVENT: Page read
+                        ga('send', {
+                            hitType:       'event',
+                            eventCategory: 'Scrolling',
+                            eventAction:   'atBottom',
+                            eventValue:    String(ms)
+                        });
+                    }
+                },
+                "read": function(ms, ct, timeToReach) {
+                    // Use this to set DIMENSION
+                    // timeToReach < 5s ==> Skim (default = Visitor)
+                    if (timeToReach < 5 * 1000) {
+                        // dimension1 = ReaderKind
+                        ga('set', AnalyticDimensionReaderKind, "skimmer");
+                    }
+
+                    // timeToReach > 30s ==> Reader
+                    if (timeToReach > 30 * 1000) {
+                        // dimension1 = ReaderKind
+                        ga('set', AnalyticDimensionReaderKind, "reader");
+                    }
+
+                    // EVENT: Page read
+                    ga('send', {
+                        hitType:       'event',
+                        eventCategory: 'Reading',
+                        eventAction:   'read',
+                        eventValue:    String(timeToReach)
+                    });
+
+                    // METRIC
+                    ga('set', AnalyticMetricReadCount, String(ct));
+                },
+                "initialIdle": function(ms) {
+                    // EVENT: Started Reading
+                    ga('send', {
+                        hitType:       'event',
+                        eventCategory: 'Scrolling',
+                        eventAction:   'begun',
+                        eventValue:    String(ms)
+                    });
+                },
+                "timeSpent": function(total, active, curIdle, initIdle, longestIdle) {
+                    // Update METRIC(S)?
+                    ga('set', AnalyticMetricActiveTime, String(active));
+                    ga('set', AnalyticMetricLongestIdleTime, String(longestIdle));
+                },
+                "idle": function(ms) {
+                },
+                "longestIdle": function(ms) {
+                }
+            }
+
+            window.onload = function() {
+                myAnalyticsInit(gaCallbacks);
+
+                //
+                // Initial dimensions & metrics
+                //
+
+                ga('set', AnalyticMetricReadCount, String(0));
+
+                // EVENT: Page load
+                ga('send', {
+                    hitType:       'event',
+                    eventCategory: 'pageLoad',
+                    eventAction:   'begun',
+                    eventValue:    String(0)
+                });
+
+                // DIMENSION: visitor
+                ga('set', AnalyticDimensionReaderKind, "visitor");
+            }
+        </script>
+    </body>
+</html>
