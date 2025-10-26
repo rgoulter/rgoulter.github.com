@@ -10,8 +10,123 @@
         <email>richard.goulter+blog@gmail.com</email>
         
     </author>
-    <updated>2025-09-18T00:00:00Z</updated>
+    <updated>2025-10-26T00:00:00Z</updated>
     <entry>
+    <title>Org Babel is an Underappreciated Tool</title>
+    <link href="http://www.rgoulter.com/blog//blog/posts/programming/2025-10-26-org-babel-is-an-underappreciated-tool.html" />
+    <id>http://www.rgoulter.com/blog//blog/posts/programming/2025-10-26-org-babel-is-an-underappreciated-tool.html</id>
+    <published>2025-10-26T00:00:00Z</published>
+    <updated>2025-10-26T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<p>Emacs Org mode’s <a href="https://orgmode.org/manual/Working-with-Source-Code.html">source code blocks</a>
+and the complementary <a href="https://orgmode.org/worg/org-contrib/babel/intro.html">org babel</a>
+are underappreciated tools.</p>
+<p><a href="https://www.gnu.org/software/emacs/">Emacs</a> is a <em>highly</em> customisable text editor.</p>
+<p><a href="https://orgmode.org/manual/index.html">Org Mode</a> is a broad set of functionality for org markup files.<br />
+Functionality ranges from todo list management &amp; note taking, agenda management,
+to spreadsheets and document exporting/publishing.</p>
+<p>Org mode’s support for source code allows blocks of source code to be:</p>
+<ul>
+<li>evaluated (with the results embedded in the document; i.e. “plaintext Jupyter Notebooks”),</li>
+<li>exported (so the code can be presented in e.g. PDF documents),</li>
+<li>tangled (rearranging snippets into source code into files for the compiler).</li>
+</ul>
+<p>Org Babel is the meta-programming functionality integrated with that,
+which allows source code blocks of different languages to interact.</p>
+<p>It’s an underappreciated tool. For how useful the functionality is,
+it’s (at best) limited to Emacs users.</p>
+<h2 id="what-ive-found-it-useful-for">What I’ve Found it Useful For</h2>
+<p>“Plaintext Jupyter Notebooks” gets 95% of the way to describing org’s source code block evaluation.<br />
+– “Plaintext”, on the one hand, means it lacks some user-friendliness that Jupyter Lab’s rich web interface provides.
+On the other hand, plaintext has its own advantages.</p>
+<p>Anyway. I’ve found the that “run the source code blocks, include the results in the document”
+(also known as a <a href="https://en.wikipedia.org/wiki/Notebook_interface">“notebook”</a>) to be useful.</p>
+<p>I’ve used it for:</p>
+<ul>
+<li><p>Playing around with / learning programming language subtleties.</p>
+<ul>
+<li>This is similar to how you’d use “scratch playgrounds” like https://play.rust-lang.org/:
+being able to run a snippet of code and see the result, without having to fuss with
+editing a file in some fresh location.</li>
+</ul></li>
+<li><p>Exploring the behaviour of under-documented APIs.</p>
+<ul>
+<li>Similar to how notebooks are useful for writing tutorials or documentation,
+when I’ve been curious about how an under-documented API works,
+I’ve found the notebook interface to be useful.</li>
+</ul></li>
+<li><p>DevOps work: spelunking around cloud environments and resources.</p>
+<ul>
+<li><a href="https://howardism.org/Technical/Emacs/literate-devops.html">howardism.org’s “Literate DevOps”</a>
+is where I first came across the idea. – As well as the output of commands, a notebook
+supports idiomatically embedding links to reference material, or explanation for why
+commands were run. These are useful things for DevOps-related tasks.</li>
+</ul></li>
+</ul>
+<h2 id="dynamics-executable-document-living-document-literate-programming">Dynamics: Executable Document, Living Document, Literate Programming</h2>
+<p>Emacs org mode’s code block support enables some dynamics:</p>
+<h4 id="executable-document">Executable Document</h4>
+<p>Because the org mode’s source code blocks can be executed, with the results
+embedded in the document, the resulting document can be described as an
+“executable document”: it’s a document where you can execute the (embedded) code
+snippets.</p>
+<p>If the document’s emphasis is on the results (e.g. statistics/graphs), then this
+can be described as a “reproducible research” tool. (To reproduce the results,
+you’d just re-execute the document).</p>
+<p>If the document emphasises documentation/specification, you can call it “executable documentation” or “executable specification”.<br />
+i.e. the benefits of a specification (communicating what something is) with the
+benefits of an automated check (confidence in the system’s correctness).</p>
+<h4 id="living-document">Living Document</h4>
+<p>A “living” document is a document which is fresh and maintained. (As opposed to
+outdated).</p>
+<p>In programming, ‘living documents’ often are associated with some kind of
+automated execution or generation.</p>
+<p>Executable documents can be maintained as living documents: you can be confident
+the document is ‘up to date’ by re-executing it.</p>
+<h4 id="literate-programming">Literate Programming</h4>
+<p>I think ‘literate programming’ is broadly (mis)understood as programming where
+the code and prose are freely mixed together.</p>
+<p>I think a more accurate and precise definition is: literate programming
+emphasises constructing an explanation of some module; where the literate
+program can be ‘weaved’ to construct a beautifully typeset document; or
+‘tangled’ to produce source code files for the compiler. – The emphasis is on
+presentation of the program for a clear explanation (without being constrained
+by order that a compiler would require).</p>
+<p>Org mode’s source code supports this.<br />
+Though, I suspect good ‘literate programming’ is requires a good amount of
+discipline and thought.</p>
+<h2 id="org-babel-is-meta-programming">Org-Babel is Meta-Programming</h2>
+<p>From <a href="https://orgmode.org/worg/org-contrib/babel/intro.html">the org mode community’s introduction to org babel</a>:</p>
+<blockquote>
+<p>Because the return value of a function written in one language can be passed
+to a function written in another language, or to an Org table, which is itself
+programmable, Babel can be used as a meta-functional programming language.
+With Babel, functions from many languages can work together. You can mix and
+match languages, using each language for the tasks to which it is best suited.</p>
+<p>For example, let’s take some system diagnostics in the shell and graph them
+with R.</p>
+</blockquote>
+<p>The code blocks can be named. The code blocks can take in <code>:var</code> inputs, and can reference the output values from other code blocks.</p>
+<p>Code blocks can be re-called with different arguments.</p>
+<p>That is: writing an org document with source code blocks is itself programming.
+It’s up to the programmer to choose an appropriate way of arranging the code.</p>
+<p>I have not made much use of the <em>polyglot</em> nature of org-babel. But, I think it’s interesting.</p>
+<h2 id="notebooks-interface-partway-between-manual-and-automated">Notebooks Interface: Partway Between “Manual” and “Automated”</h2>
+<p>I think the most common ways to interact with some program are either entirely manual, or entirely automated.</p>
+<p>e.g. if you’ve got some Python code, you’ll either run the code to observe its output;
+or perhaps you’ll write some automated check to have confidence that the code works.</p>
+<p>e.g. if you want to launch some VM, you’ll either launch it in a web console, or run a command line command;
+or perhaps apply some Terraform code.</p>
+<p>A notebook interface sits partway between these.</p>
+<p>Unlike a script/automation: You can easily execute just the snippets you want, when you want. – If you’re interrupted
+(e.g. some unexpected error occurs), you can either fix that externally, or embed instructions in the notebook to fix it.
+– The instructions to fix it could even just be an explanation.<br />
+This means a notebook does not need to be as robust as an automation/script.</p>
+<p>Unlike manual commands: A notebook document can easily include commentary, and provides an easy way to read through
+what was executed, and the output of what was executed.</p>
+<p>I think those properties make notebooks a compelling tool for cases where you
+don’t quite have a fully automated setup easily available.</p>]]></summary>
+</entry>
+<entry>
     <title>Rewriting smart-keymap's Key Storage Implementation</title>
     <link href="http://www.rgoulter.com/blog//blog/posts/programming/2025-09-18-rewriting-smart-keymap-key-storage-implementation.html" />
     <id>http://www.rgoulter.com/blog//blog/posts/programming/2025-09-18-rewriting-smart-keymap-key-storage-implementation.html</id>
@@ -1897,125 +2012,6 @@ the other is optimal for hypertrophy (building muscle).</li>
 <li>The pages mention useful qualifiers like “don’t do these kinds of exercises on the same day”.</li>
 </ul></li>
 </ul>]]></summary>
-</entry>
-<entry>
-    <title>Bridgerton Season 3</title>
-    <link href="http://www.rgoulter.com/blog//blog/posts/romance/2024-05-27-bridgerton-season-3.html" />
-    <id>http://www.rgoulter.com/blog//blog/posts/romance/2024-05-27-bridgerton-season-3.html</id>
-    <published>2024-05-27T00:00:00Z</published>
-    <updated>2024-05-27T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<p>Finished watching Bridgerton Season 3.</p>
-<p>I don’t know why it’s 4 episodes. Season 1 and 2 had 8 each.<br />
-I guess they’re moving away from 1 season = 1 book.</p>
-<p>This time, we see the romance primarily between Colin Bridgerton and Penelope.<br />
-It also features, to a lesser degree, romance between Francesca Bridgerton &amp;
-Lord Kilmartin.</p>
-<h2 id="what-it-did-well">What It Did Well</h2>
-<p>The sweet parts are <em>so</em> sweet!</p>
-<p>I think the romantic plot between Francesca and Kilmartin is very well done.<br />
-It’s cheesey.<br />
-It’s very adorable.<br />
-I think it’s a very ideal depiction of two utter nerds flirting. Most of the
-time nerds in media are depicted as just spewing a bunch of technical jargon..
-but with Francesca &amp; Kilmartin, we get people who are just somewhat socially
-awkward.</p>
-<p>My favourite part of this season, Francesca sees Kilmartin walking through the
-streets and excitedly goes up to greet him; when she flirts with him, he
-responds obtusely with an overly literal response, and the air deflates. It’s
-awkward; there’s tension; and both of them are thinking “did I do something
-wrong?”. Or, rather, this part is so good because later, Kilmartin redeems the
-awkwardness by giving a very geeky gift; and it’s such a sweet resolution to the
-tension that was built up.</p>
-<p>The romance between Colin and Penelope is solid.<br />
-I think it’d be enough to carry the season on its own.<br />
-I’m a simple man with simple tastes. I like a sweet story, well executed.</p>
-<p>I don’t recall if it was done the same in S1 or S2, but in this one at least, Lady Bridgerton got to fulfil that Dumbledore-eque “knows things, nudges in the right direction” kind of role.<br />
-It’s a good archetype, and cliches are cliche for a reason.</p>
-<p>I was pleasantly surprised by the friendship between Eloise and Cressida.<br />
-Cressida’s character always seemed like a shallow bitch rival.<br />
-In this season, she’s portrayed with more sympathy. She’s lonely as a
-consequence of her cruel actions.<br />
-Eloise’s character is more rounded and balanced than it was in earlier seasons:
-here, she mostly retains the character of “eww, I’m not interested in feminine
-things like sewing”. (Which is nice; means you’re avoiding every female
-character being the same character).</p>
-<p>It was also good to see that the suitor Penelope was chasing was a fairly charming and pleasant man.</p>
-<h2 id="what-it-did-poorly">What It Did Poorly</h2>
-<p>The show’s already made its bed, I guess, but the sex scenes are superfluous and
-don’t really add much to the show. Worse, it makes it a “don’t want to watch
-this with my family”.<br />
-I get that the sex scenes are important in the novels, in defiance of
-prudishness, and in favour of female sexual empowerment, or as a tangible plot
-point demonstrating the intensity of the love interest. But as depicted in the
-Bridgerton S3, it comes closer to “our show has sex scenes, just like other cool
-shows have sex scenes”.<br />
-At the, uh, climax of the season, we have a classical arrangement of some pop
-song triumphantly blasting as Colin pleasures Penelope.. it felt more “amusing”
-than “hot”.<br />
-– Instead: I think it’d be better to just skip the sex scenes altogether.</p>
-<p>Generally, though.. I think the show suffers in the same way that I reckon
-Columbo does:<br />
-In Columbo, every episode I want to see Columbo annoy the villain, ask innocuous
-questions, and ask “just one more thing”, before eventually catching the villain
-in the villain’s web of lies. I reckon the problem was, they never quite landed
-on what to do with the <em>rest</em> of the runtime, so you’d get weird gimmicky
-plotlines that fell flat more than they landed. – The core, good part of what
-people like about the show needs padding to support it, otherwise it’d just be
-15 minutes long.<br />
-Here, the sweet romance stuff is great. I wanna see the hero &amp; heroine flirt,
-bicker, dance, and get together. But what to do with the rest of the runtime?</p>
-<p>There’s the old adage “both original and good; but the good parts aren’t
-original, and the original parts aren’t good”.<br />
-I don’t think an adaptation needs to be all that original; especially not for
-the first time it’s being adapted.</p>
-<p>And a lot of the original stuff in Netflix’s Bridgerton is just … not good.</p>
-<p>A major subplot throughout the whole season is that Penelope’s newlywed sisters
-need to get pregnant.<br />
-And the sisters are naive about how to make babies; and their husbands are
-terrible lovers.<br />
-The whole thing is an awkward joke, but it’s not particularly funny.<br />
-(It’s easy to see Penelope’s sisters as the butt of a joke in a laughing-at-them
-kind of way. I think it detracts more than it adds).</p>
-<p>I think it’s no different than other seasons, but I recall really enjoying Lady
-Danbury’s character in the books as a fierce character with almost
-fourth-wall-breaking frankness. And in this show, she’s a silly gossip who’s a
-lacky to the Queen character. Zzzz.</p>
-<p>Though, speaking of fourth-wall-breaking frankness: the boxer/club owner
-Mondrich and his wife continue to feature in this season. I recall in S1,
-Mondrich’s wife came across as talking like someone with a smartphone in her
-pocket. (Bridgerton (books or otherwise) strives for fun over historical
-fidelity; but, at some point, why not just have a story set in the present?).<br />
-I think the show was not really short of strong-independent-female characters.
-But in this season, Mondrich’s wife is written differently, and shows a vanity
-by way of concern for what others in society will think of her if she doesn’t
-appear as her social class expects her to. I reckon the change was jarring.</p>
-<p>And while it’s more a problem with the genre than the show itself.. but I still
-don’t like seeing “the hero is cool, the other men are losers” nor “the heroine
-is cool, the other women are losers”.<br />
-In Bridgerton S3, we see that a marquess tries to court Francesca; but, he’s
-shown to be crass or otherwise undesirable. Ehhh. I don’t think the story
-benefits from this.<br />
-Penelope’s story is nicer, and more romantic: her primary concern being the
-security that’d come from a marriage, and she manages to catch the interests of
-a smart and friendly vegetarian. He’s not a loser, she could live happily with
-him. (On the other hand, Colin is shown frequenting a brothel several times. It
-doesn’t endear him to me. I think I’d prefer the trope where he otherwise chases
-after some girl, without realising his feelings are truly for Penelope).</p>
-<p>The show still also suffers from light (or otherwise) touches of progressivism.<br />
-There’s a joke in The Simpsons where Lisa Simpson boldly walks up to the
-football team and bravely says “I want to join! That’s right, a girl!”. (Lisa is
-then deflated to find that the team already has girls).<br />
-I was reminded of that by one part in Bridgerton S3, when a group of men are
-laughing/mocking an inventor for his hot air balloon, and a woman interrupts
-saying “I came hear to learn things”; Benedict Bridgerton thanks her, then
-remarks “oh, you’re a woman”, and she gives the same kind of “that’s right, I’m
-a woman who can read” kind of reply.<br />
-Do people enjoy story beats like that? I enjoy the geeky characters being well
-written. Maybe someone enjoys these “I was brave! and everybody clapped” type
-stuff.<br />
-– It’s kindof bizarre that someone would want to have fun by proselytizing
-progressivism, but also set a story in a setting wherein “woman needs to get
-married to secure her future” is a key driver of plots in the story.</p>]]></summary>
 </entry>
 
 </feed>

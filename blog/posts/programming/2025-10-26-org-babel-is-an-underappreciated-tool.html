@@ -1,0 +1,363 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Org Babel is an Underappreciated Tool - Richard Goulter's Blog</title>
+
+        <!-- My (Old) CSS theme -->
+        <link rel="stylesheet" type="text/css" href="../../../css/default.css" />
+
+        <!--
+            jQuery & jQueryUI
+        -->
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css" />
+
+        <!--
+            Pandoc Style CSS
+            (for syntax highlighted snippets)
+        -->
+        <link rel="stylesheet" type="text/css" href="../../../css/syntax.css" />
+
+        <!--
+            Bootstrap
+        -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+        <style>
+            /*
+             * Bootstrap defines blockquote as 17px,
+             * so it looks stupidly large in my blogposts. */
+            blockquote {
+                font-size: 14px;
+            }
+        </style>
+
+        <!--
+            Waypoints, and Waypoints-Sticky,
+            so we can do this:
+            http://imakewebthings.com/waypoints/shortcuts/sticky-elements/
+        -->
+        <script src="../../../js/jquery.waypoints.min.js"></script>
+        <script src="../../../js/sticky.min.js"></script>
+
+        <!-- My analytics stuff -->
+        <script src="../../../js/my_analytics.js"></script>
+        <script src="../../../js/my_analytics_debug.js"></script>
+
+        <!--
+            TOCify
+        -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js"></script>
+
+        <!--
+            Patched TOCify css file.
+            (Don't want fixed `.tocify`).
+        -->
+        <link rel="stylesheet" type="text/css" href="../../../css/jquery.tocify.css" />
+
+        <style>
+        .navbar {
+            margin-bottom: 0px;
+        }
+
+        .banner-image {
+            width:100%;
+        }
+
+        .banner {
+            margin-left: 0px;
+            margin-right: 0px;
+        }
+
+        body {
+            background-color: #e2e2e2;
+        }
+
+        #page {
+            padding-left:0;
+            padding-right:0;
+            background-color: #ffffff;
+        }
+        </style>
+
+        <!-- Google Analytics -->
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-H13NWYDX0G"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'G-H13NWYDX0G');
+        </script>
+    </head>
+    <body>
+        <div id="page" class="container">
+            <!-- This, with no padding on left/right -->
+            <div class="banner">
+                <nav class="navbar navbar-default">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+
+            <!-- The Hamburger -->
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../../../">Richard Goulter's Blog</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="../../../">Home</a></li>
+            <li><a href="../../../blog/yi.html">Yi</a></li>
+            <li><a href="../../../blog/emacs.html">Emacs</a></li>
+            <li><a href="../../../blog/what-i-wish-i-knew-when-i-started-using-nix.html">Nixpkgs</a></li>
+            <li><a href="../../../blog/archive.html">Archive</a></li>
+        </ul>
+    </div>
+</nav>
+
+            </div>
+
+            <hr style="margin: 0px; border-top: 5px solid black;" />
+
+            <div id="content" class="container">
+                <h1>Org Babel is an Underappreciated Tool</h1>
+                <div class="info">
+    Posted on October 26, 2025
+    
+        by Richard Goulter
+    <br />
+    
+    Tags: 
+    
+</div>
+
+<p>Emacs Org mode’s <a href="https://orgmode.org/manual/Working-with-Source-Code.html">source code blocks</a>
+and the complementary <a href="https://orgmode.org/worg/org-contrib/babel/intro.html">org babel</a>
+are underappreciated tools.</p>
+<p><a href="https://www.gnu.org/software/emacs/">Emacs</a> is a <em>highly</em> customisable text editor.</p>
+<p><a href="https://orgmode.org/manual/index.html">Org Mode</a> is a broad set of functionality for org markup files.<br />
+Functionality ranges from todo list management &amp; note taking, agenda management,
+to spreadsheets and document exporting/publishing.</p>
+<p>Org mode’s support for source code allows blocks of source code to be:</p>
+<ul>
+<li>evaluated (with the results embedded in the document; i.e. “plaintext Jupyter Notebooks”),</li>
+<li>exported (so the code can be presented in e.g. PDF documents),</li>
+<li>tangled (rearranging snippets into source code into files for the compiler).</li>
+</ul>
+<p>Org Babel is the meta-programming functionality integrated with that,
+which allows source code blocks of different languages to interact.</p>
+<p>It’s an underappreciated tool. For how useful the functionality is,
+it’s (at best) limited to Emacs users.</p>
+<h2 id="what-ive-found-it-useful-for">What I’ve Found it Useful For</h2>
+<p>“Plaintext Jupyter Notebooks” gets 95% of the way to describing org’s source code block evaluation.<br />
+– “Plaintext”, on the one hand, means it lacks some user-friendliness that Jupyter Lab’s rich web interface provides.
+On the other hand, plaintext has its own advantages.</p>
+<p>Anyway. I’ve found the that “run the source code blocks, include the results in the document”
+(also known as a <a href="https://en.wikipedia.org/wiki/Notebook_interface">“notebook”</a>) to be useful.</p>
+<p>I’ve used it for:</p>
+<ul>
+<li><p>Playing around with / learning programming language subtleties.</p>
+<ul>
+<li>This is similar to how you’d use “scratch playgrounds” like https://play.rust-lang.org/:
+being able to run a snippet of code and see the result, without having to fuss with
+editing a file in some fresh location.</li>
+</ul></li>
+<li><p>Exploring the behaviour of under-documented APIs.</p>
+<ul>
+<li>Similar to how notebooks are useful for writing tutorials or documentation,
+when I’ve been curious about how an under-documented API works,
+I’ve found the notebook interface to be useful.</li>
+</ul></li>
+<li><p>DevOps work: spelunking around cloud environments and resources.</p>
+<ul>
+<li><a href="https://howardism.org/Technical/Emacs/literate-devops.html">howardism.org’s “Literate DevOps”</a>
+is where I first came across the idea. – As well as the output of commands, a notebook
+supports idiomatically embedding links to reference material, or explanation for why
+commands were run. These are useful things for DevOps-related tasks.</li>
+</ul></li>
+</ul>
+<h2 id="dynamics-executable-document-living-document-literate-programming">Dynamics: Executable Document, Living Document, Literate Programming</h2>
+<p>Emacs org mode’s code block support enables some dynamics:</p>
+<h4 id="executable-document">Executable Document</h4>
+<p>Because the org mode’s source code blocks can be executed, with the results
+embedded in the document, the resulting document can be described as an
+“executable document”: it’s a document where you can execute the (embedded) code
+snippets.</p>
+<p>If the document’s emphasis is on the results (e.g. statistics/graphs), then this
+can be described as a “reproducible research” tool. (To reproduce the results,
+you’d just re-execute the document).</p>
+<p>If the document emphasises documentation/specification, you can call it “executable documentation” or “executable specification”.<br />
+i.e. the benefits of a specification (communicating what something is) with the
+benefits of an automated check (confidence in the system’s correctness).</p>
+<h4 id="living-document">Living Document</h4>
+<p>A “living” document is a document which is fresh and maintained. (As opposed to
+outdated).</p>
+<p>In programming, ‘living documents’ often are associated with some kind of
+automated execution or generation.</p>
+<p>Executable documents can be maintained as living documents: you can be confident
+the document is ‘up to date’ by re-executing it.</p>
+<h4 id="literate-programming">Literate Programming</h4>
+<p>I think ‘literate programming’ is broadly (mis)understood as programming where
+the code and prose are freely mixed together.</p>
+<p>I think a more accurate and precise definition is: literate programming
+emphasises constructing an explanation of some module; where the literate
+program can be ‘weaved’ to construct a beautifully typeset document; or
+‘tangled’ to produce source code files for the compiler. – The emphasis is on
+presentation of the program for a clear explanation (without being constrained
+by order that a compiler would require).</p>
+<p>Org mode’s source code supports this.<br />
+Though, I suspect good ‘literate programming’ is requires a good amount of
+discipline and thought.</p>
+<h2 id="org-babel-is-meta-programming">Org-Babel is Meta-Programming</h2>
+<p>From <a href="https://orgmode.org/worg/org-contrib/babel/intro.html">the org mode community’s introduction to org babel</a>:</p>
+<blockquote>
+<p>Because the return value of a function written in one language can be passed
+to a function written in another language, or to an Org table, which is itself
+programmable, Babel can be used as a meta-functional programming language.
+With Babel, functions from many languages can work together. You can mix and
+match languages, using each language for the tasks to which it is best suited.</p>
+<p>For example, let’s take some system diagnostics in the shell and graph them
+with R.</p>
+</blockquote>
+<p>The code blocks can be named. The code blocks can take in <code>:var</code> inputs, and can reference the output values from other code blocks.</p>
+<p>Code blocks can be re-called with different arguments.</p>
+<p>That is: writing an org document with source code blocks is itself programming.
+It’s up to the programmer to choose an appropriate way of arranging the code.</p>
+<p>I have not made much use of the <em>polyglot</em> nature of org-babel. But, I think it’s interesting.</p>
+<h2 id="notebooks-interface-partway-between-manual-and-automated">Notebooks Interface: Partway Between “Manual” and “Automated”</h2>
+<p>I think the most common ways to interact with some program are either entirely manual, or entirely automated.</p>
+<p>e.g. if you’ve got some Python code, you’ll either run the code to observe its output;
+or perhaps you’ll write some automated check to have confidence that the code works.</p>
+<p>e.g. if you want to launch some VM, you’ll either launch it in a web console, or run a command line command;
+or perhaps apply some Terraform code.</p>
+<p>A notebook interface sits partway between these.</p>
+<p>Unlike a script/automation: You can easily execute just the snippets you want, when you want. – If you’re interrupted
+(e.g. some unexpected error occurs), you can either fix that externally, or embed instructions in the notebook to fix it.
+– The instructions to fix it could even just be an explanation.<br />
+This means a notebook does not need to be as robust as an automation/script.</p>
+<p>Unlike manual commands: A notebook document can easily include commentary, and provides an easy way to read through
+what was executed, and the output of what was executed.</p>
+<p>I think those properties make notebooks a compelling tool for cases where you
+don’t quite have a fully automated setup easily available.</p>
+
+<hr />
+
+<div>
+    
+    
+    <a href="../../../blog/posts/programming/2025-09-18-rewriting-smart-keymap-key-storage-implementation.html" style="float:right; text-align: right;">Older post</a>
+    
+</div>
+<br style="clear: both;" />
+
+<hr />
+
+            </div>
+
+            <hr style="margin-bottom: 0px; border-top: 2px solid black;" />
+
+            <div id="footer" class="pull-right" style="padding-right: 10px;">
+                Site proudly generated by
+                <a href="http://jaspervdj.be/hakyll">Hakyll</a>
+            </div>
+        </div>
+
+        <script>
+            // The callbacks we wanna use
+            // Phone-home, telling Google Analytics various metrics/dimensions
+
+            // Use custom dimensions & metrics
+            var AnalyticDimensionReaderKind = 'dimension1';
+            var AnalyticMetricActiveTime      = 'metric1';
+            var AnalyticMetricLongestIdleTime = 'metric2';
+            var AnalyticMetricReadCount       = 'metric3';
+
+            var gaCallbacks = {
+                "scrollPercent": function(ms, perc) {
+                    if (perc > 85) {
+                        // EVENT: Page read
+                        ga('send', {
+                            hitType:       'event',
+                            eventCategory: 'Scrolling',
+                            eventAction:   'atBottom',
+                            eventValue:    String(ms)
+                        });
+                    }
+                },
+                "read": function(ms, ct, timeToReach) {
+                    // Use this to set DIMENSION
+                    // timeToReach < 5s ==> Skim (default = Visitor)
+                    if (timeToReach < 5 * 1000) {
+                        // dimension1 = ReaderKind
+                        ga('set', AnalyticDimensionReaderKind, "skimmer");
+                    }
+
+                    // timeToReach > 30s ==> Reader
+                    if (timeToReach > 30 * 1000) {
+                        // dimension1 = ReaderKind
+                        ga('set', AnalyticDimensionReaderKind, "reader");
+                    }
+
+                    // EVENT: Page read
+                    ga('send', {
+                        hitType:       'event',
+                        eventCategory: 'Reading',
+                        eventAction:   'read',
+                        eventValue:    String(timeToReach)
+                    });
+
+                    // METRIC
+                    ga('set', AnalyticMetricReadCount, String(ct));
+                },
+                "initialIdle": function(ms) {
+                    // EVENT: Started Reading
+                    ga('send', {
+                        hitType:       'event',
+                        eventCategory: 'Scrolling',
+                        eventAction:   'begun',
+                        eventValue:    String(ms)
+                    });
+                },
+                "timeSpent": function(total, active, curIdle, initIdle, longestIdle) {
+                    // Update METRIC(S)?
+                    ga('set', AnalyticMetricActiveTime, String(active));
+                    ga('set', AnalyticMetricLongestIdleTime, String(longestIdle));
+                },
+                "idle": function(ms) {
+                },
+                "longestIdle": function(ms) {
+                }
+            }
+
+            window.onload = function() {
+                myAnalyticsInit(gaCallbacks);
+
+                //
+                // Initial dimensions & metrics
+                //
+
+                ga('set', AnalyticMetricReadCount, String(0));
+
+                // EVENT: Page load
+                ga('send', {
+                    hitType:       'event',
+                    eventCategory: 'pageLoad',
+                    eventAction:   'begun',
+                    eventValue:    String(0)
+                });
+
+                // DIMENSION: visitor
+                ga('set', AnalyticDimensionReaderKind, "visitor");
+            }
+        </script>
+    </body>
+</html>
