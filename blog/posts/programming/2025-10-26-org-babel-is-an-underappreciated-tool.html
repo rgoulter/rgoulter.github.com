@@ -185,6 +185,21 @@ supports idiomatically embedding links to reference material, or explanation for
 commands were run. These are useful things for DevOps-related tasks.</li>
 </ul></li>
 </ul>
+<h3 id="nice-to-have-properties-for-notebooks">Nice-to-Have Properties for Notebooks</h3>
+<p>I suspect this takes a bit of practice to get right.</p>
+<ol type="1">
+<li><p>Easy to execute: notebooks are easy to execute for the notebook author.</p></li>
+<li><p>Easy to export to a human-readable format: e.g. I want to be able to export the report to
+markdown, and have the code in <em>that</em> be easy to read/understand, and easy to execute
+(or at least easy to copy-and-paste).</p></li>
+<li><p>Maintainable “As-Code”: The code snippets notebook should be maintainable (easy to read).
+Ideally, the snippets have as little boilerplate as they need, and no less;
+as much abstraction as helps make the code understandable, and no more.</p></li>
+</ol>
+<p>Sometimes I care about the results as a snapshot in time.
+(e.g. With the output of commands when querying a system that’s in a malformed state..
+it’d be useful to have a notebook which <em>reported</em> that bad state,
+without overwriting those results with the latest (presumably correct) state).</p>
 <h2 id="dynamics-executable-document-living-document-literate-programming">Dynamics: Executable Document, Living Document, Literate Programming</h2>
 <p>Emacs org mode’s code block support enables some dynamics:</p>
 <h4 id="executable-document">Executable Document</h4>
@@ -232,7 +247,8 @@ with R.</p>
 <p>Code blocks can be re-called with different arguments.</p>
 <p>That is: writing an org document with source code blocks is itself programming.
 It’s up to the programmer to choose an appropriate way of arranging the code.</p>
-<p>I have not made much use of the <em>polyglot</em> nature of org-babel. But, I think it’s interesting.</p>
+<p>I have not made much use of the <em>polyglot</em> nature of org-babel. But, I think it’s interesting.<br />
+It’s easy to imagine how having a notebook with a mix of =shell= (e.g. bash) cells, some =python= shells could be useful.</p>
 <h2 id="notebooks-interface-partway-between-manual-and-automated">Notebooks Interface: Partway Between “Manual” and “Automated”</h2>
 <p>I think the most common ways to interact with some program are either entirely manual, or entirely automated.</p>
 <p>e.g. if you’ve got some Python code, you’ll either run the code to observe its output;
