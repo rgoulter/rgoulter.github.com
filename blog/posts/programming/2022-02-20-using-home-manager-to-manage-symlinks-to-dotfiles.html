@@ -221,8 +221,8 @@ with the simple <code>home.nix</code> and <code>flake.nix</code> that I started 
 <span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>      <span class="va">system</span> <span class="op">=</span> <span class="st">&quot;x86_64-linux&quot;</span><span class="op">;</span></span>
 <span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>      <span class="va">username</span> <span class="op">=</span> <span class="st">&quot;rgoulter&quot;</span><span class="op">;</span></span>
 <span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    <span class="kw">in</span> <span class="op">{</span></span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>      <span class="va">homeConfigurations</span>.<span class="st">&quot;</span><span class="sc">${</span>username<span class="sc">}</span>-<span class="sc">${</span>system<span class="sc">}</span><span class="st">&quot;</span> <span class="op">=</span> home<span class="op">-</span>manager.lib.homeManagerConfiguration <span class="op">{</span></span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>        <span class="kw">inherit</span> system username<span class="op">;</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>      <span class="va">homeConfigurations</span>.<span class="st">&quot;</span><span class="sc">${</span>username<span class="sc">}</span><span class="st">-</span><span class="sc">${</span>system<span class="sc">}</span><span class="st">&quot;</span> <span class="op">=</span> home<span class="op">-</span>manager<span class="op">.</span>lib<span class="op">.</span>homeManagerConfiguration <span class="op">{</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>        <span class="kw">inherit</span> <span class="va">system</span> <span class="va">username</span><span class="op">;</span></span>
 <span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>        <span class="va">configuration</span> <span class="op">=</span> <span class="bu">import</span> <span class="ss">./home.nix</span><span class="op">;</span></span>
 <span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a></span>
@@ -277,7 +277,7 @@ symlink given some source files.</p>
 <span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Using the submodule in this dotfiles repo would make</span></span>
 <span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>  <span class="co"># require a more awkward flake URI.</span></span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>  <span class="va">home</span>.<span class="va">file</span>.<span class="st">&quot;.nvim/bundle/Vundle.vim&quot;</span>.<span class="va">source</span> <span class="op">=</span> pkgs.fetchFromGitHub <span class="op">{</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>  <span class="va">home</span>.<span class="va">file</span>.<span class="st">&quot;.nvim/bundle/Vundle.vim&quot;</span>.<span class="va">source</span> <span class="op">=</span> pkgs<span class="op">.</span>fetchFromGitHub <span class="op">{</span></span>
 <span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>    <span class="va">owner</span> <span class="op">=</span> <span class="st">&quot;VundleVim&quot;</span><span class="op">;</span></span>
 <span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>    <span class="va">repo</span> <span class="op">=</span> <span class="st">&quot;Vundle.vim&quot;</span><span class="op">;</span></span>
 <span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>    <span class="va">rev</span> <span class="op">=</span> <span class="st">&quot;cfd3b2d388a8c2e9903d7a9d80a65539aabfe933&quot;</span><span class="op">;</span></span>
@@ -308,7 +308,7 @@ But we’re at DSL o’clock here:</p>
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="co">#  e.g. &quot;alacritty/alacritty.yml&quot; for ~/.config/alacritty/alacritty.yml</span></span>
 <span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># The attribute value is the path to the dotfile in this repo.</span></span>
 <span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="va">configFilesToLink</span> <span class="op">=</span> <span class="op">{</span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;</span>alacritty/alacritty.yml<span class="st">&quot;</span> <span class="op">=</span> <span class="ss">./alacritty.yml</span><span class="op">;</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;alacritty/alacritty.yml&quot;</span> <span class="op">=</span> <span class="ss">./alacritty.yml</span><span class="op">;</span></span>
 <span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;emacs-rgoulter/init.el&quot;</span>  <span class="op">=</span> <span class="ss">./emacs.el</span><span class="op">;</span></span>
 <span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;emacs-rgoulter/straight/versions/default.el&quot;</span>  <span class="op">=</span> <span class="ss">./emacs.d/straight/versions/default.el</span><span class="op">;</span></span>
 <span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># etc.</span></span>
@@ -319,7 +319,7 @@ But we’re at DSL o’clock here:</p>
 <span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>  <span class="co">#  e.g. &quot;.hgrc&quot; for ~/.hgrc.</span></span>
 <span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>  <span class="co"># The attribute value is the path to the dotfile in this repo.</span></span>
 <span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>  <span class="va">homeFilesToLink</span> <span class="op">=</span> <span class="op">{</span></span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;</span>.emacs-profiles.el<span class="st">&quot;</span> <span class="op">=</span> <span class="ss">./emacs-profiles.el</span><span class="op">;</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;.emacs-profiles.el&quot;</span> <span class="op">=</span> <span class="ss">./emacs-profiles.el</span><span class="op">;</span></span>
 <span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;.gvimrc&quot;</span> <span class="op">=</span> <span class="ss">./gvimrc</span><span class="op">;</span></span>
 <span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>    <span class="co"># etc.</span></span>
 <span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>  <span class="op">};</span></span>
@@ -330,10 +330,10 @@ But we’re at DSL o’clock here:</p>
 <span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a><span class="kw">in</span></span>
 <span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
 <span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Symlink files under ~, e.g. ~/.hgrc</span></span>
-<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>  <span class="va">home</span>.<span class="va">file</span> <span class="op">=</span> pkgs.lib.attrsets.mapAttrs toSource homeFilesToLink<span class="op">;</span></span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>  <span class="va">home</span>.<span class="va">file</span> <span class="op">=</span> pkgs<span class="op">.</span>lib<span class="op">.</span>attrsets<span class="op">.</span>mapAttrs toSource homeFilesToLink<span class="op">;</span></span>
 <span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Symlink files under ~/.config, e.g. ~/.config/alacritty/alacritty.yml</span></span>
-<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>  <span class="va">xdg</span>.<span class="va">configFile</span> <span class="op">=</span> pkgs.lib.attrsets.mapAttrs toSource configFilesToLink<span class="op">;</span></span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>  <span class="va">xdg</span>.<span class="va">configFile</span> <span class="op">=</span> pkgs<span class="op">.</span>lib<span class="op">.</span>attrsets<span class="op">.</span>mapAttrs toSource configFilesToLink<span class="op">;</span></span>
 <span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a>  <span class="co"># ...</span></span>
 <span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
@@ -344,7 +344,7 @@ functions</a>, and
 the <a href="https://nixos.org/manual/nixpkgs/stable/#chap-functions">Nixpkgs manual has a chapter on its library
 functions</a>.</p>
 <p>To help read the above code, the example given for <code>mapAttrs</code> is:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode nix"><code class="sourceCode nix"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>lib.attrsets.mapAttrs</span>
+<div class="sourceCode" id="cb7"><pre class="sourceCode nix"><code class="sourceCode nix"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>lib<span class="op">.</span>attrsets<span class="op">.</span>mapAttrs</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="op">(</span><span class="va">name</span><span class="op">:</span> <span class="va">value</span><span class="op">:</span> name <span class="op">+</span> <span class="st">&quot;-&quot;</span> <span class="op">+</span> value<span class="op">)</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="op">{</span> <span class="va">x</span> <span class="op">=</span> <span class="st">&quot;foo&quot;</span><span class="op">;</span> <span class="va">y</span> <span class="op">=</span> <span class="st">&quot;bar&quot;</span><span class="op">;</span> <span class="op">}</span></span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># =&gt; { x = &quot;x-foo&quot;; y = &quot;y-bar&quot;; }</span></span></code></pre></div>
@@ -364,7 +364,7 @@ It’s hardly a burden to be explicit if you’re unfamiliar with the domain.</p
 <span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># e.g. given &quot;hgrc&quot;</span></span>
 <span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># return the attrset { &quot;.hgrc&quot; = ./hgrc; }.</span></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>  <span class="va">genAttrsForSimpleDotLink</span> <span class="op">=</span> <span class="va">fileName</span><span class="op">:</span> <span class="op">{</span> <span class="st">&quot;</span>.<span class="sc">${</span>fileName<span class="sc">}</span><span class="st">&quot;</span> <span class="op">=</span> <span class="ss">./.</span> <span class="op">+</span> <span class="op">(</span><span class="st">&quot;/&quot;</span> <span class="op">+</span> fileName<span class="op">);</span> <span class="op">};</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>  <span class="va">genAttrsForSimpleDotLink</span> <span class="op">=</span> <span class="va">fileName</span><span class="op">:</span> <span class="op">{</span> <span class="st">&quot;.</span><span class="sc">${</span>fileName<span class="sc">}</span><span class="st">&quot;</span> <span class="op">=</span> <span class="ss">./.</span> <span class="op">+</span> <span class="op">(</span><span class="st">&quot;/&quot;</span> <span class="op">+</span> fileName<span class="op">);</span> <span class="op">};</span></span>
 <span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># ...</span></span>
 <span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a></span>
@@ -380,7 +380,7 @@ It’s hardly a burden to be explicit if you’re unfamiliar with the domain.</p
 <span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Files where the symlinks aren't following a nice convention.</span></span>
 <span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>  <span class="va">unconventionalConfigFilesToLink</span> <span class="op">=</span> <span class="op">{</span></span>
-<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;</span>emacs-rgoulter/init.el<span class="st">&quot;</span>  <span class="op">=</span> <span class="ss">./emacs.el</span><span class="op">;</span></span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;emacs-rgoulter/init.el&quot;</span>  <span class="op">=</span> <span class="ss">./emacs.el</span><span class="op">;</span></span>
 <span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;nvim/init.vim&quot;</span> <span class="op">=</span> <span class="ss">./vimrc</span><span class="op">;</span></span>
 <span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>    <span class="co"># etc.</span></span>
 <span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>  <span class="op">};</span></span>
@@ -395,7 +395,7 @@ It’s hardly a burden to be explicit if you’re unfamiliar with the domain.</p
 <span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a>  <span class="op">];</span></span>
 <span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a>  <span class="va">unconventionalHomeFilesToLink</span> <span class="op">=</span> <span class="op">{</span></span>
-<span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;</span>.nvim/after/ftplugin/org.vim<span class="st">&quot;</span> <span class="op">=</span> <span class="ss">./vim/after/ftplugin/org.vim</span><span class="op">;</span></span>
+<span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;.nvim/after/ftplugin/org.vim&quot;</span> <span class="op">=</span> <span class="ss">./vim/after/ftplugin/org.vim</span><span class="op">;</span></span>
 <span id="cb8-42"><a href="#cb8-42" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;.nvim/bundle/Vundle.vim&quot;</span> <span class="op">=</span> vundleRepoSrc<span class="op">;</span></span>
 <span id="cb8-43"><a href="#cb8-43" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;.vim/bundle/Vundle.vim&quot;</span> <span class="op">=</span> vundleRepoSrc<span class="op">;</span></span>
 <span id="cb8-44"><a href="#cb8-44" aria-hidden="true" tabindex="-1"></a>  <span class="op">};</span></span>
@@ -405,7 +405,7 @@ It’s hardly a burden to be explicit if you’re unfamiliar with the domain.</p
 <span id="cb8-48"><a href="#cb8-48" aria-hidden="true" tabindex="-1"></a>  <span class="co">#  e.g. &quot;alacritty/alacritty.yml&quot; for ~/.config/alacritty/alacritty.yml</span></span>
 <span id="cb8-49"><a href="#cb8-49" aria-hidden="true" tabindex="-1"></a>  <span class="co"># The attribute value is the path to the dotfile in this repo.</span></span>
 <span id="cb8-50"><a href="#cb8-50" aria-hidden="true" tabindex="-1"></a>  <span class="va">configFilesToLink</span> <span class="op">=</span></span>
-<span id="cb8-51"><a href="#cb8-51" aria-hidden="true" tabindex="-1"></a>    <span class="op">(</span>pkgs.lib.attrsets.genAttrs simpleConfigFilesToLinkList genAttrsForSimpleLink<span class="op">)</span> <span class="op">//</span></span>
+<span id="cb8-51"><a href="#cb8-51" aria-hidden="true" tabindex="-1"></a>    <span class="op">(</span>pkgs<span class="op">.</span>lib<span class="op">.</span>attrsets<span class="op">.</span>genAttrs simpleConfigFilesToLinkList genAttrsForSimpleLink<span class="op">)</span> <span class="op">//</span></span>
 <span id="cb8-52"><a href="#cb8-52" aria-hidden="true" tabindex="-1"></a>    unconventionalConfigFilesToLink<span class="op">;</span></span>
 <span id="cb8-53"><a href="#cb8-53" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-54"><a href="#cb8-54" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Attribute set for dotfiles in this repo to link into home directory.</span></span>
@@ -413,15 +413,15 @@ It’s hardly a burden to be explicit if you’re unfamiliar with the domain.</p
 <span id="cb8-56"><a href="#cb8-56" aria-hidden="true" tabindex="-1"></a>  <span class="co">#  e.g. &quot;.hgrc&quot; for ~/.hgrc.</span></span>
 <span id="cb8-57"><a href="#cb8-57" aria-hidden="true" tabindex="-1"></a>  <span class="co"># The attribute value is the path to the dotfile in this repo.</span></span>
 <span id="cb8-58"><a href="#cb8-58" aria-hidden="true" tabindex="-1"></a>  <span class="va">homeFilesToLink</span> <span class="op">=</span></span>
-<span id="cb8-59"><a href="#cb8-59" aria-hidden="true" tabindex="-1"></a>    <span class="op">(</span>pkgs.lib.lists.foldr <span class="op">(</span><span class="va">a</span><span class="op">:</span> <span class="va">b</span><span class="op">:</span> a <span class="op">//</span> b<span class="op">)</span> <span class="op">{}</span> <span class="op">(</span><span class="bu">map</span> genAttrsForSimpleDotLink simpleHomeFilesToLinkList<span class="op">))</span> <span class="op">//</span></span>
+<span id="cb8-59"><a href="#cb8-59" aria-hidden="true" tabindex="-1"></a>    <span class="op">(</span>pkgs<span class="op">.</span>lib<span class="op">.</span>lists<span class="op">.</span>foldr <span class="op">(</span><span class="va">a</span><span class="op">:</span> <span class="va">b</span><span class="op">:</span> a <span class="op">//</span> b<span class="op">)</span> <span class="op">{}</span> <span class="op">(</span><span class="bu">map</span> genAttrsForSimpleDotLink simpleHomeFilesToLinkList<span class="op">))</span> <span class="op">//</span></span>
 <span id="cb8-60"><a href="#cb8-60" aria-hidden="true" tabindex="-1"></a>    unconventionalHomeFilesToLink<span class="op">;</span></span>
 <span id="cb8-61"><a href="#cb8-61" aria-hidden="true" tabindex="-1"></a><span class="kw">in</span></span>
 <span id="cb8-62"><a href="#cb8-62" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
 <span id="cb8-63"><a href="#cb8-63" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Symlink files under ~, e.g. ~/.hgrc</span></span>
-<span id="cb8-64"><a href="#cb8-64" aria-hidden="true" tabindex="-1"></a>  <span class="va">home</span>.<span class="va">file</span> <span class="op">=</span> pkgs.lib.attrsets.mapAttrs toSource homeFilesToLink<span class="op">;</span></span>
+<span id="cb8-64"><a href="#cb8-64" aria-hidden="true" tabindex="-1"></a>  <span class="va">home</span>.<span class="va">file</span> <span class="op">=</span> pkgs<span class="op">.</span>lib<span class="op">.</span>attrsets<span class="op">.</span>mapAttrs toSource homeFilesToLink<span class="op">;</span></span>
 <span id="cb8-65"><a href="#cb8-65" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-66"><a href="#cb8-66" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Symlink files under ~/.config, e.g. ~/.config/alacritty/alacritty.yml</span></span>
-<span id="cb8-67"><a href="#cb8-67" aria-hidden="true" tabindex="-1"></a>  <span class="va">xdg</span>.<span class="va">configFile</span> <span class="op">=</span> pkgs.lib.attrsets.mapAttrs toSource configFilesToLink<span class="op">;</span></span>
+<span id="cb8-67"><a href="#cb8-67" aria-hidden="true" tabindex="-1"></a>  <span class="va">xdg</span>.<span class="va">configFile</span> <span class="op">=</span> pkgs<span class="op">.</span>lib<span class="op">.</span>attrsets<span class="op">.</span>mapAttrs toSource configFilesToLink<span class="op">;</span></span>
 <span id="cb8-68"><a href="#cb8-68" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-69"><a href="#cb8-69" aria-hidden="true" tabindex="-1"></a>  <span class="co"># ...</span></span>
 <span id="cb8-70"><a href="#cb8-70" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
@@ -437,16 +437,16 @@ and construct <code>configFilesToLink</code> with:</p>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>genAttrsForSimpleLink = <span class="va">fileName</span><span class="op">:</span> <span class="ss">./.</span> <span class="op">+</span> <span class="op">(</span><span class="st">&quot;/&quot;</span> <span class="op">+</span> fileName<span class="op">)</span>;</span>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>configFilesToLink =</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="op">(</span>pkgs.lib.attrsets.genAttrs simpleConfigFilesToLinkList genAttrsForSimpleLink<span class="op">)</span> <span class="op">//</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="op">(</span>pkgs<span class="op">.</span>lib<span class="op">.</span>attrsets<span class="op">.</span>genAttrs simpleConfigFilesToLinkList genAttrsForSimpleLink<span class="op">)</span> <span class="op">//</span></span>
 <span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  unconventionalConfigFilesToLink;</span></code></pre></div>
 <p>Unfortunately, to get <code>[ "vimrc" ]</code> into <code>{ ".vimrc" = ./vimrc }</code>, this involves
 transforming “vimrc” to “.vimrc”, it’s a bit more involved:</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode nix"><code class="sourceCode nix"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># e.g. given &quot;hgrc&quot;</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co"># return the attrset { &quot;.hgrc&quot; = ./hgrc; }.</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>genAttrsForSimpleDotLink = <span class="va">fileName</span><span class="op">:</span> <span class="op">{</span> <span class="st">&quot;</span>.<span class="sc">${</span>fileName<span class="sc">}</span><span class="st">&quot;</span> <span class="op">=</span> <span class="ss">./.</span> <span class="op">+</span> <span class="op">(</span><span class="st">&quot;/&quot;</span> <span class="op">+</span> fileName<span class="op">);</span> <span class="op">}</span>;</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>genAttrsForSimpleDotLink = <span class="va">fileName</span><span class="op">:</span> <span class="op">{</span> <span class="st">&quot;.</span><span class="sc">${</span>fileName<span class="sc">}</span><span class="st">&quot;</span> <span class="op">=</span> <span class="ss">./.</span> <span class="op">+</span> <span class="op">(</span><span class="st">&quot;/&quot;</span> <span class="op">+</span> fileName<span class="op">);</span> <span class="op">}</span>;</span>
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>homeFilesToLink =</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="op">(</span>pkgs.lib.lists.foldr <span class="op">(</span><span class="va">a</span><span class="op">:</span> <span class="va">b</span><span class="op">:</span> a <span class="op">//</span> b<span class="op">)</span> <span class="op">{}</span> <span class="op">(</span><span class="bu">map</span> genAttrsForSimpleDotLink simpleHomeFilesToLinkList<span class="op">))</span> <span class="op">//</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="op">(</span>pkgs<span class="op">.</span>lib<span class="op">.</span>lists<span class="op">.</span>foldr <span class="op">(</span><span class="va">a</span><span class="op">:</span> <span class="va">b</span><span class="op">:</span> a <span class="op">//</span> b<span class="op">)</span> <span class="op">{}</span> <span class="op">(</span><span class="bu">map</span> genAttrsForSimpleDotLink simpleHomeFilesToLinkList<span class="op">))</span> <span class="op">//</span></span>
 <span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>  unconventionalHomeFilesToLink;</span></code></pre></div>
 <p>(where <code>pkgs.lib.lists.foldr (a: b: a // b) {}</code> is essentially <code>listToAttrs</code>,
 but my version of Nix didn’t have this. In nix, <code>{ a = 3; } // { b = 4; }</code>

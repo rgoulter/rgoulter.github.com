@@ -363,14 +363,14 @@ This means the VM will have <code>nix</code> available shortly after the VM laun
 <span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>    <span class="va">rgoulter</span><span class="op">,</span></span>
 <span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>    <span class="op">...</span></span>
 <span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span>: <span class="op">{</span></span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>    <span class="va">packages</span>.<span class="st">&quot;</span>x86_64-linux<span class="st">&quot;</span>.<span class="va">small-openstack</span> <span class="op">=</span> nixos<span class="op">-</span>generators.nixosGenerate <span class="op">{</span></span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>      <span class="va">pkgs</span> <span class="op">=</span> nixpkgs.legacyPackages.<span class="st">&quot;x86_64-linux&quot;</span><span class="op">;</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>    <span class="va">packages</span>.<span class="st">&quot;x86_64-linux&quot;</span>.<span class="va">small-openstack</span> <span class="op">=</span> nixos<span class="op">-</span>generators<span class="op">.</span>nixosGenerate <span class="op">{</span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>      <span class="va">pkgs</span> <span class="op">=</span> nixpkgs<span class="op">.</span>legacyPackages<span class="op">.</span><span class="st">&quot;x86_64-linux&quot;</span><span class="op">;</span></span>
 <span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>      <span class="va">format</span> <span class="op">=</span> <span class="st">&quot;openstack&quot;</span><span class="op">;</span></span>
 <span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>      <span class="va">modules</span> <span class="op">=</span> <span class="op">[</span></span>
-<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>        rgoulter.nixosModules.cloud-interactive</span>
-<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>        rgoulter.nixosModules.ssh</span>
-<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>        rgoulter.nixosModules.ssh-users</span>
-<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>        rgoulter.nixosModules.tailscale</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>        rgoulter<span class="op">.</span>nixosModules<span class="op">.</span>cloud-interactive</span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>        rgoulter<span class="op">.</span>nixosModules<span class="op">.</span>ssh</span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>        rgoulter<span class="op">.</span>nixosModules<span class="op">.</span>ssh-users</span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>        rgoulter<span class="op">.</span>nixosModules<span class="op">.</span>tailscale</span>
 <span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>      <span class="op">];</span></span>
 <span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>    <span class="op">};</span></span>
 <span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>  <span class="op">};</span></span>

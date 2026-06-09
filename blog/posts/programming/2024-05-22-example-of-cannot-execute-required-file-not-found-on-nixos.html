@@ -215,7 +215,7 @@ exec: Failed to execute process './badinterp': The file specified the interprete
 <p>e.g. in this case, we can write a simple <code>fhs.nix</code>:</p>
 <div class="sourceCode" id="cb17"><pre class="sourceCode nix"><code class="sourceCode nix"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="op">{</span> <span class="va">pkgs</span> <span class="op">?</span> <span class="bu">import</span> &lt;nixpkgs&gt; <span class="op">{}</span> <span class="op">}</span>:</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>pkgs.buildFHSEnv <span class="op">{</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>pkgs<span class="op">.</span>buildFHSEnv <span class="op">{</span></span>
 <span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="va">name</span> <span class="op">=</span> <span class="st">&quot;hello&quot;</span><span class="op">;</span></span>
 <span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="va">runScript</span> <span class="op">=</span> <span class="ss">./a.out</span><span class="op">;</span></span>
 <span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
@@ -234,7 +234,7 @@ hello world</code></pre>
 <p>NOTE: if you change the arguments to <code>nix-alien</code>, you may need to call <code>nix-alien</code> with <code>--recreate</code> to ensure it recreates the <code>default.nix</code>.</p>
 <p>Examining the <code>default.nix</code> it creates:</p>
 <div class="sourceCode" id="cb20"><pre class="sourceCode nix"><code class="sourceCode nix"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="op">{</span> <span class="va">pkgs</span> <span class="op">?</span> <span class="bu">import</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>    <span class="op">(</span><span class="bu">builtins</span>.<span class="bu">fetchTarball</span> <span class="op">{</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>    <span class="op">(</span><span class="bu">builtins</span><span class="op">.</span>fetchTarball <span class="op">{</span></span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>      <span class="va">name</span> <span class="op">=</span> <span class="st">&quot;nixpkgs-unstable-20240509145238&quot;</span><span class="op">;</span></span>
 <span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>      <span class="va">url</span> <span class="op">=</span> <span class="st">&quot;https://github.com/NixOS/nixpkgs/archive/f1010e0469db743d14519a1efd37e23f8513d714.tar.gz&quot;</span><span class="op">;</span></span>
 <span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>      <span class="va">sha256</span> <span class="op">=</span> <span class="st">&quot;sha256-doPgfj+7FFe9rfzWo1siAV2mVCasW+Bh8I1cToAXEE4=&quot;</span><span class="op">;</span></span>
@@ -264,9 +264,9 @@ hello world</code></pre>
 cannot execute ./a.out: You are trying to run an unpatched binary on nixos, but you have not configured NIX_LD or NIX_LD_x86_64-linux. See https://github.com/Mic92/nix-ld for more details</code></pre>
 <p>As the nix-ld readme suggests, we can set <code>NIX_LD</code> with a <code>shell.nix</code>:</p>
 <div class="sourceCode" id="cb23"><pre class="sourceCode nix"><code class="sourceCode nix"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="op">{</span> <span class="va">pkgs</span> <span class="op">?</span> <span class="bu">import</span> &lt;nixpkgs&gt; <span class="op">{}</span> <span class="op">}</span>:</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>pkgs.mkShell <span class="op">{</span></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="va">NIX_LD_LIBRARY_PATH</span> <span class="op">=</span> pkgs.lib.makeLibraryPath <span class="op">[];</span></span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="va">NIX_LD</span> <span class="op">=</span> pkgs.lib.fileContents <span class="st">&quot;</span><span class="sc">${</span>pkgs.stdenv.cc<span class="sc">}</span><span class="st">/nix-support/dynamic-linker&quot;</span><span class="op">;</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>pkgs<span class="op">.</span>mkShell <span class="op">{</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="va">NIX_LD_LIBRARY_PATH</span> <span class="op">=</span> pkgs<span class="op">.</span>lib<span class="op">.</span>makeLibraryPath <span class="op">[];</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="va">NIX_LD</span> <span class="op">=</span> pkgs<span class="op">.</span>lib<span class="op">.</span>fileContents <span class="st">&quot;</span><span class="sc">${</span>pkgs<span class="op">.</span>stdenv<span class="op">.</span>cc<span class="sc">}</span><span class="st">/nix-support/dynamic-linker&quot;</span><span class="op">;</span></span>
 <span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>entering this with <code>nix-shell</code>, and running this:</p>
 <pre><code>$ ./a.out
@@ -287,11 +287,11 @@ hello world</code></pre>
 <p>e.g. a <code>hello.nix</code> file with:</p>
 <div class="sourceCode" id="cb28"><pre class="sourceCode nix"><code class="sourceCode nix"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="op">{</span> <span class="va">pkgs</span> <span class="op">?</span> <span class="bu">import</span> &lt;nixpkgs&gt; <span class="op">{}</span> <span class="op">}</span>:</span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>pkgs.stdenv.mkDerivation <span class="op">{</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>pkgs<span class="op">.</span>stdenv<span class="op">.</span>mkDerivation <span class="op">{</span></span>
 <span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  <span class="va">pname</span> <span class="op">=</span> <span class="st">&quot;hello-world&quot;</span><span class="op">;</span></span>
 <span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>  <span class="va">version</span> <span class="op">=</span> <span class="st">&quot;1.0.0&quot;</span><span class="op">;</span></span>
 <span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>  <span class="va">buildInputs</span> <span class="op">=</span> <span class="op">[</span></span>
-<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>    pkgs.autoPatchelfHook</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>    pkgs<span class="op">.</span>autoPatchelfHook</span>
 <span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>  <span class="op">];</span></span>
 <span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>  <span class="va">dontUnpack</span><span class="op">=</span><span class="cn">true</span><span class="op">;</span></span>
 <span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>  <span class="va">installPhase</span><span class="op">=</span><span class="st">''</span></span>
