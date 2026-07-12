@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
     <title>Richard Goulter's Blog</title>
-    <link href="http://www.rgoulter.com/blog//blog/atom.xml" rel="self" />
+    <subtitle><![CDATA[RSS feed for Richard Goulter's blog]]></subtitle>
+    <link href="http://www.rgoulter.com/blog//atom.xml" rel="self" />
     <link href="http://www.rgoulter.com/blog/" />
-    <id>http://www.rgoulter.com/blog//blog/atom.xml</id>
+    <id>http://www.rgoulter.com/blog//atom.xml</id>
     <author>
         <name>Richard Goulter</name>
         
@@ -13,8 +14,8 @@
     <updated>2026-06-09T00:00:00Z</updated>
     <entry>
     <title>Review of Elizabeth Boyle's "Tempted by the Night"</title>
-    <link href="http://www.rgoulter.com/blog//blog/posts/romance/2026-06-09-review-of-elizabeth-boyles-tempted-by-the-night.html" />
-    <id>http://www.rgoulter.com/blog//blog/posts/romance/2026-06-09-review-of-elizabeth-boyles-tempted-by-the-night.html</id>
+    <link href="http://www.rgoulter.com/blog//posts/romance/2026-06-09-review-of-elizabeth-boyles-tempted-by-the-night.html" />
+    <id>http://www.rgoulter.com/blog//posts/romance/2026-06-09-review-of-elizabeth-boyles-tempted-by-the-night.html</id>
     <published>2026-06-09T00:00:00Z</published>
     <updated>2026-06-09T00:00:00Z</updated>
     <summary type="html"><![CDATA[<p>I <em>have to</em> write a review of Elizabeth Boyle’s “Tempted by the Night”.</p>
@@ -63,8 +64,8 @@ But as the sun sets, and no one is looking, she takes another shot and performs 
 </entry>
 <entry>
     <title>Bridgerton S4 is Really Good</title>
-    <link href="http://www.rgoulter.com/blog//blog/posts/romance/2026-03-15-bridgerton-s4-is-really-good.html" />
-    <id>http://www.rgoulter.com/blog//blog/posts/romance/2026-03-15-bridgerton-s4-is-really-good.html</id>
+    <link href="http://www.rgoulter.com/blog//posts/romance/2026-03-15-bridgerton-s4-is-really-good.html" />
+    <id>http://www.rgoulter.com/blog//posts/romance/2026-03-15-bridgerton-s4-is-really-good.html</id>
     <published>2026-03-15T00:00:00Z</published>
     <updated>2026-03-15T00:00:00Z</updated>
     <summary type="html"><![CDATA[<p>Bridgerton Season 4 is really good!</p>
@@ -140,8 +141,8 @@ show creators want to give attention to their original ideas.</p>]]></summary>
 </entry>
 <entry>
     <title>Org Babel is an Underappreciated Tool</title>
-    <link href="http://www.rgoulter.com/blog//blog/posts/programming/2025-10-26-org-babel-is-an-underappreciated-tool.html" />
-    <id>http://www.rgoulter.com/blog//blog/posts/programming/2025-10-26-org-babel-is-an-underappreciated-tool.html</id>
+    <link href="http://www.rgoulter.com/blog//posts/programming/2025-10-26-org-babel-is-an-underappreciated-tool.html" />
+    <id>http://www.rgoulter.com/blog//posts/programming/2025-10-26-org-babel-is-an-underappreciated-tool.html</id>
     <published>2025-10-26T00:00:00Z</published>
     <updated>2025-10-26T00:00:00Z</updated>
     <summary type="html"><![CDATA[<p>Emacs Org mode’s <a href="https://orgmode.org/manual/Working-with-Source-Code.html">source code blocks</a>
@@ -271,8 +272,8 @@ don’t quite have a fully automated setup easily available.</p>]]></summary>
 </entry>
 <entry>
     <title>Rewriting smart-keymap's Key Storage Implementation</title>
-    <link href="http://www.rgoulter.com/blog//blog/posts/programming/2025-09-18-rewriting-smart-keymap-key-storage-implementation.html" />
-    <id>http://www.rgoulter.com/blog//blog/posts/programming/2025-09-18-rewriting-smart-keymap-key-storage-implementation.html</id>
+    <link href="http://www.rgoulter.com/blog//posts/programming/2025-09-18-rewriting-smart-keymap-key-storage-implementation.html" />
+    <id>http://www.rgoulter.com/blog//posts/programming/2025-09-18-rewriting-smart-keymap-key-storage-implementation.html</id>
     <published>2025-09-18T00:00:00Z</published>
     <updated>2025-09-18T00:00:00Z</updated>
     <summary type="html"><![CDATA[<p>I recently finished a <a href="https://github.com/rgoulter/smart-keymap/pull/381">big
@@ -440,8 +441,8 @@ difficult to use incorrectly than an arbitrary method call.</p>]]></summary>
 </entry>
 <entry>
     <title>Brothers in Arms</title>
-    <link href="http://www.rgoulter.com/blog//blog/posts/games/2025-09-02-brothers-in-arms.html" />
-    <id>http://www.rgoulter.com/blog//blog/posts/games/2025-09-02-brothers-in-arms.html</id>
+    <link href="http://www.rgoulter.com/blog//posts/games/2025-09-02-brothers-in-arms.html" />
+    <id>http://www.rgoulter.com/blog//posts/games/2025-09-02-brothers-in-arms.html</id>
     <published>2025-09-02T00:00:00Z</published>
     <updated>2025-09-02T00:00:00Z</updated>
     <summary type="html"><![CDATA[<p>I recently played through the “Brothers in Arms” videogame series.</p>
@@ -552,8 +553,8 @@ I’d probably really appreciate its squad controls and the game’s emphasis on
 </entry>
 <entry>
     <title>Factorio Space Age</title>
-    <link href="http://www.rgoulter.com/blog//blog/posts/games/2025-07-21-factorio-space-age.html" />
-    <id>http://www.rgoulter.com/blog//blog/posts/games/2025-07-21-factorio-space-age.html</id>
+    <link href="http://www.rgoulter.com/blog//posts/games/2025-07-21-factorio-space-age.html" />
+    <id>http://www.rgoulter.com/blog//posts/games/2025-07-21-factorio-space-age.html</id>
     <published>2025-07-21T00:00:00Z</published>
     <updated>2025-07-21T00:00:00Z</updated>
     <summary type="html"><![CDATA[<p>I completed a playthrough of Factorio Space Age. Here are my thoughts on it:</p>
@@ -890,8 +891,8 @@ triggered to attack.</p>]]></summary>
 </entry>
 <entry>
     <title>Example of How Rust Can be Confusing, Iteration and Refs</title>
-    <link href="http://www.rgoulter.com/blog//blog/posts/programming/2025-05-19-example-rust-confusion-iterating-over-ref.html" />
-    <id>http://www.rgoulter.com/blog//blog/posts/programming/2025-05-19-example-rust-confusion-iterating-over-ref.html</id>
+    <link href="http://www.rgoulter.com/blog//posts/programming/2025-05-19-example-rust-confusion-iterating-over-ref.html" />
+    <id>http://www.rgoulter.com/blog//posts/programming/2025-05-19-example-rust-confusion-iterating-over-ref.html</id>
     <published>2025-05-19T00:00:00Z</published>
     <updated>2025-05-19T00:00:00Z</updated>
     <summary type="html"><![CDATA[<p>I recently tripped up over this when writing Rust:</p>
@@ -1011,8 +1012,8 @@ writing C).</p>]]></summary>
 </entry>
 <entry>
     <title>Announcing a new Smart Keymap Library</title>
-    <link href="http://www.rgoulter.com/blog//blog/posts/programming/2025-05-06-announcing-a-new-smart-keymap-library.html" />
-    <id>http://www.rgoulter.com/blog//blog/posts/programming/2025-05-06-announcing-a-new-smart-keymap-library.html</id>
+    <link href="http://www.rgoulter.com/blog//posts/programming/2025-05-06-announcing-a-new-smart-keymap-library.html" />
+    <id>http://www.rgoulter.com/blog//posts/programming/2025-05-06-announcing-a-new-smart-keymap-library.html</id>
     <published>2025-05-06T00:00:00Z</published>
     <updated>2025-05-06T00:00:00Z</updated>
     <summary type="html"><![CDATA[<p>For the last few months, I’ve been working on a new “smart keymap” library.</p>
@@ -1346,8 +1347,8 @@ is easy to do).</p>
 </entry>
 <entry>
     <title>Debugging Kirei with UART</title>
-    <link href="http://www.rgoulter.com/blog//blog/posts/programming/2024-07-06-debugging-kirei-with-uart.html" />
-    <id>http://www.rgoulter.com/blog//blog/posts/programming/2024-07-06-debugging-kirei-with-uart.html</id>
+    <link href="http://www.rgoulter.com/blog//posts/programming/2024-07-06-debugging-kirei-with-uart.html" />
+    <id>http://www.rgoulter.com/blog//posts/programming/2024-07-06-debugging-kirei-with-uart.html</id>
     <published>2024-07-06T00:00:00Z</published>
     <updated>2024-07-06T00:00:00Z</updated>
     <summary type="html"><![CDATA[<p><a href="https://github.com/semickolon/kirei">Kirei</a> is nascent keyboard firmware, which
@@ -1465,8 +1466,8 @@ code.py output:
 </entry>
 <entry>
     <title>Indicating Success on QMK Keyboards</title>
-    <link href="http://www.rgoulter.com/blog//blog/posts/programming/2024-06-23-indicating-success-on-qmk-keyboards.html" />
-    <id>http://www.rgoulter.com/blog//blog/posts/programming/2024-06-23-indicating-success-on-qmk-keyboards.html</id>
+    <link href="http://www.rgoulter.com/blog//posts/programming/2024-06-23-indicating-success-on-qmk-keyboards.html" />
+    <id>http://www.rgoulter.com/blog//posts/programming/2024-06-23-indicating-success-on-qmk-keyboards.html</id>
     <published>2024-06-23T00:00:00Z</published>
     <updated>2024-06-23T00:00:00Z</updated>
     <summary type="html"><![CDATA[<p>In the previous post, I discussed ways of <a href="/blog/posts/programming/2024-06-16-using-the-qmk-leader-key-for-fancy-keyboard-functionality.html">using QMK leader key sequences in QMK keymaps</a>.</p>
