@@ -3,132 +3,42 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="color-scheme" content="light dark">
         <title>Posts tagged "programming.terminal" - Richard Goulter's Blog</title>
 
-        <!-- My (Old) CSS theme -->
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
-
-        <!--
-            jQuery & jQueryUI
-        -->
-        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-        <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
-        <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css" />
-
-        <!--
-            Pandoc Style CSS
-            (for syntax highlighted snippets)
-        -->
-        <link rel="stylesheet" type="text/css" href="../css/syntax.css" />
-
-        <!--
-            Bootstrap
-        -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-
-        <style>
-            /*
-             * Bootstrap defines blockquote as 17px,
-             * so it looks stupidly large in my blogposts. */
-            blockquote {
-                font-size: 14px;
-            }
-        </style>
-
-        <!--
-            Waypoints, and Waypoints-Sticky,
-            so we can do this:
-            http://imakewebthings.com/waypoints/shortcuts/sticky-elements/
-        -->
-        <script src="../js/jquery.waypoints.min.js"></script>
-        <script src="../js/sticky.min.js"></script>
+        <!-- Pandoc syntax highlighting: light default, dark via media query -->
+        <link rel="stylesheet" type="text/css" href="../css/syntax-light.css" />
+        <link rel="stylesheet" type="text/css" href="../css/syntax-dark.css" media="(prefers-color-scheme: dark)" />
 
         <!-- My analytics stuff -->
         <script src="../js/my_analytics.js"></script>
         <script src="../js/my_analytics_debug.js"></script>
 
-        <!--
-            TOCify
-        -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js"></script>
-
-        <!--
-            Patched TOCify css file.
-            (Don't want fixed `.tocify`).
-        -->
-        <link rel="stylesheet" type="text/css" href="../css/jquery.tocify.css" />
-
-        <style>
-        .navbar {
-            margin-bottom: 0px;
-        }
-
-        .banner-image {
-            width:100%;
-        }
-
-        .banner {
-            margin-left: 0px;
-            margin-right: 0px;
-        }
-
-        body {
-            background-color: #e2e2e2;
-        }
-
-        #page {
-            padding-left:0;
-            padding-right:0;
-            background-color: #ffffff;
-        }
-        </style>
-
         <!-- Google Analytics -->
-        <!-- Google tag (gtag.js) -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-H13NWYDX0G"></script>
         <script>
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
-
           gtag('config', 'G-H13NWYDX0G');
         </script>
     </head>
     <body>
-        <div id="page" class="container">
-            <!-- This, with no padding on left/right -->
-            <div class="banner">
-                <nav class="navbar navbar-default">
-    <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1">
-            <span class="sr-only">Toggle navigation</span>
-
-            <!-- The Hamburger -->
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="../">Richard Goulter's Blog</a>
-    </div>
-
-    <div class="collapse navbar-collapse" id="navbar-collapse-1">
-        <ul class="nav navbar-nav navbar-right">
-            <li><a href="../">Home</a></li>
-            <li><a href="../yi.html">Yi</a></li>
-            <li><a href="../emacs.html">Emacs</a></li>
-            <li><a href="../what-i-wish-i-knew-when-i-started-using-nix.html">Nixpkgs</a></li>
-            <li><a href="../archive.html">Archive</a></li>
-        </ul>
-    </div>
+        <div id="page">
+            <nav class="site-nav" aria-label="Site">
+    <a class="brand" href="../">Richard Goulter's Blog</a>
+    <ul>
+        <li><a href="../">Home</a></li>
+        <li><a href="../yi.html">Yi</a></li>
+        <li><a href="../emacs.html">Emacs</a></li>
+        <li><a href="../what-i-wish-i-knew-when-i-started-using-nix.html">Nixpkgs</a></li>
+        <li><a href="../archive.html">Archive</a></li>
+    </ul>
 </nav>
 
-            </div>
 
-            <hr style="margin: 0px; border-top: 5px solid black;" />
-
-            <div id="content" class="container">
+            <main id="content">
                 <h1>Posts tagged "programming.terminal"</h1>
                 <ul>
     
@@ -146,14 +56,12 @@
     
 </ul>
 
-            </div>
+            </main>
 
-            <hr style="margin-bottom: 0px; border-top: 2px solid black;" />
-
-            <div id="footer" class="pull-right" style="padding-right: 10px;">
+            <footer id="footer">
                 Site proudly generated by
-                <a href="http://jaspervdj.be/hakyll">Hakyll</a>
-            </div>
+                <a href="https://jaspervdj.be/hakyll">Hakyll</a>
+            </footer>
         </div>
 
         <script>
